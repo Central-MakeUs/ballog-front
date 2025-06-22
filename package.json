@@ -1,0 +1,27 @@
+{
+  "name": "ballog-front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "dependencies": {
+    "typescript": "^5.8.3"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "devDependencies": {
+    "@titicaca/eslint-config-triple": "^5.3.1",
+    "@titicaca/prettier-config-triple": "^1.2.1",
+    "eslint": "^9.29.0",
+    "prettier": "^3.5.3"
+  },
+  "prettier": "@titicaca/prettier-config-triple"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@ballog/eslint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint:es": "eslint .",
+    "lint:es:fix": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "devDependencies": {
+    "@titicaca/eslint-config-triple": "^5.3.1",
+    "@titicaca/prettier-config-triple": "^1.2.1",
+    "eslint": "^9.29.0",
+    "prettier": "^3.5.3"
+  }
+}
