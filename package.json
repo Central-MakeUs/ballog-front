@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:app": "pnpm --filter app start",
+    "build:web": "pnpm --filter web build",
+    "build:app": "pnpm --filter app build",
+    "lint": "pnpm -r lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -1,9 +1,9 @@
-import { Text, View, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
-export default function NotFoundScreen() {
+export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>404 - Page Not Found</Text>
+      <Text style={styles.text}>Hello Wwwoorrlldd</Text>
     </View>
   )
 }
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
   },
 })
