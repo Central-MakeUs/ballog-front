@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native'
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Hello Wwwoorrlldd</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
-});
+})
