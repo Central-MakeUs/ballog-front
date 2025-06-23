@@ -3,12 +3,7 @@
   "display": "Client",
   "extends": "./base.json",
   "compilerOptions": {
-    "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "jsx": "preserve"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }
