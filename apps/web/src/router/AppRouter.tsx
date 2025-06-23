@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from '../App'
-import HomePage from '../pages/homePage'
-import TestPage from '../pages/testPage'
-import TestId from '../pages/testId'
+import HomePage from '@/pages/homePage'
+import TestPage from '@/pages/testPage'
+import TestId from '@/pages/testId'
 
-import { PATH } from '../constants/path'
+import { PATH } from '@/constants/path'
 
 const AppRouter = () => {
   const router = createBrowserRouter([
