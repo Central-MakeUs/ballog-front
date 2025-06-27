@@ -14,7 +14,7 @@ const Header = ({
   logo,
 }: HeaderProps) => {
   return (
-    <header className="h-14 flex items-center border-b px-4 relative">
+    <header className="h-14 flex items-center border-none px-4 relative">
       {left && <div className="absolute left-4">{left}</div>}
 
       {logo ? (
