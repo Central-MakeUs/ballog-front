@@ -7,7 +7,7 @@ const navItems = [
   { href: '/mypage', icon: Home, label: '마이페이지' },
 ]
 
-export default function GlobalNavigationBar() {
+const GlobalNavigationBar = () => {
   return (
     <nav className="fixed bottom-0 left-0 right-0 h-20 bg-white border-t flex justify-around items-center z-50">
       {navItems.map((item) => (
@@ -27,3 +27,5 @@ export default function GlobalNavigationBar() {
     </nav>
   )
 }
+
+export default GlobalNavigationBar
