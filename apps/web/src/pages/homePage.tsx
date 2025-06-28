@@ -12,15 +12,7 @@ const HomePage: ActivityComponentType = () => {
 
   return (
     <>
-      <AppScreen
-        appBar={{
-          title: '볼로그',
-          renderLeft: () => (
-            <img src={BallogLogo} alt="ballog" className="h-6 ml-2" />
-          ),
-        }}
-      >
-        {/* <AppScreen> */}
+      <AppScreen>
         <Header logo={<img src={BallogLogo} alt="ballog" className="h-6" />} />
         <h2 className="text-center mt-15 mb-8 text-xl font-bold">
           오늘 경기 선택하고 감정 기록하기
@@ -36,7 +28,10 @@ const HomePage: ActivityComponentType = () => {
           </p>
         </div>
         <div className="flex justify-center mt-10">
-          <Button className="w-30 h-10" onClick={() => replace('LiveRecord', {})}>
+          <Button
+            className="w-30 h-10"
+            onClick={() => replace('LiveRecord', {})}
+          >
             기록 시작하기
           </Button>
         </div>
