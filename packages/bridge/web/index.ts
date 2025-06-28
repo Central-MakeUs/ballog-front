@@ -41,13 +41,13 @@ const handleMessage = (data: string): WebMessageEvent | null => {
  * const bridge = createWebBridge()
  * bridge.send('test-message', { message: 'Hello from Web' })
  * // 여기서 data는 payload에 담긴 데이터
- * bridge.addEventListner('test-message', (data) => {
+ * bridge.addEventListener('test-message', (data) => {
  *   alert(data)
  * })
  *
  * return {
  *   send: (eventName: string, payload: any) => void,
- *   addEventListner: (eventName: string, callback: (data: any) => void) => void,
+ *   addEventListener: (eventName: string, callback: (data: any) => void) => void,
  *   isRNEnvironment: () => boolean,
  * }
  */
@@ -58,7 +58,7 @@ export const createWebBridge = <
 
   // 이벤트 리스너들을 저장할 Map
   // eventName, callback이 key, value로 저장
-  // 이 중에서 addEventListner에서 추가한 이벤트 리스너만 호출
+  // 이 중에서 addEventListener에서 추가한 이벤트 리스너만 호출
   const eventListeners = new Map<string, (event: any) => void>()
 
   // 전역 메시지 핸들러
@@ -100,7 +100,7 @@ export const createWebBridge = <
 
   // 이벤트 리스너 추가
   // 추가 시, eventName에 해당하는 callback 함수 호출
-  const addEventListner = <K extends keyof T>(
+  const addEventListener = <K extends keyof T>(
     eventName: K,
     callback: (event: T[K]['payload']) => void,
   ) => {
@@ -122,6 +122,6 @@ export const createWebBridge = <
   return {
     send,
     isRNEnvironment: () => isReady,
-    addEventListner,
+    addEventListener,
   }
 }
