@@ -14,6 +14,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@stackflow/core": "^1.2.0",
     "@stackflow/plugin-basic-ui": "^1.14.2",
+    "@stackflow/plugin-history-sync": "^1.7.1",
     "@stackflow/plugin-renderer-basic": "^1.1.13",
     "@stackflow/react": "^1.5.2",
     "@types/react-router-dom": "^5.3.3",

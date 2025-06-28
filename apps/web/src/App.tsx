@@ -1,14 +1,10 @@
 import { Outlet } from 'react-router-dom'
+import { Stack } from "@/lib/stackflow";
+import "@stackflow/plugin-basic-ui/index.css";
 
 const App = () => {
 
-  return (
-    <>
-      <main>
-        <Outlet />
-      </main>
-    </>
-  )
+  return <Stack />;
 }
 
 export default App
