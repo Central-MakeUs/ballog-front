@@ -9,7 +9,8 @@ const LiveRecordPage: ActivityComponentType = () => {
   return (
     <AppScreen appBar={{ title: '감정 기록 중' }}>
       {/* <AppScreen> */}
-      <div className="min-h-screen flex flex-col">
+      {/* <div className="min-h-screen flex flex-col"> */}
+      <div className="max-h-full flex flex-col">
         {/* <Header title={<p className="font-bold text-base">감정 기록 중</p>} /> */}
         <div className="flex-grow flex-col items-center gap-4">
           <GameInfoCard />
