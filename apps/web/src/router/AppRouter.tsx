@@ -1,8 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import HomePage from '@/pages/homePage'
-import TestPage from '@/pages/testPage'
-import TestId from '@/pages/testId'
+import LiveRecordPage from '@/pages/liveRecordPage'
 
 import { PATH } from '@/constants/path'
 
@@ -13,11 +12,11 @@ const AppRouter = () => {
       element: <App />,
       children: [
         { path: '', element: <HomePage /> },
-        { path: PATH.TEST, element: <TestPage /> },
-        {
-          path: 'test/:id',
-          element: <TestId />,
-        },
+        { path: PATH.LIVE_RECORD, element: <LiveRecordPage /> },
+        // {
+        //   path: 'test/:id',
+        //   element: <TestId />,
+        // },
       ],
     },
   ])
