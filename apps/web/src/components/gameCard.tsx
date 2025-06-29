@@ -23,15 +23,15 @@ const GameCard = ({
         {`{${stadium}}`} | {`{${date}}`}
       </div>
       <div className="mt-3">
-        <div className="w-full h-24 bg-gray-300 rounded-md overflow-hidden">
-          {thumbnail && (
+        {thumbnail && (
+          <div className="w-full h-24 bg-gray-300 rounded-md overflow-hidden">
             <img
               src={thumbnail}
               alt="경기 썸네일"
               className="w-full h-full object-cover"
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   )

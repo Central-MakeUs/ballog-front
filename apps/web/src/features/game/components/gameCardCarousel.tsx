@@ -5,7 +5,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel'
-import GameCard from './gameCard'
+import GameCard from '../../../components/gameCard'
 import type { CarouselApi } from '@/components/ui/carousel'
 
 const GameCardCarousel = () => {
@@ -47,6 +47,7 @@ const GameCardCarousel = () => {
                 awayTeam="KT"
                 stadium="사직"
                 date="2025.06.27"
+                thumbnail='이미지URL'
               />
             </CarouselItem>
           ))}
