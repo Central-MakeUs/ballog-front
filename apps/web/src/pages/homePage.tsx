@@ -3,7 +3,7 @@ import { useFlow } from '@/lib/stackflow'
 import { Button } from '@/components/ui/button'
 import GlobalNavigationBar from '@/components/common/globalNavigationBar'
 import Header from '@/components/common/Header'
-import BallogLogo from '@/assets/ballogLogo.svg'
+import DarkBallogLogo from '@/assets/darkBallogLogo.svg'
 import GameCardCarousel from '@/features/game/components/gameCardCarousel'
 import type { ActivityComponentType } from '@stackflow/react'
 
@@ -14,7 +14,7 @@ const HomePage: ActivityComponentType = () => {
   return (
     <>
       <AppScreen>
-        <Header logo={<img src={BallogLogo} alt="ballog" className="h-6" />} />
+        <Header logo={<img src={DarkBallogLogo} alt="ballog" className="h-6" />} />
         <h2 className="text-center mt-15 mb-8 text-xl font-bold">
           오늘 경기 선택하고 감정 기록하기
         </h2>

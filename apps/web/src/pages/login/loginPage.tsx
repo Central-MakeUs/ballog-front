@@ -3,11 +3,6 @@ import LoginPageIcon from '@/assets/loginPageIcon.svg'
 const LoginPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-8">
-      <div className="mb-16 flex flex-col items-center">
-        <img src="/logo.svg" alt="ballog logo" className="w-10 h-10 mb-2" />
-        <p className="font-bold text-2xl">ballog</p>
-      </div>
-
       <div className="flex flex-col items-center mb-20">
         <img src={LoginPageIcon} alt="ballog icon" className="w-20 h-20 mb-4" />
         <p className="text-center text-lg font-semibold">
