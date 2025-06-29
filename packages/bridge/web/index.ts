@@ -77,7 +77,7 @@ export const createWebBridge = <
   // 전역 이벤트 리스너 등록 (한 번만)
   if (isReady) {
     window.addEventListener('message', globalMessageHandler)
-    document.addEventListener('message', globalMessageHandler)
+    document.addEventListener('message', globalMessageHandler as EventListener)
   }
 
   // RN으로 메시지 전송하는 함수
@@ -119,9 +119,19 @@ export const createWebBridge = <
     }
   }
 
+  const destroy = () => {
+    eventListeners.clear()
+    window.removeEventListener('message', globalMessageHandler)
+    document.removeEventListener(
+      'message',
+      globalMessageHandler as EventListener,
+    )
+  }
+
   return {
     send,
     isRNEnvironment: () => isReady,
     addEventListener,
+    destroy,
   }
 }
