@@ -22,6 +22,9 @@
     "packages/*",
     "apps/*"
   ],
+  "engines": {
+    "node": ">=18.0.0 <24.0.0"
+  },
   "devDependencies": {
     "@titicaca/eslint-config-triple": "^5.3.1",
     "@titicaca/prettier-config-triple": "^1.2.1",
