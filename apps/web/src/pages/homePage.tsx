@@ -7,6 +7,7 @@ import BallogLogo from '@/assets/ballogLogo.svg'
 import GameCardCarousel from '@/features/game/components/gameCardCarousel'
 import type { ActivityComponentType } from '@stackflow/react'
 
+
 const HomePage: ActivityComponentType = () => {
   const { replace } = useFlow()
 
