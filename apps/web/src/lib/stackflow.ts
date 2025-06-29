@@ -5,6 +5,7 @@ import { historySyncPlugin } from '@stackflow/plugin-history-sync'
 
 import HomePage from '@/pages/homePage'
 import LiveRecordPage from '@/pages/liveRecordPage'
+import LoginPage from '@/pages/loginPage'
 
 export const { Stack, useFlow } = stackflow({
   transitionDuration: 350,
@@ -18,6 +19,7 @@ export const { Stack, useFlow } = stackflow({
       routes: {
         Home: '/',
         LiveRecord: '/live-record',
+        Login: "/login"
       },
       fallbackActivity: () => 'Home',
     }),
@@ -26,5 +28,6 @@ export const { Stack, useFlow } = stackflow({
   activities: {
     Home: HomePage,
     LiveRecord: LiveRecordPage,
+    Login: LoginPage
   },
 })

@@ -5,7 +5,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel'
-import GameCard from '../../../components/gameCard'
+import GameCard from '../../../components/common/gameCard'
 import type { CarouselApi } from '@/components/ui/carousel'
 
 const GameCardCarousel = () => {

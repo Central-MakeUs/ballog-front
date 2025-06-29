@@ -31,7 +31,7 @@ const HomePage: ActivityComponentType = () => {
         <div className="flex justify-center mt-10">
           <Button
             className="w-30 h-10"
-            onClick={() => replace('LiveRecord', {})}
+            onClick={() => replace('Login', {})}
           >
             기록 시작하기
           </Button>
