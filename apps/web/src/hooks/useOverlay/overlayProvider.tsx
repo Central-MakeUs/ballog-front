@@ -4,8 +4,8 @@ import {
   useContext,
   useState,
   useCallback,
-  useRef,
 } from 'react'
+import { findLastIndex } from 'remeda'
 
 interface Overlay {
   overlayElement: JSX.Element | null
@@ -27,7 +27,6 @@ export const OverlayProvider = ({
   children: React.ReactNode
 }) => {
   const [overlays, setOverlays] = useState<Overlay[]>([])
-  const overlayMapRef = useRef<Map<string, Overlay>>(new Map())
 
   const setOverlay = useCallback((overlay: Overlay) => {
     setOverlays((prev) => [...prev, overlay])
@@ -35,15 +34,19 @@ export const OverlayProvider = ({
 
   const popOverlay = useCallback((overlayId?: string) => {
     if (typeof overlayId === 'string') {
-      // Map에서 삭제
-      overlayMapRef.current.delete(overlayId)
-      setOverlays(Array.from(overlayMapRef.current.values()))
+      setOverlays((prev) => {
+        const newOverlays = [...prev]
+        const index = findLastIndex(
+          newOverlays,
+          (overlay: Overlay) => overlay.overlayId === overlayId,
+        )
+        if (index !== -1) {
+          newOverlays.splice(index, 1)
+        }
+        return newOverlays
+      })
     } else {
-      const lastOverlay = overlays[overlays.length - 1]
-      if (lastOverlay && lastOverlay.overlayId) {
-        overlayMapRef.current.delete(lastOverlay.overlayId)
-        setOverlays(overlays.slice(0, -1))
-      }
+      setOverlays((prev) => prev.slice(0, -1))
     }
   }, [])
 
