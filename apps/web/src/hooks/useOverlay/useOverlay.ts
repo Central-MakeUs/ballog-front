@@ -43,9 +43,9 @@ export const useOverlay = () => {
 
   useEffect(() => {
     return () => {
-      popOverlay(id)
+      clearAllOverlays()
     }
-  }, [exit])
+  }, [clearAllOverlays])
 
   return useMemo(
     () => ({
