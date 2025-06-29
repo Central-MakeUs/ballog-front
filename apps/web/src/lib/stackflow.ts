@@ -7,6 +7,7 @@ import HomePage from '@/pages/homePage'
 import LiveRecordPage from '@/pages/liveRecordPage'
 import LoginPage from '@/pages/login/loginPage'
 import TeamSelectPage from '@/pages/login/teamSelectPage'
+import NickNamePage from '@/pages/login/nickNamePage'
 
 export const { Stack, useFlow } = stackflow({
   transitionDuration: 350,
@@ -21,7 +22,8 @@ export const { Stack, useFlow } = stackflow({
         Home: '/',
         LiveRecord: '/live-record',
         Login: '/login',
-        TeamSelect: "/team-select",
+        TeamSelect: '/team-select',
+        NickName: '/nickname',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -31,7 +33,7 @@ export const { Stack, useFlow } = stackflow({
     Home: HomePage,
     LiveRecord: LiveRecordPage,
     Login: LoginPage,
-    TeamSelect: TeamSelectPage
-    
+    TeamSelect: TeamSelectPage,
+    NickName: NickNamePage,
   },
 })
