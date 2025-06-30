@@ -1,51 +1,73 @@
-import { View, Text, StyleSheet } from 'react-native'
-import { createAppBridge } from '@ballog/bridge'
+import { View, StyleSheet,SafeAreaView } from 'react-native'
 import { useRef } from 'react'
 import { WebView, WebViewMessageEvent } from 'react-native-webview'
 
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null)
-  // const bridge = createAppBridge(webViewRef)
 
   const handleMessage = (event: WebViewMessageEvent) => {
+    const data = event.nativeEvent.data
+
+    if (!data) {
+      console.warn('수신된 데이터 없음')
+      return
+    }
+
     try {
-      const data = JSON.parse(event.nativeEvent.data)
-      console.log(data)
-    } catch (e) {
-      console.log('RN 메시지 파싱 실패:', e)
+      const message = JSON.parse(data)
+
+      if (typeof message !== 'object' || message === null) {
+        throw new Error('데이터 타입 불일치')
+      }
+
+      console.log('RN 수신:', message)
+
+      switch (message.eventName) {
+        case 'OPEN_CAMERA':
+          if (validateOpenCameraPayload(message.payload)) {
+            console.log('RN: 카메라 열기 요청 처리')
+            // TODO: navigation.navigate('CameraScreen') 같은 로직 추가
+          } else {
+            console.warn('RN: OPEN_CAMERA payload 불일치', message.payload)
+          }
+          break
+
+        default:
+          console.warn('RN: 알 수 없는 eventName 수신', message.eventName)
+      }
+
+    } catch (err) {
+      console.error('RN: 메시지 파싱 실패', err, data)
     }
   }
 
+  const validateOpenCameraPayload = (payload: any): payload is { message: string } => {
+    return (
+      typeof payload === 'object' &&
+      payload !== null &&
+      typeof payload.message === 'string'
+    )
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello Wwwoorrlldd</Text>
+    <SafeAreaView style={styles.container}>
       <WebView
         ref={webViewRef}
-        source={{ uri: 'http://localhost:5173' }}
+        source={{ uri: 'http://192.168.0.9:5173/' }}
         onMessage={handleMessage}
-        style={StyleSheet.absoluteFill}
-        // 필수 설정
         javaScriptEnabled={true}
         domStorageEnabled={true}
-        originWhitelist={['*']}
-        // 디버깅 로그
+        originWhitelist={['http://192.168.0.9']}
         onError={(error) => console.error('WebView 에러:', error)}
-        onLoadStart={() => console.log('⏳ WebView 로딩 시작...')}
-        onLoadEnd={() => console.log('✅ WebView 로딩 완료')}
+        onLoadStart={() => console.log('WebView 로딩 시작...')}
+        onLoadEnd={() => console.log('WebView 로딩 완료')}
       />
-      <Text>ㅎㅎㅎ</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
   },
 })
