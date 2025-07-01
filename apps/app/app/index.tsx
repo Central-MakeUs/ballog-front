@@ -1,9 +1,11 @@
-import { View, StyleSheet,SafeAreaView } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import { useRef } from 'react'
 import { WebView, WebViewMessageEvent } from 'react-native-webview'
+import { useRouter } from 'expo-router'
 
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null)
+  const router = useRouter()
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data
@@ -27,6 +29,7 @@ export default function HomeScreen() {
           if (validateOpenCameraPayload(message.payload)) {
             console.log('RN: 카메라 열기 요청 처리')
             // TODO: navigation.navigate('CameraScreen') 같은 로직 추가
+            router.push("/screens/cameraScreen")
           } else {
             console.warn('RN: OPEN_CAMERA payload 불일치', message.payload)
           }
@@ -35,13 +38,14 @@ export default function HomeScreen() {
         default:
           console.warn('RN: 알 수 없는 eventName 수신', message.eventName)
       }
-
     } catch (err) {
       console.error('RN: 메시지 파싱 실패', err, data)
     }
   }
 
-  const validateOpenCameraPayload = (payload: any): payload is { message: string } => {
+  const validateOpenCameraPayload = (
+    payload: any,
+  ): payload is { message: string } => {
     return (
       typeof payload === 'object' &&
       payload !== null &&
@@ -54,6 +58,7 @@ export default function HomeScreen() {
       <WebView
         ref={webViewRef}
         source={{ uri: 'http://192.168.0.9:5173/' }}
+        // source={{ uri: 'http://10.222.127.101:5173/' }}
         onMessage={handleMessage}
         javaScriptEnabled={true}
         domStorageEnabled={true}
