@@ -67,6 +67,7 @@ export default function HomeScreen() {
         onLoadStart={() => console.log('WebView 로딩 시작...')}
         onLoadEnd={() => console.log('WebView 로딩 완료')}
       />
+      
     </SafeAreaView>
   )
 }
