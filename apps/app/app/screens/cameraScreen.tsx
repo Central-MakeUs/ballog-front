@@ -34,10 +34,13 @@ export default function CameraScreen() {
     if (cameraPermission?.status !== 'granted') {
       requestCameraPermission()
     }
-    if (mediaLibraryPermission?.status !== 'granted') {
+    if (
+      !mediaLibraryPermission ||
+      mediaLibraryPermission.status !== 'granted'
+    ) {
       requestMediaLibraryPermission()
     }
-  }, [])
+  }, [cameraPermission, mediaLibraryPermission])
 
   const takePicture = async () => {
     if (!cameraRef.current) return
@@ -170,8 +173,12 @@ export default function CameraScreen() {
         <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
           <Ionicons name="close" size={28} color="white" />
         </TouchableOpacity>
-
         <Text style={styles.headerTitle}>촬영하기</Text>
+        <View style={styles.placeholder} />
+      </View>
+
+      {/* 카메라 뷰 */}
+      <View style={styles.cameraContainer}>
         <TouchableOpacity
           style={styles.flashButton}
           onPress={() => setFlash(flash === 'off' ? 'on' : 'off')}
@@ -182,17 +189,32 @@ export default function CameraScreen() {
             color="white"
           />
         </TouchableOpacity>
-      </View>
 
-      {/* 카메라 뷰 */}
-      <View style={styles.cameraContainer}>
-        
         <CameraView
           style={styles.camera}
           facing={facing}
           flash={flash}
           ref={cameraRef}
         />
+        <TouchableOpacity style={styles.shutterButton} onPress={takePicture}>
+          <View style={styles.shutterInner} />
+        </TouchableOpacity>
+      </View>
+
+      {/* 하단 컨트롤 */}
+      <View style={styles.bottomControls}>
+        <TouchableOpacity
+          style={styles.galleryButton}
+          onPress={() => {
+            if (mediaLibraryPermission?.status !== 'granted') {
+              requestMediaLibraryPermission()
+            } else {
+              Alert.alert('갤러리', '갤러리 열기 로직 작성 필요')
+            }
+          }}
+        >
+          <Text style={{ color: '#000' }}>갤러리</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.flipButton}
@@ -201,29 +223,10 @@ export default function CameraScreen() {
           <Ionicons name="camera-reverse" size={30} color="white" />
         </TouchableOpacity>
       </View>
-
-      {/* 하단 컨트롤 */}
-      <View style={styles.bottomControls}>
-        <TouchableOpacity
-          style={styles.galleryButton}
-          onPress={() => Alert.alert('갤러리', '갤러리 기능 구현 예정')}
-        >
-          <View style={styles.galleryIcon}>
-            <Text style={styles.galleryText}>갤러리</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.shutterButton} onPress={takePicture}>
-          <View style={styles.shutterInner} />
-        </TouchableOpacity>
-
-        <View style={styles.placeholder} />
-      </View>
     </SafeAreaView>
   )
 }
 
-// 스타일은 이전과 동일...
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -231,67 +234,69 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   headerTitle: {
+    flex: 1,
     color: '#fff',
     fontSize: 18,
     fontWeight: '600',
-  },
-  flashButton: {
-    padding: 5,
+    textAlign: 'center',
   },
   closeButton: {
     padding: 5,
   },
   cameraContainer: {
     flex: 1,
-    marginHorizontal: 20,
-    marginBottom: 20,
-    borderRadius: 20,
+    margin: 16,
+    borderRadius: 16,
     overflow: 'hidden',
     backgroundColor: '#333',
+    position: 'relative',
   },
   camera: {
     flex: 1,
   },
-  flipButton: {
+  flashButton: {
     position: 'absolute',
-    top: 20,
-    right: 20,
+    top: 16,
+    alignSelf: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    borderRadius: 25,
+    padding: 8,
+    borderRadius: 20,
+    zIndex: 1,
+  },
+  flipButton: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
     width: 50,
     height: 50,
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomControls: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 40,
-    paddingTop: 20,
+    paddingHorizontal: 30,
+    paddingBottom: 20,
+    paddingTop: 10,
   },
   galleryButton: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#333',
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  galleryIcon: {
-    alignItems: 'center',
-  },
-  galleryText: {
-    color: '#fff',
-    fontSize: 14,
-  },
   shutterButton: {
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center',
     width: 80,
     height: 80,
     borderRadius: 40,
@@ -309,7 +314,7 @@ const styles = StyleSheet.create({
     borderColor: '#000',
   },
   placeholder: {
-    width: 80,
+    width: 60,
   },
   permissionText: {
     color: '#fff',
