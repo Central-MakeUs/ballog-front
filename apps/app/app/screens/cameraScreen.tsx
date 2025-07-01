@@ -14,6 +14,7 @@ import {
   FlashMode,
   useCameraPermissions,
 } from 'expo-camera'
+import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
 import * as FileSystem from 'expo-file-system'
 import { Ionicons } from '@expo/vector-icons'
@@ -166,6 +167,59 @@ export default function CameraScreen() {
     )
   }
 
+  // 갤러리에서 이미지 선택하는 함수
+  const pickImageFromGallery = async () => {
+    try {
+      // 갤러리 권한 확인
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+
+      if (status !== 'granted') {
+        Alert.alert('권한 필요', '갤러리 접근 권한이 필요합니다.')
+        return
+      }
+
+      // 이미지 선택
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true, // 편집 허용 (크롭 등)
+        aspect: [4, 3], // 편집 시 비율
+        quality: 1, // 이미지 품질 (0-1)
+      })
+
+      if (!result.canceled && result.assets && result.assets.length > 0) {
+        const selectedImage = result.assets[0]
+        console.log('선택된 이미지:', selectedImage.uri)
+
+        // 선택된 이미지 처리
+        handleSelectedImage(selectedImage.uri)
+      }
+    } catch (error) {
+      console.error('갤러리 접근 에러:', error)
+      Alert.alert('에러', '갤러리를 여는 중 오류가 발생했습니다.')
+    }
+  }
+
+  // 선택된 이미지 처리
+  const handleSelectedImage = (imageUri: string) => {
+    Alert.alert('이미지 선택됨', '선택한 이미지를 어떻게 처리하시겠습니까?', [
+      {
+        text: '웹뷰로 전송',
+        onPress: () => {
+          sendPhotoToWebView(imageUri)
+          router.back()
+        },
+      },
+      {
+        text: '다시 선택',
+        onPress: () => pickImageFromGallery(),
+      },
+      {
+        text: '취소',
+        style: 'cancel',
+      },
+    ])
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       {/* 상단 헤더 */}
@@ -205,13 +259,7 @@ export default function CameraScreen() {
       <View style={styles.bottomControls}>
         <TouchableOpacity
           style={styles.galleryButton}
-          onPress={() => {
-            if (mediaLibraryPermission?.status !== 'granted') {
-              requestMediaLibraryPermission()
-            } else {
-              Alert.alert('갤러리', '갤러리 열기 로직 작성 필요')
-            }
-          }}
+          onPress={pickImageFromGallery}
         >
           <Text style={{ color: '#000' }}>갤러리</Text>
         </TouchableOpacity>
