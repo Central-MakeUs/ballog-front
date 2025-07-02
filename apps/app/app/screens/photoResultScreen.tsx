@@ -1,6 +1,14 @@
 // app/screens/photoResultScreen.tsx
-import { View, StyleSheet, Image, TouchableOpacity, Text, SafeAreaView } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Text,
+  SafeAreaView,
+} from 'react-native'
 import { useRouter, useLocalSearchParams } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons'
 
 export default function PhotoResultScreen() {
   const router = useRouter()
@@ -15,18 +23,28 @@ export default function PhotoResultScreen() {
     // 업로드 로직 추가하기
   }
 
+  const handleClose = () => {
+    router.replace('/')
+    // 닫기 버튼 눌렀을 때 카메라 밖으로 나가기 그냥
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+        <View style={styles.placeholder} />
         <Text style={styles.headerTitle}>촬영하기</Text>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.closeButton}>X</Text>
+        <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
+          <Ionicons name="close" size={28} color="white" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.photoContainer}>
         {photoUri ? (
-          <Image source={{ uri: photoUri }} style={styles.photo} resizeMode="cover" />
+          <Image
+            source={{ uri: photoUri }}
+            style={styles.photo}
+            resizeMode="cover"
+          />
         ) : (
           <Text style={{ color: '#fff' }}>사진 없음</Text>
         )}
@@ -53,14 +71,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 10,
     paddingBottom: 5,
-    justifyContent: 'space-between',
   },
-  headerTitle: { color: '#fff', fontSize: 18, fontWeight: '600' },
-  closeButton: { color: '#fff', fontSize: 20 },
+  headerTitle: {
+    flex: 1,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  closeButton: { padding: 5 },
   photoContainer: {
     flex: 1,
-    margin: 16,
-    borderRadius: 16,
     backgroundColor: '#ccc',
     overflow: 'hidden',
     justifyContent: 'center',
@@ -72,28 +93,36 @@ const styles = StyleSheet.create({
   },
   bottomControls: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    gap: 12,
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    paddingBottom: 16,
+    paddingTop: 8,
   },
   retakeButton: {
+    flex: 1,
     backgroundColor: '#aaa',
-    borderRadius: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    borderRadius: 12,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   retakeText: {
     color: '#333',
     fontWeight: '600',
   },
   uploadButton: {
+    flex: 1,
     backgroundColor: '#26c6da',
-    borderRadius: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    borderRadius: 12,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   uploadText: {
     color: '#fff',
     fontWeight: '600',
+  },
+  placeholder: {
+    width: 60,
   },
 })

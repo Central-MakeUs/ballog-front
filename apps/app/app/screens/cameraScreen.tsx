@@ -16,7 +16,6 @@ import {
 } from 'expo-camera'
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
-import * as FileSystem from 'expo-file-system'
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import FlipButton from '@/assets/images/flipButton.svg'
