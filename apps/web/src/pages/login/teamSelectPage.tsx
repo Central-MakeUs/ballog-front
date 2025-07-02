@@ -4,19 +4,7 @@ import Header from '@/components/common/Header'
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { useFlow } from '@/lib/stackflow'
-
-const teams = [
-  '두산 베어스',
-  '롯데 자이언츠',
-  '삼성 라이온즈',
-  '키움 히어로즈',
-  '한화 이글스',
-  'KIA 타이거즈',
-  'KT 위즈',
-  'LG 트윈스',
-  'NC 다이노스',
-  '응원팀 없음',
-]
+import { teams } from '@/constants/teams'
 
 const TeamSelectPage = () => {
   const { push } = useFlow()
