@@ -56,12 +56,13 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <WebView
         ref={webViewRef}
-        source={{ uri: 'http://192.168.0.9:5173/' }}
-        // source={{ uri: 'http://10.222.127.101:5173/' }}
+        // source={{ uri: 'http://192.168.0.9:5173/' }}
+        source={{ uri: 'http://172.20.10.8:5173/' }}
         onMessage={handleMessage}
         javaScriptEnabled={true}
         domStorageEnabled={true}
-        originWhitelist={['http://192.168.0.9']}
+        // originWhitelist={['http://192.168.0.9']}
+        originWhitelist={['http://172.20.10.8']}
         onError={(error) => console.error('WebView 에러:', error)}
         onLoadStart={() => console.log('WebView 로딩 시작...')}
         onLoadEnd={() => console.log('WebView 로딩 완료')}

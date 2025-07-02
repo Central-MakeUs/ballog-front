@@ -19,6 +19,7 @@ import * as MediaLibrary from 'expo-media-library'
 import * as FileSystem from 'expo-file-system'
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
+import FlipButton from '@/assets/images/flipButton.svg'
 
 export default function CameraScreen() {
   const router = useRouter()
@@ -222,11 +223,11 @@ export default function CameraScreen() {
     <SafeAreaView style={styles.container}>
       {/* 상단 헤더 */}
       <View style={styles.header}>
+        <View style={styles.placeholder} />
+        <Text style={styles.headerTitle}>촬영하기</Text>
         <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
           <Ionicons name="close" size={28} color="white" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>촬영하기</Text>
-        <View style={styles.placeholder} />
       </View>
 
       {/* 카메라 뷰 */}
@@ -266,7 +267,7 @@ export default function CameraScreen() {
           style={styles.flipButton}
           onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
         >
-          <Ionicons name="camera-reverse" size={30} color="white" />
+          <FlipButton />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -297,8 +298,7 @@ const styles = StyleSheet.create({
   },
   cameraContainer: {
     flex: 1,
-    margin: 16,
-    borderRadius: 16,
+    // borderRadius: 16,
     overflow: 'hidden',
     backgroundColor: '#333',
     position: 'relative',
