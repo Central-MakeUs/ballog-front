@@ -54,92 +54,15 @@ export default function CameraScreen() {
         exif: true,
       })
 
-      if (photo) {
-        console.log('📸 촬영 완료:', photo.uri)
-        setCapturedPhoto(photo.uri)
-
-        // 사진 저장 옵션 보여주기
-        Alert.alert('사진 저장', '사진을 어디에 저장하시겠습니까?', [
-          {
-            text: '갤러리에 저장',
-            onPress: () => saveToGallery(photo.uri),
-          },
-          {
-            text: '앱 내부 임시저장',
-            onPress: () => saveToAppStorage(photo.uri),
-          },
-          {
-            text: '취소',
-            style: 'cancel',
-          },
-        ])
+      if (photo?.uri) {
+        router.push({
+          pathname: '/screens/photoResultScreen',
+          params: { photoUri: photo.uri },
+        })
       }
     } catch (error) {
       console.error('사진 촬영 에러:', error)
       Alert.alert('에러', '사진 촬영 중 오류가 발생했습니다.')
-    }
-  }
-
-  // 갤러리(카메라롤)에 저장
-  const saveToGallery = async (photoUri: string) => {
-    try {
-      if (mediaLibraryPermission?.status !== 'granted') {
-        const { status } = await requestMediaLibraryPermission()
-        if (status !== 'granted') {
-          Alert.alert('권한 필요', '갤러리 접근 권한이 필요합니다.')
-          return
-        }
-      }
-
-      const asset = await MediaLibrary.createAssetAsync(photoUri)
-      console.log('갤러리 저장 완료:', asset.uri)
-
-      Alert.alert('저장 완료', '사진이 갤러리에 저장되었습니다.', [
-        {
-          text: '확인',
-          onPress: () => {
-            // WebView로 결과 전달하고 돌아가기
-            sendPhotoToWebView(asset.uri)
-            router.back()
-          },
-        },
-      ])
-    } catch (error) {
-      console.error('갤러리 저장 실패:', error)
-      Alert.alert('에러', '갤러리 저장에 실패했습니다.')
-    }
-  }
-
-  // 앱 내부 저장소에 저장
-  const saveToAppStorage = async (photoUri: string) => {
-    try {
-      // 앱 내부 Documents 디렉토리에 저장
-      const fileName = `photo_${Date.now()}.jpg`
-      const newUri = `${FileSystem.documentDirectory}${fileName}`
-
-      await FileSystem.copyAsync({
-        from: photoUri,
-        to: newUri,
-      })
-
-      console.log('앱 내부 저장 완료:', newUri)
-
-      Alert.alert(
-        '저장 완료',
-        `앱 내부 저장소에 저장되었습니다.\n경로: ${fileName}`,
-        [
-          {
-            text: '확인',
-            onPress: () => {
-              sendPhotoToWebView(newUri)
-              router.back()
-            },
-          },
-        ],
-      )
-    } catch (error) {
-      console.error('앱 내부 저장 실패:', error)
-      Alert.alert('에러', '저장에 실패했습니다.')
     }
   }
 
@@ -190,33 +113,15 @@ export default function CameraScreen() {
         console.log('선택된 이미지:', selectedImage.uri)
 
         // 선택된 이미지 처리
-        handleSelectedImage(selectedImage.uri)
+        router.push({
+          pathname: '/screens/photoResultScreen',
+          params: { photoUri: selectedImage.uri },
+        })
       }
     } catch (error) {
       console.error('갤러리 접근 에러:', error)
       Alert.alert('에러', '갤러리를 여는 중 오류가 발생했습니다.')
     }
-  }
-
-  // 선택된 이미지 처리
-  const handleSelectedImage = (imageUri: string) => {
-    Alert.alert('이미지 선택됨', '선택한 이미지를 어떻게 처리하시겠습니까?', [
-      {
-        text: '웹뷰로 전송',
-        onPress: () => {
-          sendPhotoToWebView(imageUri)
-          router.back()
-        },
-      },
-      {
-        text: '다시 선택',
-        onPress: () => pickImageFromGallery(),
-      },
-      {
-        text: '취소',
-        style: 'cancel',
-      },
-    ])
   }
 
   return (
