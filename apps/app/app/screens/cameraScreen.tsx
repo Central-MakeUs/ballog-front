@@ -181,8 +181,6 @@ export default function CameraScreen() {
       // 이미지 선택
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true, // 편집 허용 (크롭 등)
-        aspect: [4, 3], // 편집 시 비율
         quality: 1, // 이미지 품질 (0-1)
       })
 

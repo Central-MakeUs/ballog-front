@@ -28,7 +28,6 @@ export default function HomeScreen() {
         case 'OPEN_CAMERA':
           if (validateOpenCameraPayload(message.payload)) {
             console.log('RN: 카메라 열기 요청 처리')
-            // TODO: navigation.navigate('CameraScreen') 같은 로직 추가
             router.push("/screens/cameraScreen")
           } else {
             console.warn('RN: OPEN_CAMERA payload 불일치', message.payload)
