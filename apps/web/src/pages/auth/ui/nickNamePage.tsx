@@ -1,13 +1,13 @@
-import { Header } from '@/widget/header'
+import { Header } from '@/widgets/header'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { useMutation } from '@tanstack/react-query'
-import { auth } from '@/entities/auth/api/auth-post'
+import { authPost } from '@/entities/auth/api'
 
 const NickNamePage = () => {
   const { mutate: signup } = useMutation({
-    mutationFn: auth.signup,
+    mutationFn: authPost.signup,
     onSuccess: (data) => {
       console.log(data)
     },

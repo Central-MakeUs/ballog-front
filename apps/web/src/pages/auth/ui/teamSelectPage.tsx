@@ -1,9 +1,9 @@
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
 import { TeamSelectButton } from '@/entities/auth/ui'
-import { Header } from '@/widget/header'
+import { Header } from '@/widgets/header'
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { useFlow } from '@/share/lib/stackflow'
+import { useFlow } from '@/shared/lib/stackflow'
 import { teams } from '@/constants/teams'
 
 const TeamSelectPage = () => {

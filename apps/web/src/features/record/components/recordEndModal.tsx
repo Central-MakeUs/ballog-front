@@ -1,4 +1,4 @@
-import { Dialog, DialogContent } from '@/share/ui/common'
+import { Dialog, DialogContent } from '@/shared/ui/common'
 import { useState } from 'react'
 
 type MatchResult = 'win' | 'lose' | 'draw'

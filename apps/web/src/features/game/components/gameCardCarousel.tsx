@@ -4,9 +4,9 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from '@/share/ui/common/carousel'
+} from '@/shared/ui/common/carousel'
 import { GameCard } from '@/entities/game'
-import type { CarouselApi } from '@/share/ui/common/carousel'
+import type { CarouselApi } from '@/shared/ui/common/carousel'
 
 const GameCardCarousel = () => {
   const [api, setApi] = useState<CarouselApi | null>(null)

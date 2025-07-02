@@ -1,6 +1,6 @@
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { Header } from '@/widget/header'
+import { Header } from '@/widgets/header'
 import { Banner } from '@/entities/auth/ui/Banner'
 import { KakaoButton, AppleButton } from '@/features/auth'
 

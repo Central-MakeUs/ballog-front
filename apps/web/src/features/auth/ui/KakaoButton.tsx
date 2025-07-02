@@ -1,4 +1,4 @@
-import { useFlow } from '@/share/lib/stackflow'
+import { useFlow } from '@/shared/lib/stackflow'
 
 export const KakaoButton = () => {
   const { push } = useFlow()
