@@ -1,4 +1,3 @@
-// app/screens/cameraScreen.tsx
 import React, { useState, useRef, useEffect } from 'react'
 import {
   View,
@@ -7,6 +6,7 @@ import {
   Text,
   SafeAreaView,
   Alert,
+  Image,
 } from 'react-native'
 import {
   CameraView,
@@ -22,16 +22,18 @@ import FlipButton from '@/assets/images/flipButton.svg'
 
 export default function CameraScreen() {
   const router = useRouter()
+
   const [cameraPermission, requestCameraPermission] = useCameraPermissions()
   const [mediaLibraryPermission, requestMediaLibraryPermission] =
     MediaLibrary.usePermissions()
   const [facing, setFacing] = useState<CameraType>('back')
   const [flash, setFlash] = useState<FlashMode>('off')
-  const [capturedPhoto, setCapturedPhoto] = useState<string | null>(null)
+  const [latestPhotoUri, setLatestPhotoUri] = useState<string | null>(null)
+
   const cameraRef = useRef<CameraView>(null)
 
+  // 권한 요청
   useEffect(() => {
-    // 권한 요청
     if (cameraPermission?.status !== 'granted') {
       requestCameraPermission()
     }
@@ -42,6 +44,20 @@ export default function CameraScreen() {
       requestMediaLibraryPermission()
     }
   }, [cameraPermission, mediaLibraryPermission])
+
+  // mediaLibraryPermission 권한 생기면 갤러리 최신 사진 불러오기
+  useEffect(() => {
+    const loadLatestPhoto = async () => {
+      const uri = await getGalleryThumbnail()
+      setLatestPhotoUri(uri ?? null)
+    }
+
+    loadLatestPhoto()
+  }, [mediaLibraryPermission])
+
+  const handleClose = () => {
+    router.back()
+  }
 
   const takePicture = async () => {
     if (!cameraRef.current) return
@@ -63,17 +79,6 @@ export default function CameraScreen() {
       console.error('사진 촬영 에러:', error)
       Alert.alert('에러', '사진 촬영 중 오류가 발생했습니다.')
     }
-  }
-
-  // WebView로 사진 정보 전달
-  const sendPhotoToWebView = (photoUri: string) => {
-    // WebView로 메시지 전송 로직
-    // 실제로는 WebView ref를 통해 postMessage 호출
-    console.log('WebView로 전송할 사진:', photoUri)
-  }
-
-  const handleClose = () => {
-    router.back()
   }
 
   if (!cameraPermission || !cameraPermission.granted) {
@@ -123,6 +128,30 @@ export default function CameraScreen() {
     }
   }
 
+  // 갤러리 버튼 썸네일
+  const getGalleryThumbnail = async () => {
+    try {
+      const assets = await MediaLibrary.getAssetsAsync({
+        sortBy: [['creationTime', false]],
+        mediaType: 'photo',
+        first: 1,
+      })
+
+      if (assets.assets.length > 0) {
+        const assetInfo = await MediaLibrary.getAssetInfoAsync(
+          assets.assets[0].id,
+        )
+        console.log('Asset info:', assetInfo)
+        return assetInfo.localUri
+      }
+
+      return null
+    } catch (error) {
+      console.error('최신 사진 불러오기 실패:', error)
+      return null
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       {/* 상단 헤더 */}
@@ -164,7 +193,14 @@ export default function CameraScreen() {
           style={styles.galleryButton}
           onPress={pickImageFromGallery}
         >
-          <Text style={{ color: '#000' }}>갤러리</Text>
+          {latestPhotoUri ? (
+            <Image
+              source={{ uri: latestPhotoUri }}
+              style={styles.galleryThumbnail}
+            />
+          ) : (
+            <Text style={{ color: '#000' }}>갤러리</Text>
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -242,6 +278,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  galleryThumbnail: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
   },
   shutterButton: {
     position: 'absolute',

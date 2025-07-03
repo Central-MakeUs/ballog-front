@@ -1,4 +1,3 @@
-// app/screens/photoResultScreen.tsx
 import {
   View,
   StyleSheet,
