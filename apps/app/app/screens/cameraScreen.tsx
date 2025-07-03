@@ -89,7 +89,6 @@ export default function CameraScreen() {
   }
 
   // 핀치 줌 핸들러
-  const scale = useSharedValue(1)
   const savedZoom = useSharedValue(0) // 줌 값 저장
 
   const updateZoom = (newZoom: number) => {
@@ -98,19 +97,20 @@ export default function CameraScreen() {
 
   const pinchGesture = Gesture.Pinch()
     .onUpdate((event) => {
+      const sensitivity = 0.1 // 핀치 줌 감도 조절
       const newZoom = Math.max(
         0,
-        Math.min(savedZoom.value + (event.scale - 1) * 0.5, 1),
+        Math.min(savedZoom.value + (event.scale - 1) * sensitivity, 1),
       )
       runOnJS(updateZoom)(newZoom)
     })
     .onEnd((event) => {
+      const sensitivity = 0.1
       const finalZoom = Math.max(
         0,
-        Math.min(savedZoom.value + (event.scale - 1) * 0.5, 1),
+        Math.min(savedZoom.value + (event.scale - 1) * sensitivity, 1),
       )
       savedZoom.value = finalZoom // 현재 줌 값 저장
-      scale.value = 1 // 제스처 스케일만 리셋
     })
 
   if (!cameraPermission || !cameraPermission.granted) {
