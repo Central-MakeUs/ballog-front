@@ -18,6 +18,12 @@ import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
+import {
+  GestureHandlerRootView,
+  GestureDetector,
+  Gesture,
+} from 'react-native-gesture-handler'
+import Animated, { useSharedValue, runOnJS } from 'react-native-reanimated'
 import FlipButton from '@/assets/images/flipButton.svg'
 
 export default function CameraScreen() {
@@ -29,6 +35,7 @@ export default function CameraScreen() {
   const [facing, setFacing] = useState<CameraType>('back')
   const [flash, setFlash] = useState<FlashMode>('off')
   const [latestPhotoUri, setLatestPhotoUri] = useState<string | null>(null)
+  const [zoom, setZoom] = useState(0)
 
   const cameraRef = useRef<CameraView>(null)
 
@@ -80,6 +87,31 @@ export default function CameraScreen() {
       Alert.alert('에러', '사진 촬영 중 오류가 발생했습니다.')
     }
   }
+
+  // 핀치 줌 핸들러
+  const scale = useSharedValue(1)
+  const savedZoom = useSharedValue(0) // 줌 값 저장
+
+  const updateZoom = (newZoom: number) => {
+    setZoom(newZoom)
+  }
+
+  const pinchGesture = Gesture.Pinch()
+    .onUpdate((event) => {
+      const newZoom = Math.max(
+        0,
+        Math.min(savedZoom.value + (event.scale - 1) * 0.5, 1),
+      )
+      runOnJS(updateZoom)(newZoom)
+    })
+    .onEnd((event) => {
+      const finalZoom = Math.max(
+        0,
+        Math.min(savedZoom.value + (event.scale - 1) * 0.5, 1),
+      )
+      savedZoom.value = finalZoom // 현재 줌 값 저장
+      scale.value = 1 // 제스처 스케일만 리셋
+    })
 
   if (!cameraPermission || !cameraPermission.granted) {
     return (
@@ -153,64 +185,77 @@ export default function CameraScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* 상단 헤더 */}
-      <View style={styles.header}>
-        <View style={styles.placeholder} />
-        <Text style={styles.headerTitle}>촬영하기</Text>
-        <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
-          <Ionicons name="close" size={28} color="white" />
-        </TouchableOpacity>
-      </View>
+    <GestureHandlerRootView style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        {/* 상단 헤더 */}
+        <View style={styles.header}>
+          <View style={styles.placeholder} />
+          <Text style={styles.headerTitle}>촬영하기</Text>
+          <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
+            <Ionicons name="close" size={28} color="white" />
+          </TouchableOpacity>
+        </View>
 
-      {/* 카메라 뷰 */}
-      <View style={styles.cameraContainer}>
-        <TouchableOpacity
-          style={styles.flashButton}
-          onPress={() => setFlash(flash === 'off' ? 'on' : 'off')}
-        >
-          <Ionicons
-            name={flash === 'off' ? 'flash-off' : 'flash'}
-            size={24}
-            color="white"
-          />
-        </TouchableOpacity>
-
-        <CameraView
-          style={styles.camera}
-          facing={facing}
-          flash={flash}
-          ref={cameraRef}
-        />
-        <TouchableOpacity style={styles.shutterButton} onPress={takePicture}>
-          <View style={styles.shutterInner} />
-        </TouchableOpacity>
-      </View>
-
-      {/* 하단 컨트롤 */}
-      <View style={styles.bottomControls}>
-        <TouchableOpacity
-          style={styles.galleryButton}
-          onPress={pickImageFromGallery}
-        >
-          {latestPhotoUri ? (
-            <Image
-              source={{ uri: latestPhotoUri }}
-              style={styles.galleryThumbnail}
+        {/* 카메라 뷰 */}
+        <View style={styles.cameraContainer}>
+          <TouchableOpacity
+            style={styles.flashButton}
+            onPress={() => setFlash(flash === 'off' ? 'on' : 'off')}
+          >
+            <Ionicons
+              name={flash === 'off' ? 'flash-off' : 'flash'}
+              size={24}
+              color="white"
             />
-          ) : (
-            <Text style={{ color: '#000' }}>갤러리</Text>
-          )}
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.flipButton}
-          onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
-        >
-          <FlipButton />
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+          <GestureDetector gesture={pinchGesture}>
+            <Animated.View style={styles.camera}>
+              <CameraView
+                style={styles.camera}
+                facing={facing}
+                flash={flash}
+                zoom={zoom}
+                ref={cameraRef}
+              />
+            </Animated.View>
+          </GestureDetector>
+
+          <TouchableOpacity style={styles.shutterButton} onPress={takePicture}>
+            <View style={styles.shutterInner} />
+          </TouchableOpacity>
+          {zoom > 0 && (
+            <View style={styles.zoomIndicator}>
+              <Text style={styles.zoomText}>{(zoom * 10 + 1).toFixed(1)}x</Text>
+            </View>
+          )}
+        </View>
+
+        {/* 하단 컨트롤 */}
+        <View style={styles.bottomControls}>
+          <TouchableOpacity
+            style={styles.galleryButton}
+            onPress={pickImageFromGallery}
+          >
+            {latestPhotoUri ? (
+              <Image
+                source={{ uri: latestPhotoUri }}
+                style={styles.galleryThumbnail}
+              />
+            ) : (
+              <Text style={{ color: '#000' }}>갤러리</Text>
+            )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.flipButton}
+            onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
+          >
+            <FlipButton />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </GestureHandlerRootView>
   )
 }
 
@@ -245,6 +290,21 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
+  },
+  zoomIndicator: {
+    position: 'absolute',
+    bottom: 110,
+    alignSelf: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
+    zIndex: 1,
+  },
+  zoomText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
   },
   flashButton: {
     position: 'absolute',
