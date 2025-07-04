@@ -12,10 +12,16 @@ interface ModalButton {
 interface ModalProps {
   type: 'overlay' | 'bottomSheet'
   heading?: string
-  buttons: {
-    layout: 'horizontal' | 'vertical' | 'img'
-    items: ModalButton[]
-  }
+  imgSrc?: string
+  buttons:
+    | {
+        layout: 'horizontal' | 'vertical'
+        items: ModalButton[]
+      }
+    | {
+        layout: 'img'
+        src: string
+      }
   dismissible?: boolean
   body?: string // 바텀시트 텍스트
   hasSubText?: boolean
@@ -26,6 +32,7 @@ interface ModalProps {
 export function Modal({
   type,
   heading,
+  imgSrc,
   body,
   hasSubText,
   hasImg,
@@ -57,6 +64,7 @@ export function Modal({
             <CloseButton />
           </button>
         )}
+
         {hasImg && (
           <div className="w-24 h-24 mx-auto mb-2">
             <img
@@ -66,12 +74,25 @@ export function Modal({
             />
           </div>
         )}
+
         {heading && (
-          <h2 className="text-lg font-bold text-center mb-1">{heading}</h2>
+          <h2 className="body-lg-bold">{heading}</h2>
         )}
+
         {body && (
           <p className="text-sm text-center text-gray-600 mb-1">{body}</p>
         )}
+
+        {imgSrc && (
+          <div className="w-24 h-24 mx-auto mb-2">
+            <img
+              src={imgSrc}
+              alt="모달 이미지"
+              className="w-full h-full object-cover rounded"
+            />
+          </div>
+        )}
+
         {hasSubText && (
           <p className="text-xs text-center text-gray-400 mb-2">
             탈퇴시 블로그 내 모든 정보가 <br />
@@ -86,15 +107,37 @@ export function Modal({
             buttons.layout === 'img' && 'justify-center',
           )}
         >
-          {buttons.items.map((btn, idx) => (
-            <button
-              key={idx}
-              onClick={btn.onClick}
-              className="flex-1 rounded bg-primary text-white py-2"
+          {buttons.layout === 'img' && (
+            <div className="w-24 h-24 mx-auto mb-2">
+              <img
+                src={buttons.src}
+                alt="모달 이미지"
+                className="w-full h-full object-cover rounded"
+              />
+            </div>
+          )}
+
+          {/* 버튼 */}
+          {(buttons.layout === 'horizontal' ||
+            buttons.layout === 'vertical') && (
+            <div
+              className={cn(
+                'flex gap-2',
+                buttons.layout === 'vertical' && 'flex-col',
+                buttons.layout === 'horizontal' && 'flex-row',
+              )}
             >
-              {btn.label}
-            </button>
-          ))}
+              {buttons.items.map((btn, idx) => (
+                <button
+                  key={idx}
+                  onClick={btn.onClick}
+                  className="flex-1 rounded bg-primary text-white py-2"
+                >
+                  {btn.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
