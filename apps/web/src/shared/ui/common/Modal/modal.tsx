@@ -10,7 +10,6 @@ import {
 interface ModalButton {
   label: string
   onClick: () => void
-  variant?: 'primary' | 'secondary'
 }
 
 interface ModalProps {
@@ -22,7 +21,6 @@ interface ModalProps {
   }
   dismissible?: boolean
   body?: string
-  hasSubText?: string
   hasImg?: string
   open?: boolean
   onOpenChange?: (open: boolean) => void
@@ -102,17 +100,11 @@ const ModalButtons = ({
   }
 
   // 바텀시트 타입일 때 - 둥근 버튼 스타일
-  const getBottomSheetButtonStyle = (variant?: 'primary' | 'secondary') => {
-    if (variant === 'secondary') {
-      return 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-    }
-    return 'bg-teal-500 text-white hover:bg-teal-600'
-  }
-
+  // 바텀시트
   return (
     <div
       className={cn(
-        'flex gap-3 w-full mt-6',
+        'flex gap-4 w-full pb-8',
         buttons.layout === 'vertical' ? 'flex-col' : 'flex-row',
       )}
     >
@@ -120,10 +112,17 @@ const ModalButtons = ({
         <button
           key={idx}
           onClick={btn.onClick}
-          className={cn(
-            'flex-1 py-4 px-6 rounded-xl font-medium transition-all active:scale-95',
-            getBottomSheetButtonStyle(btn.variant),
-          )}
+          className={cn('body-md-medium', 'flex-1 py-3 rounded-[12px]')}
+          style={{
+            backgroundColor:
+              idx === 0
+                ? 'var(--color-brand-secondary-subtle)'
+                : 'var(--color-brand-primary-default)',
+            color:
+              idx === 0
+                ? 'var(--color-brand-neutral-70)'
+                : 'var(--color-brand-neutral-white)',
+          }}
         >
           {btn.label}
         </button>
@@ -137,7 +136,6 @@ function Modal({
   type,
   heading,
   body,
-  hasSubText,
   hasImg,
   dismissible = true,
   buttons,
@@ -148,17 +146,14 @@ function Modal({
 
   const contentStyles = {
     overlay: cn(
-      'max-w-md rounded-2xl bg-white shadow-xl',
+      'w-[270px] rounded-[16px]',
       'px-0 pb-0 pt-4',
-      'w-[270px]',
-      'flex flex-col gap-y-4'
+      'flex flex-col gap-y-4',
     ),
     bottomSheet: cn(
-      'max-w-full fixed bottom-0 left-0 right-0',
-      'rounded-t-3xl bg-gray-900 text-white',
-      'animate-slide-up min-h-[400px]',
-      'p-6 pb-8',
-      'sm:max-w-lg sm:mx-auto sm:mb-4 sm:rounded-3xl',
+      'w-full max-w-[466px] text-white rounded-t-[16px] rounded-b-none',
+      'animate-slide-up',
+      'p-8',
     ),
   }
 
@@ -170,6 +165,13 @@ function Modal({
           'pb-0 mb-0',
           !dismissible && '[&>button]:hidden',
         )}
+        style={{
+          border: 'none',
+          backgroundColor:
+            type === 'overlay'
+              ? 'var(--color-usage-background-inverse)'
+              : 'var(--color-usage-background-strong)',
+        }}
         onInteractOutside={(e) => {
           if (!dismissible) e.preventDefault()
         }}
@@ -177,19 +179,9 @@ function Modal({
           if (!dismissible) e.preventDefault()
         }}
       >
-        {/* BottomSheet 핸들 */}
-        {isBottomSheet && (
-          <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-6" />
-        )}
-
-        {/* 이미지 */}
-        {hasImg && (
-          <div
-            className={cn(
-              'mx-auto',
-              isBottomSheet ? 'w-64 h-64' : 'w-[123px] h-[123px]',
-            )}
-          >
+        {/* 오버레이일 때 이미지 */}
+        {!isBottomSheet && hasImg && (
+          <div className={cn('mx-auto', 'w-[123px] h-[123px]')}>
             <img
               src={hasImg}
               alt="모달 이미지"
@@ -206,7 +198,7 @@ function Modal({
                 className={cn(
                   'text-center body-lg-bold',
                   isBottomSheet
-                    ? '--color-usage-text-default'
+                    ? '--color-usage-text-default pb-1'
                     : '--color-usage-text-inverse',
                 )}
               >
@@ -219,11 +211,10 @@ function Modal({
                 className={cn(
                   'text-center body-sm-medium mb-0',
                   isBottomSheet
-                    ? '--color-usage-text-default'
+                    ? '--color-usage-text-default pb-2'
                     : '--color-usage-text-inverse',
-                    type === 'overlay' && hasImg && 'pb-8'
+                  type === 'overlay' && hasImg && 'pb-8',
                 )}
-                
               >
                 {body}
               </DialogDescription>
@@ -231,8 +222,17 @@ function Modal({
           </div>
         </DialogHeader>
 
+        {/* 바텀시트일 때 이미지 */}
+        {isBottomSheet && hasImg && (
+          <div className={cn('mx-auto', 'w-full h-full max-h-[536px]', 'mb-2')}>
+            <img
+              src={hasImg}
+              alt="모달 이미지"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+        )}
         {/* 버튼 섹션 */}
-
         <ModalButtons buttons={buttons} type={type} />
       </DialogContent>
     </Dialog>

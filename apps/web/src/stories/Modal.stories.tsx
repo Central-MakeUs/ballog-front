@@ -104,9 +104,8 @@ export const BottomSheet: Story = {
     hasImg: GrayExampleImage,
     dismissible: true,
     buttons: {
-      layout: 'vertical',
+      layout: 'horizontal',
       items: [
-        { label: 'button' },
         { label: 'button' },
         { label: 'button' },
       ],
