@@ -11,6 +11,7 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@ballog/bridge": "workspace:*",
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
@@ -39,12 +40,15 @@
     "react-native-webview": "13.13.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
     "@ballog/eslint": "workspace:*",
     "@ballog/tsconfig": "workspace:*",
-    "@babel/core": "^7.25.2",
-    "@types/react": "~19.0.10",
-    "typescript": "~5.8.3",
+    "@types/react": "~19.0.14",
     "eslint": "^9.25.0",
-    "eslint-config-expo": "~9.2.0"
+    "eslint-config-expo": "~9.2.0",
+    "typescript": "~5.8.3"
+  },
+  "resolutions": {
+    "@types/react": "~19.0.14"
   }
 }
