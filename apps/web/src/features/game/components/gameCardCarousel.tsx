@@ -4,9 +4,9 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from '@/components/ui/carousel'
-import GameCard from '../../../components/common/gameCard'
-import type { CarouselApi } from '@/components/ui/carousel'
+} from '@/shared/ui/common/carousel'
+import { GameCard } from '@/entities/game'
+import type { CarouselApi } from '@/shared/ui/common/carousel'
 
 const GameCardCarousel = () => {
   const [api, setApi] = useState<CarouselApi | null>(null)
@@ -47,7 +47,7 @@ const GameCardCarousel = () => {
                 awayTeam="KT"
                 stadium="사직"
                 date="2025.06.27"
-                thumbnail='이미지URL'
+                thumbnail="이미지URL"
               />
             </CarouselItem>
           ))}
