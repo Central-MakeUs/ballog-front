@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router'
 import type { PostMessagePayload } from '@ballog/bridge'
 import { getMetroServerUrl } from '@/scripts/getMetroUrl'
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const router = useRouter()
 
@@ -64,7 +64,7 @@ export default function HomeScreen() {
         onMessage={handleMessage}
         javaScriptEnabled={true}
         domStorageEnabled={true}
-        originWhitelist={["*"]}
+        originWhitelist={['*']}
         onError={(error) => console.error('WebView 에러:', error)}
         onLoadStart={() => console.log('WebView 로딩 시작...')}
         onLoadEnd={() => console.log('WebView 로딩 완료')}
@@ -72,6 +72,8 @@ export default function HomeScreen() {
     </SafeAreaView>
   )
 }
+
+export { HomeScreen }
 
 const styles = StyleSheet.create({
   container: {
