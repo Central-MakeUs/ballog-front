@@ -2,6 +2,7 @@ import { StyleSheet, SafeAreaView } from 'react-native'
 import { useRef } from 'react'
 import { WebView, WebViewMessageEvent } from 'react-native-webview'
 import { useRouter } from 'expo-router'
+import type { PostMessagePayload } from '@ballog/bridge'
 
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null)
@@ -43,7 +44,7 @@ export default function HomeScreen() {
   }
 
   const validateOpenCameraPayload = (
-    payload: any,
+    payload: PostMessagePayload,
   ): payload is { message: string } => {
     return (
       typeof payload === 'object' &&
