@@ -2,7 +2,7 @@ import Constants from 'expo-constants'
 
 export function getMetroServerUrl() {
   const manifest = Constants.expoConfig
-
+  console.log(manifest)
   const originalDebuggerHost = manifest?.hostUri
 
   const webviewDebuggerUri = originalDebuggerHost
