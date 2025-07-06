@@ -2,11 +2,11 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import HomePage from '@/pages/homePage'
 import LiveRecordPage from '@/pages/liveRecordPage'
-import LoginPage from '@/pages/auth/ui/loginPage'
-import TeamSelectPage from '@/pages/auth/ui/teamSelectPage'
-import NickNamePage from '@/pages/auth/ui/nickNamePage'
+import LoginPage from '@/pages/auth/ui/LoginPage'
 
-import { PATH } from '@/constants/path'
+import { PATH } from '@/shared/constants/path'
+import TeamSelectPage from '@/pages/auth/ui/TeamSelectPage'
+import NickNamePage from '@/pages/auth/ui/NickNamePage'
 
 const AppRouter = () => {
   const router = createBrowserRouter([
