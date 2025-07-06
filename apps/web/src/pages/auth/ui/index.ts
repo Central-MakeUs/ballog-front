@@ -1,3 +1,3 @@
-export * from './loginPage'
-export * from './teamSelectPage'
-export * from './nickNamePage'
+export * from './LoginPage'
+export * from './TeamSelectPage'
+export * from './NickNamePage'
