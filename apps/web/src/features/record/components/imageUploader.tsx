@@ -1,6 +1,15 @@
+import { createWebBridge } from '@ballog/bridge'
+import { POST_MESSAGE_EVENT } from '@ballog/bridge'
+
 const ImageUploader = () => {
+  const bridge = createWebBridge()
+  const handleClick = () => {
+    console.log("click")
+    bridge.send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })
+  }
+
   return (
-    <div className="relative flex flex-col items-center">
+    <div className="relative flex flex-col items-center" onClick={handleClick}>
       <div className="absolute -top-5 -left-4 bg-gray-600 text-white text-xs rounded px-2 py-1">
         이미지 등록하기
         <div
