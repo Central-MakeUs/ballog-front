@@ -20,13 +20,13 @@ const RecordLogCard = ({
     : renderNoRecord()
 }
 
-function renderWithRecord(
+const renderWithRecord = (
   homeTeam?: string,
   awayTeam?: string,
   stadium?: string,
   date?: string,
   matchesResult?: string,
-) {
+) => {
   return (
     <div
       className="flex flex-col w-[328px] relative"
