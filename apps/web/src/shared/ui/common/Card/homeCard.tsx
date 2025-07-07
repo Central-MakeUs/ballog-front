@@ -1,6 +1,23 @@
 import SampleImage from '@/assets/whiteBallogLogo.svg'
 import '@/shared/ui/global.css'
 
+/**
+ * HomeCard
+ *
+ * 홈 화면에서 경기 정보를 보여주는 카드 컴포넌트.
+ *
+ * @param props - HomeCardProps
+ * @param props.state - 카드의 상태 ('default' | 'disabled')
+ *   - 'default' 또는 undefined: 경기 정보를 표시
+ *   - 'disabled': 경기 정보가 없을 때 표시
+ * @param props.homeTeam - 홈 팀 이름 (state가 'default'일 때 필수)
+ * @param props.awayTeam - 원정 팀 이름 (state가 'default'일 때 필수)
+ * @param props.stadium - 경기장 이름 (state가 'default'일 때 필수)
+ * @param props.dateTime - 경기 일시 (state가 'default'일 때 필수)
+ *
+ * @returns 홈 카드 UI 요소
+ */
+
 interface DefaultCardProps {
   state?: 'default'
   homeTeam: string
@@ -30,7 +47,7 @@ const HomeCard = (props: HomeCardProps) => {
 
 const renderDefaultCard = (props: DefaultCardProps) => {
   const { homeTeam, awayTeam, stadium, dateTime } = props
-  
+
   return (
     <div
       className="flex flex-col items-center w-[200px] overflow-hidden"

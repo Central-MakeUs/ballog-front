@@ -2,6 +2,17 @@ import MadEmotion from '@/assets/madEmotion.svg?react'
 import HappyEmotion from '@/assets/happyEmotion.svg?react'
 import { Pie, PieChart } from 'recharts'
 
+/**
+ * EmotionCard
+ * 
+ * 감정 비율을 도넛 차트 형태로 보여주는 카드 컴포넌트.
+ * 
+ * @param props - EmotionCardProps
+ * @param props.state - 'active' | 'disabled', active면 감정과 비율 표시, disabled면 비율 없음 표시
+ * @param props.emotion - '화나요' 또는 '좋아요', active일 때 중심 감정 표시용
+ * @param props.rate - 감정 비율 (0~100), active일 때 중심 감정의 퍼센트
+ */
+
 interface ActiveEmotionCardProps {
   state: 'active'
   emotion: string
@@ -57,6 +68,11 @@ const renderActive = (props: ActiveEmotionCardProps) => {
   let startAngle = 0
   let endAngle = 0
 
+
+  /**
+   * 화나요 50% 이하이면 12시 방향에서 시작
+   * 화나요 50% 이상이면 3시 방향에서 시작
+   */
   if (madValue <= 50) {
     startAngle = 90
     endAngle = 450

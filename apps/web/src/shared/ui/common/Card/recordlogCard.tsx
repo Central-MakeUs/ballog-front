@@ -1,3 +1,21 @@
+/**
+ * RecordLogCard
+ * 
+ * 직관 기록 정보를 표시하는 카드 컴포넌트.
+ * 
+ * @param props - RecordLogCardProps
+ * @param props.hasRecord - 기록 여부를 나타냄
+ *   - true: 기록이 있는 상태. 경기 정보와 경기 결과를 표시
+ *   - false: 기록이 없는 상태. 직관 기록 유도 UI 표시
+ * @param props.homeTeam - 홈 팀 이름 (hasRecord가 true일 때 필수)
+ * @param props.awayTeam - 원정 팀 이름 (hasRecord가 true일 때 필수)
+ * @param props.stadium - 경기장 이름 (hasRecord가 true일 때 필수)
+ * @param props.date - 경기 일시 (hasRecord가 true일 때 필수)
+ * @param props.matchesResult - 경기 결과 ('win' | 'lose' | 'draw', hasRecord가 true일 때 필수)
+ * 
+ * @returns RecordLogCard UI 요소
+ */
+
 interface RecordCardWithRecord {
   hasRecord: true
   homeTeam: string

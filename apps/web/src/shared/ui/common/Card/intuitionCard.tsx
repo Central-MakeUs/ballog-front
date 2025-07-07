@@ -1,3 +1,18 @@
+/**
+ * IntuitionCard
+ * 
+ * 직관(경기 관람) 횟수와 승률을 보여주는 카드 컴포넌트.
+ * 
+ * @param props - IntuitionCardProps
+ * @param props.state - 카드의 상태 ('active' | 'disabled')
+ *   - 'active': 직관 횟수와 승률 데이터를 표시
+ *   - 'disabled': 직관 데이터가 없음을 표시
+ * @param props.matchCount - 직관 횟수 (state가 'active'일 때 필수)
+ * @param props.winRate - 직관 경기 승률 (state가 'active'일 때 필수, 소수점 포함 가능)
+ * 
+ * @returns 직관 카드 UI 요소
+ */
+
 interface ActiveIntuitionCardProps {
   state: 'active'
   matchCount: number
@@ -24,7 +39,7 @@ const IntuitionCard = (props: IntuitionCardProps) => {
 
 const renderActive = (props: ActiveIntuitionCardProps) => {
   const { matchCount, winRate } = props
-  
+
   return (
     <div
       className="flex w-[156px] h-[184px] px-4 py-6 justify-center items-center flex-shrink-0"
