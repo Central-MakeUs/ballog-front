@@ -3,11 +3,11 @@ import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { useMutation } from '@tanstack/react-query'
-import { authPost } from '@/entities/auth/api'
+// import { authPost } from '@/entities/auth/api'
 
 const NickNamePage = () => {
   const { mutate: signup } = useMutation({
-    mutationFn: authPost.signup,
+    // mutationFn: authPost.signup,
     onSuccess: (data) => {
       console.log(data)
     },
@@ -45,7 +45,7 @@ const NickNamePage = () => {
 
         <button
           onClick={() => {
-            signup({ nickname, baseballTeam })
+            // signup({ nickname, baseballTeam })
           }}
           disabled={!nickname.trim()}
           className={`w-full max-w-xs py-3 rounded-lg ${

@@ -1,117 +1,46 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Text,
   SafeAreaView,
-  Alert,
   Image,
 } from 'react-native'
-import {
-  CameraView,
-  CameraType,
-  FlashMode,
-  useCameraPermissions,
-} from 'expo-camera'
-import * as ImagePicker from 'expo-image-picker'
-import * as MediaLibrary from 'expo-media-library'
+import { CameraView } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import {
   GestureHandlerRootView,
   GestureDetector,
-  Gesture,
 } from 'react-native-gesture-handler'
-import Animated, { useSharedValue, runOnJS } from 'react-native-reanimated'
+import Animated from 'react-native-reanimated'
 import FlipButton from '@/assets/images/flipButton.svg'
+import { useCamera } from '@/hooks/useCamera'
+import { useGallery } from '@/hooks/useGallery'
 
 export default function CameraScreen() {
   const router = useRouter()
 
-  const [cameraPermission, requestCameraPermission] = useCameraPermissions()
-  const [mediaLibraryPermission, requestMediaLibraryPermission] =
-    MediaLibrary.usePermissions()
-  const [facing, setFacing] = useState<CameraType>('back')
-  const [flash, setFlash] = useState<FlashMode>('off')
-  const [latestPhotoUri, setLatestPhotoUri] = useState<string | null>(null)
-  const [zoom, setZoom] = useState(0)
+  const cameraRef = useRef<CameraView>(null) as React.RefObject<CameraView>
 
-  const cameraRef = useRef<CameraView>(null)
+  const {
+    cameraPermission,
+    requestCameraPermission,
+    facing,
+    setFacing,
+    flash,
+    setFlash,
+    zoom,
+    takePicture,
+    pinchGesture,
+  } = useCamera(cameraRef, router)
 
-  // 권한 요청
-  useEffect(() => {
-    if (cameraPermission?.status !== 'granted') {
-      requestCameraPermission()
-    }
-    if (
-      !mediaLibraryPermission ||
-      mediaLibraryPermission.status !== 'granted'
-    ) {
-      requestMediaLibraryPermission()
-    }
-  }, [cameraPermission, mediaLibraryPermission])
-
-  // mediaLibraryPermission 권한 생기면 갤러리 최신 사진 불러오기
-  useEffect(() => {
-    const loadLatestPhoto = async () => {
-      const uri = await getGalleryThumbnail()
-      setLatestPhotoUri(uri ?? null)
-    }
-
-    loadLatestPhoto()
-  }, [mediaLibraryPermission])
+  const { latestPhotoUri, pickImageFromGallery } = useGallery(router)
 
   const handleClose = () => {
     router.back()
   }
-
-  const takePicture = async () => {
-    if (!cameraRef.current) return
-
-    try {
-      const photo = await cameraRef.current.takePictureAsync({
-        quality: 1,
-        base64: false,
-        exif: true,
-      })
-
-      if (photo?.uri) {
-        router.push({
-          pathname: '/screens/photoResultScreen',
-          params: { photoUri: photo.uri },
-        })
-      }
-    } catch (error) {
-      console.error('사진 촬영 에러:', error)
-      Alert.alert('에러', '사진 촬영 중 오류가 발생했습니다.')
-    }
-  }
-
-  // 핀치 줌 핸들러
-  const savedZoom = useSharedValue(0) // 줌 값 저장
-
-  const updateZoom = (newZoom: number) => {
-    setZoom(newZoom)
-  }
-
-  const pinchGesture = Gesture.Pinch()
-    .onUpdate((event) => {
-      const sensitivity = 0.1 // 핀치 줌 감도 조절
-      const newZoom = Math.max(
-        0,
-        Math.min(savedZoom.value + (event.scale - 1) * sensitivity, 1),
-      )
-      runOnJS(updateZoom)(newZoom)
-    })
-    .onEnd((event) => {
-      const sensitivity = 0.1
-      const finalZoom = Math.max(
-        0,
-        Math.min(savedZoom.value + (event.scale - 1) * sensitivity, 1),
-      )
-      savedZoom.value = finalZoom // 현재 줌 값 저장
-    })
 
   if (!cameraPermission || !cameraPermission.granted) {
     return (
@@ -125,63 +54,6 @@ export default function CameraScreen() {
         </TouchableOpacity>
       </View>
     )
-  }
-
-  // 갤러리에서 이미지 선택하는 함수
-  const pickImageFromGallery = async () => {
-    try {
-      // 갤러리 권한 확인
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-
-      if (status !== 'granted') {
-        Alert.alert('권한 필요', '갤러리 접근 권한이 필요합니다.')
-        return
-      }
-
-      // 이미지 선택
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 1, // 이미지 품질 (0-1)
-      })
-
-      if (!result.canceled && result.assets && result.assets.length > 0) {
-        const selectedImage = result.assets[0]
-        console.log('선택된 이미지:', selectedImage.uri)
-
-        // 선택된 이미지 처리
-        router.push({
-          pathname: '/screens/photoResultScreen',
-          params: { photoUri: selectedImage.uri },
-        })
-      }
-    } catch (error) {
-      console.error('갤러리 접근 에러:', error)
-      Alert.alert('에러', '갤러리를 여는 중 오류가 발생했습니다.')
-    }
-  }
-
-  // 갤러리 버튼 썸네일
-  const getGalleryThumbnail = async () => {
-    try {
-      const assets = await MediaLibrary.getAssetsAsync({
-        sortBy: [['creationTime', false]],
-        mediaType: 'photo',
-        first: 1,
-      })
-
-      if (assets.assets.length > 0) {
-        const assetInfo = await MediaLibrary.getAssetInfoAsync(
-          assets.assets[0].id,
-        )
-        console.log('Asset info:', assetInfo)
-        return assetInfo.localUri
-      }
-
-      return null
-    } catch (error) {
-      console.error('최신 사진 불러오기 실패:', error)
-      return null
-    }
   }
 
   return (

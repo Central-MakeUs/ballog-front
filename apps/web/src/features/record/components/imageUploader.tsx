@@ -1,10 +1,11 @@
 import { createWebBridge } from '@ballog/bridge'
+import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 
 const ImageUploader = () => {
   const bridge = createWebBridge()
   const handleClick = () => {
     console.log("click")
-    bridge.send('OPEN_CAMERA', { message: 'camera' })
+    bridge.send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })
   }
 
   return (

@@ -2,10 +2,14 @@ import { StyleSheet, SafeAreaView } from 'react-native'
 import { useRef } from 'react'
 import { WebView, WebViewMessageEvent } from 'react-native-webview'
 import { useRouter } from 'expo-router'
+import type { PostMessagePayload } from '@ballog/bridge'
+import { getMetroServerUrl } from '@/scripts/getMetroUrl'
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const router = useRouter()
+
+  const webViewUri = getMetroServerUrl()
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data
@@ -28,7 +32,7 @@ export default function HomeScreen() {
         case 'OPEN_CAMERA':
           if (validateOpenCameraPayload(message.payload)) {
             console.log('RN: 카메라 열기 요청 처리')
-            router.push("/screens/cameraScreen")
+            router.push('/screens/cameraScreen')
           } else {
             console.warn('RN: OPEN_CAMERA payload 불일치', message.payload)
           }
@@ -43,7 +47,7 @@ export default function HomeScreen() {
   }
 
   const validateOpenCameraPayload = (
-    payload: any,
+    payload: PostMessagePayload,
   ): payload is { message: string } => {
     return (
       typeof payload === 'object' &&
@@ -56,21 +60,20 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <WebView
         ref={webViewRef}
-        source={{ uri: 'http://192.168.0.9:5173/' }}
-        // source={{ uri: 'http://172.20.10.8:5173/' }}
+        source={{ uri: webViewUri }}
         onMessage={handleMessage}
         javaScriptEnabled={true}
         domStorageEnabled={true}
-        originWhitelist={['http://192.168.0.9']}
-        // originWhitelist={['http://172.20.10.8']}
+        originWhitelist={['*']}
         onError={(error) => console.error('WebView 에러:', error)}
         onLoadStart={() => console.log('WebView 로딩 시작...')}
         onLoadEnd={() => console.log('WebView 로딩 완료')}
       />
-      
     </SafeAreaView>
   )
 }
+
+export { HomeScreen }
 
 const styles = StyleSheet.create({
   container: {
