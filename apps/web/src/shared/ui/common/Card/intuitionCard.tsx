@@ -1,28 +1,30 @@
-interface ActiveIntuitionCard {
+interface ActiveIntuitionCardProps {
   state: 'active'
   matchCount: number
   winRate: number
 }
 
-interface DisabledIntuitionCard {
+interface DisabledIntuitionCardProps {
   state: 'disabled'
 }
 
-type IntuitionCardProps = ActiveIntuitionCard | DisabledIntuitionCard
+type IntuitionCardProps = ActiveIntuitionCardProps | DisabledIntuitionCardProps
 
 const IntuitionCard = (props: IntuitionCardProps) => {
   switch (props.state) {
     case 'disabled':
       return renderDisabled()
     case 'active':
-      return renderActive(props.matchCount, props.winRate)
+      return renderActive(props)
     default:
       const _exhaustive: never = props
       return _exhaustive
   }
 }
 
-const renderActive = (matchCount: number, winRate: number) => {
+const renderActive = (props: ActiveIntuitionCardProps) => {
+  const { matchCount, winRate } = props
+  
   return (
     <div
       className="flex w-[156px] h-[184px] px-4 py-6 justify-center items-center flex-shrink-0"
