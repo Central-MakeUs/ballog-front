@@ -3,7 +3,7 @@ interface RecordCardWithRecord {
   homeTeam: string
   awayTeam: string
   stadium: string
-  dateTime: string
+  date: string
   matchesResult: 'win' | 'lose' | 'draw'
 }
 
@@ -18,15 +18,15 @@ const RecordLogCard = (props: RecordLogCardProps) => {
     return renderNoRecord()
   }
 
-  const { homeTeam, awayTeam, stadium, dateTime, matchesResult } = props
-  return renderWithRecord(homeTeam, awayTeam, stadium, dateTime, matchesResult)
+  const { homeTeam, awayTeam, stadium, date, matchesResult } = props
+  return renderWithRecord(homeTeam, awayTeam, stadium, date, matchesResult)
 }
 
 const renderWithRecord = (
   homeTeam?: string,
   awayTeam?: string,
   stadium?: string,
-  dateTime?: string,
+  date?: string,
   matchesResult?: string,
 ) => {
   return (
@@ -49,7 +49,7 @@ const renderWithRecord = (
             className="body-sm-light"
             style={{ color: 'var(--color-usage-text-subtle)' }}
           >
-            {stadium} <span className="mx-2">|</span> {dateTime}
+            {stadium} <span className="mx-2">|</span> {date}
           </div>
         </div>
         <div

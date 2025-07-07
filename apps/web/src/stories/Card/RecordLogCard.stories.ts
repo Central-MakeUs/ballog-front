@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RecordLogCard } from '@/shared/ui/common/Card/recordlogCard'
 
 const meta: Meta<typeof RecordLogCard> = {
-  title: 'Components/RecordingCard',
+  title: 'Components/RecordLogCard',
   component: RecordLogCard,
   tags: ['autodocs'],
   args: {
