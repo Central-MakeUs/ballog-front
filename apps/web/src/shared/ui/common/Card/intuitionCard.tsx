@@ -16,6 +16,9 @@ const IntuitionCard = (props: IntuitionCardProps) => {
       return renderDisabled()
     case 'active':
       return renderActive(props.matchCount, props.winRate)
+    default:
+      const _exhaustive: never = props
+      return _exhaustive
   }
 }
 

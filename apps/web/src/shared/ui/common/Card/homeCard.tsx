@@ -16,20 +16,21 @@ interface DisabledCardProps {
 type HomeCardProps = DefaultCardProps | DisabledCardProps
 
 const HomeCard = (props: HomeCardProps) => {
-  if (props.state === 'disabled') {
-    return renderDisabledCard()
+  switch (props.state) {
+    case 'disabled':
+      return renderDisabledCard()
+    case 'default':
+    case undefined:
+      return renderDefaultCard(props)
+    default:
+      const _exhaustive: never = props
+      return _exhaustive
   }
-
-  const { homeTeam, awayTeam, stadium, dateTime } = props
-  return renderDefaultCard(homeTeam, awayTeam, stadium, dateTime)
 }
 
-const renderDefaultCard = (
-  homeTeam?: string,
-  awayTeam?: string,
-  stadium?: string,
-  dateTime?: string,
-) => {
+const renderDefaultCard = (props: DefaultCardProps) => {
+  const { homeTeam, awayTeam, stadium, dateTime } = props
+  
   return (
     <div
       className="flex flex-col items-center w-[200px] overflow-hidden"

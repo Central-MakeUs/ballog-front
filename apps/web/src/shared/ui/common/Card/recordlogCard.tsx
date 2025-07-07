@@ -17,18 +17,12 @@ const RecordLogCard = (props: RecordLogCardProps) => {
   if (!props.hasRecord) {
     return renderNoRecord()
   }
-
-  const { homeTeam, awayTeam, stadium, date, matchesResult } = props
-  return renderWithRecord(homeTeam, awayTeam, stadium, date, matchesResult)
+  return renderWithRecord(props)
 }
 
-const renderWithRecord = (
-  homeTeam?: string,
-  awayTeam?: string,
-  stadium?: string,
-  date?: string,
-  matchesResult?: string,
-) => {
+const renderWithRecord = (props: RecordCardWithRecord) => {
+  const { homeTeam, awayTeam, stadium, date, matchesResult } = props
+  
   return (
     <div
       className="flex flex-col w-[328px] relative"
