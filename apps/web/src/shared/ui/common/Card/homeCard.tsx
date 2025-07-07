@@ -1,4 +1,3 @@
-import { cn } from '@/shared/lib/utils'
 import SampleImage from '@/assets/whiteBallogLogo.svg'
 import '@/shared/ui/global.css'
 
@@ -72,7 +71,7 @@ const HomeCard = ({
 }
 
 // 나중에 이미지, 버튼 넣기
-function disabledCard() {
+const disabledCard = () => {
   return (
     <div
       className="flex flex-col items-center w-[200px] h-[324px] overflow-hidden"
