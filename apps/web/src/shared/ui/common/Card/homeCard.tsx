@@ -71,6 +71,7 @@ const HomeCard = ({
   )
 }
 
+// 나중에 이미지, 버튼 넣기
 function disabledCard() {
   return (
     <div
@@ -79,19 +80,14 @@ function disabledCard() {
         borderRadius: 'var(--radius-medium)',
       }}
     >
-      <div className="w-10 h-10 w-full bg-gray-500 rounded-md flex items-center justify-center">
+      <div
+        className=" flex flex-col items-center justify-center w-full h-full py-12 px-4"
+        style={{ backgroundColor: 'var(--color-usage-background-subtle)' }}
+      >
         <span role="img" aria-label="disabled-icon">
           <SampleImage />
         </span>
-        <button
-          className="px-4 py-1 text-xs rounded-full"
-          style={{
-            backgroundColor: 'var(--color-brand-primary-default)',
-            color: 'white',
-          }}
-        >
-          Button
-        </button>
+        <button>Button</button>
       </div>
     </div>
   )
