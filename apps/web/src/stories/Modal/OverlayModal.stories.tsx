@@ -44,7 +44,7 @@ export const VerticalButtons: Story = {
 
 export const NoneWithImage: Story = {
   args: {
-    layout: 'none',
+    layout: 'image',
     heading: 'text heading',
     body: 'body text',
     imgSrc: grayExampleImage,

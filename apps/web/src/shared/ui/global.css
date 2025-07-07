@@ -429,3 +429,8 @@
     background: var(--gradient-primary);
   }
 }
+
+[data-radix-dialog-overlay] {
+  background-color: rgba(0, 0, 0, 0.5); /* 50% 투명도의 검은색 */
+  backdrop-filter: blur(4px); /* 선택사항: 배경 블러 효과 */
+}

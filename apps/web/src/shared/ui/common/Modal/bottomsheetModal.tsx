@@ -1,93 +1,124 @@
 import { cn } from '@/shared/lib/utils'
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogHeader,
-  DialogDescription,
-} from '@/shared/ui/common/dialog'
 
 interface ModalButton {
   label: string
   onClick: () => void
 }
 
+/**
+ * BottomSheetModal 컴포넌트 props
+ * 
+ * @property heading 모달 제목 (필수)
+ * @property body 모달 설명 (선택)
+ * @property imgSrc 이미지 URL (필수)
+ * @property dismissible 배경 클릭 / ESC 로 닫기 허용 여부 (기본값: true)
+ * @property buttons 2개의 버튼 배열 (왼쪽, 오른쪽 순)
+ * @property open 모달 열림 여부
+ * @property onOpenChange 열림 상태 변경 콜백
+ */
 interface BottomSheetModalProps {
-  heading?: string
+  heading: string
   body?: string
-  hasImg?: string
+  imgSrc: string
   dismissible?: boolean
-  buttons?: {
-    layout: 'horizontal' | 'vertical'
-    items: ModalButton[]
-  }
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
+  buttons: [ModalButton, ModalButton]
+  open: boolean
+  onOpenChange: (open: boolean) => void
 }
 
+/**
+ * BottomSheetModal: 화면 하단에서 슬라이드 업 되는 모달 컴포넌트
+ * 
+ * @example
+ * <BottomSheetModal
+ *   heading="제목"
+ *   body="설명"
+ *   imgSrc="/img/example.png"
+ *   dismissible={true}
+ *   buttons={[
+ *     { label: '취소', onClick: () => {} },
+ *     { label: '확인', onClick: () => {} }
+ *   ]}
+ *   open={isOpen}
+ *   onOpenChange={setIsOpen}
+ * />
+ */
 const BottomSheetModal = (props: BottomSheetModalProps) => {
+  const {
+    heading,
+    body,
+    imgSrc,
+    dismissible = true,
+    buttons,
+    open,
+    onOpenChange,
+  } = props
+
+  if (!open) return null
+
+  const handleBackdropClick = () => {
+    if (dismissible) {
+      onOpenChange(false)
+    }
+  }
+
   return (
-    <Dialog open={props.open} onOpenChange={props.onOpenChange}>
-      <DialogContent
-        className="w-full max-w-[466px] text-white rounded-t-[16px] rounded-b-none animate-slide-up p-8"
+    <div className="fixed inset-0 z-50">
+      {/* 검정 배경 처리 */}
+      <div
+        className="absolute inset-0 bg-black/50"
+        onClick={handleBackdropClick}
+      />
+
+      {/* 바텀시트 */}
+      <div
+        className={cn(
+          'absolute bottom-0 w-full max-w-[466px] left-1/2 -translate-x-1/2 rounded-t-[16px] rounded-b-none p-8',
+        )}
         style={{
           backgroundColor: 'var(--color-usage-background-strong)',
           border: 'none',
         }}
-        onInteractOutside={(e) => {
-          if (!props.dismissible) e.preventDefault()
-        }}
-        onEscapeKeyDown={(e) => {
-          if (!props.dismissible) e.preventDefault()
-        }}
       >
-        <DialogHeader className="text-white mb-0">
-          <div className="flex flex-col space-y-2 items-center mb-0">
-            {props.heading && (
-              <DialogTitle className="text-center body-lg-bold --color-usage-text-default pb-1">
-                {props.heading}
-              </DialogTitle>
-            )}
-            {props.body && (
-              <DialogDescription className="text-center body-sm-medium --color-usage-text-default pb-2">
-                {props.body}
-              </DialogDescription>
-            )}
-          </div>
-        </DialogHeader>
+        <div
+          className="flex flex-col space-y-3 text-center items-center"
+          style={{ color: 'var(--color-usage-text-default)' }}
+        >
+          <div className="body-lg-bold">{heading}</div>
+          {body && (
+            <div
+              className="body-sm-medium pb-6"
+              style={{ color: 'var(--color-usage-text-subtle)' }}
+            >
+              {body}
+            </div>
+          )}
+        </div>
 
-        {props.hasImg && (
-          <div className="mx-auto w-full h-full max-h-[536px] mb-2">
-            <img
-              src={props.hasImg}
-              alt="모달 이미지"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-        )}
-
-        {renderButtons(props.buttons, 'bottomSheet')}
-      </DialogContent>
-    </Dialog>
+        <div className="mx-auto w-full max-h-[536px] mb-6">
+          <img
+            src={imgSrc}
+            alt="모달 이미지"
+            className="w-full h-auto max-h-[536px]"
+          />
+        </div>
+        {/* 버튼 */}
+        {renderButtons(buttons)}
+      </div>
+    </div>
   )
 }
 
-export { BottomSheetModal }
-
-function renderButtons(
-  buttons: BottomSheetModalProps['buttons'],
-  type: 'bottomSheet',
-) {
-  if (!buttons || !buttons.items.length) return null
-
+/**
+ * 버튼 배열을 렌더링하는 함수
+ * 
+ * @param buttons 2개의 버튼 배열
+ * @returns JSX.Element | null
+ */
+const renderButtons = (buttons: [ModalButton, ModalButton]) => {
   return (
-    <div
-      className={cn(
-        'flex gap-4 w-full pb-8',
-        buttons.layout === 'vertical' ? 'flex-col' : 'flex-row',
-      )}
-    >
-      {buttons.items.map((btn, idx) => (
+    <div className="flex gap-4 w-full">
+      {buttons.map((btn, idx) => (
         <button
           key={idx}
           onClick={btn.onClick}
@@ -109,3 +140,5 @@ function renderButtons(
     </div>
   )
 }
+
+export { BottomSheetModal }

@@ -1,34 +1,51 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { BottomSheetModal } from '@/shared/ui/common/Modal/bottomsheetModal'
+import grayExampleImage from '@/assets/grayExampleImage.jpg'
+import { useState } from 'react'
 
 const meta: Meta<typeof BottomSheetModal> = {
-  title: 'Components/Modal/BottomSheetModal',
+  title: 'Common/BottomSheetModal',
   component: BottomSheetModal,
-  tags: ['autodocs'],
+  argTypes: {
+    heading: { control: 'text' },
+    body: { control: 'text' },
+    imgSrc: { control: 'text' },
+    dismissible: { control: 'boolean' },
+  },
 }
 
 export default meta
+
 type Story = StoryObj<typeof BottomSheetModal>
 
 export const Default: Story = {
   args: {
-    open: true,
-    heading: '선택하세요',
-    body: '아래 옵션 중 하나를 선택할 수 있습니다.',
-    hasImg: 'https://via.placeholder.com/300x150', // 임시 이미지
+    heading: 'text heading',
+    body: 'body text',
+    imgSrc: grayExampleImage,
     dismissible: true,
-    buttons: {
-      layout: 'vertical',
-      items: [
-        {
-          label: '옵션 1',
-          onClick: () => alert('옵션 1 선택'),
-        },
-        {
-          label: '옵션 2',
-          onClick: () => alert('옵션 2 선택'),
-        },
-      ],
-    },
+    buttons: [
+      { label: '취소', onClick: () => console.log('취소 클릭됨') },
+      { label: '확인', onClick: () => console.log('확인 클릭됨') },
+    ],
+    open: true,
+    onOpenChange: (open) => console.log(`모달 상태 변경: ${open}`),
+  },
+
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.open)
+
+    const handleOpenChange = (open: boolean) => {
+      setIsOpen(open)
+      args.onOpenChange?.(open)
+    }
+
+    return (
+      <BottomSheetModal
+        {...args}
+        open={isOpen}
+        onOpenChange={handleOpenChange}
+      />
+    )
   },
 }
