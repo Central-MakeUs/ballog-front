@@ -1,30 +1,32 @@
-interface RecordLogCardProps {
-  hasRecord: boolean
-  homeTeam?: string
-  awayTeam?: string
-  stadium?: string
-  date?: string
-  matchesResult?: 'win' | 'lose' | 'draw'
+interface RecordCardWithRecord {
+  hasRecord: true
+  homeTeam: string
+  awayTeam: string
+  stadium: string
+  dateTime: string
+  matchesResult: 'win' | 'lose' | 'draw'
 }
 
-const RecordLogCard = ({
-  hasRecord,
-  homeTeam,
-  awayTeam,
-  stadium,
-  date,
-  matchesResult,
-}: RecordLogCardProps) => {
-  return hasRecord
-    ? renderWithRecord(homeTeam, awayTeam, stadium, date, matchesResult)
-    : renderNoRecord()
+interface RecordCardNoRecord {
+  hasRecord: false
+}
+
+type RecordLogCardProps = RecordCardWithRecord | RecordCardNoRecord
+
+const RecordLogCard = (props: RecordLogCardProps) => {
+  if (!props.hasRecord) {
+    return renderNoRecord()
+  }
+
+  const { homeTeam, awayTeam, stadium, dateTime, matchesResult } = props
+  return renderWithRecord(homeTeam, awayTeam, stadium, dateTime, matchesResult)
 }
 
 const renderWithRecord = (
   homeTeam?: string,
   awayTeam?: string,
   stadium?: string,
-  date?: string,
+  dateTime?: string,
   matchesResult?: string,
 ) => {
   return (
@@ -47,7 +49,7 @@ const renderWithRecord = (
             className="body-sm-light"
             style={{ color: 'var(--color-usage-text-subtle)' }}
           >
-            {stadium} <span className="mx-2">|</span> {date}
+            {stadium} <span className="mx-2">|</span> {dateTime}
           </div>
         </div>
         <div
