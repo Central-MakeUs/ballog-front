@@ -2,12 +2,33 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { IntuitionCard } from '@/shared/ui/common/Card/IntuitionCard'
 
 const meta: Meta<typeof IntuitionCard.Active> = {
-  title: 'Components/IntuitionCard',
+  title: 'Components/Card/IntuitionCard',
   component: IntuitionCard.Active,
   tags: ['autodocs'],
+  argTypes: {
+    matchCount: {
+      control: 'number',
+      description: '직관 경기 수',
+      defaultValue: 5,
+    },
+    winRate: {
+      control: 'number',
+      description: '승률 (0~100)',
+      defaultValue: 80.5,
+    },
+  },
 }
 
 export default meta
+
+export const Test: StoryObj<typeof IntuitionCard.Active> = {
+  name: 'test',
+  args: {
+    matchCount: 5,
+    winRate: 80.5,
+  },
+}
+
 
 export const Active: StoryObj<typeof IntuitionCard.Active> = {
   name: 'active',

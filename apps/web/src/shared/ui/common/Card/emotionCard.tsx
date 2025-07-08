@@ -43,6 +43,7 @@ const Active = ({ emotion, rate }: ActiveEmotionCardProps) => {
       bg-usage-background-subtle"
     >
       <div className="relative py-10">
+        
         <PieChart width={104} height={104}>
           <Pie
             data={chartData}
@@ -93,7 +94,7 @@ const Disabled = ({}: DisabledEmotionCardProps) => (
         w-full h-full
         rounded-full bg-usage-background-strong"
     >
-      <div className="flex items-center gap-4 mt-[5px] text-brand-neutral-white">
+      <div className="flex items-center gap-4 mt-4.25 text-brand-neutral-white">
         <div className="flex flex-col items-center">
           <MadEmotion className="w-8 h-8" />
           <p className="body-sm-bold">- %</p>

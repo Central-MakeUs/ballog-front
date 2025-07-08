@@ -1,23 +1,4 @@
-/**
- * RecordLogCard
- *
- * 직관 기록 정보를 표시하는 카드 컴포넌트.
- *
- * @param props - RecordLogCardProps
- * @param props.hasRecord - 기록 여부를 나타냄
- *   - true: 기록이 있는 상태. 경기 정보와 경기 결과를 표시
- *   - false: 기록이 없는 상태. 직관 기록 유도 UI 표시
- * @param props.homeTeam - 홈 팀 이름 (hasRecord가 true일 때 필수)
- * @param props.awayTeam - 원정 팀 이름 (hasRecord가 true일 때 필수)
- * @param props.stadium - 경기장 이름 (hasRecord가 true일 때 필수)
- * @param props.date - 경기 일시 (hasRecord가 true일 때 필수)
- * @param props.matchesResult - 경기 결과 ('win' | 'lose' | 'draw', hasRecord가 true일 때 필수)
- *
- * @returns RecordLogCard UI 요소
- */
-
-interface RecordCardWithRecord {
-  hasRecord: true
+interface WithRecordProps {
   homeTeam: string
   awayTeam: string
   stadium: string
@@ -25,110 +6,66 @@ interface RecordCardWithRecord {
   matchesResult: 'win' | 'lose' | 'draw'
 }
 
-interface RecordCardNoRecord {
-  hasRecord: false
-}
+const WithRecord = ({
+  homeTeam,
+  awayTeam,
+  stadium,
+  date,
+  matchesResult,
+}: WithRecordProps) => {
+  const badgeColor = {
+    win: 'bg-brand-green-subtle text-brand-green-default',
+    lose: 'bg-brand-red-subtle text-brand-red-default',
+    draw: 'bg-brand-secondary-subtle text-brand-neutral-70',
+  }[matchesResult]
 
-type RecordLogCardProps = RecordCardWithRecord | RecordCardNoRecord
-
-const RecordLogCard = (props: RecordLogCardProps) => {
-  if (!props.hasRecord) {
-    return renderNoRecord()
-  }
-  return renderWithRecord(props)
-}
-
-const renderWithRecord = (props: RecordCardWithRecord) => {
-  const { homeTeam, awayTeam, stadium, date, matchesResult } = props
+  const badgeText = {
+    win: '승리',
+    lose: '패배',
+    draw: '무승부',
+  }[matchesResult]
 
   return (
-    <div
-      className="flex flex-col w-[328px] relative"
-      style={{
-        borderRadius: 'var(--radius-large)',
-        background: 'var(--color-usage-background-subtle)',
-      }}
-    >
+    <div className="flex flex-col w-[328px] relative rounded-large bg-usage-background-subtle">
       <div className="flex justify-between items-start">
-        <div className="p-6">
-          <div
-            className="body-lg-bold"
-            style={{ color: 'var(--color-usage-text-default)' }}
-          >
+        <div className="relative p-6">
+          <p className="body-lg-bold text-usage-text-default">
             {homeTeam} <span className="mx-2">vs</span> {awayTeam}
-          </div>
-          <div
-            className="body-sm-light"
-            style={{ color: 'var(--color-usage-text-subtle)' }}
-          >
+          </p>
+          <p className="body-sm-light text-usage-text-subtle">
             {stadium} <span className="mx-2">|</span> {date}
-          </div>
+          </p>
         </div>
         <div
-          className="absolute top-4 right-4 px-3 py-1 caption-md-medium"
-          style={{
-            background:
-              matchesResult === 'win'
-                ? 'var(--color-brand-green-subtle)'
-                : matchesResult === 'lose'
-                  ? 'var(--color-brand-red-subtle)'
-                  : 'var(--color-brand-secondary-subtle)',
-            color:
-              matchesResult === 'win'
-                ? 'var(--color-brand-green-default)'
-                : matchesResult === 'lose'
-                  ? 'var(--color-brand-red-default)'
-                  : 'var(--color-brand-neutral-70)',
-            borderRadius: 'var(--radius-large)',
-          }}
+          className={`
+            absolute top-4 right-4
+            px-3 py-1
+            caption-md-medium rounded-large
+            ${badgeColor}
+          `}
         >
-          {matchesResult}
+          {badgeText}
         </div>
       </div>
-      <div
-        className="text-center py-3 body-sm-medium"
-        style={{
-          borderTop: 'var(--color-usage-background-strong) 1px solid',
-          color: 'var(--color-usage-text-default)',
-        }}
-      >
+      <div className="text-center py-3 body-sm-medium border-t border-usage-background-strong text-usage-text-default">
         경기 결과 보러가기
       </div>
     </div>
   )
 }
 
-const renderNoRecord = () => {
+const NoRecord = () => {
   return (
-    <div
-      className="flex flex-col w-[328px] relative"
-      style={{
-        borderRadius: 'var(--radius-large)',
-        background: 'var(--color-usage-background-subtle)',
-      }}
-    >
-      <div
-        className="text-center w-full body-lg-bold py-10"
-        style={{ color: 'var(--color-brand-neutral-white)' }}
-      >
+    <div className="flex flex-col w-[328px] relative rounded-large bg-usage-background-subtle">
+      <div className="text-center w-full body-lg-bold py-10 text-brand-neutral-white">
         <div className="body-lg-bold">아직 직관 기록이 없어요!</div>
-        <div
-          className="body-sm-light py-4"
-          style={{ color: 'var(--color-usage-text-subtle)' }}
-        >
+        <p className="body-sm-light py-4 text-usage-text-subtle">
           직관 중인 경기를 선택하고
           <br />
           실시간으로 감정을 기록해 보세요.
-        </div>
+        </p>
         <div className="flex justify-center w-full">
-          <button
-            className="px-6 py-3 body-sm-medium"
-            style={{
-              borderRadius: 'var(--radius-large)',
-              backgroundColor: 'var(--color-brand-secondary-default)',
-              color: 'var(--color-brand-neutral-white)',
-            }}
-          >
+          <button className="px-6 py-3 body-sm-medium rounded-large bg-brand-secondary-default text-brand-neutral-white">
             첫 직관 기록하기
           </button>
         </div>
@@ -137,4 +74,7 @@ const renderNoRecord = () => {
   )
 }
 
-export { RecordLogCard }
+export const RecordLogCard = {
+  WithRecord,
+  NoRecord,
+}
