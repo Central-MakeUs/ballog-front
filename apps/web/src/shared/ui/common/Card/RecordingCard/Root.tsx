@@ -1,12 +1,19 @@
-import type { ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
+import { cn } from '@/shared/lib/utils'
 
-interface RootProps {
+interface RootProps extends ComponentProps<'div'> {
   children: ReactNode
 }
 
-export const Root = ({ children }: RootProps) => {
+export const Root = ({ children, className, ...rest }: RootProps) => {
   return (
-    <div className="flex items-center gap-4 p-4 w-[328px] flex-shrink-0 rounded-xlarge bg-usage-background-subtle">
+    <div
+      className={cn(
+        'flex items-center gap-4 p-4 w-[328px] flex-shrink-0 rounded-xlarge bg-usage-background-subtle',
+        className,
+      )}
+      {...rest}
+    >
       {children}
     </div>
   )

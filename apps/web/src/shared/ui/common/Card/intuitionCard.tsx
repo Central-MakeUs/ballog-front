@@ -1,16 +1,46 @@
-interface ActiveIntuitionCardProps {
+import type { ComponentProps } from 'react'
+import { cn } from '@/shared/lib/utils'
+
+interface ActiveIntuitionCardProps extends ComponentProps<'div'> {
   matchCount: number
   winRate: number
 }
 
-interface DisabledIntuitionCardProps {}
+interface DisabledIntuitionCardProps extends ComponentProps<'div'> {}
 
-const Active = ({ matchCount, winRate }: ActiveIntuitionCardProps) => (
+/**
+ * IntuitionCard
+ *
+ *
+ * 컴포넌트 구성:
+ * - `IntuitionCard.Active`: 기록된 직관 횟수와 승률 정보를 표시하는 활성 카드입니다.
+ * - `IntuitionCard.Disabled`: 아직 직관 기록이 없을 때 보여주는 비활성 카드입니다.
+ *
+ * @example 활성 상태
+ * ```tsx
+ * <IntuitionCard.Active matchCount={5} winRate={75} />
+ * ```
+ *
+ * @example 비활성 상태
+ * ```tsx
+ * <IntuitionCard.Disabled />
+ * ```
+ */
+
+const Active = ({
+  matchCount,
+  winRate,
+  className,
+  ...rest
+}: ActiveIntuitionCardProps) => (
   <div
-    className="
-    flex w-full max-w-[156px] h-full max-h-[184px] px-4 py-6
-    justify-center items-center text-center
-    rounded-xlarge bg-usage-background-subtle text-brand-neutral-white"
+    className={cn(
+      'flex w-full max-w-[156px] h-full max-h-[184px]',
+      'px-4 py-6 justify-center items-center text-center rounded-xlarge',
+      'bg-usage-background-subtle text-brand-neutral-white',
+      className,
+    )}
+    {...rest}
   >
     <div>
       <div className="body-md-medium mb-2">직관</div>
@@ -23,12 +53,15 @@ const Active = ({ matchCount, winRate }: ActiveIntuitionCardProps) => (
   </div>
 )
 
-const Disabled = ({}: DisabledIntuitionCardProps) => (
+const Disabled = ({ className, ...rest }: DisabledIntuitionCardProps) => (
   <div
-    className=" 
-    flex w-[156px] h-full max-h-[184px] px-4 py-6
-    justify-center items-center text-center flex-shrink-0
-    rounded-xlarge bg-usage-background-subtle text-brand-neutral-white"
+    className={cn(
+      ' flex w-[156px] h-full max-h-[184px] px-4 py-6',
+      'justify-center items-center text-center flex-shrink-0',
+      'rounded-xlarge bg-usage-background-subtle text-brand-neutral-white',
+      className,
+    )}
+    {...rest}
   >
     <div className="text-center">
       <div className="body-md-medium mb-2">직관</div>

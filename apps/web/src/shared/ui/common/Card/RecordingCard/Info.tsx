@@ -1,13 +1,23 @@
-interface InfoProps {
+import type { ComponentProps } from 'react'
+import { cn } from '@/shared/lib/utils'
+
+interface InfoProps extends ComponentProps<'div'> {
   homeTeam: string
   awayTeam: string
   stadium: string
   date: string
 }
 
-export const Info = ({ homeTeam, awayTeam, stadium, date }: InfoProps) => {
+export const Info = ({
+  homeTeam,
+  awayTeam,
+  stadium,
+  date,
+  className,
+  ...rest
+}: InfoProps) => {
   return (
-    <div>
+    <div className={cn('', className)} {...rest}>
       <div className="body-md-bold text-usage-text-default">
         {homeTeam} <span className="mx-1">vs</span> {awayTeam}
       </div>

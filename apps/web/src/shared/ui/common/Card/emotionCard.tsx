@@ -1,15 +1,40 @@
 import MadEmotion from '@/assets/madEmotion.svg?react'
 import HappyEmotion from '@/assets/happyEmotion.svg?react'
 import { Pie, PieChart } from 'recharts'
+import type { ComponentProps } from 'react'
+import { cn } from '@/shared/lib/utils'
 
-interface ActiveEmotionCardProps {
+interface ActiveEmotionCardProps extends ComponentProps<'div'> {
   emotion: '화나요' | '기뻐요'
   rate: number
 }
 
-interface DisabledEmotionCardProps {}
+interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
 
-const Active = ({ emotion, rate }: ActiveEmotionCardProps) => {
+/**
+ * EmotionCard
+ *
+ *
+ * 컴포넌트 구성:
+ * - `EmotionCard.Active`: 감정이 기록된 상태. 원형 차트를 통해 비율과 감정 상태를 표시합니다.
+ * - `EmotionCard.Disabled`: 감정이 기록되지 않은 상태. 기본 아이콘과 안내 메시지를 보여줍니다.
+ *
+ * @example 활성 상태
+ * ```tsx
+ * <EmotionCard.Active emotion="기뻐요" rate={60} />
+ * ```
+ *
+ * @example 비활성 상태
+ * ```tsx
+ * <EmotionCard.Disabled />
+ * ```
+ */
+const Active = ({
+  emotion,
+  rate,
+  className,
+  ...rest
+}: ActiveEmotionCardProps) => {
   const chartData = [
     {
       name: '화나요',
@@ -34,16 +59,18 @@ const Active = ({ emotion, rate }: ActiveEmotionCardProps) => {
 
   return (
     <div
-      className="
-      relative flex flex-col
-      w-full max-w-[156px]
-      h-full max-h-[184px]
-      justify-center items-center
-      rounded-xlarge
-      bg-usage-background-subtle"
+      className={cn(
+        'relative flex flex-col',
+        'w-full max-w-[156px]',
+        'h-full max-h-[184px]',
+        'justify-center items-center',
+        'rounded-xlarge',
+        'bg-usage-background-subtle',
+        className,
+      )}
+      {...rest}
     >
       <div className="relative py-10">
-        
         <PieChart width={104} height={104}>
           <Pie
             data={chartData}
@@ -80,13 +107,16 @@ const Active = ({ emotion, rate }: ActiveEmotionCardProps) => {
   )
 }
 
-const Disabled = ({}: DisabledEmotionCardProps) => (
+const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
   <div
-    className="
-      flex flex-col items-center justify-center
-      w-full max-w-[156px] h-full max-h-[150px]
-      px-4 py-4
-      rounded-xlarge bg-usage-background-subtle"
+    className={cn(
+      'flex flex-col items-center justify-center',
+      'w-full max-w-[156px] h-full max-h-[150px]',
+      'px-4 py-4',
+      'rounded-xlarge bg-usage-background-subtle',
+      className,
+    )}
+    {...rest}
   >
     <div
       className="

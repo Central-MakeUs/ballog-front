@@ -1,4 +1,7 @@
-interface WithRecordProps {
+import type { ComponentProps } from 'react'
+import { cn } from '@/shared/lib/utils'
+
+interface WithRecordProps extends ComponentProps<'div'> {
   homeTeam: string
   awayTeam: string
   stadium: string
@@ -6,12 +9,40 @@ interface WithRecordProps {
   matchesResult: 'win' | 'lose' | 'draw'
 }
 
+interface NoRecorcProps extends ComponentProps<'div'> {}
+
+/**
+ * RecordLogCard
+ *
+ *
+ * 컴포넌트 구성:
+ * - `RecordLogCard.WithRecord`: 직관 기록이 있을 경우, 경기 정보와 결과 배지를 표시합니다.
+ * - `RecordLogCard.NoRecord`: 직관 기록이 없을 경우, 안내 메시지와 버튼을 표시합니다.
+ *
+ * @example 기록이 있는 상태
+ * ```tsx
+ * <RecordLogCard.WithRecord
+ *   homeTeam="LG 트윈스"
+ *   awayTeam="SSG 랜더스"
+ *   stadium="잠실야구장"
+ *   date="2025.07.09 (수) 오후 6:30"
+ *   matchesResult="win"
+ * />
+ * ```
+ *
+ * @example 기록이 없는 상태
+ * ```tsx
+ * <RecordLogCard.NoRecord />
+ * ```
+ */
 const WithRecord = ({
   homeTeam,
   awayTeam,
   stadium,
   date,
   matchesResult,
+  className,
+  ...rest
 }: WithRecordProps) => {
   const badgeColor = {
     win: 'bg-brand-green-subtle text-brand-green-default',
@@ -26,7 +57,13 @@ const WithRecord = ({
   }[matchesResult]
 
   return (
-    <div className="flex flex-col w-[328px] relative rounded-large bg-usage-background-subtle">
+    <div
+      className={cn(
+        'flex flex-col w-[328px] relative rounded-large bg-usage-background-subtle',
+        className,
+      )}
+      {...rest}
+    >
       <div className="flex justify-between items-start">
         <div className="relative p-6">
           <p className="body-lg-bold text-usage-text-default">
@@ -54,9 +91,15 @@ const WithRecord = ({
   )
 }
 
-const NoRecord = () => {
+const NoRecord = ({ className, ...rest }: NoRecorcProps) => {
   return (
-    <div className="flex flex-col w-[328px] relative rounded-large bg-usage-background-subtle">
+    <div
+      className={cn(
+        'flex flex-col w-[328px] relative rounded-large bg-usage-background-subtle',
+        className,
+      )}
+      {...rest}
+    >
       <div className="text-center w-full body-lg-bold py-10 text-brand-neutral-white">
         <div className="body-lg-bold">아직 직관 기록이 없어요!</div>
         <p className="body-sm-light py-4 text-usage-text-subtle">
