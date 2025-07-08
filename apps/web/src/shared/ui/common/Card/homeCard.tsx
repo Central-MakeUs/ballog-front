@@ -1,6 +1,3 @@
-import SampleImage from '@/assets/whiteBallogLogo.svg'
-import '@/shared/ui/global.css'
-
 /**
  * HomeCard
  *
