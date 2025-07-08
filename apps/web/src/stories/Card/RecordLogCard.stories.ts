@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { RecordLogCard } from '@/shared/ui/common/Card/recordlogCard'
+import { RecordLogCard } from '@/shared/ui/common/Card/RecordLogCard'
 
 const meta: Meta<typeof RecordLogCard> = {
   title: 'Components/RecordLogCard',

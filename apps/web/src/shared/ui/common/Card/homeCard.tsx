@@ -1,114 +1,58 @@
-/**
- * HomeCard
- *
- * 홈 화면에서 경기 정보를 보여주는 카드 컴포넌트.
- *
- * @param props - HomeCardProps
- * @param props.state - 카드의 상태 ('default' | 'disabled')
- *   - 'default' 또는 undefined: 경기 정보를 표시
- *   - 'disabled': 경기 정보가 없을 때 표시
- * @param props.homeTeam - 홈 팀 이름 (state가 'default'일 때 필수)
- * @param props.awayTeam - 원정 팀 이름 (state가 'default'일 때 필수)
- * @param props.stadium - 경기장 이름 (state가 'default'일 때 필수)
- * @param props.dateTime - 경기 일시 (state가 'default'일 때 필수)
- *
- * @returns 홈 카드 UI 요소
- */
+import SampleImage from '@/assets/whiteBallogLogo.svg?react'
 
-interface DefaultCardProps {
-  state?: 'default'
+interface DefaultHomeCardProps {
   homeTeam: string
   awayTeam: string
   stadium: string
   dateTime: string
 }
 
-interface DisabledCardProps {
-  state: 'disabled'
-}
+interface DisabledHomeCardProps {}
 
-type HomeCardProps = DefaultCardProps | DisabledCardProps
-
-const HomeCard = (props: HomeCardProps) => {
-  switch (props.state) {
-    case 'disabled':
-      return renderDisabledCard()
-    case 'default':
-    case undefined:
-      return renderDefaultCard(props)
-    default:
-      const _exhaustive: never = props
-      return _exhaustive
-  }
-}
-
-const renderDefaultCard = (props: DefaultCardProps) => {
-  const { homeTeam, awayTeam, stadium, dateTime } = props
-
-  return (
+export const Default = ({
+  homeTeam,
+  awayTeam,
+  stadium,
+  dateTime,
+}: DefaultHomeCardProps) => (
+  <div
+    className="
+    flex flex-col items-center w-full max-w-[200px] overflow-hidden rounded-medium
+  "
+  >
     <div
-      className="flex flex-col items-center w-[200px] overflow-hidden"
-      style={{
-        borderRadius: 'var(--radius-medium)',
-      }}
+      className="
+      flex flex-col items-center w-full px-4 py-12
+      bg-usage-background-subtle text-brand-primary-default
+    "
     >
-      <div
-        className="py-12 px-4 flex flex-col items-center w-full"
-        style={{ backgroundColor: 'var(--color-usage-background-subtle)' }}
-      >
-        <div
-          className="body-lg-bold"
-          style={{ color: 'var(--color-brand-primary-default)' }}
-        >
-          {homeTeam}
-        </div>
-        <div
-          className="body-lg-medium"
-          style={{ color: 'var(--color-usage-text-default)' }}
-        >
-          vs
-        </div>
-        <div
-          className="body-lg-bold"
-          style={{ color: 'var(--color-brand-primary-default)' }}
-        >
-          {awayTeam}
-        </div>
-      </div>
-
-      <div
-        className="bg-gray-100 text-center pt-4 pb-6 w-full"
-        style={{
-          backgroundColor: 'var(--color-usage-background-inverses)',
-        }}
-      >
-        <div className="mb-2 body-sm-medium">{stadium}</div>
-        <div className="body-sm-light">{dateTime}</div>
-      </div>
+      <div>{homeTeam}</div>
+      <div className="body-lg-medium text-usage-text-default">vs</div>
+      <div>{awayTeam}</div>
     </div>
-  )
-}
 
-// 나중에 이미지, 버튼 넣기
-const renderDisabledCard = () => {
-  return (
     <div
-      className="flex flex-col items-center w-[200px] h-[324px] overflow-hidden"
-      style={{
-        borderRadius: 'var(--radius-medium)',
-      }}
+      className="
+      w-full text-center pt-4 pb-6
+      bg-usage-background-inverses
+    "
     >
-      <div
-        className=" flex flex-col items-center justify-center w-full h-full py-12 px-4"
-        style={{ backgroundColor: 'var(--color-usage-background-subtle)' }}
-      >
-        <span role="img" aria-label="disabled-icon">
-          <SampleImage />
-        </span>
-        <button>Button</button>
-      </div>
+      <div className="mb-2 body-sm-medium">{stadium}</div>
+      <div className="body-sm-light">{dateTime}</div>
     </div>
-  )
-}
+  </div>
+)
 
-export { HomeCard }
+export const Disabled = ({}: DisabledHomeCardProps) => (
+  <div className="flex flex-col items-center w-full max-w-[200px] h-full max-h-[324px] overflow-hidden rounded-medium">
+    <div className="flex flex-col items-center justify-center w-full h-full py-12 px-4 bg-usage-background-subtle">
+      <SampleImage />
+      <button>Button</button>
+    </div>
+  </div>
+)
+
+export const HomeCard = {
+  Default,
+  Disabled,
+}

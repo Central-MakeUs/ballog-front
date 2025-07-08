@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { RecordingCard } from '@/shared/ui/common/Card/recordingCard'
+import { RecordingCard } from '@/shared/ui/common/Card/RecordingCard'
 
 const meta: Meta<typeof RecordingCard> = {
   title: 'Components/RecordingCard',
