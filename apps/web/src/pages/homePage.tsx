@@ -8,7 +8,7 @@ import GameCardCarousel from '@/features/game/components/gameCardCarousel'
 import type { ActivityComponentType } from '@stackflow/react'
 
 const HomePage: ActivityComponentType = () => {
-  const { replace } = useFlow()
+  const { replace, push } = useFlow()
 
   return (
     <>
@@ -30,7 +30,10 @@ const HomePage: ActivityComponentType = () => {
           </p>
         </div>
         <div className="flex justify-center mt-10">
-          <Button className="w-30 h-10" onClick={() => replace('Login', {})}>
+          <Button
+            className="w-30 h-10"
+            onClick={() => push('LiveRecord', {})}
+          >
             기록 시작하기
           </Button>
         </div>
