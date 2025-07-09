@@ -1,45 +1,40 @@
 import MadEmotion from '@/assets/madEmotion.svg?react'
 import HappyEmotion from '@/assets/happyEmotion.svg?react'
 import { Pie, PieChart } from 'recharts'
+import type { ComponentProps } from 'react'
+import { cn } from '@/shared/lib/utils'
 
-/**
- * EmotionCard
- * 
- * 감정 비율을 도넛 차트 형태로 보여주는 카드 컴포넌트.
- * 
- * @param props - EmotionCardProps
- * @param props.state - 'active' | 'disabled', active면 감정과 비율 표시, disabled면 비율 없음 표시
- * @param props.emotion - '화나요' 또는 '좋아요', active일 때 중심 감정 표시용
- * @param props.rate - 감정 비율 (0~100), active일 때 중심 감정의 퍼센트
- */
-
-interface ActiveEmotionCardProps {
-  state: 'active'
-  emotion: string
+interface ActiveEmotionCardProps extends ComponentProps<'div'> {
+  emotion: '화나요' | '기뻐요'
   rate: number
 }
 
-interface DisabledEmotionCardProps {
-  state: 'disabled'
-}
+interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
 
-type EmotionCardProps = ActiveEmotionCardProps | DisabledEmotionCardProps
-
-const EmotionCard = (props: EmotionCardProps) => {
-  switch (props.state) {
-    case 'disabled':
-      return renderDisabled()
-    case 'active':
-      return renderActive(props)
-    default:
-      const _exhaustive: never = props
-      return _exhaustive
-  }
-}
-
-const renderActive = (props: ActiveEmotionCardProps) => {
-  const { emotion, rate } = props
-
+/**
+ * EmotionCard
+ *
+ *
+ * 컴포넌트 구성:
+ * - `EmotionCard.Active`: 감정이 기록된 상태. 원형 차트를 통해 비율과 감정 상태를 표시합니다.
+ * - `EmotionCard.Disabled`: 감정이 기록되지 않은 상태. 기본 아이콘과 안내 메시지를 보여줍니다.
+ *
+ * @example 활성 상태
+ * ```tsx
+ * <EmotionCard.Active emotion="기뻐요" rate={60} />
+ * ```
+ *
+ * @example 비활성 상태
+ * ```tsx
+ * <EmotionCard.Disabled />
+ * ```
+ */
+const Active = ({
+  emotion,
+  rate,
+  className,
+  ...rest
+}: ActiveEmotionCardProps) => {
   const chartData = [
     {
       name: '화나요',
@@ -48,7 +43,7 @@ const renderActive = (props: ActiveEmotionCardProps) => {
     },
     {
       name: '좋아요',
-      value: emotion === '좋아요' ? rate : 100 - rate,
+      value: emotion === '기뻐요' ? rate : 100 - rate,
       fill: 'var(--color-brand-green-hover)',
     },
   ]
@@ -56,38 +51,24 @@ const renderActive = (props: ActiveEmotionCardProps) => {
   const madValue = chartData.find((d) => d.name === '화나요')!.value
   const happyValue = chartData.find((d) => d.name === '좋아요')!.value
 
-  const centerEmotion =
-    madValue > happyValue
-      ? '화나요'
-      : madValue < happyValue
-        ? '좋아요'
-        : '화나요'
-
+  const centerEmotion = madValue >= happyValue ? '화나요' : '기뻐요'
   const centerRate = centerEmotion === '화나요' ? madValue : happyValue
 
-  let startAngle = 0
-  let endAngle = 0
-
-
-  /**
-   * 화나요 50% 이하이면 12시 방향에서 시작
-   * 화나요 50% 이상이면 3시 방향에서 시작
-   */
-  if (madValue <= 50) {
-    startAngle = 90
-    endAngle = 450
-  } else {
-    startAngle = 0
-    endAngle = 360
-  }
+  const startAngle = madValue <= 50 ? 90 : 0
+  const endAngle = madValue <= 50 ? 450 : 360
 
   return (
     <div
-      className="relative flex flex-col w-[156px] h-[184px] justify-center items-center flex-shrink-0"
-      style={{
-        borderRadius: 'var(--radius-xlarge)',
-        background: 'var(--color-usage-background-subtle)',
-      }}
+      className={cn(
+        'relative flex flex-col',
+        'w-full max-w-[156px]',
+        'h-full max-h-[184px]',
+        'justify-center items-center',
+        'rounded-xlarge',
+        'bg-usage-background-subtle',
+        className,
+      )}
+      {...rest}
     >
       <div className="relative py-10">
         <PieChart width={104} height={104}>
@@ -104,11 +85,12 @@ const renderActive = (props: ActiveEmotionCardProps) => {
         </PieChart>
 
         <div
-          className="body-sm-bold absolute inset-0 flex flex-col items-center justify-center"
-          style={{
-            pointerEvents: 'none',
-            color: 'var(--color-brand-neutral-white)',
-          }}
+          className="
+          absolute inset-0
+          flex flex-col items-center justify-center
+          body-sm-bold text-brand-neutral-white
+          pointer-events-none
+        "
         >
           <div>{centerEmotion}</div>
           <div>{centerRate}%</div>
@@ -125,39 +107,38 @@ const renderActive = (props: ActiveEmotionCardProps) => {
   )
 }
 
-const renderDisabled = () => {
-  return (
+const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
+  <div
+    className={cn(
+      'flex flex-col items-center justify-center',
+      'w-full max-w-[156px] h-full max-h-[150px]',
+      'px-4 py-4',
+      'rounded-xlarge bg-usage-background-subtle',
+      className,
+    )}
+    {...rest}
+  >
     <div
-      className="flex w-[156px] min-h-[150px] flex-col justify-center items-center flex-shrink-0"
-      style={{
-        borderRadius: 'var(--radius-xlarge)',
-        background: 'var(--color-usage-background-subtle)',
-      }}
+      className="
+        flex items-center justify-center
+        w-full h-full
+        rounded-full bg-usage-background-strong"
     >
-      <div
-        className="flex justify-center items-center rounded-full"
-        style={{
-          width: '122px',
-          height: '122px',
-          backgroundColor: 'var(--color-usage-background-strong, #2A2A2A)',
-        }}
-      >
-        <div
-          className="flex items-center gap-4 mt-[5px]"
-          style={{ color: 'var(--color-brand-neutral-white)' }}
-        >
-          <div className="flex flex-col items-center">
-            <MadEmotion />
-            <div className="body-sm-bold">- %</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <HappyEmotion />
-            <div className="body-sm-bold">- %</div>
-          </div>
+      <div className="flex items-center gap-4 mt-4.25 text-brand-neutral-white">
+        <div className="flex flex-col items-center">
+          <MadEmotion className="w-8 h-8" />
+          <p className="body-sm-bold">- %</p>
+        </div>
+        <div className="flex flex-col items-center">
+          <HappyEmotion className="w-8 h-8" />
+          <p className="body-sm-bold">- %</p>
         </div>
       </div>
     </div>
-  )
-}
+  </div>
+)
 
-export { EmotionCard }
+export const EmotionCard = {
+  Active,
+  Disabled,
+}
