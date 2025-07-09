@@ -22,15 +22,11 @@ export const Root = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          'w-67.5 px-0 pb-0 pt-4 flex flex-col',
+          'w-67.5 px-0 pb-0 pt-4 flex flex-col bg-usage-background-inverse border-none',
           !dismissible && '[&>button]:hidden',
           className,
         )}
         {...rest}
-        style={{
-          backgroundColor: 'var(--color-usage-background-inverse)',
-          border: 'none',
-        }}
         onInteractOutside={(e) => {
           if (!dismissible) e.preventDefault()
         }}

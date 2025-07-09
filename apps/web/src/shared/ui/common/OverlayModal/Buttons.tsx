@@ -30,15 +30,12 @@ export const Buttons = ({
               'flex-1 py-2.5 text-center',
               idx < buttons.length - 1 && 'border-r',
               idx === buttons.length - 1 ? 'body-md-bold' : 'body-md-medium',
+              'text-brand-primary-pressed',
+              'border-t-[0.333px] solid border-brand-neutral-50',
+              idx < buttons.length - 1
+                ? 'border-r-[0.333px] solid border-brand-neutral-50'
+                : undefined,
             )}
-            style={{
-              borderTop: '0.333px solid var(--color-brand-neutral-50)',
-              borderRight:
-                idx < buttons.length - 1
-                  ? '0.333px solid var(--color-brand-neutral-50)'
-                  : undefined,
-              color: 'var(--color-brand-primary-pressed)',
-            }}
           >
             {btn.label}
           </button>
@@ -53,14 +50,13 @@ export const Buttons = ({
         <button
           key={idx}
           onClick={btn.onClick}
-          className="w-full py-2.5 text-center body-md-medium"
-          style={{
-            borderTop: '0.333px solid var(--color-brand-neutral-50)',
-            color:
-              idx === buttons.length - 1
-                ? 'var(--color-brand-neutral-70)'
-                : 'var(--color-brand-primary-pressed)',
-          }}
+          className={cn(
+            'w-full py-2.5 text-center body-md-medium',
+            'border-t-[0.333px] solid border-brand-neutral-50',
+            idx < buttons.length - 1
+              ? 'text-brand-neutral-70'
+              : 'text-brand-primary-pressed',
+          )}
         >
           {btn.label}
         </button>

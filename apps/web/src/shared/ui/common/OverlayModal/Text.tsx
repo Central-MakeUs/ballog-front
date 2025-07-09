@@ -23,12 +23,11 @@ export const Text = ({
     <DialogHeader>
       <div
         className={cn(
-          'flex flex-col space-y-2 text-center items-center',
+          'flex flex-col space-y-2 text-center items-center text-usage-text-inverse',
           isImageModal && 'mb-8',
           className,
         )}
         {...rest}
-        style={{ color: 'var(--color-usage-text-inverse)' }}
       >
         <DialogTitle className="body-lg-bold">{heading}</DialogTitle>
         {body && (
