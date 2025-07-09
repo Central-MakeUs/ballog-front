@@ -1,6 +1,4 @@
-// TODO: 아이콘 가져온 뒤에 css 맞추기. 지금은 임시로 샘플 넣어놓음
-
-import SampleImage from '@/assets/whiteBallogLogo.svg?react'
+import BoxAndLeaf from '@/assets/boxAndLeaf.svg?react'
 import type { ReactNode } from 'react'
 import type { ComponentProps } from 'react'
 import { cn } from '@/shared/lib/utils'
@@ -19,7 +17,7 @@ export const Disabled = ({ children, className, ...rest }: DisabledProps) => {
       {...rest}
     >
       <div className="flex flex-col items-center justify-center w-full h-full py-12 px-4 bg-usage-background-subtle">
-        <SampleImage />
+        <BoxAndLeaf className="w-12.75 mb-2.5" />
         {children}
       </div>
     </div>
