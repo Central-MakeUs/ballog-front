@@ -1,5 +1,7 @@
+import { TEAMS } from '@/shared/constants/teams'
+
 interface TeamSelectButtonProps {
-  label: string
+  label: (typeof TEAMS)[keyof typeof TEAMS]
   selected?: boolean
   onClick: () => void
 }

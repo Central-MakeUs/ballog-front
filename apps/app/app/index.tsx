@@ -1,5 +1,5 @@
-import { StyleSheet, SafeAreaView } from 'react-native'
-import { useRef } from 'react'
+import { StyleSheet, SafeAreaView, BackHandler } from 'react-native'
+import { useEffect, useRef } from 'react'
 import { WebView, WebViewMessageEvent } from 'react-native-webview'
 import { useRouter } from 'expo-router'
 import type { PostMessagePayload } from '@ballog/bridge'
@@ -10,6 +10,24 @@ const HomeScreen = () => {
   const router = useRouter()
 
   const webViewUri = getMetroServerUrl()
+
+  // 뒤로가기 버튼 처리
+  useEffect(() => {
+    const backAction = () => {
+      if (webViewRef.current) {
+        webViewRef.current.goBack()
+        return true // 이벤트 소비
+      }
+      return false // 기본 동작 허용
+    }
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    )
+
+    return () => backHandler.remove()
+  }, [])
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data
