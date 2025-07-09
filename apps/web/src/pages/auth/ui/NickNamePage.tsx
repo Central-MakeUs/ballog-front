@@ -4,11 +4,10 @@ import type {
   SignupRequestDTO,
   SignupResponseDTO,
 } from '@/entities/auth/model/auth.type'
-import { NickNameForm } from '@/features/auth/ui/NickNameForm'
+import { NickNameForm } from '@/features/auth/ui'
 import { type ExtendedKyHttpError } from '@/types/api/common'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
-import { useFlow } from '@/shared/lib/stackflow'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 

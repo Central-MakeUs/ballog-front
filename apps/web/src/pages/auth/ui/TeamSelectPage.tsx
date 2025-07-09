@@ -1,4 +1,4 @@
-import { TeamSelectionForm } from '@/features/auth/ui/TeamSelectForm'
+import { TeamSelectionForm } from '@/features/auth/ui'
 import { useFlow } from '@/shared/lib/stackflow'
 import type { TeamKey } from '@/shared/constants/teams'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
