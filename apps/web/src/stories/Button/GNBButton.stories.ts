@@ -6,10 +6,15 @@ import { GNBButton } from '@/shared/ui/common/Button/GNBButton'
 import { BallogLogo } from '@/assets/BallogLogo'
 
 const meta = {
-  title: 'GNBButton',
+  title: 'Components/Button/GNBButton',
   component: GNBButton,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: 'GNB 버튼 컴포넌트입니다.',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {

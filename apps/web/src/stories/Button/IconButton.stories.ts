@@ -5,10 +5,15 @@ import { fn } from 'storybook/test'
 import { IconButton } from '@/shared/ui/common/Button/IconButton'
 
 const meta = {
-  title: 'IconButton',
+  title: 'Components/Button/IconButton',
   component: IconButton,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: '아이콘 버튼 컴포넌트입니다.',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {
