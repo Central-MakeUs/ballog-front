@@ -220,6 +220,29 @@ interface ButtonProps
   rightIcon?: React.ReactNode
 }
 
+/**
+ * Button
+ *
+ * 컴포넌트 구성:
+ * - 버튼 타입에 따라 스타일 변경
+ * - 클릭 시 효과 추가
+ *
+ * 사용 예시:
+ * <Button variant="primary" size="default" buttonType="filled">
+ *   Primary Filled Button
+ * </Button>
+ * @param className 클래스 이름
+ * @param variant 버튼 타입
+ * @param size 버튼 크기
+ * @param buttonType 버튼 타입
+ * @param asChild 자식 컴포넌트 사용 여부
+ * @param leftIcon 왼쪽 아이콘
+ * @param rightIcon 오른쪽 아이콘
+ * @param children 버튼 텍스트
+ * @param state 버튼 상태
+ * @returns
+ */
+
 const Button = ({
   className,
   variant,

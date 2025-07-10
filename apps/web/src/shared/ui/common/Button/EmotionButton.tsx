@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps } from 'react'
 import { IconButton } from './IconButton'
 import { cn } from '@/shared/lib/utils'
 
@@ -31,14 +31,14 @@ interface EmotionButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
  *
  * @example
  * <EmotionButton
- * className={`origin-bottom ${emotion === 'joy' ? 'scale-110 transition-transform duration-150' : 'scale-90'}`}
- * onClick={() => setEmotion('joy')}
+ *  className={`origin-bottom ${emotion === 'joy' ? 'scale-110 transition-transform duration-150' : 'scale-90'}`}
+ *  onClick={() => setEmotion('joy')}
  * >
- * 기뻐요
+ *  기뻐요
  * </EmotionButton>
  * <EmotionButton
- * className={`origin-bottom ${emotion === 'angry' ? 'scale-110 transition-transform duration-150' : 'scale-90'}`}
- * onClick={() => setEmotion('angry')}
+ *  className={`origin-bottom ${emotion === 'angry' ? 'scale-110 transition-transform duration-150' : 'scale-90'}`}
+ *  onClick={() => setEmotion('angry')}
  * >
  *  화나요
  * </EmotionButton>
