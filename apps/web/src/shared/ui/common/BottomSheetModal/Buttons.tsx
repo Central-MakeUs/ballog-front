@@ -11,22 +11,28 @@ interface ButtonsProps extends ComponentProps<'div'> {
 }
 
 export const Buttons = ({ buttons, className, ...rest }: ButtonsProps) => {
+  const [left, right] = buttons
+
   return (
     <div className={cn('flex gap-4 w-full ', className)} {...rest}>
-      {buttons.map((btn, idx) => (
-        <button
-          key={idx}
-          onClick={btn.onClick}
-          className={cn(
-            'body-md-medium flex-1 py-3 rounded-xl',
-            idx === 0
-              ? 'bg-brand-secondary-subtle text-brand-neutral-70'
-              : 'bg-brand-primary-default text-brand-neutral-white',
-          )}
-        >
-          {btn.label}
-        </button>
-      ))}
+      <button
+        onClick={left.onClick}
+        className={cn(
+          'body-md-medium flex-1 py-3 rounded-xl',
+          'bg-brand-secondary-subtle text-brand-neutral-70',
+        )}
+      >
+        {left.label}
+      </button>
+      <button
+        onClick={right.onClick}
+        className={cn(
+          'body-md-medium flex-1 py-3 rounded-xl',
+          'bg-brand-primary-default text-brand-neutral-white',
+        )}
+      >
+        {right.label}
+      </button>
     </div>
   )
 }
