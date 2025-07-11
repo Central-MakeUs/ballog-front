@@ -6,7 +6,9 @@ export const KakaoButton = () => {
   return (
     <button
       onClick={() => {
-        push('TeamSelect', {})
+        push('TeamSelect', {
+          selectedTeam: null,
+        })
       }}
       className="bg-gray-700 text-white rounded-lg py-3"
     >

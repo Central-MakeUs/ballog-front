@@ -3,19 +3,20 @@ import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic'
 import { basicUIPlugin } from '@stackflow/plugin-basic-ui'
 import { historySyncPlugin } from '@stackflow/plugin-history-sync'
 
-import HomePage from '@/pages/home/ui/HomePage'
-import LiveRecordPage from '@/pages/home/ui/LiveRecordPage'
-import LoginPage from '@/pages/auth/ui/loginPage'
-import TeamSelectPage from '@/pages/auth/ui/teamSelectPage'
-import NickNamePage from '@/pages/auth/ui/nickNamePage'
+import HomePage from '@/pages/home/ui/homePage'
+import LiveRecordPage from '@/pages/home/ui/liveRecordPage'
+import LoginPage from '@/pages/auth/ui/LoginPage'
+import TeamSelectPage from '@/pages/auth/ui/TeamSelectPage'
+// import NickNamePage from '@/pages/auth/ui/NickNamePage'
 
-export const { Stack, useFlow } = stackflow({
+export const { Stack, useFlow, useStepFlow } = stackflow({
   transitionDuration: 350,
 
   plugins: [
     basicRendererPlugin(),
     basicUIPlugin({
       theme: 'cupertino', // cupertino | android 두가지 옵션 있음
+      backgroundColor: 'bg-usage-background-default',
     }),
     historySyncPlugin({
       routes: {
@@ -23,7 +24,7 @@ export const { Stack, useFlow } = stackflow({
         LiveRecord: '/live-record',
         Login: '/login',
         TeamSelect: '/team-select',
-        NickName: '/nickname',
+        Nickname: '/nickname',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -34,6 +35,7 @@ export const { Stack, useFlow } = stackflow({
     LiveRecord: LiveRecordPage,
     Login: LoginPage,
     TeamSelect: TeamSelectPage,
-    NickName: NickNamePage,
+    // Nickname: NickNamePage,
   },
+  initialActivity: () => 'Home',
 })
