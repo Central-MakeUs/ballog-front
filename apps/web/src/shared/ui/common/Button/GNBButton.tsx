@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-
+import { cn } from '@/shared/lib/utils'
 interface GNBButtonProps extends ComponentProps<'button'> {
   active?: boolean
   disabled?: boolean
@@ -46,7 +46,7 @@ export const GNBButton = ({
       disabled={disabled}
       {...props}
     >
-      {IconComponent && <IconComponent className={logoColor} />}
+      {IconComponent && <IconComponent className={cn(logoColor, 'w-7 h-7')} />}
       {children && (
         <span className={`caption-md-medium ${textColor}`}>{children}</span>
       )}
