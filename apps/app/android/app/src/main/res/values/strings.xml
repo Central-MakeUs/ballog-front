@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">app</string>
+    <string name="kakao_app_key">YOUR_KAKAO_NATIVE_APP_KEY</string>
+</resources>
