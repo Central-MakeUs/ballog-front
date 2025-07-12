@@ -3,11 +3,11 @@ import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic'
 import { basicUIPlugin } from '@stackflow/plugin-basic-ui'
 import { historySyncPlugin } from '@stackflow/plugin-history-sync'
 
-import HomePage from '@/pages/homePage'
-import LiveRecordPage from '@/pages/liveRecordPage'
+import HomePage from '@/pages/home/ui/homePage'
+import LiveRecordPage from '@/pages/home/ui/liveRecordPage'
 import LoginPage from '@/pages/auth/ui/LoginPage'
 import TeamSelectPage from '@/pages/auth/ui/TeamSelectPage'
-import NickNamePage from '@/pages/auth/ui/NickNamePage'
+// import NickNamePage from '@/pages/auth/ui/NickNamePage'
 
 export const { Stack, useFlow, useStepFlow } = stackflow({
   transitionDuration: 350,
@@ -35,7 +35,7 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     LiveRecord: LiveRecordPage,
     Login: LoginPage,
     TeamSelect: TeamSelectPage,
-    Nickname: NickNamePage,
+    // Nickname: NickNamePage,
   },
   initialActivity: () => 'Home',
 })
