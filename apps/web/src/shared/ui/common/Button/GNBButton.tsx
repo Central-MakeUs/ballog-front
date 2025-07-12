@@ -1,0 +1,55 @@
+import type { ComponentProps } from 'react'
+
+interface GNBButtonProps extends ComponentProps<'button'> {
+  active?: boolean
+  disabled?: boolean
+  icon?: React.ComponentType<{ className?: string }>
+  children?: React.ReactNode // 텍스트용
+}
+
+/**
+ * GNBButton
+ * GNB 버튼 컴포넌트
+ *
+ * 컴포넌트 구성:
+ * - 아이콘 표시
+ * - 텍스트 표시
+ * - 클릭 시 효과 추가
+ *
+ * 사용 예시:
+ * <GNBButton icon={BallogLogo} />
+ * @param active 활성 상태
+ * @param disabled 비활성 상태
+ * @param icon 아이콘 컴포넌트
+ * @param children 텍스트
+ * @returns
+ */
+export const GNBButton = ({
+  active = false,
+  disabled = false,
+  icon: IconComponent,
+  children,
+  ...props
+}: GNBButtonProps) => {
+  const logoColor = active
+    ? 'text-brand-neutral-white'
+    : 'text-brand-secondary-default'
+  const textColor = active
+    ? 'text-brand-neutral-white'
+    : 'text-brand-secondary-default'
+
+  return (
+    <button
+      className={`h-12 w-full gap-1 transition-colors
+        flex flex-col items-center justify-between
+      `}
+      disabled={disabled}
+      {...props}
+    >
+      {IconComponent && <IconComponent className={logoColor} />}
+      {children && (
+        <span className={`caption-md-medium ${textColor}`}>{children}</span>
+      )}
+    </button>
+  )
+}

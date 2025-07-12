@@ -1,7 +1,8 @@
 import { AUTH_MESSAGES } from '@/shared/ui/constants/messages'
 import { useNickNameForm } from '@/shared/hooks/auth/useNickNameForm'
 import type { ExtendedKyHttpError } from '@/types/api/common'
-import { ErrorMessageFactory } from './ErrorMessageFactory'
+import { ErrorMessageFactory } from '@/features/auth/ui'
+import { Button } from '@/shared/ui/common'
 
 type NickNameFormProps = {
   onSubmit: (data: { nickname: string }) => void
@@ -46,17 +47,15 @@ export const NickNameForm = ({
         </p>
       </div>
 
-      <button
+      <Button
+        size="lg"
+        variant="primary"
         onClick={handleSubmit}
         disabled={!nickname?.trim() || isLoading}
-        className={`w-full py-3 rounded-lg sticky bottom-10 ${
-          nickname?.trim()
-            ? 'bg-cyan-400 text-black'
-            : 'bg-gray-600 text-gray-400'
-        }`}
+        className={`w-full sticky bottom-10`}
       >
         {isLoading ? '처리중...' : '완료'}
-      </button>
+      </Button>
     </div>
   )
 }

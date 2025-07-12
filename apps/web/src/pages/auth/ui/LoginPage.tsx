@@ -1,9 +1,11 @@
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
 import { Banner } from '@/entities/auth/ui/Banner'
-import { KakaoButton, AppleButton } from '@/features/auth'
+import { KakaoButton, AppleButton } from './SocialButton'
 import type { ActivityComponentType } from '@stackflow/react'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { Button } from '@/shared/ui/common'
+import { KakaoTalk } from '@/assets/KakaoTalk'
 
 const LoginPage: ActivityComponentType = () => {
   return (
@@ -17,8 +19,19 @@ const LoginPage: ActivityComponentType = () => {
         <div className="flex flex-col items-center justify-center w-full h-full px-4 gap-20">
           <Banner />
           <div className="flex flex-col gap-4 w-full">
-            <KakaoButton />
-            <AppleButton />
+            <KakaoButton className="h-13" />
+            <AppleButton className="h-13" />
+            <Button
+              size="icon"
+              buttonType="naked"
+              variant="secondary"
+              className="size-10"
+              onClick={() => {
+                console.log('카카오 로그인')
+              }}
+            >
+              <KakaoTalk className="size-6 active:scale-95" />
+            </Button>
           </div>
         </div>
       </AppLayout>
