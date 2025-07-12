@@ -58,6 +58,7 @@ export const EmotionButton = ({
         'active:bg-usage-background-strong/80',
         className,
       )}
+      type="button"
       {...props}
     >
       <div className="flex flex-col items-center justify-center w-full gap-4 min-w-31">
@@ -67,5 +68,3 @@ export const EmotionButton = ({
     </button>
   )
 }
-
-export default EmotionButton
