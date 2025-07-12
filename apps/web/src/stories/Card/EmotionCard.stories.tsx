@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { EmotionCard } from '@/shared/ui/common/Card/emotionCard'
+import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
 
 const meta: Meta<typeof EmotionCard.Active> = {
   title: 'Components/Card/EmotionCard',

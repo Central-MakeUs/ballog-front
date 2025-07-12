@@ -2,7 +2,6 @@ import RecordingCardWithNoImage from '@/assets/recordingCardIconWithNoImage.svg?
 import RecordingCardWithImage from '@/assets/recordingCardIconWithImage.svg?react'
 import type { ComponentProps } from 'react'
 import { cn } from '@/shared/lib/utils'
-import { Profile } from '@/shared/ui/common/Profile/Profile'
 interface IconProps extends ComponentProps<'div'> {
   state: 'default' | 'active'
   onClick?: () => void
