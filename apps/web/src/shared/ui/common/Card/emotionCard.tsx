@@ -1,5 +1,5 @@
-import MadEmotion from '@/assets/madEmotion.svg?react'
-import HappyEmotion from '@/assets/happyEmotion.svg?react'
+import AngryEmotion from '@/assets/angryEmotion.svg?react'
+import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import { Pie, PieChart } from 'recharts'
 import type { ComponentProps } from 'react'
 import { cn } from '@/shared/lib/utils'
@@ -98,10 +98,10 @@ const Active = ({
       </div>
 
       <div className="absolute top-4 left-4">
-        <MadEmotion className="w-8 h-8" />
+        <AngryEmotion className="w-8 h-8" />
       </div>
       <div className="absolute bottom-4 right-4">
-        <HappyEmotion className="w-8 h-8" />
+        <JoyEmotion className="w-8 h-8" />
       </div>
     </div>
   )
@@ -126,11 +126,11 @@ const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
     >
       <div className="flex items-center gap-4 mt-4.25 text-brand-neutral-white">
         <div className="flex flex-col items-center">
-          <MadEmotion className="w-8 h-8" />
+          <AngryEmotion className="w-8 h-8" />
           <p className="body-sm-bold">- %</p>
         </div>
         <div className="flex flex-col items-center">
-          <HappyEmotion className="w-8 h-8" />
+          <JoyEmotion className="w-8 h-8" />
           <p className="body-sm-bold">- %</p>
         </div>
       </div>
