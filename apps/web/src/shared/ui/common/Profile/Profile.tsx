@@ -36,7 +36,7 @@ export const Profile = ({
 }: ProfileProps) => {
   if (!imgSrc) imgSrc = DefaultProfile
   return (
-    <div className={cn('relative w-[60px] h-[60px]', className)} {...rest}>
+    <div className={cn('relative w-21 h-21', className)} {...rest}>
       {border ? (
         <>
           <ProfileFrameWithBorder imgSrc={imgSrc} />
