@@ -1,0 +1,23 @@
+---
+description: 생성된 코드에서 컴포넌트들을 논리적으로 그룹화하는 단계의 규칙
+globs:
+alwaysApply: false
+---
+
+## description: Figma MCP 워크플로우 단계별 memory.md 연동 규칙
+
+# [필수] memory.md 연동 안내
+
+- 이 단계의 작업을 시작하기 전에 반드시 `.cursor/rules/workflows/figma/memory.md` 파일을 확인하세요.
+- 이전 단계의 결과, 결정사항, 참고사항이 memory.md에 기록되어 있습니다.
+- 작업이 끝나면, 해당 단계의 결과/결정사항을 memory.md에 반드시 기록하세요.
+- 단계가 완료되면 memory.md의 체크박스를 `[x]`로 변경하세요.
+
+  globs:
+  alwaysApply: false
+
+# cluster-components 단계 규칙
+
+- 비슷한 역할/스타일의 컴포넌트는 하나의 그룹(폴더)로 묶는다.
+- 공통 props, 스타일, 유틸리티 함수는 별도 파일로 분리한다.
+- 중복되는 부분은 추상화한다.-
