@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RecordingCard } from '@/shared/ui/common/Card/RecordingCard/index'
+import { Profile } from '@/shared/ui/common/Profile/Profile'
+import DefaultProfile from '@/assets/defaultProfile.png'
 
 const meta: Meta<typeof RecordingCard.Root> = {
   title: 'Components/Card/RecordingCard',
@@ -29,7 +31,7 @@ export const Active: Story = {
   name: 'Active',
   render: () => (
     <RecordingCard.Root>
-      <RecordingCard.Icon state="active" onClick={() => alert('클릭')} />
+      <Profile imgSrc={DefaultProfile} border={true} />
       <RecordingCard.Info
         homeTeam="한화 이글스"
         awayTeam="롯데 자이언츠"
