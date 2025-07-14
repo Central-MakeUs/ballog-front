@@ -54,7 +54,7 @@ export const EmotionButton = ({
     <button
       className={cn(
         'bg-usage-background-strong flex flex-col',
-        'items-center justify-end rounded-xlarge px-4 py-6 shadow-medium',
+        'items-center justify-end rounded-xlarge w-full h-full px-4 py-6 shadow-medium',
         'active:bg-usage-background-strong/80',
         className,
       )}
