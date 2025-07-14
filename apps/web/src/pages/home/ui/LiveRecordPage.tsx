@@ -1,8 +1,5 @@
 import { cn } from '@/shared/lib/utils'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import GameInfoCard from '@/features/record/components/gameInfoCard'
-import EmotionRecorder from '@/features/record/components/emotionRecorder'
-import RecordEndModal from '@/features/record/components/recordEndModal'
 import type { ActivityComponentType } from '@stackflow/react'
 import { RecordingCard } from '@/shared/ui/common/Card/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
