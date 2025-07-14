@@ -14,7 +14,10 @@ export default meta
 type Story = StoryObj<typeof EmotionVoteWidget>
 
 export const Default: Story = {
-  args: {
-    className: 'w-[360px] h-[180px]',
-  },
+  render: (args) => (
+    <div className='bg-black'>
+      {' '}
+      <EmotionVoteWidget {...args} />
+    </div>
+  ),
 }
