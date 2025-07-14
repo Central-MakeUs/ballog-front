@@ -50,7 +50,7 @@
 
 - The project follows the FSD (Feature-Sliced Design) structure.
 - Main folder roles:
-  - features: Independent business feature units (e.g., auth, game, record, etc.)
+  - features: Independent business feature units (e.g., auth, match, record, etc.)
   - entities: Core domain models and their subfolders such as UI, API, model, etc.
   - shared: Utilities, components, and styles commonly used across features
   - widgets: UI blocks that combine multiple entities/features (e.g., header, navigation, etc.)
