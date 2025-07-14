@@ -28,6 +28,7 @@ export const EmotionVoteWidget = ({
       <div
         className={cn(
           'flex flex-row w-full h-full gap-4',
+          'items-end',
           selectedEmotion === null
             ? 'translate-0'
             : selectedEmotion === 'joy'
@@ -43,10 +44,10 @@ export const EmotionVoteWidget = ({
           className={cn(
             'origin-bottom transition-transform duration-150',
             selectedEmotion === null
-              ? 'scale-100'
+              ? 'scale-100 mt-0'
               : selectedEmotion === 'joy'
-                ? 'scale-110'
-                : 'scale-90',
+                ? 'scale-110 mt-4'
+                : 'scale-90 ',
           )}
         >
           기뻐요
@@ -59,10 +60,10 @@ export const EmotionVoteWidget = ({
           className={cn(
             'origin-bottom transition-transform duration-150',
             selectedEmotion === null
-              ? 'scale-100'
+              ? 'scale-100 mt-0'
               : selectedEmotion === 'angry'
-                ? 'scale-110'
-                : 'scale-90',
+                ? 'scale-110 mt-4'
+                : 'scale-90 ',
           )}
         >
           화나요
@@ -82,10 +83,12 @@ export const EmotionVoteWidget = ({
           }}
         />
       </div>
-      <div className={cn(
-        "heading-lg-bold text-usage-text-default",
-        'flex justify-between'
-        )}>
+      <div
+        className={cn(
+          'heading-lg-bold text-usage-text-default',
+          'flex justify-between',
+        )}
+      >
         <span>{joyPercent}%</span>
         <span>{angryPercent}%</span>
       </div>

@@ -1,3 +1,4 @@
+import { cn } from '@/shared/lib/utils'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import GameInfoCard from '@/features/record/components/gameInfoCard'
 import EmotionRecorder from '@/features/record/components/emotionRecorder'
@@ -19,9 +20,21 @@ const LiveRecordPage: ActivityComponentType = () => {
             date="2025.07.09"
           />
         </RecordingCard.Root>
-        <div className="w-full">
-          <EmotionVoteWidget />
+        <div
+          className={cn(
+            'flex flex-col items-center text-center w-full',
+            'mt-8 mb-6',
+          )}
+        >
+          <p className="body-lg-bold text-usage-text-default mb-2">
+            지금의 감정 클릭하기!
+          </p>
+          <p className="body-sm-light text-usage-text-subtle">
+            기뻐요가 이기고 있어요! <br />
+            하지만 지금 기분은 또 다를 수도?
+          </p>
         </div>
+        <EmotionVoteWidget />
         <RecordEndModal />
       </div>
     </AppScreen>
