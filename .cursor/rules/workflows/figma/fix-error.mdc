@@ -1,0 +1,23 @@
+---
+description: 코드 오류 수정 단계의 규칙
+globs:
+alwaysApply: false
+---
+
+## description: Figma MCP 워크플로우 단계별 memory.md 연동 규칙
+
+# [필수] memory.md 연동 안내
+
+- 이 단계의 작업을 시작하기 전에 반드시 `.cursor/rules/workflows/figma/memory.md` 파일을 확인하세요.
+- 이전 단계의 결과, 결정사항, 참고사항이 memory.md에 기록되어 있습니다.
+- 작업이 끝나면, 해당 단계의 결과/결정사항을 memory.md에 반드시 기록하세요.
+- 단계가 완료되면 memory.md의 체크박스를 `[x]`로 변경하세요.
+
+  globs:
+  alwaysApply: false
+
+# fix-error 단계 규칙
+
+- TypeScript 오류, ESLint 경고를 모두 해결한다.
+- 누락된 import, props, 타입 등을 보완한다.
+- 빌드/런타임 오류가 없도록 코드를 수정한다.
