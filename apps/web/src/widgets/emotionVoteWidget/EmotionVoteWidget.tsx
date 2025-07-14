@@ -2,7 +2,6 @@ import { cn } from '@/shared/lib/utils'
 import type { ComponentProps } from 'react'
 import { EmotionButton } from '@/shared/ui/common'
 import { useState } from 'react'
-import { ProgressBar } from '@/shared/ui/common/ProgressBar/ProgressBar'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {}
 
@@ -22,52 +21,74 @@ export const EmotionVoteWidget = ({
   const joyPercent = total > 0 ? Math.round((joyCount / total) * 100) : 50
   const angryPercent = 100 - joyPercent
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
+  console.log(selectedEmotion)
 
   return (
-    <div
-      className={cn(
-        'flex flex-row w-full h-full gap-4',
-        selectedEmotion === 'joy' ? 'translate-x-2' : '-translate-x-2',
-        className,
-      )}
-      {...rest}
-    >
-      <EmotionButton
-        emotionType="joy"
-        onClick={() => {
-          setSelectedEmotion('joy'), setJoyCount((prev) => prev + 1)
-        }}
+    <div className={cn('flex flex-col w-full h-full', className)} {...rest}>
+      <div
         className={cn(
-          'origin-bottom transition-transform duration-150',
+          'flex flex-row w-full h-full gap-4',
           selectedEmotion === null
-            ? 'scale-100'
+            ? 'translate-0'
             : selectedEmotion === 'joy'
-              ? 'scale-110'
-              : 'scale-90',
+              ? 'translate-x-2'
+              : '-translate-x-2',
         )}
       >
-        기뻐요
-      </EmotionButton>
-      <EmotionButton
-        emotionType="angry"
-        onClick={() => {
-          setSelectedEmotion('angry'), setAngryCount((prev) => prev + 1)
-        }}
-        className={cn(
-          'origin-bottom transition-transform duration-150',
-          selectedEmotion === null
-            ? 'scale-100'
-            : selectedEmotion === 'angry'
-              ? 'scale-110'
-              : 'scale-90',
-        )}
-      >
-        화나요
-      </EmotionButton>
-      <ProgressBar
-        emotion={dominant}
-        emotionPercent={dominant === 'joy' ? joyPercent : angryPercent}
-      />
+        <EmotionButton
+          emotionType="joy"
+          onClick={() => {
+            setSelectedEmotion('joy'), setJoyCount((prev) => prev + 1)
+          }}
+          className={cn(
+            'origin-bottom transition-transform duration-150',
+            selectedEmotion === null
+              ? 'scale-100'
+              : selectedEmotion === 'joy'
+                ? 'scale-110'
+                : 'scale-90',
+          )}
+        >
+          기뻐요
+        </EmotionButton>
+        <EmotionButton
+          emotionType="angry"
+          onClick={() => {
+            setSelectedEmotion('angry'), setAngryCount((prev) => prev + 1)
+          }}
+          className={cn(
+            'origin-bottom transition-transform duration-150',
+            selectedEmotion === null
+              ? 'scale-100'
+              : selectedEmotion === 'angry'
+                ? 'scale-110'
+                : 'scale-90',
+          )}
+        >
+          화나요
+        </EmotionButton>
+      </div>
+
+      <div className="relative w-full h-4 mt-6 mb-2 bg-usage-background-strong rounded-full overflow-hidden">
+        <div
+          className={cn(
+            'absolute top-0 h-full transition-all duration-1000',
+            dominant === 'joy'
+              ? 'left-0 bg-brand-green-default'
+              : 'right-0 bg-brand-red-default',
+          )}
+          style={{
+            width: `${dominant === 'joy' ? joyPercent : angryPercent}%`,
+          }}
+        />
+      </div>
+      <div className={cn(
+        "heading-lg-bold text-usage-text-default",
+        'flex justify-between'
+        )}>
+        <span>{joyPercent}%</span>
+        <span>{angryPercent}%</span>
+      </div>
     </div>
   )
 }
