@@ -6,11 +6,14 @@ import RecordEndModal from '@/features/record/components/recordEndModal'
 import type { ActivityComponentType } from '@stackflow/react'
 import { RecordingCard } from '@/shared/ui/common/Card/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
+import { Button } from '@/shared/ui/common'
 
 const LiveRecordPage: ActivityComponentType = () => {
   return (
     <AppScreen appBar={{ title: '감정 기록 중' }}>
-      <div className="max-h-full flex flex-col justify-center items-center px-4">
+      <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
+
+        {/* Recording Card */}
         <RecordingCard.Root className="w-full">
           <RecordingCard.Icon state="active" />
           <RecordingCard.Info
@@ -20,6 +23,8 @@ const LiveRecordPage: ActivityComponentType = () => {
             date="2025.07.09"
           />
         </RecordingCard.Root>
+
+        {/* 텍스트 */}
         <div
           className={cn(
             'flex flex-col items-center text-center w-full',
@@ -34,8 +39,23 @@ const LiveRecordPage: ActivityComponentType = () => {
             하지만 지금 기분은 또 다를 수도?
           </p>
         </div>
+
+        {/* 버튼 인터랙션 부분 */}
         <EmotionVoteWidget />
-        <RecordEndModal />
+
+        {/* 하단 버튼 */}
+        <div className="fixed bottom-10 w-full">
+          <div className="px-4 max-w-screen-md mx-auto">
+            <Button
+              variant="secondary"
+              state="pressed"
+              size="lg"
+              className="w-full"
+            >
+              기록 종료하기
+            </Button>
+          </div>
+        </div>
       </div>
     </AppScreen>
   )
