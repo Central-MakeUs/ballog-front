@@ -7,12 +7,20 @@ import type { ActivityComponentType } from '@stackflow/react'
 import { RecordingCard } from '@/shared/ui/common/Card/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
+import { useFlow } from '@stackflow/react/future'
 
 const LiveRecordPage: ActivityComponentType = () => {
+  const { replace, push } = useFlow()
   return (
-    <AppScreen appBar={{ title: '감정 기록 중' }}>
+    <AppScreen
+      appBar={{
+        title: (
+          <span className="flex text-usage-text-default">감정 기록 중</span>
+        ),
+        height: '48px',
+      }}
+    >
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
-
         {/* Recording Card */}
         <RecordingCard.Root className="w-full">
           <RecordingCard.Icon state="active" />

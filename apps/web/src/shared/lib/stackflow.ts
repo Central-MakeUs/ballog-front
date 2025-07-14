@@ -18,6 +18,7 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
       theme: 'cupertino', // cupertino | android 두가지 옵션 있음
       backgroundColor: 'bg-usage-background-default',
     }),
+    
     historySyncPlugin({
       routes: {
         Home: '/',
@@ -28,7 +29,9 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
       },
       fallbackActivity: () => 'Home',
     }),
+    
   ],
+
 
   activities: {
     Home: HomePage,
