@@ -8,9 +8,14 @@ import { RecordingCard } from '@/shared/ui/common/Card/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
 import { useFlow } from '@stackflow/react/future'
+import { useState } from 'react'
+import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 
 const LiveRecordPage: ActivityComponentType = () => {
   const { replace, push } = useFlow()
+
+  const [modalStep, setModalStep] = useState<1 | 2 | 3 | null>(null)
+
   return (
     <AppScreen
       appBar={{
@@ -58,11 +63,60 @@ const LiveRecordPage: ActivityComponentType = () => {
               variant="secondary"
               state="pressed"
               size="lg"
+              onClick={() => setModalStep(1)}
               className="w-full"
             >
               기록 종료하기
             </Button>
           </div>
+
+          {/* 모달 */}
+          {modalStep === 1 && (
+            <OverlayModal.Root open onOpenChange={() => setModalStep(null)}>
+              <OverlayModal.Text
+                heading="기록을 종료하시겠습니까?"
+                body="Body text"
+              />
+              <OverlayModal.Buttons
+                layout="horizontal"
+                buttons={[
+                  { label: '취소', onClick: () => setModalStep(null) },
+                  { label: '종료하기', onClick: () => setModalStep(2) },
+                ]}
+              />
+            </OverlayModal.Root>
+          )}
+
+          {/* Step 2 */}
+          {modalStep === 2 && (
+            <OverlayModal.Root open onOpenChange={() => setModalStep(null)}>
+              <OverlayModal.Text
+                heading="경기 결과를 선택해주세요."
+                body="Body text"
+              />
+              <OverlayModal.Buttons
+                layout="vertical"
+                buttons={[
+                  { label: '승리', onClick: () => setModalStep(3) },
+                  { label: '패배', onClick: () => setModalStep(3) },
+                  { label: '무승부', onClick: () => setModalStep(3) },
+                  { label: '건너뛰기', onClick: () => setModalStep(3) },
+                ]}
+              />
+            </OverlayModal.Root>
+          )}
+
+          {/* Step 3 */}
+          {modalStep === 3 && (
+            <OverlayModal.Root open onOpenChange={() => setModalStep(null)}>
+              <OverlayModal.Image imgSrc="/img/end-record.png" />
+              <OverlayModal.Text
+                heading="기록이 완료되었어요!"
+                body="Body text"
+                isImageModal={true}
+              />
+            </OverlayModal.Root>
+          )}
         </div>
       </div>
     </AppScreen>
