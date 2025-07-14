@@ -6,14 +6,13 @@ import { Header } from '@/widgets/header'
 import DarkBallogLogo from '@/assets/darkBallogLogo.svg'
 import GameCardCarousel from '@/features/game/components/gameCardCarousel'
 import type { ActivityComponentType } from '@stackflow/react'
-import { title } from 'process'
 
 const HomePage: ActivityComponentType = () => {
   const { replace } = useFlow()
 
   return (
     <>
-      <AppScreen appBar={{title: "홈"}}>
+      <AppScreen appBar={{ title: '홈' }}>
         <Header
           logo={<img src={DarkBallogLogo} alt="ballog" className="h-6" />}
         />
@@ -31,7 +30,10 @@ const HomePage: ActivityComponentType = () => {
           </p>
         </div>
         <div className="flex justify-center mt-10">
-          <Button className="w-30 h-10" onClick={() => replace('LiveRecord', {})}>
+          <Button
+            className="w-30 h-10"
+            onClick={() => replace('LiveRecord', {})}
+          >
             기록 시작하기
           </Button>
         </div>
