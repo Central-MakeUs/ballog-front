@@ -1,7 +1,7 @@
 import RecordingCardWithNoImage from '@/assets/recordingCardIconWithNoImage.svg?react'
 import RecordingCardWithImage from '@/assets/recordingCardIconWithImage.svg?react'
 import type { ComponentProps } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import { createWebBridge } from '@ballog/bridge'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 

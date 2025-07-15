@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/shared/contexts/EmotionVoteContext'
@@ -14,12 +14,8 @@ export const EmotionVoteWidget = ({
     'joy' | 'angry' | null
   >(null)
 
-  const {
-    setJoyCount,
-    setAngryCount,
-    joyPercent,
-    angryPercent,
-  } = useEmotionVote()
+  const { setJoyCount, setAngryCount, joyPercent, angryPercent } =
+    useEmotionVote()
 
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
 
