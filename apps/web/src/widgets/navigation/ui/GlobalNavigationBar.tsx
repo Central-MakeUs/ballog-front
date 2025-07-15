@@ -38,10 +38,10 @@ export const GlobalNavigationBar = () => {
 
     switch (activity) {
       case 'Home':
-        push('Home', { Home: 'ActivityComponentType' })
+        push('Home', {}, { animate: false })
         break
       case 'LiveRecord':
-        push('LiveRecord', { LiveRecord: 'ActivityComponentType' })
+        push('LiveRecord', {}, { animate: false })
         break
       case 'MyPage':
         // TODO: MyPage 액티비티가 추가되면 사용

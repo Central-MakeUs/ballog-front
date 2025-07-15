@@ -1,6 +1,7 @@
 import { cn } from '@/shared/lib/utils'
 import type { ComponentProps } from 'react'
 import { EmotionButton } from '@/shared/ui/common'
+import { useEmotionVote } from '@/shared/contexts/EmotionVoteContext'
 import { useState } from 'react'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {}
@@ -13,15 +14,14 @@ export const EmotionVoteWidget = ({
     'joy' | 'angry' | null
   >(null)
 
-  const [joyCount, setJoyCount] = useState<number>(0)
-  const [angryCount, setAngryCount] = useState<number>(0)
+  const {
+    setJoyCount,
+    setAngryCount,
+    joyPercent,
+    angryPercent,
+  } = useEmotionVote()
 
-  const total = joyCount + angryCount
-
-  const joyPercent = total > 0 ? Math.round((joyCount / total) * 100) : 50
-  const angryPercent = 100 - joyPercent
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
-  console.log(selectedEmotion)
 
   return (
     <div className={cn('flex flex-col w-full h-full', className)} {...rest}>
