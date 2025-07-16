@@ -1,5 +1,5 @@
 import { Dialog, DialogContent } from '@/shared/ui/common/dialog'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 import type { ReactNode } from 'react'
 

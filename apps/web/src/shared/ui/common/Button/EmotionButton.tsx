@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import { IconButton } from './IconButton'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 
 // TODO: 실제 감정별 SVG 아이콘으로 교체 필요
 export const JoyIcon = () => (
@@ -54,7 +54,7 @@ export const EmotionButton = ({
     <button
       className={cn(
         'bg-usage-background-strong flex flex-col',
-        'items-center justify-end rounded-xlarge px-4 py-6 shadow-medium',
+        'items-center justify-end rounded-xlarge w-full h-full px-4 py-6 shadow-medium',
         'active:bg-usage-background-strong/80',
         className,
       )}

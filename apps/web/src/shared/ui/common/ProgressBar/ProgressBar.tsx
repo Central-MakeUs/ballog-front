@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import AngryEmotion from '@/assets/angryEmotion.svg?react'

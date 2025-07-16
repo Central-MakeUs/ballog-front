@@ -1,7 +1,7 @@
 import BoxAndLeaf from '@/assets/boxAndLeaf.svg?react'
 import type { ReactNode } from 'react'
 import type { ComponentProps } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 
 interface DisabledProps extends ComponentProps<'div'> {
   children?: ReactNode

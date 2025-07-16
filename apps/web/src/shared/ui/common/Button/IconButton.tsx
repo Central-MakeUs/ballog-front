@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import { AngryIcon, JoyIcon } from './EmotionButton'
 
 interface IconButtonProps extends ComponentProps<'div'> {

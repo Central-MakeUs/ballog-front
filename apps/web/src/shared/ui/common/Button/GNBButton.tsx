@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 interface GNBButtonProps extends ComponentProps<'button'> {
   active?: boolean
   disabled?: boolean
