@@ -37,10 +37,10 @@ const LiveRecordPageInner: ActivityComponentType = () => {
   }
 
   // 모달
-  const { open } = useOverlay()
+  const overlay = useOverlay()
 
-  const showStep1Modal = () => {
-    open(({ isOpen, close }) => (
+  const confirmEndRecord = () => {
+    return overlay.open(({ isOpen, close, exit }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
         <OverlayModal.Text
           heading="기록을 종료하시겠습니까?"
@@ -54,7 +54,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
               label: '종료하기',
               onClick: () => {
                 close()
-                showStep2Modal()
+                selectMatchResult()
               },
             },
           ]}
@@ -63,8 +63,8 @@ const LiveRecordPageInner: ActivityComponentType = () => {
     ))
   }
 
-  const showStep2Modal = () => {
-    open(({ isOpen, close }) => (
+  const selectMatchResult = () => {
+    return overlay.open(({ isOpen, close, exit }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
         <OverlayModal.Text
           heading="경기 결과를 선택해주세요."
@@ -77,28 +77,28 @@ const LiveRecordPageInner: ActivityComponentType = () => {
               label: '승리',
               onClick: () => {
                 close()
-                showStep3Modal()
+                leavePage()
               },
             },
             {
               label: '패배',
               onClick: () => {
                 close()
-                showStep3Modal()
+                leavePage()
               },
             },
             {
               label: '무승부',
               onClick: () => {
                 close()
-                showStep3Modal()
+                leavePage()
               },
             },
             {
               label: '건너뛰기',
               onClick: () => {
                 close()
-                showStep3Modal()
+                leavePage()
               },
             },
           ]}
@@ -107,8 +107,11 @@ const LiveRecordPageInner: ActivityComponentType = () => {
     ))
   }
 
-  const showStep3Modal = () => {
-    open(({ isOpen, close }) => (
+  const leavePage = () => {
+    setTimeout(() => {
+      replace('Login', {})
+    }, 2000)
+    return overlay.open(({ isOpen, close, exit }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
         <OverlayModal.Image imgSrc="/img/end-record.png" />
         <OverlayModal.Text
@@ -118,9 +121,6 @@ const LiveRecordPageInner: ActivityComponentType = () => {
         />
       </OverlayModal.Root>
     ))
-    setTimeout(() => {
-      replace('Login', {})
-    }, 2000)
   }
 
   return (
@@ -171,7 +171,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
               variant="secondary"
               state="pressed"
               size="lg"
-              onClick={showStep1Modal}
+              onClick={confirmEndRecord}
               className="w-full"
             >
               기록 종료하기
