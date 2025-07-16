@@ -1,1 +1,1 @@
-export * from './ui/globalNavigationBar'
+export * from './ui/GlobalNavigationBar'
