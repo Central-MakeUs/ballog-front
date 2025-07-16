@@ -79,10 +79,12 @@ const HomeScreen = () => {
       <WebView
         ref={webViewRef}
         source={{ uri: webViewUri }}
+        // source={{ uri: "http://172.30.1.63:5173" }}
         onMessage={handleMessage}
         javaScriptEnabled={true}
         domStorageEnabled={true}
         originWhitelist={['*']}
+        // originWhitelist={['http://172.30.1.63:5173']}
         onError={(error) => console.error('WebView 에러:', error)}
         onLoadStart={() => console.log('WebView 로딩 시작...')}
         onLoadEnd={() => console.log('WebView 로딩 완료')}
