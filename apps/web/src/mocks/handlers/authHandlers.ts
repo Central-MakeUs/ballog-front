@@ -51,6 +51,7 @@ export const authHandlers = [
           data: '회원가입이 완료되었습니다.',
           statusCode: 200,
           message: 'Success',
+          success: '회원가입이 완료되었습니다.',
         },
         { status: 200 },
       )

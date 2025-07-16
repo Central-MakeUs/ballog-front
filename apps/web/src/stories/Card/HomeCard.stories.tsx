@@ -14,7 +14,7 @@ type Story = StoryObj<typeof HomeCard.Root>
 export const Default: Story = {
   render: () => (
     <HomeCard.Root>
-      <HomeCard.MatchInfo homeTeam="롯데 자이언츠" awayTeam="KT 위즈" />
+      <HomeCard.MatchInfo homeTeam="LOTTE_GIANTS" awayTeam="KT_WIZ" />
       <HomeCard.DetailInfo stadium="잠실 경기장" dateTime="2025.06.18 17:30" />
     </HomeCard.Root>
   ),
@@ -23,11 +23,10 @@ export const Default: Story = {
 export const HasButton: Story = {
   render: () => (
     <HomeCard.Root>
-      <HomeCard.MatchInfo homeTeam="롯데 자이언츠" awayTeam="KT 위즈" />
-      <HomeCard.DetailInfo stadium="잠실 경기장" dateTime="2025.06.18 17:30" />
-      <HomeCard.Footer>
+      <HomeCard.MatchInfo homeTeam="LOTTE_GIANTS" awayTeam="KT_WIZ" />
+      <HomeCard.DetailInfo stadium="잠실 경기장" dateTime="2025.06.18 17:30">
         <Button>기록 시작하기</Button>
-      </HomeCard.Footer>
+      </HomeCard.DetailInfo>
     </HomeCard.Root>
   ),
 }
