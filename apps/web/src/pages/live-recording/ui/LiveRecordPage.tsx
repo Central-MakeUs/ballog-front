@@ -5,8 +5,8 @@ import { RecordingCard } from '@/features/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
 import { useFlow } from '@stackflow/react/future'
-import { useState } from 'react'
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
+import { OverlayProvider, useOverlay } from '@/hooks/useOverlay'
 import {
   EmotionVoteProvider,
   useEmotionVote,
@@ -16,15 +16,15 @@ import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGr
 const LiveRecordPage = () => {
   return (
     <EmotionVoteProvider>
-      <LiveRecordPageInner params={{}} />
+      <OverlayProvider>
+        <LiveRecordPageInner params={{}} />
+      </OverlayProvider>
     </EmotionVoteProvider>
   )
 }
 
 const LiveRecordPageInner: ActivityComponentType = () => {
-  const { replace, push } = useFlow()
-
-  const [modalStep, setModalStep] = useState<1 | 2 | 3 | null>(null)
+  const { replace } = useFlow()
 
   const { joyPercent, angryPercent } = useEmotionVote()
 
@@ -34,6 +34,93 @@ const LiveRecordPageInner: ActivityComponentType = () => {
     bgColor = calculateGradientColor('#2e4c30', '#00ff11', joyPercent)
   } else if (angryPercent > joyPercent && angryPercent > 50) {
     bgColor = calculateGradientColor('#55262a', '#ff0016', angryPercent)
+  }
+
+  // 모달
+  const { open, close } = useOverlay()
+
+  const showStep1Modal = () => {
+    open(({ isOpen, close }) => (
+      <OverlayModal.Root open={isOpen} onOpenChange={close}>
+        <OverlayModal.Text
+          heading="기록을 종료하시겠습니까?"
+          body="Body text"
+        />
+        <OverlayModal.Buttons
+          layout="horizontal"
+          buttons={[
+            { label: '취소', onClick: close },
+            {
+              label: '종료하기',
+              onClick: () => {
+                close()
+                showStep2Modal()
+              },
+            },
+          ]}
+        />
+      </OverlayModal.Root>
+    ))
+  }
+
+  const showStep2Modal = () => {
+    open(({ isOpen, close }) => (
+      <OverlayModal.Root open={isOpen} onOpenChange={close}>
+        <OverlayModal.Text
+          heading="경기 결과를 선택해주세요."
+          body="Body text"
+        />
+        <OverlayModal.Buttons
+          layout="vertical"
+          buttons={[
+            {
+              label: '승리',
+              onClick: () => {
+                close()
+                showStep3Modal()
+              },
+            },
+            {
+              label: '패배',
+              onClick: () => {
+                close()
+                showStep3Modal()
+              },
+            },
+            {
+              label: '무승부',
+              onClick: () => {
+                close()
+                showStep3Modal()
+              },
+            },
+            {
+              label: '건너뛰기',
+              onClick: () => {
+                close()
+                showStep3Modal()
+              },
+            },
+          ]}
+        />
+      </OverlayModal.Root>
+    ))
+  }
+
+  const showStep3Modal = () => {
+    open(({ isOpen, close }) => (
+      <OverlayModal.Root open={isOpen} onOpenChange={close}>
+        <OverlayModal.Image imgSrc="/img/end-record.png" />
+        <OverlayModal.Text
+          heading="기록이 완료되었어요!"
+          body="Body text"
+          isImageModal
+        />
+      </OverlayModal.Root>
+    ))
+    setTimeout(() => {
+      replace('Login', {})
+    }, 2000)
   }
 
   return (
@@ -84,60 +171,12 @@ const LiveRecordPageInner: ActivityComponentType = () => {
               variant="secondary"
               state="pressed"
               size="lg"
-              onClick={() => setModalStep(1)}
+              onClick={showStep1Modal}
               className="w-full"
             >
               기록 종료하기
             </Button>
           </div>
-
-          {/* 모달 */}
-          {modalStep === 1 && (
-            <OverlayModal.Root open onOpenChange={() => setModalStep(null)}>
-              <OverlayModal.Text
-                heading="기록을 종료하시겠습니까?"
-                body="Body text"
-              />
-              <OverlayModal.Buttons
-                layout="horizontal"
-                buttons={[
-                  { label: '취소', onClick: () => setModalStep(null) },
-                  { label: '종료하기', onClick: () => setModalStep(2) },
-                ]}
-              />
-            </OverlayModal.Root>
-          )}
-
-          {/* Step 2 */}
-          {modalStep === 2 && (
-            <OverlayModal.Root open onOpenChange={() => setModalStep(null)}>
-              <OverlayModal.Text
-                heading="경기 결과를 선택해주세요."
-                body="Body text"
-              />
-              <OverlayModal.Buttons
-                layout="vertical"
-                buttons={[
-                  { label: '승리', onClick: () => setModalStep(3) },
-                  { label: '패배', onClick: () => setModalStep(3) },
-                  { label: '무승부', onClick: () => setModalStep(3) },
-                  { label: '건너뛰기', onClick: () => setModalStep(3) },
-                ]}
-              />
-            </OverlayModal.Root>
-          )}
-
-          {/* Step 3 */}
-          {modalStep === 3 && (
-            <OverlayModal.Root open onOpenChange={() => setModalStep(null)}>
-              <OverlayModal.Image imgSrc="/img/end-record.png" />
-              <OverlayModal.Text
-                heading="기록이 완료되었어요!"
-                body="Body text"
-                isImageModal={true}
-              />
-            </OverlayModal.Root>
-          )}
         </div>
       </div>
     </AppScreen>
