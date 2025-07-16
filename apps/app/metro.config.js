@@ -23,4 +23,5 @@ defaultConfig.watchFolders = [
   path.resolve(__dirname, '../../packages/bridge'),
 ];
 
+
 module.exports = defaultConfig;
