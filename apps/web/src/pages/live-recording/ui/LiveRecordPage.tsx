@@ -37,7 +37,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
   }
 
   // 모달
-  const { open, close } = useOverlay()
+  const { open } = useOverlay()
 
   const showStep1Modal = () => {
     open(({ isOpen, close }) => (
