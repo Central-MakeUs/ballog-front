@@ -1,7 +1,7 @@
 import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 import { EmotionButton } from '@/shared/ui/common'
-import { useEmotionVote } from '@/shared/contexts/EmotionVoteContext'
+import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { useState } from 'react'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {}

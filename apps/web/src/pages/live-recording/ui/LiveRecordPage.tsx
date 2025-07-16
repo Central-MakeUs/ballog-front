@@ -1,7 +1,7 @@
 import { cn } from '@/shared/lib/classnames'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
-import { RecordingCard } from '@/shared/ui/common/Card/RecordingCard'
+import { RecordingCard } from '@/features/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
 import { useFlow } from '@stackflow/react/future'
@@ -10,8 +10,8 @@ import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 import {
   EmotionVoteProvider,
   useEmotionVote,
-} from '@/shared/contexts/EmotionVoteContext'
-import { calculateGradientColor } from '@/shared/utils/calculateGradientColor'
+} from '@/pages/live-recording/contexts/EmotionVoteContext'
+import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
 
 const LiveRecordPage = () => {
   return (
