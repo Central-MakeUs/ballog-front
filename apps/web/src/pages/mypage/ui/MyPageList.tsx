@@ -7,13 +7,14 @@ interface MyPageListProps extends ComponentProps<'div'> {
   className?: string
   children: ReactNode
   type: 'arrow' | 'switch'
-  onClick?: () => void
+  onClick?: () => void 
 }
 
 export const MyPageList = ({
   children,
   className,
   type,
+  onClick,
   ...rest
 }: MyPageListProps) => {
   const { push } = useFlow()
@@ -23,7 +24,7 @@ export const MyPageList = ({
       <>
         <List.Root>
           <List.Text>{children}</List.Text>
-          <List.Arrow />
+          <List.Arrow onClick={onClick} />
         </List.Root>
       </>
     )
