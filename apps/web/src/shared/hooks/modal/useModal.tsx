@@ -24,6 +24,47 @@ interface ImageModalProps {
   imgSrc: string
 }
 
+/**
+ * - openHorizontalModal
+ * 좌우 2버튼 형태의 모달을 띄웁니다.
+ *
+ * @example
+ * openHorizontalModal({
+ *   heading: '정말 탈퇴하시겠어요?',
+ *   body: '탈퇴 시 모든 정보가 삭제되며 복구할 수 없습니다.',
+ *   buttons: [
+ *     { label: '취소', onClick: () => {} },
+ *     { label: '탈퇴', onClick: handleWithdraw },
+ *   ]
+ * })
+ * 
+ * 
+ * - openVerticalModal
+ * 수직 버튼 목록 형태의 모달을 띄웁니다.
+ *
+ * @example
+ * openVerticalModal({
+ *   heading: '경기 결과를 선택해주세요.',
+ *   buttons: [
+ *     { label: '승리', onClick: handleWin },
+ *     { label: '패배', onClick: handleLose },
+ *     { label: '무승부', onClick: handleDraw },
+ *     { label: '건너뛰기', onClick: handleSkip },
+ *   ]
+ * })
+ * 
+ * 
+ * - openImageModal
+ * 이미지를 보여주는 모달을 띄웁니다.
+ * 
+ * @example
+ * openImageModal({
+ *   heading: '기록이 완료되었어요!',
+ *   body: '수고하셨습니다.',
+ *   imgSrc: '/img/end-record.png',
+ * })
+ */
+
 export const useModal = () => {
   const overlay = useOverlay()
 
