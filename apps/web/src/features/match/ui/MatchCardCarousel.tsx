@@ -33,15 +33,14 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
 
   return (
     <div className="pt-6 w-full">
-      <Carousel className="w-full justify-center items-center" setApi={setApi}>
-        <CarouselContent>
-          <div
-            className="pointer-events-none shrink-0 grow-0"
-            aria-hidden="true"
-          />
-
+      <Carousel
+        className="w-full justify-center items-center"
+        setApi={setApi}
+        opts={{ loop: true }}
+      >
+        <CarouselContent className="-ml-6">
           {matches.map((match, index) => (
-            <CarouselItem key={index} className="flex justify-center shrink-0">
+            <CarouselItem key={index} className="basis-3/5 pl-6">
               <MatchCard {...match} />
             </CarouselItem>
           ))}

@@ -11,7 +11,7 @@ export const Disabled = ({ children, className, ...rest }: DisabledProps) => {
   return (
     <div
       className={cn(
-        'flex flex-col items-center min-w-[200px] min-h-[324px] overflow-hidden rounded-medium',
+        'flex flex-col items-center min-w-[200px] min-h-[324px] overflow-hidden rounded-medium w-full',
         className,
       )}
       {...rest}

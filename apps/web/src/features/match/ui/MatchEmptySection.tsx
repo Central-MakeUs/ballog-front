@@ -14,7 +14,7 @@ export const MatchEmptySection = () => {
       />
 
       {/* 하단 disabled 카드 */}
-      <div className="flex justify-center pt-6 w-full">
+      <div className="flex justify-center pt-6 px-20 w-full">
         <HomeCard.Disabled>
           <Button
             variant="primary"
