@@ -9,7 +9,7 @@ export const Root = ({ children, className, ...rest }: RootProps) => {
   return (
     <div
       className={cn(
-        'flex items-center justify-between w-full max-w-82 p-4 rounded-xlarge',
+        'flex items-center justify-between w-full min-w-82 p-4 rounded-xlarge',
         'bg-usage-background-subtle',
         className,
       )}

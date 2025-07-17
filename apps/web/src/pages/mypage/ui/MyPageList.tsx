@@ -1,20 +1,38 @@
-import type { ComponentProps } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 import { cn } from '@/shared/lib/classnames'
 import { useFlow } from '@stackflow/react/future'
-import RightArrow from '@/assets/rightArrow.svg?react'
+import { List } from '@/shared/ui/common/List'
 
-interface MyPageButtonProps extends ComponentProps<'button'> {
+interface MyPageListProps extends ComponentProps<'div'> {
   className?: string
+  children: ReactNode
+  type: 'arrow' | 'switch'
+  onClick?: () => void
 }
 
-export const ChangeTeamList = ({ className, ...rest }: MyPageButtonProps) => {
+export const MyPageList = ({
+  children,
+  className,
+  type,
+  ...rest
+}: MyPageListProps) => {
   const { push } = useFlow()
 
-  return (
-    <span
-      className={cn('body-sm-medium items-center text-brand-neutral-white')}
-    >
-      응원 팀 변경
-    </span>
-  )
+  if (type === 'arrow') {
+    return (
+      <>
+        <List.Root>
+          <List.Text>{children}</List.Text>
+          <List.Arrow />
+        </List.Root>
+      </>
+    )
+  } else if (type === 'switch') {
+    return (
+      <List.Root>
+        <List.Text>{children}</List.Text>
+        <List.SwitchItem />
+      </List.Root>
+    )
+  }
 }
