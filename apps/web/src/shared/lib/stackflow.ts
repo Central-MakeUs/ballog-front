@@ -8,6 +8,7 @@ import LiveRecordPage from '@/pages/live-recording/ui/LiveRecordPage'
 import LoginPage from '@/pages/auth/ui/LoginPage'
 import TeamSelectPage from '@/pages/auth/ui/TeamSelectPage'
 import NickNamePage from '@/pages/auth/ui/NickNamePage'
+import MyPage from '@/pages/mypage/ui/MyPage'
 
 export const { Stack, useFlow, useStepFlow } = stackflow({
   transitionDuration: 350,
@@ -26,6 +27,7 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
         Login: '/login',
         TeamSelect: '/team-select',
         Nickname: '/nickname',
+        My: '/mypage',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -37,6 +39,7 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     Login: LoginPage,
     TeamSelect: TeamSelectPage,
     Nickname: NickNamePage,
+    My: MyPage,
   },
   initialActivity: () => 'Home',
 })

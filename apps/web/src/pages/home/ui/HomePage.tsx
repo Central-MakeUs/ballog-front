@@ -37,7 +37,6 @@ const HomePage: ActivityComponentType = () => {
             기록 시작하기
           </Button>
         </div>
-
         <GlobalNavigationBar />
       </AppScreen>
     </>

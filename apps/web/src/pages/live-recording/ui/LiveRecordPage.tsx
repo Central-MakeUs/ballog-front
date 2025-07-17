@@ -109,7 +109,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
 
   const leavePage = () => {
     setTimeout(() => {
-      replace('Login', {})
+      replace('My', {})
     }, 2000)
     return overlay.open(({ isOpen, close, exit }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
