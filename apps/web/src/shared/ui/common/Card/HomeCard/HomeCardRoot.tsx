@@ -1,6 +1,6 @@
 import React from 'react'
 import type { ComponentProps } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 
 interface HomeCardRootProps extends ComponentProps<'div'> {
   children?: React.ReactNode
@@ -17,7 +17,7 @@ export const HomeCardRoot = ({
     <div
       className={cn(
         'flex flex-col',
-        'items-center justify-start overflow-clip pt-0 px-0 relative rounded-lg w-full max-w-50',
+        'items-center justify-start overflow-clip pt-0 px-0 relative rounded-lg min-w-50 w-full',
         className,
       )}
       data-name={`state=${state}`}

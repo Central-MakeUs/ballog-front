@@ -1,6 +1,6 @@
 import React from 'react'
 import type { ComponentProps } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 
 interface HomeCardDetailInfoProps extends ComponentProps<'div'> {
   stadium?: string

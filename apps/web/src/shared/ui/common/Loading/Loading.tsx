@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 
 interface LoadingProps extends ComponentProps<'div'> {
