@@ -7,7 +7,7 @@ export const MatchEmptySection = () => {
   const { push } = useFlow()
 
   return (
-    <div className="flex flex-col items-center justify-start w-full">
+    <div className="flex flex-col items-center justify-start w-full pb-20">
       <SectionHeader
         title={['오늘 예정된', '경기가 없습니다']}
         subtitle={['다음 직관을 기대하며,', '지난 직관 기록을 돌아볼까요?']}

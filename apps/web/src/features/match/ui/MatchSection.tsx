@@ -8,7 +8,7 @@ interface MatchSectionProps {
 
 export const MatchSection = ({ matches }: MatchSectionProps) => {
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center w-full pb-20">
       <SectionHeader
         title={['오늘의 경기 선택하고', '감정 기록하기']}
         subtitle={[
