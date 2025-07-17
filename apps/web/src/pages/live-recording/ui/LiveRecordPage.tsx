@@ -5,13 +5,14 @@ import { RecordingCard } from '@/features/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
 import { useFlow } from '@stackflow/react/future'
-import { OverlayModal } from '@/shared/ui/common/OverlayModal'
-import { OverlayProvider, useOverlay } from '@/hooks/useOverlay'
+import { OverlayProvider } from '@/hooks/useOverlay'
 import {
   EmotionVoteProvider,
   useEmotionVote,
 } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
+import { useModal } from '@/shared/hooks/modal/useModal'
+import SampleImage from '@/assets/grayExampleImage.jpg'
 
 const LiveRecordPage = () => {
   return (
@@ -25,7 +26,7 @@ const LiveRecordPage = () => {
 
 const LiveRecordPageInner: ActivityComponentType = () => {
   const { replace } = useFlow()
-
+  const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()
 
   let bgColor = 'transparent'
@@ -36,91 +37,45 @@ const LiveRecordPageInner: ActivityComponentType = () => {
     bgColor = calculateGradientColor('#55262a', '#ff0016', angryPercent)
   }
 
-  // 모달
-  const overlay = useOverlay()
-
   const confirmEndRecord = () => {
-    return overlay.open(({ isOpen, close, exit }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Text
-          heading="기록을 종료하시겠습니까?"
-          body="Body text"
-        />
-        <OverlayModal.Buttons
-          layout="horizontal"
-          buttons={[
-            { label: '취소', onClick: close },
-            {
-              label: '종료하기',
-              onClick: () => {
-                close()
-                selectMatchResult()
-              },
-            },
-          ]}
-        />
-      </OverlayModal.Root>
-    ))
+    openHorizontalModal({
+      heading: '기록을 종료하시겠습니까?',
+      body: 'Body text',
+      buttons: [
+        { label: '취소', onClick: close },
+        {
+          label: '종료하기',
+          onClick: () => {
+            close()
+            selectMatchResult()
+          },
+        },
+      ],
+    })
   }
 
   const selectMatchResult = () => {
-    return overlay.open(({ isOpen, close, exit }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Text
-          heading="경기 결과를 선택해주세요."
-          body="Body text"
-        />
-        <OverlayModal.Buttons
-          layout="vertical"
-          buttons={[
-            {
-              label: '승리',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-            {
-              label: '패배',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-            {
-              label: '무승부',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-            {
-              label: '건너뛰기',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-          ]}
-        />
-      </OverlayModal.Root>
-    ))
+    openVerticalModal({
+      heading: '경기 결과를 선택해주세요.',
+      body: 'Body text',
+      buttons: ['승리', '패배', '무승부', '건너뛰기'].map((label) => ({
+        label,
+        onClick: () => {
+          leavePage()
+        },
+      })),
+    })
   }
 
   const leavePage = () => {
     setTimeout(() => {
       replace('My', {})
     }, 2000)
-    return overlay.open(({ isOpen, close, exit }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Image imgSrc="/img/end-record.png" />
-        <OverlayModal.Text
-          heading="기록이 완료되었어요!"
-          body="Body text"
-          isImageModal
-        />
-      </OverlayModal.Root>
-    ))
+    openImageModal({
+      heading: '기록이 완료되었어요!',
+      body: 'Body Text',
+      imgSrc: SampleImage,
+    })
   }
 
   return (

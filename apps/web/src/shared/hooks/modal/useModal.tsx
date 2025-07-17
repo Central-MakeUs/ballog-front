@@ -1,27 +1,40 @@
 import { useOverlay } from '@/hooks/useOverlay'
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 
-type ButtonOption = {
+type ModalButton = {
   label: string
-  onClick?: () => void
+  onClick: () => void
 }
 
-interface HorizontalModalOptions {
-  heading?: string
+interface HorizontalModalProps {
+  heading: string
   body?: string
-  buttons: [ButtonOption, ButtonOption]
+  buttons: [ModalButton, ModalButton]
 }
 
-export const useHorizontalModal = () => {
+interface VerticalModalProps {
+  heading: string
+  body?: string
+  buttons: ModalButton[]
+}
+
+interface ImageModalProps {
+  heading: string
+  body?: string
+  imgSrc: string
+}
+
+export const useModal = () => {
   const overlay = useOverlay()
 
-  const openHorizontalModal = ({ heading, body, buttons }: HorizontalModalOptions) => {
+  const openHorizontalModal = ({
+    heading,
+    body,
+    buttons,
+  }: HorizontalModalProps) => {
     return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Text
-          heading={heading ?? 'Heading'}
-          body={body ?? 'body text'}
-        />
+        <OverlayModal.Text heading={heading} body={body ?? 'body text'} />
         <OverlayModal.Buttons
           layout="horizontal"
           buttons={[
@@ -45,7 +58,31 @@ export const useHorizontalModal = () => {
     ))
   }
 
+  const openVerticalModal = ({
+    heading,
+    body,
+    buttons,
+  }: VerticalModalProps) => {
+    return overlay.open(({ isOpen, close }) => (
+      <OverlayModal.Root open={isOpen} onOpenChange={close}>
+        <OverlayModal.Text heading={heading} body={body} />
+        <OverlayModal.Buttons layout="vertical" buttons={buttons} />
+      </OverlayModal.Root>
+    ))
+  }
+
+  const openImageModal = ({ heading, body, imgSrc }: ImageModalProps) => {
+    return overlay.open(({ isOpen, close }) => (
+      <OverlayModal.Root open={isOpen} onOpenChange={close}>
+        <OverlayModal.Image imgSrc={imgSrc} />
+        <OverlayModal.Text heading={heading} body={body} isImageModal />
+      </OverlayModal.Root>
+    ))
+  }
+
   return {
     openHorizontalModal,
+    openVerticalModal,
+    openImageModal,
   }
 }
