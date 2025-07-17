@@ -19,7 +19,7 @@ export const HorizontalButtons: Story = {
       <OverlayModal.Root open={open} onOpenChange={setOpen} dismissible={false}>
         <OverlayModal.Text
           heading="정말 삭제할까요?"
-          body="삭제하면 복구할 수 없습니다."
+          body="탈퇴 시 서비스 내 모든 정보가 삭제되어 복구할 수 없습니다."
         />
         <OverlayModal.Buttons
           layout="horizontal"
