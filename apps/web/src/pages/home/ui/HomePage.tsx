@@ -1,7 +1,6 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import { Header } from '@/widgets/header'
 import { MatchSection } from '@/features/match/ui/MatchSection'
 import type { ActivityComponentType } from '@stackflow/react'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
@@ -25,8 +24,7 @@ const HomePage: ActivityComponentType = () => {
   }
 
   return (
-    <AppScreen>
-      <Header logo={<WhiteBallogLogo />} />
+    <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>
       <HomeContent />
       <GlobalNavigationBar />
     </AppScreen>
