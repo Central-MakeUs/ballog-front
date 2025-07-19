@@ -1,6 +1,6 @@
 import { HomeCard } from '@/shared/ui/common/Card/HomeCard'
 import { Button } from '@/shared/ui/common/Button'
-import { SectionHeader } from '../../../entities/match/ui/SectionHeader'
+import { SectionHeader } from '@/entities/match/ui/SectionHeader'
 import { useFlow } from '@/shared/lib/stackflow'
 
 export const MatchEmptySection = () => {

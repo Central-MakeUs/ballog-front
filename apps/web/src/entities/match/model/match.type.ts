@@ -1,4 +1,4 @@
-import { type ApiResponse } from '../../../types/api/common'
+import { type ApiResponse } from '@/types/api/common'
 import { type TeamKey } from '@/shared/constants/teams'
 
 export interface Match {
@@ -11,4 +11,4 @@ export interface Match {
   matchesResult: string | null
 }
 
-export type MathResponseDTO = ApiResponse<Match[]>
+export type MacthResponseDTO = ApiResponse<Match[]>

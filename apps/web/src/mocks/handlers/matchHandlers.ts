@@ -1,12 +1,12 @@
 import { http, HttpResponse } from 'msw'
-import type { MathResponseDTO } from '@/entities/match/model/match.type'
+import type { MacthResponseDTO } from '@/entities/match/model/match.type'
 import type { ApiErrorMessage } from '@/types/api/common'
 import { match } from '@/mocks/data/match'
 
 const MATCH_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/match`
 
 export const matchHandlers = [
-  http.get<never, MathResponseDTO, ApiErrorMessage | MathResponseDTO>(
+  http.get<never, MacthResponseDTO, ApiErrorMessage | MacthResponseDTO>(
     `${MATCH_API_PREFIX}`,
     async () => {
       const matches = match.today.data
