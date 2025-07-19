@@ -1,6 +1,6 @@
 import { KakaoTalk } from '@/assets/KakaoTalk'
 import { useFlow } from '@/shared/lib/stackflow'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import { Chevron } from '@/assets/Chevron'
 import { Button } from '@/shared/ui/common/Button/Button'
 import type { ComponentProps } from 'react'

@@ -2,7 +2,7 @@ import AngryEmotion from '@/assets/angryEmotion.svg?react'
 import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import { Pie, PieChart } from 'recharts'
 import type { ComponentProps } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 
 interface ActiveEmotionCardProps extends ComponentProps<'div'> {
   emotion: '화나요' | '기뻐요'

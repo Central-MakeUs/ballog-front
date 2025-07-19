@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 
 /**

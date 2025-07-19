@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/classnames'
 
 interface RootProps extends ComponentProps<'div'> {
   children: ReactNode

@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   SafeAreaView,
+  Linking,
 } from 'react-native'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
@@ -22,9 +23,12 @@ export default function PhotoResultScreen() {
     // 업로드 로직 추가하기
   }
 
+  // 그냥 뒤로가기 2번 함
   const handleClose = () => {
-    router.replace('/')
-    // 닫기 버튼 눌렀을 때 카메라 밖으로 나가기 그냥
+    router.back()
+    setTimeout(() => {
+      router.back()
+    }, 1)
   }
 
   return (
