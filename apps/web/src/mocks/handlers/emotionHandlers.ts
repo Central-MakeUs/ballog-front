@@ -1,28 +1,50 @@
 import { http, HttpResponse } from 'msw'
 import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 import type { ApiErrorMessage } from '@/types/api/common'
-import { emotion } from '@/mocks/data/emotion'
+import {
+  emotionGet,
+  emotionPostPositive,
+  emotionPostNegative,
+} from '@/mocks/data/emotion'
 
-const EMOTION_API_PREFIX = 'http://localhost:5173/live-record/api/v1/emotion'
+const EMOTION_API_PREFIX = 'http://localhost:5173/api/v1/emotion'
 
-export const emotionHandlers = [
-  http.post<never, EmotionResponseDTO, ApiErrorMessage | EmotionResponseDTO>(
-    EMOTION_API_PREFIX,
-    async () => {
-      const responseData = emotion.data
+const getEmotionHandler = http.get(
+  `${EMOTION_API_PREFIX}/:recordId`,
+  async ({ params }) => {
+    const { recordId } = params
 
-      // mock latency (선택)
-      await new Promise((resolve) => setTimeout(resolve, emotion.delay || 500))
+    // recordId 별로 다르게 하려면 조건문 분기 가능
+    return HttpResponse.json<EmotionResponseDTO>({
+      message: 'success',
+      statusCode: 200,
+      success: '감정 비율 조회 성공',
+      data: emotionGet.data,
+    })
+  },
+)
 
-      return HttpResponse.json(
-        {
-          data: responseData,
-          statusCode: 200,
-          message: 'success',
-          success: '감정 표현 등록 성공',
-        },
-        { status: 200 },
-      )
-    },
-  ),
-]
+const postEmotionHandler = http.post(
+  `${EMOTION_API_PREFIX}`,
+  async ({ request }) => {
+    const body = (await request.json()) as {
+      recordId: number
+      emotionType: 'POSITIVE' | 'NEGATIVE'
+    }
+    const { emotionType } = body
+
+    const responseData =
+      emotionType === 'POSITIVE'
+        ? emotionPostPositive.data
+        : emotionPostNegative.data
+
+    return HttpResponse.json<EmotionResponseDTO>({
+      message: 'success',
+      statusCode: 200,
+      success: '감정 표현 등록 성공',
+      data: responseData,
+    })
+  },
+)
+
+export const emotionHandlers = [getEmotionHandler, postEmotionHandler]

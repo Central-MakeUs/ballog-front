@@ -19,7 +19,7 @@ export const EmotionVoteWidget = ({
   const [selectedEmotion, setSelectedEmotion] = useState<
     'joy' | 'angry' | null
   >(null)
-  console.log(emotions)
+
   const { setJoyCount, setAngryCount, joyPercent, angryPercent } =
     useEmotionVote()
 

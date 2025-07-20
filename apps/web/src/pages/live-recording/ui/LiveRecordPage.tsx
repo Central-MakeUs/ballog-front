@@ -18,21 +18,28 @@ import { emotions } from '@/entities/record/api/emotion.queries'
 import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 import { usePostEmotion } from '@/entities/record/hooks/usePostEmotion'
 
-const LiveRecordPage = () => {
+const LiveRecordPage: ActivityComponentType<{ recordId: string }> = (props: {
+  params: { recordId: string }
+}) => {
   return (
     <EmotionVoteProvider>
       <OverlayProvider>
-        <LiveRecordPageInner params={{}} />
+        <LiveRecordPageInner {...props} />
       </OverlayProvider>
     </EmotionVoteProvider>
   )
 }
 
-const LiveRecordPageInner: ActivityComponentType = () => {
-  const { data, isLoading } = useQuery<EmotionResponseDTO>(emotions.record(1))
+const LiveRecordPageInner: ActivityComponentType<{ recordId: string }> = ({
+  params,
+}: {
+  params: { recordId: string }
+}) => {
+  const recordId = Number(params.recordId)
+  const { data, isLoading } = useQuery(emotions.record(recordId))
   const { mutate } = usePostEmotion()
 
-  console.log(data?.data)
+  // console.log(data?.data)
   const { replace } = useFlow()
   const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()

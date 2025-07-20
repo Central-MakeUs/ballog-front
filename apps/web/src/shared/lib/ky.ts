@@ -15,7 +15,7 @@ const errorInterceptor = async (
 
 // ky instance 생성
 export const api = ky.create({
-  prefixUrl: (import.meta.env.VITE_PUBLIC_API_URL || '') + 'api/v1',
+  prefixUrl: "http://localhost:5173/" + 'api/v1',
   timeout: 10000,
   retry: 2,
   credentials: 'include',
