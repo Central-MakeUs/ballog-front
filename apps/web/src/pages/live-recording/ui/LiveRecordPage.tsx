@@ -40,7 +40,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
   const overlay = useOverlay()
 
   const confirmEndRecord = () => {
-    return overlay.open(({ isOpen, close, exit }) => (
+    return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
         <OverlayModal.Text
           heading="기록을 종료하시겠습니까?"
@@ -64,7 +64,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
   }
 
   const selectMatchResult = () => {
-    return overlay.open(({ isOpen, close, exit }) => (
+    return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
         <OverlayModal.Text
           heading="경기 결과를 선택해주세요."
@@ -111,7 +111,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
     setTimeout(() => {
       replace('Login', {})
     }, 2000)
-    return overlay.open(({ isOpen, close, exit }) => (
+    return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
         <OverlayModal.Image imgSrc="/img/end-record.png" />
         <OverlayModal.Text
