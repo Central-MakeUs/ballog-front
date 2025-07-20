@@ -10,7 +10,7 @@ export interface Emotion {
   stadium: StadiumKey
   positivePercent: number
   negativePercent: number
-  recentEmotion: string
+  recentEmotion: string | null
   defaultImageUrl: string
 }
 

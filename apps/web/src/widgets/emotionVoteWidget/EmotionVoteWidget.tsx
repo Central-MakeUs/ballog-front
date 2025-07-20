@@ -3,17 +3,21 @@ import type { ComponentProps } from 'react'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { useState } from 'react'
+import type { Emotion } from '@/entities/record/model/emotion.type'
 
-interface EmotionVoteWidgetProps extends ComponentProps<'div'> {}
+interface EmotionVoteWidgetProps extends ComponentProps<'div'> {
+  emotions?: Emotion
+}
 
 export const EmotionVoteWidget = ({
+  emotions,
   className,
   ...rest
 }: EmotionVoteWidgetProps) => {
   const [selectedEmotion, setSelectedEmotion] = useState<
     'joy' | 'angry' | null
   >(null)
-
+  console.log(emotions)
   const { setJoyCount, setAngryCount, joyPercent, angryPercent } =
     useEmotionVote()
 

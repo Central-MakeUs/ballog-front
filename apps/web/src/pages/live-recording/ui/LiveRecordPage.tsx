@@ -4,7 +4,7 @@ import type { ActivityComponentType } from '@stackflow/react'
 import { RecordingCard } from '@/features/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
-import { useFlow } from '@stackflow/react/future'
+import { useFlow } from '@/shared/lib/stackflow'
 import { OverlayProvider } from '@/hooks/useOverlay'
 import {
   EmotionVoteProvider,
@@ -13,6 +13,8 @@ import {
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
 import { useModal } from '@/shared/hooks/modal/useModal'
 import SampleImage from '@/assets/grayExampleImage.jpg'
+import { useQuery } from '@tanstack/react-query'
+import { emotions } from '@/entities/record/api/emotion.queries'
 
 const LiveRecordPage = () => {
   return (
@@ -25,6 +27,8 @@ const LiveRecordPage = () => {
 }
 
 const LiveRecordPageInner: ActivityComponentType = () => {
+  const { data, isLoading } = useQuery(emotions.record())
+  console.log(data?.data)
   const { replace } = useFlow()
   const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()
@@ -117,7 +121,7 @@ const LiveRecordPageInner: ActivityComponentType = () => {
         </div>
 
         {/* 버튼 인터랙션 부분 */}
-        <EmotionVoteWidget />
+        <EmotionVoteWidget emotions={data?.data} />
 
         {/* 하단 버튼 */}
         <div className="fixed bottom-10 w-full">

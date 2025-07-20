@@ -3,7 +3,7 @@ import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 import type { ApiErrorMessage } from '@/types/api/common'
 import { emotion } from '@/mocks/data/emotion'
 
-const EMOTION_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_UR}/api/v1/emotion`
+const EMOTION_API_PREFIX = 'http://localhost:5173/live-record/api/v1/emotion'
 
 export const emotionHandlers = [
   http.post<never, EmotionResponseDTO, ApiErrorMessage | EmotionResponseDTO>(
@@ -12,9 +12,7 @@ export const emotionHandlers = [
       const responseData = emotion.data
 
       // mock latency (선택)
-      await new Promise((resolve) =>
-        setTimeout(resolve, emotion.delay || 500),
-      )
+      await new Promise((resolve) => setTimeout(resolve, emotion.delay || 500))
 
       return HttpResponse.json(
         {

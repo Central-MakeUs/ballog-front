@@ -1,1 +1,1 @@
-export * from './emotion-post'
+export * from './emotion-get'
