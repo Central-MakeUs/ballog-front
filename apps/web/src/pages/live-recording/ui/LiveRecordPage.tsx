@@ -15,6 +15,8 @@ import { useModal } from '@/shared/hooks/modal/useModal'
 import SampleImage from '@/assets/grayExampleImage.jpg'
 import { useQuery } from '@tanstack/react-query'
 import { emotions } from '@/entities/record/api/emotion.queries'
+import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
+import { usePostEmotion } from '@/entities/record/hooks/usePostEmotion'
 
 const LiveRecordPage = () => {
   return (
@@ -27,7 +29,9 @@ const LiveRecordPage = () => {
 }
 
 const LiveRecordPageInner: ActivityComponentType = () => {
-  const { data, isLoading } = useQuery(emotions.record())
+  const { data, isLoading } = useQuery<EmotionResponseDTO>(emotions.record(1))
+  const { mutate } = usePostEmotion()
+
   console.log(data?.data)
   const { replace } = useFlow()
   const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
@@ -121,7 +125,12 @@ const LiveRecordPageInner: ActivityComponentType = () => {
         </div>
 
         {/* 버튼 인터랙션 부분 */}
-        <EmotionVoteWidget emotions={data?.data} />
+        <EmotionVoteWidget
+          emotions={data?.data}
+          onEmotionSubmit={(emotionType) => {
+            mutate({ recordId: 1, emotionType })
+          }}
+        />
 
         {/* 하단 버튼 */}
         <div className="fixed bottom-10 w-full">

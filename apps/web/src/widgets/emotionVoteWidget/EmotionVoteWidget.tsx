@@ -7,10 +7,12 @@ import type { Emotion } from '@/entities/record/model/emotion.type'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {
   emotions?: Emotion
+  onEmotionSubmit?: (emotionType: 'POSITIVE' | 'NEGATIVE') => void
 }
 
 export const EmotionVoteWidget = ({
   emotions,
+  onEmotionSubmit,
   className,
   ...rest
 }: EmotionVoteWidgetProps) => {
@@ -39,7 +41,9 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="joy"
           onClick={() => {
-            setSelectedEmotion('joy'), setJoyCount((prev) => prev + 1)
+            setSelectedEmotion('joy'),
+              setJoyCount((prev) => prev + 1),
+              onEmotionSubmit?.('POSITIVE')
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',
@@ -55,7 +59,9 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="angry"
           onClick={() => {
-            setSelectedEmotion('angry'), setAngryCount((prev) => prev + 1)
+            setSelectedEmotion('angry'),
+              setAngryCount((prev) => prev + 1),
+              onEmotionSubmit?.('NEGATIVE')
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',
