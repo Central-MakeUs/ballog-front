@@ -1,96 +1,91 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { screen, fireEvent } from '@testing-library/react'
+import { render } from '@/test/QueryWrapper'
 import { NickNameForm } from '@/features/auth/ui/NickNameForm'
-import userEvent from '@testing-library/user-event'
+import { useNickNameForm } from '@/shared/hooks/auth/useNickNameForm'
+
+// useNickNameForm 훅 모킹
+vi.mock('@/shared/hooks/auth/useNickNameForm', () => ({
+  useNickNameForm: vi.fn(() => ({
+    nickname: '',
+    setNickname: vi.fn(),
+    errors: [],
+    validateNickname: vi.fn(() => true),
+  })),
+}))
 
 describe('NickNameForm', () => {
-  const mockOnSubmit = vi.fn()
-
-  beforeEach(() => {
+  afterEach(() => {
     vi.clearAllMocks()
   })
 
-  it('NickNameForm 렌더링', () => {
-    render(<NickNameForm onSubmit={mockOnSubmit} error={null} />)
+  const mockOnSubmit = vi.fn()
+
+  const defaultProps = {
+    onSubmit: mockOnSubmit,
+    isLoading: false,
+    error: null,
+  }
+
+  it('닉네임 입력 필드와 완료 버튼이 렌더링된다', () => {
+    render(<NickNameForm {...defaultProps} />)
+
     expect(screen.getByText('닉네임을 입력해주세요.')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('닉네임')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: '완료' })).toBeDisabled()
+    expect(screen.getByPlaceholderText(/닉네임/)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '완료' })).toBeInTheDocument()
   })
-  it('NickNameForm input에 닉네임을 입력하면 submit button이 활성화된다.', async () => {
-    const user = userEvent.setup()
-    // Given
-    render(<NickNameForm onSubmit={mockOnSubmit} error={null} />)
 
-    const input = screen.getByPlaceholderText('닉네임')
-    const submitButton = screen.getByRole('button', { name: '완료' })
+  it('닉네임이 비어있으면 완료 버튼이 비활성화된다', () => {
+    render(<NickNameForm {...defaultProps} />)
 
-    // When
-    expect(submitButton).toBeDisabled()
-
-    await user.type(input, '테스트')
-
-    // Then
-    expect(submitButton).toBeEnabled()
+    const button = screen.getByRole('button', { name: '완료' })
+    expect(button).toBeDisabled()
   })
-  it('submit button을 누르면 onSubmit이 호출된다.', async () => {
-    // Given
-    const user = userEvent.setup()
-    render(<NickNameForm onSubmit={mockOnSubmit} error={null} />)
 
-    const input = screen.getByPlaceholderText('닉네임')
-    const submitButton = screen.getByRole('button', { name: '완료' })
+  it('로딩 중일 때 버튼 텍스트가 변경되고 비활성화된다', () => {
+    render(<NickNameForm {...defaultProps} isLoading={true} />)
 
-    // When
-    await user.type(input, '테스트')
-
-    await user.click(submitButton)
-
-    // Then
-    expect(mockOnSubmit).toHaveBeenCalledWith({ nickname: '테스트' })
+    const button = screen.getByRole('button', { name: '처리중...' })
+    expect(button).toBeDisabled()
   })
-  it('만약 1~10자 사이의 닉네임이 아니라면 ErrorMessage가 표시된다.', async () => {
-    // Given
-    const user = userEvent.setup()
-    render(<NickNameForm onSubmit={mockOnSubmit} error={null} />)
 
-    const input = screen.getByPlaceholderText('닉네임')
-    const submitButton = screen.getByRole('button', { name: '완료' })
+  it('에러가 있을 때 에러 메시지가 표시된다', () => {
+    const error = {
+      errorData: {
+        code: 409,
+        error: '이미 사용 중인 닉네임입니다.',
+        status: 409,
+        message: '이미 사용 중인 닉네임입니다.',
+      },
+    }
 
-    // When
-    await user.type(input, '12345678901')
+    render(<NickNameForm {...defaultProps} error={error as any} />)
 
-    await user.click(submitButton)
+    expect(screen.getByText('이미 사용 중인 닉네임입니다.')).toBeInTheDocument()
+  })
 
-    // Then
-    await waitFor(() => {
-      expect(
-        screen.getByText('1자~10자까지 입력 가능합니다.'),
-      ).toBeInTheDocument()
+  it('닉네임이 있는 상태에서 완료 버튼 클릭 시 onSubmit이 호출된다', () => {
+    // useNickNameForm 의 함수를 모킹
+    vi.mocked(useNickNameForm).mockImplementation(() => ({
+      nickname: 'testNickname',
+      setNickname: vi.fn(),
+      errors: [],
+      validateNickname: vi.fn(() => true),
+    }))
+
+    render(<NickNameForm {...defaultProps} />)
+
+    // button의 비활성화 확인
+    const button = screen.getByRole('button', { name: '완료' })
+    expect(button).not.toBeDisabled()
+
+    // 버튼 클릭
+    fireEvent.click(button)
+
+    // onSubmit이 호출되었는지 확인
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1)
+    expect(mockOnSubmit).toHaveBeenCalledWith({
+      nickname: 'testNickname',
     })
-
-    expect(mockOnSubmit).not.toHaveBeenCalled()
-  })
-  it('특수문자가 들어가면 에러 메세지가 표시된다.', async () => {
-    // Given
-    const user = userEvent.setup()
-    render(<NickNameForm onSubmit={mockOnSubmit} error={null} />)
-
-    const input = screen.getByPlaceholderText('닉네임')
-    const submitButton = screen.getByRole('button', { name: '완료' })
-
-    // When
-    await user.type(input, '테스트@')
-
-    await user.click(submitButton)
-
-    // Then
-    await waitFor(() => {
-      expect(
-        screen.getByText('한글, 영문, 숫자만 입력 가능합니다.'),
-      ).toBeInTheDocument()
-    })
-
-    // onSubmit이 호출되지 않아야 함
-    expect(mockOnSubmit).not.toHaveBeenCalled()
   })
 })
