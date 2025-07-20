@@ -29,6 +29,9 @@ jobs:
       - name: Run linting
         run: pnpm lint
 
+      - name: Run tests
+        run: pnpm --filter web exec vitest run
+
       - name: Build web
         run: pnpm build:web
 
@@ -41,8 +44,8 @@ jobs:
             const success = '${{ job.status }}' === 'success';
             const emoji = success ? '✅' : '❌';
             const message = success ? 
-              '빌드가 성공적으로 완료되었습니다!' : 
-              '빌드 중 오류가 발생했습니다. 로그를 확인해주세요.';
+              '테스트와 빌드가 성공적으로 완료되었습니다!' : 
+              '테스트 또는 빌드 중 오류가 발생했습니다. 로그를 확인해주세요.';
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
