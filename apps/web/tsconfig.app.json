@@ -27,6 +27,11 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "vitest.config.ts",
+    "vitest.shims.d.ts",
+    ".storybook/**/*"
+  ],
   "extends": "./tsconfig.json"
 }
