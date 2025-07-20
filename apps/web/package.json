@@ -22,6 +22,7 @@
     "@stackflow/plugin-renderer-basic": "^1.1.13",
     "@stackflow/react": "^1.5.2",
     "@tanstack/react-query": "^5.81.5",
+    "@tanstack/react-query-devtools": "^5.83.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/react-router-dom": "^5.3.3",
     "class-variance-authority": "^0.7.1",

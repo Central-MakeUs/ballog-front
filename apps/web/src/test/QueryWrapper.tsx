@@ -1,12 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import React from 'react'
+import type { JSX, ReactElement, ReactNode } from 'react'
 import { render, renderHook, type RenderOptions } from '@testing-library/react'
-import type { ReactElement } from 'react'
 
 import QueryProvider from '@/app/Provider/QueryProvider'
 
-export const wrapper = ({ children }: { children: React.ReactNode }) => {
-  return <QueryProvider>{children}</QueryProvider>
+export const wrapper = ({ children }: { children: ReactNode }) => {
+  return <QueryProvider>{children as JSX.Element}</QueryProvider>
 }
 
 const customRender = (
