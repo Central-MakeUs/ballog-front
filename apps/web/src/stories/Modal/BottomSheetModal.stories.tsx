@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
+
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import grayExampleImage from '@/assets/grayExampleImage.jpg'
-import { useState } from 'react'
 
 const meta: Meta = {
   title: 'shared/BottomSheetModal',

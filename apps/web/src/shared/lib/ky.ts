@@ -1,4 +1,5 @@
 import ky from 'ky'
+
 import type { KyHttpError, ExtendedKyHttpError } from '@/types/api/common'
 
 // 에러 인터셉터
@@ -24,7 +25,7 @@ export const api = ky.create({
   },
   hooks: {
     afterResponse: [
-      async (_, __, response) => {
+      (_, __, response) => {
         // 리프레시 토큰 처리 로직 필요
         if (response.status === 401) {
           window.location.href = '/login'

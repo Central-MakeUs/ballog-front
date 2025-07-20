@@ -1,10 +1,11 @@
-import { cn } from '@/shared/lib/classnames'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
+import { useFlow } from '@stackflow/react/future'
+
+import { cn } from '@/shared/lib/classnames'
 import { RecordingCard } from '@/features/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
-import { useFlow } from '@stackflow/react/future'
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 import { OverlayProvider, useOverlay } from '@/hooks/useOverlay'
 import {
@@ -12,16 +13,6 @@ import {
   useEmotionVote,
 } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
-
-const LiveRecordPage = () => {
-  return (
-    <EmotionVoteProvider>
-      <OverlayProvider>
-        <LiveRecordPageInner params={{}} />
-      </OverlayProvider>
-    </EmotionVoteProvider>
-  )
-}
 
 const LiveRecordPageInner: ActivityComponentType = () => {
   const { replace } = useFlow()
@@ -39,25 +30,17 @@ const LiveRecordPageInner: ActivityComponentType = () => {
   // 모달
   const overlay = useOverlay()
 
-  const confirmEndRecord = () => {
+  const leavePage = () => {
+    setTimeout(() => {
+      replace('Login', {})
+    }, 2000)
     return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
+        <OverlayModal.Image imgSrc="/img/end-record.png" />
         <OverlayModal.Text
-          heading="기록을 종료하시겠습니까?"
+          heading="기록이 완료되었어요!"
           body="Body text"
-        />
-        <OverlayModal.Buttons
-          layout="horizontal"
-          buttons={[
-            { label: '취소', onClick: close },
-            {
-              label: '종료하기',
-              onClick: () => {
-                close()
-                selectMatchResult()
-              },
-            },
-          ]}
+          isImageModal
         />
       </OverlayModal.Root>
     ))
@@ -107,17 +90,25 @@ const LiveRecordPageInner: ActivityComponentType = () => {
     ))
   }
 
-  const leavePage = () => {
-    setTimeout(() => {
-      replace('Login', {})
-    }, 2000)
+  const confirmEndRecord = () => {
     return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Image imgSrc="/img/end-record.png" />
         <OverlayModal.Text
-          heading="기록이 완료되었어요!"
+          heading="기록을 종료하시겠습니까?"
           body="Body text"
-          isImageModal
+        />
+        <OverlayModal.Buttons
+          layout="horizontal"
+          buttons={[
+            { label: '취소', onClick: close },
+            {
+              label: '종료하기',
+              onClick: () => {
+                close()
+                selectMatchResult()
+              },
+            },
+          ]}
         />
       </OverlayModal.Root>
     ))
@@ -180,6 +171,16 @@ const LiveRecordPageInner: ActivityComponentType = () => {
         </div>
       </div>
     </AppScreen>
+  )
+}
+
+const LiveRecordPage = () => {
+  return (
+    <EmotionVoteProvider>
+      <OverlayProvider>
+        <LiveRecordPageInner params={{}} />
+      </OverlayProvider>
+    </EmotionVoteProvider>
   )
 }
 

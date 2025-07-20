@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { RecordLogCard } from '@/features/record/ui/RecordLogCard'
 import { Button } from '@/shared/ui/common'
 

@@ -1,8 +1,10 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { screen, fireEvent } from '@testing-library/react'
+
 import { render } from '@/test/QueryWrapper'
 import { NickNameForm } from '@/features/auth/ui/NickNameForm'
 import { useNickNameForm } from '@/shared/hooks/auth/useNickNameForm'
+import type { ExtendedKyHttpError } from '@/types/api/common'
 
 // useNickNameForm 훅 모킹
 vi.mock('@/shared/hooks/auth/useNickNameForm', () => ({
@@ -59,7 +61,12 @@ describe('NickNameForm', () => {
       },
     }
 
-    render(<NickNameForm {...defaultProps} error={error as any} />)
+    render(
+      <NickNameForm
+        {...defaultProps}
+        error={error as unknown as ExtendedKyHttpError}
+      />,
+    )
 
     expect(screen.getByText('이미 사용 중인 닉네임입니다.')).toBeInTheDocument()
   })

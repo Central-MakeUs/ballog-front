@@ -1,8 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 import { screen, waitFor } from '@testing-library/react'
-import { render } from '@/test/QueryWrapper'
-import NickNamePage from '../ui/NickNamePage'
 import userEvent from '@testing-library/user-event'
+
+import { render } from '@/test/QueryWrapper'
+
+import NickNamePage from '../ui/NickNamePage'
 
 vi.mock('@/shared/lib/stackflow', () => ({
   useFlow: () => ({

@@ -1,4 +1,5 @@
 import { api } from '@/shared/lib/ky'
+
 import type { SignupRequestDTO, SignupResponseDTO } from '../model/auth.type'
 
 export const authPost = {

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
+
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 import grayExampleImage from '@/assets/grayExampleImage.jpg'
-import { useState } from 'react'
 
 const meta: Meta<typeof OverlayModal.Root> = {
   title: 'shared/OverlayModal',

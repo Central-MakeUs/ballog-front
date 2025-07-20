@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw'
+
 import type {
   SignupRequestDTO,
   SignupResponseDTO,
@@ -12,8 +13,7 @@ export const authHandlers = [
   http.post<never, SignupRequestDTO, ApiErrorMessage | SignupResponseDTO>(
     `${AUTH_API_PREFIX}/signup`,
     async ({ request }) => {
-      const { baseballTeam, nickname } =
-        (await request.json()) as SignupRequestDTO
+      const { baseballTeam, nickname } = await request.json()
 
       // 존재하는 닉네임 목록
       const existingNicknames = auth.signup.existingNicknames
@@ -44,7 +44,6 @@ export const authHandlers = [
           { status: 409 },
         )
       }
-      console.log('signup')
 
       return HttpResponse.json<SignupResponseDTO>(
         {
