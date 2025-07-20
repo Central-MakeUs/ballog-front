@@ -20,9 +20,8 @@ export const EmotionVoteWidget = ({
     'joy' | 'angry' | null
   >(null)
 
-  const { setJoyCount, setAngryCount, joyPercent, angryPercent } =
-    useEmotionVote()
-
+  const { joyPercent, angryPercent } = useEmotionVote()
+  console.log(joyPercent, angryPercent)
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
 
   return (
@@ -41,9 +40,7 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="joy"
           onClick={() => {
-            setSelectedEmotion('joy'),
-              setJoyCount((prev) => prev + 1),
-              onEmotionSubmit?.('POSITIVE')
+            setSelectedEmotion('joy'), onEmotionSubmit?.('POSITIVE')
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',
@@ -59,9 +56,7 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="angry"
           onClick={() => {
-            setSelectedEmotion('angry'),
-              setAngryCount((prev) => prev + 1),
-              onEmotionSubmit?.('NEGATIVE')
+            setSelectedEmotion('angry'), onEmotionSubmit?.('NEGATIVE')
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',

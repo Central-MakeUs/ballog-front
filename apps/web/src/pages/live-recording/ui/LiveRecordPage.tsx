@@ -17,29 +17,41 @@ import { useQuery } from '@tanstack/react-query'
 import { emotions } from '@/entities/record/api/emotion.queries'
 import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 import { usePostEmotion } from '@/entities/record/hooks/usePostEmotion'
+import type { Emotion } from '@/entities/record/model/emotion.type'
 
-const LiveRecordPage: ActivityComponentType<{ recordId: string }> = (props: {
-  params: { recordId: string }
-}) => {
+const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
+  params,
+}: { params: { recordId: string } }) => {
+  const recordId = Number(params.recordId)
+  const { data, isLoading } = useQuery(emotions.record(recordId))
+
+  const joy = data?.data.positivePercent ?? 50
+  const angry = data?.data.negativePercent ?? 50
+
   return (
-    <EmotionVoteProvider>
+    <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
       <OverlayProvider>
-        <LiveRecordPageInner {...props} />
+        <LiveRecordPageInner
+          recordId={recordId}
+          isLoading={isLoading}
+          emotionData={data?.data}
+        />
       </OverlayProvider>
     </EmotionVoteProvider>
   )
 }
 
-const LiveRecordPageInner: ActivityComponentType<{ recordId: string }> = ({
-  params,
+const LiveRecordPageInner = ({
+  recordId,
+  isLoading,
+  emotionData,
 }: {
-  params: { recordId: string }
+  recordId: number
+  isLoading: boolean
+  emotionData?: Emotion
 }) => {
-  const recordId = Number(params.recordId)
-  const { data, isLoading } = useQuery(emotions.record(recordId))
   const { mutate } = usePostEmotion()
 
-  // console.log(data?.data)
   const { replace } = useFlow()
   const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()
@@ -133,7 +145,7 @@ const LiveRecordPageInner: ActivityComponentType<{ recordId: string }> = ({
 
         {/* 버튼 인터랙션 부분 */}
         <EmotionVoteWidget
-          emotions={data?.data}
+          emotions={emotionData}
           onEmotionSubmit={(emotionType) => {
             mutate({ recordId: 1, emotionType })
           }}
