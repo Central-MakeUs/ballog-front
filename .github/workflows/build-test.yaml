@@ -31,6 +31,8 @@ jobs:
 
       - name: Run tests
         run: pnpm --filter web exec vitest run
+        env:
+          VITE_PUBLIC_API_URL: http://localhost:5000
 
       - name: Build web
         run: pnpm build:web
