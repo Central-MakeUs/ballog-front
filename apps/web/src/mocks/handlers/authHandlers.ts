@@ -6,7 +6,7 @@ import type {
 import type { ApiErrorMessage } from '@/types/api/common'
 import { auth } from '@/mocks/data/auth'
 
-const AUTH_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}api/v1/auth`
+const AUTH_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/auth`
 
 export const authHandlers = [
   http.post<never, SignupRequestDTO, ApiErrorMessage | SignupResponseDTO>(
