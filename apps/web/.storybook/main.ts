@@ -1,4 +1,5 @@
 import { dirname, join } from 'path'
+import path from 'path'
 
 import { mergeConfig } from 'vite'
 import type { StorybookConfig } from '@storybook/react-vite'
@@ -34,6 +35,11 @@ const config: StorybookConfig = {
           include: '**/*.svg',
         }),
       ],
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '../src'),
+        },
+      },
     })
   },
 }

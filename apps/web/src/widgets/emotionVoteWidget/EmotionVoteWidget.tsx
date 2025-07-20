@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
