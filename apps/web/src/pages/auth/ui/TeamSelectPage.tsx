@@ -10,7 +10,7 @@ const TeamSelectPage = () => {
   const { push } = useFlow()
 
   const handleTeamSelect = (selectedTeam: TeamKey) => {
-    // push('Nickname', { selectedTeam })
+    push('Nickname', { selectedTeam })
   }
 
   return (

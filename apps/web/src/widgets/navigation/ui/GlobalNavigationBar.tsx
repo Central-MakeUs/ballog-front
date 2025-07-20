@@ -30,7 +30,7 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 export const GlobalNavigationBar = () => {
-  const { push, replace } = useFlow()
+  const { replace } = useFlow()
   const [currentActivity, setCurrentActivity] = useState<ActivityType>('Home')
 
   const handleNavigation = (activity: ActivityType) => {
@@ -38,11 +38,11 @@ export const GlobalNavigationBar = () => {
 
     switch (activity) {
       case 'Home':
-        push('Home', {}, { animate: false })
+        replace('Home', {}, { animate: false })
         break
       // TODO : 여기 LiveRecord 아니고 직관로그 와야 함
       case 'LiveRecord':
-        push('LiveRecord', {}, { animate: false })
+        replace('LiveRecord', {}, { animate: false })
         break
       case 'MyPage':
         // TODO: MyPage 액티비티가 추가되면 사용

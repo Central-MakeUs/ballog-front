@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { IntuitionCard } from '@/shared/ui/common/Card/IntuitionCard'
+import { IntuitionCard } from '@/shared/ui/common/Card/intuitionCard'
 
 const meta: Meta<typeof IntuitionCard.Active> = {
   title: 'Components/Card/IntuitionCard',
@@ -28,7 +28,6 @@ export const Test: StoryObj<typeof IntuitionCard.Active> = {
     winRate: 80.5,
   },
 }
-
 
 export const Active: StoryObj<typeof IntuitionCard.Active> = {
   name: 'active',
