@@ -15,13 +15,14 @@ import { useModal } from '@/shared/hooks/modal/useModal'
 import SampleImage from '@/assets/grayExampleImage.jpg'
 import { useQuery } from '@tanstack/react-query'
 import { emotions } from '@/entities/record/api/emotion.queries'
-import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 import { usePostEmotion } from '@/entities/record/hooks/usePostEmotion'
 import type { Emotion } from '@/entities/record/model/emotion.type'
 
 const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
   params,
-}: { params: { recordId: string } }) => {
+}: {
+  params: { recordId: string }
+}) => {
   const recordId = Number(params.recordId)
   const { data, isLoading } = useQuery(emotions.record(recordId))
 
