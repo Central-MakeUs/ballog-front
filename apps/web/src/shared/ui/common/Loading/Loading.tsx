@@ -1,5 +1,6 @@
-import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
+
+import { cn } from '@/shared/lib/classnames'
 
 interface LoadingProps extends ComponentProps<'div'> {
   size?: 'sm' | 'md' | 'lg'

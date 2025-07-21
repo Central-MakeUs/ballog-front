@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw'
+
 import type { MacthResponseDTO } from '@/entities/match/model/match.type'
 import type { ApiErrorMessage } from '@/types/api/common'
 import { match } from '@/mocks/data/match'

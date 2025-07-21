@@ -1,4 +1,5 @@
 import { api } from '@/shared/lib/ky'
+
 import type { MacthResponseDTO } from '../model/match.type'
 
 export const matchGet = {

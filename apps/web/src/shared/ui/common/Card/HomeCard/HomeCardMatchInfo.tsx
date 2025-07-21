@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react'
+
 import { cn } from '@/shared/lib/classnames'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 
@@ -30,7 +31,7 @@ export const HomeCardMatchInfo = ({
               data-name="text"
             >
               <div className="body-lg-bold text-brand-primary-default text-center whitespace-nowrap">
-                {TEAMS[homeTeam as TeamKey]}
+                {TEAMS[homeTeam]}
               </div>
             </div>
             <div
@@ -46,7 +47,7 @@ export const HomeCardMatchInfo = ({
               data-name="text"
             >
               <div className="body-lg-bold text-brand-primary-default text-center whitespace-nowrap">
-                {TEAMS[awayTeam as TeamKey]}
+                {TEAMS[awayTeam]}
               </div>
             </div>
           </div>

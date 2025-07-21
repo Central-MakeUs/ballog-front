@@ -1,6 +1,7 @@
 import type { Match } from '@/entities/match/model/match.type'
+import { SectionHeader } from '@/entities/match/ui/SectionHeader'
+
 import { MatchCardCarousel } from './MatchCardCarousel'
-import { SectionHeader } from '../../../entities/match/ui/SectionHeader'
 
 interface MatchSectionProps {
   matches: Match[]
