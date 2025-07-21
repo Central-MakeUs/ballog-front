@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { IntuitionCard } from '@/shared/ui/common/Card/intuitionCard'
 
 const meta: Meta<typeof IntuitionCard.Active> = {

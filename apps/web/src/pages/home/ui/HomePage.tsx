@@ -1,11 +1,12 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import type { ActivityComponentType } from '@stackflow/react'
+
 import { useFlow } from '@/shared/lib/stackflow'
 import { Button } from '@/shared/ui/common/Button'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { Header } from '@/widgets/header'
 import DarkBallogLogo from '@/assets/darkBallogLogo.svg'
 import GameCardCarousel from '@/features/game/components/gameCardCarousel'
-import type { ActivityComponentType } from '@stackflow/react'
 
 const HomePage: ActivityComponentType = () => {
   const { replace } = useFlow()

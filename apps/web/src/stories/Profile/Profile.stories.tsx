@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { Profile } from '@/shared/ui/common/Profile/Profile'
 import MockImage from '@/assets/grayExampleImage.jpg'
 import DefaultProfile from '@/assets/defaultProfile.png'

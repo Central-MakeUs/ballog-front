@@ -1,9 +1,10 @@
 import { useState } from 'react'
+
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common'
 
-type TeamSelectionFormProps = {
+interface TeamSelectionFormProps {
   onSubmit: (team: TeamKey) => void
 }
 

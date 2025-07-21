@@ -1,6 +1,8 @@
 import type { ComponentProps } from 'react'
-import { IconButton } from './IconButton'
+
 import { cn } from '@/shared/lib/classnames'
+
+import { IconButton } from './IconButton'
 
 // TODO: 실제 감정별 SVG 아이콘으로 교체 필요
 export const JoyIcon = () => (

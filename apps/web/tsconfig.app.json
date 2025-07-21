@@ -28,5 +28,6 @@
     }
   },
   "include": ["src"],
+  "exclude": [".storybook/**/*"],
   "extends": "./tsconfig.json"
 }

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { fn } from 'storybook/test'
 
 import { Button } from '@/shared/ui/common/Button/Button'

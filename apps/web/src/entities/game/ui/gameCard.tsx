@@ -1,4 +1,4 @@
-type GameCardProps = {
+interface GameCardProps {
   homeTeam: string
   awayTeam: string
   stadium: string

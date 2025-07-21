@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 
 const meta: Meta<typeof EmotionVoteWidget> = {

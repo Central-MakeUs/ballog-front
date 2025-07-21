@@ -1,7 +1,8 @@
-import { Dialog, DialogContent } from '@/shared/ui/common/dialog'
-import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 import type { ReactNode } from 'react'
+
+import { Dialog, DialogContent } from '@/shared/ui/common/dialog'
+import { cn } from '@/shared/lib/classnames'
 
 interface RootProps extends ComponentProps<'div'> {
   open: boolean
