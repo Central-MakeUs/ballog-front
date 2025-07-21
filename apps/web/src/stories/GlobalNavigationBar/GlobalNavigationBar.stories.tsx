@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { GlobalNavigationBar } from '@/widgets/navigation'
 
 const meta: Meta<typeof GlobalNavigationBar> = {

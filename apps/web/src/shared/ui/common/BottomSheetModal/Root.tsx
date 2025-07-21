@@ -1,6 +1,7 @@
-import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
 import type { ReactNode } from 'react'
+
+import { cn } from '@/shared/lib/classnames'
 import WhiteCloseButton from '@/assets/whiteCloseButton.svg?react'
 
 interface RootProps extends ComponentProps<'div'> {

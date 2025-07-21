@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { RecordingCard } from '@/features/record/ui/RecordingCard/index'
 import { Profile } from '@/shared/ui/common/Profile/Profile'
 import DefaultProfile from '@/assets/defaultProfile.png'

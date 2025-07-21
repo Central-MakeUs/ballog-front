@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
 import { HomeCard } from '@/shared/ui/common/Card/HomeCard/index'
 import { Button } from '@/shared/ui/common/Button'
 

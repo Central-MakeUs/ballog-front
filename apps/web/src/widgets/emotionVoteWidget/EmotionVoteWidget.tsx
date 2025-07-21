@@ -1,8 +1,9 @@
-import { cn } from '@/shared/lib/classnames'
+import { useState } from 'react'
 import type { ComponentProps } from 'react'
+
+import { cn } from '@/shared/lib/classnames'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
-import { useState } from 'react'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {}
 
@@ -35,7 +36,8 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="joy"
           onClick={() => {
-            setSelectedEmotion('joy'), setJoyCount((prev) => prev + 1)
+            setSelectedEmotion('joy')
+            setJoyCount((prev) => prev + 1)
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',
@@ -51,7 +53,8 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="angry"
           onClick={() => {
-            setSelectedEmotion('angry'), setAngryCount((prev) => prev + 1)
+            setSelectedEmotion('angry')
+            setAngryCount((prev) => prev + 1)
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',

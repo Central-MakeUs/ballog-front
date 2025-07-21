@@ -1,4 +1,5 @@
 import { type JSX, useCallback, useEffect, useMemo, useState } from 'react'
+
 import { useOverlayContext } from './overlayProvider'
 
 let elementId = 0
@@ -28,7 +29,7 @@ export type CreateOverlayElement = (props: {
  */
 export const useOverlay = () => {
   const { setOverlay, popOverlay, clearAllOverlays } = useOverlayContext()
-  const [_, setIsOpen] = useState(false)
+  const [, setIsOpen] = useState(false)
   const [id] = useState(() => String(elementId++))
 
   const close = useCallback(() => {

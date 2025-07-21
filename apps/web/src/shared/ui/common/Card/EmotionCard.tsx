@@ -1,7 +1,8 @@
-import AngryEmotion from '@/assets/angryEmotion.svg?react'
-import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import { Pie, PieChart } from 'recharts'
 import type { ComponentProps } from 'react'
+
+import AngryEmotion from '@/assets/angryEmotion.svg?react'
+import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
 interface ActiveEmotionCardProps extends ComponentProps<'div'> {

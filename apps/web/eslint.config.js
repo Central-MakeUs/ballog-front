@@ -1,6 +1,5 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from 'eslint-plugin-storybook'
-
+import ballogConfig from '@ballog/eslint'
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -8,17 +7,26 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', '.storybook/**/*'] },
+
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...ballogConfig,
+
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      '@ballog/eslint',
-    ],
     files: ['**/*.{ts,tsx}'],
+    ignores: ['.storybook/**/*'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parserOptions: {
+        root: true,
+        project: [
+          './tsconfig.json',
+          './tsconfig.app.json',
+          './tsconfig.node.json',
+        ],
+      },
     },
     plugins: {
       'react-hooks': reactHooks,
@@ -30,52 +38,28 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      // FSD Architecture Rules - Core Principles Only
+      '@typescript-eslint/unbound-method': 'off',
+    },
+  },
+
+  // FSD Architecture Rules - 각 레이어별 별도 설정
+  // Shared layer 규칙
+  {
+    files: ['**/shared/**/*'],
+    rules: {
       'no-restricted-imports': [
         'error',
         {
           patterns: [
-            // Core FSD principle: Higher layers cannot import from lower layers
-            {
-              group: ['shared/*', 'entities/*', 'features/*', 'widgets/*'],
-              message: 'App layer cannot import from lower layers',
-              when: {
-                files: ['**/app/**/*'],
-              },
-            },
-            {
-              group: ['shared/*', 'entities/*', 'features/*'],
-              message: 'Pages layer cannot import from lower layers',
-              when: {
-                files: ['**/pages/**/*'],
-              },
-            },
-            {
-              group: ['shared/*', 'entities/*'],
-              message: 'Widgets layer cannot import from lower layers',
-              when: {
-                files: ['**/widgets/**/*'],
-              },
-            },
-            {
-              group: ['shared/*'],
-              message: 'Features layer cannot import from lower layers',
-              when: {
-                files: ['**/features/**/*'],
-              },
-            },
             {
               group: [
-                'app/*',
-                'pages/*',
-                'widgets/*',
-                'features/*',
-                'entities/*',
+                '../app/*',
+                '../pages/*',
+                '../widgets/*',
+                '../features/*',
+                '../entities/*',
               ],
               message: 'Shared layer cannot import from higher layers',
-              when: {
-                files: ['**/shared/**/*'],
-              },
             },
           ],
         },
@@ -83,16 +67,93 @@ export default tseslint.config(
     },
   },
 
-  // Optional: More flexible cross-slice rules (warning level)
+  // Entities layer 규칙
+  {
+    files: ['**/entities/**/*'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [
+                '../app/*',
+                '../pages/*',
+                '../widgets/*',
+                '../features/*',
+              ],
+              message: 'Entities layer cannot import from higher layers',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // Features layer 규칙
+  {
+    files: ['**/features/**/*'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['../app/*', '../pages/*', '../widgets/*'],
+              message: 'Features layer cannot import from higher layers',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // Widgets layer 규칙
+  {
+    files: ['**/widgets/**/*'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['../app/*', '../pages/*'],
+              message: 'Widgets layer cannot import from higher layers',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // Pages layer 규칙
+  {
+    files: ['**/pages/**/*'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['../app/*'],
+              message: 'Pages layer cannot import from higher layers',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // Cross-slice 통신에 대한 경고 (더 유연한 규칙)
   {
     files: ['**/entities/**/*', '**/features/**/*', '**/widgets/**/*'],
     rules: {
       'no-restricted-imports': [
-        'warn', // error -> warn으로 변경
+        'warn',
         {
           patterns: [
             {
-              group: ['entities/*', 'features/*', 'widgets/*'],
+              group: ['../entities/*', '../features/*', '../widgets/*'],
               message:
                 'Consider using shared layer for cross-slice communication',
             },
@@ -101,6 +162,4 @@ export default tseslint.config(
       ],
     },
   },
-
-  storybook.configs['flat/recommended'],
 )

@@ -1,5 +1,5 @@
 import { WebView } from 'react-native-webview'
-import {
+import type {
   PostMessageSchemaObject,
   PostMessageEvent,
   WebMessageEvent,

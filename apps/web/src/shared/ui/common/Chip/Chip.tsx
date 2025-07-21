@@ -1,6 +1,8 @@
+import React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
+
+import { cn } from '@/shared/lib/classnames'
 
 /**
  * Chip 컴포넌트의 스타일을 관리하는 cva 설정

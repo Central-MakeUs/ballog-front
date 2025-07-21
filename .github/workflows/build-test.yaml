@@ -1,0 +1,57 @@
+name: PR Test and Build in Web
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.10.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.11.0'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run linting
+        run: pnpm lint
+
+      - name: Run tests
+        run: pnpm --filter web exec vitest run
+        env:
+          VITE_PUBLIC_API_URL: http://localhost:5000
+
+      - name: Build web
+        run: pnpm build:web
+
+      # 테스트 결과를 PR에 코멘트로 표시
+      - name: Comment PR
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const success = '${{ job.status }}' === 'success';
+            const emoji = success ? '✅' : '❌';
+            const message = success ? 
+              '테스트와 빌드가 성공적으로 완료되었습니다!' : 
+              '테스트 또는 빌드 중 오류가 발생했습니다. 로그를 확인해주세요.';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${emoji} ${message}`,
+            })

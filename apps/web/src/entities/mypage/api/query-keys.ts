@@ -1,4 +1,5 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
+
 import { mypage } from './mypage-get'
 
 // 예시용 쿼리키 생성
