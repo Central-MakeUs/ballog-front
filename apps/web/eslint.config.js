@@ -1,5 +1,4 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from 'eslint-plugin-storybook'
 import ballogConfig from '@ballog/eslint'
 import js from '@eslint/js'
 import globals from 'globals'
@@ -8,7 +7,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', '.storybook/**/*'] },
 
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -16,6 +15,7 @@ export default tseslint.config(
 
   {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['.storybook/**/*'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -162,6 +162,4 @@ export default tseslint.config(
       ],
     },
   },
-
-  storybook.configs['flat/recommended'],
 )
