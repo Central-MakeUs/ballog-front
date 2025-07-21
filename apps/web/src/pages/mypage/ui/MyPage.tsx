@@ -1,10 +1,11 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { MyPageList } from './MyPageList'
+
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useModal } from '@/shared/hooks/modal/useModal'
 import { OverlayProvider } from '@/hooks/useOverlay'
+import { List } from '@/shared/ui/common/List/List'
 
 const MyPage = () => {
   return (
@@ -51,7 +52,9 @@ const MyPageInner = () => {
       ],
     })
   }
-
+  const printHello = () => {
+    console.log('hello')
+  }
   return (
     <AppScreen
       appBar={{
@@ -62,34 +65,22 @@ const MyPageInner = () => {
       <div className={cn('flex flex-col w-full px-4 py-4 pb-27.5')}>
         <div className="space-y-4 mb-6">
           <p className="body-sm-bold text-brand-neutral-white">내 정보</p>
-          <MyPageList type="arrow" onClick={() => push('Home', {})}>
-            응원 팀 변경
-          </MyPageList>
-          <MyPageList type="arrow" onClick={() => push('Home', {})}>
-            닉네임 변경
-          </MyPageList>
+          <List type="arrow">경기 시작 알림 받기</List>
+          <List type="arrow">닉네임 변경</List>
         </div>
 
         <div className="space-y-4 mb-6">
           <p className="body-sm-bold text-brand-neutral-white">알람 설정</p>
-          <MyPageList type="switch">경기 시작 알림 받기</MyPageList>
-          <MyPageList type="switch">경기 중 알림 받기</MyPageList>
+          <List type="switch">경기 시작 알림 받기</List>
+          <List type="switch">경기 중 알림 받기</List>
         </div>
 
         <div className="space-y-4 mb-6">
           <p className="body-sm-bold text-brand-neutral-white">기타 등등</p>
-          <MyPageList type="arrow" onClick={() => push('Home', {})}>
-            볼로그 인스타그램
-          </MyPageList>
-          <MyPageList type="arrow" onClick={() => push('Home', {})}>
-            문의하기
-          </MyPageList>
-          <MyPageList type="arrow" onClick={() => push('Home', {})}>
-            개인정보 처리방침
-          </MyPageList>
-          <MyPageList type="arrow" onClick={() => push('Home', {})}>
-            서비스 이용약관
-          </MyPageList>
+          <List type="arrow">볼로그 인스타그램</List>
+          <List type="arrow">문의하기</List>
+          <List type="arrow">개인정보 처리방침</List>
+          <List type="arrow">서비스 이용약관</List>
         </div>
 
         <div className="flex items-center gap-4 px-4 mt-4 mb-4">
