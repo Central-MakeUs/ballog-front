@@ -23,8 +23,8 @@ export const emotionPostPositive = {
     homeTeam: 'LG_TWINS',
     awayTeam: 'LOTTE_GIANTS',
     stadium: 'JAMSIL',
-    positivePercent: 70.0,
-    negativePercent: 30.0,
+    positivePercent: 75.0,
+    negativePercent: 25.0,
     recentEmotion: 'POSITIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',
@@ -39,8 +39,8 @@ export const emotionPostNegative = {
     homeTeam: 'LG_TWINS',
     awayTeam: 'LOTTE_GIANTS',
     stadium: 'JAMSIL',
-    positivePercent: 45.0,
-    negativePercent: 55.0,
+    positivePercent: 0.0,
+    negativePercent: 100.0,
     recentEmotion: 'NEGATIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',

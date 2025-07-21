@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
-import type { ApiErrorMessage } from '@/types/api/common'
+
 import {
   emotionGet,
   emotionPostPositive,

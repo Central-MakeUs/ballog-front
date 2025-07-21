@@ -60,9 +60,9 @@ const LiveRecordPageInner = ({
   let bgColor = 'transparent'
 
   if (joyPercent > angryPercent && joyPercent > 50) {
-    bgColor = calculateGradientColor('#2e4c30', '#00ff11', joyPercent)
+    bgColor = calculateGradientColor('#030303', '#2e4d31', joyPercent)
   } else if (angryPercent > joyPercent && angryPercent > 50) {
-    bgColor = calculateGradientColor('#55262a', '#ff0016', angryPercent)
+    bgColor = calculateGradientColor('#030303', '#57272b', angryPercent)
   }
 
   const confirmEndRecord = () => {
@@ -116,6 +116,14 @@ const LiveRecordPageInner = ({
         height: '48px',
       }}
     >
+      {/* 배경 그라데이션 */}
+      <div
+        className="absolute top-0 left-0 w-full h-full z-[-1]"
+        style={{
+          background: `linear-gradient(to bottom, ${bgColor}, #030303 80%)`,
+        }}
+      />
+
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
         {/* Recording Card */}
         <RecordingCard.Root className="w-full">
