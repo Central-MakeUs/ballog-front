@@ -3,6 +3,7 @@ import { useNickNameForm } from '@/shared/hooks/auth/useNickNameForm'
 import type { ExtendedKyHttpError } from '@/types/api/common'
 import { ErrorMessageFactory } from '@/features/auth/ui'
 import { Button } from '@/shared/ui/common'
+import { useMeContext } from '@/shared/contexts/meContext'
 
 interface NickNameFormProps {
   onSubmit: (data: { nickname: string }) => void
@@ -16,7 +17,8 @@ export const NickNameForm = ({
   error,
 }: NickNameFormProps) => {
   const { nickname, setNickname, errors, validateNickname } = useNickNameForm()
-
+  const { me, setMe } = useMeContext()
+  
   const handleSubmit = () => {
     if (!validateNickname(nickname)) return
     onSubmit({ nickname })
