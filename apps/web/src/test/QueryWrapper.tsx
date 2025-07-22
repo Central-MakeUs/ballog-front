@@ -3,9 +3,14 @@ import type { JSX, ReactElement, ReactNode } from 'react'
 import { render, renderHook, type RenderOptions } from '@testing-library/react'
 
 import QueryProvider from '@/app/Provider/QueryProvider'
+import { MeProvider } from '@/shared/contexts/meContext'
 
 export const wrapper = ({ children }: { children: ReactNode }) => {
-  return <QueryProvider>{children as JSX.Element}</QueryProvider>
+  return (
+    <MeProvider>
+      <QueryProvider>{children as JSX.Element}</QueryProvider>
+    </MeProvider>
+  )
 }
 
 const customRender = (
