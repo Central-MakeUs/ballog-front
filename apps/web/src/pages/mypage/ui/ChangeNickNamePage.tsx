@@ -4,10 +4,28 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import { NickNameForm } from '@/features/auth/ui'
+import { useUpdateMyInfoMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
+import { useMeContext } from '@/shared/contexts/meContext'
+import { useFlow } from '@/shared/lib/stackflow'
 
 const ChangeNickNamePage = () => {
+  const { pop } = useFlow()
+  const { me } = useMeContext()
+  const { mutate } = useUpdateMyInfoMutation()
+
   const handleSubmit = (data: { nickname: string }) => {
-    console.log('변경할 닉네임:', data.nickname)
+    if (!me) return
+    mutate(
+      {
+        nickname: data.nickname,
+        baseballTeam: me.baseballTeam,
+      },
+      {
+        onSuccess: () => {
+          pop()
+        },
+      },
+    )
   }
 
   return (

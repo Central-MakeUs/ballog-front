@@ -6,13 +6,25 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import type { TeamKey } from '@/shared/constants/teams'
+import { useUpdateMyInfoMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
+import { useMeContext } from '@/shared/contexts/meContext'
 
 const ChangeTeamSelectPage = () => {
   const { pop } = useFlow()
+  const { me } = useMeContext()
+
+  const { mutate } = useUpdateMyInfoMutation()
 
   const handleSubmit = (selectedTeam: TeamKey) => {
-    console.log('선택된 팀:', selectedTeam)
-    pop()
+    if (!me) return
+    mutate(
+      { baseballTeam: selectedTeam, nickname: me.nickname },
+      {
+        onSuccess: () => {
+          pop()
+        },
+      },
+    )
   }
 
   return (

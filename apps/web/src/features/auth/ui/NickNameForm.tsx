@@ -16,12 +16,16 @@ export const NickNameForm = ({
   isLoading,
   error,
 }: NickNameFormProps) => {
-  const { nickname, setNickname, errors, validateNickname } = useNickNameForm()
   const { me, setMe } = useMeContext()
-  
+
+  const { nickname, setNickname, errors, validateNickname } = useNickNameForm(
+    me?.nickname ?? '',
+  )
+
   const handleSubmit = () => {
     if (!validateNickname(nickname)) return
     onSubmit({ nickname })
+    if (me) setMe({ ...me, nickname })
   }
 
   return (
