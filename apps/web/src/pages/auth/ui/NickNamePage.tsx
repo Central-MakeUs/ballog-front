@@ -10,6 +10,7 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
+import { authGet } from '@/entities/auth/api'
 
 type NickNamePageProps = {
   selectedTeam: string | null
@@ -22,7 +23,15 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
     error,
   } = useMutation<SignupResponseDTO, ExtendedKyHttpError, SignupRequestDTO>({
     mutationFn: authPost.signup,
-    onSuccess: (data) => {
+    onSuccess: async(data) => {
+      try {
+        const user = await authGet.me()
+        // setUser(user.data)
+        console.log(user.data)
+
+      } catch (error) {
+        console.error(error)
+      }
       console.log(data)
       if (data.statusCode === 200) {
         console.log(data.message)
