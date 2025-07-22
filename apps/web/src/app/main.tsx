@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 
 import '../shared/ui/global.css'
 import { startMocking } from '@/mocks/browser'
+import { MeProvider } from '@/shared/contexts/meContext'
 
 import App from './App'
 
@@ -13,7 +14,9 @@ async function bootstrap() {
 
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <App />
+      <MeProvider>
+        <App />
+      </MeProvider>
     </StrictMode>,
   )
 }
