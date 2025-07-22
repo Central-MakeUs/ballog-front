@@ -1,7 +1,6 @@
-import { Root } from './Root'
-import { MatchInfo } from './MatchInfo'
-import { DetailInfo } from './DetailInfo'
-import { Footer } from './Footer'
+import { HomeCardRoot } from './HomeCardRoot'
+import { HomeCardMatchInfo } from './HomeCardMatchInfo'
+import { HomeCardDetailInfo } from './HomeCardDetailInfo'
 import { Disabled } from './Disabled'
 
 /**
@@ -28,9 +27,8 @@ import { Disabled } from './Disabled'
  */
 
 export const HomeCard = {
-  Root,
-  MatchInfo,
-  DetailInfo,
-  Footer,
+  Root: HomeCardRoot,
+  MatchInfo: HomeCardMatchInfo,
+  DetailInfo: HomeCardDetailInfo,
   Disabled,
 }

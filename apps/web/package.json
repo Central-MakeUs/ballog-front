@@ -73,7 +73,8 @@
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
     "vite-plugin-svgr": "^4.3.0",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@ballog/bridge": "workspace:*"
   },
   "msw": {
     "workerDirectory": [
