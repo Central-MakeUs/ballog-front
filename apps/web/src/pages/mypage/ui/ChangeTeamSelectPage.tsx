@@ -4,12 +4,13 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
+import type { TeamKey } from '@/shared/constants/teams'
 
-export const ChangeTeamSelectPage = () => {
+const ChangeTeamSelectPage = () => {
   const { pop } = useFlow()
 
-  const handleSubmit = (team: string) => {
-    console.log('선택된 팀:', team)
+  const handleSubmit = (selectedTeam: TeamKey) => {
+    console.log('선택된 팀:', selectedTeam)
     pop()
   }
 
@@ -29,3 +30,5 @@ export const ChangeTeamSelectPage = () => {
     </AppScreen>
   )
 }
+
+export default ChangeTeamSelectPage

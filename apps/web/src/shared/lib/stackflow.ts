@@ -9,7 +9,8 @@ import LoginPage from '@/pages/auth/ui/LoginPage'
 import TeamSelectPage from '@/pages/auth/ui/TeamSelectPage'
 import NickNamePage from '@/pages/auth/ui/NickNamePage'
 import MyPage from '@/pages/mypage/ui/MyPage'
-import { ChangeTeamSelectPage } from '@/pages/mypage/ui/ChangeTeamSelectPage'
+import ChangeTeamSelectPage from '@/pages/mypage/ui/ChangeTeamSelectPage'
+import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
 
 export const { Stack, useFlow, useStepFlow } = stackflow({
   transitionDuration: 350,
@@ -29,7 +30,8 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
         TeamSelect: '/team-select',
         Nickname: '/nickname',
         My: '/mypage',
-        ChangeTeamSelect: "/change-team-select"
+        ChangeTeamSelect: '/change-team-select',
+        ChangeNickName: '/change-nickname',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -43,6 +45,7 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     Nickname: NickNamePage,
     My: MyPage,
     ChangeTeamSelect: ChangeTeamSelectPage,
+    ChangeNickName: ChangeNickNamePage,
   },
   initialActivity: () => 'Home',
 })
