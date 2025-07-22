@@ -6,9 +6,12 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import type { TeamKey } from '@/shared/constants/teams'
+import { useMeContext } from '@/shared/contexts/meContext'
 
 const ChangeTeamSelectPage = () => {
   const { pop } = useFlow()
+
+  const { me, setMe } = useMeContext()
 
   const handleSubmit = (selectedTeam: TeamKey) => {
     console.log('선택된 팀:', selectedTeam)
@@ -26,7 +29,7 @@ const ChangeTeamSelectPage = () => {
       }}
     >
       <AppLayout>
-        <TeamSelectionForm onSubmit={handleSubmit} />
+        <TeamSelectionForm onSubmit={handleSubmit} team={me?.baseballTeam} />
       </AppLayout>
     </AppScreen>
   )

@@ -6,10 +6,16 @@ import { Button } from '@/shared/ui/common'
 
 interface TeamSelectionFormProps {
   onSubmit: (team: TeamKey) => void
+  team?: string
 }
 
-export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
-  const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(null)
+export const TeamSelectionForm = ({
+  onSubmit,
+  team,
+}: TeamSelectionFormProps) => {
+  const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(
+    (team as TeamKey) ?? null,
+  )
 
   const handleSelect = (team: TeamKey) => {
     setSelectedTeam(team)

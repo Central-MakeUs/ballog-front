@@ -5,7 +5,7 @@ import { useFlow } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { GNBButton } from '@/shared/ui/common'
 
-type ActivityType = 'Home' | 'LiveRecord' | 'MyPage'
+type ActivityType = 'Home' | 'LiveRecord' | 'My'
 
 interface NavItem {
   label: string
@@ -26,7 +26,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: '마이페이지',
     icon: HomeIcon,
-    activity: 'MyPage',
+    activity: 'My',
   },
 ]
 
@@ -45,9 +45,8 @@ export const GlobalNavigationBar = () => {
       case 'LiveRecord':
         replace('LiveRecord', {}, { animate: false })
         break
-      case 'MyPage':
-        // TODO: MyPage 액티비티가 추가되면 사용
-        // push('MyPage', { MyPage: 'ActivityComponentType' })
+      case 'My':
+        replace('My', {}, { animate: false })
         break
     }
   }

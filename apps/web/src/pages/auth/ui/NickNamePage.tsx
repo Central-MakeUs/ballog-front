@@ -31,7 +31,7 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
       try {
         const user = await authGet.me()
         console.log(user)
-        console.log("onSuccess 수행완로")
+
       } catch (error) {
         console.log(error)
       }
