@@ -28,13 +28,9 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
     mutationFn: authPost.signup,
 
     onSuccess: async (data) => {
-      try {
-        const user = await authGet.me()
-        console.log(user)
+      const user = await authGet.me()
+      console.log(user)
 
-      } catch (error) {
-        console.log(error)
-      }
       if (data.statusCode === 200) {
         push('Home', {}, { animate: false })
       }

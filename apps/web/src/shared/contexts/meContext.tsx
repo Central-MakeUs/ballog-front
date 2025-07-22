@@ -20,7 +20,6 @@ export const MeProvider = ({ children }: { children: React.ReactNode }) => {
       setMe(data.data)
     } catch (error) {
       setMe(null)
-      console.error('[MeContext] me API 에러:', error)
       throw error
     }
   }
