@@ -4,7 +4,7 @@ import type { ExtendedKyHttpError } from '@/types/api/common'
 import { ErrorMessageFactory } from '@/features/auth/ui'
 import { Button } from '@/shared/ui/common'
 
-type NickNameFormProps = {
+interface NickNameFormProps {
   onSubmit: (data: { nickname: string }) => void
   isLoading?: boolean
   error: ExtendedKyHttpError | null
@@ -22,10 +22,8 @@ export const NickNameForm = ({
     onSubmit({ nickname })
   }
 
-  console.log(error?.errorData)
-
   return (
-    <div className="flex flex-col items-center justify-between w-full h-full w-full">
+    <div className="flex flex-col items-center justify-between w-full h-full">
       <div className="flex flex-col items-center w-full gap-8">
         <p className="body-lg-bold mt-8">닉네임을 입력해주세요.</p>
 

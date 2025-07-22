@@ -1,5 +1,6 @@
-import { cn } from '@/shared/lib/classnames'
 import type { ComponentProps } from 'react'
+
+import { cn } from '@/shared/lib/classnames'
 
 interface ModalButton {
   label: string

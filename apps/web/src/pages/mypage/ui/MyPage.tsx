@@ -2,22 +2,12 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import { useFlow } from '@/shared/lib/stackflow'
 import { useModal } from '@/shared/hooks/modal/useModal'
 import { OverlayProvider } from '@/hooks/useOverlay'
 import { List } from '@/shared/ui/common/List/List'
 import { ChangeMyInfoWidget } from '@/widgets/changeMyInfoWidget/ChangeMyInfoWidget'
 
-const MyPage = () => {
-  return (
-    <OverlayProvider>
-      <MyPageInner />
-    </OverlayProvider>
-  )
-}
-
 const MyPageInner = () => {
-  const { push } = useFlow()
   const { openHorizontalModal } = useModal()
 
   const HandleClickLogout = () => {
@@ -99,6 +89,14 @@ const MyPageInner = () => {
         <GlobalNavigationBar />
       </div>
     </AppScreen>
+  )
+}
+
+const MyPage = () => {
+  return (
+    <OverlayProvider>
+      <MyPageInner />
+    </OverlayProvider>
   )
 }
 

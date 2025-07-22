@@ -1,10 +1,12 @@
-import { cn } from '@/shared/lib/classnames'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
+import { useFlow } from '@stackflow/react/future'
+import { useQuery } from '@tanstack/react-query'
+
+import { cn } from '@/shared/lib/classnames'
 import { RecordingCard } from '@/features/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
-import { useFlow } from '@/shared/lib/stackflow'
 import { OverlayProvider } from '@/hooks/useOverlay'
 import {
   EmotionVoteProvider,
@@ -13,38 +15,11 @@ import {
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
 import { useModal } from '@/shared/hooks/modal/useModal'
 import SampleImage from '@/assets/grayExampleImage.jpg'
-import { useQuery } from '@tanstack/react-query'
 import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
 import type { Emotion } from '@/entities/record/model/emotion.type'
 
-const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
-  params,
-}: {
-  params: { recordId: string }
-}) => {
-  const recordId = Number(params.recordId)
-  const { data, isLoading } = useQuery(emotions.record(recordId))
-
-  const joy = data?.data.positivePercent ?? 50
-  const angry = data?.data.negativePercent ?? 50
-
-  return (
-    <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
-      <OverlayProvider>
-        <LiveRecordPageInner
-          recordId={recordId}
-          isLoading={isLoading}
-          emotionData={data?.data}
-        />
-      </OverlayProvider>
-    </EmotionVoteProvider>
-  )
-}
-
 const LiveRecordPageInner = ({
-  recordId,
-  isLoading,
   emotionData,
 }: {
   recordId: number
@@ -52,7 +27,6 @@ const LiveRecordPageInner = ({
   emotionData?: Emotion
 }) => {
   const { mutate } = usePostEmotion()
-
   const { replace } = useFlow()
   const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()
@@ -63,6 +37,29 @@ const LiveRecordPageInner = ({
     bgColor = calculateGradientColor('#030303', '#2e4d31', joyPercent)
   } else if (angryPercent > joyPercent && angryPercent > 50) {
     bgColor = calculateGradientColor('#030303', '#57272b', angryPercent)
+  }
+
+  const leavePage = () => {
+    setTimeout(() => {
+      replace('My', {})
+    }, 2000)
+    openImageModal({
+      heading: '기록이 완료되었어요!',
+      body: 'Body Text',
+      imgSrc: SampleImage,
+    })
+  }
+  const selectMatchResult = () => {
+    openVerticalModal({
+      heading: '경기 결과를 선택해주세요.',
+      body: 'Body text',
+      buttons: ['승리', '패배', '무승부', '건너뛰기'].map((label) => ({
+        label,
+        onClick: () => {
+          leavePage()
+        },
+      })),
+    })
   }
 
   const confirmEndRecord = () => {
@@ -79,30 +76,6 @@ const LiveRecordPageInner = ({
           },
         },
       ],
-    })
-  }
-
-  const selectMatchResult = () => {
-    openVerticalModal({
-      heading: '경기 결과를 선택해주세요.',
-      body: 'Body text',
-      buttons: ['승리', '패배', '무승부', '건너뛰기'].map((label) => ({
-        label,
-        onClick: () => {
-          leavePage()
-        },
-      })),
-    })
-  }
-
-  const leavePage = () => {
-    setTimeout(() => {
-      replace('My', {})
-    }, 2000)
-    openImageModal({
-      heading: '기록이 완료되었어요!',
-      body: 'Body Text',
-      imgSrc: SampleImage,
     })
   }
 
@@ -176,6 +149,30 @@ const LiveRecordPageInner = ({
         </div>
       </div>
     </AppScreen>
+  )
+}
+
+const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
+  params,
+}: {
+  params: { recordId: string }
+}) => {
+  const recordId = Number(params.recordId)
+  const { data, isLoading } = useQuery(emotions.record(recordId))
+
+  const joy = data?.data.positivePercent ?? 50
+  const angry = data?.data.negativePercent ?? 50
+
+  return (
+    <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
+      <OverlayProvider>
+        <LiveRecordPageInner
+          recordId={recordId}
+          isLoading={isLoading}
+          emotionData={data?.data}
+        />
+      </OverlayProvider>
+    </EmotionVoteProvider>
   )
 }
 

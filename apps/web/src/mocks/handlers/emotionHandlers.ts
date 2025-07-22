@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
-import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 
+import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 import {
   emotionGet,
   emotionPostPositive,
@@ -11,7 +11,7 @@ const EMOTION_API_PREFIX = 'http://localhost:5173/api/v1/emotion'
 
 const getEmotionHandler = http.get(
   `${EMOTION_API_PREFIX}/:recordId`,
-  async ({ params }) => {
+  ({ params }) => {
     const { recordId } = params
 
     // recordId 별로 다르게 하려면 조건문 분기 가능

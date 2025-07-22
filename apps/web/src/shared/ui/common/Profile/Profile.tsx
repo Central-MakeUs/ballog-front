@@ -1,5 +1,6 @@
-import DefaultProfile from '@/assets/defaultProfile.png'
 import type { ComponentProps } from 'react'
+
+import DefaultProfile from '@/assets/defaultProfile.png'
 import { cn } from '@/shared/lib/classnames'
 import { ProfileFrameWithBorder } from '@/shared/ui/common/Profile/ProfileFrameWithBorder'
 import { ProfileFrameNoBorder } from '@/shared/ui/common/Profile/ProfileFrameNoBorder'

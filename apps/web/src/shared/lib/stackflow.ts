@@ -20,6 +20,8 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     basicUIPlugin({
       theme: 'cupertino', // cupertino | android 두가지 옵션 있음
       backgroundColor: 'bg-usage-background-default',
+      rootClassName:
+        'w-full min-h-screen max-w-[512px] mx-auto flex flex-col items-center justify-center relative',
     }),
 
     historySyncPlugin({

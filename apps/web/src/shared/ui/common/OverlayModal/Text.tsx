@@ -1,10 +1,11 @@
+import type { ComponentProps } from 'react'
+
 import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
 } from '@/shared/ui/common/dialog'
 import { cn } from '@/shared/lib/classnames'
-import type { ComponentProps } from 'react'
 
 interface TextProps extends ComponentProps<'div'> {
   heading: string

@@ -1,6 +1,7 @@
-import BoxAndLeaf from '@/assets/boxAndLeaf.svg?react'
 import type { ReactNode } from 'react'
 import type { ComponentProps } from 'react'
+
+import BoxAndLeaf from '@/assets/boxAndLeaf.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
 interface DisabledProps extends ComponentProps<'div'> {
@@ -11,7 +12,7 @@ export const Disabled = ({ children, className, ...rest }: DisabledProps) => {
   return (
     <div
       className={cn(
-        'flex flex-col items-center w-full max-w-[200px] h-full max-h-[324px] overflow-hidden rounded-medium',
+        'flex flex-col items-center min-w-[200px] min-h-[324px] overflow-hidden rounded-medium w-full',
         className,
       )}
       {...rest}

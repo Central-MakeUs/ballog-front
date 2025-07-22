@@ -1,4 +1,5 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'

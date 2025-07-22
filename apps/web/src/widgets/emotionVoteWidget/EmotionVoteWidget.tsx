@@ -1,8 +1,9 @@
-import { cn } from '@/shared/lib/classnames'
+import { useState } from 'react'
 import type { ComponentProps } from 'react'
+
+import { cn } from '@/shared/lib/classnames'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
-import { useState } from 'react'
 import type { Emotion } from '@/entities/record/model/emotion.type'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {
@@ -21,7 +22,7 @@ export const EmotionVoteWidget = ({
   >(null)
 
   const { joyPercent, angryPercent } = useEmotionVote()
-  console.log(joyPercent, angryPercent)
+
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
 
   return (
@@ -40,7 +41,8 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="joy"
           onClick={() => {
-            setSelectedEmotion('joy'), onEmotionSubmit?.('POSITIVE')
+            setSelectedEmotion('joy')
+            onEmotionSubmit?.('POSITIVE')
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',
@@ -56,7 +58,8 @@ export const EmotionVoteWidget = ({
         <EmotionButton
           emotionType="angry"
           onClick={() => {
-            setSelectedEmotion('angry'), onEmotionSubmit?.('NEGATIVE')
+            setSelectedEmotion('angry')
+            onEmotionSubmit?.('NEGATIVE')
           }}
           className={cn(
             'origin-bottom transition-transform duration-150',

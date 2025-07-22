@@ -53,7 +53,7 @@ export const EmotionVoteProvider = ({
   )
 }
 
-export const useEmotionVote = () => {
+export const useEmotionVote = (): EmotionVoteContextType => {
   const ctx = useContext(EmotionVoteContext)
   if (!ctx) throw new Error('EmotionVoteProvider must be used')
   return ctx

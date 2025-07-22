@@ -13,5 +13,5 @@ export const STADIUM = {
 
 export const stadium = Object.values(STADIUM)
 
-export type STADIUM = (typeof stadium)[number]
 export type StadiumKey = keyof typeof STADIUM
+export type StadiumValue = (typeof STADIUM)[StadiumKey]

@@ -1,7 +1,7 @@
 import { useOverlay } from '@/hooks/useOverlay'
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 
-type ModalButton = {
+interface ModalButton {
   label: string
   onClick: () => void
 }

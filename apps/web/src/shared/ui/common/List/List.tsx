@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+
 import { cn } from '@/shared/lib/classnames'
 import RightArrow from '@/assets/rightArrow.svg?react'
 import { Switch } from '@/shared/ui/common/switch'

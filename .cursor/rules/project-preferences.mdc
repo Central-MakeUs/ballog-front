@@ -1,3 +1,7 @@
+---
+alwaysApply: true
+---
+
 # Design System and Styling
 
 ## Color Application
@@ -59,10 +63,5 @@
 
   globs:
   alwaysApply: false
-
----
-
-globs:
-alwaysApply: false
 
 ---

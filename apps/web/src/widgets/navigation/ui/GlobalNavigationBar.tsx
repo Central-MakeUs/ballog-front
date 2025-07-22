@@ -1,7 +1,8 @@
+import React, { useState } from 'react'
+
 import HomeIcon from '@/assets/home.svg?react'
 import { useFlow } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
-import { useState } from 'react'
 import { GNBButton } from '@/shared/ui/common'
 
 type ActivityType = 'Home' | 'LiveRecord' | 'MyPage'

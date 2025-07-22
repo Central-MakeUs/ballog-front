@@ -1,6 +1,7 @@
+import { AppScreen } from '@stackflow/plugin-basic-ui'
+
 import { TeamSelectionForm } from '@/features/auth/ui'
 import { useFlow } from '@/shared/lib/stackflow'
-import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'

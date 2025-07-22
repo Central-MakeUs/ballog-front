@@ -20,6 +20,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"],
+  "include": ["vite.config.ts", "vitest.config.ts", "vitest.shims.d.ts"],
+  "exclude": [".storybook/**/*"],
   "extends": "./tsconfig.json"
 }
