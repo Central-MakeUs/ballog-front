@@ -9,6 +9,7 @@ export const authGet = {
   },
   me: async (): Promise<MeResponseDTO> => {
     const response = await api.get('mypage/user')
+    // console.log(response.json())
     return response.json()
   },
 }
