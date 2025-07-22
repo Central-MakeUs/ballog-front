@@ -5,18 +5,18 @@ import { ImageTimeLine } from '../ui/ImageTimeLine'
 
 describe.skip('ImageTimeLine', () => {
   it('should render', () => {
-    render(<ImageTimeLine />)
+    render(<ImageTimeLine images={[]} />)
   })
 
   it('전달받은 images를 Image 컴포넌트로 렌더링한다.', () => {
     const images = [
       {
-        id: 1,
-        url: 'https://via.placeholder.com/150',
+        imageUrl: 'https://via.placeholder.com/150',
+        createdAt: '2025-07-22',
       },
       {
-        id: 2,
-        url: 'https://via.placeholder.com/150',
+        imageUrl: 'https://via.placeholder.com/150',
+        createdAt: '2025-07-22',
       },
     ]
     render(<ImageTimeLine images={images} />)

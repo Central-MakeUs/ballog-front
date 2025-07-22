@@ -2,9 +2,11 @@ import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import type { Record } from '@/entities/record/model/record.type'
+
 import { RecordList } from '../ui/RecordList'
 
-const records = [
+const records: Record[] = [
   {
     matchRecordId: 5,
     matchesId: 4,
@@ -14,7 +16,7 @@ const records = [
     matchTime: '21:30',
     userId: 1,
     watchCnt: 4,
-    result: 'SKIP',
+    result: 'DRAW',
     baseballTeam: 'LG_TWINS',
   },
   {
@@ -26,7 +28,7 @@ const records = [
     matchTime: '10:30',
     userId: 1,
     watchCnt: 3,
-    result: 'SKIP',
+    result: 'WIN',
     baseballTeam: 'LG_TWINS',
   },
   {
@@ -38,14 +40,14 @@ const records = [
     matchTime: '19:30',
     userId: 1,
     watchCnt: 2,
-    result: null,
+    result: 'DRAW',
     baseballTeam: 'LG_TWINS',
   },
 ]
 
 describe.skip('RecordList', () => {
   it('should render', () => {
-    render(<RecordList />)
+    render(<RecordList records={[]} />)
   })
 
   it('전달받은 records를 RecordCard 컴포넌트로 렌더링한다.', () => {
