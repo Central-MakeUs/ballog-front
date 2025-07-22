@@ -7,6 +7,12 @@ export interface ApiResponse<T> {
   success: string
 }
 
+export interface ApiResponseWithNoSuccess<T> {
+  data: T
+  statusCode: number
+  message: string
+}
+
 export interface ApiErrorMessage {
   error: string
   message: string

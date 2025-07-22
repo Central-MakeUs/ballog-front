@@ -30,9 +30,10 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
     onSuccess: async (data) => {
       try {
         const user = await authGet.me()
-        // setUser(user.data)
+        console.log(user)
+        console.log("onSuccess 수행완로")
       } catch (error) {
-        console.error(error)
+        console.log(error)
       }
       if (data.statusCode === 200) {
         push('Home', {}, { animate: false })

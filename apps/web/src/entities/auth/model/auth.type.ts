@@ -1,11 +1,12 @@
-import { type ApiResponse } from '../../../types/api/common'
+import type { ApiResponse } from '@/types/api/common'
+import type { ApiResponseWithNoSuccess } from '@/types/api/common'
 
 export interface SignupRequestDTO {
   baseballTeam: string
   nickname: string
 }
 
-interface MyPageResponse {
+export interface MeType {
   userId: number
   email: string
   nickname: string
@@ -15,4 +16,4 @@ interface MyPageResponse {
 }
 
 export type SignupResponseDTO = ApiResponse<string>
-export type MyPageResponseDTO = ApiResponse<MyPageResponse>
+export type MeResponseDTO = ApiResponseWithNoSuccess<MeType>

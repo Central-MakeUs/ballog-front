@@ -7,7 +7,7 @@ import {
   emotionPostNegative,
 } from '@/mocks/data/emotion'
 
-const EMOTION_API_PREFIX = 'http://localhost:5173/api/v1/emotion'
+const EMOTION_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/emotion`
 
 const getEmotionHandler = http.get(
   `${EMOTION_API_PREFIX}/:recordId`,

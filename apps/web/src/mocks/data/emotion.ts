@@ -1,4 +1,4 @@
-import type { Emotion } from '@/entities/record/model/emotion.type'
+import type { EmotionType } from '@/entities/record/model/emotion.type'
 
 export const emotionGet = {
   data: {
@@ -12,7 +12,7 @@ export const emotionGet = {
     recentEmotion: 'POSITIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',
-  } as Emotion,
+  } as EmotionType,
   delay: 1000,
 }
 
@@ -28,7 +28,7 @@ export const emotionPostPositive = {
     recentEmotion: 'POSITIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',
-  } as Emotion,
+  } as EmotionType,
   delay: 1000,
 }
 
@@ -44,6 +44,6 @@ export const emotionPostNegative = {
     recentEmotion: 'NEGATIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',
-  } as Emotion,
+  } as EmotionType,
   delay: 1000,
 }

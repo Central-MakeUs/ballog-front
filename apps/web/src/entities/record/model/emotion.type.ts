@@ -2,7 +2,7 @@ import type { ApiResponse } from '@/types/api/common'
 import type { TeamKey } from '@/shared/constants/teams'
 import type { StadiumKey } from '@/shared/constants/stadium'
 
-export interface Emotion {
+export interface EmotionType {
   matchesDate: string
   matchesTime: string
   homeTeam: TeamKey
@@ -14,4 +14,4 @@ export interface Emotion {
   defaultImageUrl: string
 }
 
-export type EmotionResponseDTO = ApiResponse<Emotion>
+export type EmotionResponseDTO = ApiResponse<EmotionType>
