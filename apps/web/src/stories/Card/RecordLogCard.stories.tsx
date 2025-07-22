@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { RecordLogCard } from '@/features/record/ui/RecordLogCard'
+import { RecordLogCard } from '@/entities/record/ui/RecordLogCard'
 import { Button } from '@/shared/ui/common'
 
 const meta: Meta<typeof RecordLogCard.Root> = {
