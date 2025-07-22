@@ -15,7 +15,7 @@ import { useModal } from '@/shared/hooks/modal/useModal'
 import SampleImage from '@/assets/grayExampleImage.jpg'
 import { useQuery } from '@tanstack/react-query'
 import { emotions } from '@/entities/record/api/emotion.queries'
-import { usePostEmotion } from '@/entities/record/hooks/usePostEmotion'
+import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
 import type { Emotion } from '@/entities/record/model/emotion.type'
 
 const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
