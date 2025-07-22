@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import React, { createContext, useContext, useState, useMemo } from 'react'
+import { createContext, useContext, useState, useMemo } from 'react'
 
 interface EmotionVoteContextType {
   joyPercent: number

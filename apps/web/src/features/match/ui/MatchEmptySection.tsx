@@ -20,7 +20,7 @@ export const MatchEmptySection = () => {
             variant="primary"
             size="sm"
             className="bg-brand-primary-default text-white"
-            onClick={() => push('LiveRecord', {})}
+            onClick={() => push('LiveRecord', { recordId: '1' })} // 일단 하드코딩  TODO: id 값 기반 라우팅
           >
             직관로그 가기
           </Button>

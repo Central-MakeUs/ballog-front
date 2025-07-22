@@ -43,7 +43,7 @@ export const GlobalNavigationBar = () => {
         break
       // TODO : 여기 LiveRecord 아니고 직관로그 와야 함
       case 'LiveRecord':
-        replace('LiveRecord', {}, { animate: false })
+        replace('LiveRecord', { recordId: '1' }, { animate: false })
         break
       case 'My':
         replace('My', {}, { animate: false })

@@ -4,10 +4,10 @@ import type { ComponentProps } from 'react'
 import { cn } from '@/shared/lib/classnames'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
-import type { Emotion } from '@/entities/record/model/emotion.type'
+import type { EmotionType } from '@/entities/record/model/emotion.type'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {
-  emotions?: Emotion
+  emotions?: EmotionType
   onEmotionSubmit?: (emotionType: 'POSITIVE' | 'NEGATIVE') => void
 }
 

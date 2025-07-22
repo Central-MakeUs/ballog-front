@@ -13,6 +13,7 @@ import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import { authGet } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
+import { useMeContext } from '@/shared/contexts/meContext'
 
 interface NickNamePageProps {
   selectedTeam: string | null
@@ -20,6 +21,8 @@ interface NickNamePageProps {
 
 const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
   const { push } = useFlow()
+  const { setMe } = useMeContext()
+
   const {
     mutate: signup,
     isPending: isLoading,
@@ -29,8 +32,7 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
 
     onSuccess: async (data) => {
       const user = await authGet.me()
-      console.log(user)
-
+      setMe(user.data)
       if (data.statusCode === 200) {
         push('Home', {}, { animate: false })
       }

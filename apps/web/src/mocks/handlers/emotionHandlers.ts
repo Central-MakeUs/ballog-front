@@ -9,20 +9,15 @@ import {
 
 const EMOTION_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/emotion`
 
-const getEmotionHandler = http.get(
-  `${EMOTION_API_PREFIX}/:recordId`,
-  ({ params }) => {
-    const { recordId } = params
-
-    // recordId 별로 다르게 하려면 조건문 분기 가능
-    return HttpResponse.json<EmotionResponseDTO>({
-      message: 'success',
-      statusCode: 200,
-      success: '감정 비율 조회 성공',
-      data: emotionGet.data,
-    })
-  },
-)
+const getEmotionHandler = http.get(`${EMOTION_API_PREFIX}/:recordId`, () => {
+  // recordId 별로 다르게 하려면 조건문 분기 가능
+  return HttpResponse.json<EmotionResponseDTO>({
+    message: 'success',
+    statusCode: 200,
+    success: '감정 비율 조회 성공',
+    data: emotionGet.data,
+  })
+})
 
 const postEmotionHandler = http.post(
   `${EMOTION_API_PREFIX}`,

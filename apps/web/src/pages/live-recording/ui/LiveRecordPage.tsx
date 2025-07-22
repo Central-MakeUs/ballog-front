@@ -17,14 +17,14 @@ import { useModal } from '@/shared/hooks/modal/useModal'
 import SampleImage from '@/assets/grayExampleImage.jpg'
 import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
-import type { Emotion } from '@/entities/record/model/emotion.type'
+import type { EmotionType } from '@/entities/record/model/emotion.type'
 
 const LiveRecordPageInner = ({
   emotionData,
 }: {
   recordId: number
   isLoading: boolean
-  emotionData?: Emotion
+  emotionData?: EmotionType
 }) => {
   const { mutate } = usePostEmotion()
   const { replace } = useFlow()
