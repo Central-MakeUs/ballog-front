@@ -1,10 +1,19 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import type { Record } from '@/entities/record/model/record.type'
 
 import { RecordList } from '../ui/RecordList'
+
+// stackflow mock
+const mockPush = vi.fn()
+
+vi.mock('@/shared/lib/stackflow', () => ({
+  useFlow: () => ({
+    push: mockPush,
+  }),
+}))
 
 const records: Record[] = [
   {
@@ -45,7 +54,7 @@ const records: Record[] = [
   },
 ]
 
-describe.skip('RecordList', () => {
+describe('RecordList', () => {
   it('should render', () => {
     render(<RecordList records={[]} />)
   })
@@ -53,16 +62,20 @@ describe.skip('RecordList', () => {
   it('전달받은 records를 RecordCard 컴포넌트로 렌더링한다.', () => {
     render(<RecordList records={records} />)
 
-    expect(screen.getByText('KT 위즈')).toBeInTheDocument()
+    expect(screen.getByText('LG 트윈스', { exact: false })).toBeInTheDocument()
   })
 
-  it('RecordCard 컴포넌트를 클릭하면 직관 기록 상세 페이지로 이동한다.', () => {
+  it('RecordCard 컴포넌트를 클릭하면 직관 기록 상세 페이지로 이동한다.', async () => {
     const user = userEvent.setup()
 
-    user.click(screen.getByText('KT 위즈'))
+    render(<RecordList records={records} />)
 
-    const path = window.location.pathname
+    const detailButton = screen.getAllByText('경기 결과 보러가기')
 
-    expect(path).toBe('/record/5')
+    await user.click(detailButton[0])
+
+    expect(mockPush).toHaveBeenCalledWith('RecordDetail', {
+      matchRecordId: records[0].matchRecordId,
+    })
   })
 })
