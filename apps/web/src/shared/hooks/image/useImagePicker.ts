@@ -24,6 +24,10 @@ export const useImagePicker = ({
     setImages((prevImages) => [...prevImages, newImage])
   }
 
+  const addImages = (newImages: Image[]) => {
+    setImages((prevImages) => [...prevImages, ...newImages])
+  }
+
   // RN에서 전송된 이미지 데이터 수신
   useEffect(() => {
     if (!bridge.isRNEnvironment()) return
@@ -31,16 +35,19 @@ export const useImagePicker = ({
     const unsubscribe = bridge.addEventListener('IMAGE_SELECTED', (data) => {
       if (
         data &&
-        'imageData' in data &&
-        data.imageData.uri &&
-        data.imageData.createdAt
+        'imageDataList' in data &&
+        Array.isArray(data.imageDataList)
       ) {
-        const newImage: Image = {
-          imageUrl: data.imageData.uri,
-          createdAt: data.imageData.createdAt,
-        }
+        const newImages: Image[] = data.imageDataList
+          .filter((imageData) => imageData.base64 && imageData.createdAt)
+          .map((imageData) => ({
+            imageUrl: imageData.base64,
+            createdAt: imageData.createdAt,
+          }))
 
-        addImage(newImage)
+        if (newImages.length > 0) {
+          addImages(newImages)
+        }
       }
     })
 
@@ -55,6 +62,7 @@ export const useImagePicker = ({
   return {
     images,
     addImage,
+    addImages,
     requestImagePick,
     setImages,
   }
