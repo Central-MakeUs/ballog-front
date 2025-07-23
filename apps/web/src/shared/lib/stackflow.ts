@@ -8,6 +8,9 @@ import LiveRecordPage from '@/pages/live-recording/ui/LiveRecordPage'
 import LoginPage from '@/pages/auth/ui/LoginPage'
 import TeamSelectPage from '@/pages/auth/ui/TeamSelectPage'
 import NickNamePage from '@/pages/auth/ui/NickNamePage'
+import MyPage from '@/pages/mypage/ui/MyPage'
+import ChangeTeamSelectPage from '@/pages/mypage/ui/ChangeTeamSelectPage'
+import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
 import RecordMainPage from '@/pages/record/ui/RecordMainPage'
 import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
 
@@ -26,10 +29,13 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     historySyncPlugin({
       routes: {
         Home: '/',
-        LiveRecord: '/live-record',
+        LiveRecord: '/live-record/:recordId',
         Login: '/login',
         TeamSelect: '/team-select',
         Nickname: '/nickname',
+        My: '/mypage',
+        ChangeTeamSelect: '/change-team-select',
+        ChangeNickName: '/change-nickname',
         Record: '/record',
         RecordDetail: '/record/:matchRecordId',
       },
@@ -43,6 +49,9 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     Login: LoginPage,
     TeamSelect: TeamSelectPage,
     Nickname: NickNamePage,
+    My: MyPage,
+    ChangeTeamSelect: ChangeTeamSelectPage,
+    ChangeNickName: ChangeNickNamePage,
     Record: RecordMainPage,
     RecordDetail: RecordDetailPage,
   },

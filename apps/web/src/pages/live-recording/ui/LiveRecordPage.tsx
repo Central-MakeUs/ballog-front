@@ -1,117 +1,82 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
 import { useFlow } from '@stackflow/react/future'
+import { useQuery } from '@tanstack/react-query'
 
 import { cn } from '@/shared/lib/classnames'
 import { RecordingCard } from '@/entities/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
-import { OverlayModal } from '@/shared/ui/common/OverlayModal'
-import { OverlayProvider, useOverlay } from '@/hooks/useOverlay'
+import { OverlayProvider } from '@/hooks/useOverlay'
 import {
   EmotionVoteProvider,
   useEmotionVote,
 } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
+import { useModal } from '@/shared/hooks/modal/useModal'
+import SampleImage from '@/assets/grayExampleImage.jpg'
+import { emotions } from '@/entities/record/api/emotion.queries'
+import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
+import type { EmotionType } from '@/entities/record/model/emotion.type'
 
-const LiveRecordPageInner: ActivityComponentType = () => {
+const LiveRecordPageInner = ({
+  emotionData,
+}: {
+  recordId: number
+  isLoading: boolean
+  emotionData?: EmotionType
+}) => {
+  const { mutate } = usePostEmotion()
   const { replace } = useFlow()
-
+  const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()
 
   let bgColor = 'transparent'
 
   if (joyPercent > angryPercent && joyPercent > 50) {
-    bgColor = calculateGradientColor('#2e4c30', '#00ff11', joyPercent)
+    bgColor = calculateGradientColor('#030303', '#2e4d31', joyPercent)
   } else if (angryPercent > joyPercent && angryPercent > 50) {
-    bgColor = calculateGradientColor('#55262a', '#ff0016', angryPercent)
+    bgColor = calculateGradientColor('#030303', '#57272b', angryPercent)
   }
-
-  // 모달
-  const overlay = useOverlay()
 
   const leavePage = () => {
     setTimeout(() => {
-      replace('Login', {})
+      replace('My', {})
     }, 2000)
-    return overlay.open(({ isOpen, close }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Image imgSrc="/img/end-record.png" />
-        <OverlayModal.Text
-          heading="기록이 완료되었어요!"
-          body="Body text"
-          isImageModal
-        />
-      </OverlayModal.Root>
-    ))
+    openImageModal({
+      heading: '기록이 완료되었어요!',
+      body: 'Body Text',
+      imgSrc: SampleImage,
+    })
   }
-
   const selectMatchResult = () => {
-    return overlay.open(({ isOpen, close }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Text
-          heading="경기 결과를 선택해주세요."
-          body="Body text"
-        />
-        <OverlayModal.Buttons
-          layout="vertical"
-          buttons={[
-            {
-              label: '승리',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-            {
-              label: '패배',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-            {
-              label: '무승부',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-            {
-              label: '건너뛰기',
-              onClick: () => {
-                close()
-                leavePage()
-              },
-            },
-          ]}
-        />
-      </OverlayModal.Root>
-    ))
+    openVerticalModal({
+      heading: '경기 결과를 선택해주세요.',
+      body: 'Body text',
+      buttons: ['승리', '패배', '무승부', '건너뛰기'].map((label) => ({
+        label,
+        onClick: () => {
+          leavePage()
+        },
+      })),
+    })
   }
 
   const confirmEndRecord = () => {
-    return overlay.open(({ isOpen, close }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Text
-          heading="기록을 종료하시겠습니까?"
-          body="Body text"
-        />
-        <OverlayModal.Buttons
-          layout="horizontal"
-          buttons={[
-            { label: '취소', onClick: close },
-            {
-              label: '종료하기',
-              onClick: () => {
-                close()
-                selectMatchResult()
-              },
-            },
-          ]}
-        />
-      </OverlayModal.Root>
-    ))
+    openHorizontalModal({
+      heading: '기록을 종료하시겠습니까?',
+      body: 'Body text',
+      buttons: [
+        { label: '취소', onClick: close },
+        {
+          label: '종료하기',
+          onClick: () => {
+            close()
+            selectMatchResult()
+          },
+        },
+      ],
+    })
   }
 
   return (
@@ -124,6 +89,14 @@ const LiveRecordPageInner: ActivityComponentType = () => {
         height: '48px',
       }}
     >
+      {/* 배경 그라데이션 */}
+      <div
+        className="absolute top-0 left-0 w-full h-full z-[-1]"
+        style={{
+          background: `linear-gradient(to bottom, ${bgColor}, #030303 80%)`,
+        }}
+      />
+
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
         {/* Recording Card */}
         <RecordingCard.Root className="w-full">
@@ -153,7 +126,12 @@ const LiveRecordPageInner: ActivityComponentType = () => {
         </div>
 
         {/* 버튼 인터랙션 부분 */}
-        <EmotionVoteWidget />
+        <EmotionVoteWidget
+          emotions={emotionData}
+          onEmotionSubmit={(emotionType) => {
+            mutate({ recordId: 1, emotionType })
+          }}
+        />
 
         {/* 하단 버튼 */}
         <div className="fixed bottom-10 w-full">
@@ -174,11 +152,25 @@ const LiveRecordPageInner: ActivityComponentType = () => {
   )
 }
 
-const LiveRecordPage = () => {
+const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
+  params,
+}: {
+  params: { recordId: string }
+}) => {
+  const recordId = Number(params.recordId)
+  const { data, isLoading } = useQuery(emotions.record(recordId))
+
+  const joy = data?.data.positivePercent ?? 50
+  const angry = data?.data.negativePercent ?? 50
+
   return (
-    <EmotionVoteProvider>
+    <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
       <OverlayProvider>
-        <LiveRecordPageInner params={{}} />
+        <LiveRecordPageInner
+          recordId={recordId}
+          isLoading={isLoading}
+          emotionData={data?.data}
+        />
       </OverlayProvider>
     </EmotionVoteProvider>
   )
