@@ -3,7 +3,7 @@ import type { ActivityComponentType } from '@stackflow/react'
 import { useFlow } from '@stackflow/react/future'
 
 import { cn } from '@/shared/lib/classnames'
-import { RecordingCard } from '@/features/record/ui/RecordingCard'
+import { RecordingCard } from '@/entities/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
