@@ -3,17 +3,17 @@ import { useState } from 'react'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common'
-import { useMeContext } from '@/shared/contexts/meContext'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 interface TeamSelectionFormProps {
   onSubmit: (team: TeamKey) => void
 }
 
 export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
-  const { me, setMe } = useMeContext()
+  const { user, setUser } = useSessionContext()
 
   const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(
-    (me?.baseballTeam as TeamKey) ?? null,
+    (user?.baseballTeam as TeamKey) ?? null,
   )
 
   const handleSelect = (team: TeamKey) => {
@@ -23,7 +23,7 @@ export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
   const handleSubmit = () => {
     if (!selectedTeam) return
     onSubmit(selectedTeam)
-    if (me) setMe({...me, baseballTeam: selectedTeam})
+    if (user) setUser({ ...user, baseballTeam: selectedTeam })
   }
 
   return (

@@ -1,16 +1,16 @@
 import { useMutation } from '@tanstack/react-query'
 
 import { authPatch, authGet } from '@/entities/auth/api'
-import { useMeContext } from '@/shared/contexts/meContext'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 export const useUpdateMyInfoMutation = () => {
-  const { setMe } = useMeContext()
+  const { setUser } = useSessionContext()
 
   return useMutation({
-    mutationFn: authPatch.updateUserInfo,
+    mutationFn: authPatch.patchUserInfo,
     onSuccess: async () => {
-      const updated = await authGet.me()
-      setMe(updated.data)
+      const updated = await authGet.getUser()
+      setUser(updated.data)
     },
   })
 }

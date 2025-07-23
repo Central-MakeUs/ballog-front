@@ -1,18 +1,18 @@
 import { http, HttpResponse, delay } from 'msw'
 
-import { me } from '@/mocks/data/me'
+import { user } from '@/mocks/data/user'
 import type { SignupRequestDTO } from '@/entities/auth/model/auth.type'
 
 const ME_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/mypage`
 
-export const meHandlers = [
+export const userHandlers = [
   http.get(`${ME_API_PREFIX}/user`, async () => {
-    await delay(me.delay)
+    await delay(user.delay)
 
     return HttpResponse.json({
       message: 'Success',
       statusCode: 200,
-      data: me.data,
+      data: user.data,
     })
   }),
 

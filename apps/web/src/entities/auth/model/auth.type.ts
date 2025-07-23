@@ -6,7 +6,7 @@ export interface SignupRequestDTO {
   nickname: string
 }
 
-export interface MeType {
+export interface UserType {
   userId: number
   email: string
   nickname: string
@@ -16,4 +16,4 @@ export interface MeType {
 }
 
 export type SignupResponseDTO = ApiResponse<string>
-export type MeResponseDTO = ApiResponseWithNoSuccess<MeType>
+export type UserResponseDTO = ApiResponseWithNoSuccess<UserType>

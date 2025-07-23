@@ -7,18 +7,18 @@ import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import type { TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyInfoMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
-import { useMeContext } from '@/shared/contexts/meContext'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 const ChangeTeamSelectPage = () => {
   const { pop } = useFlow()
-  const { me } = useMeContext()
+  const { user } = useSessionContext()
 
   const { mutate } = useUpdateMyInfoMutation()
 
   const handleSubmit = (selectedTeam: TeamKey) => {
-    if (!me) return
+    if (!user) return
     mutate(
-      { baseballTeam: selectedTeam, nickname: me.nickname },
+      { baseballTeam: selectedTeam, nickname: user.nickname },
       {
         onSuccess: () => {
           pop()

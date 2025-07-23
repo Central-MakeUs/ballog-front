@@ -5,20 +5,20 @@ import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import { NickNameForm } from '@/features/auth/ui'
 import { useUpdateMyInfoMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
-import { useMeContext } from '@/shared/contexts/meContext'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 import { useFlow } from '@/shared/lib/stackflow'
 
 const ChangeNickNamePage = () => {
   const { pop } = useFlow()
-  const { me } = useMeContext()
+  const { user } = useSessionContext()
   const { mutate } = useUpdateMyInfoMutation()
 
   const handleSubmit = (data: { nickname: string }) => {
-    if (!me) return
+    if (!user) return
     mutate(
       {
         nickname: data.nickname,
-        baseballTeam: me.baseballTeam,
+        baseballTeam: user.baseballTeam,
       },
       {
         onSuccess: () => {

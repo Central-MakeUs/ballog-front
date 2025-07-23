@@ -1,6 +1,6 @@
-import type { MeType } from '@/entities/auth/model/auth.type'
+import type { UserType } from '@/entities/auth/model/auth.type'
 
-export const me = {
+export const user = {
   data: {
     userId: 4,
     email: 'inha0319@naver.com',
@@ -8,6 +8,6 @@ export const me = {
     baseballTeam: 'LG_TWINS',
     isNewUser: false,
     role: 'USER',
-  } as MeType,
+  } as UserType,
   delay: 1000,
 }
