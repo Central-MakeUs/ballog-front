@@ -10,7 +10,7 @@ interface RootProps extends ComponentProps<'div'> {
 export const Root = ({ children, className, ...rest }: RootProps) => (
   <div
     className={cn(
-      'flex flex-col w-[328px] relative rounded-large bg-usage-background-subtle',
+      'flex flex-col min-w-[328px] relative rounded-large bg-usage-background-subtle',
       className,
     )}
     {...rest}

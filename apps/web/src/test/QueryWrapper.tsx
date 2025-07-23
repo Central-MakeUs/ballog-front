@@ -5,7 +5,7 @@ import { render, renderHook, type RenderOptions } from '@testing-library/react'
 import QueryProvider from '@/app/Provider/QueryProvider'
 
 export const wrapper = ({ children }: { children: ReactNode }) => {
-  return <QueryProvider>{children as JSX.Element}</QueryProvider>
+  return <QueryProvider>{children as JSX.Element[]}</QueryProvider>
 }
 
 const customRender = (

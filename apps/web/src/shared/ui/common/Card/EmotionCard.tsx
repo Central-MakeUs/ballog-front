@@ -62,8 +62,8 @@ const Active = ({
     <div
       className={cn(
         'relative flex flex-col',
-        'w-full max-w-[156px]',
-        'h-full max-h-[184px]',
+        'w-full',
+        'h-full',
         'justify-center items-center',
         'rounded-xlarge',
         'bg-usage-background-subtle',
@@ -71,7 +71,7 @@ const Active = ({
       )}
       {...rest}
     >
-      <div className="relative py-10">
+      <div className="relative flex justify-center items-center py-10 min-w-30 min-h-30">
         <PieChart width={104} height={104}>
           <Pie
             data={chartData}
@@ -112,7 +112,7 @@ const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
   <div
     className={cn(
       'flex flex-col items-center justify-center',
-      'w-full max-w-[156px] h-full max-h-[150px]',
+      'min-w-[156px] h-full',
       'px-4 py-4',
       'rounded-xlarge bg-usage-background-subtle',
       className,
@@ -125,7 +125,7 @@ const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
         w-full h-full
         rounded-full bg-usage-background-strong"
     >
-      <div className="flex items-center gap-4 mt-4.25 text-brand-neutral-white">
+      <div className="flex items-center justify-center gap-4 mt-4.25 text-brand-neutral-white min-w-30 min-h-30">
         <div className="flex flex-col items-center">
           <AngryEmotion className="w-8 h-8" />
           <p className="body-sm-bold">- %</p>

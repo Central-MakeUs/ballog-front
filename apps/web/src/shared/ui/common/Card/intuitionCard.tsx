@@ -36,14 +36,15 @@ const Active = ({
 }: ActiveIntuitionCardProps) => (
   <div
     className={cn(
-      'flex w-full max-w-[156px] h-full max-h-[184px]',
-      'px-4 py-6 justify-center items-center text-center rounded-xlarge',
-      'bg-usage-background-subtle text-brand-neutral-white',
+      'flex flex-col items-center justify-center',
+      'min-w-[156px] h-full',
+      'px-4 py-6',
+      'rounded-xlarge bg-usage-background-subtle',
       className,
     )}
     {...rest}
   >
-    <div>
+    <div className="text-center min-w-30 min-h-30">
       <div className="body-md-medium mb-2">직관</div>
       <div className="heading-md-bold">
         {matchCount} <span className="body-md-bold">회</span>
@@ -57,9 +58,10 @@ const Active = ({
 const Disabled = ({ className, ...rest }: DisabledIntuitionCardProps) => (
   <div
     className={cn(
-      ' flex w-[156px] h-full max-h-[184px] px-4 py-6',
-      'justify-center items-center text-center flex-shrink-0',
-      'rounded-xlarge bg-usage-background-subtle text-brand-neutral-white',
+      'flex flex-col items-center justify-center',
+      'min-w-[156px] h-full',
+      'px-4 py-6',
+      'rounded-xlarge bg-usage-background-subtle',
       className,
     )}
     {...rest}
