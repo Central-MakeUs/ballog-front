@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { RecordLogCard } from '@/features/record/ui/RecordLogCard'
+import { RecordLogCard } from '@/entities/record/ui/RecordLogCard'
 import { Button } from '@/shared/ui/common'
 
 const meta: Meta<typeof RecordLogCard.Root> = {
@@ -16,12 +16,12 @@ export const WithRecord: Story = {
   render: () => (
     <RecordLogCard.Root>
       <RecordLogCard.Info
-        homeTeam="LG 트윈스"
-        awayTeam="SSG 랜더스"
+        homeTeam="LG_TWINS"
+        awayTeam="SSG_LANDERS"
         stadium="잠실야구장"
         date="2025.07.09 (수) 오후 6:30"
       />
-      <RecordLogCard.Badge result="win" />
+      <RecordLogCard.Badge result="WIN" />
       <RecordLogCard.Footer onClick={() => alert('클릭')}>
         경기 결과 보러가기
       </RecordLogCard.Footer>

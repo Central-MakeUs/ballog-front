@@ -11,6 +11,8 @@ import NickNamePage from '@/pages/auth/ui/NickNamePage'
 import MyPage from '@/pages/mypage/ui/MyPage'
 import ChangeTeamSelectPage from '@/pages/mypage/ui/ChangeTeamSelectPage'
 import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
+import RecordMainPage from '@/pages/record/ui/RecordMainPage'
+import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
 
 export const { Stack, useFlow, useStepFlow } = stackflow({
   transitionDuration: 350,
@@ -34,6 +36,8 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
         My: '/mypage',
         ChangeTeamSelect: '/change-team-select',
         ChangeNickName: '/change-nickname',
+        Record: '/record',
+        RecordDetail: '/record/:matchRecordId',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -48,6 +52,8 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     My: MyPage,
     ChangeTeamSelect: ChangeTeamSelectPage,
     ChangeNickName: ChangeNickNamePage,
+    Record: RecordMainPage,
+    RecordDetail: RecordDetailPage,
   },
   initialActivity: () => 'Home',
 })

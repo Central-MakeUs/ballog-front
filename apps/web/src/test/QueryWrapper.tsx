@@ -8,7 +8,7 @@ import { SessionProvider } from '@/shared/contexts/sessionContext'
 export const wrapper = ({ children }: { children: ReactNode }) => {
   return (
     <SessionProvider>
-      <QueryProvider>{children as JSX.Element}</QueryProvider>
+      <QueryProvider>{children as JSX.Element[]}</QueryProvider>
     </SessionProvider>
   )
 }

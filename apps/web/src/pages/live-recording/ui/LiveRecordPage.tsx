@@ -4,7 +4,7 @@ import { useFlow } from '@stackflow/react/future'
 import { useQuery } from '@tanstack/react-query'
 
 import { cn } from '@/shared/lib/classnames'
-import { RecordingCard } from '@/features/record/ui/RecordingCard'
+import { RecordingCard } from '@/entities/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
 import { OverlayProvider } from '@/hooks/useOverlay'
