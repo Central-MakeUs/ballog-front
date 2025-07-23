@@ -17,7 +17,7 @@ export const createImageHandler = (bridge: AppBridge) => ({
       quality: 0.8,
       base64: true,
       allowsMultipleSelection: true, // 여러장 선택 허용
-      selectionLimit: 10, // 최대 10장까지 선택 가능 (선택사항)
+      selectionLimit: 5, // 최대 5장까지 선택 가능
     })
 
     if (!result.canceled && result.assets?.length > 0) {
