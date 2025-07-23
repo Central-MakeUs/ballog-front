@@ -1,17 +1,33 @@
-import { describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { screen, waitFor } from '@testing-library/react'
 
 import { recordGet } from '@/entities/record/api/record-get'
+import { render } from '@/test/QueryWrapper'
 
 import { RecordMainPage } from '../ui/RecordMainPage'
 
-describe.skip('RecordMainPage', () => {
+vi.mock('@/shared/lib/stackflow', () => ({
+  useFlow: () => ({
+    push: vi.fn(),
+  }),
+}))
+
+vi.mock('@/entities/record/api/record-get', () => ({
+  recordGet: {
+    getRecord: vi.fn(),
+  },
+}))
+
+describe('RecordMainPage', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
   it('should render', () => {
     render(<RecordMainPage />)
   })
 
   it('직관 기록이 없으면 Empty 컴포넌트가 렌더링된다.', () => {
-    render(<RecordMainPage />)
     vi.mocked(recordGet.getRecord).mockResolvedValue({
       statusCode: 200,
       message: 'success',
@@ -25,12 +41,14 @@ describe.skip('RecordMainPage', () => {
       success: '오늘 경기 일정 조회 성공',
     })
 
-    expect(screen.getByText('아직 직관 기록이 없어요!')).toBeInTheDocument()
+    render(<RecordMainPage />)
+
+    waitFor(() =>
+      expect(screen.getByText('아직 직관 기록이 없어요!')).toBeInTheDocument(),
+    )
   })
 
   it('직관 기록이 있으면 RecordList 컴포넌트가 렌더링된다.', () => {
-    render(<RecordMainPage />)
-
     vi.mocked(recordGet.getRecord).mockResolvedValue({
       statusCode: 200,
       message: 'success',
@@ -69,7 +87,9 @@ describe.skip('RecordMainPage', () => {
       success: '오늘 경기 일정 조회 성공',
     })
 
-    expect(screen.getByText('KT 위즈')).toBeInTheDocument()
+    render(<RecordMainPage />)
+
+    waitFor(() => expect(screen.getByText('KT 위즈')).toBeInTheDocument())
   })
 
   it('에러 발생 시 toast메세지와 함께 empty 컴포넌트가 렌더링된다.', () => {
@@ -82,9 +102,11 @@ describe.skip('RecordMainPage', () => {
       code: 'RECORD001',
     })
 
-    expect(screen.getByText('아직 직관 기록이 없어요!')).toBeInTheDocument()
-    expect(screen.getByTestId('toast')).toHaveTextContent(
-      '해당 직관기록을 찾을 수 없습니다.',
-    )
+    waitFor(() => {
+      expect(screen.getByText('아직 직관 기록이 없어요!')).toBeInTheDocument()
+      expect(screen.getByTestId('toast')).toHaveTextContent(
+        '해당 직관기록을 찾을 수 없습니다.',
+      )
+    })
   })
 })

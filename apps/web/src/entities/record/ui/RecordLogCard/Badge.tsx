@@ -1,23 +1,24 @@
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
+import { type RecordResult } from '@/entities/record/model/record.type'
 
 interface BadgeProps extends ComponentProps<'div'> {
-  result: 'win' | 'lose' | 'draw'
+  result: RecordResult
 }
 
-export const Badge = ({ result, className, ...rest }: BadgeProps) => {
+export const Badge = ({ result = 'DRAW', className, ...rest }: BadgeProps) => {
   const badgeColor = {
-    win: 'bg-brand-green-subtle text-brand-green-default',
-    lose: 'bg-brand-red-subtle text-brand-red-default',
-    draw: 'bg-brand-secondary-subtle text-brand-neutral-70',
-  }[result]
+    WIN: 'bg-brand-green-subtle text-brand-green-default',
+    LOSE: 'bg-brand-red-subtle text-brand-red-default',
+    DRAW: 'bg-brand-secondary-subtle text-brand-neutral-70',
+  }[result ?? 'DRAW']
 
   const badgeText = {
-    win: '승리',
-    lose: '패배',
-    draw: '무승부',
-  }[result]
+    WIN: '승리',
+    LOSE: '패배',
+    DRAW: '무승부',
+  }[result ?? 'DRAW']
 
   return (
     <div

@@ -11,7 +11,7 @@ const RECORD_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/record`
 
 export const recordHandlers = [
   http.get<never, RecordResponseDTO, ApiErrorMessage | RecordResponseDTO>(
-    `${RECORD_API_PREFIX}/record`,
+    `${RECORD_API_PREFIX}`,
     () => {
       // 네트워크 지연 효과 추가
       delay(3000)
@@ -38,8 +38,8 @@ export const recordHandlers = [
           data: {
             totalCount: 1,
             winRate: 0,
-            positiveEmotionPercent: 0,
-            negativeEmotionPercent: 0,
+            positiveEmotionPercent: 50,
+            negativeEmotionPercent: 50,
             records: record.records,
           },
           statusCode: 200,
@@ -54,7 +54,7 @@ export const recordHandlers = [
     never,
     RecordDetailResponseDTO,
     ApiErrorMessage | RecordDetailResponseDTO
-  >(`${RECORD_API_PREFIX}/record/:recordId`, ({ params }) => {
+  >(`${RECORD_API_PREFIX}/:recordId`, ({ params }) => {
     const { recordId } = params
 
     if (recordId !== '1') {
