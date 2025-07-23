@@ -1,13 +1,14 @@
-import { WebView } from 'react-native-webview'
+import { WebView, type WebViewMessageEvent } from 'react-native-webview'
 import type {
   PostMessageSchemaObject,
   PostMessageEvent,
   WebMessageEvent,
+  AppBridge,
+  BridgeMessageSchema,
 } from '../types'
 
 // 웹에서 오는 메시지 처리
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const handleMessage = (event: any): WebMessageEvent | null => {
+const handleMessage = (event: WebViewMessageEvent): WebMessageEvent | null => {
   try {
     const message: WebMessageEvent = JSON.parse(event.nativeEvent.data)
     return message
@@ -25,17 +26,18 @@ const handleMessage = (event: any): WebMessageEvent | null => {
  * const bridge = createAppBridge(webViewRef)
  * bridge.send('test-message', { message: 'Hello from RN' })
  * bridge.handleMessage(event)
- *
- * return {
- *   send: (eventName: string, payload: any) => void,
- *   handleMessage: (event: any) => WebMessageEvent | null,
- * }
  */
 export const createAppBridge = <
-  T extends PostMessageSchemaObject = PostMessageSchemaObject,
+  T extends PostMessageSchemaObject = BridgeMessageSchema,
 >(
-  webViewRef: React.RefObject<WebView>,
-) => {
+  webViewRef: React.RefObject<WebView | null>,
+): AppBridge<T> => {
+  // 이벤트 핸들러들을 저장할 Map
+  const eventHandlers = new Map<
+    string,
+    (payload: T[keyof T]['payload']) => void
+  >()
+
   // 웹으로 메시지 전송하는 함수
   // PostMessageEvent 타입으로 변환
   // 웹으로 메시지 전송
@@ -51,8 +53,38 @@ export const createAppBridge = <
     webViewRef.current?.postMessage(JSON.stringify(message))
   }
 
+  // 이벤트 핸들러 등록
+  const on = (
+    eventName: string,
+    handler: (payload?: T[keyof T]['payload']) => void,
+  ): void => {
+    eventHandlers.set(eventName, handler)
+  }
+
+  // 메시지 처리 및 핸들러 실행
+  const processMessage = (event: WebViewMessageEvent): void => {
+    const message = handleMessage(event)
+    if (!message) return
+
+    const handler = eventHandlers.get(message.eventName)
+    if (handler) {
+      try {
+        handler(message.payload)
+      } catch (error) {
+        console.error(
+          `RN Bridge: Handler error for ${message.eventName}:`,
+          error,
+        )
+      }
+    } else {
+      console.warn(`RN Bridge: No handler registered for ${message.eventName}`)
+    }
+  }
+
   return {
     send,
+    on, // 이벤트 핸들러 등록
+    processMessage,
     handleMessage,
   }
 }
