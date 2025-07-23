@@ -11,7 +11,8 @@ interface SessionContextType {
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined)
 
-export const MeProvider = ({ children }: { children: React.ReactNode }) => {
+
+export const SessionProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null)
 
   const refetchUser = async () => {

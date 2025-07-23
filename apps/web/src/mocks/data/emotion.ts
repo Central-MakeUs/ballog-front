@@ -1,6 +1,6 @@
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 
-export const emotionGet = {
+export const emotionGet: { data: EmotionType; delay: number } = {
   data: {
     matchesDate: '2025-07-18',
     matchesTime: '16:30:00',
@@ -12,11 +12,11 @@ export const emotionGet = {
     recentEmotion: 'POSITIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',
-  } as EmotionType,
+  },
   delay: 1000,
 }
 
-export const emotionPostPositive = {
+export const emotionPostPositive: { data: EmotionType; delay: number } = {
   data: {
     matchesDate: '2025-07-18',
     matchesTime: '16:30:00',
@@ -28,11 +28,11 @@ export const emotionPostPositive = {
     recentEmotion: 'POSITIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',
-  } as EmotionType,
+  },
   delay: 1000,
 }
 
-export const emotionPostNegative = {
+export const emotionPostNegative: { data: EmotionType; delay: number } = {
   data: {
     matchesDate: '2025-07-18',
     matchesTime: '16:30:00',
@@ -44,6 +44,6 @@ export const emotionPostNegative = {
     recentEmotion: 'NEGATIVE',
     defaultImageUrl:
       'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/24b81566-62aa-4351-854c-a4a79c22050c.svg',
-  } as EmotionType,
+  },
   delay: 1000,
 }
