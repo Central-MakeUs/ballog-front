@@ -15,7 +15,7 @@ export type BasicMessagePayload = {
 // 이미지 선택 이벤트용 페이로드 타입
 export type ImageSelectedPayload = {
   message: string
-  imageData: ImageData
+  imageDataList: ImageData[]
 }
 
 // 각 이벤트별 스키마 정의
