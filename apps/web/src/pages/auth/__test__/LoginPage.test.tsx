@@ -30,6 +30,22 @@ describe('LoginPage', () => {
 
     await user.click(kakaoButton)
 
-    expect(mockPush).toHaveBeenCalledWith('TeamSelect')
+    it.skip('카카오 로그인 실패 시 에러 메시지를 보여준다', async () => {
+      // Given: 카카오 로그인 실패를 가정한 mock
+      // (아직 login 함수가 없거나 실패 로직이 미구현일 수 있으므로 skip 처리)
+
+      // vi.mock('@/shared/lib/kakaoBridge', () => ({
+      //   login: () => Promise.reject(new Error('로그인 실패')),
+      // }))
+
+      // When
+      render(<LoginPage params={{}} />)
+      await user.click(screen.getByRole('button', { name: /카카오/i }))
+
+      // Then
+      // expect(await screen.findByText('로그인에 실패했습니다')).toBeInTheDocument()
+    })
+
+    expect(mockPush).toHaveBeenCalledWith('TeamSelect', { selectedTeam: null })
   })
 })
