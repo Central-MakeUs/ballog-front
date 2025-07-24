@@ -6,7 +6,7 @@ import { useFlow } from '@/shared/lib/stackflow'
 export const RecordList = ({ records }: { records: Record[] }) => {
   const { push } = useFlow()
 
-  if (records.length === 0 || records === undefined) {
+  if (!records || records.length === 0) {
     return (
       <RecordLogCard.Empty>
         <Button className="rounded-large px-6 bg-brand-secondary-default">

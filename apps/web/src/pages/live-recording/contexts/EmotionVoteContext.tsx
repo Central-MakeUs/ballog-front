@@ -1,49 +1,49 @@
 import type { ReactNode } from 'react'
-import React, { createContext, useContext, useState, useMemo } from 'react'
+import { createContext, useContext, useState, useMemo } from 'react'
 
 interface EmotionVoteContextType {
-  joyCount: number
-  angryCount: number
-  total: number
-  setJoyCount: React.Dispatch<React.SetStateAction<number>>
-  setAngryCount: React.Dispatch<React.SetStateAction<number>>
   joyPercent: number
   angryPercent: number
+  setEmotionPercent: (joy: number, angry: number) => void
 }
 
 const EmotionVoteContext = createContext<EmotionVoteContextType | undefined>(
   undefined,
 )
 /**
- * 
+ *
  * @EmotionVoteContext
  * 감정 정보(카운트, 퍼센테이지 등)을 전역에서 공유하기 위한 context
- * 
+ *
  * - joyCount, angryCount: 각 감정 선택 수
  * - joyPercent, angryPercent: 전체 비율
  * - setJoyCount, setAngryCount: 상태 업데이트 함수
- * 
+ *
  */
-export const EmotionVoteProvider = ({ children }: { children: ReactNode }) => {
-  const [joyCount, setJoyCount] = useState<number>(0)
-  const [angryCount, setAngryCount] = useState<number>(0)
+export const EmotionVoteProvider = ({
+  children,
+  initialJoyPercent = 50,
+  initialAngryPercent = 50,
+}: {
+  children: ReactNode
+  initialJoyPercent?: number
+  initialAngryPercent?: number
+}) => {
+  const [joyPercent, setJoyPercent] = useState(initialJoyPercent)
+  const [angryPercent, setAngryPercent] = useState(initialAngryPercent)
 
-  const total = joyCount + angryCount
-
-  const joyPercent = total > 0 ? Math.round((joyCount / total) * 100) : 50
-  const angryPercent = 100 - joyPercent
+  const setEmotionPercent = (joy: number, angry: number) => {
+    setJoyPercent(joy)
+    setAngryPercent(angry)
+  }
 
   const value = useMemo(
     () => ({
-      joyCount,
-      angryCount,
-      total,
-      setJoyCount,
-      setAngryCount,
       joyPercent,
       angryPercent,
+      setEmotionPercent,
     }),
-    [joyCount, angryCount],
+    [joyPercent, angryPercent],
   )
 
   return (
@@ -53,7 +53,7 @@ export const EmotionVoteProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
-export const useEmotionVote = () => {
+export const useEmotionVote = (): EmotionVoteContextType => {
   const ctx = useContext(EmotionVoteContext)
   if (!ctx) throw new Error('EmotionVoteProvider must be used')
   return ctx

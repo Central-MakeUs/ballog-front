@@ -7,6 +7,7 @@ import { GNBButton } from '@/shared/ui/common'
 
 type ActivityType = 'Home' | 'Record' | 'MyPage'
 
+
 interface NavItem {
   label: string
   icon: React.ComponentType<{ className?: string }>
@@ -26,7 +27,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: '마이페이지',
     icon: HomeIcon,
-    activity: 'MyPage',
+    activity: 'My',
   },
 ]
 
@@ -41,13 +42,13 @@ export const GlobalNavigationBar = () => {
       case 'Home':
         replace('Home', {}, { animate: false })
         break
-      // TODO : 여기 LiveRecord 아니고 직관로그 와야 함
+
       case 'Record':
         replace('Record', {}, { animate: false })
+
         break
-      case 'MyPage':
-        // TODO: MyPage 액티비티가 추가되면 사용
-        // push('MyPage', { MyPage: 'ActivityComponentType' })
+      case 'My':
+        replace('My', {}, { animate: false })
         break
     }
   }

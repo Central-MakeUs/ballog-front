@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { AUTH_CONFIG } from '@/shared/ui/constants/config'
 import { AUTH_MESSAGES } from '@/shared/ui/constants/messages'
 
-export const useNickNameForm = () => {
-  const [nickname, setNickname] = useState('')
+export const useNickNameForm = (initialValue: string = '') => {
+  const [nickname, setNickname] = useState(initialValue)
   const [errors, setErrors] = useState<string[]>([])
 
   const validateNickname = (value: string) => {
