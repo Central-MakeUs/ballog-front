@@ -5,7 +5,7 @@ import { ImageTimeLine } from '../ui/ImageTimeLine'
 
 describe.skip('ImageTimeLine', () => {
   it('should render', () => {
-    render(<ImageTimeLine images={[]} />)
+    render(<ImageTimeLine images={[]} recordId={1} />)
   })
 
   it('전달받은 images를 Image 컴포넌트로 렌더링한다.', () => {
@@ -19,13 +19,13 @@ describe.skip('ImageTimeLine', () => {
         createdAt: '2025-07-22',
       },
     ]
-    render(<ImageTimeLine images={images} />)
+    render(<ImageTimeLine images={images} recordId={1} />)
 
     expect(screen.getAllByRole('img')).toHaveLength(2)
   })
 
   it('만약 images가 없으면 Empty 컴포넌트가 렌더링된다.', () => {
-    render(<ImageTimeLine images={[]} />)
+    render(<ImageTimeLine images={[]} recordId={1} />)
 
     expect(
       screen.getByRole('heading', { level: 3, name: '등록된 사진이 없어요!' }),
