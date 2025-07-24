@@ -28,4 +28,11 @@ describe('TeamSelectPage', () => {
       selectedTeam: 'DOOSAN_BEARS',
     })
   })
+
+  it('팀을 선택하지 않으면 시작하기 버튼이 비활성화 상태여야 한다', () => {
+    render(<TeamSelectPage />)
+
+    const submitButton = screen.getByRole('button', { name: /시작하기/i })
+    expect(submitButton).toBeDisabled()
+  })
 })
