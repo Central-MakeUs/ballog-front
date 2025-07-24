@@ -3,13 +3,13 @@ import type { JSX, ReactElement, ReactNode } from 'react'
 import { render, renderHook, type RenderOptions } from '@testing-library/react'
 
 import QueryProvider from '@/app/Provider/QueryProvider'
-import { SessionProvider } from '@/shared/contexts/sessionContext'
+import { TestSessionProvider } from '@/test/TestSessionProvider'
 
 export const wrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <SessionProvider>
+    <TestSessionProvider>
       <QueryProvider>{children as JSX.Element[]}</QueryProvider>
-    </SessionProvider>
+    </TestSessionProvider>
   )
 }
 
