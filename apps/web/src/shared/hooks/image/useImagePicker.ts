@@ -7,10 +7,24 @@ interface UseImagePickerProps {
   initialImages?: Image[]
 }
 
+interface BridgeImageData {
+  fileName: string
+  uri: string
+  base64: string
+  createdAt: string
+}
+
+interface WebImageData {
+  imageUrl: string
+  createdAt: string
+}
+
+type ImageData = BridgeImageData | WebImageData
+
 export const useImagePicker = ({
   initialImages = [],
 }: UseImagePickerProps = {}) => {
-  const [images, setImages] = useState<Image[]>(initialImages)
+  const [newImages, setNewImages] = useState<ImageData[]>([])
   const bridge = createWebBridge()
 
   const requestImagePick = () => {
@@ -20,12 +34,8 @@ export const useImagePicker = ({
     }
   }
 
-  const addImage = (newImage: Image) => {
-    setImages((prevImages) => [...prevImages, newImage])
-  }
-
-  const addImages = (newImages: Image[]) => {
-    setImages((prevImages) => [...prevImages, ...newImages])
+  const addImages = (newImages: ImageData[]) => {
+    setNewImages(newImages)
   }
 
   // RN에서 전송된 이미지 데이터 수신
@@ -38,10 +48,15 @@ export const useImagePicker = ({
         'imageDataList' in data &&
         Array.isArray(data.imageDataList)
       ) {
-        const newImages: Image[] = data.imageDataList
-          .filter((imageData) => imageData.base64 && imageData.createdAt)
+        const newImages: ImageData[] = data.imageDataList
+          .filter(
+            (imageData) =>
+              imageData.base64 && imageData.createdAt && imageData.fileName,
+          )
           .map((imageData) => ({
-            imageUrl: imageData.base64,
+            fileName: imageData.fileName,
+            uri: imageData.uri,
+            base64: imageData.base64,
             createdAt: imageData.createdAt,
           }))
 
@@ -56,14 +71,12 @@ export const useImagePicker = ({
 
   // initialImages가 변경될 때 상태 업데이트
   useEffect(() => {
-    setImages(initialImages)
+    setNewImages(initialImages)
   }, [initialImages])
 
   return {
-    images,
-    addImage,
     addImages,
     requestImagePick,
-    setImages,
+    newImages,
   }
 }
