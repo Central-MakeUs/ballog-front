@@ -1,10 +1,13 @@
+import { useEffect, useState } from 'react'
+
 import type { Image } from '@/entities/record/model/record.type'
 import { RecordLogCard } from '@/entities/record/ui/RecordLogCard'
 import { formatTime } from '@/shared/lib/date'
-import { Button, LazyImage } from '@/shared/ui/common'
+import { Button, LazyImage, Loading } from '@/shared/ui/common'
 import { SectionHeader } from '@/shared/ui/common'
 import { ScrollArea, ScrollBar } from '@/shared/ui/common/scroll-area'
-import { useImagePicker } from '@/shared/hooks/image/useImagePicker'
+
+import { useImagePickerWithUpload } from '../hooks/useImagePickerWithUpload'
 
 const ImageItem = ({ image }: { image: Image }) => {
   return (
@@ -55,10 +58,27 @@ export const ImageTimeLineContent = ({ images }: { images: Image[] }) => {
 
 export const ImageTimeLine = ({
   images: initialImages,
+  recordId,
 }: {
   images: Image[]
+  recordId: number
 }) => {
-  const { images, requestImagePick } = useImagePicker({ initialImages })
+  const [images, setImages] = useState<Image[]>(initialImages)
+  const { requestImagePick, uploadState, uploadedImages } =
+    useImagePickerWithUpload({
+      recordId,
+      initialImages,
+    })
+
+  useEffect(() => {
+    // uploadedImages는 서버에 업로드 후 받은 이미지 정보
+    const addNewImages = uploadedImages.map((image) => ({
+      imageUrl: image.imageUrl,
+      createdAt: image.createdAt,
+    }))
+
+    setImages(images.concat(addNewImages))
+  }, [uploadedImages])
 
   return (
     <div className="w-full mt-10 flex flex-col gap-4">
@@ -72,7 +92,11 @@ export const ImageTimeLine = ({
         className="px-4"
       />
       <div className="pt-4">
-        <ImageTimeLineContent images={images} />
+        {uploadState.isUploading ? (
+          <Loading text="" />
+        ) : (
+          <ImageTimeLineContent images={images} />
+        )}
       </div>
     </div>
   )

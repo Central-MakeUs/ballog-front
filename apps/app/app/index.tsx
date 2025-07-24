@@ -9,7 +9,7 @@ const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
 
-  const webViewUri = getMetroServerUrl() + '/record'
+  const webViewUri = getMetroServerUrl()
 
   // 뒤로가기 버튼 처리
   useEffect(() => {

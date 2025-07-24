@@ -54,7 +54,10 @@ export const RecordDetailPage = ({
           </RecordLogCard.Root>
         </div>
 
-        <ImageTimeLine images={data?.data.imageList ?? []} />
+        <ImageTimeLine
+          images={data?.data.imageList ?? []}
+          recordId={data?.data.matchRecordId ?? 0}
+        />
       </AppLayout>
     </AppScreen>
   )
