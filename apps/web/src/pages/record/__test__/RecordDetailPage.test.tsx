@@ -8,11 +8,11 @@ import { RecordDetailPage } from '../ui/RecordDetailPage'
 
 describe.skip('RecordDetailPage', () => {
   it('should render', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
   })
 
   it('삭제 버튼을 클릭하면 삭제 확인 모달이 렌더링된다.', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     const user = userEvent.setup()
 
@@ -24,7 +24,7 @@ describe.skip('RecordDetailPage', () => {
   })
 
   it('삭제 확인 모달에서 취소 버튼을 클릭하면 삭제 확인 모달이 닫힌다.', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     const user = userEvent.setup()
 
@@ -38,7 +38,7 @@ describe.skip('RecordDetailPage', () => {
   })
 
   it('삭제 확인 모달에서 삭제 버튼을 클릭하면 직관 기록이 삭제된 후 직관 기록 메인 페이지에서 toast가 렌더링된다.', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     const user = userEvent.setup()
 
@@ -52,7 +52,7 @@ describe.skip('RecordDetailPage', () => {
   })
 
   it('공유하기 버튼을 클릭하면 바텀시트가 렌더링된다.', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     const user = userEvent.setup()
 
@@ -62,7 +62,7 @@ describe.skip('RecordDetailPage', () => {
   })
 
   it('바텀시트에는 record의 첫번째 이미지가 표시된다.', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     vi.mocked(recordGet.getRecordDetail).mockResolvedValue({
       statusCode: 200,
@@ -75,6 +75,7 @@ describe.skip('RecordDetailPage', () => {
         awayTeam: 'KT_WIZ',
         matchDate: '2025-07-08',
         matchTime: '21:30',
+        stadium: '잠실야구장',
         userId: 1,
         watchCnt: 4,
         result: 'DRAW',
@@ -104,7 +105,7 @@ describe.skip('RecordDetailPage', () => {
   })
 
   it('이미지 저장 버튼을 누르면 이미지가 저장되고 toast가 렌더링된다.', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     const user = userEvent.setup()
 
@@ -116,7 +117,7 @@ describe.skip('RecordDetailPage', () => {
   })
 
   it('공유하기 버튼을 누르면 toast가 렌더링 되고 공유 링크가 복사된다.', () => {
-    render(<RecordDetailPage />)
+    render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     const user = userEvent.setup()
 
