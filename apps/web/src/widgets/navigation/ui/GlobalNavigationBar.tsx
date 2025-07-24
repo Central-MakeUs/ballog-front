@@ -5,8 +5,7 @@ import { useFlow } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { GNBButton } from '@/shared/ui/common'
 
-type ActivityType = 'Home' | 'Record' | 'MyPage'
-
+type ActivityType = 'Home' | 'Record' | 'My'
 
 interface NavItem {
   label: string
