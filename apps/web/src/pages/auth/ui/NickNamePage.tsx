@@ -11,7 +11,9 @@ import { type ExtendedKyHttpError } from '@/types/api/common'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
+import { authGet } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 interface NickNamePageProps {
   selectedTeam: string | null
@@ -19,13 +21,18 @@ interface NickNamePageProps {
 
 const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
   const { push } = useFlow()
+  const { setUser } = useSessionContext()
+
   const {
     mutate: signup,
     isPending: isLoading,
     error,
   } = useMutation<SignupResponseDTO, ExtendedKyHttpError, SignupRequestDTO>({
     mutationFn: authPost.signup,
-    onSuccess: (data) => {
+
+    onSuccess: async (data) => {
+      const user = await authGet.getUser()
+      setUser(user.data)
       if (data.statusCode === 200) {
         push('Home', {}, { animate: false })
       }

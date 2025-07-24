@@ -6,10 +6,16 @@ import { startMocking } from '@/mocks/browser'
 
 import App from './App'
 
-startMocking()
+async function bootstrap() {
+  if (import.meta.env.DEV) {
+    await startMocking()
+  }
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+}
+
+bootstrap()
