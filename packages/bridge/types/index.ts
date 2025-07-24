@@ -1,4 +1,4 @@
-import { WebViewMessageEvent } from 'react-native-webview'
+import { type WebViewMessageEvent } from 'react-native-webview'
 // 이미지 데이터 타입 정의
 export type ImageData = {
   uri: string
