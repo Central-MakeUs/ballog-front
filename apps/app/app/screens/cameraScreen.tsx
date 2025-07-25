@@ -18,12 +18,10 @@ import Animated from 'react-native-reanimated'
 // import FlipButton from '@/assets/images/flipButton.svg'
 import { useCamera } from '@/hooks/useCamera'
 import { useGallery } from '@/hooks/useGallery'
-import  Constants  from 'expo-constants'
-const API_BASE_URL = Constants.expoConfig?.extra?.API_BASE_URL
 
 export default function CameraScreen() {
   const router = useRouter()
-  console.log(API_BASE_URL, "이거임")
+
   const cameraRef = useRef<CameraView>(null) as React.RefObject<CameraView>
 
   const {

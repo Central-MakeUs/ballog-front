@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { imagePost } from '@/entities/image/api/image-post'
 
 export default function PhotoResultScreen() {
   const router = useRouter()
@@ -17,9 +18,17 @@ export default function PhotoResultScreen() {
     router.back()
   }
 
-  const handleUpload = () => {
-    console.log('사진:', photoUri)
-    // 업로드 로직 추가하기
+  // TODO : 일단 recordId 하드코딩
+  const handleUpload = async () => {
+    try {
+      const response = await imagePost.postImage({
+        recordId: 0,
+        imageUrl: photoUri,
+      })
+      console.log('업로드 성공:', response)
+    } catch (err) {
+      console.error('업로드 실패:', err)
+    }
   }
 
   // 그냥 뒤로가기 2번 함
