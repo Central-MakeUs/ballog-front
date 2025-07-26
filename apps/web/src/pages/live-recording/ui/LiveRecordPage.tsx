@@ -4,7 +4,6 @@ import { useFlow } from '@stackflow/react/future'
 import { useQuery } from '@tanstack/react-query'
 
 import { cn } from '@/shared/lib/classnames'
-import { RecordingCard } from '@/entities/record/ui/RecordingCard'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
 import { OverlayProvider } from '@/hooks/useOverlay'
@@ -18,6 +17,7 @@ import SampleImage from '@/assets/grayExampleImage.jpg'
 import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
+import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWithWebBridge'
 
 const LiveRecordPageInner = ({
   emotionData,
@@ -99,15 +99,7 @@ const LiveRecordPageInner = ({
 
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
         {/* Recording Card */}
-        <RecordingCard.Root className="w-full">
-          <RecordingCard.IconWrapper />
-          <RecordingCard.Info
-            homeTeam="LG 트윈스"
-            awayTeam="SSG 랜더스"
-            stadium="잠실야구장"
-            date="2025.07.09"
-          />
-        </RecordingCard.Root>
+        <RecordingCardWithWebBridge />
 
         {/* 텍스트 */}
         <div
