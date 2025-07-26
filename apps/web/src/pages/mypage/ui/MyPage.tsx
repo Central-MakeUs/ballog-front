@@ -3,10 +3,10 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { OverlayProvider } from '@/hooks/useOverlay'
-import { List } from '@/shared/ui/common/List/List'
 import { ChangeMyInfoWidget } from '@/widgets/changeMyInfoWidget/ChangeMyInfoWidget'
-import { LogoutAndWithdrawButtons } from '@/features/auth/ui/LogoutAndWithDrawButtons'
+import { AlarmToggleList } from '@/features/auth/ui/AlarmSwitchList'
 import { OtherLinkList } from '@/features/auth/ui/OtherLinkList'
+import { LogoutAndWithdrawButtons } from '@/features/auth/ui/LogoutAndWithDrawButtons'
 
 const MyPageInner = () => {
   return (
@@ -21,12 +21,7 @@ const MyPageInner = () => {
           <p className="body-sm-bold text-brand-neutral-white">내 정보</p>
           <ChangeMyInfoWidget />
         </div>
-
-        <div className="space-y-4 mb-6">
-          <p className="body-sm-bold text-brand-neutral-white">알람 설정</p>
-          <List type="switch">경기 시작 알림 받기</List>
-          <List type="switch">경기 중 알림 받기</List>
-        </div>
+        <AlarmToggleList />
 
         <OtherLinkList />
 
