@@ -52,6 +52,13 @@
             ]
           }
         }
+      ],
+      [
+        "react-native-share",
+        {
+          "ios": ["fb", "instagram"],
+          "android": ["com.facebook.katana", "com.instagram.android"]
+        }
       ]
     ],
     "experiments": {
