@@ -36,6 +36,7 @@ export const record: { records: Record[]; recordDetail: RecordDetailResponse } =
       matchesId: 1,
       homeTeam: 'LG_TWINS',
       awayTeam: 'KT_WIZ',
+      stadium: '잠실야구장',
       matchDate: '2025-07-08',
       matchTime: '21:30',
       userId: 1,

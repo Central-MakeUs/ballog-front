@@ -1,15 +1,18 @@
 import { StyleSheet, SafeAreaView, BackHandler } from 'react-native'
 import { useEffect, useRef } from 'react'
 import { WebView, WebViewMessageEvent } from 'react-native-webview'
-import { useRouter } from 'expo-router'
-import type { PostMessagePayload } from '@ballog/bridge'
 import { getMetroServerUrl } from '@/scripts/getMetroUrl'
 import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
+import { useRouter } from 'expo-router'
+import { useBridge } from './bridge/bridgeHandler'
+import type { PostMessagePayload } from '@ballog/bridge'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
+  const { bridge } = useBridge(webViewRef)
   const router = useRouter()
   const { base64Image, clearBase64Image } = useImageBridge()
+
   const webViewUri = getMetroServerUrl()
 
   // 뒤로가기 버튼 처리
@@ -88,6 +91,10 @@ const HomeScreen = () => {
     }
   }
 
+  const combinedMessageHandler = (event: WebViewMessageEvent) => {
+    bridge.processMessage(event)
+    handleMessage(event)
+  }
   const validateOpenCameraPayload = (
     payload: PostMessagePayload,
   ): payload is { message: string } => {
@@ -103,7 +110,7 @@ const HomeScreen = () => {
       <WebView
         ref={webViewRef}
         source={{ uri: webViewUri }}
-        onMessage={handleMessage}
+        onMessage={combinedMessageHandler}
         javaScriptEnabled={true}
         domStorageEnabled={true}
         originWhitelist={['*']}

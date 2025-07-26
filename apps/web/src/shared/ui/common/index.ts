@@ -1,4 +1,6 @@
 export * from './Button'
 export * from './carousel'
 export * from './dialog'
+export * from './LazyImage'
 export * from './Loading'
+export * from './SectionHeader'

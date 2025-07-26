@@ -5,10 +5,11 @@ import { toast } from 'sonner'
 import { IntuitionCard } from '@/shared/ui/common/Card/intuitionCard'
 import { RecordList } from '@/features/record/ui/RecordList'
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
-import { queryKeys } from '@/entities/record/api/query-key'
+import { queryKeys } from '@/entities/record/api/record.queries'
 import { Loading } from '@/shared/ui/common'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
+import { SectionHeader } from '@/shared/ui/common'
 
 export const RecordMainPage = () => {
   const { data, isLoading, error } = useQuery(queryKeys.getRecord())
@@ -33,9 +34,7 @@ export const RecordMainPage = () => {
         {/* 대시보드 카드 섹션 */}
         <div className="flex gap-4 px-4 mt-4 w-full">
           <div className="flex-1 flex flex-col gap-4">
-            <div className="body-sm-bold text-brand-neutral-white">
-              직관 횟수/승률
-            </div>
+            <SectionHeader title="직관 횟수/승률" />
             {data?.data.totalCount === 0 ? (
               <IntuitionCard.Disabled />
             ) : (
@@ -46,9 +45,7 @@ export const RecordMainPage = () => {
             )}
           </div>
           <div className="flex-1 flex flex-col gap-4">
-            <div className="body-sm-bold text-brand-neutral-white">
-              감정분포
-            </div>
+            <SectionHeader title="감정분포" />
             {data?.data.totalCount === 0 ? (
               <EmotionCard.Disabled />
             ) : (
@@ -62,9 +59,7 @@ export const RecordMainPage = () => {
 
         {/* 기록 목록 섹션 */}
         <div className="mt-10 px-4 gap-4 flex flex-col w-full">
-          <div className="body-sm-bold text-brand-neutral-white">
-            직관 횟수/승률
-          </div>
+          <SectionHeader title="직관 횟수/승률" />
           <RecordList records={data?.data.records ?? []} />
         </div>
         <GlobalNavigationBar />

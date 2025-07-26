@@ -57,6 +57,8 @@ export const recordHandlers = [
   >(`${RECORD_API_PREFIX}/:recordId`, ({ params }) => {
     const { recordId } = params
 
+    delay(3000)
+
     if (recordId !== '1') {
       return HttpResponse.json<RecordDetailResponseDTO>(
         {

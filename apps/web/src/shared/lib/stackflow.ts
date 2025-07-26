@@ -21,7 +21,8 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     basicRendererPlugin(),
     basicUIPlugin({
       theme: 'cupertino', // cupertino | android 두가지 옵션 있음
-      backgroundColor: 'bg-usage-background-default',
+      // className 시 title 잔상 문제로 변수 사용
+      backgroundColor: 'var(--color-usage-background-default)',
       rootClassName:
         'w-full min-h-screen max-w-[512px] mx-auto flex flex-col items-center justify-center relative',
     }),

@@ -4,6 +4,8 @@ export type {
   PostMessageEvent,
   WebMessageEvent,
   PostMessagePayload,
+  AppBridge,
+  BridgeMessageSchema,
 } from './types'
 
 // React Native WebView Bridge

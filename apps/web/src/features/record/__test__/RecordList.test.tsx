@@ -75,7 +75,7 @@ describe('RecordList', () => {
     await user.click(detailButton[0])
 
     expect(mockPush).toHaveBeenCalledWith('RecordDetail', {
-      matchRecordId: records[0].matchRecordId,
+      matchRecordId: records[0].matchRecordId.toString(),
     })
   })
 })
