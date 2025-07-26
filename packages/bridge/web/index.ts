@@ -2,6 +2,7 @@ import type {
   PostMessageEvent,
   PostMessageSchemaObject,
   WebMessageEvent,
+  BridgeMessageSchema,
 } from '../types'
 
 declare global {
@@ -46,20 +47,23 @@ const handleMessage = (data: string): WebMessageEvent | null => {
  * })
  *
  * return {
- *   send: (eventName: string, payload: any) => void,
- *   addEventListener: (eventName: string, callback: (data: any) => void) => void,
+ *   send: (eventName: string, payload: T[keyof T]['payload']) => void,
+ *   addEventListener: (eventName: string, callback: (data: T[keyof T]['payload']) => void) => void,
  *   isRNEnvironment: () => boolean,
  * }
  */
 export const createWebBridge = <
-  T extends PostMessageSchemaObject = PostMessageSchemaObject,
+  T extends PostMessageSchemaObject = BridgeMessageSchema,
 >() => {
   const isReady = isRNEnvironment()
 
   // 이벤트 리스너들을 저장할 Map
   // eventName, callback이 key, value로 저장
   // 이 중에서 addEventListener에서 추가한 이벤트 리스너만 호출
-  const eventListeners = new Map<string, (event: any) => void>()
+  const eventListeners = new Map<
+    string,
+    (event: T[keyof T]['payload']) => void
+  >()
 
   // 전역 메시지 핸들러
   const globalMessageHandler = (event: MessageEvent) => {
@@ -102,7 +106,7 @@ export const createWebBridge = <
   // 추가 시, eventName에 해당하는 callback 함수 호출
   const addEventListener = <K extends keyof T>(
     eventName: K,
-    callback: (event: T[K]['payload']) => void,
+    callback: (payload: T[K]['payload']) => void,
   ) => {
     const eventNameStr = String(eventName)
 

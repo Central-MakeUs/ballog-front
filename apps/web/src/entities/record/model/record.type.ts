@@ -36,6 +36,7 @@ export interface RecordDetailResponse {
   awayTeam: TeamKey
   matchDate: string
   matchTime: string
+  stadium: string
   userId: number
   watchCnt: number
   result: RecordResult

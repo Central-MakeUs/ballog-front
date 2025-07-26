@@ -29,7 +29,9 @@ export const RecordList = ({ records }: { records: Record[] }) => {
           <RecordLogCard.Badge result={record.result ?? 'DRAW'} />
           <RecordLogCard.Footer
             onClick={() =>
-              push('RecordDetail', { matchRecordId: record.matchRecordId })
+              push('RecordDetail', {
+                matchRecordId: record.matchRecordId.toString(),
+              })
             }
           >
             경기 결과 보러가기

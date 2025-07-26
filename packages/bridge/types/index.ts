@@ -1,7 +1,38 @@
-// RN에서 사용할 메시지 페이로드 타입
-export type PostMessagePayload = {
+import { type WebViewMessageEvent } from 'react-native-webview'
+// 이미지 데이터 타입 정의
+export type ImageData = {
+  uri: string
+  base64: string
+  fileName: string
+  createdAt: string
+}
+
+// 기본 메시지 페이로드 타입
+export type BasicMessagePayload = {
   message: string
 }
+
+// 이미지 선택 이벤트용 페이로드 타입
+export type ImageSelectedPayload = {
+  message: string
+  imageDataList: ImageData[]
+}
+
+// 각 이벤트별 스키마 정의
+export type BridgeMessageSchema = {
+  OPEN_CAMERA: {
+    payload: BasicMessagePayload
+  }
+  PICK_IMAGE: {
+    payload: BasicMessagePayload
+  }
+  IMAGE_SELECTED: {
+    payload: ImageSelectedPayload
+  }
+}
+
+// 기존 PostMessagePayload는 유니온 타입으로 변경
+export type PostMessagePayload = BasicMessagePayload | ImageSelectedPayload
 
 // {
 //   eventName: string
@@ -50,3 +81,17 @@ export type PostMessageEvent<T extends PostMessageSchemaObject> = {
     payload: T[K]['payload']
   }
 }[keyof T]
+
+// AppBridge 인터페이스
+export interface AppBridge<
+  T extends PostMessageSchemaObject = BridgeMessageSchema,
+> {
+  send: <K extends keyof T>(eventName: K, payload: T[K]['payload']) => void
+  on: (
+    eventName: string,
+    handler: (payload?: T[keyof T]['payload']) => void,
+  ) => void
+  processMessage: (event: WebViewMessageEvent) => void
+  //legacy
+  handleMessage: (event: WebViewMessageEvent) => WebMessageEvent | null
+}

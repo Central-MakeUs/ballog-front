@@ -1,4 +1,5 @@
 export const POST_MESSAGE_EVENT = {
   OPEN_CAMERA: 'OPEN_CAMERA',
-} as const;
-
+  PICK_IMAGE: 'PICK_IMAGE',
+  IMAGE_SELECTED: 'IMAGE_SELECTED',
+} as const
