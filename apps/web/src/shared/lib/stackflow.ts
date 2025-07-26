@@ -13,6 +13,7 @@ import ChangeTeamSelectPage from '@/pages/mypage/ui/ChangeTeamSelectPage'
 import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
 import RecordMainPage from '@/pages/record/ui/RecordMainPage'
 import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
+import ShareBottomSheet from '@/pages/record/ui/ShareBottomSheet'
 
 export const { Stack, useFlow, useStepFlow } = stackflow({
   transitionDuration: 350,
@@ -39,6 +40,7 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
         ChangeNickName: '/change-nickname',
         Record: '/record',
         RecordDetail: '/record/:matchRecordId',
+        ShareBottomSheet: '/share-bottom-sheet',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -55,6 +57,7 @@ export const { Stack, useFlow, useStepFlow } = stackflow({
     ChangeNickName: ChangeNickNamePage,
     Record: RecordMainPage,
     RecordDetail: RecordDetailPage,
+    ShareBottomSheet,
   },
   initialActivity: () => 'Home',
 })
