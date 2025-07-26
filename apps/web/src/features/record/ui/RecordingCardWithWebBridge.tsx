@@ -13,7 +13,7 @@ export const RecordingCardWithWebBridge = () => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  useWebViewBridgeListener((base64) => {
+  useWebViewBridgeListener((_base64) => {
     // TODO: 서버 업로드 후 URL로 addImage(base64) 할 예정
     // addImage(base64)
   })
