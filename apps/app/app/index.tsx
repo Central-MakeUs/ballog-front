@@ -4,11 +4,12 @@ import { WebView, WebViewMessageEvent } from 'react-native-webview'
 import { useRouter } from 'expo-router'
 import type { PostMessagePayload } from '@ballog/bridge'
 import { getMetroServerUrl } from '@/scripts/getMetroUrl'
+import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const router = useRouter()
-
+  const { base64Image, clearBase64Image } = useImageBridge()
   const webViewUri = getMetroServerUrl()
 
   // 뒤로가기 버튼 처리
@@ -29,6 +30,25 @@ const HomeScreen = () => {
     return () => backHandler.remove()
   }, [])
 
+  useEffect(() => {
+    if (base64Image && webViewRef.current) {
+      console.log('[RN] WebView에 메시지 전송 준비')
+
+      const timeout = setTimeout(() => {
+        console.log('[RN] 메시지 전송 시작')
+        webViewRef.current?.postMessage(
+          JSON.stringify({
+            type: 'image',
+            payload: base64Image,
+          }),
+        )
+        clearBase64Image()
+      }, 1500) // 너무 짧으면 WebView 아직 준비 안 됐을 수 있음
+
+      return () => clearTimeout(timeout)
+    }
+  }, [base64Image])
+
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data
 
@@ -44,7 +64,11 @@ const HomeScreen = () => {
         throw new Error('데이터 타입 불일치')
       }
 
-      console.log('RN 수신:', message)
+      // Web 메시지 수신 확인용 조건문
+      if (message.type === 'echo_log') {
+        console.log('[RN] 웹에서 다시 받은 base64 preview:', message.message)
+        return
+      }
 
       switch (message.eventName) {
         case 'OPEN_CAMERA':

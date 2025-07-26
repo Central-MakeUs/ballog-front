@@ -1,6 +1,7 @@
 import { Root } from './Root'
 import { Icon } from './Icon'
 import { Info } from './Info'
+import { IconWrapper } from './IconWrapper'
 
 /**
  * RecordingCard
@@ -28,4 +29,5 @@ export const RecordingCard = {
   Root,
   Icon,
   Info,
+  IconWrapper,
 }

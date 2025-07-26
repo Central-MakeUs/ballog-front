@@ -11,11 +11,13 @@ import { Ionicons } from '@expo/vector-icons'
 import { imagePost } from '@/entities/image/api/image-post'
 import { useBase64Image } from '@/hooks/useBase64Image'
 import * as FileSystem from 'expo-file-system'
+import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
 
 export default function PhotoResultScreen() {
   const router = useRouter()
   const { photoUri } = useLocalSearchParams<{ photoUri: string }>()
   const { encode } = useBase64Image()
+  const { setBase64Image } = useImageBridge()
 
   const handleRetake = () => {
     router.back()
@@ -24,7 +26,7 @@ export default function PhotoResultScreen() {
   // TODO : 일단 recordId 하드코딩
   const handleUpload = async () => {
     if (!photoUri) return
-    
+
     const fileInfo = await FileSystem.getInfoAsync(photoUri)
     if (!fileInfo.exists) {
       console.error('파일이 존재하지 않음:', photoUri)
@@ -41,15 +43,9 @@ export default function PhotoResultScreen() {
     const base64Raw = base64DataUrl.split(',')[1]
     console.log('base64 실제 데이터 길이:', base64Raw.length)
 
-    try {
-      const response = await imagePost.postImage({
-        recordId: 0,
-        imageUrl: photoUri,
-      })
-      console.log('업로드 성공:', response)
-    } catch (err) {
-      console.error('업로드 실패:', err)
-    }
+    setBase64Image(base64DataUrl)
+    router.back()
+    handleClose()
   }
 
   // 그냥 뒤로가기 2번 함

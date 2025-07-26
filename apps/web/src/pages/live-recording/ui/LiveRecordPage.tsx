@@ -100,7 +100,7 @@ const LiveRecordPageInner = ({
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
         {/* Recording Card */}
         <RecordingCard.Root className="w-full">
-          <RecordingCard.Icon state="active" />
+          <RecordingCard.IconWrapper />
           <RecordingCard.Info
             homeTeam="LG 트윈스"
             awayTeam="SSG 랜더스"
