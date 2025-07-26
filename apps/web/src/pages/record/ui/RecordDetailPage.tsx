@@ -4,10 +4,11 @@ import { toast } from 'sonner'
 
 import { BackArrow } from '@/assets/BackArrow'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
-import { queryKeys } from '@/entities/record/api/query-key'
+import { queryKeys } from '@/entities/record/api/record.queries'
 import { Loading } from '@/shared/ui/common'
 import { RecordLogCard } from '@/entities/record/ui/RecordLogCard'
 import { ImageTimeLine } from '@/features/record/ui/ImageTimeLine'
+import { ImageContextProvider } from '@/features/record/hooks/ImageContextProvider'
 
 export const RecordDetailPage = ({
   params,
@@ -39,26 +40,27 @@ export const RecordDetailPage = ({
         },
       }}
     >
-      <AppLayout>
-        <div className="px-4 pt-4 w-full">
-          <RecordLogCard.Root key={data?.data.matchRecordId}>
-            <RecordLogCard.Info
-              homeTeam={data?.data.homeTeam ?? 'SSG_LANDERS'}
-              awayTeam={data?.data.awayTeam ?? 'LG_TWINS'}
-              stadium={data?.data.stadium ?? '잠실야구장'}
-              date={data?.data.matchDate ?? '2025.07.09 (수) 오후 6:30'}
-            />
-            {data?.data.result && (
-              <RecordLogCard.Badge result={data?.data.result} />
-            )}
-          </RecordLogCard.Root>
-        </div>
+      <ImageContextProvider initialImages={data?.data.imageList ?? []}>
+        <AppLayout>
+          <div className="px-4 pt-4 w-full">
+            <RecordLogCard.Root key={data?.data.matchRecordId}>
+              <RecordLogCard.Info
+                homeTeam={data?.data.homeTeam ?? 'SSG_LANDERS'}
+                awayTeam={data?.data.awayTeam ?? 'LG_TWINS'}
+                stadium={data?.data.stadium ?? '잠실야구장'}
+                date={data?.data.matchDate ?? '2025.07.09 (수) 오후 6:30'}
+              />
+              {data?.data.result && (
+                <RecordLogCard.Badge result={data?.data.result} />
+              )}
+            </RecordLogCard.Root>
+          </div>
 
-        <ImageTimeLine
-          images={data?.data.imageList ?? []}
-          recordId={data?.data.matchRecordId ?? 0}
-        />
-      </AppLayout>
+          <ImageTimeLine recordId={data?.data.matchRecordId ?? 0} />
+          {/* <EmotionTimeLine />
+          <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} /> */}
+        </AppLayout>
+      </ImageContextProvider>
     </AppScreen>
   )
 }
