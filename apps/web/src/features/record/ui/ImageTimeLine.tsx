@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import type { Image } from '@/entities/record/model/record.type'
 import { RecordLogCard } from '@/entities/record/ui/RecordLogCard'
@@ -6,6 +6,7 @@ import { formatTime } from '@/shared/lib/date'
 import { Button, LazyImage, Loading } from '@/shared/ui/common'
 import { SectionHeader } from '@/shared/ui/common'
 import { ScrollArea, ScrollBar } from '@/shared/ui/common/scroll-area'
+import { useImageContext } from '@/features/record/hooks/useImageContext'
 
 import { useImagePickerWithUpload } from '../hooks/useImagePickerWithUpload'
 
@@ -26,7 +27,9 @@ const ImageItem = ({ image }: { image: Image }) => {
   )
 }
 
-export const ImageTimeLineContent = ({ images }: { images: Image[] }) => {
+export const ImageTimeLineContent = () => {
+  const { images } = useImageContext()
+
   if (images.length === 0) {
     return (
       <RecordLogCard.Root className="min-h-50 flex justify-center items-center mx-4">
@@ -56,29 +59,24 @@ export const ImageTimeLineContent = ({ images }: { images: Image[] }) => {
   )
 }
 
-export const ImageTimeLine = ({
-  images: initialImages,
-  recordId,
-}: {
-  images: Image[]
-  recordId: number
-}) => {
-  const [images, setImages] = useState<Image[]>(initialImages)
+export const ImageTimeLine = ({ recordId }: { recordId: number }) => {
+  const { images, setImages } = useImageContext()
   const { requestImagePick, uploadState, uploadedImages } =
     useImagePickerWithUpload({
       recordId,
-      initialImages,
+      initialImages: images,
     })
 
   useEffect(() => {
-    // uploadedImages는 서버에 업로드 후 받은 이미지 정보
-    const addNewImages = uploadedImages.map((image) => ({
-      imageUrl: image.imageUrl,
-      createdAt: image.createdAt,
-    }))
+    if (uploadedImages.length > 0) {
+      const addNewImages = uploadedImages.map((image) => ({
+        imageUrl: image.imageUrl,
+        createdAt: image.createdAt,
+      }))
 
-    setImages(images.concat(addNewImages))
-  }, [uploadedImages])
+      setImages([...images, ...addNewImages])
+    }
+  }, [uploadedImages, setImages])
 
   return (
     <div className="w-full mt-10 flex flex-col gap-4">
@@ -95,7 +93,7 @@ export const ImageTimeLine = ({
         {uploadState.isUploading ? (
           <Loading text="" />
         ) : (
-          <ImageTimeLineContent images={images} />
+          <ImageTimeLineContent />
         )}
       </div>
     </div>
