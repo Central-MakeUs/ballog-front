@@ -21,21 +21,13 @@ export const Root = ({
 }: RootProps) => {
   if (!open) return null
 
-  const handleBackdropClick = () => {
-    if (dismissible) onOpenChange(false)
-  }
-
   return (
-    <div className={cn('fixed inset-0 z-50', className)} {...rest}>
-      <div
-        className="absolute inset-0 bg-black/50"
-        onClick={handleBackdropClick}
-      />
+    <div className={cn('flex flex-col justify-end', className)} {...rest}>
       <div
         className={cn(
-          'relative w-full max-w-116.5',
+          'relative w-full',
           'rounded-t-2xl rounded-b-none p-8 border-none',
-          'bg-usage-background-strong',
+          'bg-usage-background-strong gap-6 flex flex-col',
         )}
       >
         {dismissible && (
