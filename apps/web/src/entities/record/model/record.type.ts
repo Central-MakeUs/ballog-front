@@ -49,3 +49,4 @@ export interface RecordDetailResponse {
 
 export type RecordResponseDTO = ApiResponse<RecordResponse>
 export type RecordDetailResponseDTO = ApiResponse<RecordDetailResponse>
+export type RecordDeleteResponseDTO = ApiResponse<null>
