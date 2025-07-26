@@ -9,10 +9,13 @@ import {
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { imagePost } from '@/entities/image/api/image-post'
+import { useBase64Image } from '@/hooks/useBase64Image'
+import * as FileSystem from 'expo-file-system'
 
 export default function PhotoResultScreen() {
   const router = useRouter()
   const { photoUri } = useLocalSearchParams<{ photoUri: string }>()
+  const { encode } = useBase64Image()
 
   const handleRetake = () => {
     router.back()
@@ -20,6 +23,24 @@ export default function PhotoResultScreen() {
 
   // TODO : 일단 recordId 하드코딩
   const handleUpload = async () => {
+    if (!photoUri) return
+    
+    const fileInfo = await FileSystem.getInfoAsync(photoUri)
+    if (!fileInfo.exists) {
+      console.error('파일이 존재하지 않음:', photoUri)
+      return
+    }
+    const base64DataUrl = await encode(photoUri)
+    console.log('원본 파일 경로:', photoUri)
+    console.log('원본 파일 크기:', fileInfo.size, 'bytes')
+
+    // 2. base64 인코딩
+
+    // 3. base64 길이 측정 (data:image/... 부분 포함)
+    console.log('base64 전체 길이:', base64DataUrl.length)
+    const base64Raw = base64DataUrl.split(',')[1]
+    console.log('base64 실제 데이터 길이:', base64Raw.length)
+
     try {
       const response = await imagePost.postImage({
         recordId: 0,
