@@ -1,6 +1,6 @@
 import { authPost, authDelete } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
-import { useSessionContext } from '@/test/TestSessionProvider'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 export const useAuthAction = () => {
   const { replace } = useFlow()
