@@ -41,7 +41,7 @@ export const imageHandlers = [
         return HttpResponse.json<ImageUploadResponseDTO>(
           {
             data: image.image,
-            statusCode: 200,
+            status: 200,
             message: 'Success',
             success: '이미지 업로드 성공',
           },
@@ -91,7 +91,7 @@ export const imageHandlers = [
     return HttpResponse.json<PresignedUrlResponseDTO>(
       {
         message: 'success',
-        statusCode: 200,
+        status: 200,
         success: 'presignedUrl 요청 성공',
         data: image.presignedUrl,
       },
