@@ -2,48 +2,12 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import { useModal } from '@/shared/hooks/modal/useModal'
 import { OverlayProvider } from '@/hooks/useOverlay'
 import { List } from '@/shared/ui/common/List/List'
 import { ChangeMyInfoWidget } from '@/widgets/changeMyInfoWidget/ChangeMyInfoWidget'
+import { LogoutAndWithdrawButtons } from '@/features/auth/ui/LogoutAndWithDrawButtons'
 
 const MyPageInner = () => {
-  const { openHorizontalModal } = useModal()
-
-  const HandleClickLogout = () => {
-    openHorizontalModal({
-      heading: '로그아웃 하시겠어요?',
-      body: 'Body text',
-      buttons: [
-        { label: '취소', onClick: close },
-        {
-          label: '로그아웃',
-          onClick: () => {
-            close()
-            // 로그아웃 로직 작성
-          },
-        },
-      ],
-    })
-  }
-
-  const HandleClickQuit = () => {
-    openHorizontalModal({
-      heading: '정말 탈퇴하시겠어요?',
-      body: '탈퇴 시 서비스 내 모든 정보가 \n 삭제되어 복구할 수 없습니다.',
-      buttons: [
-        { label: '취소', onClick: close },
-        {
-          label: '탈퇴',
-          onClick: () => {
-            close()
-            // 탈퇴 로직 작성
-          },
-        },
-      ],
-    })
-  }
-
   return (
     <AppScreen
       appBar={{
@@ -72,19 +36,7 @@ const MyPageInner = () => {
         </div>
 
         <div className="flex items-center gap-4 px-4 mt-4 mb-4">
-          <button
-            className="flex-1 text-center text-usage-text-hover body-sm-medium"
-            onClick={HandleClickLogout}
-          >
-            로그아웃
-          </button>
-          <p className="body-sm-light text-usage-text-subtle">|</p>
-          <button
-            className="flex-1 text-center text-usage-text-hover body-sm-medium"
-            onClick={HandleClickQuit}
-          >
-            탈퇴하기
-          </button>
+          <LogoutAndWithdrawButtons />
         </div>
         <GlobalNavigationBar />
       </div>
