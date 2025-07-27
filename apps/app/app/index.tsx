@@ -1,15 +1,13 @@
-import { StyleSheet, SafeAreaView, BackHandler } from 'react-native'
+import { StyleSheet, BackHandler } from 'react-native'
 import { useEffect, useRef } from 'react'
 import { WebView } from 'react-native-webview'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
-import { getMetroServerUrl } from '@/scripts/getMetroUrl'
 import { useBridge } from './bridge/bridgeHandler'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
-
-  const webViewUri = getMetroServerUrl()
 
   // 뒤로가기 버튼 처리
   useEffect(() => {
@@ -30,19 +28,23 @@ const HomeScreen = () => {
   }, [])
 
   return (
-    <SafeAreaView style={styles.container}>
-      <WebView
-        ref={webViewRef}
-        source={{ uri: webViewUri }}
-        onMessage={bridge.processMessage}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        originWhitelist={['*']}
-        onError={(error) => console.error('WebView 에러:', error)}
-        onLoadStart={() => console.log('WebView 로딩 시작...')}
-        onLoadEnd={() => console.log('WebView 로딩 완료')}
-      />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <WebView
+          ref={webViewRef}
+          source={{
+            uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+          }}
+          onMessage={bridge.processMessage}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          originWhitelist={['*']}
+          onError={(error) => console.error('WebView 에러:', error)}
+          onLoadStart={() => console.log('WebView 로딩 시작...')}
+          onLoadEnd={() => console.log('WebView 로딩 완료')}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 
