@@ -13,6 +13,8 @@
   "dependencies": {
     "@ballog/bridge": "workspace:*",
     "@expo/vector-icons": "^14.1.0",
+    "@react-native-firebase/app": "^22.4.0",
+    "@react-native-firebase/messaging": "^22.4.0",
     "@react-native-seoul/kakao-login": "^5.4.1",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
