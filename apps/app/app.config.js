@@ -10,7 +10,7 @@ export default {
     newArchEnabled: true,
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.kych0912.app',
+      bundleIdentifier: 'com.ballog.app',
     },
     android: {
       adaptiveIcon: {
@@ -18,7 +18,7 @@ export default {
         backgroundColor: '#ffffff',
       },
       edgeToEdgeEnabled: true,
-      package: 'com.kych0912.app',
+      package: 'com.ballog.app',
     },
     web: {
       bundler: 'metro',

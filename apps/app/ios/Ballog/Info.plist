@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>ballog</string>
-          <string>com.kych0912.app</string>
+          <string>com.ballog.app</string>
         </array>
       </dict>
       <dict>

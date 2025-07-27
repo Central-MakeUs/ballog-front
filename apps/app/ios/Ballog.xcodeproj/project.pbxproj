@@ -257,7 +257,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kych0912.app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ballog.app";
 				PRODUCT_NAME = "Ballog";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ballog/Ballog-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -286,7 +286,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kych0912.app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ballog.app";
 				PRODUCT_NAME = "Ballog";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ballog/Ballog-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

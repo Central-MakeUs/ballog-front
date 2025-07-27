@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.kych0912.app'
+    namespace 'com.ballog.app'
     defaultConfig {
-        applicationId 'com.kych0912.app'
+        applicationId 'com.ballog.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
