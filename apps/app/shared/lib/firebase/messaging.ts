@@ -1,0 +1,47 @@
+import messaging from '@react-native-firebase/messaging'
+
+/**
+ * IOS 에서 사용자에게 푸시 알림 권한 요청 함수
+ */
+export const requestUserPermission = async () => {
+  const authStatus = await messaging().requestPermission()
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL
+
+  if (enabled) {
+    console.log('알림 권한 허용됨')
+  } else {
+    console.log('알림 권한 거부됨')
+  }
+}
+
+/**
+ * 현재 디바이스 FCM 토큰을 반환하는 함수
+ * @return token
+ */
+export const getFcmToken = async () => {
+  const token = await messaging().getToken()
+  console.log('🔥 FCM Token:', token)
+  // 서버에 토큰 저장하거나, 테스트 용도로 복사해도 됨
+  return token
+}
+
+/**
+ * 포그라운드 메시지 수신 핸들러 등록 함수
+ * 앱이 켜져있는 상태에서 알림 수신 시 호출됨
+ */
+export const listenForegroundMessages = () => {
+  return messaging().onMessage(async (remoteMessage) => {
+    console.log('포그라운드 알림 수신:', remoteMessage)
+    // 예: Alert.alert(remoteMessage.notification?.title ?? '알림')
+  })
+}
+
+/**
+ * 백그라운드 상태에서 메시지 수신 핸들러
+ */
+messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  console.log('백그라운드 알림 수신:', remoteMessage)
+  // 알림 클릭 여부와 관계없이 수신시 실행됨
+})
