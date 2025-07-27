@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">app</string>
-    <string name="kakao_app_key">YOUR_KAKAO_NATIVE_APP_KEY</string>
+  <string name="app_name">Ballog</string>
+  <string name="kakao_app_key">{{kakao api key}}</string>
+  <string name="expo_system_ui_user_interface_style" translatable="false">automatic</string>
 </resources>

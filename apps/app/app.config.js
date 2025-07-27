@@ -1,19 +1,20 @@
 export default {
   expo: {
-    name: 'app',
-    slug: 'app',
+    name: 'Ballog',
+    slug: 'ballog',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
-    scheme: 'app',
+    scheme: 'ballog',
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     ios: {
       supportsTablet: true,
+      bundleIdentifier: 'com.kych0912.app',
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: './assets/images/adaptive-icon.png',
+        // foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
       edgeToEdgeEnabled: true,
@@ -22,19 +23,18 @@ export default {
     web: {
       bundler: 'metro',
       output: 'static',
-      favicon: './assets/images/favicon.png',
     },
     plugins: [
       'expo-router',
-      [
-        'expo-splash-screen',
-        {
-          image: './assets/images/splash-icon.png',
-          imageWidth: 200,
-          resizeMode: 'contain',
-          backgroundColor: '#ffffff',
-        },
-      ],
+      // [
+      //   'expo-splash-screen',
+      //   {
+      //     image: './assets/images/splash-icon.png',
+      //     imageWidth: 200,
+      //     resizeMode: 'contain',
+      //     backgroundColor: '#ffffff',
+      //   },
+      // ],
       [
         '@react-native-seoul/kakao-login',
         {
