@@ -1,4 +1,4 @@
-package com.app
+pacakge com.ballog.app
 
 import android.app.Application
 import android.content.res.Configuration

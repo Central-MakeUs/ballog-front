@@ -1,4 +1,4 @@
-package com.app
+pacakge com.ballog.app
 
 import android.os.Build
 import android.os.Bundle
