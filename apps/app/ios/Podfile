@@ -44,12 +44,28 @@ target 'Ballog' do
   )
 
   post_install do |installer|
+
     react_native_post_install(
       installer,
       config[:reactNativePath],
       :mac_catalyst_enabled => false,
       :ccache_enabled => podfile_properties['apple.ccacheEnabled'] == 'true',
     )
+
+    # Xcode 16 호환성 수정
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        # 중요: User Script Sandboxing 비활성화
+        config.build_settings['ENABLE_USER_SCRIPT_SANDBOXING'] = 'NO'
+        
+        # 모듈 설정
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'YES'
+        config.build_settings['ENABLE_BITCODE'] = 'NO'
+        
+        # 시뮬레이터 아키텍처 제외
+        config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      end
+    end
 
     # This is necessary for Xcode 14, because it signs resource bundles by default
     # when building for devices.
