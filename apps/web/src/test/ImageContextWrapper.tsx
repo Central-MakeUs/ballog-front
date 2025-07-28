@@ -41,8 +41,8 @@ export const EmptyImageContextWrapper = ({
   )
 }
 
-export const ImageContextRender = (ui: React.ReactNode) =>
-  render(ui, { wrapper: ImageContextWrapper })
+export const ImageContextRender = (ui: React.ReactElement) =>
+  render(<ImageContextWrapper>{ui}</ImageContextWrapper>)
 
-export const EmptyImageContextRender = (ui: React.ReactNode) =>
-  render(ui, { wrapper: EmptyImageContextWrapper })
+export const EmptyImageContextRender = (ui: React.ReactElement) =>
+  render(<EmptyImageContextWrapper>{ui}</EmptyImageContextWrapper>)
