@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
+import { Button } from '@/shared/ui/common/Button'
 
 interface ModalButton {
   label: string
@@ -16,24 +17,22 @@ export const Buttons = ({ buttons, className, ...rest }: ButtonsProps) => {
 
   return (
     <div className={cn('flex gap-4 w-full ', className)} {...rest}>
-      <button
+      <Button
         onClick={left.onClick}
-        className={cn(
-          'body-md-medium flex-1 py-3 rounded-xl',
-          'bg-brand-secondary-subtle text-brand-neutral-70',
-        )}
+        variant="secondary"
+        size="lg"
+        className="flex-1"
       >
         {left.label}
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={right.onClick}
-        className={cn(
-          'body-md-medium flex-1 py-3 rounded-xl',
-          'bg-brand-primary-default text-brand-neutral-white',
-        )}
+        variant="primary"
+        size="lg"
+        className="flex-1"
       >
         {right.label}
-      </button>
+      </Button>
     </div>
   )
 }

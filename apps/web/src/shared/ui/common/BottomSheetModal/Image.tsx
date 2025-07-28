@@ -14,11 +14,11 @@ export const Image = ({
   ...rest
 }: ImageProps) => {
   return (
-    <div className={cn('mb-6', className)} {...rest}>
+    <div className={cn(className)} {...rest}>
       <img
         src={src}
         alt={alt}
-        className={cn('w-full h-full max-h-134', className)}
+        className={cn('w-full h-full max-h-100 object-cover', className)}
         {...rest}
       />
     </div>

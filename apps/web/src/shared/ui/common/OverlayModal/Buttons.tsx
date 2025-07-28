@@ -5,6 +5,7 @@ import { cn } from '@/shared/lib/classnames'
 interface ModalButton {
   label: string
   onClick: () => void
+  dataTestId?: string
 }
 
 interface ButtonsProps extends ComponentProps<'div'> {
@@ -33,6 +34,7 @@ export const Buttons = ({
           <button
             key={idx}
             onClick={btn.onClick}
+            data-testid={btn.dataTestId}
             className={cn(
               'flex-1 py-2.5 text-center',
               idx === buttons.length - 1 ? 'body-md-bold' : 'body-md-medium',

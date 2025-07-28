@@ -18,7 +18,7 @@ export const matchHandlers = [
       return HttpResponse.json(
         {
           data: isEmpty ? [] : matches,
-          statusCode: 200,
+          status: 200,
           message: 'Success',
           success: '오늘 경기 일정 조회 성공',
         },

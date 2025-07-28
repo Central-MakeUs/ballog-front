@@ -3,14 +3,17 @@ import '@stackflow/plugin-basic-ui/index.css'
 import QueryProvider from '@/app/Provider/QueryProvider'
 import { SessionProvider } from '@/shared/contexts/sessionContext'
 import { Toaster } from '@/shared/ui/common/Sonner'
+import { OverlayProvider } from '@/hooks/useOverlay'
 
 const App = () => {
   return (
     <SessionProvider>
-      <QueryProvider>
-        <Stack />
-        <Toaster position="bottom-center" />
-      </QueryProvider>
+      <OverlayProvider>
+        <QueryProvider>
+          <Stack />
+          <Toaster position="bottom-center" />
+        </QueryProvider>
+      </OverlayProvider>
     </SessionProvider>
   )
 }

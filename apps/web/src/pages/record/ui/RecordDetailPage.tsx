@@ -8,6 +8,8 @@ import { queryKeys } from '@/entities/record/api/record.queries'
 import { Loading } from '@/shared/ui/common'
 import { RecordLogCard } from '@/entities/record/ui/RecordLogCard'
 import { ImageTimeLine } from '@/features/record/ui/ImageTimeLine'
+import { EmotionTimeLine } from '@/features/record/ui/EmotionTimeLine'
+import { BottomButtonGroup } from '@/features/record/ui/BottomButtonGroup'
 import { ImageContextProvider } from '@/features/record/hooks/ImageContextProvider'
 
 export const RecordDetailPage = ({
@@ -57,8 +59,8 @@ export const RecordDetailPage = ({
           </div>
 
           <ImageTimeLine recordId={data?.data.matchRecordId ?? 0} />
-          {/* <EmotionTimeLine />
-          <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} /> */}
+          <EmotionTimeLine />
+          <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} />
         </AppLayout>
       </ImageContextProvider>
     </AppScreen>

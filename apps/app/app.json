@@ -4,7 +4,7 @@
     "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/profile_img.png",
     "scheme": "app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/profile_img.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -22,25 +22,17 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/profile_img.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/profile_img.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
-        }
-      ],
-      [
-        "@react-native-seoul/kakao-login",
-        {
-          "kakaoAppKey": "{{kakao api key}}",
-          "overrideKakaoSDKVersion": "2.11.2",
-          "kotlinVersion": "1.9.0"
         }
       ],
       [
@@ -51,6 +43,13 @@
               "https://devrepo.kakao.com/nexus/content/groups/public/"
             ]
           }
+        }
+      ],
+      [
+        "react-native-share",
+        {
+          "ios": ["fb", "instagram"],
+          "android": ["com.facebook.katana", "com.instagram.android"]
         }
       ]
     ],

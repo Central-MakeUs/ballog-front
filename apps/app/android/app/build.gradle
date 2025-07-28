@@ -87,16 +87,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.app"
+    namespace 'com.kych0912.app'
     defaultConfig {
-        applicationId "com.app"
+        applicationId 'com.kych0912.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
-        manifestPlaceholders = [
-            KAKAO_APP_KEY: "YOUR_KAKAO_NATIVE_APP_KEY"
-        ]
+        versionName "1.0.0"
     }
     signingConfigs {
         debug {

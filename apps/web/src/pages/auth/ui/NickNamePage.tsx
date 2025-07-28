@@ -33,7 +33,7 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
     onSuccess: async (data) => {
       const user = await authGet.getUser()
       setUser(user.data)
-      if (data.statusCode === 200) {
+      if (data.status === 200) {
         push('Home', {}, { animate: false })
       }
     },

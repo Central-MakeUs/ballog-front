@@ -18,6 +18,15 @@ export type ImageSelectedPayload = {
   imageDataList: ImageData[]
 }
 
+export type ImageDownloadPayload = {
+  imageUrl: string
+}
+
+// 인스타그램 스토리 공유용 페이로드 타입
+export type InstagramSharePayload = {
+  imageUrl: string
+}
+
 // 각 이벤트별 스키마 정의
 export type BridgeMessageSchema = {
   OPEN_CAMERA: {
@@ -29,10 +38,26 @@ export type BridgeMessageSchema = {
   IMAGE_SELECTED: {
     payload: ImageSelectedPayload
   }
+  DOWNLOAD_IMAGE: {
+    payload: ImageDownloadPayload
+  }
+  IMAGE_DOWNLOAD_RESPONSE: {
+    payload: BasicMessagePayload
+  }
+  SHARE_TO_INSTAGRAM_STORY: {
+    payload: InstagramSharePayload
+  }
+  INSTAGRAM_SHARE_RESPONSE: {
+    payload: BasicMessagePayload
+  }
 }
 
 // 기존 PostMessagePayload는 유니온 타입으로 변경
-export type PostMessagePayload = BasicMessagePayload | ImageSelectedPayload
+export type PostMessagePayload =
+  | BasicMessagePayload
+  | ImageSelectedPayload
+  | ImageDownloadPayload
+  | InstagramSharePayload
 
 // {
 //   eventName: string
