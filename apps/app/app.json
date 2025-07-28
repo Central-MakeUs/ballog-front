@@ -9,7 +9,14 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "fb",
+          "instagram"
+        ]
+      },
+      "bundleIdentifier": "com.kych0912.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -48,8 +55,14 @@
       [
         "react-native-share",
         {
-          "ios": ["fb", "instagram"],
-          "android": ["com.facebook.katana", "com.instagram.android"]
+          "ios": [
+            "fb",
+            "instagram"
+          ],
+          "android": [
+            "com.facebook.katana",
+            "com.instagram.android"
+          ]
         }
       ]
     ],
