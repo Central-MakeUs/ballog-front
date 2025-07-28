@@ -28,21 +28,3 @@ project.xcworkspace
 
 # CocoaPods
 /Pods/
-
-# iOS build
-ios/build/
-ios/Pods/
-ios/.xcworkspace
-ios/Podfile.lock
-ios/Ballog.xcworkspace/
-ios/Ballog.xcodeproj/project.xcworkspace/
-ios/Ballog.xcodeproj/xcuserdata/
-ios/Ballog.xcodeproj/xcshareddata/WorkspaceSettings.xcsettings
-
-# Xcode user settings
-*.xcuserstate
-*.xcuserdata
-*.xcscmblueprint
-
-# Derived data
-DerivedData/
