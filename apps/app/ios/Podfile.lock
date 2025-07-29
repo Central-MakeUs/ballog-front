@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.10.2)
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
   - EXConstants (17.1.7):
@@ -50,7 +49,7 @@ PODS:
     - ExpoModulesCore
   - ExpoHead (5.1.4):
     - ExpoModulesCore
-  - ExpoImage (2.4.0):
+  - ExpoImage (2.3.2):
     - ExpoModulesCore
     - libavif/libdav1d
     - SDWebImage (~> 5.21.0)
@@ -160,22 +159,6 @@ PODS:
   - hermes-engine (0.79.5):
     - hermes-engine/Pre-built (= 0.79.5)
   - hermes-engine/Pre-built (0.79.5)
-  - kakao-login (5.3.0):
-    - KakaoSDKAuth (= 2.11.2)
-    - KakaoSDKCommon (= 2.11.2)
-    - KakaoSDKUser (= 2.11.2)
-    - React
-  - KakaoSDKAuth (2.11.2):
-    - KakaoSDKCommon (= 2.11.2)
-  - KakaoSDKCommon (2.11.2):
-    - KakaoSDKCommon/Common (= 2.11.2)
-    - KakaoSDKCommon/Network (= 2.11.2)
-  - KakaoSDKCommon/Common (2.11.2)
-  - KakaoSDKCommon/Network (2.11.2):
-    - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.11.2)
-  - KakaoSDKUser (2.11.2):
-    - KakaoSDKAuth (= 2.11.2)
   - libavif/core (0.11.1)
   - libavif/libdav1d (0.11.1):
     - libavif/core
@@ -1944,6 +1927,8 @@ PODS:
     - React-logger (= 0.79.5)
     - React-perflogger (= 0.79.5)
     - React-utils (= 0.79.5)
+  - RNDeviceInfo (14.0.4):
+    - React-Core
   - RNFBApp (22.4.0):
     - Firebase/CoreOnly (= 11.15.0)
     - React-Core
@@ -2151,6 +2136,30 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNShare (12.1.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNSVG (15.12.0):
     - DoubleConversion
     - glog
@@ -2232,7 +2241,7 @@ DEPENDENCIES:
   - "ExpoFont (from `../../../node_modules/.pnpm/expo-font@13.3.2_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_react-native_57d2a3b7d162cf352166aab2d74cfb02/node_modules/expo-font/ios`)"
   - "ExpoHaptics (from `../../../node_modules/.pnpm/expo-haptics@14.1.4_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_react-nat_12feb26aa80ae206e958eb97ddd24b6a/node_modules/expo-haptics/ios`)"
   - "ExpoHead (from `../../../node_modules/.pnpm/expo-router@5.1.4_55e55c04b8f2ea52e4168c89b259e1b7/node_modules/expo-router/ios`)"
-  - "ExpoImage (from `../../../node_modules/.pnpm/expo-image@2.4.0_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_react-native_115dd7fd5de5278c636c1f26725a075e/node_modules/expo-image/ios`)"
+  - "ExpoImage (from `../../../node_modules/.pnpm/expo-image@2.3.2_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_react-native_e411bab0392f16d16021532cc6dbe65e/node_modules/expo-image/ios`)"
   - "ExpoImagePicker (from `../../../node_modules/.pnpm/expo-image-picker@16.1.4_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_reac_604f75b4ed6a27c355ec3f98d5e5cfc8/node_modules/expo-image-picker/ios`)"
   - ExpoKeepAwake (from `../../../node_modules/expo-keep-awake/ios`)
   - "ExpoLinking (from `../../../node_modules/.pnpm/expo-linking@7.1.7_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_react-nati_8216a57eeb1fe9e53992ec19ecd02e7e/node_modules/expo-linking/ios`)"
@@ -2247,7 +2256,6 @@ DEPENDENCIES:
   - "fmt (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/third-party-podspecs/fmt.podspec`)"
   - "glog (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/third-party-podspecs/glog.podspec`)"
   - "hermes-engine (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)"
-  - "kakao-login (from `../node_modules/@react-native-seoul/kakao-login`)"
   - "RCT-Folly (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)"
   - "RCT-Folly/Fabric (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)"
   - "RCTDeprecation (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)"
@@ -2314,17 +2322,18 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - "ReactCommon/turbomodule/core (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/ReactCommon`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - "Yoga (from `../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/ReactCommon/yoga`)"
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - Firebase
     - FirebaseCore
     - FirebaseCoreExtension
@@ -2333,9 +2342,6 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
-    - KakaoSDKAuth
-    - KakaoSDKCommon
-    - KakaoSDKUser
     - libavif
     - libdav1d
     - libwebp
@@ -2374,7 +2380,7 @@ EXTERNAL SOURCES:
   ExpoHead:
     :path: "../../../node_modules/.pnpm/expo-router@5.1.4_55e55c04b8f2ea52e4168c89b259e1b7/node_modules/expo-router/ios"
   ExpoImage:
-    :path: "../../../node_modules/.pnpm/expo-image@2.4.0_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_react-native_115dd7fd5de5278c636c1f26725a075e/node_modules/expo-image/ios"
+    :path: "../../../node_modules/.pnpm/expo-image@2.3.2_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_react-native_e411bab0392f16d16021532cc6dbe65e/node_modules/expo-image/ios"
   ExpoImagePicker:
     :path: "../../../node_modules/.pnpm/expo-image-picker@16.1.4_expo@53.0.20_@babel+core@7.27.4_@expo+metro-runtime@5.0.4_reac_604f75b4ed6a27c355ec3f98d5e5cfc8/node_modules/expo-image-picker/ios"
   ExpoKeepAwake:
@@ -2404,8 +2410,6 @@ EXTERNAL SOURCES:
   hermes-engine:
     :podspec: "../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
     :tag: hermes-2025-06-04-RNv0.79.3-7f9a871eefeb2c3852365ee80f0b6733ec12ac3b
-  kakao-login:
-    :path: "../node_modules/@react-native-seoul/kakao-login"
   RCT-Folly:
     :podspec: "../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTDeprecation:
@@ -2534,6 +2538,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/ReactCommon"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBMessaging:
@@ -2544,13 +2550,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNShare:
+    :path: "../node_modules/react-native-share"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   Yoga:
     :path: "../../../node_modules/.pnpm/react-native@0.79.5_@babel+core@7.27.4_@react-native-community+cli@19.1.1_typescript@5._bde630859f6ac88a3ab175e3d226808c/node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EXConstants: 98bcf0f22b820f9b28f9fee55ff2daededadd2f8
@@ -2563,7 +2570,7 @@ SPEC CHECKSUMS:
   ExpoFont: cf508bc2e6b70871e05386d71cab927c8524cc8e
   ExpoHaptics: 0ff6e0d83cd891178a306e548da1450249d54500
   ExpoHead: a7b66cbaeeb51f4a85338d335a0f5467e29a2c90
-  ExpoImage: e4102c93d1dbe99ff54b075452d1bc9d6ec21b7c
+  ExpoImage: 785f7673cfecd97045cf333fd6486b57ccab4b71
   ExpoImagePicker: 0963da31800c906e01c03e25d7c849f16ebf02a2
   ExpoKeepAwake: bf0811570c8da182bfb879169437d4de298376e7
   ExpoLinking: d5c183998ca6ada66ff45e407e0f965b398a8902
@@ -2586,10 +2593,6 @@ SPEC CHECKSUMS:
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   hermes-engine: f03b0e06d3882d71e67e45b073bb827da1a21aae
-  kakao-login: a0c69f7a7c188fc2980e6070720a2acd8f7516f9
-  KakaoSDKAuth: 98f90fb67b2c2015cc94066a4489d54bb2f2a68e
-  KakaoSDKCommon: 83fef177bcad9a8f9cb728f92e04a464882d3a82
-  KakaoSDKUser: bf7b02e23257199995cdd03d59feb716416d14d6
   libavif: 84bbb62fb232c3018d6f1bab79beea87e35de7b7
   libdav1d: 23581a4d8ec811ff171ed5e2e05cd27bad64c39f
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
@@ -2659,11 +2662,13 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: f3e842e6cb5a825b6918a74a38402ba1409411f8
   ReactCodegen: 17081d53b1834e03c937d58a2d97500ae6231748
   ReactCommon: 1ab5451fc5da87c4cc4c3046e19a8054624ca763
+  RNDeviceInfo: d863506092aef7e7af3a1c350c913d867d795047
   RNFBApp: 12884d3bf9b3a0223efe4a0adce516edf72c4102
   RNFBMessaging: e954bfb053a5c6bb10b26bae4bbc58a4edd41131
   RNGestureHandler: 7d0931a61d7ba0259f32db0ba7d0963c3ed15d2b
   RNReanimated: 684261c15e37328de1463799dbb75ae81152ba65
   RNScreens: 482e9707f9826230810c92e765751af53826d509
+  RNShare: f97d3748c0801c03d8d4fd043b1d94d0a67ba4e9
   RNSVG: 8a1054afe490b5d63b9792d7ae3c1fde8c05cdd0
   SDWebImage: f29024626962457f3470184232766516dee8dfea
   SDWebImageAVIFCoder: 00310d246aab3232ce77f1d8f0076f8c4b021d90
