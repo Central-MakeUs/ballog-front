@@ -1,19 +1,27 @@
 import messaging from '@react-native-firebase/messaging'
+import { Alert } from 'react-native'
 
 /**
  * IOS 에서 사용자에게 푸시 알림 권한 요청 함수
  */
 export const requestUserPermission = async () => {
-  const authStatus = await messaging().requestPermission()
+  const authStatus = await messaging().requestPermission({
+    sound: true,
+    badge: true,
+    alert: true,
+  })
+
   const enabled =
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL
 
   if (enabled) {
-    console.log('알림 권한 허용됨')
-  } else {
-    console.log('알림 권한 거부됨')
+    console.log('Authorization status:', authStatus)
+    // 🔥 중요: 디바이스를 원격 메시지에 등록
+    await messaging().registerDeviceForRemoteMessages()
   }
+
+  return enabled
 }
 
 /**
@@ -38,6 +46,15 @@ export const getFcmToken = async () => {
 export const listenForegroundMessages = () => {
   return messaging().onMessage(async (remoteMessage) => {
     console.log('포그라운드 알림 수신:', remoteMessage)
+    Alert.alert(
+      remoteMessage.notification?.title || '알림',
+      remoteMessage.notification?.body || '',
+      [
+        { text: '닫기', style: 'cancel' },
+        { text: '확인', style: 'default' }
+      ]
+    );
+    
     // 예: Alert.alert(remoteMessage.notification?.title ?? '알림')
   })
 }
