@@ -1,5 +1,5 @@
+package com.ballog.app
 import expo.modules.splashscreen.SplashScreenManager
-pacakge com.ballog.app
 
 import android.os.Build
 import android.os.Bundle

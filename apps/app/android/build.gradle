@@ -10,9 +10,6 @@ buildscript {
     classpath('com.android.tools.build:gradle')
     classpath('com.facebook.react:react-native-gradle-plugin')
     classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
-
-    // firebase 용 구글 서비스 플러그인
-    classpath 'com.google.gms:google-services:4.4.3'
   }
 }
 
@@ -34,7 +31,6 @@ allprojects {
     google()
     mavenCentral()
     maven { url 'https://www.jitpack.io' }
-    maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
   }
 }
 

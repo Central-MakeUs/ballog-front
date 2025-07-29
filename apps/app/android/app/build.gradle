@@ -1,7 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
-apply plugin: 'com.google.gms.google-services'
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
@@ -95,9 +94,6 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
-        manifestPlaceholders = [
-            KAKAO_APP_KEY: "YOUR_KAKAO_NATIVE_APP_KEY"
-        ]
     }
     signingConfigs {
         debug {
@@ -178,10 +174,4 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-
-     // Firebase BoM (버전 관리)
-    implementation platform('com.google.firebase:firebase-bom:34.0.0')
-
-    // 사용할 Firebase 모듈
-    implementation 'com.google.firebase:firebase-messaging'
 }
