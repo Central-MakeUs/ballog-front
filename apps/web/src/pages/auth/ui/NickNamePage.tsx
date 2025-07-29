@@ -9,11 +9,11 @@ import type {
 import { NickNameForm } from '@/features/auth/ui'
 import { type ExtendedKyHttpError } from '@/types/api/common'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
-import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import { authGet } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
+import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
 interface NickNamePageProps {
   selectedTeam: string | null
@@ -47,7 +47,7 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
   return (
     <AppScreen
       appBar={{
-        title: <BallogLogo />,
+        title: <WhiteBallogLogo />,
         backButton: {
           renderIcon: () => <BackArrow />,
         },

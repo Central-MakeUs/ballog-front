@@ -4,8 +4,8 @@ import { TeamSelectionForm } from '@/features/auth/ui'
 import { useFlow } from '@/shared/lib/stackflow'
 import type { TeamKey } from '@/shared/constants/teams'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
-import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
+import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
 const TeamSelectPage = () => {
   const { push } = useFlow()
@@ -17,7 +17,7 @@ const TeamSelectPage = () => {
   return (
     <AppScreen
       appBar={{
-        title: <BallogLogo />,
+        title: <WhiteBallogLogo />,
         height: '48px',
         backButton: {
           renderIcon: () => <BackArrow />,
