@@ -13,5 +13,5 @@ export const useBridgeEvent = <T extends keyof BridgeMessageSchema>(
   useEffect(() => {
     const unsubscribe = bridge.addEventListener(eventType, callback)
     return () => unsubscribe()
-  }, [bridge, eventType, ...deps])
+  }, [eventType, callback, ...deps])
 }
