@@ -25,7 +25,7 @@ const TeamSelectPage = () => {
       }}
       preventSwipeBack={true}
     >
-      <AppLayout>
+      <AppLayout className="h-full">
         <TeamSelectionForm onSubmit={handleTeamSelect} />
       </AppLayout>
     </AppScreen>

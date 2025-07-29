@@ -1,20 +1,14 @@
 import { useState } from 'react'
 
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
-import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 interface TeamSelectionFormProps {
   onSubmit: (team: TeamKey) => void
 }
 
 export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
-  const { user, setUser } = useSessionContext()
-
-  const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(
-    (user?.baseballTeam as TeamKey) ?? null,
-  )
+  const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(null)
 
   const handleSelect = (team: TeamKey) => {
     setSelectedTeam(team)
@@ -23,7 +17,6 @@ export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
   const handleSubmit = () => {
     if (!selectedTeam) return
     onSubmit(selectedTeam)
-    if (user) setUser({ ...user, baseballTeam: selectedTeam })
   }
 
   return (
@@ -54,13 +47,12 @@ export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
       </div>
 
       <div className="flex-grow" />
-
       <Button
         size="lg"
         variant="primary"
         disabled={!selectedTeam}
         onClick={handleSubmit}
-        className={cn('w-full sticky bottom-10')}
+        className="fixed bottom-10 left-4 right-4"
       >
         시작하기
       </Button>
