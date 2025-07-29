@@ -20,6 +20,17 @@ declare global {
   }
 }
 
+// 이벤트 리스너들을 저장할 Map
+// eventName, callback이 key, value로 저장
+// 이 중에서 addEventListener에서 추가한 이벤트 리스너만 호출
+// 전역 상태로 두어 bridge instance들이 공유하도록 함
+const globalEventListeners = new Map<
+  string,
+  (
+    event: PostMessageSchemaObject[keyof PostMessageSchemaObject]['payload'],
+  ) => void
+>()
+
 // RN 환경 여부를 확인하는 함수
 const isRNEnvironment = (): boolean => {
   return !!window.ReactNativeWebView
@@ -33,6 +44,19 @@ const handleMessage = (data: string): WebMessageEvent | null => {
   } catch (error) {
     console.error('Web Bridge message parsing error:', error)
     return null
+  }
+}
+
+// 전역 메시지 핸들러
+const globalMessageHandler = (event: MessageEvent) => {
+  const message = handleMessage(event.data)
+  if (message) {
+    // 이벤트 이름에 해당하는 핸들러 함수 호출
+    const listeners = globalEventListeners.get(message.eventName)
+    if (listeners) {
+      // 있으면 핸들러 함수 호출
+      listeners(message.payload)
+    }
   }
 }
 /**
@@ -56,27 +80,6 @@ export const createWebBridge = <
   T extends PostMessageSchemaObject = BridgeMessageSchema,
 >() => {
   const isReady = isRNEnvironment()
-
-  // 이벤트 리스너들을 저장할 Map
-  // eventName, callback이 key, value로 저장
-  // 이 중에서 addEventListener에서 추가한 이벤트 리스너만 호출
-  const eventListeners = new Map<
-    string,
-    (event: T[keyof T]['payload']) => void
-  >()
-
-  // 전역 메시지 핸들러
-  const globalMessageHandler = (event: MessageEvent) => {
-    const message = handleMessage(event.data)
-    if (message) {
-      // 이벤트 이름에 해당하는 핸들러 함수 호출
-      const listeners = eventListeners.get(message.eventName)
-      if (listeners) {
-        // 있으면 핸들러 함수 호출
-        listeners(message.payload)
-      }
-    }
-  }
 
   // 전역 이벤트 리스너 등록 (한 번만)
   if (isReady) {
@@ -110,21 +113,21 @@ export const createWebBridge = <
   ) => {
     const eventNameStr = String(eventName)
 
-    if (!eventListeners.has(eventNameStr)) {
-      eventListeners.set(eventNameStr, callback)
+    if (!globalEventListeners.has(eventNameStr)) {
+      globalEventListeners.set(eventNameStr, callback)
     }
 
     // 구독 해제 함수 반환
     return () => {
-      const currentListeners = eventListeners.get(eventNameStr)
+      const currentListeners = globalEventListeners.get(eventNameStr)
       if (currentListeners) {
-        eventListeners.delete(eventNameStr)
+        globalEventListeners.delete(eventNameStr)
       }
     }
   }
 
   const destroy = () => {
-    eventListeners.clear()
+    globalEventListeners.clear()
     window.removeEventListener('message', globalMessageHandler)
     document.removeEventListener(
       'message',
