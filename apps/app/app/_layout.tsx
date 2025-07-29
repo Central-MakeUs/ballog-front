@@ -3,15 +3,11 @@ import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 import { ImageBridgeProvider } from '@/shared/contexts/imageBridgeContext'
-// import '@react-native-firebase/app'
 import {
   requestUserPermission,
   getFcmToken,
   listenForegroundMessages,
 } from '@/shared/lib/firebase/messaging'
-// import messaging from '@react-native-firebase/messaging'
-// import firebase from '@react-native-firebase/app'
-
 
 export default function RootLayout() {
 

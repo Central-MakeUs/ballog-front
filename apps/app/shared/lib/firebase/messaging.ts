@@ -45,7 +45,7 @@ export const getFcmToken = async () => {
  */
 export const listenForegroundMessages = () => {
   return messaging().onMessage(async (remoteMessage) => {
-    console.log('포그라운드 알림 수신:', remoteMessage)
+    console.log('알림 수신:', remoteMessage)
     Alert.alert(
       remoteMessage.notification?.title || '알림',
       remoteMessage.notification?.body || '',
@@ -58,11 +58,3 @@ export const listenForegroundMessages = () => {
     // 예: Alert.alert(remoteMessage.notification?.title ?? '알림')
   })
 }
-
-/**
- * 백그라운드 상태에서 메시지 수신 핸들러
- */
-// messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-//   console.log('백그라운드 알림 수신:', remoteMessage)
-//   // 알림 클릭 여부와 관계없이 수신시 실행됨
-// })

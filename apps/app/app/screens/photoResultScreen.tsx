@@ -33,15 +33,15 @@ export default function PhotoResultScreen() {
       return
     }
     const base64DataUrl = await encode(photoUri)
-    console.log('원본 파일 경로:', photoUri)
-    console.log('원본 파일 크기:', fileInfo.size, 'bytes')
+    // console.log('원본 파일 경로:', photoUri)
+    // console.log('원본 파일 크기:', fileInfo.size, 'bytes')
 
     // 2. base64 인코딩
 
     // 3. base64 길이 측정 (data:image/... 부분 포함)
-    console.log('base64 전체 길이:', base64DataUrl.length)
-    const base64Raw = base64DataUrl.split(',')[1]
-    console.log('base64 실제 데이터 길이:', base64Raw.length)
+    // console.log('base64 전체 길이:', base64DataUrl.length)
+    // const base64Raw = base64DataUrl.split(',')[1]
+    // console.log('base64 실제 데이터 길이:', base64Raw.length)
 
     setBase64Image(base64DataUrl)
     router.back()
