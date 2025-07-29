@@ -21,10 +21,14 @@ export const requestUserPermission = async () => {
  * @return token
  */
 export const getFcmToken = async () => {
-  const token = await messaging().getToken()
-  console.log('🔥 FCM Token:', token)
-  // 서버에 토큰 저장하거나, 테스트 용도로 복사해도 됨
-  return token
+  try {
+    const token = await messaging().getToken()
+    console.log('FCM Token:', token)
+    return token
+  } catch (error) {
+    console.error('FCM 토큰 가져오기 실패:', error)
+    return null
+  }
 }
 
 /**
@@ -41,7 +45,7 @@ export const listenForegroundMessages = () => {
 /**
  * 백그라운드 상태에서 메시지 수신 핸들러
  */
-messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-  console.log('백그라운드 알림 수신:', remoteMessage)
-  // 알림 클릭 여부와 관계없이 수신시 실행됨
-})
+// messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+//   console.log('백그라운드 알림 수신:', remoteMessage)
+//   // 알림 클릭 여부와 관계없이 수신시 실행됨
+// })

@@ -36,20 +36,16 @@ export default {
       //   },
       // ],
       [
-        '@react-native-seoul/kakao-login',
-        {
-          kakaoAppKey: '{{kakao api key}}',
-          overrideKakaoSDKVersion: '2.11.2',
-          kotlinVersion: '1.9.0',
-        },
-      ],
-      [
         'expo-build-properties',
         {
           android: {
             extraMavenRepos: [
               'https://devrepo.kakao.com/nexus/content/groups/public/',
             ],
+          },
+          ios: {
+            deploymentTarget: '15.1',
+            useFrameworks: 'static',
           },
         },
       ],

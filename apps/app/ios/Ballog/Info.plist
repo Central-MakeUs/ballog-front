@@ -31,23 +31,9 @@
           <string>com.ballog.app</string>
         </array>
       </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>kakao{{kakao api key}}</string>
-        </array>
-      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>
-    <key>KAKAO_APP_KEY</key>
-    <string>{{kakao api key}}</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>kakaokompassauth</string>
-      <string>storykompassauth</string>
-      <string>kakaolink</string>
-    </array>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
     <key>LSRequiresIPhoneOS</key>

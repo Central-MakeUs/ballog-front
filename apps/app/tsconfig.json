@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-    }
+    },
+    "types": ["expo-router"]
   },
   "include": [
     "**/*.ts",

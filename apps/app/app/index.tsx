@@ -6,6 +6,7 @@ import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
 import { useRouter } from 'expo-router'
 import { useBridge } from './bridge/bridgeHandler'
 import type { PostMessagePayload } from '@ballog/bridge'
+import Constants from 'expo-constants'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
@@ -105,11 +106,13 @@ const HomeScreen = () => {
     )
   }
 
+  // 김용희 uri : http://192.168.0.12:5173/
+
   return (
     <SafeAreaView style={styles.container}>
       <WebView
         ref={webViewRef}
-        source={{ uri: webViewUri }}
+        source={{ uri: 'http://192.168.0.12:5173/' }}
         onMessage={combinedMessageHandler}
         javaScriptEnabled={true}
         domStorageEnabled={true}

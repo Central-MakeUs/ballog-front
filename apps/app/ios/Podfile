@@ -8,9 +8,6 @@ ENV['RCT_NEW_ARCH_ENABLED'] = '0' if podfile_properties['newArchEnabled'] == 'fa
 ENV['EX_DEV_CLIENT_NETWORK_INSPECTOR'] = podfile_properties['EX_DEV_CLIENT_NETWORK_INSPECTOR']
 
 platform :ios, podfile_properties['ios.deploymentTarget'] || '15.1'
-
-use_modular_headers!
-
 install! 'cocoapods',
   :deterministic_uuids => false
 
@@ -65,4 +62,3 @@ target 'Ballog' do
     end
   end
 end
-$KakaoSDKVersion="2.11.2"
