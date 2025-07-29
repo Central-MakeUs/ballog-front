@@ -11,7 +11,7 @@ import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 const ChangeTeamSelectPage = () => {
   const { pop } = useFlow()
-  const { user } = useSessionContext()
+  const { user, setUser } = useSessionContext()
 
   const { mutate } = useUpdateMyInfoMutation()
 
@@ -22,6 +22,7 @@ const ChangeTeamSelectPage = () => {
       {
         onSuccess: () => {
           pop()
+          setUser({ ...user, baseballTeam: selectedTeam })
         },
       },
     )

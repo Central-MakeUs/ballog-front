@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { POST_MESSAGE_EVENT, createWebBridge } from '@ballog/bridge'
+import { toast } from 'sonner'
 
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
@@ -6,9 +9,22 @@ import { useModal } from '@/shared/hooks/modal/useModal'
 import { OverlayProvider } from '@/hooks/useOverlay'
 import { List } from '@/shared/ui/common/List/List'
 import { ChangeMyInfoWidget } from '@/widgets/changeMyInfoWidget/ChangeMyInfoWidget'
+import { useFlow } from '@/shared/lib/stackflow'
 
 const MyPageInner = () => {
   const { openHorizontalModal } = useModal()
+  const { replace } = useFlow()
+  const bridge = createWebBridge()
+
+  useEffect(() => {
+    bridge.addEventListener(POST_MESSAGE_EVENT.LOGOUT_RESPONSE, (payload) => {
+      if (payload.status === 'success') {
+        replace('Login', {})
+      } else {
+        toast.error('로그아웃에 실패했습니다.')
+      }
+    })
+  }, [])
 
   const HandleClickLogout = () => {
     openHorizontalModal({
@@ -19,6 +35,9 @@ const MyPageInner = () => {
         {
           label: '로그아웃',
           onClick: () => {
+            bridge.send(POST_MESSAGE_EVENT.LOGOUT, {
+              message: '로그아웃 요청',
+            })
             close()
             // 로그아웃 로직 작성
           },
