@@ -16,15 +16,24 @@ interface SocialButtonProps extends ComponentProps<'button'> {
 
 export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
   const { push } = useFlow()
-  const { handleLogin } = useSocialLogin({
+  // 카카오 로그인 훅
+  const { handleLogin, isPending } = useSocialLogin({
     social: 'kakao',
     onSuccess: () => {
       push('TeamSelect', {
         selectedTeam: null,
       })
     },
-    onError: () => {
-      toast.error('로그인에 실패했습니다.')
+    onError: (error) => {
+      if (error && typeof error === 'object' && 'errorData' in error) {
+        toast.error(error.errorData?.error)
+        return
+      }
+
+      if (error instanceof Error) {
+        toast.error(error.message)
+        return
+      }
     },
   })
 
@@ -33,6 +42,7 @@ export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
       leftIcon={<KakaoTalk className="size-6" />}
       rightIcon={<Chevron className="size-6" />}
       size="lg"
+      disabled={isPending}
       className={cn(
         'bg-[#FFD337]',
         'justify-between body-sm-medium text-usage-text-inverse',
@@ -44,22 +54,31 @@ export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
       }}
       {...props}
     >
-      카카오로 시작하기
+      {isPending ? '로그인 중...' : '카카오로 시작하기'}
     </Button>
   )
 }
 
 export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
   const { push } = useFlow()
-  const { handleLogin } = useSocialLogin({
+  // 애플 로그인 훅
+  const { handleLogin, isPending } = useSocialLogin({
     social: 'apple',
     onSuccess: () => {
       push('TeamSelect', {
         selectedTeam: null,
       })
     },
-    onError: () => {
-      toast.error('로그인에 실패했습니다.')
+    onError: (error) => {
+      if (error && typeof error === 'object' && 'errorData' in error) {
+        toast.error(error.errorData?.error)
+        return
+      }
+
+      if (error instanceof Error) {
+        toast.error(error.message)
+        return
+      }
     },
   })
   return (
@@ -67,6 +86,7 @@ export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
       leftIcon={<Apple className="size-6" />}
       rightIcon={<Chevron className="size-6" />}
       size="lg"
+      disabled={isPending}
       className={cn(
         'bg-brand-neutral-5 justify-between body-sm-medium text-usage-text-inverse',
         'active:bg-brand-neutral-5/80 py-4',
@@ -77,7 +97,7 @@ export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
       }}
       {...props}
     >
-      애플 로그인
+      {isPending ? '로그인 중...' : '애플로 시작하기'}
     </Button>
   )
 }

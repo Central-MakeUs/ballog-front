@@ -16,11 +16,15 @@ export const createLoginHandler = (bridge: AppBridge) => {
         // 단순히 성공 상태만 전송
         bridge.send(POST_MESSAGE_EVENT.LOGIN_RESPONSE, {
           status: 'success',
+          accessToken: res.accessToken,
+          refreshToken: res.refreshToken,
         })
       } catch (error) {
         console.log(error)
         bridge.send(POST_MESSAGE_EVENT.LOGIN_RESPONSE, {
           status: 'error',
+          accessToken: '',
+          refreshToken: '',
         })
       }
     },

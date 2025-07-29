@@ -1,6 +1,15 @@
 import { api } from '@/shared/lib/ky'
 
-import type { SignupRequestDTO, SignupResponseDTO } from '../model/auth.type'
+import type {
+  SignupRequestDTO,
+  SignupResponseDTO,
+  SocialLoginResponseDTO,
+} from '../model/auth.type'
+
+const setAccessToken = (response: SocialLoginResponseDTO) => {
+  const { accessToken: serverAccessToken } = response.data
+  localStorage.setItem('accessToken', serverAccessToken)
+}
 
 export const authPost = {
   signup: async ({
@@ -10,6 +19,46 @@ export const authPost = {
     const response = await api
       .post('auth/signup', { json: { baseballTeam, nickname } })
       .json<SignupResponseDTO>()
+    return response
+  },
+  kakaoLogin: async ({
+    accessToken,
+    refreshToken,
+  }: {
+    accessToken: string
+    refreshToken: string
+  }): Promise<SocialLoginResponseDTO> => {
+    const response = await api
+      .post('auth/login/kakao', {
+        headers: {
+          Authorization: 'Bearer ' + accessToken,
+          'X-Refresh-Token': refreshToken,
+        },
+      })
+      .json<SocialLoginResponseDTO>()
+
+    setAccessToken(response)
+
+    return response
+  },
+  appleLogin: async ({
+    accessToken,
+    refreshToken,
+  }: {
+    accessToken: string
+    refreshToken: string
+  }): Promise<SocialLoginResponseDTO> => {
+    const response = await api
+      .post('auth/login/apple', {
+        headers: {
+          Authorization: 'Bearer ' + accessToken,
+          'X-Refresh-Token': refreshToken,
+        },
+      })
+      .json<SocialLoginResponseDTO>()
+
+    setAccessToken(response)
+
     return response
   },
 }

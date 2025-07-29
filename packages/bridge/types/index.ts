@@ -33,6 +33,8 @@ export type LoginPayload = {
 
 export type LoginResponsePayload = {
   status: 'success' | 'error'
+  accessToken: string
+  refreshToken: string
 }
 
 export type LogoutResponsePayload = {
@@ -84,6 +86,7 @@ export type PostMessagePayload =
   | InstagramSharePayload
   | LoginPayload
   | LoginResponsePayload
+  | LogoutResponsePayload
 // {
 //   eventName: string
 //   payload: PostMessagePayload

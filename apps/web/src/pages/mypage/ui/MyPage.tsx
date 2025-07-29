@@ -38,6 +38,7 @@ const MyPageInner = () => {
             bridge.send(POST_MESSAGE_EVENT.LOGOUT, {
               message: '로그아웃 요청',
             })
+            localStorage.removeItem('accessToken')
             close()
             // 로그아웃 로직 작성
           },
