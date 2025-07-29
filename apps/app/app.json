@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.kych0912.app"
+      "package": "com.ballog.app"
     },
     "web": {
       "bundler": "metro",
@@ -50,6 +50,18 @@
         {
           "ios": ["fb", "instagram"],
           "android": ["com.facebook.katana", "com.instagram.android"]
+        }
+      ],
+      [
+        "@react-native-kakao/core",
+        {
+          "nativeAppKey": "1694fe053696167cfe84a8fc247896db",
+          "android": {
+            "authCodeHandlerActivity": true
+          },
+          "ios": {
+            "handleKakaoOpenUrl": true
+          }
         }
       ]
     ],
