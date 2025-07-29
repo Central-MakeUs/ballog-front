@@ -29,7 +29,7 @@ describe('RecordMainPage', () => {
 
   it('직관 기록이 없으면 Empty 컴포넌트가 렌더링된다.', () => {
     vi.mocked(recordGet.getRecord).mockResolvedValue({
-      statusCode: 200,
+      status: 200,
       message: 'success',
       data: {
         totalCount: 0,
@@ -50,7 +50,7 @@ describe('RecordMainPage', () => {
 
   it('직관 기록이 있으면 RecordList 컴포넌트가 렌더링된다.', () => {
     vi.mocked(recordGet.getRecord).mockResolvedValue({
-      statusCode: 200,
+      status: 200,
       message: 'success',
       data: {
         totalCount: 1,

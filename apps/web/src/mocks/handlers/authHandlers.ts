@@ -48,7 +48,7 @@ export const authHandlers = [
       return HttpResponse.json<SignupResponseDTO>(
         {
           data: '회원가입이 완료되었습니다.',
-          statusCode: 200,
+          status: 200,
           message: 'Success',
           success: '회원가입이 완료되었습니다.',
         },

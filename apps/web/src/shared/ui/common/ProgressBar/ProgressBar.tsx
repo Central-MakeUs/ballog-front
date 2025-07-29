@@ -42,7 +42,7 @@ export const ProgressBar = ({
     <div
       className={cn(
         'flex flex-row justify-center items-center gap-4',
-        'w-full max-w-90',
+        'w-full',
         className,
       )}
       {...rest}

@@ -34,14 +34,14 @@ export const ImageTimeLineContent = () => {
     return (
       <RecordLogCard.Root className="min-h-50 flex justify-center items-center mx-4">
         <div className="flex flex-col gap-4">
-          <div className="body-lg-bold text-brand-neutral-white text-center">
+          <h3 className="body-lg-bold text-brand-neutral-white text-center">
             등록된 사진이 없어요!
-          </div>
-          <div className="body-sm-light text-usage-text-subtle text-center">
+          </h3>
+          <p className="body-sm-light text-usage-text-subtle text-center">
             사진을 추가해
             <br />
             나만의 직관 기록을 완성해보세요.
-          </div>
+          </p>
         </div>
       </RecordLogCard.Root>
     )

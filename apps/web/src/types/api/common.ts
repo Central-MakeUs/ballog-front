@@ -2,14 +2,14 @@ import type { HTTPError } from 'ky'
 
 export interface ApiResponse<T> {
   data: T
-  statusCode: number
+  status: number
   message: string
   success: string
 }
 
 export interface ApiResponseWithNoSuccess<T> {
   data: T
-  statusCode: number
+  status: number
   message: string
 }
 

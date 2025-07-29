@@ -13,7 +13,7 @@ const getEmotionHandler = http.get(`${EMOTION_API_PREFIX}/:recordId`, () => {
   // recordId 별로 다르게 하려면 조건문 분기 가능
   return HttpResponse.json<EmotionResponseDTO>({
     message: 'success',
-    statusCode: 200,
+    status: 200,
     success: '감정 비율 조회 성공',
     data: emotionGet.data,
   })
@@ -35,7 +35,7 @@ const postEmotionHandler = http.post(
 
     return HttpResponse.json<EmotionResponseDTO>({
       message: 'success',
-      statusCode: 200,
+      status: 200,
       success: '감정 표현 등록 성공',
       data: responseData,
     })

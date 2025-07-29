@@ -1,20 +1,19 @@
-import { StyleSheet, SafeAreaView, BackHandler } from 'react-native'
+import { StyleSheet, BackHandler } from 'react-native'
 import { useEffect, useRef } from 'react'
+
 import { WebView, WebViewMessageEvent } from 'react-native-webview'
-import { getMetroServerUrl } from '@/scripts/getMetroUrl'
-import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
+
+import { useImageBridge } from '../shared/contexts/imageBridgeContext'
 import { useRouter } from 'expo-router'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { useBridge } from './bridge/bridgeHandler'
 import type { PostMessagePayload } from '@ballog/bridge'
-import Constants from 'expo-constants'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
   const router = useRouter()
   const { base64Image, clearBase64Image } = useImageBridge()
-
-  const webViewUri = getMetroServerUrl()
 
   // 뒤로가기 버튼 처리
   useEffect(() => {
@@ -109,19 +108,24 @@ const HomeScreen = () => {
   // 김용희 uri : http://192.168.0.12:5173/
 
   return (
-    <SafeAreaView style={styles.container}>
-      <WebView
-        ref={webViewRef}
-        source={{ uri: 'http://192.168.0.12:5173/' }}
-        onMessage={combinedMessageHandler}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        originWhitelist={['*']}
-        onError={(error) => console.error('WebView 에러:', error)}
-        onLoadStart={() => console.log('WebView 로딩 시작...')}
-        onLoadEnd={() => console.log('WebView 로딩 완료')}
-      />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <WebView
+          ref={webViewRef}
+          source={{
+            uri: 'http://192.168.0.12:5173/',
+            // uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+          }}
+          onMessage={bridge.processMessage}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          originWhitelist={['*']}
+          onError={(error) => console.error('WebView 에러:', error)}
+          onLoadStart={() => console.log('WebView 로딩 시작...')}
+          onLoadEnd={() => console.log('WebView 로딩 완료')}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 

@@ -11,7 +11,7 @@ export const userHandlers = [
 
     return HttpResponse.json({
       message: 'Success',
-      statusCode: 200,
+      status: 200,
       data: user.data,
     })
   }),

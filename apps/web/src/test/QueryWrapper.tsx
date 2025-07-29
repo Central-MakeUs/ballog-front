@@ -1,18 +1,18 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { JSX, ReactElement, ReactNode } from 'react'
 import { render, renderHook, type RenderOptions } from '@testing-library/react'
-import { vi } from 'vitest'
 
 import QueryProvider from '@/app/Provider/QueryProvider'
-import { TestSessionProvider } from '@/test/TestSessionProvider'
-
-const mockSetUser = vi.fn()
+import { SessionProvider } from '@/shared/contexts/sessionContext'
+import { OverlayProvider } from '@/hooks/useOverlay'
 
 export const wrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <TestSessionProvider value={{ user: null, setUser: mockSetUser }}>
-      <QueryProvider>{children as JSX.Element[]}</QueryProvider>
-    </TestSessionProvider>
+    <SessionProvider>
+      <OverlayProvider>
+        <QueryProvider>{children as JSX.Element[]}</QueryProvider>
+      </OverlayProvider>
+    </SessionProvider>
   )
 }
 

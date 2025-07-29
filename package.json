@@ -32,5 +32,8 @@
     "eslint": "^9.29.0",
     "prettier": "^3.5.3"
   },
-  "prettier": "@titicaca/prettier-config-triple"
+  "prettier": "@titicaca/prettier-config-triple",
+  "overrides": {
+    "react-is": "^19.0.0-rc-69d4b800-20241021"
+  }
 }

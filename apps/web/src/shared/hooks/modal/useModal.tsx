@@ -4,6 +4,7 @@ import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 interface ModalButton {
   label: string
   onClick: () => void
+  dataTestId?: string
 }
 
 interface HorizontalModalProps {
@@ -37,8 +38,8 @@ interface ImageModalProps {
  *     { label: '탈퇴', onClick: handleWithdraw },
  *   ]
  * })
- * 
- * 
+ *
+ *
  * - openVerticalModal
  * 수직 버튼 목록 형태의 모달을 띄웁니다.
  *
@@ -52,11 +53,11 @@ interface ImageModalProps {
  *     { label: '건너뛰기', onClick: handleSkip },
  *   ]
  * })
- * 
- * 
+ *
+ *
  * - openImageModal
  * 이미지를 보여주는 모달을 띄웁니다.
- * 
+ *
  * @example
  * openImageModal({
  *   heading: '기록이 완료되었어요!',
@@ -85,6 +86,7 @@ export const useModal = () => {
                 close()
                 buttons[0].onClick?.()
               },
+              dataTestId: buttons[0].dataTestId,
             },
             {
               label: buttons[1].label,

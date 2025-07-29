@@ -30,7 +30,9 @@ export const Text = ({
         )}
         {...rest}
       >
-        <DialogTitle className="body-lg-bold">{heading}</DialogTitle>
+        <DialogTitle className="body-lg-bold whitespace-pre-line">
+          {heading}
+        </DialogTitle>
         {body && (
           <DialogDescription className="body-sm-medium whitespace-pre-line">
             {body}
