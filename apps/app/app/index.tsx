@@ -8,12 +8,15 @@ import { useRouter } from 'expo-router'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { useBridge } from './bridge/bridgeHandler'
 import type { PostMessagePayload } from '@ballog/bridge'
+import { useImageSender } from './bridge/hooks/useImageSender'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
   const router = useRouter()
   const { base64Image, clearBase64Image } = useImageBridge()
+
+  useImageSender(bridge, base64Image, clearBase64Image)
 
   // 뒤로가기 버튼 처리
   useEffect(() => {
@@ -32,25 +35,6 @@ const HomeScreen = () => {
 
     return () => backHandler.remove()
   }, [])
-
-  useEffect(() => {
-    if (base64Image && webViewRef.current) {
-      console.log('[RN] WebView에 메시지 전송 준비')
-
-      const timeout = setTimeout(() => {
-        console.log('[RN] 메시지 전송 시작')
-        webViewRef.current?.postMessage(
-          JSON.stringify({
-            type: 'image',
-            payload: base64Image,
-          }),
-        )
-        clearBase64Image()
-      }, 1500) // 너무 짧으면 WebView 아직 준비 안 됐을 수 있음
-
-      return () => clearTimeout(timeout)
-    }
-  }, [base64Image])
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data
