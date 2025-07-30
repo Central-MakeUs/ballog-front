@@ -27,6 +27,10 @@ export type InstagramSharePayload = {
   imageUrl: string
 }
 
+export type CameraShotPayload = {
+  imageUrl: string
+}
+
 // 각 이벤트별 스키마 정의
 export type BridgeMessageSchema = {
   OPEN_CAMERA: {
@@ -49,6 +53,9 @@ export type BridgeMessageSchema = {
   }
   INSTAGRAM_SHARE_RESPONSE: {
     payload: BasicMessagePayload
+  }
+  CAMERA_SHOT: {
+    payload: CameraShotPayload
   }
 }
 

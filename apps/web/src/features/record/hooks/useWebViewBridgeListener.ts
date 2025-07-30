@@ -16,7 +16,7 @@ export const useWebViewBridgeListener = (onImageReceived: MessageHandler) => {
         window.ReactNativeWebView?.postMessage(
           JSON.stringify({
             from: 'web',
-            type: 'echo_log',
+            type: 'SEND_IMAGE_ECHO',
             message: parsed.payload.slice(0, 50),
           }),
         )
