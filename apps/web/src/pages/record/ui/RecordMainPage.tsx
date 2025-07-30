@@ -10,13 +10,57 @@ import { Loading } from '@/shared/ui/common'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { SectionHeader } from '@/shared/ui/common'
+import type { RecordResponseDTO } from '@/entities/record/model/record.type'
+
+const RecordMainContent = ({
+  data,
+}: {
+  data: RecordResponseDTO | undefined
+}) => {
+  const { totalCount, winRate, positiveEmotionPercent, records } =
+    data?.data ?? {
+      totalCount: 0,
+      winRate: 0,
+      positiveEmotionPercent: 0,
+      records: [],
+    }
+
+  return (
+    <>
+      {/* 대시보드 카드 섹션 */}
+      <div className="flex gap-4 px-4 mt-4 w-full">
+        <div className="flex-1 flex flex-col gap-4">
+          <SectionHeader title="직관 횟수/승률" />
+          {totalCount === 0 ? (
+            <IntuitionCard.Disabled />
+          ) : (
+            <IntuitionCard.Active matchCount={totalCount} winRate={winRate} />
+          )}
+        </div>
+        <div className="flex-1 flex flex-col gap-4">
+          <SectionHeader title="감정분포" />
+          {totalCount === 0 ? (
+            <EmotionCard.Disabled />
+          ) : (
+            <EmotionCard.Active
+              emotion={'기뻐요'}
+              rate={positiveEmotionPercent}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* 기록 목록 섹션 */}
+      <div className="mt-10 px-4 gap-4 flex flex-col w-full">
+        <SectionHeader title="직관 횟수/승률" />
+        <RecordList records={records} />
+      </div>
+    </>
+  )
+}
 
 export const RecordMainPage = () => {
   const { data, isLoading, error } = useQuery(queryKeys.getRecord())
-
-  if (isLoading) {
-    return <Loading text="직관 기록을 불러오는 중..." />
-  }
 
   if (error) {
     toast('직관 기록을 불러오는 중 오류가 발생했습니다.')
@@ -31,37 +75,11 @@ export const RecordMainPage = () => {
       }}
     >
       <AppLayout>
-        {/* 대시보드 카드 섹션 */}
-        <div className="flex gap-4 px-4 mt-4 w-full">
-          <div className="flex-1 flex flex-col gap-4">
-            <SectionHeader title="직관 횟수/승률" />
-            {data?.data.totalCount === 0 ? (
-              <IntuitionCard.Disabled />
-            ) : (
-              <IntuitionCard.Active
-                matchCount={data?.data.totalCount ?? 0}
-                winRate={data?.data.winRate ?? 0}
-              />
-            )}
-          </div>
-          <div className="flex-1 flex flex-col gap-4">
-            <SectionHeader title="감정분포" />
-            {data?.data.totalCount === 0 ? (
-              <EmotionCard.Disabled />
-            ) : (
-              <EmotionCard.Active
-                emotion={'기뻐요'}
-                rate={data?.data.positiveEmotionPercent ?? 0}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* 기록 목록 섹션 */}
-        <div className="mt-10 px-4 gap-4 flex flex-col w-full">
-          <SectionHeader title="직관 횟수/승률" />
-          <RecordList records={data?.data.records ?? []} />
-        </div>
+        {isLoading ? (
+          <Loading text="직관 기록을 불러오는 중..." />
+        ) : (
+          <RecordMainContent data={data} />
+        )}
         <GlobalNavigationBar />
       </AppLayout>
     </AppScreen>
