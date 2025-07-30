@@ -2,7 +2,7 @@ import { useAuthAction } from '@/features/auth/hooks/useAuthAction'
 import { useModal } from '@/shared/hooks/modal/useModal'
 
 export const LogoutAndWithdrawButtons = () => {
-  const { logout, withdraw } = useAuthAction()
+  const { logout, deleteUser } = useAuthAction()
   const { openHorizontalModal } = useModal()
 
   const handleClickLogout = () => {
@@ -32,7 +32,7 @@ export const LogoutAndWithdrawButtons = () => {
           label: '탈퇴',
           onClick: () => {
             close()
-            withdraw()
+            deleteUser()
           },
         },
       ],

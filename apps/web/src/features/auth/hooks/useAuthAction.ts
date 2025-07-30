@@ -20,17 +20,17 @@ export const useAuthAction = () => {
     replace('Login', {})
   }
 
-  const withdraw = async () => {
+  const deleteUser = async () => {
     const token = localStorage.getItem('accessToken')
     if (!token) return
 
-    await authDelete.withdraw(token)
+    await authDelete.deleteUser(token)
     clearSession()
     replace('Login', {})
   }
 
   return {
     logout,
-    withdraw,
+    deleteUser,
   }
 }

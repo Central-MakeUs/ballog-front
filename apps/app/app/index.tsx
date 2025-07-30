@@ -33,16 +33,13 @@ const HomeScreen = () => {
     return () => backHandler.remove()
   }, [])
 
-  // 김용희 uri : http://192.168.0.12:5173/
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <WebView
           ref={webViewRef}
           source={{
-            uri: 'http://192.168.0.11:5173/',
-            // uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+            uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
           }}
           onMessage={bridge.processMessage}
           javaScriptEnabled={true}
