@@ -1,27 +1,31 @@
 import { createContext, useContext, useState, useCallback } from 'react'
+import type { ImageData } from '@ballog/bridge/types'
+import type { PropsWithChildren } from 'react'
 
 interface ImageBridgeContextValue {
-  base64Image: string | null
-  setBase64Image: (image: string) => void
-  clearBase64Image: () => void
+  imageData: ImageData | null
+  setImageData: (image: ImageData) => void
+  clearImageData: () => void
 }
 
-const ImageBridgeContext = createContext<ImageBridgeContextValue | undefined>(undefined)
+const ImageBridgeContext = createContext<ImageBridgeContextValue | undefined>(
+  undefined,
+)
 
-export const ImageBridgeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [base64Image, setBase64] = useState<string | null>(null)
+export const ImageBridgeProvider = ({ children }: PropsWithChildren) => {
+  const [imageData, setImage] = useState<ImageData | null>(null)
 
-  const setBase64Image = useCallback((image: string) => {
-    setBase64(image)
+  const setImageData = useCallback((data: ImageData) => {
+    setImage(data)
   }, [])
 
-  const clearBase64Image = useCallback(() => {
-    setBase64(null)
+  const clearImageData = useCallback(() => {
+    setImage(null)
   }, [])
 
   return (
     <ImageBridgeContext.Provider
-      value={{ base64Image, setBase64Image, clearBase64Image }}
+      value={{ imageData, setImageData, clearImageData }}
     >
       {children}
     </ImageBridgeContext.Provider>

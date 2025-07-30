@@ -55,7 +55,7 @@ export type BridgeMessageSchema = {
     payload: BasicMessagePayload
   }
   CAMERA_SHOT: {
-    payload: CameraShotPayload
+    payload: ImageData
   }
 }
 
@@ -65,6 +65,7 @@ export type PostMessagePayload =
   | ImageSelectedPayload
   | ImageDownloadPayload
   | InstagramSharePayload
+  | ImageData
 
 // {
 //   eventName: string
