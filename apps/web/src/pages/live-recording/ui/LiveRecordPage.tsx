@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query'
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import { Button } from '@/shared/ui/common'
-import { OverlayProvider } from '@/hooks/useOverlay'
 import {
   EmotionVoteProvider,
   useEmotionVote,
@@ -157,13 +156,11 @@ const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
 
   return (
     <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
-      <OverlayProvider>
-        <LiveRecordPageInner
-          recordId={recordId}
-          isLoading={isLoading}
-          emotionData={data?.data}
-        />
-      </OverlayProvider>
+      <LiveRecordPageInner
+        recordId={recordId}
+        isLoading={isLoading}
+        emotionData={data?.data}
+      />
     </EmotionVoteProvider>
   )
 }

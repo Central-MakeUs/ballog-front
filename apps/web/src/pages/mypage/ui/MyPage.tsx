@@ -2,7 +2,6 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import { OverlayProvider } from '@/hooks/useOverlay'
 import { ChangeMyInfoWidget } from '@/widgets/changeMyInfoWidget/ChangeMyInfoWidget'
 import { AlarmToggleList } from '@/features/auth/ui/AlarmSwitchList'
 import { OtherLinkList } from '@/features/auth/ui/OtherLinkList'
@@ -34,11 +33,7 @@ const MyPageInner = () => {
 }
 
 const MyPage = () => {
-  return (
-    <OverlayProvider>
-      <MyPageInner />
-    </OverlayProvider>
-  )
+  return <MyPageInner />
 }
 
 export default MyPage

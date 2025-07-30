@@ -1,32 +1,28 @@
 import { useEffect } from 'react'
 import type { ImageData } from '@ballog/bridge/types'
-
-interface WebMessagePayload {
-  eventName?: string
-  payload?: ImageData
-}
+import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
 
 type MessageHandler = (image: ImageData) => void
 
 export const useWebViewBridgeListener = (onImageReceived: MessageHandler) => {
+  const bridge = createWebBridge()
+
   useEffect(() => {
-    const listener = (event: MessageEvent) => {
-      const raw = typeof event.data === 'string' ? event.data : '{}'
+    const unsubscribe = bridge.addEventListener(
+      POST_MESSAGE_EVENT.CAMERA_SHOT,
+      (payload) => {
+        if (
+          payload &&
+          payload.base64 &&
+          payload.fileName &&
+          payload.uri &&
+          payload.createdAt
+        ) {
+          onImageReceived(payload)
+        }
+      },
+    )
 
-      const parsed = JSON.parse(raw) as WebMessagePayload
-      if (
-        parsed.eventName === 'CAMERA_SHOT' &&
-        parsed.payload &&
-        parsed.payload.base64 &&
-        parsed.payload.fileName &&
-        parsed.payload.uri &&
-        parsed.payload.createdAt
-      ) {
-        onImageReceived(parsed.payload)
-      }
-    }
-
-    window.addEventListener('message', listener)
-    return () => window.removeEventListener('message', listener)
+    return unsubscribe
   }, [onImageReceived])
 }
