@@ -15,7 +15,7 @@ import RecordMainPage from '@/pages/record/ui/RecordMainPage'
 import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
 import ShareBottomSheet from '@/pages/record/ui/ShareBottomSheet'
 
-export const { Stack, useFlow, useStepFlow } = stackflow({
+export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   transitionDuration: 350,
 
   plugins: [
