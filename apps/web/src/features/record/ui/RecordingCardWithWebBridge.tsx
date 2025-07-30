@@ -6,22 +6,37 @@ import { useWebViewBridgeListener } from '@/features/record/hooks/useWebViewBrid
 
 export const RecordingCardWithWebBridge = () => {
   const bridge = createWebBridge()
-  const { hasImage } = useRecordingImages()
+  const { hasImage, addImage } = useRecordingImages()
 
   const handleClick = () => {
     bridge.send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  useWebViewBridgeListener((_base64) => {
-    // TODO: 서버 업로드 후 URL로 addImage(base64) 할 예정
-    // addImage(base64)
+  useWebViewBridgeListener((image) => {
+    addImage(image)
   })
+
+  // 디버깅용 echo (images 배열 출력)
+//   useEffect(() => {
+//   if (!images.length) return
+
+//   const simplifiedImages = images.map((img) => ({
+//     ...img,
+//     base64: img.base64.slice(0, 50) + '...',
+//   }))
+
+//   window.ReactNativeWebView?.postMessage(
+//     JSON.stringify({
+//       eventName: 'SEND_IMAGE_ECHO',
+//       payload: simplifiedImages,
+//     }),
+//   )
+// }, [images])
 
   return (
     <RecordingCard.Root className="w-full">
       <RecordingCard.Icon
-        state={hasImage ? 'active' : 'default'}
+        state={hasImage ? true : false}
         onClick={handleClick}
       />
       <RecordingCard.Info

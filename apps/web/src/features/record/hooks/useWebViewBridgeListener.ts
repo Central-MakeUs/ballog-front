@@ -1,25 +1,28 @@
-// hooks/useWebViewBridgeListener.ts
 import { useEffect } from 'react'
+import type { ImageData } from '@ballog/bridge/types'
 
-type MessageHandler = (payload: string) => void
+interface WebMessagePayload {
+  eventName?: string
+  payload?: ImageData
+}
+
+type MessageHandler = (image: ImageData) => void
 
 export const useWebViewBridgeListener = (onImageReceived: MessageHandler) => {
   useEffect(() => {
     const listener = (event: MessageEvent) => {
       const raw = typeof event.data === 'string' ? event.data : '{}'
-      const parsed = JSON.parse(raw) as { type?: string; payload?: string }
 
-      if (parsed.type === 'image' && typeof parsed.payload === 'string') {
+      const parsed = JSON.parse(raw) as WebMessagePayload
+      if (
+        parsed.eventName === 'CAMERA_SHOT' &&
+        parsed.payload &&
+        parsed.payload.base64 &&
+        parsed.payload.fileName &&
+        parsed.payload.uri &&
+        parsed.payload.createdAt
+      ) {
         onImageReceived(parsed.payload)
-
-        // 디버깅용 echo
-        window.ReactNativeWebView?.postMessage(
-          JSON.stringify({
-            from: 'web',
-            type: 'SEND_IMAGE_ECHO',
-            message: parsed.payload.slice(0, 50),
-          }),
-        )
       }
     }
 

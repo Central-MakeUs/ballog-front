@@ -1,24 +1,25 @@
 import { useState } from 'react'
+import type { ImageData } from '@ballog/bridge/types'
 
 /**
- * recording-page 에서 업로드된 이미지 상태를 관리하는 훅
+ * recording-page 에서 업로드된 이미지를 관리하는 배열
  * hasImage 가 true 이면 감정 기록 중 페이지에서 이미지를 업로드했다는 의미임.
  */
 export const useRecordingImages = () => {
-  const [imageUrls, setImageUrls] = useState<string[]>([])
+  const [images, setImages] = useState<ImageData[]>([])
 
-  const addImage = (url: string) => {
-    setImageUrls((prev) => [...prev, url])
+  const addImage = (data: ImageData) => {
+    setImages((prev) => [...prev, data])
   }
 
   const clearImages = () => {
-    setImageUrls([])
+    setImages([])
   }
 
   return {
-    imageUrls,
+    images,
     addImage,
     clearImages,
-    hasImage: imageUrls.length > 0,
+    hasImage: images.length > 0,
   }
 }
