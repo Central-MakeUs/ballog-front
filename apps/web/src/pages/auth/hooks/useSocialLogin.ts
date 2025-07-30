@@ -57,8 +57,8 @@ export const useSocialLogin = ({
     if (payload.status === 'success') {
       const { accessToken, refreshToken } = payload
       socialLogin({
-        accessToken: accessToken as string,
-        refreshToken: refreshToken as string,
+        accessToken,
+        refreshToken,
       })
     } else {
       onError(new Error('로그인에 실패했습니다.'))
