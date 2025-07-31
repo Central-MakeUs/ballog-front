@@ -14,11 +14,8 @@ export const useAuthAction = () => {
   }
 
   const logout = async () => {
-    const token = localStorage.getItem('accessToken')
-    if (!token) return
-
     try {
-      await authPost.logout(token)
+      await authPost.logout()
       clearSession()
       replace('Login', {})
     } catch {
@@ -27,11 +24,8 @@ export const useAuthAction = () => {
   }
 
   const deleteUser = async () => {
-    const token = localStorage.getItem('accessToken')
-    if (!token) return
-
     try {
-      await authDelete.deleteUser(token)
+      await authDelete.deleteUser()
       clearSession()
       replace('Login', {})
     } catch {

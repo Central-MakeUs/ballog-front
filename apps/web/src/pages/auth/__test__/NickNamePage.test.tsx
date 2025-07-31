@@ -113,14 +113,14 @@ describe.skip('NickNamePage', () => {
 
     const mockSignupResponse: SignupResponseDTO = {
       success: '회원 정보 조회 성공',
-      statusCode: 200,
+      status: 200,
       message: '성공',
       data: 'signup successful',
     }
 
     const mockUserResponse: UserResponseDTO = {
       message: 'success',
-      statusCode: 200,
+      status: 200,
       success: '회원 정보 조회 성공',
       data: mockUserData,
     } as UserResponseDTO
