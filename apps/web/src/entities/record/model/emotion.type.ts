@@ -4,7 +4,12 @@ import type { StadiumKey } from '@/shared/constants/stadium'
 
 export interface EmotionType {
   matchesDate: string
-  matchesTime: string
+  matchesTime: {
+    hour: number
+    minute: number
+    second: number
+    nano: number
+  }
   homeTeam: TeamKey
   awayTeam: TeamKey
   stadium: StadiumKey
