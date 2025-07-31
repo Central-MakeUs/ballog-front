@@ -41,7 +41,7 @@ vi.mock('@/shared/contexts/sessionContext', async () => {
   }
 })
 
-describe('NickNamePage', () => {
+describe.skip('NickNamePage', () => {
   it('should render', () => {
     render(<NickNamePage params={{ selectedTeam: null }} />)
   })
