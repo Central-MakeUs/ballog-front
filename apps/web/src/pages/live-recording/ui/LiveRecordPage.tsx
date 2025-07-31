@@ -21,7 +21,7 @@ import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWi
 const LiveRecordPageInner = ({
   emotionData,
 }: {
-  recordId: number
+  matchId: number
   isLoading: boolean
   emotionData?: EmotionType
 }) => {
@@ -143,13 +143,13 @@ const LiveRecordPageInner = ({
   )
 }
 
-const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
+const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   params,
 }: {
-  params: { recordId: string }
+  params: { matchId: string }
 }) => {
-  const recordId = Number(params.recordId)
-  const { data, isLoading } = useQuery(emotions.record(recordId))
+  const matchId = Number(params.matchId)
+  const { data, isLoading } = useQuery(emotions.record(matchRecordId))
 
   const joy = data?.data.positivePercent ?? 50
   const angry = data?.data.negativePercent ?? 50
@@ -157,7 +157,7 @@ const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
   return (
     <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
       <LiveRecordPageInner
-        recordId={recordId}
+        matchId={matchId}
         isLoading={isLoading}
         emotionData={data?.data}
       />
