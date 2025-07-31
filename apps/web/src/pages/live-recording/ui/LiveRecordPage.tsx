@@ -17,13 +17,17 @@ import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWithWebBridge'
+import type { RecordingResponseDTO } from '@/entities/record/model/recording.type'
+import { recording } from '@/entities/record/api/recording.queries'
 
 const LiveRecordPageInner = ({
+  recordingData,
   emotionData,
 }: {
   matchId: number
   isLoading: boolean
-  emotionData?: EmotionType
+  recordingData: RecordingResponseDTO
+  emotionData: EmotionType
 }) => {
   const { mutate } = usePostEmotion()
   const { replace } = useFlow()
@@ -120,7 +124,7 @@ const LiveRecordPageInner = ({
         <EmotionVoteWidget
           emotions={emotionData}
           onEmotionSubmit={(emotionType) => {
-            mutate({ recordId: 1, emotionType })
+            mutate({ matchRecordId: recordingData.matchRecordId, emotionType })
           }}
         />
 
@@ -149,17 +153,25 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   params: { matchId: string }
 }) => {
   const matchId = Number(params.matchId)
-  const { data, isLoading } = useQuery(emotions.record(matchRecordId))
+  const { data: emotionData } = useQuery(emotions.record(matchId))
+  const { data: recordingData, isLoading: isRecordingLoading } = useQuery(
+    recording.getRecording(matchId),
+  )
 
-  const joy = data?.data.positivePercent ?? 50
-  const angry = data?.data.negativePercent ?? 50
+  if (!emotionData || !recordingData) {
+    return <div>로딩 중이거나 데이터를 불러올 수 없습니다.</div>
+  }
+
+  const joy = emotionData?.data.positivePercent ?? 50
+  const angry = emotionData?.data.negativePercent ?? 50
 
   return (
     <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
       <LiveRecordPageInner
+        recordingData={recordingData}
         matchId={matchId}
-        isLoading={isLoading}
-        emotionData={data?.data}
+        isLoading={isRecordingLoading}
+        emotionData={emotionData?.data}
       />
     </EmotionVoteProvider>
   )

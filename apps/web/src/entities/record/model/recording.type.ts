@@ -3,7 +3,7 @@ import type { TeamKey } from '@/shared/constants/teams'
 
 export type RecordResult = 'WIN' | 'LOSE' | 'DRAW' | null
 
-export interface RecordingPostResponseDTO {
+export interface RecordingResponseDTO {
   matchRecordId: number
   matchesId: number
   homeTeam: TeamKey
