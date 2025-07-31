@@ -16,14 +16,8 @@ export const authPost = {
       .json<SignupResponseDTO>()
     return response
   },
-  logout: async (accessToken: string): Promise<LogoutResponseDTO> => {
-    const response = await api
-      .post('auth/logout', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .json<LogoutResponseDTO>()
+  logout: async (): Promise<LogoutResponseDTO> => {
+    const response = await api.post('auth/logout').json<LogoutResponseDTO>()
     return response
   },
 }
