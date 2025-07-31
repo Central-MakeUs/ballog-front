@@ -50,6 +50,9 @@ export type BridgeMessageSchema = {
   INSTAGRAM_SHARE_RESPONSE: {
     payload: BasicMessagePayload
   }
+  CAMERA_SHOT: {
+    payload: ImageData
+  }
 }
 
 // 기존 PostMessagePayload는 유니온 타입으로 변경
@@ -58,6 +61,7 @@ export type PostMessagePayload =
   | ImageSelectedPayload
   | ImageDownloadPayload
   | InstagramSharePayload
+  | ImageData
 
 // {
 //   eventName: string
