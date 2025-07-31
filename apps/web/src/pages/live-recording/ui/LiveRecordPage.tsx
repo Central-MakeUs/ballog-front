@@ -17,7 +17,7 @@ import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWithWebBridge'
-import type { RecordingResponseDTO } from '@/entities/record/model/recording.type'
+import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { recording } from '@/entities/record/api/recording.queries'
 
 const LiveRecordPageInner = ({
@@ -26,7 +26,7 @@ const LiveRecordPageInner = ({
 }: {
   matchId: number
   isLoading: boolean
-  recordingData: RecordingResponseDTO
+  recordingData: RecordingResponse
   emotionData: EmotionType
 }) => {
   const { mutate } = usePostEmotion()
@@ -102,7 +102,7 @@ const LiveRecordPageInner = ({
 
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
         {/* Recording Card */}
-        <RecordingCardWithWebBridge />
+        <RecordingCardWithWebBridge recordingData={recordingData}  />
 
         {/* 텍스트 */}
         <div
@@ -168,7 +168,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   return (
     <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
       <LiveRecordPageInner
-        recordingData={recordingData}
+        recordingData={recordingData.data}
         matchId={matchId}
         isLoading={isRecordingLoading}
         emotionData={emotionData?.data}

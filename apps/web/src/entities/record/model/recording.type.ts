@@ -1,11 +1,13 @@
 import type { ApiResponse } from '@/types/api/common'
 import type { TeamKey } from '@/shared/constants/teams'
+import type { StadiumKey } from '@/shared/constants/stadium'
 
 export type RecordResult = 'WIN' | 'LOSE' | 'DRAW' | null
 
-export interface RecordingResponseDTO {
+export interface RecordingResponse {
   matchRecordId: number
   matchesId: number
+  stadium: StadiumKey
   homeTeam: TeamKey
   awayTeam: TeamKey
   matchDate: string
@@ -24,4 +26,5 @@ export interface RecordingResponseDTO {
   defaultImageUrl: string
 }
 
+export type RecordingResponseDTO = ApiResponse<RecordingResponse>
 export type RecordingPatchResponseDTO = ApiResponse<Record<string, never>>
