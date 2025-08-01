@@ -1,6 +1,7 @@
 import { WebView } from 'react-native-webview'
-import { createAppBridge } from '@ballog/bridge'
-import { createCameraHandler } from './cameraHandler'
+import { BridgeMessageSchema, createAppBridge } from '@ballog/bridge'
+
+import { createCameraHandler } from './createCameraHandler'
 import { createImageHandler } from './imageHandler'
 
 export const createHandlerRegistry = (

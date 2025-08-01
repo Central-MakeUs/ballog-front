@@ -1,7 +1,4 @@
-import { useEffect } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { POST_MESSAGE_EVENT, createWebBridge } from '@ballog/bridge'
-import { toast } from 'sonner'
 
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
