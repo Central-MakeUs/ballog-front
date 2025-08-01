@@ -68,7 +68,7 @@ const LiveRecordPageInner = ({
           )}
         >
           <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center">
-            지금의 감정 클릭하기! <InfoIcon className='ml-1 w-5 h-5' />
+            지금의 감정 클릭하기! <InfoIcon className="ml-1 w-5 h-5" />
           </p>
           <p className="body-sm-light text-usage-text-subtle">
             기뻐요가 이기고 있어요! <br />

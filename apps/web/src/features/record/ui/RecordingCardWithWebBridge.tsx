@@ -1,4 +1,6 @@
 import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
+import { useEffect } from 'react'
+import type { ImageData } from '@ballog/bridge/types'
 
 import { RecordingCard } from '@/entities/record/ui/RecordingCard'
 import { useRecordingImages } from '@/features/record/hooks/useRecordImages'
@@ -14,6 +16,21 @@ export const RecordingCardWithWebBridge = ({
 }) => {
   const bridge = createWebBridge()
   const { hasImage, addImage } = useRecordingImages()
+
+  useEffect(() => {
+    if (!recordingData.imageList || recordingData.imageList.length === 0) return
+
+    recordingData.imageList.forEach((image) => {
+      const newImage: ImageData = {
+        uri: image.imageUrl,
+        base64: '',
+        fileName: '',
+        createdAt: image.createdAt,
+      }
+
+      addImage(newImage)
+    })
+  }, [recordingData.imageList])
 
   const handleClick = () => {
     bridge.send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })

@@ -21,6 +21,14 @@ export const recording: Record<number, RecordingResponse> = {
         imageUrl: 'https://example.com/image1.jpg',
         createdAt: '2025-07-14T18:35:00Z',
       },
+      {
+        imageUrl: 'https://example.com/image2.jpg',
+        createdAt: '2025-07-14T18:35:00Z',
+      },
+      {
+        imageUrl: 'https://example.com/image3.jpg',
+        createdAt: '2025-07-14T18:35:00Z',
+      },
     ],
     emotionGroupList: [
       {
@@ -46,12 +54,7 @@ export const recording: Record<number, RecordingResponse> = {
     positiveEmotionPercent: 40,
     negativeEmotionPercent: 60,
     defaultImageUrl: 'https://example.com/default2.jpg',
-    imageList: [
-      {
-        imageUrl: 'https://example.com/image2.jpg',
-        createdAt: '2025-07-03T18:50:00Z',
-      },
-    ],
+    imageList: [],
     emotionGroupList: [
       {
         groupStart: '2025-07-03T19:00:00Z',
@@ -106,12 +109,7 @@ export const recording: Record<number, RecordingResponse> = {
     positiveEmotionPercent: 50,
     negativeEmotionPercent: 50,
     defaultImageUrl: 'https://example.com/default4.jpg',
-    imageList: [
-      {
-        imageUrl: 'https://example.com/image4.jpg',
-        createdAt: '2025-07-03T18:33:00Z',
-      },
-    ],
+    imageList: [],
     emotionGroupList: [
       {
         groupStart: '2025-07-03T18:40:00Z',
