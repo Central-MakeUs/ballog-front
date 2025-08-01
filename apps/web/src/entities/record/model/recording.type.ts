@@ -24,6 +24,19 @@ export interface RecordingResponse {
   positiveEmotionPercent: number
   negativeEmotionPercent: number
   defaultImageUrl: string
+  imageList: Image[]
+  emotionGroupList: EmotionGroup[]
+}
+
+interface Image {
+  imageUrl: string
+  createdAt: string
+}
+
+interface EmotionGroup {
+  groupStart: string
+  emotionType: string
+  count: number
 }
 
 export type RecordingResponseDTO = ApiResponse<RecordingResponse>

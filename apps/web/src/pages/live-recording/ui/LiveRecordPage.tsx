@@ -143,7 +143,7 @@ const LiveRecordPageInner = ({
           </div>
         </div>
       </div>
-    </AppScreen>
+    </AppScreen> 
   )
 }
 
