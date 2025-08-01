@@ -18,7 +18,9 @@ export const EndRecordingButton = ({
 
   // 마지막 모달
   const leavePage = () => {
-    replace('Record', {})
+    setTimeout(() => {
+      replace('Record', {})
+    }, 1000)
 
     openImageModal({
       heading: '기록이 완료되었어요!',
