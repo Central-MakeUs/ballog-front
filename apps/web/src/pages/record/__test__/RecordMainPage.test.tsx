@@ -10,6 +10,25 @@ vi.mock('@/shared/lib/stackflow', () => ({
   useFlow: () => ({
     push: vi.fn(),
   }),
+  actions: {
+    getStack: vi.fn().mockReturnValue({
+      activities: [
+        {
+          name: 'Record',
+        },
+        {
+          name: 'Home',
+        },
+      ],
+    }),
+  },
+  activities: {
+    Home: vi.fn(),
+    Record: vi.fn(),
+    // 필요한 다른 activities들도 추가
+  },
+  Stack: vi.fn(),
+  useStepFlow: vi.fn(),
 }))
 
 vi.mock('@/entities/record/api/record-get', () => ({
