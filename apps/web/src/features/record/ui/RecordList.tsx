@@ -4,12 +4,15 @@ import { Button } from '@/shared/ui/common'
 import { useFlow } from '@/shared/lib/stackflow'
 
 export const RecordList = ({ records }: { records: Record[] }) => {
-  const { push } = useFlow()
+  const { push, replace } = useFlow()
 
   if (!records || records.length === 0) {
     return (
       <RecordLogCard.Empty>
-        <Button className="rounded-large px-6 bg-brand-secondary-default">
+        <Button
+          className="rounded-large px-6 bg-brand-secondary-default"
+          onClick={() => replace('Home', {}, { animate: false })}
+        >
           첫 직관 기록하기
         </Button>
       </RecordLogCard.Empty>
