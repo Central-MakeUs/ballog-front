@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
-import type { ImageData } from '@ballog/bridge/types'
-import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
+import {
+  createWebBridge,
+  POST_MESSAGE_EVENT,
+  type ImageData,
+} from '@ballog/bridge'
 
-type MessageHandler = (image: ImageData) => void
+type MessageHandler = (image: ImageData) => void | Promise<void>
 
 export const useWebViewBridgeListener = (onImageReceived: MessageHandler) => {
   const bridge = createWebBridge()
@@ -10,7 +13,7 @@ export const useWebViewBridgeListener = (onImageReceived: MessageHandler) => {
   useEffect(() => {
     const unsubscribe = bridge.addEventListener(
       POST_MESSAGE_EVENT.CAMERA_SHOT,
-      (payload) => {
+      (payload: ImageData) => {
         if (
           payload &&
           payload.base64 &&

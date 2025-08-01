@@ -1,5 +1,5 @@
 import { toast } from 'sonner'
-import { POST_MESSAGE_EVENT } from '@ballog/bridge'
+import { POST_MESSAGE_EVENT, type LogoutResponsePayload } from '@ballog/bridge'
 
 import { authPost, authDelete } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
@@ -18,14 +18,17 @@ export const useAuthAction = () => {
   }
 
   // 로그아웃 브릿지 이벤트 핸들러
-  useBridgeEvent(POST_MESSAGE_EVENT.LOGOUT, (payload) => {
-    if (payload.status === 'success') {
-      clearSession()
-      replace('Login', {})
-    } else {
-      toast.error('로그아웃에 실패했습니다.')
-    }
-  })
+  useBridgeEvent(
+    POST_MESSAGE_EVENT.LOGOUT_RESPONSE,
+    (payload: LogoutResponsePayload) => {
+      if (payload.status === 'success') {
+        clearSession()
+        replace('Login', {})
+      } else {
+        toast.error('로그아웃에 실패했습니다.')
+      }
+    },
+  )
 
   const logout = async () => {
     try {
