@@ -1,6 +1,10 @@
 import { api } from '@/shared/lib/ky'
 
-import type { SignupRequestDTO, SignupResponseDTO } from '../model/auth.type'
+import type {
+  SignupRequestDTO,
+  SignupResponseDTO,
+  LogoutResponseDTO,
+} from '../model/auth.type'
 
 export const authPost = {
   signup: async ({
@@ -10,6 +14,10 @@ export const authPost = {
     const response = await api
       .post('auth/signup', { json: { baseballTeam, nickname } })
       .json<SignupResponseDTO>()
+    return response
+  },
+  logout: async (): Promise<LogoutResponseDTO> => {
+    const response = await api.post('auth/logout').json<LogoutResponseDTO>()
     return response
   },
 }
