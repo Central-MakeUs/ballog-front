@@ -1,5 +1,3 @@
-import { toast } from 'sonner'
-
 import { useAuthAction } from '@/features/auth/hooks/useAuthAction'
 import { useModal } from '@/shared/hooks/modal/useModal'
 
@@ -15,12 +13,8 @@ export const LogoutAndWithdrawButtons = () => {
         { label: '취소', onClick: close },
         {
           label: '로그아웃',
-          onClick: async () => {
-            try {
-              await logout()
-            } catch (e) {
-              toast.error(getErrorMessage(e))
-            }
+          onClick: () => {
+            logout()
           },
         },
       ],

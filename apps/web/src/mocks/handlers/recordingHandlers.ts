@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw'
 
 import { recording } from '@/mocks/data/recording'
 import type { RecordingResponseDTO } from '@/entities/record/model/recording.type'
-import type { ApiResponse, ApiErrorMessage } from '@/types/api/common'
+import type { ApiErrorMessage } from '@/types/api/common'
 
 type MatchResult = 'WIN' | 'LOSS' | 'DRAW' | 'SKIP'
 
