@@ -1,17 +1,42 @@
+import { useEffect } from 'react'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useEffect } from 'react'
 import { initializeKakaoSDK } from '@react-native-kakao/core'
 
+import { ImageBridgeProvider } from '@/shared/contexts/imageBridgeContext'
+import {
+  requestUserPermission,
+  getFcmToken,
+  listenForegroundMessages,
+} from '@/shared/lib/firebase/messaging'
+
 export default function RootLayout() {
+  // 전역에서 푸시 알림 수신 위해 _layout 에 작업
   useEffect(() => {
     initializeKakaoSDK(`${process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY}`)
+    const setupFCM = async () => {
+      try {
+        await requestUserPermission()
+        await getFcmToken()
+        const unsubscribe = listenForegroundMessages()
+        return unsubscribe
+      } catch (error) {
+        console.error('FCM setup error:', error)
+      }
+    }
+
+    const unsub = setupFCM()
+    return () => {
+      unsub.then((f) => f?.())
+    }
   }, [])
 
   return (
     <>
-      <Stack screenOptions={{ headerShown: false }} />
-      <StatusBar style="auto" />
+      <ImageBridgeProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+        <StatusBar style="auto" />
+      </ImageBridgeProvider>
     </>
   )
 }

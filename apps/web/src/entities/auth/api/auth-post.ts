@@ -3,6 +3,7 @@ import { api } from '@/shared/lib/ky'
 import type {
   SignupRequestDTO,
   SignupResponseDTO,
+  LogoutResponseDTO,
   SocialLoginResponseDTO,
 } from '../model/auth.type'
 
@@ -59,6 +60,10 @@ export const authPost = {
 
     setAccessToken(response)
 
+    return response
+  },
+  logout: async (): Promise<LogoutResponseDTO> => {
+    const response = await api.post('auth/logout').json<LogoutResponseDTO>()
     return response
   },
 }

@@ -2,8 +2,8 @@ import type { ComponentProps } from 'react'
 
 import DefaultProfile from '@/assets/defaultProfile.png'
 import { cn } from '@/shared/lib/classnames'
-import { ProfileFrameWithBorder } from '@/shared/ui/common/Profile/ProfileFrameWithBorder'
-import { ProfileFrameNoBorder } from '@/shared/ui/common/Profile/ProfileFrameNoBorder'
+import CameraNoBorder from '@/assets/cameraNoBorder.svg?react'
+import CameraWithBorder from '@/assets/cameraWithBorder.svg?react'
 
 interface ProfileProps extends ComponentProps<'div'> {
   border: boolean
@@ -40,10 +40,12 @@ export const Profile = ({
     <div className={cn('relative w-21 h-21', className)} {...rest}>
       {border ? (
         <>
-          <ProfileFrameWithBorder imgSrc={imgSrc} />
+          {/* <ProfileFrameWithBorder imgSrc={imgSrc} /> */}
+          <CameraWithBorder />
         </>
       ) : (
-        <ProfileFrameNoBorder imgSrc={imgSrc} />
+        // <ProfileFrameNoBorder imgSrc={imgSrc} />
+        <CameraNoBorder />
       )}
     </div>
   )

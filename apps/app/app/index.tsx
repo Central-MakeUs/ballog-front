@@ -1,16 +1,19 @@
 import { StyleSheet, BackHandler } from 'react-native'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { WebView } from 'react-native-webview'
+import { useImageBridge } from '../shared/contexts/imageBridgeContext'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { useBridge } from './bridge/bridgeHandler'
+import { useImageSender } from './bridge/hooks/useImageSender'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
-  const [accessToken, setAccessToken] = useState<string>('')
-  const [refreshToken, setRefreshToken] = useState<string>('')
+
+  const { imageData, clearImageData } = useImageBridge()
+
+  useImageSender(bridge, imageData, clearImageData)
 
   // 뒤로가기 버튼 처리
   useEffect(() => {
@@ -22,27 +25,11 @@ const HomeScreen = () => {
       return false // 기본 동작 허용
     }
 
-    const loadToken = async () => {
-      try {
-        const token = await AsyncStorage.getItem('accessToken')
-        const refreshToken = await AsyncStorage.getItem('refreshToken')
-        if (token) {
-          setAccessToken(token)
-        }
-        if (refreshToken) {
-          setRefreshToken(refreshToken)
-        }
-      } catch (error) {
-        console.error('토큰 로드 실패:', error)
-      }
-    }
-
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       backAction,
     )
 
-    loadToken()
     return () => backHandler.remove()
   }, [])
 

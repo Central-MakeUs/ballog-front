@@ -15,7 +15,7 @@ import {
   GestureDetector,
 } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
-import FlipButton from '@/assets/images/flipButton.svg'
+// import FlipButton from '@/assets/images/flipButton.svg'
 import { useCamera } from '@/hooks/useCamera'
 import { useGallery } from '@/hooks/useGallery'
 
@@ -123,7 +123,12 @@ export default function CameraScreen() {
             style={styles.flipButton}
             onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
           >
-            <FlipButton />
+            {/* <FlipButton /> */}
+             <Ionicons
+              name={flash === 'off' ? 'flash-off' : 'flash'}
+              size={24}
+              color="white"
+            />
           </TouchableOpacity>
         </View>
       </SafeAreaView>

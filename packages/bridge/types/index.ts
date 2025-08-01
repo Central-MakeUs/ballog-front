@@ -75,6 +75,8 @@ export type BridgeMessageSchema = {
   }
   LOGOUT_RESPONSE: {
     payload: LogoutResponsePayload
+  CAMERA_SHOT: {
+    payload: ImageData
   }
 }
 
@@ -87,6 +89,8 @@ export type PostMessagePayload =
   | LoginPayload
   | LoginResponsePayload
   | LogoutResponsePayload
+  | ImageData
+
 // {
 //   eventName: string
 //   payload: PostMessagePayload

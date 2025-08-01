@@ -1,8 +1,7 @@
 import { WebView } from 'react-native-webview'
-import { BridgeMessageSchema, createAppBridge } from '@ballog/bridge'
+import { createAppBridge } from '@ballog/bridge'
 import { createCameraHandler } from './cameraHandler'
 import { createImageHandler } from './imageHandler'
-import { createLoginHandler } from './loginHandler'
 
 export const createHandlerRegistry = (
   webViewRef: React.RefObject<WebView | null>,
@@ -12,7 +11,6 @@ export const createHandlerRegistry = (
   const handlers = {
     ...createCameraHandler(),
     ...createImageHandler(bridge),
-    ...createLoginHandler(bridge),
   }
 
   const registerHandlers = () => {

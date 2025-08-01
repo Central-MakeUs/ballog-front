@@ -5,22 +5,46 @@ import {
   TouchableOpacity,
   Text,
   SafeAreaView,
-  Linking,
 } from 'react-native'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { useBase64Image } from '@/hooks/useBase64Image'
+import * as FileSystem from 'expo-file-system'
+import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
 
 export default function PhotoResultScreen() {
   const router = useRouter()
   const { photoUri } = useLocalSearchParams<{ photoUri: string }>()
+  const { encode } = useBase64Image()
+  const { setImageData } = useImageBridge()
 
   const handleRetake = () => {
     router.back()
   }
 
-  const handleUpload = () => {
-    console.log('사진:', photoUri)
-    // 업로드 로직 추가하기
+  // TODO : 일단 recordId 하드코딩
+  const handleUpload = async () => {
+    if (!photoUri) return
+
+    const fileInfo = await FileSystem.getInfoAsync(photoUri)
+    if (!fileInfo.exists) {
+      console.error('파일이 존재하지 않음:', photoUri)
+      return
+    }
+    const imageData = await encode(photoUri)
+    // console.log('원본 파일 경로:', photoUri)
+    // console.log('원본 파일 크기:', fileInfo.size, 'bytes')
+
+    // 2. base64 인코딩
+
+    // 3. base64 길이 측정 (data:image/... 부분 포함)
+    // console.log('base64 전체 길이:', imageData.base64.length)
+    // const base64Raw = imageData.base64.split(',')[1]
+    // console.log('base64 실제 데이터 길이:', base64Raw.length)
+
+    setImageData(imageData)
+    router.back()
+    handleClose()
   }
 
   // 그냥 뒤로가기 2번 함
