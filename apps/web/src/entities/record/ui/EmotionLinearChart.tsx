@@ -115,6 +115,7 @@ export const EmotionLinearChart = ({
   const dataCount = ChartData.length
   const chartRef = useRef<HTMLDivElement>(null)
 
+  // 감정 카드 카운트
   const joyCount = ChartData.filter(
     (data) => data.emotionType === 'POSITIVE',
   ).length
@@ -133,6 +134,8 @@ export const EmotionLinearChart = ({
     return `calc(100% + ${additionalWidth}px)`
   }
 
+  // 렌더링 되면 CartesianGrid 안에있는 rect 태그의 rx, ry 속성 변경
+  // rx, ry 커스텀이 안됨;
   useGraphObserver(chartRef)
 
   return (
