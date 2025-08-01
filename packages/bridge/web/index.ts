@@ -20,6 +20,17 @@ declare global {
   }
 }
 
+// 브리지 인스턴스 타입 정의
+type BridgeInstance<T extends PostMessageSchemaObject = BridgeMessageSchema> = {
+  send: <K extends keyof T>(eventName: K, payload: T[K]['payload']) => void
+  isRNEnvironment: () => boolean
+  addEventListener: <K extends keyof T>(
+    eventName: K,
+    callback: (payload: T[K]['payload']) => void,
+  ) => () => void
+  destroy: () => void
+}
+
 /**
  * 웹 브리지 싱글톤 인스턴스 생성/반환
  * @returns 웹 브리지 함수들
@@ -39,7 +50,7 @@ declare global {
  */
 export const createWebBridge = (() => {
   // 싱글톤 인스턴스와 상태들을 클로저 내부에서 관리
-  let bridgeInstance: any = null
+  let bridgeInstance: BridgeInstance | null = null // any → 제대로 된 타입
   let isGlobalListenerRegistered = false
 
   // 이벤트 리스너들을 저장할 Map
@@ -165,14 +176,16 @@ export const createWebBridge = (() => {
   }
 
   // 실제 export되는 함수
-  return <T extends PostMessageSchemaObject = BridgeMessageSchema>() => {
+  return <
+    T extends PostMessageSchemaObject = BridgeMessageSchema,
+  >(): BridgeInstance<T> => {
     // 이미 인스턴스가 존재하면 기존 인스턴스 반환
     if (bridgeInstance) {
-      return bridgeInstance
+      return bridgeInstance as unknown as BridgeInstance<T>
     }
 
     // 새 인스턴스 생성 및 저장
     bridgeInstance = createBridgeInstance<T>()
-    return bridgeInstance
+    return bridgeInstance as unknown as BridgeInstance<T>
   }
 })()
