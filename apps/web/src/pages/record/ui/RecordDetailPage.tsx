@@ -59,7 +59,9 @@ export const RecordDetailPage = ({
           </div>
 
           <ImageTimeLine recordId={data?.data.matchRecordId ?? 0} />
-          <EmotionTimeLine />
+          <EmotionTimeLine
+            emotionGroupList={data?.data.emotionGroupList ?? []}
+          />
           <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} />
         </AppLayout>
       </ImageContextProvider>
