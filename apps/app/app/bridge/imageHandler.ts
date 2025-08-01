@@ -6,6 +6,8 @@ import {
   POST_MESSAGE_EVENT,
   MESSAGE_STATUS,
   type AppBridge,
+  type ImageDownloadPayload,
+  InstagramSharePayload,
 } from '@ballog/bridge'
 import { Alert } from 'react-native'
 
@@ -58,7 +60,8 @@ export const createImageHandler = (bridge: AppBridge) => ({
     }
   },
 
-  DOWNLOAD_IMAGE: async (payload: { imageUrl: string }) => {
+  DOWNLOAD_IMAGE: async (payload?: ImageDownloadPayload) => {
+    if (!payload) return
     console.log('RN: 이미지 다운로드 요청 처리', payload)
 
     try {
@@ -108,7 +111,8 @@ export const createImageHandler = (bridge: AppBridge) => ({
     }
   },
 
-  SHARE_TO_INSTAGRAM_STORY: async (payload: { imageUrl: string }) => {
+  SHARE_TO_INSTAGRAM_STORY: async (payload?: InstagramSharePayload) => {
+    if (!payload) return
     console.log('RN: 인스타그램 스토리 공유 요청 처리', payload)
 
     try {

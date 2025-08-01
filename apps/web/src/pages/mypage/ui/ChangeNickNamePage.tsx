@@ -10,7 +10,7 @@ import { useFlow } from '@/shared/lib/stackflow'
 
 const ChangeNickNamePage = () => {
   const { pop } = useFlow()
-  const { user } = useSessionContext()
+  const { user, setUser } = useSessionContext()
   const { mutate } = useUpdateMyInfoMutation()
 
   const handleSubmit = (data: { nickname: string }) => {
@@ -23,6 +23,7 @@ const ChangeNickNamePage = () => {
       {
         onSuccess: () => {
           pop()
+          setUser({ ...user, nickname: data.nickname })
         },
       },
     )
