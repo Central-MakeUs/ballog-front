@@ -16,6 +16,7 @@ import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWi
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { recording } from '@/entities/record/api/recording.queries'
 import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
+import InfoIcon from '@/assets/infoIcon.svg?react'
 
 const LiveRecordPageInner = ({
   recordingData,
@@ -66,8 +67,8 @@ const LiveRecordPageInner = ({
             'mt-8 mb-6',
           )}
         >
-          <p className="body-lg-bold text-usage-text-default mb-2">
-            지금의 감정 클릭하기!
+          <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center">
+            지금의 감정 클릭하기! <InfoIcon className='ml-1 w-5 h-5' />
           </p>
           <p className="body-sm-light text-usage-text-subtle">
             기뻐요가 이기고 있어요! <br />

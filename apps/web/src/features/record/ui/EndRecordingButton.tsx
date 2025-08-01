@@ -1,10 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 import { Button } from '@/shared/ui/common'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useModal } from '@/shared/hooks/modal/useModal'
 import { recordingPatch } from '@/entities/record/api/recording-patch'
-import SampleImage from '@/assets/grayExampleImage.jpg'
+import CheckIcon from "@/assets/checkIcon.svg"
 
 type MatchResult = 'WIN' | 'LOSS' | 'DRAW' | 'SKIP'
 
@@ -25,7 +26,7 @@ export const EndRecordingButton = ({
     openImageModal({
       heading: '기록이 완료되었어요!',
       body: 'Body Text',
-      imgSrc: SampleImage,
+      imgSrc: CheckIcon,
     })
   }
 
@@ -40,6 +41,9 @@ export const EndRecordingButton = ({
     onSuccess: () => {
       leavePage()
     },
+    onError: () => {
+      toast("기록 저장에 실패했습니다")
+    }
   })
 
   // 두번째 모달
