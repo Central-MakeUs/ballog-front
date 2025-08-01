@@ -1,6 +1,7 @@
 import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
 import { useEffect } from 'react'
 import type { ImageData } from '@ballog/bridge/types'
+import { toast } from 'sonner'
 
 import { RecordingCard } from '@/entities/record/ui/RecordingCard'
 import { useRecordingImages } from '@/features/record/hooks/useRecordImages'
@@ -8,6 +9,7 @@ import { useWebViewBridgeListener } from '@/features/record/hooks/useWebViewBrid
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { TEAMS } from '@/shared/constants/teams'
 import { STADIUM } from '@/shared/constants/stadium'
+import { useImageUpload } from '@/shared/hooks/image'
 
 export const RecordingCardWithWebBridge = ({
   recordingData,
@@ -16,7 +18,9 @@ export const RecordingCardWithWebBridge = ({
 }) => {
   const bridge = createWebBridge()
   const { hasImage, addImage } = useRecordingImages()
-
+  const { uploadImage, uploadState } = useImageUpload({
+    recordId: recordingData.matchRecordId,
+  })
   useEffect(() => {
     if (!recordingData.imageList || recordingData.imageList.length === 0) return
 
@@ -36,9 +40,38 @@ export const RecordingCardWithWebBridge = ({
     bridge.send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })
   }
 
-  useWebViewBridgeListener((image) => {
-    addImage(image)
+  useWebViewBridgeListener(async (image) => {
+    const uploaded = await uploadImage(
+      image.base64,
+      image.fileName || 'upload.jpg',
+    )
+    if (uploaded) {
+      addImage({
+        uri: uploaded.imageUrl,
+        base64: '',
+        fileName: image.fileName,
+        createdAt: uploaded.createdAt,
+      })
+    }
   })
+
+  useEffect(() => {
+    if (uploadState.isUploading) {
+      toast('이미지 업로드 중...')
+    }
+  }, [uploadState.isUploading])
+
+  useEffect(() => {
+    if (!uploadState.isUploading && uploadState.progress === 'complete') {
+      toast.success('업로드 완료!')
+    }
+  }, [uploadState.isUploading, uploadState.progress])
+
+  useEffect(() => {
+    if (uploadState.error) {
+      toast.error(`업로드 실패: ${uploadState.error}`)
+    }
+  }, [uploadState.error])
 
   // 디버깅용 echo (images 배열 출력)
   //   useEffect(() => {
