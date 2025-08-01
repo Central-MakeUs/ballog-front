@@ -1,24 +1,21 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
-import { useFlow } from '@stackflow/react/future'
 import { useQuery } from '@tanstack/react-query'
 
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
-import { Button } from '@/shared/ui/common'
 import {
   EmotionVoteProvider,
   useEmotionVote,
 } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
-import { useModal } from '@/shared/hooks/modal/useModal'
-import SampleImage from '@/assets/grayExampleImage.jpg'
 import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWithWebBridge'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { recording } from '@/entities/record/api/recording.queries'
+import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
 
 const LiveRecordPageInner = ({
   recordingData,
@@ -30,8 +27,6 @@ const LiveRecordPageInner = ({
   emotionData: EmotionType
 }) => {
   const { mutate } = usePostEmotion()
-  const { replace } = useFlow()
-  const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()
 
   let bgColor = 'transparent'
@@ -40,46 +35,6 @@ const LiveRecordPageInner = ({
     bgColor = calculateGradientColor('#030303', '#2e4d31', joyPercent)
   } else if (angryPercent > joyPercent && angryPercent > 50) {
     bgColor = calculateGradientColor('#030303', '#57272b', angryPercent)
-  }
-
-  const leavePage = () => {
-    setTimeout(() => {
-      replace('My', {})
-    }, 2000)
-    openImageModal({
-      heading: '기록이 완료되었어요!',
-      body: 'Body Text',
-      imgSrc: SampleImage,
-    })
-  }
-  const selectMatchResult = () => {
-    openVerticalModal({
-      heading: '경기 결과를 선택해주세요.',
-      body: 'Body text',
-      buttons: ['승리', '패배', '무승부', '건너뛰기'].map((label) => ({
-        label,
-        onClick: () => {
-          leavePage()
-        },
-      })),
-    })
-  }
-
-  const confirmEndRecord = () => {
-    openHorizontalModal({
-      heading: '기록을 종료하시겠습니까?',
-      body: 'Body text',
-      buttons: [
-        { label: '취소', onClick: close },
-        {
-          label: '종료하기',
-          onClick: () => {
-            close()
-            selectMatchResult()
-          },
-        },
-      ],
-    })
   }
 
   return (
@@ -102,7 +57,7 @@ const LiveRecordPageInner = ({
 
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
         {/* Recording Card */}
-        <RecordingCardWithWebBridge recordingData={recordingData}  />
+        <RecordingCardWithWebBridge recordingData={recordingData} />
 
         {/* 텍스트 */}
         <div
@@ -129,21 +84,9 @@ const LiveRecordPageInner = ({
         />
 
         {/* 하단 버튼 */}
-        <div className="fixed bottom-10 w-full">
-          <div className="px-4 max-w-screen-md mx-auto">
-            <Button
-              variant="secondary"
-              state="pressed"
-              size="lg"
-              onClick={confirmEndRecord}
-              className="w-full"
-            >
-              기록 종료하기
-            </Button>
-          </div>
-        </div>
+        <EndRecordingButton matchRecordId={recordingData.matchRecordId} />
       </div>
-    </AppScreen> 
+    </AppScreen>
   )
 }
 

@@ -1,7 +1,7 @@
 import { api } from '@/shared/lib/ky'
 import type { RecordingPatchResponseDTO } from '@/entities/record/model/recording.type'
 
-type RecordResult = 'WIN' | 'LOSE' | 'DRAW'
+type RecordResult = 'WIN' | 'LOSS' | 'DRAW' | "SKIP"
 
 export const recordingPatch = {
   patchRecording: async (

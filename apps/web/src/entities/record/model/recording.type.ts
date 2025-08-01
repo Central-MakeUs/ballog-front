@@ -19,7 +19,7 @@ export interface RecordingResponse {
   }
   userId: number
   watchCnt: number
-  result: 'WIN' | 'LOSS' | 'DRAW'
+  result: 'WIN' | 'LOSS' | 'DRAW' | null
   baseballTeam: TeamKey
   positiveEmotionPercent: number
   negativeEmotionPercent: number
