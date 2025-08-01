@@ -33,6 +33,15 @@ export const api = ky.create({
         return response
       },
     ],
+    beforeRequest: [
+      (request) => {
+        const token = localStorage.getItem('accessToken')
+
+        if (token) {
+          request.headers.set('Authorization', `${token}`)
+        }
+      },
+    ],
     beforeError: [errorInterceptor],
   },
 })

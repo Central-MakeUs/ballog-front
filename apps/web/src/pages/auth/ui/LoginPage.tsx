@@ -17,7 +17,7 @@ const LoginPage: ActivityComponentType = () => {
         height: '48px',
       }}
     >
-      <AppLayout>
+      <AppLayout className="h-full">
         <div className="flex flex-col items-center justify-center w-full h-full px-4 gap-20">
           <Banner />
           <div className="flex flex-col gap-4 w-full">

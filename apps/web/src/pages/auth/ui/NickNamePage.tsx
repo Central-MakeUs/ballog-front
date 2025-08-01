@@ -9,18 +9,18 @@ import type {
 import { NickNameForm } from '@/features/auth/ui'
 import { type ExtendedKyHttpError } from '@/types/api/common'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
-import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import { authGet } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
+import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
 interface NickNamePageProps {
   selectedTeam: string | null
 }
 
 const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
-  const { push } = useFlow()
+  const { replace, pop } = useFlow()
   const { setUser } = useSessionContext()
 
   const {
@@ -34,7 +34,12 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
       const user = await authGet.getUser()
       setUser(user.data)
       if (data.status === 200) {
-        push('Home', {}, { animate: false })
+        // 이전 팀 선택 페이지 pop
+        pop()
+        // 로그인 페이지 pop
+        pop()
+        // 홈 페이지로 이동
+        replace('Home', {}, { animate: false })
       }
     },
   })
@@ -42,7 +47,7 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
   return (
     <AppScreen
       appBar={{
-        title: <BallogLogo />,
+        title: <WhiteBallogLogo />,
         backButton: {
           renderIcon: () => <BackArrow />,
         },
@@ -50,19 +55,17 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
       }}
       preventSwipeBack={true}
     >
-      <AppLayout>
-        <div className="flex flex-col items-center justify-center w-full h-full px-4 gap-20">
-          <NickNameForm
-            onSubmit={(data) => {
-              signup({
-                nickname: data.nickname,
-                baseballTeam: params.selectedTeam!,
-              })
-            }}
-            isLoading={isLoading}
-            error={error}
-          />
-        </div>
+      <AppLayout className="h-full">
+        <NickNameForm
+          onSubmit={(data) => {
+            signup({
+              nickname: data.nickname,
+              baseballTeam: params.selectedTeam!,
+            })
+          }}
+          isLoading={isLoading}
+          error={error}
+        />
       </AppLayout>
     </AppScreen>
   )
