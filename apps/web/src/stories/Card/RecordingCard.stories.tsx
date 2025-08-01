@@ -17,7 +17,7 @@ export const Default: Story = {
   name: 'Default',
   render: () => (
     <RecordingCard.Root>
-      <RecordingCard.Icon state="default" onClick={() => alert('클릭')} />
+      <RecordingCard.Icon state={true} onClick={() => alert('클릭')} />
       <RecordingCard.Info
         homeTeam="LG 트윈스"
         awayTeam="SSG 랜더스"

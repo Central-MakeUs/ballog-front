@@ -1,13 +1,19 @@
 import { StyleSheet, BackHandler } from 'react-native'
 import { useEffect, useRef } from 'react'
 import { WebView } from 'react-native-webview'
+import { useImageBridge } from '../shared/contexts/imageBridgeContext'
+import { useRouter } from 'expo-router'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
-
 import { useBridge } from './bridge/bridgeHandler'
+import { useImageSender } from './bridge/hooks/useImageSender'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
+  const router = useRouter()
+  const { imageData, clearImageData } = useImageBridge()
+
+  useImageSender(bridge, imageData, clearImageData)
 
   // 뒤로가기 버튼 처리
   useEffect(() => {

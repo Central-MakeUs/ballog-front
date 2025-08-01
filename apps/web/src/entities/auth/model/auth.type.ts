@@ -16,4 +16,6 @@ export interface UserType {
 }
 
 export type SignupResponseDTO = ApiResponse<string>
+export type LogoutResponseDTO = ApiResponse<string>
+export type WithDrawResponseDTO = ApiResponse<string>
 export type UserResponseDTO = ApiResponseWithNoSuccess<UserType>
