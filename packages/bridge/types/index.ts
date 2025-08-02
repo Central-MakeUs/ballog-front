@@ -27,6 +27,20 @@ export type InstagramSharePayload = {
   imageUrl: string
 }
 
+export type LoginPayload = {
+  social: 'kakao' | 'apple'
+}
+
+export type LoginResponsePayload = {
+  status: 'success' | 'error'
+  accessToken: string
+  refreshToken: string
+}
+
+export type LogoutResponsePayload = {
+  status: 'success' | 'error'
+}
+
 // 각 이벤트별 스키마 정의
 export type BridgeMessageSchema = {
   OPEN_CAMERA: {
@@ -50,6 +64,18 @@ export type BridgeMessageSchema = {
   INSTAGRAM_SHARE_RESPONSE: {
     payload: BasicMessagePayload
   }
+  LOGIN: {
+    payload: LoginPayload
+  }
+  LOGIN_RESPONSE: {
+    payload: LoginResponsePayload
+  }
+  LOGOUT: {
+    payload: BasicMessagePayload
+  }
+  LOGOUT_RESPONSE: {
+    payload: LogoutResponsePayload
+  }
   CAMERA_SHOT: {
     payload: ImageData
   }
@@ -61,6 +87,9 @@ export type PostMessagePayload =
   | ImageSelectedPayload
   | ImageDownloadPayload
   | InstagramSharePayload
+  | LoginPayload
+  | LoginResponsePayload
+  | LogoutResponsePayload
   | ImageData
 
 // {
@@ -116,9 +145,9 @@ export interface AppBridge<
   T extends PostMessageSchemaObject = BridgeMessageSchema,
 > {
   send: <K extends keyof T>(eventName: K, payload: T[K]['payload']) => void
-  on: (
-    eventName: string,
-    handler: (payload?: T[keyof T]['payload']) => void,
+  on: <K extends keyof T>(
+    eventName: K,
+    handler: (payload?: T[K]['payload']) => void | Promise<void>,
   ) => void
   processMessage: (event: WebViewMessageEvent) => void
   //legacy
