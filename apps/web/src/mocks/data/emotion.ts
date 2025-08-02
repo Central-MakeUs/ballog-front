@@ -3,7 +3,12 @@ import type { EmotionType } from '@/entities/record/model/emotion.type'
 export const emotionGet: { data: EmotionType; delay: number } = {
   data: {
     matchesDate: '2025-07-18',
-    matchesTime: '16:30:00',
+    matchesTime: {
+      hour: 16,
+      minute: 30,
+      second: 0,
+      nano: 0,
+    },
     homeTeam: 'LG_TWINS',
     awayTeam: 'LOTTE_GIANTS',
     stadium: 'JAMSIL',
@@ -19,7 +24,12 @@ export const emotionGet: { data: EmotionType; delay: number } = {
 export const emotionPostPositive: { data: EmotionType; delay: number } = {
   data: {
     matchesDate: '2025-07-18',
-    matchesTime: '16:30:00',
+    matchesTime: {
+      hour: 16,
+      minute: 30,
+      second: 0,
+      nano: 0,
+    },
     homeTeam: 'LG_TWINS',
     awayTeam: 'LOTTE_GIANTS',
     stadium: 'JAMSIL',
@@ -35,7 +45,12 @@ export const emotionPostPositive: { data: EmotionType; delay: number } = {
 export const emotionPostNegative: { data: EmotionType; delay: number } = {
   data: {
     matchesDate: '2025-07-18',
-    matchesTime: '16:30:00',
+    matchesTime: {
+      hour: 16,
+      minute: 30,
+      second: 0,
+      nano: 0,
+    },
     homeTeam: 'LG_TWINS',
     awayTeam: 'LOTTE_GIANTS',
     stadium: 'JAMSIL',

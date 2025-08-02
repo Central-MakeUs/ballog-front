@@ -27,6 +27,10 @@ export type InstagramSharePayload = {
   imageUrl: string
 }
 
+export type NotificationOnPayload = {
+  token: string
+}
+
 export type LoginPayload = {
   social: 'kakao' | 'apple'
 }
@@ -85,6 +89,12 @@ export type BridgeMessageSchema = {
   CAMERA_SHOT: {
     payload: ImageData
   }
+  NOTIFICATION_ON: {
+    payload: NotificationOnPayload
+  }
+  NOTIFICATION_OFF: {
+    payload: { message: string }
+  }
 }
 
 // 기존 PostMessagePayload는 유니온 타입으로 변경
@@ -97,6 +107,7 @@ export type PostMessagePayload =
   | LoginResponsePayload
   | LogoutResponsePayload
   | ImageData
+  | NotificationOnPayload
 
 // {
 //   eventName: string
