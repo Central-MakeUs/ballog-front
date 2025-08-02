@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { AUTH_CONFIG } from '@/shared/ui/constants/config'
 import { AUTH_MESSAGES } from '@/shared/ui/constants/messages'
@@ -27,6 +27,10 @@ export const useNickNameForm = (initialValue: string = '') => {
     setErrors(newErrors)
     return newErrors.length === 0
   }
+
+  useEffect(() => {
+    setErrors([])
+  }, [nickname])
 
   return {
     nickname,
