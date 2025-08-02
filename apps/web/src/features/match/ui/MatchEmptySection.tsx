@@ -1,10 +1,10 @@
-import { toast } from 'sonner'
-
 import { HomeCard } from '@/shared/ui/common/Card/HomeCard'
 import { Button } from '@/shared/ui/common/Button'
 import { SectionHeader } from '@/entities/match/ui/SectionHeader'
+import { useFlow } from '@/shared/lib/stackflow'
 
 export const MatchEmptySection = () => {
+  const { push } = useFlow()
   return (
     <div className="flex flex-col items-center justify-start w-full pb-20">
       <SectionHeader
@@ -19,7 +19,7 @@ export const MatchEmptySection = () => {
             variant="primary"
             size="sm"
             className="bg-brand-primary-default text-white"
-            onClick={() => toast('경기가 없습니다')}
+            onClick={() => push('Record', {})}
           >
             직관로그 가기
           </Button>
