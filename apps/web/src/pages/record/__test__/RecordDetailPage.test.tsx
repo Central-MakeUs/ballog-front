@@ -8,6 +8,7 @@ import { recordGet } from '@/entities/record/api/record-get'
 import type { RecordResult } from '@/entities/record/model/record.type'
 import type { TeamKey } from '@/shared/constants/teams'
 import { recordDelete } from '@/entities/record/api/record-delete'
+import { emotionGroupList } from '@/mocks/data/record'
 
 import { RecordDetailPage } from '../ui/RecordDetailPage'
 
@@ -79,6 +80,7 @@ const mockRecordData = {
         createdAt: '2025-07-13T14:09:51.386663',
       },
     ],
+    emotionGroupList,
   },
 }
 

@@ -67,7 +67,7 @@ const emotionGroupListShort: EmotionGroup[] = [
   },
 ]
 
-const emotionGroupList: EmotionGroup[] = [
+export const emotionGroupList: EmotionGroup[] = [
   {
     groupStart: '2025-07-28T19:04:00',
     emotionType: 'POSITIVE',
