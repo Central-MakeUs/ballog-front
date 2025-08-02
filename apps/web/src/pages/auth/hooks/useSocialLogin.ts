@@ -1,5 +1,6 @@
-import { POST_MESSAGE_EVENT } from '@ballog/bridge'
+import { POST_MESSAGE_EVENT, type LoginResponsePayload } from '@ballog/bridge'
 import { useMutation } from '@tanstack/react-query'
+import { useCallback } from 'react'
 
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
@@ -47,23 +48,58 @@ export const useSocialLogin = ({
 
   const handleLogin = () => {
     if (isRNEnvironment) {
-      send(POST_MESSAGE_EVENT.LOGIN, { social })
+      switch (social) {
+        case 'kakao':
+          send(POST_MESSAGE_EVENT.LOGIN_KAKAO, { social })
+          break
+        case 'apple':
+          send(POST_MESSAGE_EVENT.LOGIN_APPLE, { social })
+          break
+      }
     } else {
       onSuccess()
     }
   }
 
-  useBridgeEvent(POST_MESSAGE_EVENT.LOGIN_RESPONSE, (payload) => {
-    if (payload.status === 'success') {
-      const { accessToken, refreshToken } = payload
-      socialLogin({
-        accessToken,
-        refreshToken,
-      })
-    } else {
-      onError(new Error('로그인에 실패했습니다.'))
-    }
-  })
+  const handleKakaoLoginResponse = useCallback(
+    (payload: LoginResponsePayload) => {
+      if (payload.status === 'success') {
+        const { accessToken, refreshToken } = payload
+        socialLogin({
+          accessToken,
+          refreshToken,
+        })
+      } else {
+        onError(new Error('로그인에 실패했습니다.'))
+      }
+    },
+    [socialLogin, onError],
+  )
+
+  const handleAppleLoginResponse = useCallback(
+    (payload: LoginResponsePayload) => {
+      if (payload.status === 'success') {
+        const { accessToken, refreshToken } = payload
+        socialLogin({
+          accessToken,
+          refreshToken,
+        })
+      } else {
+        onError(new Error('로그인에 실패했습니다.'))
+      }
+    },
+    [onError],
+  )
+
+  useBridgeEvent(
+    POST_MESSAGE_EVENT.LOGIN_RESPONSE_KAKAO,
+    handleKakaoLoginResponse,
+  )
+  // app에 카카오 로그인 로직이 등록되어있음. 수정필요
+  useBridgeEvent(
+    POST_MESSAGE_EVENT.LOGIN_RESPONSE_APPLE,
+    handleAppleLoginResponse,
+  )
 
   return { handleLogin, isPending }
 }
