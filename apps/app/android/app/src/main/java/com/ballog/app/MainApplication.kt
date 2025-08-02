@@ -1,4 +1,4 @@
-package com.kych0912.app
+package com.ballog.app
 
 import android.app.Application
 import android.content.res.Configuration

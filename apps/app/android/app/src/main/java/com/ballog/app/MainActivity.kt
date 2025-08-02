@@ -1,4 +1,4 @@
-package com.kych0912.app
+package com.ballog.app
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
