@@ -2,7 +2,9 @@ import { HomeCard } from '@/shared/ui/common/Card/HomeCard'
 import { Button } from '@/shared/ui/common/Button'
 import { type Match } from '@/entities/match/model/match.type'
 
-type MatchCardProps = Match
+interface MatchCardProps extends Match {
+  onClick?: () => void
+}
 
 export const MatchCard = ({
   homeTeam,
@@ -10,6 +12,7 @@ export const MatchCard = ({
   stadium,
   matchesDate,
   matchesTime,
+  onClick,
 }: MatchCardProps) => {
   return (
     <HomeCard.Root>
@@ -18,7 +21,7 @@ export const MatchCard = ({
         stadium={stadium}
         dateTime={`${matchesDate} ${matchesTime}`}
       >
-        <Button>기록 시작하기</Button>
+        <Button onClick={onClick}>기록 시작하기</Button>
       </HomeCard.DetailInfo>
     </HomeCard.Root>
   )

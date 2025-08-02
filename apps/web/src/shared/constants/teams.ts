@@ -1,3 +1,18 @@
+import React from 'react'
+
+import LgIcon from '@/assets/lgIcon.svg?react'
+import DoosanIcon from '@/assets/doosanIcon.svg?react'
+import KtIcon from '@/assets/ktIcon.svg?react'
+import KiaIcon from '@/assets/kiaIcon.svg?react'
+import LotteIcon from '@/assets/lotteIcon.svg?react'
+import KiwoomIcon from '@/assets/kiwoomIcon.svg?react'
+import SamsungIcon from '@/assets/samsungIcon.svg?react'
+import NcIcon from '@/assets/ncIcon.svg?react'
+import SsgIcon from '@/assets/ssgIcon.svg?react'
+import HanhwaIcon from '@/assets/hanwhaIcon.svg?react'
+
+type SvgComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>
+
 export const TEAMS = {
   DOOSAN_BEARS: '두산 베어스',
   LOTTE_GIANTS: '롯데 자이언츠',
@@ -16,3 +31,17 @@ export const teams = Object.values(TEAMS)
 
 export type Team = (typeof teams)[number]
 export type TeamKey = keyof typeof TEAMS
+
+export const TEAM_ICONS: Record<TeamKey, SvgComponent | null> = {
+  DOOSAN_BEARS: DoosanIcon,
+  LOTTE_GIANTS: LotteIcon,
+  SAMSUNG_LIONS: SamsungIcon,
+  KIWOOM_HEROES: KiwoomIcon,
+  HANWHA_EAGLES: HanhwaIcon,
+  KIA_TIGERS: KiaIcon,
+  KT_WIZ: KtIcon,
+  LG_TWINS: LgIcon,
+  NC_DINOS: NcIcon,
+  SSG_LANDERS: SsgIcon,
+  NONE: null,
+} as const
