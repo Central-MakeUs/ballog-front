@@ -34,8 +34,8 @@ export const createAppBridge = <
 ): AppBridge<T> => {
   // 이벤트 핸들러들을 저장할 Map
   const eventHandlers = new Map<
-    string,
-    (payload: T[keyof T]['payload']) => void
+    keyof T,
+    (payload?: T[keyof T]['payload']) => void | Promise<void>
   >()
 
   // 웹으로 메시지 전송하는 함수
@@ -55,21 +55,21 @@ export const createAppBridge = <
 
   // 이벤트 핸들러 등록
   const on = (
-    eventName: string,
-    handler: (payload?: T[keyof T]['payload']) => void,
+    eventName: keyof T,
+    handler: (payload?: T[keyof T]['payload']) => void | Promise<void>,
   ): void => {
     eventHandlers.set(eventName, handler)
   }
 
   // 메시지 처리 및 핸들러 실행
-  const processMessage = (event: WebViewMessageEvent): void => {
+  const processMessage = async (event: WebViewMessageEvent): Promise<void> => {
     const message = handleMessage(event)
     if (!message) return
 
     const handler = eventHandlers.get(message.eventName)
     if (handler) {
       try {
-        handler(message.payload)
+        await handler(message.payload)
       } catch (error) {
         console.error(
           `RN Bridge: Handler error for ${message.eventName}:`,

@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import { useState, useEffect, type ComponentType } from 'react'
 
 import HomeIcon from '@/assets/home.svg?react'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow, activities, actions } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { GNBButton } from '@/shared/ui/common'
 
-type ActivityType = 'Home' | 'Record' | 'My'
+type ActivityType = keyof typeof activities
 
 interface NavItem {
   label: string
-  icon: React.ComponentType<{ className?: string }>
+  icon: ComponentType<{ className?: string }>
   activity: ActivityType
 }
 const NAV_ITEMS: NavItem[] = [
@@ -30,27 +30,26 @@ const NAV_ITEMS: NavItem[] = [
   },
 ]
 
+// 타입 가드 함수
+const isValidActivityType = (
+  activityName: string,
+): activityName is ActivityType => {
+  return Object.keys(activities).includes(activityName)
+}
+
 export const GlobalNavigationBar = () => {
   const { replace } = useFlow()
   const [currentActivity, setCurrentActivity] = useState<ActivityType>('Home')
 
-  const handleNavigation = (activity: ActivityType) => {
-    setCurrentActivity(activity)
+  useEffect(() => {
+    const currentActivities = actions.getStack().activities
+    const currentActivityName =
+      currentActivities[currentActivities.length - 1].name
 
-    switch (activity) {
-      case 'Home':
-        replace('Home', {}, { animate: false })
-        break
-
-      case 'Record':
-        replace('Record', {}, { animate: false })
-
-        break
-      case 'My':
-        replace('My', {}, { animate: false })
-        break
+    if (currentActivityName && isValidActivityType(currentActivityName)) {
+      setCurrentActivity(currentActivityName)
     }
-  }
+  }, [actions])
 
   return (
     <nav
@@ -69,7 +68,7 @@ export const GlobalNavigationBar = () => {
             key={activity}
             active={isActive}
             icon={icon}
-            onClick={() => handleNavigation(activity)}
+            onClick={() => replace(activity, {}, { animate: false })}
           >
             {label}
           </GNBButton>

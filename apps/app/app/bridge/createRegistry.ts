@@ -1,5 +1,6 @@
 import { WebView } from 'react-native-webview'
-import { createAppBridge } from '@ballog/bridge'
+import { BridgeMessageSchema, createAppBridge } from '@ballog/bridge'
+
 import { createCameraHandler } from './createCameraHandler'
 import { createImageHandler } from './imageHandler'
 import { createEchoDebugHandler } from './createEchoDedugHandler'
@@ -19,7 +20,11 @@ export const createHandlerRegistry = (
 
   const registerHandlers = () => {
     Object.entries(handlers).forEach(([eventName, handler]) => {
-      bridge.on(eventName, handler)
+      // key-value 타입 추론이 안되는 문제로 any 사용
+      // bridge.on("ODNWLOAD_IMAGE",handlers.DOWNLOAD_IMAGE) 하면 타입 추론 잘함
+      // 제네릭 타입 추론 문제라고 생각
+      bridge.on(eventName as keyof BridgeMessageSchema, handler as any)
+      // 아마 key-value쌍의 정확한 대응 관계를 typescript가 못찾아서 그런거 같음
     })
   }
 

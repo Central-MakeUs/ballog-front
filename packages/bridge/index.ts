@@ -1,12 +1,5 @@
 // Types
-export type {
-  PostMessageSchemaObject,
-  PostMessageEvent,
-  WebMessageEvent,
-  PostMessagePayload,
-  AppBridge,
-  BridgeMessageSchema,
-} from './types'
+export type * from './types'
 
 // React Native WebView Bridge
 export { createAppBridge } from './app'
