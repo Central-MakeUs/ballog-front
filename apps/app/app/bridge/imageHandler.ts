@@ -6,7 +6,7 @@ import {
   POST_MESSAGE_EVENT,
   MESSAGE_STATUS,
   type AppBridge,
-} from '@ballog/bridge'
+} from '@ballwog/bridge'
 import { Alert } from 'react-native'
 
 export const createImageHandler = (bridge: AppBridge) => ({

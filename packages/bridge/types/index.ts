@@ -27,6 +27,10 @@ export type InstagramSharePayload = {
   imageUrl: string
 }
 
+export type NotificationOnPayload = {
+  token: string
+}
+
 // 각 이벤트별 스키마 정의
 export type BridgeMessageSchema = {
   OPEN_CAMERA: {
@@ -53,6 +57,12 @@ export type BridgeMessageSchema = {
   CAMERA_SHOT: {
     payload: ImageData
   }
+  NOTIFICATION_ON: {
+    payload: NotificationOnPayload
+  }
+  NOTIFICATION_OFF: {
+    payload: { message: string }
+  }
 }
 
 // 기존 PostMessagePayload는 유니온 타입으로 변경
@@ -62,6 +72,7 @@ export type PostMessagePayload =
   | ImageDownloadPayload
   | InstagramSharePayload
   | ImageData
+  | NotificationOnPayload
 
 // {
 //   eventName: string
