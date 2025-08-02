@@ -1,7 +1,204 @@
 import type {
   Record,
   RecordDetailResponse,
+  EmotionGroup,
 } from '@/entities/record/model/record.type'
+
+const emotionGroupListShort: EmotionGroup[] = [
+  {
+    groupStart: '2025-07-28T19:04:00',
+    emotionType: 'POSITIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:04:00',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:05:01',
+    emotionType: 'POSITIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:05:01',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:06:02',
+    emotionType: 'POSITIVE',
+    count: 54,
+  },
+  {
+    groupStart: '2025-07-28T19:06:02',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:07:03',
+    emotionType: 'POSITIVE',
+    count: 24,
+  },
+  {
+    groupStart: '2025-07-28T19:07:03',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:08:04',
+    emotionType: 'POSITIVE',
+    count: 54,
+  },
+  {
+    groupStart: '2025-07-28T19:08:04',
+    emotionType: 'NEGATIVE',
+    count: 34,
+  },
+  {
+    groupStart: '2025-07-28T19:09:05',
+    emotionType: 'POSITIVE',
+    count: 8,
+  },
+  {
+    groupStart: '2025-07-28T19:09:05',
+    emotionType: 'NEGATIVE',
+    count: 6,
+  },
+]
+
+export const emotionGroupList: EmotionGroup[] = [
+  {
+    groupStart: '2025-07-28T19:04:00',
+    emotionType: 'POSITIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:04:00',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:05:01',
+    emotionType: 'POSITIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:05:01',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:06:02',
+    emotionType: 'POSITIVE',
+    count: 54,
+  },
+  {
+    groupStart: '2025-07-28T19:06:02',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:07:03',
+    emotionType: 'POSITIVE',
+    count: 24,
+  },
+  {
+    groupStart: '2025-07-28T19:07:03',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:08:04',
+    emotionType: 'POSITIVE',
+    count: 54,
+  },
+  {
+    groupStart: '2025-07-28T19:08:04',
+    emotionType: 'NEGATIVE',
+    count: 34,
+  },
+  {
+    groupStart: '2025-07-28T19:09:05',
+    emotionType: 'POSITIVE',
+    count: 8,
+  },
+  {
+    groupStart: '2025-07-28T19:09:05',
+    emotionType: 'NEGATIVE',
+    count: 6,
+  },
+  {
+    groupStart: '2025-07-28T19:10:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:10:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:11:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:11:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:12:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:12:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:13:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:13:06',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:14:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:14:06',
+    emotionType: 'NEGATIVE',
+    count: 41,
+  },
+  {
+    groupStart: '2025-07-28T19:15:06',
+    emotionType: 'POSITIVE',
+    count: 21,
+  },
+  {
+    groupStart: '2025-07-28T19:15:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:16:06',
+    emotionType: 'POSITIVE',
+    count: 22,
+  },
+  {
+    groupStart: '2025-07-28T19:16:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+]
 
 export const record: {
   records: Record[]
@@ -61,6 +258,7 @@ export const record: {
           createdAt: '2025-07-13T14:09:51.386663',
         },
       ],
+      emotionGroupList,
     },
     {
       matchRecordId: 4,
@@ -84,6 +282,7 @@ export const record: {
           createdAt: '2025-07-08T11:15:30.123456',
         },
       ],
+      emotionGroupList: emotionGroupListShort,
     },
   ],
 }
