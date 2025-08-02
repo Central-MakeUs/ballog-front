@@ -3,6 +3,8 @@ import { BridgeMessageSchema, createAppBridge } from '@ballog/bridge'
 
 import { createCameraHandler } from './createCameraHandler'
 import { createImageHandler } from './imageHandler'
+import { createLoginHandler } from './loginHandler'
+import { createEchoDebugHandler } from './createEchoDedugHandler'
 
 export const createHandlerRegistry = (
   webViewRef: React.RefObject<WebView | null>,
@@ -12,6 +14,8 @@ export const createHandlerRegistry = (
   const handlers = {
     ...createCameraHandler(),
     ...createImageHandler(bridge),
+    ...createLoginHandler(bridge),
+    ...createEchoDebugHandler(),
   }
 
   const registerHandlers = () => {
