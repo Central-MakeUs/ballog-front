@@ -8,12 +8,15 @@ import {
 import type { CarouselApi } from '@/shared/ui/common/carousel'
 import { MatchCard } from '@/entities/match/ui/MatchCard'
 import type { Match } from '@/entities/match/model/match.type'
+import { useFlow } from '@/shared/lib/stackflow'
 
 interface MatchCardCarouselProps {
   matches: Match[]
 }
 
 export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
+  const { push } = useFlow()
+
   const [api, setApi] = useState<CarouselApi | null>(null)
   const [current, setCurrent] = useState(0)
 
@@ -42,7 +45,12 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
         <CarouselContent className="-ml-6">
           {matches.map((match, index) => (
             <CarouselItem key={index} className="basis-3/5 pl-6">
-              <MatchCard {...match} />
+              <MatchCard
+                {...match}
+                onClick={() =>
+                  push('LiveRecord', { matchId: String(match.matchesId) })
+                }
+              />
             </CarouselItem>
           ))}
         </CarouselContent>

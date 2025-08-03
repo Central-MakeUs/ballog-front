@@ -1,6 +1,8 @@
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
+import JoyEmotion from '@/assets/joyEmotion.svg?react'
+import AngryEmotion from '@/assets/angryEmotion.svg?react'
 
 import { IconButton } from './IconButton'
 
@@ -9,9 +11,9 @@ export const JoyIcon = () => (
   <span
     role="img"
     aria-label="기뻐요"
-    className="flex items-center justify-center size-10"
+    className="flex items-center justify-center size-18"
   >
-    🤩
+    <JoyEmotion className="w-full h-full" />
   </span>
 )
 
@@ -19,9 +21,9 @@ export const AngryIcon = () => (
   <span
     role="img"
     aria-label="화나요"
-    className="flex items-center justify-center size-10"
+    className="flex items-center justify-center size-18"
   >
-    🤬
+    <AngryEmotion className="w-full h-full" />
   </span>
 )
 

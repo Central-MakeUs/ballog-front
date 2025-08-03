@@ -3,7 +3,9 @@ import { Button } from '@/shared/ui/common/Button'
 import { type Match } from '@/entities/match/model/match.type'
 import { useFlow } from '@/shared/lib/stackflow'
 
-type MatchCardProps = Match
+interface MatchCardProps extends Match {
+  onClick?: () => void
+}
 
 export const MatchCard = ({
   homeTeam,
@@ -11,7 +13,7 @@ export const MatchCard = ({
   stadium,
   matchesDate,
   matchesTime,
-  matchesId,
+  onClick,
 }: MatchCardProps) => {
   const { push } = useFlow()
   return (
@@ -21,11 +23,7 @@ export const MatchCard = ({
         stadium={stadium}
         dateTime={`${matchesDate} ${matchesTime}`}
       >
-        <Button
-          onClick={() => push('LiveRecord', { recordId: String(matchesId) })}
-        >
-          기록 시작하기
-        </Button>
+        <Button onClick={onClick}>기록 시작하기</Button>
       </HomeCard.DetailInfo>
     </HomeCard.Root>
   )

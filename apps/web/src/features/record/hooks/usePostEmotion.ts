@@ -6,7 +6,7 @@ import { emotions } from '@/entities/record/api/emotion.queries'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 
 interface PostEmotionProps {
-  recordId: number
+  matchRecordId: number
   emotionType: 'POSITIVE' | 'NEGATIVE'
 }
 
@@ -15,15 +15,15 @@ export const usePostEmotion = () => {
   const { setEmotionPercent } = useEmotionVote()
 
   return useMutation<EmotionResponseDTO, Error, PostEmotionProps>({
-    mutationFn: ({ recordId, emotionType }) => {
-      return emotionPost.postEmotionRecord(recordId, emotionType)
+    mutationFn: ({ matchRecordId, emotionType }) => {
+      return emotionPost.postEmotionRecord(matchRecordId, emotionType)
     },
     onSuccess: (data, variables) => {
       const { positivePercent, negativePercent } = data.data
       setEmotionPercent(positivePercent, negativePercent)
 
       queryClient.invalidateQueries({
-        queryKey: emotions.record(variables.recordId).queryKey,
+        queryKey: emotions.record(variables.matchRecordId).queryKey,
       })
     },
   })

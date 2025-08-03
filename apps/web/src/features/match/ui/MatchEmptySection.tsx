@@ -5,7 +5,6 @@ import { useFlow } from '@/shared/lib/stackflow'
 
 export const MatchEmptySection = () => {
   const { push } = useFlow()
-
   return (
     <div className="flex flex-col items-center justify-start w-full pb-20">
       <SectionHeader
@@ -20,7 +19,7 @@ export const MatchEmptySection = () => {
             variant="primary"
             size="sm"
             className="bg-brand-primary-default text-white"
-            onClick={() => push('LiveRecord', { recordId: '1' })} // 일단 하드코딩  TODO: id 값 기반 라우팅
+            onClick={() => push('Record', {})}
           >
             직관로그 가기
           </Button>

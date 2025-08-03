@@ -1,33 +1,33 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
-import { useFlow } from '@stackflow/react/future'
 import { useQuery } from '@tanstack/react-query'
 
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
-import { Button } from '@/shared/ui/common'
 import {
   EmotionVoteProvider,
   useEmotionVote,
 } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
-import { useModal } from '@/shared/hooks/modal/useModal'
-import SampleImage from '@/assets/grayExampleImage.jpg'
 import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWithWebBridge'
+import type { RecordingResponse } from '@/entities/record/model/recording.type'
+import { recording } from '@/entities/record/api/recording.queries'
+import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
+import InfoIcon from '@/assets/infoIcon.svg?react'
 
 const LiveRecordPageInner = ({
+  recordingData,
   emotionData,
 }: {
-  recordId: number
+  matchId: number
   isLoading: boolean
-  emotionData?: EmotionType
+  recordingData: RecordingResponse
+  emotionData: EmotionType
 }) => {
   const { mutate } = usePostEmotion()
-  const { replace } = useFlow()
-  const { openHorizontalModal, openVerticalModal, openImageModal } = useModal()
   const { joyPercent, angryPercent } = useEmotionVote()
 
   let bgColor = 'transparent'
@@ -36,46 +36,6 @@ const LiveRecordPageInner = ({
     bgColor = calculateGradientColor('#030303', '#2e4d31', joyPercent)
   } else if (angryPercent > joyPercent && angryPercent > 50) {
     bgColor = calculateGradientColor('#030303', '#57272b', angryPercent)
-  }
-
-  const leavePage = () => {
-    setTimeout(() => {
-      replace('My', {})
-    }, 2000)
-    openImageModal({
-      heading: '기록이 완료되었어요!',
-      body: 'Body Text',
-      imgSrc: SampleImage,
-    })
-  }
-  const selectMatchResult = () => {
-    openVerticalModal({
-      heading: '경기 결과를 선택해주세요.',
-      body: 'Body text',
-      buttons: ['승리', '패배', '무승부', '건너뛰기'].map((label) => ({
-        label,
-        onClick: () => {
-          leavePage()
-        },
-      })),
-    })
-  }
-
-  const confirmEndRecord = () => {
-    openHorizontalModal({
-      heading: '기록을 종료하시겠습니까?',
-      body: 'Body text',
-      buttons: [
-        { label: '취소', onClick: close },
-        {
-          label: '종료하기',
-          onClick: () => {
-            close()
-            selectMatchResult()
-          },
-        },
-      ],
-    })
   }
 
   return (
@@ -98,7 +58,7 @@ const LiveRecordPageInner = ({
 
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
         {/* Recording Card */}
-        <RecordingCardWithWebBridge />
+        <RecordingCardWithWebBridge recordingData={recordingData} />
 
         {/* 텍스트 */}
         <div
@@ -107,8 +67,8 @@ const LiveRecordPageInner = ({
             'mt-8 mb-6',
           )}
         >
-          <p className="body-lg-bold text-usage-text-default mb-2">
-            지금의 감정 클릭하기!
+          <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center">
+            지금의 감정 클릭하기! <InfoIcon className="ml-1 w-5 h-5" />
           </p>
           <p className="body-sm-light text-usage-text-subtle">
             기뻐요가 이기고 있어요! <br />
@@ -120,46 +80,42 @@ const LiveRecordPageInner = ({
         <EmotionVoteWidget
           emotions={emotionData}
           onEmotionSubmit={(emotionType) => {
-            mutate({ recordId: 1, emotionType })
+            mutate({ matchRecordId: recordingData.matchRecordId, emotionType })
           }}
         />
 
         {/* 하단 버튼 */}
-        <div className="fixed bottom-10 w-full">
-          <div className="px-4 max-w-screen-md mx-auto">
-            <Button
-              variant="secondary"
-              state="pressed"
-              size="lg"
-              onClick={confirmEndRecord}
-              className="w-full"
-            >
-              기록 종료하기
-            </Button>
-          </div>
-        </div>
+        <EndRecordingButton matchRecordId={recordingData.matchRecordId} />
       </div>
     </AppScreen>
   )
 }
 
-const LiveRecordPage: ActivityComponentType<{ recordId: string }> = ({
+const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   params,
 }: {
-  params: { recordId: string }
+  params: { matchId: string }
 }) => {
-  const recordId = Number(params.recordId)
-  const { data, isLoading } = useQuery(emotions.record(recordId))
+  const matchId = Number(params.matchId)
+  const { data: emotionData } = useQuery(emotions.record(matchId))
+  const { data: recordingData, isLoading: isRecordingLoading } = useQuery(
+    recording.getRecording(matchId),
+  )
 
-  const joy = data?.data.positivePercent ?? 50
-  const angry = data?.data.negativePercent ?? 50
+  if (!emotionData || !recordingData) {
+    return <div>로딩 중이거나 데이터를 불러올 수 없습니다.</div>
+  }
+
+  const joy = emotionData?.data.positivePercent ?? 50
+  const angry = emotionData?.data.negativePercent ?? 50
 
   return (
     <EmotionVoteProvider initialJoyPercent={joy} initialAngryPercent={angry}>
       <LiveRecordPageInner
-        recordId={recordId}
-        isLoading={isLoading}
-        emotionData={data?.data}
+        recordingData={recordingData.data}
+        matchId={matchId}
+        isLoading={isRecordingLoading}
+        emotionData={emotionData?.data}
       />
     </EmotionVoteProvider>
   )
