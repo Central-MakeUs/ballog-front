@@ -3,6 +3,8 @@ import { type TeamKey } from '@/shared/constants/teams'
 
 export type RecordResult = 'WIN' | 'LOSE' | 'DRAW' | null
 
+export type EmotionType = 'POSITIVE' | 'NEGATIVE'
+
 export interface Record {
   matchRecordId: number
   matchesId: number
@@ -29,6 +31,12 @@ export interface Image {
   createdAt: string
 }
 
+export interface EmotionGroup {
+  groupStart: string
+  emotionType: EmotionType
+  count: number
+}
+
 export interface RecordDetailResponse {
   matchRecordId: number
   matchesId: number
@@ -45,6 +53,7 @@ export interface RecordDetailResponse {
   negativeEmotionPercent: number
   defaultImageUrl: string | null
   imageList: Image[]
+  emotionGroupList: EmotionGroup[]
 }
 
 export type RecordResponseDTO = ApiResponse<RecordResponse>

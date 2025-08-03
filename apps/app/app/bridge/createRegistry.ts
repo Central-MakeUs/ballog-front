@@ -3,6 +3,7 @@ import { BridgeMessageSchema, createAppBridge } from '@ballog/bridge'
 
 import { createCameraHandler } from './createCameraHandler'
 import { createImageHandler } from './imageHandler'
+import { createLoginHandler } from './loginHandler'
 import { createEchoDebugHandler } from './createEchoDedugHandler'
 import { createNotificationHandler } from './createNotificationHandler'
 
@@ -14,6 +15,7 @@ export const createHandlerRegistry = (
   const handlers = {
     ...createCameraHandler(),
     ...createImageHandler(bridge),
+    ...createLoginHandler(bridge),
     ...createEchoDebugHandler(),
     ...createNotificationHandler(bridge),
   }
