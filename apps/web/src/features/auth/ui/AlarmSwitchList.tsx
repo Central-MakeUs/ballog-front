@@ -12,7 +12,7 @@ export const AlarmToggleList = () => {
   const handleToggleInGame = () => {
     toggleInGame()
   }
-
+  
   return (
     <div className="space-y-4 mb-6">
       <p className="body-sm-bold text-brand-neutral-white">알람 설정</p>

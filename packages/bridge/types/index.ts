@@ -27,7 +27,7 @@ export type InstagramSharePayload = {
   imageUrl: string
 }
 
-export type NotificationOnPayload = {
+export type FcmTokenPayload = {
   token: string
 }
 
@@ -83,8 +83,8 @@ export type BridgeMessageSchema = {
   CAMERA_SHOT: {
     payload: ImageData
   }
-  NOTIFICATION_ON: {
-    payload: NotificationOnPayload
+  GET_MY_FCM_TOKEN: {
+    payload: FcmTokenPayload
   }
   NOTIFICATION_OFF: {
     payload: { message: string }
@@ -101,7 +101,7 @@ export type PostMessagePayload =
   | LoginResponsePayload
   | LogoutResponsePayload
   | ImageData
-  | NotificationOnPayload
+  | FcmTokenPayload
 
 // {
 //   eventName: string

@@ -5,8 +5,10 @@ import { SessionProvider } from '@/shared/contexts/sessionContext'
 import { Toaster } from '@/shared/ui/common/Sonner'
 import { AlarmProvider } from '@/features/auth/contexts/alarmContext'
 import { OverlayProvider } from '@/hooks/useOverlay'
+import { useFcmToken } from '@/features/auth/hooks/useFcmToken'
 
 const App = () => {
+  useFcmToken()
   return (
     <SessionProvider>
       <AlarmProvider>
