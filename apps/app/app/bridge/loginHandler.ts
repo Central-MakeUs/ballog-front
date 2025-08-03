@@ -7,7 +7,6 @@ export const createLoginHandler = (bridge: AppBridge) => {
     LOGIN: async () => {
       try {
         const res = await login()
-
         // AsyncStorage에 accessToken 저장
         if (res.accessToken) {
           await AsyncStorage.setItem('accessToken', res.accessToken)

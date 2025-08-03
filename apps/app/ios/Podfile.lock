@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.9.1)
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
   - EXConstants (17.1.7):
@@ -159,6 +160,17 @@ PODS:
   - hermes-engine (0.79.5):
     - hermes-engine/Pre-built (= 0.79.5)
   - hermes-engine/Pre-built (0.79.5)
+  - KakaoSDKAuth (2.22.0):
+    - KakaoSDKCommon (= 2.22.0)
+  - KakaoSDKCommon (2.22.0):
+    - KakaoSDKCommon/Common (= 2.22.0)
+    - KakaoSDKCommon/Network (= 2.22.0)
+  - KakaoSDKCommon/Common (2.22.0)
+  - KakaoSDKCommon/Network (2.22.0):
+    - Alamofire (~> 5.9.0)
+    - KakaoSDKCommon/Common (= 2.22.0)
+  - KakaoSDKUser (2.22.0):
+    - KakaoSDKAuth (= 2.22.0)
   - libavif/core (0.11.1)
   - libavif/libdav1d (0.11.1):
     - libavif/core
@@ -1951,6 +1963,57 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNCKakaoCore (2.4.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - KakaoSDKCommon (= 2.22.0)
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - RNCKakaoUser (2.4.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - KakaoSDKUser (= 2.22.0)
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - RNCKakaoCore
+    - Yoga
   - RNDeviceInfo (14.0.4):
     - React-Core
   - RNFBApp (22.4.0):
@@ -2348,6 +2411,8 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../../../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCKakaoCore (from `../../../node_modules/@react-native-kakao/core`)"
+  - "RNCKakaoUser (from `../../../node_modules/@react-native-kakao/user`)"
   - RNDeviceInfo (from `../../../node_modules/react-native-device-info`)
   - "RNFBApp (from `../../../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../../../node_modules/@react-native-firebase/messaging`)"
@@ -2360,6 +2425,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Firebase
     - FirebaseCore
     - FirebaseCoreExtension
@@ -2368,6 +2434,9 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - libavif
     - libdav1d
     - libwebp
@@ -2566,6 +2635,10 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../../../node_modules/@react-native-async-storage/async-storage"
+  RNCKakaoCore:
+    :path: "../../../node_modules/@react-native-kakao/core"
+  RNCKakaoUser:
+    :path: "../../../node_modules/@react-native-kakao/user"
   RNDeviceInfo:
     :path: "../../../node_modules/react-native-device-info"
   RNFBApp:
@@ -2586,6 +2659,7 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EXConstants: 98bcf0f22b820f9b28f9fee55ff2daededadd2f8
@@ -2621,6 +2695,9 @@ SPEC CHECKSUMS:
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   hermes-engine: f03b0e06d3882d71e67e45b073bb827da1a21aae
+  KakaoSDKAuth: 569b377eda622d93d4575240b8031cd658163eef
+  KakaoSDKCommon: d57127c339fc79e73aa8b236a4c77211c29924f1
+  KakaoSDKUser: 043bcd7e91454ebf3bf64f150c430e6f65f0a08d
   libavif: 84bbb62fb232c3018d6f1bab79beea87e35de7b7
   libdav1d: 23581a4d8ec811ff171ed5e2e05cd27bad64c39f
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
@@ -2691,6 +2768,8 @@ SPEC CHECKSUMS:
   ReactCodegen: df649968ae6d05359c4f9fdff1c3e43d4bdcd1ec
   ReactCommon: 1aa48867a0fc71a2b4f9e8a1529f5673648354f3
   RNCAsyncStorage: c1dca434eda758348a549efb46822b4091d76804
+  RNCKakaoCore: cbd2cd3ed87412a73710cd8c13a0eaab7830a0cd
+  RNCKakaoUser: 7f603bfd4caf9355f20c7d4dbc612dd3b580ac5a
   RNDeviceInfo: d863506092aef7e7af3a1c350c913d867d795047
   RNFBApp: 12884d3bf9b3a0223efe4a0adce516edf72c4102
   RNFBMessaging: e954bfb053a5c6bb10b26bae4bbc58a4edd41131

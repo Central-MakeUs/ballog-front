@@ -5,6 +5,7 @@ import { createCameraHandler } from './createCameraHandler'
 import { createImageHandler } from './imageHandler'
 import { createEchoDebugHandler } from './createEchoDedugHandler'
 import { createNotificationHandler } from './createNotificationHandler'
+import { createLoginHandler } from './loginHandler'
 
 export const createHandlerRegistry = (
   webViewRef: React.RefObject<WebView | null>,
@@ -16,6 +17,7 @@ export const createHandlerRegistry = (
     ...createImageHandler(bridge),
     ...createEchoDebugHandler(),
     ...createNotificationHandler(bridge),
+    ...createLoginHandler(bridge),
   }
 
   const registerHandlers = () => {

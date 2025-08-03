@@ -48,7 +48,8 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
               <MatchCard
                 {...match}
                 onClick={() =>
-                  push('LiveRecord', { matchId: String(match.matchesId) })
+                  // push('LiveRecord', { matchId: String(match.matchesId) })
+                  push('Login', { })
                 }
               />
             </CarouselItem>
