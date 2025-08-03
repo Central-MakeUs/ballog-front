@@ -6,6 +6,7 @@ import { createImageHandler } from './imageHandler'
 import { createEchoDebugHandler } from './createEchoDedugHandler'
 import { createNotificationHandler } from './createNotificationHandler'
 import { createLoginHandler } from './loginHandler'
+import { instagramHandler } from './instagramHandler'
 
 export const createHandlerRegistry = (
   webViewRef: React.RefObject<WebView | null>,
@@ -18,6 +19,7 @@ export const createHandlerRegistry = (
     ...createEchoDebugHandler(),
     ...createNotificationHandler(bridge),
     ...createLoginHandler(bridge),
+    ...instagramHandler()
   }
 
   const registerHandlers = () => {

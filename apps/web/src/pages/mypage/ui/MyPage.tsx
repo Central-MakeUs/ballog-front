@@ -3,9 +3,9 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { ChangeMyInfoWidget } from '@/widgets/changeMyInfoWidget/ChangeMyInfoWidget'
-import { AlarmToggleList } from '@/features/auth/ui/AlarmSwitchList'
-import { OtherLinkList } from '@/features/auth/ui/OtherLinkList'
-import { LogoutAndWithdrawButtons } from '@/features/auth/ui/LogoutAndWithDrawButtons'
+import { AlarmToggleList } from '@/features/mypage/ui/AlarmSwitchList'
+import { OtherLinkList } from '@/widgets/otherListList/OtherLinkList'
+import { LogoutAndWithdrawButtons } from '@/features/mypage/ui/LogoutAndWithDrawButtons'
 
 const MyPageInner = () => {
   return (

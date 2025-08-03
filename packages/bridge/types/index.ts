@@ -45,6 +45,10 @@ export type LogoutResponsePayload = {
   status: 'success' | 'error'
 }
 
+export type InstagramPayload = {
+  username: string
+}
+
 // 각 이벤트별 스키마 정의
 export type BridgeMessageSchema = {
   OPEN_CAMERA: {
@@ -89,6 +93,9 @@ export type BridgeMessageSchema = {
   NOTIFICATION_OFF: {
     payload: { message: string }
   }
+  OPEN_INSTAGRAM: {
+    payload: InstagramPayload
+  }
 }
 
 // 기존 PostMessagePayload는 유니온 타입으로 변경
@@ -102,6 +109,7 @@ export type PostMessagePayload =
   | LogoutResponsePayload
   | ImageData
   | FcmTokenPayload
+  | InstagramPayload
 
 // {
 //   eventName: string
