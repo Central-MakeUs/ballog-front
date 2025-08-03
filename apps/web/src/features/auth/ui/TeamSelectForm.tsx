@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { TEAMS, type TeamKey } from '@/shared/constants/teams'
+import { TEAM_ICONS, TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { Button } from '@/shared/ui/common'
 
 interface TeamSelectionFormProps {
@@ -30,16 +30,17 @@ export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
             const row = Math.floor(idx / 2) + 1
             const col = (idx % 2) + 1
             const isSelected = selectedTeam === key // 선택 여부 확인
+            const Icon = TEAM_ICONS[key as TeamKey]
             return (
               <Button
                 key={key}
                 size="lg"
                 variant={isSelected ? 'primary' : 'secondary'}
                 state={isSelected ? 'subtle' : undefined} // 선택 시만 subtle, 아니면 기본
-                className={`self-stretch row-start-${row} col-start-${col} flex-1 h-full`}
+                className={`self-stretch row-start-${row} col-start-${col} flex-1 h-full gap-0`}
                 onClick={() => handleSelect(key as TeamKey)}
               >
-                {value}
+                {Icon && <Icon className="size-6 mr-1 -ml-2" />} {value}
               </Button>
             )
           })}

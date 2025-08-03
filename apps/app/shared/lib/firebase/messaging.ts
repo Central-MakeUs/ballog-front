@@ -39,6 +39,16 @@ export const getFcmToken = async () => {
   }
 }
 
+// 토큰 삭제 함수
+export const disableFcmToken = async () => {
+  try {
+    await messaging().deleteToken()
+    console.log('FCM 토큰 삭제됨')
+  } catch (error) {
+    console.error('FCM 토큰 삭제 실패:', error)
+  }
+}
+
 /**
  * 포그라운드 메시지 수신 핸들러 등록 함수
  * 앱이 켜져있는 상태에서 알림 수신 시 호출됨

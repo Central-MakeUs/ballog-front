@@ -31,7 +31,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
     historySyncPlugin({
       routes: {
         Home: '/',
-        LiveRecord: '/live-record/:recordId',
+        LiveRecord: '/live-record/:matchId',
         Login: '/login',
         TeamSelect: '/team-select',
         Nickname: '/nickname',
