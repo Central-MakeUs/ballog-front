@@ -101,7 +101,7 @@ export const useSocialLogin = ({
     POST_MESSAGE_EVENT.LOGIN_RESPONSE_KAKAO,
     handleKakaoLoginResponse,
   )
-  // app에 카카오 로그인 로직이 등록되어있음. 수정필요
+
   useBridgeEvent(
     POST_MESSAGE_EVENT.LOGIN_RESPONSE_APPLE,
     handleAppleLoginResponse,
