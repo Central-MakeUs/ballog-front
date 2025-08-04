@@ -41,6 +41,11 @@ export type LoginResponsePayload = {
   refreshToken: string
 }
 
+export type AppleLoginResponsePayload = {
+  status: 'success' | 'error'
+  authorizationCode: string
+}
+
 export type LogoutResponsePayload = {
   status: 'success' | 'error'
 }
@@ -78,7 +83,7 @@ export type BridgeMessageSchema = {
     payload: LoginPayload
   }
   LOGIN_RESPONSE_APPLE: {
-    payload: LoginResponsePayload
+    payload: AppleLoginResponsePayload
   }
   LOGOUT: {
     payload: BasicMessagePayload
@@ -108,6 +113,7 @@ export type PostMessagePayload =
   | LogoutResponsePayload
   | ImageData
   | NotificationOnPayload
+  | AppleLoginResponsePayload
 
 // {
 //   eventName: string

@@ -1,6 +1,7 @@
 import { AppBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
 import { login, logout } from '@react-native-kakao/user'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as AppleAuthentication from 'expo-apple-authentication'
 
 export const createLoginHandler = (bridge: AppBridge) => {
   return {
@@ -30,25 +31,26 @@ export const createLoginHandler = (bridge: AppBridge) => {
     },
     LOGIN_APPLE: async () => {
       try {
-        const res = await login()
+        const res = await AppleAuthentication.signInAsync()
 
+        const authorizationCode = res.authorizationCode
+
+        console.log('인증코드: ', authorizationCode)
         // AsyncStorage에 accessToken 저장
-        if (res.accessToken) {
-          await AsyncStorage.setItem('accessToken', res.accessToken)
-        }
 
-        // 단순히 성공 상태만 전송
-        bridge.send(POST_MESSAGE_EVENT.LOGIN_RESPONSE_APPLE, {
-          status: 'success',
-          accessToken: res.accessToken,
-          refreshToken: res.refreshToken,
-        })
+        if (authorizationCode) {
+          // await AsyncStorage.setItem('accessToken', authorizationCode)
+          // 애플로그인은 인증코드 전달
+          bridge.send(POST_MESSAGE_EVENT.LOGIN_RESPONSE_APPLE, {
+            status: 'success',
+            authorizationCode: authorizationCode,
+          })
+        }
       } catch (error) {
         console.log(error)
         bridge.send(POST_MESSAGE_EVENT.LOGIN_RESPONSE_APPLE, {
           status: 'error',
-          accessToken: '',
-          refreshToken: '',
+          authorizationCode: '',
         })
       }
     },
