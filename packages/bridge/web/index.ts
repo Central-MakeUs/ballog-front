@@ -133,9 +133,8 @@ export const createWebBridge = (() => {
 
       if (!globalEventListeners.has(eventNameStr)) {
         globalEventListeners.set(eventNameStr, [callback])
-      } else {
-        globalEventListeners.get(eventNameStr)?.push(callback)
       }
+      // TODO: 여러 callback 함수 추가 시 처리 필요
 
       // 구독 해제 함수 반환
       return () => {

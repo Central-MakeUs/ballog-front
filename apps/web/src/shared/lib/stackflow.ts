@@ -14,6 +14,7 @@ import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
 import RecordMainPage from '@/pages/record/ui/RecordMainPage'
 import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
 import ShareBottomSheet from '@/pages/record/ui/ShareBottomSheet'
+import { withAuth } from '@/shared/hoc/Auth'
 
 export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   transitionDuration: 350,
@@ -47,16 +48,16 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   ],
 
   activities: {
-    Home: HomePage,
-    LiveRecord: LiveRecordPage,
+    Home: withAuth(HomePage),
+    LiveRecord: withAuth(LiveRecordPage),
     Login: LoginPage,
-    TeamSelect: TeamSelectPage,
-    Nickname: NickNamePage,
-    My: MyPage,
-    ChangeTeamSelect: ChangeTeamSelectPage,
-    ChangeNickName: ChangeNickNamePage,
-    Record: RecordMainPage,
-    RecordDetail: RecordDetailPage,
+    TeamSelect: withAuth(TeamSelectPage),
+    Nickname: withAuth(NickNamePage),
+    My: withAuth(MyPage),
+    ChangeTeamSelect: withAuth(ChangeTeamSelectPage),
+    ChangeNickName: withAuth(ChangeNickNamePage),
+    Record: withAuth(RecordMainPage),
+    RecordDetail: withAuth(RecordDetailPage),
     ShareBottomSheet,
   },
   initialActivity: () => 'Home',

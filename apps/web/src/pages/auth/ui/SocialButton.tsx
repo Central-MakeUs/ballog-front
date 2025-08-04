@@ -61,6 +61,7 @@ export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
 
 export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
   const { push } = useFlow()
+  const ua = navigator.userAgent
   // 애플 로그인 훅
   const { handleLogin, isPending } = useSocialLogin({
     social: 'apple',
@@ -81,6 +82,12 @@ export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
       }
     },
   })
+
+  // IOS일 경우에만 애플 로그인 버튼 렌더링
+  if (!/iPhone|iPad|iPod/.test(ua)) {
+    return null
+  }
+
   return (
     <Button
       leftIcon={<Apple className="size-6" />}

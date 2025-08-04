@@ -23,6 +23,8 @@ export const NickNameForm = ({
     onSubmit({ nickname })
   }
 
+  const isFormValid = nickname.trim() && errors.length === 0
+
   return (
     <div className="flex flex-col items-center justify-between w-full h-full px-4">
       <div className="flex flex-col items-center w-full gap-8">
@@ -49,7 +51,7 @@ export const NickNameForm = ({
         size="lg"
         variant="primary"
         onClick={handleSubmit}
-        disabled={!nickname?.trim() || errors.length > 0 || isLoading}
+        disabled={!isFormValid || isLoading}
         className="fixed bottom-10 left-4 right-4"
       >
         {isLoading ? '처리중...' : '완료'}

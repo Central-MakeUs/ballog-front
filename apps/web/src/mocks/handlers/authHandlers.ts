@@ -4,6 +4,7 @@ import type {
   SignupRequestDTO,
   SignupResponseDTO,
   SocialLoginResponseDTO,
+  LogoutResponseDTO,
 } from '@/entities/auth/model/auth.type'
 import type { ApiErrorMessage } from '@/types/api/common'
 import { auth } from '@/mocks/data/auth'
@@ -101,6 +102,36 @@ export const authHandlers = [
             refreshToken:
               'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJ1c2VySWQiOjEsImlhdCI6MTc1MTUyNTAxNiwiZXhwIjoxNzUyMTI5ODE2fQ.B9k7zOgL0Gw8AZ9QuLLm9Sneww8xTrtC8CKdJW9-hRA',
           },
+        },
+        { status: 200 },
+      )
+    },
+  ),
+  http.post<never, never, ApiErrorMessage | LogoutResponseDTO>(
+    `${AUTH_API_PREFIX}/logout`,
+    ({ request }) => {
+      const Authorization = request.headers.get('Authorization')
+
+      if (!Authorization) {
+        return HttpResponse.json<ApiErrorMessage>(
+          {
+            error: 'Authorization 헤더가 누락되었습니다.',
+            message: 'fail',
+            status: 401,
+            code: 'INVALID_INPUT',
+          },
+          { status: 401 },
+        )
+      }
+
+      delay(3000)
+
+      return HttpResponse.json<LogoutResponseDTO>(
+        {
+          message: 'success',
+          status: 200,
+          success: '로그아웃 성공',
+          data: '로그아웃 성공',
         },
         { status: 200 },
       )
