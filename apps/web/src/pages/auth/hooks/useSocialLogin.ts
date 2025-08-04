@@ -9,9 +9,7 @@ import { useCallback } from 'react'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 import { authPost } from '@/entities/auth/api/auth-post'
-import type {
-  SocialLoginResponseDTO,
-} from '@/entities/auth/model/auth.type'
+import type { SocialLoginResponseDTO } from '@/entities/auth/model/auth.type'
 import type { ExtendedKyHttpError } from '@/types/api/common'
 
 type SocialLoginVariables =
@@ -96,7 +94,7 @@ export const useSocialLogin = ({
         onError(new Error('로그인에 실패했습니다.'))
       }
     },
-    [onError],
+    [socialLogin, onError],
   )
 
   useBridgeEvent(
