@@ -76,35 +76,27 @@ export const listenBackgroundMessages = () => {
   })
 }
 
-/**
- * Android 13+ POST_NOTIFICATIONS 권한 요청
- */
+// POST_NOTIFICATIONS 권한 요청
 export const requestAndroidNotificationPermission = async () => {
   if (Platform.OS !== 'android') {
     return true // iOS는 Firebase messaging으로 처리
   }
 
   try {
-    if (Platform.Version >= 33) {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-      )
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    )
 
-      console.log('Android 알림 권한 결과:', granted)
-      return granted === PermissionsAndroid.RESULTS.GRANTED
-    }
-
-    // Android 13 미만은 자동으로 허용
-    return true
+    console.log('Android 알림 권한 결과:', granted)
+    return granted === PermissionsAndroid.RESULTS.GRANTED
   } catch (error) {
     console.error('Android 알림 권한 요청 실패:', error)
     return false
   }
 }
 
-/**
- * 플랫폼별 권한 요청 (통합 함수)
- */
+// 권한 요청 (통합 함수)
+
 export const requestPlatformPermission = async () => {
   if (Platform.OS === 'android') {
     // Android: POST_NOTIFICATIONS 권한 먼저 요청
@@ -118,11 +110,4 @@ export const requestPlatformPermission = async () => {
   // iOS & Android: Firebase messaging 권한 요청
   const firebasePermission = await requestUserPermission()
   return firebasePermission
-}
-
-export const openAndroidSettings = () => {
-  if (Platform.OS === 'android') {
-    const { openSettings } = require('react-native')
-    openSettings()
-  }
 }
