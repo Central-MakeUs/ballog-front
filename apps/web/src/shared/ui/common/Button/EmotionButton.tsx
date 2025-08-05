@@ -32,7 +32,7 @@ interface EmotionButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
   scale: number
 }
 
-const getScale = (scale: number): string => {
+const getButtonScale = (scale: number): string => {
   if (scale === 0.7) return 'scale-70'
   else if (scale === 0.8) return 'scale-80'
   else if (scale === 0.9) return 'scale-90'
@@ -86,7 +86,7 @@ export const EmotionButton = ({
           'bg-usage-background-strong flex flex-col',
           'items-center justify-end rounded-xlarge w-full px-4 py-6',
           className,
-          getScale(scale),
+          getButtonScale(scale),
         )}
         type="button"
         {...props}

@@ -6,6 +6,9 @@ import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 
+import { getScale } from './utils/getScale'
+import { getGridRatio } from './utils/getGridRatio'
+
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {
   emotions?: EmotionType
   onEmotionSubmit?: (emotionType: 'POSITIVE' | 'NEGATIVE') => void
@@ -23,33 +26,6 @@ export const EmotionVoteWidget = ({
 
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
 
-  const getScale = (percent: number) => {
-    if (percent === 0) return 0.7
-    if (percent <= 20) return 0.8
-    if (percent <= 40) return 0.9
-    return 1 // 40% 초과 시 원래 크기
-  }
-
-  const getGridRatio = () => {
-    // 40% 초과 60% 미만: 반반씩 차지
-    if (joyPercent > 40 && joyPercent < 60) {
-      return '1fr 1fr'
-    }
-
-    // 한쪽이 40% 이하일 때
-    const joyScale = getScale(joyPercent)
-    const angryScale = getScale(angryPercent)
-
-    // 원래 크기 1을 기준으로 scale 적용
-    if (joyPercent <= 40) {
-      // joy가 작을 때: joy는 scale 크기, angry는 나머지
-      return `${joyScale}fr ${2 - joyScale}fr`
-    } else {
-      // angry가 작을 때: angry는 scale 크기, joy는 나머지
-      return `${2 - angryScale}fr ${angryScale}fr`
-    }
-  }
-
   return (
     <div className={cn('flex flex-col w-full h-full', className)} {...rest}>
       <div
@@ -59,7 +35,7 @@ export const EmotionVoteWidget = ({
           'transition-all duration-300',
         )}
         style={{
-          gridTemplateColumns: getGridRatio(),
+          gridTemplateColumns: getGridRatio(joyPercent, angryPercent),
         }}
       >
         <div
