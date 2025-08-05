@@ -69,7 +69,7 @@ export const EmotionVoteWidget = ({
         </div>
       </div>
 
-      <div className="relative w-full h-4 mt-6 mb-2 bg-usage-background-strong rounded-full overflow-hidden">
+      <div className="relative w-full h-4 mt-8 mb-2 bg-usage-background-strong rounded-full overflow-hidden">
         <div
           className={cn(
             'absolute top-0 h-full transition-all duration-1000',
