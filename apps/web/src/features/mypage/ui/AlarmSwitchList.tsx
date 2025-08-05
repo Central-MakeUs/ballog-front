@@ -1,19 +1,27 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+
 import { List } from '@/shared/ui/common/List/List'
+import type { Alert } from '@/entities/mypage/model/alert.type'
 import {
+  alertPatch,
   useAlertSettingQuery,
-  useAlertSettingMutation,
-} from '@/entities/mypage/api/alert.queries'
+  alertQueryKeys,
+} from '@/entities/mypage/api'
 
 export const AlarmToggleList = () => {
-  const { data, isLoading } = useAlertSettingQuery()
-  const { mutate } = useAlertSettingMutation()
+  const queryClient = useQueryClient()
 
+  const { data, isLoading } = useAlertSettingQuery()
+
+  const { mutate } = useMutation({
+    mutationFn: (payload: Alert) => alertPatch.patchAlert(payload),
+    onSuccess: (data) => {
+      queryClient.setQueryData(alertQueryKeys.setting().queryKey, data)
+    },
+  })
   if (isLoading || !data) return null
 
   const { startAlert, inGameAlert } = data.data
-
-  // const { startAlert, inGameAlert, toggleMatchStart, toggleInGame } =
-  //   useAlarmContext()
 
   const handleToggleMatchStart = () => {
     mutate({ startAlert: !startAlert, inGameAlert })

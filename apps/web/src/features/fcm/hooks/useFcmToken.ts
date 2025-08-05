@@ -6,10 +6,6 @@ import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 import { fcmPost } from '@/entities/fcm/api/fcm-post'
 
-/**
- * import type FcmTokenPayload 하니까
- * Unsafe member access .token on an `error` typed value. 뜨는 이슈 (원인 모름)
- *  */
 interface FcmTokenPayload {
   token: string
 }
