@@ -17,61 +17,80 @@ export const EmotionVoteWidget = ({
   className,
   ...rest
 }: EmotionVoteWidgetProps) => {
-  const [selectedEmotion, setSelectedEmotion] = useState<
-    'joy' | 'angry' | null
-  >(null)
+  const [, setSelectedEmotion] = useState<'joy' | 'angry' | null>(null)
 
   const { joyPercent, angryPercent } = useEmotionVote()
 
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
 
+  const getScale = (percent: number) => {
+    if (percent === 0) return 0.7
+    if (percent <= 20) return 0.8
+    if (percent <= 40) return 0.9
+    return 1 // 40% 초과 시 원래 크기
+  }
+
+  const getGridRatio = () => {
+    // 40% 초과 60% 미만: 반반씩 차지
+    if (joyPercent > 40 && joyPercent < 60) {
+      return '1fr 1fr'
+    }
+
+    // 한쪽이 40% 이하일 때
+    const joyScale = getScale(joyPercent)
+    const angryScale = getScale(angryPercent)
+
+    // 원래 크기 1을 기준으로 scale 적용
+    if (joyPercent <= 40) {
+      // joy가 작을 때: joy는 scale 크기, angry는 나머지
+      return `${joyScale}fr ${2 - joyScale}fr`
+    } else {
+      // angry가 작을 때: angry는 scale 크기, joy는 나머지
+      return `${2 - angryScale}fr ${angryScale}fr`
+    }
+  }
+
   return (
     <div className={cn('flex flex-col w-full h-full', className)} {...rest}>
       <div
         className={cn(
-          'flex flex-row w-full h-full gap-4',
+          'grid w-full h-full gap-4',
           'items-end',
-          selectedEmotion === null
-            ? 'translate-0'
-            : selectedEmotion === 'joy'
-              ? 'translate-x-2'
-              : '-translate-x-2',
+          'transition-all duration-300',
         )}
+        style={{
+          gridTemplateColumns: getGridRatio(),
+        }}
       >
-        <EmotionButton
-          emotionType="joy"
-          onClick={() => {
-            setSelectedEmotion('joy')
-            onEmotionSubmit?.('POSITIVE')
-          }}
-          className={cn(
-            'origin-bottom transition-transform duration-150',
-            selectedEmotion === null
-              ? 'scale-100 mt-0'
-              : selectedEmotion === 'joy'
-                ? 'scale-110 mt-4'
-                : 'scale-90 ',
-          )}
+        <div
+          className={cn('flex justify-center items-end min-w-0 w-full h-full')}
         >
-          기뻐요
-        </EmotionButton>
-        <EmotionButton
-          emotionType="angry"
-          onClick={() => {
-            setSelectedEmotion('angry')
-            onEmotionSubmit?.('NEGATIVE')
-          }}
-          className={cn(
-            'origin-bottom transition-transform duration-150',
-            selectedEmotion === null
-              ? 'scale-100 mt-0'
-              : selectedEmotion === 'angry'
-                ? 'scale-110 mt-4'
-                : 'scale-90 ',
-          )}
-        >
-          화나요
-        </EmotionButton>
+          <EmotionButton
+            emotionType="joy"
+            onClick={() => {
+              setSelectedEmotion('joy')
+              onEmotionSubmit?.('POSITIVE')
+            }}
+            scale={getScale(joyPercent)}
+            className="transition-all duration-300 origin-bottom w-full"
+          >
+            기뻐요
+          </EmotionButton>
+        </div>
+
+        <div className={cn('flex justify-center items-end min-w-0 w-full')}>
+          <EmotionButton
+            emotionType="angry"
+            onClick={() => {
+              setSelectedEmotion('angry')
+              onEmotionSubmit?.('NEGATIVE')
+            }}
+            scale={getScale(angryPercent)}
+            className="transition-all duration-300 origin-bottom w-full"
+          >
+            화나요
+          </EmotionButton>
+        </div>
       </div>
 
       <div className="relative w-full h-4 mt-6 mb-2 bg-usage-background-strong rounded-full overflow-hidden">
