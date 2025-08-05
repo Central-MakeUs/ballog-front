@@ -14,14 +14,16 @@ import { authGet } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
+import { useStack } from '@/shared/hooks/stackflow/useStack'
 
 interface NickNamePageProps {
   selectedTeam: string | null
 }
 
 const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
-  const { replace, pop } = useFlow()
+  const { replace } = useFlow()
   const { setUser } = useSessionContext()
+  const { popAll } = useStack()
 
   const {
     mutate: signup,
@@ -34,11 +36,7 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
       const user = await authGet.getUser()
       setUser(user.data)
       if (data.status === 200) {
-        // 이전 팀 선택 페이지 pop
-        pop()
-        // 로그인 페이지 pop
-        pop()
-        // 홈 페이지로 이동
+        popAll()
         replace('Home', {}, { animate: false })
       }
     },

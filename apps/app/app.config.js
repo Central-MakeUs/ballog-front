@@ -1,5 +1,6 @@
 export default {
   expo: {
+    owner: 'kych0912',
     name: 'Ballog',
     slug: 'ballog',
     version: '1.0.0',
@@ -14,7 +15,7 @@ export default {
     },
     android: {
       adaptiveIcon: {
-        // foregroundImage: './assets/images/adaptive-icon.png',
+        foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
       edgeToEdgeEnabled: true,
@@ -58,6 +59,9 @@ export default {
     },
     extra: {
       API_BASE_URL: process.env.API_BASE_URL,
+      eas: {
+        projectId: process.env.EXPO_PUBLIC_EAS_PROJECT_ID,
+      },
     },
   },
 }

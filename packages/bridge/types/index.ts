@@ -68,10 +68,16 @@ export type BridgeMessageSchema = {
   INSTAGRAM_SHARE_RESPONSE: {
     payload: BasicMessagePayload
   }
-  LOGIN: {
+  LOGIN_KAKAO: {
     payload: LoginPayload
   }
-  LOGIN_RESPONSE: {
+  LOGIN_RESPONSE_KAKAO: {
+    payload: LoginResponsePayload
+  }
+  LOGIN_APPLE: {
+    payload: LoginPayload
+  }
+  LOGIN_RESPONSE_APPLE: {
     payload: LoginResponsePayload
   }
   LOGOUT: {
