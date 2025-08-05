@@ -84,10 +84,7 @@ export const useSocialLogin = ({
   const handleAppleLoginResponse = useCallback(
     (payload: AppleLoginResponsePayload) => {
       if (payload.status === 'success') {
-        const { authorizationCode } = payload as {
-          status: 'success'
-          authorizationCode: string
-        }
+        const { authorizationCode } = payload
 
         socialLogin({ authorizationCode })
       } else {

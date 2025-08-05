@@ -108,9 +108,9 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   useEffect(() => {
     const key = `recording_started_${matchId}`
 
-    if (!sessionStorage.getItem(key)) {
+    if (!localStorage.getItem(key)) {
       mutate(matchId)
-      sessionStorage.setItem(key, 'true') // post 딱 한 번만
+      localStorage.setItem(key, 'true') // post 딱 한 번만
     }
   }, [mutate, matchId])
 
