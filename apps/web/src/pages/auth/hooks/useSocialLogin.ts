@@ -70,6 +70,7 @@ export const useSocialLogin = ({
     (payload: LoginResponsePayload) => {
       if (payload.status === 'success') {
         const { accessToken, refreshToken } = payload
+        
         socialLogin({
           accessToken,
           refreshToken,
