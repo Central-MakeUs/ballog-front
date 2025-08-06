@@ -39,21 +39,30 @@ export const authPost = {
       .json<SocialLoginResponseDTO>()
 
     setAccessToken(response)
-
     return response
   },
+
   appleLogin: async ({
     authorizationCode,
   }: {
     authorizationCode: string
   }): Promise<SocialLoginResponseDTO> => {
-    const response = await api
-      .post(`auth/login/apple?code=${authorizationCode}`)
-      .json<SocialLoginResponseDTO>()
-
-    setAccessToken(response)
-
-    return response
+    try {
+      const response = await api
+        .post(`auth/login/apple?code=${authorizationCode}`)
+        .json<SocialLoginResponseDTO>()
+      setAccessToken(response)
+      return response
+    } catch (error) {
+      // 에러 콘솔 출력
+      window.ReactNativeWebView?.postMessage(
+        JSON.stringify({
+          eventName: 'SEND_IMAGE_ECHO',
+          payload: error,
+        }),
+      )
+      throw error
+    }
   },
   logout: async (): Promise<LogoutResponseDTO> => {
     const response = await api.post('auth/logout').json<LogoutResponseDTO>()

@@ -13,10 +13,10 @@ export default {
       bundleIdentifier: 'com.ballog.app',
     },
     android: {
-      adaptiveIcon: {
-        foregroundImage: './assets/images/adaptive-icon.png',
-        backgroundColor: '#ffffff',
-      },
+      // adaptiveIcon: {
+      //   foregroundImage: './assets/images/adaptive-icon.png',
+      //   backgroundColor: '#ffffff',
+      // },
       edgeToEdgeEnabled: true,
       package: 'com.ballog.app',
     },
@@ -52,7 +52,7 @@ export default {
       [
         '@react-native-kakao/core',
         {
-          nativeAppKey: process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY,
+          nativeAppKey: 'd2e267a69de013956deecbf7fd4973cb',
           ios: {
             handleKakaoOpenUrl: true,
           },
