@@ -7,8 +7,9 @@ export const createLoginHandler = (bridge: AppBridge) => {
   return {
     LOGIN_KAKAO: async () => {
       try {
+        console.log("test")
         const res = await login()
-
+        console.log(res)
         // AsyncStorage에 accessToken 저장
         if (res.accessToken) {
           await AsyncStorage.setItem('accessToken', res.accessToken)
@@ -36,7 +37,6 @@ export const createLoginHandler = (bridge: AppBridge) => {
         const authorizationCode = res.authorizationCode
 
         console.log('인증코드: ', authorizationCode)
-        // AsyncStorage에 accessToken 저장
 
         if (authorizationCode) {
           // await AsyncStorage.setItem('accessToken', authorizationCode)

@@ -49,6 +49,15 @@ export default {
           },
         },
       ],
+      [
+        '@react-native-kakao/core',
+        {
+          nativeAppKey: process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY,
+          ios: {
+            handleKakaoOpenUrl: true,
+          },
+        },
+      ],
     ],
     experiments: {
       typedRoutes: true,
