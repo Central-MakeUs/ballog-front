@@ -106,7 +106,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
 
   
   const { mutate } = useMutation<RecordingPostResponseDTO, Error, number>({
-    mutationFn: (matchId) => recordingPost.postRecording(null, matchId),
+    mutationFn: (matchId) => recordingPost.postRecording(matchId),
     onSuccess: () => {
       localStorage.setItem(key, 'true')
       setIsPostComplete(true)
