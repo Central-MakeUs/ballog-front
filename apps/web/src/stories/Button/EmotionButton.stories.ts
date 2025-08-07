@@ -30,11 +30,13 @@ type Story = StoryObj<typeof meta>
 export const Joy: Story = {
   args: {
     emotionType: 'joy',
+    scale: 50
   },
 }
 
 export const Angry: Story = {
   args: {
     emotionType: 'angry',
+    scale: 50
   },
 }
