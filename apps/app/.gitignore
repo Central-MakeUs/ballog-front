@@ -83,3 +83,4 @@ yarn-error.*
 
 # Ingore IOS
 android/
+ios/
