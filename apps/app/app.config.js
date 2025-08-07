@@ -1,5 +1,10 @@
+import 'dotenv/config'
+
+const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY
+
 export default {
   expo: {
+    owner: 'kych0912',
     name: 'Ballog',
     slug: 'ballog',
     version: '1.0.0',
@@ -11,6 +16,18 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'com.ballog.app',
+      infoPlist: {
+        LSApplicationQueriesSchemes: [
+          'kakaokompassauth',
+          'kakaolink',
+          'kakaoplus',
+        ],
+        CFBundleURLTypes: [
+          {
+            CFBundleURLSchemes: [`kakao${KAKAO_NATIVE_APP_KEY}`],
+          },
+        ],
+      },
     },
     android: {
       // adaptiveIcon: {
@@ -52,7 +69,11 @@ export default {
       [
         '@react-native-kakao/core',
         {
-          nativeAppKey: 'd2e267a69de013956deecbf7fd4973cb',
+
+          nativeAppKey: KAKAO_NATIVE_APP_KEY,
+          // android: {
+          //   authCodeHandlerActivity: true,
+          // },
           ios: {
             handleKakaoOpenUrl: true,
           },
@@ -64,6 +85,9 @@ export default {
     },
     extra: {
       API_BASE_URL: process.env.API_BASE_URL,
+      eas: {
+        projectId: process.env.EXPO_PUBLIC_EAS_PROJECT_ID,
+      },
     },
   },
 }

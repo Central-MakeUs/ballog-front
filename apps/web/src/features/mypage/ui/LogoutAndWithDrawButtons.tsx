@@ -1,4 +1,4 @@
-import { useAuthAction } from '@/features/auth/hooks/useAuthAction'
+import { useAuthAction } from '@/features/mypage/hooks/useAuthAction'
 import { useModal } from '@/shared/hooks/modal/useModal'
 
 export const LogoutAndWithdrawButtons = () => {
