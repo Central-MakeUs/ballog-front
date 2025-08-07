@@ -36,6 +36,7 @@ export default {
       // },
       edgeToEdgeEnabled: true,
       package: 'com.ballog.app',
+      googleServicesFile: './android/app/google-services.json',
     },
     web: {
       bundler: 'metro',
@@ -43,6 +44,8 @@ export default {
     },
     plugins: [
       'expo-router',
+      '@react-native-firebase/app',
+      '@react-native-firebase/messaging',
       // [
       //   'expo-splash-screen',
       //   {
