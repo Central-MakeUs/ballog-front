@@ -1,3 +1,5 @@
+const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY
+
 export default {
   expo: {
     name: 'Ballog',
@@ -52,7 +54,7 @@ export default {
       [
         '@react-native-kakao/core',
         {
-          nativeAppKey: 'd2e267a69de013956deecbf7fd4973cb',
+          nativeAppKey: KAKAO_NATIVE_APP_KEY,
           ios: {
             handleKakaoOpenUrl: true,
           },
