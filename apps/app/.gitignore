@@ -82,5 +82,4 @@ yarn-error.*
 *.tsbuildinfo
 
 # Ingore IOS
-ios/
 android/
