@@ -12,8 +12,8 @@ const HomeScreen = () => {
   const { bridge } = useBridge(webViewRef)
 
   const { imageData, clearImageData } = useImageBridge()
-
   useImageSender(bridge, imageData, clearImageData)
+
   // 뒤로가기 버튼 처리
   useEffect(() => {
     const backAction = () => {

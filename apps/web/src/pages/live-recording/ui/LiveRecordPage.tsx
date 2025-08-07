@@ -36,9 +36,9 @@ const LiveRecordPageInner = ({
   let bgColor = 'transparent'
 
   if (joyPercent > angryPercent && joyPercent > 50) {
-    bgColor = calculateGradientColor('#030303', '#2e4d31', joyPercent)
+    bgColor = calculateGradientColor('joy', joyPercent)
   } else if (angryPercent > joyPercent && angryPercent > 50) {
-    bgColor = calculateGradientColor('#030303', '#57272b', angryPercent)
+    bgColor = calculateGradientColor('angry', angryPercent)
   }
 
   return (
@@ -55,7 +55,7 @@ const LiveRecordPageInner = ({
       <div
         className="absolute top-0 left-0 w-full h-full z-[-1]"
         style={{
-          background: `linear-gradient(to bottom, ${bgColor}, #030303 80%)`,
+          background: `linear-gradient(to bottom, ${bgColor}, #030303 40%)`,
         }}
       />
 
@@ -67,7 +67,7 @@ const LiveRecordPageInner = ({
         <div
           className={cn(
             'flex flex-col items-center text-center w-full',
-            'mt-8 mb-6',
+            'mt-8 mb-8',
           )}
         >
           <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center">

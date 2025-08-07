@@ -3,10 +3,10 @@ import type { AppBridge } from '@ballog/bridge'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 
 export const createNotificationHandler = (bridge: AppBridge) => ({
-  NOTIFICATON_ON: async () => {
+  GET_MY_FCM_TOKEN: async () => {
     const token = await getFcmToken()
     if (token) {
-      bridge.send(POST_MESSAGE_EVENT.NOTIFICATION_ON, { token })
+      bridge.send(POST_MESSAGE_EVENT.GET_MY_FCM_TOKEN, { token })
     }
   },
 

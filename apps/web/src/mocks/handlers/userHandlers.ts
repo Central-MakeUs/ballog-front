@@ -1,7 +1,12 @@
 import { http, HttpResponse, delay } from 'msw'
 
 import { user } from '@/mocks/data/user'
+import { mockAlert } from '@/mocks/data/alert'
 import type { SignupRequestDTO } from '@/entities/auth/model/auth.type'
+import type {
+  Alert,
+  AlertResponseDTO,
+} from '@/entities/mypage/model/alert.type'
 
 const ME_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/mypage`
 
@@ -41,4 +46,40 @@ export const userHandlers = [
       })
     },
   ),
+
+  http.get(`${ME_API_PREFIX}/alert`, async () => {
+    await delay(100)
+
+    return HttpResponse.json({
+      message: 'Success',
+      status: 200,
+      data: mockAlert.data,
+    })
+  }),
+
+  http.patch<never, Alert>(`${ME_API_PREFIX}/alert`, async ({ request }) => {
+    const body = await request.json()
+
+    const { startAlert, inGameAlert } = body
+
+    mockAlert.data = {
+      startAlert:
+        typeof startAlert === 'boolean'
+          ? startAlert
+          : mockAlert.data.startAlert,
+      inGameAlert:
+        typeof inGameAlert === 'boolean'
+          ? inGameAlert
+          : mockAlert.data.inGameAlert,
+    }
+
+    const response: AlertResponseDTO = {
+      message: 'Success',
+      status: 200,
+      success: '알림 설정 성공',
+      data: mockAlert.data,
+    }
+
+    return HttpResponse.json(response)
+  }),
 ]

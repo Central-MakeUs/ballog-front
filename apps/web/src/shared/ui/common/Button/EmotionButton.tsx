@@ -29,6 +29,21 @@ export const AngryIcon = () => (
 
 interface EmotionButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
   emotionType?: 'joy' | 'angry'
+  scale: number
+}
+
+const getButtonScale = (scale: number): string => {
+  if (scale === 0.7) return 'scale-70'
+  else if (scale === 0.8) return 'scale-80'
+  else if (scale === 0.9) return 'scale-90'
+  else return 'scale-100'
+}
+
+const getHeightClass = (scale: number): string => {
+  if (scale === 0.7) return 'h-29'
+  else if (scale === 0.8) return 'h-33'
+  else if (scale === 0.9) return 'h-37'
+  else return 'h-40.5'
 }
 
 /**
@@ -51,24 +66,42 @@ interface EmotionButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
 export const EmotionButton = ({
   emotionType = 'joy',
   className,
+  scale,
   ...props
 }: EmotionButtonProps) => {
   const label = emotionType === 'joy' ? '기뻐요' : '화나요'
+
   return (
-    <button
+    <div
       className={cn(
-        'bg-usage-background-strong flex flex-col',
-        'items-center justify-end rounded-xlarge w-full h-full px-4 py-6 shadow-medium',
+        getHeightClass(scale),
+        'bg-usage-background-strong flex flex-col shadow-medium',
+        'items-center  justify-end rounded-xlarge w-full',
         'active:bg-usage-background-strong/80',
         className,
       )}
-      type="button"
-      {...props}
     >
-      <div className="flex flex-col items-center justify-center w-full gap-4 min-w-31">
-        <IconButton className="size-20 mx-auto" state={emotionType} />
-        <span className="body-sm-light text-usage-text-subtle">{label}</span>
-      </div>
-    </button>
+      <button
+        className={cn(
+          'bg-usage-background-strong flex flex-col',
+          'items-center justify-end rounded-xlarge w-full px-4 py-6',
+          className,
+          getButtonScale(scale),
+        )}
+        type="button"
+        {...props}
+      >
+        <div
+          className={cn(
+            'flex flex-col items-center justify-center w-full gap-4',
+          )}
+        >
+          <IconButton className={cn('size-20 mx-auto')} state={emotionType} />
+          <span className={cn('body-sm-light text-usage-text-subtle')}>
+            {label}
+          </span>
+        </div>
+      </button>
+    </div>
   )
 }
