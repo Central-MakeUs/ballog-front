@@ -24,11 +24,13 @@ const getMutationFn = (social: 'kakao' | 'apple') => {
  */
 export const useSocialLogin = ({
   social,
-  onSuccess,
+  onSignupSuccess,
+  onLoginSuccess,
   onError,
 }: {
   social: 'kakao' | 'apple'
-  onSuccess: () => void
+  onSignupSuccess: (response: SocialLoginResponseDTO) => void
+  onLoginSuccess: (response: SocialLoginResponseDTO) => void
   onError: (error: Error | ExtendedKyHttpError) => void
 }) => {
   const { send, isRNEnvironment } = useBridge()
@@ -38,8 +40,12 @@ export const useSocialLogin = ({
     { accessToken: string; refreshToken: string }
   >({
     mutationFn: getMutationFn(social),
-    onSuccess: () => {
-      onSuccess()
+    onSuccess: (response) => {
+      if (response.success.includes('회원가입')) {
+        onSignupSuccess(response)
+      } else {
+        onLoginSuccess(response)
+      }
     },
     onError: (error) => {
       onError(error)
@@ -57,7 +63,15 @@ export const useSocialLogin = ({
           break
       }
     } else {
-      onSuccess()
+      onSignupSuccess({
+        status: 200,
+        message: '로그인 성공',
+        success: '로그인 성공',
+        data: {
+          accessToken: '_example_access_token_',
+          refreshToken: '_example_refresh_token_',
+        },
+      })
     }
   }
 
@@ -88,7 +102,7 @@ export const useSocialLogin = ({
         onError(new Error('로그인에 실패했습니다.'))
       }
     },
-    [onError],
+    [onError, socialLogin],
   )
 
   useBridgeEvent(

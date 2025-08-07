@@ -12,7 +12,7 @@ import { useStack } from '../hooks/stackflow/useStack'
  */
 export const withAuth = <P extends object>(Component: ComponentType<P>) => {
   const AuthenticatedComponent = (props: P) => {
-    const { push } = useFlow()
+    const { replace } = useFlow()
     const overlay = useOverlay()
     const { popAll } = useStack()
 
@@ -31,7 +31,7 @@ export const withAuth = <P extends object>(Component: ComponentType<P>) => {
                   onClick: () => {
                     overlay.close()
                     popAll()
-                    push('Login', {})
+                    replace('Login', {})
                   },
                 },
               ]}
@@ -39,7 +39,7 @@ export const withAuth = <P extends object>(Component: ComponentType<P>) => {
           </OverlayModal.Root>
         ))
       }
-    }, [push])
+    }, [replace])
 
     // accessToken이 있는지 확인
     const accessToken = localStorage.getItem('accessToken')

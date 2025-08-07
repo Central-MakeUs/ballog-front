@@ -7,11 +7,6 @@ import type {
   SocialLoginResponseDTO,
 } from '../model/auth.type'
 
-const setAccessToken = (response: SocialLoginResponseDTO) => {
-  const { accessToken: serverAccessToken } = response.data
-  localStorage.setItem('accessToken', serverAccessToken)
-}
-
 export const authPost = {
   signup: async ({
     baseballTeam,
@@ -38,8 +33,6 @@ export const authPost = {
       })
       .json<SocialLoginResponseDTO>()
 
-    setAccessToken(response)
-
     return response
   },
   appleLogin: async ({
@@ -57,8 +50,6 @@ export const authPost = {
         },
       })
       .json<SocialLoginResponseDTO>()
-
-    setAccessToken(response)
 
     return response
   },
