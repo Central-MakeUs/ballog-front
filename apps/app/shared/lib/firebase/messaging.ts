@@ -31,7 +31,6 @@ export const requestUserPermission = async () => {
 export const getFcmToken = async () => {
   try {
     const token = await messaging().getToken()
-    console.log('FCM Token:', token)
     return token
   } catch (error) {
     console.error('FCM 토큰 가져오기 실패:', error)
