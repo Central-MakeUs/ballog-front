@@ -27,7 +27,7 @@ export type InstagramSharePayload = {
   imageUrl: string
 }
 
-export type NotificationOnPayload = {
+export type FcmTokenPayload = {
   token: string
 }
 
@@ -43,6 +43,10 @@ export type LoginResponsePayload = {
 
 export type LogoutResponsePayload = {
   status: 'success' | 'error'
+}
+
+export type InstagramPayload = {
+  username: string
 }
 
 // 각 이벤트별 스키마 정의
@@ -89,11 +93,14 @@ export type BridgeMessageSchema = {
   CAMERA_SHOT: {
     payload: ImageData
   }
-  NOTIFICATION_ON: {
-    payload: NotificationOnPayload
+  GET_MY_FCM_TOKEN: {
+    payload: FcmTokenPayload
   }
   NOTIFICATION_OFF: {
     payload: { message: string }
+  }
+  OPEN_INSTAGRAM: {
+    payload: InstagramPayload
   }
 }
 
@@ -107,7 +114,8 @@ export type PostMessagePayload =
   | LoginResponsePayload
   | LogoutResponsePayload
   | ImageData
-  | NotificationOnPayload
+  | FcmTokenPayload
+  | InstagramPayload
 
 // {
 //   eventName: string

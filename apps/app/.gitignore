@@ -83,3 +83,7 @@ yarn-error.*
 *.tsbuildinfo
 
 # @end expo-cli
+
+# Ingore IOS
+ios/
+android/
