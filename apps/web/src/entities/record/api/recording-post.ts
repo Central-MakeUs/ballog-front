@@ -9,7 +9,7 @@ export const recordingPost = {
     matchRecordId: number,
   ): Promise<RecordingPostResponseDTO> => {
     const response = await api
-      .patch(`record`, { json: { result, matchRecordId } })
+      .post(`record`, { json: { result, matchRecordId } })
       .json<RecordingPostResponseDTO>()
 
     return response
