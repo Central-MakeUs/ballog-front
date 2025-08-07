@@ -81,8 +81,6 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# @end expo-cli
-
 # Ingore IOS
 ios/
 android/

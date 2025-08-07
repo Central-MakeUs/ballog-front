@@ -43,7 +43,6 @@ export default function PhotoResultScreen() {
     // console.log('base64 실제 데이터 길이:', base64Raw.length)
 
     setImageData(imageData)
-    router.back()
     handleClose()
   }
 

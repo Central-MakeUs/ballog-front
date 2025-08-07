@@ -1,4 +1,8 @@
-import { POST_MESSAGE_EVENT, type LoginResponsePayload } from '@ballog/bridge'
+import {
+  POST_MESSAGE_EVENT,
+  type LoginResponsePayload,
+  type AppleLoginResponsePayload,
+} from '@ballog/bridge'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback } from 'react'
 
@@ -8,14 +12,9 @@ import { authPost } from '@/entities/auth/api/auth-post'
 import type { SocialLoginResponseDTO } from '@/entities/auth/model/auth.type'
 import type { ExtendedKyHttpError } from '@/types/api/common'
 
-const getMutationFn = (social: 'kakao' | 'apple') => {
-  switch (social) {
-    case 'kakao':
-      return authPost.kakaoLogin
-    case 'apple':
-      return authPost.appleLogin
-  }
-}
+type SocialLoginVariables =
+  | { accessToken: string; refreshToken: string }
+  | { authorizationCode: string }
 
 /**
  * 소셜 로그인 훅
@@ -35,9 +34,15 @@ export const useSocialLogin = ({
   const { mutate: socialLogin, isPending } = useMutation<
     SocialLoginResponseDTO,
     ExtendedKyHttpError,
-    { accessToken: string; refreshToken: string }
+    SocialLoginVariables
   >({
-    mutationFn: getMutationFn(social),
+    mutationFn: (variables) => {
+      if ('authorizationCode' in variables) {
+        return authPost.appleLogin(variables)
+      } else {
+        return authPost.kakaoLogin(variables)
+      }
+    },
     onSuccess: () => {
       onSuccess()
     },
@@ -65,6 +70,7 @@ export const useSocialLogin = ({
     (payload: LoginResponsePayload) => {
       if (payload.status === 'success') {
         const { accessToken, refreshToken } = payload
+        
         socialLogin({
           accessToken,
           refreshToken,
@@ -77,25 +83,23 @@ export const useSocialLogin = ({
   )
 
   const handleAppleLoginResponse = useCallback(
-    (payload: LoginResponsePayload) => {
+    (payload: AppleLoginResponsePayload) => {
       if (payload.status === 'success') {
-        const { accessToken, refreshToken } = payload
-        socialLogin({
-          accessToken,
-          refreshToken,
-        })
+        const { authorizationCode } = payload
+
+        socialLogin({ authorizationCode })
       } else {
         onError(new Error('로그인에 실패했습니다.'))
       }
     },
-    [onError],
+    [socialLogin, onError],
   )
 
   useBridgeEvent(
     POST_MESSAGE_EVENT.LOGIN_RESPONSE_KAKAO,
     handleKakaoLoginResponse,
   )
-  // app에 카카오 로그인 로직이 등록되어있음. 수정필요
+
   useBridgeEvent(
     POST_MESSAGE_EVENT.LOGIN_RESPONSE_APPLE,
     handleAppleLoginResponse,
