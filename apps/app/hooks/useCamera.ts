@@ -10,6 +10,7 @@ import {
 import { useRouter } from 'expo-router'
 import { Gesture } from 'react-native-gesture-handler'
 import { useSharedValue, runOnJS } from 'react-native-reanimated'
+import { Platform } from 'react-native'
 
 export const useCamera = (
   cameraRef: React.RefObject<CameraView>,
@@ -46,8 +47,13 @@ export const useCamera = (
       exif: true,
     })
     if (photo?.uri) {
+      const route =
+        Platform.OS === 'ios'
+          ? '/screens/iosPhotoResultScreen'
+          : '/screens/photoResultScreen'
+
       router.push({
-        pathname: '/screens/photoResultScreen',
+        pathname: route,
         params: { photoUri: photo.uri },
       })
     }

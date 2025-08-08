@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Alert } from 'react-native'
+import { Alert, Platform } from 'react-native'
 
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
@@ -70,8 +70,13 @@ export const useGallery = (router: ReturnType<typeof useRouter>) => {
     })
 
     if (!result.canceled && result.assets?.length > 0) {
+      const route =
+        Platform.OS === 'ios'
+          ? '/screens/iosPhotoResultScreen'
+          : '/screens/photoResultScreen'
+
       router.push({
-        pathname: '/screens/photoResultScreen',
+        pathname: route,
         params: { photoUri: result.assets[0].uri },
       })
     }
