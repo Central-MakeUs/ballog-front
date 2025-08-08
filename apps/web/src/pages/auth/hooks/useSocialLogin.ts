@@ -58,12 +58,6 @@ export const useSocialLogin = ({
     },
     onError: (error) => {
       onError(error)
-      window.ReactNativeWebView?.postMessage(
-        JSON.stringify({
-          eventName: 'SEND_IMAGE_ECHO',
-          payload: error,
-        }),
-      )
     },
   })
 

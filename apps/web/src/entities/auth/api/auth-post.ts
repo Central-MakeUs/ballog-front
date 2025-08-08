@@ -44,12 +44,6 @@ export const authPost = {
     const response = await api
       .post(`auth/login/apple?code=${authorizationCode}`)
       .json<SocialLoginResponseDTO>()
-    window.ReactNativeWebView?.postMessage(
-      JSON.stringify({
-        eventName: 'SEND_IMAGE_ECHO',
-        payload: response,
-      }),
-    )
     return response
   },
   logout: async (): Promise<LogoutResponseDTO> => {

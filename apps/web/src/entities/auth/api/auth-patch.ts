@@ -13,26 +13,12 @@ export const authPatch = {
     const response = await api
       .patch('mypage/user', { json: { baseballTeam, nickname } })
       .json<UserResponseDTO>()
-
-    window.ReactNativeWebView?.postMessage(
-      JSON.stringify({
-        eventName: 'SEND_IMAGE_ECHO',
-        payload: 'response',
-      }),
-    )
     return response
   },
   patchUserTeam: async ({ baseballTeam }: ChangeTeamRequestDTO) => {
     const response = await api
       .patch('mypage/user', { json: { baseballTeam } })
       .json<UserResponseDTO>()
-
-    window.ReactNativeWebView?.postMessage(
-      JSON.stringify({
-        eventName: 'SEND_IMAGE_ECHO',
-        payload: 'response',
-      }),
-    )
     return response
   },
 }
