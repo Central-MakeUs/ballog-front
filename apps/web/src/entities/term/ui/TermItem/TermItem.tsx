@@ -1,4 +1,4 @@
-import RightArrow from '@/assets/RightArrow.svg?react'
+import RightArrow from '@/assets/rightArrow.svg?react'
 import { Button } from '@/shared/ui/common/Button'
 import { Checkbox } from '@/shared/ui/common/Checkbox'
 import { type TermType } from '@/entities/term/model/term.type'
