@@ -24,6 +24,7 @@ export const Text = ({
     <DialogHeader>
       <div
         className={cn(
+
           'flex flex-col space-y-2 text-center items-center text-usage-text-inverse',
           isImageModal && 'mb-8',
           className,

@@ -25,7 +25,6 @@ export const EndRecordingButton = ({
 
     openImageModal({
       heading: '기록이 완료되었어요!',
-      body: 'Body Text',
       imgSrc: CheckIcon,
     })
   }
@@ -50,7 +49,6 @@ export const EndRecordingButton = ({
   const selectMatchResult = () => {
     openVerticalModal({
       heading: '경기 결과를 선택해주세요.',
-      body: 'Body text',
       buttons: [
         {
           label: '승리',
