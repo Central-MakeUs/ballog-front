@@ -1,4 +1,6 @@
-import { StyleSheet, BackHandler } from 'react-native'
+import { StyleSheet, BackHandler, Platform } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
 import { useEffect, useRef } from 'react'
 import { WebView } from 'react-native-webview'
 import { useImageBridge } from '../shared/contexts/imageBridgeContext'
@@ -10,6 +12,7 @@ import { useImageSender } from './bridge/hooks/useImageSender'
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
+  const insets = useSafeAreaInsets()
 
   const { imageData, clearImageData } = useImageBridge()
   useImageSender(bridge, imageData, clearImageData)
@@ -34,11 +37,20 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          {
+            paddingBottom: Platform.OS === 'ios' ? -34 : insets.bottom,
+            paddingTop: insets.top,
+          },
+        ]}
+      >
         <WebView
           ref={webViewRef}
           source={{
-            uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+            uri: 'http://192.168.1.163:5173/',
+            // uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
           }}
           onMessage={bridge.processMessage}
           javaScriptEnabled={true}
@@ -58,5 +70,6 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#030303',
   },
 })
