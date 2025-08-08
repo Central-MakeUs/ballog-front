@@ -9,8 +9,16 @@ export const authPatch = {
     nickname,
     baseballTeam,
   }: ChangeNicknameRequestDTO) => {
-    return api
+    const response = await api
       .patch('mypage/user', { json: { baseballTeam, nickname } })
       .json<UserResponseDTO>()
+
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({
+        eventName: 'SEND_IMAGE_ECHO',
+        payload: 'response',
+      }),
+    )
+    return response
   },
 }

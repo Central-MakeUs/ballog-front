@@ -70,7 +70,6 @@ export const EndRecordingButton = () => {
         {
           label: '종료하기',
           onClick: () => {
-            close()
             leavePage()
           },
         },

@@ -5,10 +5,10 @@ import { startMocking } from '@/mocks/browser'
 
 import App from './App'
 
-function bootstrap() {
-  // if (import.meta.env.DEV) {
-  //   await startMocking()
-  // }
+async function bootstrap() {
+  if (import.meta.env.DEV) {
+    await startMocking()
+  }
 
   createRoot(document.getElementById('root')!).render(
     <>
