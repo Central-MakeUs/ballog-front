@@ -15,7 +15,7 @@ interface MatchCardCarouselProps {
 }
 
 export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
-  const { push } = useFlow()
+  const { replace } = useFlow()
 
   const [api, setApi] = useState<CarouselApi | null>(null)
   const [current, setCurrent] = useState(0)
@@ -48,7 +48,7 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
               <MatchCard
                 {...match}
                 onClick={() =>
-                  push('LiveRecord', { matchId: String(match.matchesId) })
+                  replace('LiveRecord', { matchId: String(match.matchesId) })
                 }
               />
             </CarouselItem>
