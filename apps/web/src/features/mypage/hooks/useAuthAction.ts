@@ -24,14 +24,8 @@ export const useAuthAction = () => {
       if (payload.status === 'success') {
         clearSession()
         replace('Login', {})
-        window.ReactNativeWebView?.postMessage(
-          JSON.stringify({
-            eventName: 'SEND_IMAGE_ECHO',
-            payload: `페이로드 상태 : ${payload.status}`,
-          }),
-        )
       } else {
-        toast.error('로그아웃에 실패했습니다.')
+        // toast.error('로그아웃에 실패했습니다.')
       }
     },
   )

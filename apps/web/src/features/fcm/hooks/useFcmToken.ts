@@ -33,14 +33,6 @@ export const useFcmToken = () => {
           toast.error('토큰 전송 실패')
         }
       }
-
-      // 디버깅용 메시지 echo
-      // window.ReactNativeWebView?.postMessage(
-      //   JSON.stringify({
-      //     eventName: 'SEND_IMAGE_ECHO',
-      //     payload: payload.token,
-      //   }),
-      // )
     },
   )
 }
