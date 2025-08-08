@@ -1,4 +1,4 @@
 export const mockAlert = {
-  delay: 50,
+  delay: 1000,
   data: { startAlert: true, inGameAlert: false },
 }
