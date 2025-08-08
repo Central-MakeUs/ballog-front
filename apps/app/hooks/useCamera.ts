@@ -21,11 +21,22 @@ export const useCamera = (
   const [zoom, setZoom] = useState(0)
   const savedZoom = useSharedValue(0)
 
+  // 카메라 권한 요청을 더 적극적으로 처리
   useEffect(() => {
     if (cameraPermission?.status !== 'granted') {
       requestCameraPermission()
     }
-  }, [cameraPermission])
+  }, [cameraPermission, requestCameraPermission])
+
+  // 컴포넌트가 마운트될 때마다 카메라 권한 확인
+  useEffect(() => {
+    const checkPermission = async () => {
+      if (cameraPermission?.status !== 'granted') {
+        await requestCameraPermission()
+      }
+    }
+    checkPermission()
+  })
 
   const takePicture = async () => {
     if (!cameraRef.current) return

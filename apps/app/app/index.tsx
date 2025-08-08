@@ -11,6 +11,7 @@ import { useImageBridge } from '../shared/contexts/imageBridgeContext'
 
 import { useBridge } from './bridge/bridgeHandler'
 import { useImageSender } from './bridge/hooks/useImageSender'
+import { router } from 'expo-router'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
@@ -23,11 +24,16 @@ const HomeScreen = () => {
   // 뒤로가기 버튼 처리
   useEffect(() => {
     const backAction = () => {
+      if (router.canGoBack()) {
+        router.back()
+        return true
+      }
       if (webViewRef.current) {
         webViewRef.current.goBack()
         return true // 이벤트 소비
       }
-      return false // 기본 동작 허용
+
+      return false
     }
 
     const backHandler = BackHandler.addEventListener(
@@ -44,15 +50,14 @@ const HomeScreen = () => {
         style={[
           styles.container,
           {
-            paddingBottom: Platform.OS === 'ios' ? -34 : insets.bottom,
+            paddingBottom: Platform.OS === 'ios' ? -34 : 0,
           },
         ]}
       >
         <WebView
           ref={webViewRef}
           source={{
-            uri: 'http://192.168.1.163:5173/',
-            // uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+            uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
           }}
           onMessage={bridge.processMessage}
           javaScriptEnabled={true}

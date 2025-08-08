@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
 import { CameraView } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons'
-import { useRouter } from 'expo-router'
+import { useRouter, useFocusEffect } from 'expo-router'
 import {
   GestureHandlerRootView,
   GestureDetector,
@@ -15,6 +15,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 export default function CameraScreen() {
   const router = useRouter()
+  const [cameraKey, setCameraKey] = useState(0)
 
   const cameraRef = useRef<CameraView>(null) as React.RefObject<CameraView>
 
@@ -31,6 +32,13 @@ export default function CameraScreen() {
   } = useCamera(cameraRef, router)
 
   const { latestPhotoUri, pickImageFromGallery } = useGallery(router)
+
+  // 화면이 포커스될 때마다 카메라를 재시작
+  useFocusEffect(
+    React.useCallback(() => {
+      setCameraKey((prev) => prev + 1)
+    }, []),
+  )
 
   const handleClose = () => {
     router.back()
@@ -79,6 +87,7 @@ export default function CameraScreen() {
             <GestureDetector gesture={pinchGesture}>
               <Animated.View style={styles.camera}>
                 <CameraView
+                  key={cameraKey}
                   style={styles.camera}
                   facing={facing}
                   flash={flash}
@@ -123,12 +132,7 @@ export default function CameraScreen() {
               style={styles.flipButton}
               onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
             >
-              {/* <FlipButton /> */}
-              <Ionicons
-                name={flash === 'off' ? 'flash-off' : 'flash'}
-                size={24}
-                color="white"
-              />
+              <Ionicons name="camera-reverse" size={24} color="white" />
             </TouchableOpacity>
           </View>
         </SafeAreaView>

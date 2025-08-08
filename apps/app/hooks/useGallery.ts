@@ -11,11 +11,11 @@ export const useGallery = (router: ReturnType<typeof useRouter>) => {
     MediaLibrary.usePermissions()
   const [latestPhotoUri, setLatestPhotoUri] = useState<string | null>(null)
 
-    useEffect(() => {
-      if (mediaLibraryPermission?.status === 'granted') {
-        getGalleryThumbnail().then((uri) => setLatestPhotoUri(uri ?? null))
-      }
-    }, [mediaLibraryPermission])
+  useEffect(() => {
+    if (mediaLibraryPermission?.status === 'granted') {
+      getGalleryThumbnail().then((uri) => setLatestPhotoUri(uri ?? null))
+    }
+  })
 
   useEffect(() => {
     if (
@@ -35,8 +35,7 @@ export const useGallery = (router: ReturnType<typeof useRouter>) => {
     }
 
     loadLatestPhoto()
-  }, [mediaLibraryPermission])
-
+  })
 
   const getGalleryThumbnail = async () => {
     try {
