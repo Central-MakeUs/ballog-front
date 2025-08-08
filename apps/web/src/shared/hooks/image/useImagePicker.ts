@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  createWebBridge,
-  POST_MESSAGE_EVENT,
-  type ImageSelectedPayload,
-} from '@ballog/bridge'
+import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
 
 import type { Image } from '@/entities/record/model/record.type'
 
@@ -46,32 +42,23 @@ export const useImagePicker = ({
   useEffect(() => {
     if (!bridge.isRNEnvironment()) return
 
-    const unsubscribe = bridge.addEventListener(
-      'IMAGE_SELECTED',
-      (data: ImageSelectedPayload) => {
-        if (
-          data &&
-          'imageDataList' in data &&
-          Array.isArray(data.imageDataList)
-        ) {
-          const newImages: ImageData[] = data.imageDataList
-            .filter(
-              (imageData: BridgeImageData) =>
-                imageData.base64 && imageData.createdAt && imageData.fileName,
-            )
-            .map((imageData: BridgeImageData) => ({
-              fileName: imageData.fileName,
-              uri: imageData.uri,
-              base64: imageData.base64,
-              createdAt: imageData.createdAt,
-            }))
+    const unsubscribe = bridge.addEventListener('IMAGE_SELECTED', (data) => {
+      const newImages = data.imageDataList
+        .filter(
+          (imageData: BridgeImageData) =>
+            imageData.base64 && imageData.createdAt && imageData.fileName,
+        )
+        .map((imageData: BridgeImageData) => ({
+          fileName: imageData.fileName,
+          uri: imageData.uri,
+          base64: imageData.base64,
+          createdAt: imageData.createdAt,
+        }))
 
-          if (newImages.length > 0) {
-            addImages(newImages)
-          }
-        }
-      },
-    )
+      if (newImages.length > 0) {
+        addImages(newImages)
+      }
+    })
 
     return unsubscribe
   }, [bridge])
