@@ -43,7 +43,16 @@ vi.mock('@/shared/contexts/sessionContext', async () => {
 
 describe.skip('NickNamePage', () => {
   it('should render', () => {
-    render(<NickNamePage params={{ selectedTeam: null }} />)
+    render(
+      <NickNamePage
+        params={{
+          selectedTeam: 'DOOSAN_BEARS',
+          serviceAgree: true,
+          marketingAgree: true,
+          privacyAgree: true,
+        }}
+      />,
+    )
   })
 
   it('중복된 닉네임 "김영천" 입력 시 에러 메시지가 표시된다.', async () => {
@@ -56,7 +65,16 @@ describe.skip('NickNamePage', () => {
       },
     })
 
-    render(<NickNamePage params={{ selectedTeam: 'DOOSAN_BEARS' }} />)
+    render(
+      <NickNamePage
+        params={{
+          selectedTeam: 'DOOSAN_BEARS',
+          serviceAgree: true,
+          marketingAgree: true,
+          privacyAgree: true,
+        }}
+      />,
+    )
 
     const input = screen.getByPlaceholderText('닉네임')
 
@@ -79,7 +97,16 @@ describe.skip('NickNamePage', () => {
 
   it('에러가 없다면 닉네임 입력 후 완료 버튼을 누르면 닉네임 저장 요청이 발생한다.', async () => {
     // Given
-    render(<NickNamePage params={{ selectedTeam: 'DOOSAN_BEARS' }} />)
+    render(
+      <NickNamePage
+        params={{
+          selectedTeam: 'DOOSAN_BEARS',
+          serviceAgree: true,
+          marketingAgree: true,
+          privacyAgree: true,
+        }}
+      />,
+    )
 
     const input = screen.getByPlaceholderText('닉네임')
     const submitButton = screen.getByRole('button', { name: '완료' })
@@ -128,7 +155,16 @@ describe.skip('NickNamePage', () => {
     vi.mocked(authPost.signup).mockResolvedValueOnce(mockSignupResponse)
     vi.mocked(authGet.getUser).mockResolvedValueOnce(mockUserResponse)
 
-    render(<NickNamePage params={{ selectedTeam: 'DOOSAN_BEARS' }} />)
+    render(
+      <NickNamePage
+        params={{
+          selectedTeam: 'DOOSAN_BEARS',
+          serviceAgree: true,
+          marketingAgree: true,
+          privacyAgree: true,
+        }}
+      />,
+    )
 
     const input = screen.getByPlaceholderText('닉네임')
     const submitButton = screen.getByRole('button', { name: '완료' })

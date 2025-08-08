@@ -17,10 +17,15 @@ import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 
 interface NickNamePageProps {
-  selectedTeam: string | null
+  params: {
+    selectedTeam: string
+    serviceAgree: boolean
+    marketingAgree: boolean
+    privacyAgree: boolean
+  }
 }
 
-const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
+const NickNamePage = ({ params }: NickNamePageProps) => {
   const { replace } = useFlow()
   const { setUser } = useSessionContext()
   const { popAll } = useStack()
@@ -58,7 +63,12 @@ const NickNamePage = ({ params }: { params: NickNamePageProps }) => {
           onSubmit={(data) => {
             signup({
               nickname: data.nickname,
-              baseballTeam: params.selectedTeam!,
+              baseballTeam: params.selectedTeam,
+              termAgree: {
+                privacyAgree: params.privacyAgree,
+                serviceAgree: params.serviceAgree,
+                marketingAgree: params.marketingAgree,
+              },
             })
           }}
           isLoading={isLoading}

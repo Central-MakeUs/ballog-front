@@ -6,9 +6,7 @@ export const useSocialNavigation = () => {
   const { popAll } = useStack()
 
   const handleSignupSuccess = () => {
-    push('TeamSelect', {
-      selectedTeam: null,
-    })
+    push('TermAgree', {})
   }
 
   const handleLoginSuccess = () => {
@@ -20,4 +18,4 @@ export const useSocialNavigation = () => {
     handleSignupSuccess,
     handleLoginSuccess,
   }
-} 
+}
