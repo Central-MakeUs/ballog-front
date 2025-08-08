@@ -11,11 +11,7 @@ import {
 } from '@ballog/bridge'
 import { Alert } from 'react-native'
 
-<<<<<<< HEAD
 const EXPO_PUBLIC_FACEBOOK_APP_ID = process.env.EXPO_PUBLIC_FACEBOOK_APP_ID
-=======
-const FACEBOOK_APP_ID = process.env.EXPO_PUBLIC_FACEBOOK_APP_ID
->>>>>>> develop
 
 export const createImageHandler = (bridge: AppBridge) => ({
   PICK_IMAGE: async () => {
