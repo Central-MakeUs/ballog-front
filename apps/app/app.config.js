@@ -3,12 +3,12 @@ const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY
 export default {
   expo: {
     owner: 'kych0912',
-    name: 'Ballog',
-    slug: 'ballog',
+    name: '볼로그',
+    slug: '볼로그',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
-    scheme: 'ballog',
+    scheme: '볼로그',
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     ios: {
