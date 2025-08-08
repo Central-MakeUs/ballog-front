@@ -11,6 +11,8 @@ import {
 } from '@ballog/bridge'
 import { Alert } from 'react-native'
 
+const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID
+
 export const createImageHandler = (bridge: AppBridge) => ({
   PICK_IMAGE: async () => {
     console.log('RN: 이미지 선택 요청 처리')
@@ -135,7 +137,7 @@ export const createImageHandler = (bridge: AppBridge) => ({
       // 인스타그램 스토리 공유 옵션
       Share.shareSingle({
         social: Social.InstagramStories,
-        appId: '621-2-1',
+        appId: FACEBOOK_APP_ID ?? '',
         backgroundImage: downloadResult.uri,
         backgroundBottomColor: '#837DF4',
         backgroundTopColor: '#906df4',

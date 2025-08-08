@@ -12,6 +12,7 @@ const HomeScreen = () => {
   const { bridge } = useBridge(webViewRef)
 
   const { imageData, clearImageData } = useImageBridge()
+  useImageSender(bridge, imageData, clearImageData)
 
   // 뒤로가기 버튼 처리
   useEffect(() => {
@@ -37,8 +38,7 @@ const HomeScreen = () => {
         <WebView
           ref={webViewRef}
           source={{
-            uri: 'http://192.168.0.33:5173/ㅅ',
-            // uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+            uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
           }}
           onMessage={bridge.processMessage}
           javaScriptEnabled={true}

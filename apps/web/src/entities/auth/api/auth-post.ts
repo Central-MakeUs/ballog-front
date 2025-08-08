@@ -32,7 +32,6 @@ export const authPost = {
         },
       })
       .json<SocialLoginResponseDTO>()
-
     return response
   },
 

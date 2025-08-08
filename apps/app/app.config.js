@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY
 
 export default {
@@ -79,6 +77,18 @@ export default {
           ios: {
             handleKakaoOpenUrl: true,
           },
+        },
+      ],
+      [
+        'react-native-share',
+        {
+          ios: ['fb', 'instagram', 'twitter', 'tiktoksharesdk'],
+          android: [
+            'com.facebook.katana',
+            'com.instagram.android',
+            'com.twitter.android',
+            'com.zhiliaoapp.musically',
+          ],
         },
       ],
     ],

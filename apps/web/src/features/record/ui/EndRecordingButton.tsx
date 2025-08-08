@@ -25,7 +25,6 @@ export const EndRecordingButton = ({
 
     openImageModal({
       heading: '기록이 완료되었어요!',
-      body: 'Body Text',
       imgSrc: CheckIcon,
     })
   }
@@ -42,6 +41,7 @@ export const EndRecordingButton = ({
       leavePage()
     },
     onError: () => {
+      close()
       toast("기록 저장에 실패했습니다")
     }
   })
@@ -50,7 +50,6 @@ export const EndRecordingButton = ({
   const selectMatchResult = () => {
     openVerticalModal({
       heading: '경기 결과를 선택해주세요.',
-      body: 'Body text',
       buttons: [
         {
           label: '승리',
@@ -75,8 +74,7 @@ export const EndRecordingButton = ({
   // 첫 번째 모달
   const confirmEndRecord = () => {
     openHorizontalModal({
-      heading: '기록을 종료하시겠습니까?',
-      body: 'Body text',
+      heading: '기록을 완료하시겠습니까?',
       buttons: [
         { label: '취소', onClick: close },
         {

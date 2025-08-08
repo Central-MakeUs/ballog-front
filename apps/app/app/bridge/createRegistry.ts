@@ -6,7 +6,6 @@ import { createImageHandler } from './imageHandler'
 import { createLoginHandler } from './loginHandler'
 import { createEchoDebugHandler } from './createEchoDedugHandler'
 import { createNotificationHandler } from './createNotificationHandler'
-import { createLoginHandler } from './loginHandler'
 import { instagramHandler } from './instagramHandler'
 
 export const createHandlerRegistry = (

@@ -8,6 +8,7 @@ import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 
 const App = () => {
   useFcmToken()
+  // localStorage.clear()
   return (
     <SessionProvider>
       <OverlayProvider>

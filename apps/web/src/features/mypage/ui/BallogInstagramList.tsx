@@ -4,7 +4,7 @@ import type { InstagramPayload } from '@ballog/bridge'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { List } from '@/shared/ui/common/List/List'
 
-const BALLOG_INSTAGRAM = 'y_h2._'
+const BALLOG_INSTAGRAM = 'ballog.kr'
 
 export const BallogInstagramList = () => {
   const { send } = useBridge()

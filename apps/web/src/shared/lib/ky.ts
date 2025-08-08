@@ -38,7 +38,7 @@ export const api = ky.create({
         const token = localStorage.getItem('accessToken')
 
         if (token) {
-          request.headers.set('Authorization', `${token}`)
+          request.headers.set('Authorization', `Bearer ${token}`)
         }
       },
     ],

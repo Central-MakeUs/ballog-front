@@ -24,6 +24,8 @@ export const EmotionVoteWidget = ({
 
   const { joyPercent, angryPercent } = useEmotionVote()
 
+  const isZero = joyPercent === 0 && angryPercent === 0
+
   const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
 
   return (
@@ -47,7 +49,7 @@ export const EmotionVoteWidget = ({
               setSelectedEmotion('joy')
               onEmotionSubmit?.('POSITIVE')
             }}
-            scale={getScale(joyPercent)}
+            scale={isZero ? 1 : getScale(joyPercent)}
             className="transition-all duration-300 origin-bottom w-full"
           >
             기뻐요
@@ -61,7 +63,7 @@ export const EmotionVoteWidget = ({
               setSelectedEmotion('angry')
               onEmotionSubmit?.('NEGATIVE')
             }}
-            scale={getScale(angryPercent)}
+            scale={isZero ? 1 : getScale(angryPercent)}
             className="transition-all duration-300 origin-bottom w-full"
           >
             화나요
@@ -88,8 +90,8 @@ export const EmotionVoteWidget = ({
           'flex justify-between',
         )}
       >
-        <span>{joyPercent}%</span>
-        <span>{angryPercent}%</span>
+        <span>{Math.round(joyPercent)}%</span>
+        <span>{Math.round(angryPercent)}%</span>
       </div>
     </div>
   )

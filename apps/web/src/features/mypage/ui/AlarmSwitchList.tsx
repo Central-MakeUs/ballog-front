@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
 
 import { List } from '@/shared/ui/common/List/List'
 import type { Alert } from '@/entities/mypage/model/alert.type'
@@ -13,22 +14,38 @@ export const AlarmToggleList = () => {
 
   const { data, isLoading } = useAlertSettingQuery()
 
+  const [localStartAlert, setLocalStartAlert] = useState<boolean | null>(null)
+  const [localInGameAlert, setLocalInGameAlert] = useState<boolean | null>(null)
+
   const { mutate } = useMutation({
     mutationFn: (payload: Alert) => alertPatch.patchAlert(payload),
     onSuccess: (data) => {
       queryClient.setQueryData(alertQueryKeys.setting().queryKey, data)
+      setLocalStartAlert(null)
+      setLocalInGameAlert(null)
+    },
+    onError: () => {
+      setLocalStartAlert(null)
+      setLocalInGameAlert(null)
     },
   })
   if (isLoading || !data) return null
 
   const { startAlert, inGameAlert } = data.data
 
+  const displayStartAlert = localStartAlert ?? startAlert
+  const displayInGameAlert = localInGameAlert ?? inGameAlert
+
   const handleToggleMatchStart = () => {
-    mutate({ startAlert: !startAlert, inGameAlert })
+    const next = !displayStartAlert
+    setLocalStartAlert(next)
+    mutate({ startAlert: next, inGameAlert: displayInGameAlert })
   }
 
   const handleToggleInGame = () => {
-    mutate({ startAlert, inGameAlert: !inGameAlert })
+    const next = !displayInGameAlert
+    setLocalInGameAlert(next)
+    mutate({ startAlert: displayStartAlert, inGameAlert: next })
   }
 
   return (
