@@ -1,6 +1,11 @@
 import type { ApiResponse } from '@/types/api/common'
 import type { ApiResponseWithNoSuccess } from '@/types/api/common'
 
+export interface ChangeNicknameRequestDTO {
+  baseballTeam: string
+  nickname: string
+}
+
 export interface SignupRequestDTO {
   baseballTeam: string
   nickname: string
