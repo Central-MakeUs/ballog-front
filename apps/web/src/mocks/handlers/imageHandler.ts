@@ -33,11 +33,11 @@ export const imageHandlers = [
   http.post<never, ImageRequestDTO, ApiErrorMessage | ImageUploadResponseDTO>(
     `${IMAGE_API_PREFIX}`,
     async ({ request }) => {
-      const { recordId, imageUrl } = await request.json()
+      const { matchRecordId, imageUrl } = await request.json()
 
       await delay(1000)
 
-      if (recordId && imageUrl) {
+      if (matchRecordId && imageUrl) {
         return HttpResponse.json<ImageUploadResponseDTO>(
           {
             data: image.image,
@@ -88,17 +88,9 @@ export const imageHandlers = [
 
     await delay(1000)
 
-    return HttpResponse.json<PresignedUrlResponseDTO>(
-      {
-        message: 'success',
-        status: 200,
-        success: 'presignedUrl 요청 성공',
-        data: image.presignedUrl,
-      },
-      {
-        status: 200,
-      },
-    )
+    return HttpResponse.json<PresignedUrlResponseDTO>(image.presignedUrl, {
+      status: 200,
+    })
   }),
   // S3 이미지 업로드 모킹
   http.put<{ fileName: string }, never, never>(
