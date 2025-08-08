@@ -36,22 +36,15 @@ export const authPost = {
 
     return response
   },
+
   appleLogin: async ({
-    accessToken,
-    refreshToken,
+    authorizationCode,
   }: {
-    accessToken: string
-    refreshToken: string
+    authorizationCode: string
   }): Promise<SocialLoginResponseDTO> => {
     const response = await api
-      .post('auth/login/apple', {
-        headers: {
-          Authorization: 'Bearer ' + accessToken,
-          'X-Refresh-Token': refreshToken,
-        },
-      })
+      .post(`auth/login/apple?code=${authorizationCode}`)
       .json<SocialLoginResponseDTO>()
-
     return response
   },
   logout: async (): Promise<LogoutResponseDTO> => {

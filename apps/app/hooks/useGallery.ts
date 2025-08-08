@@ -11,29 +11,32 @@ export const useGallery = (router: ReturnType<typeof useRouter>) => {
     MediaLibrary.usePermissions()
   const [latestPhotoUri, setLatestPhotoUri] = useState<string | null>(null)
 
-  //   useEffect(() => {
-  //     if (mediaLibraryPermission?.status === 'granted') {
-  //       getGalleryThumbnail().then((uri) => setLatestPhotoUri(uri ?? null))
-  //     }
-  //   }, [mediaLibraryPermission])
+    useEffect(() => {
+      if (mediaLibraryPermission?.status === 'granted') {
+        getGalleryThumbnail().then((uri) => setLatestPhotoUri(uri ?? null))
+      }
+    }, [mediaLibraryPermission])
 
   useEffect(() => {
     if (
       !mediaLibraryPermission ||
-      mediaLibraryPermission.status !== 'granted'
+      mediaLibraryPermission.status !== 'undetermined'
     ) {
       requestMediaLibraryPermission()
     }
-  }, [mediaLibraryPermission])
+  }, [mediaLibraryPermission, requestMediaLibraryPermission])
 
   useEffect(() => {
     const loadLatestPhoto = async () => {
+      if (mediaLibraryPermission?.status !== 'granted') return
+
       const uri = await getGalleryThumbnail()
       setLatestPhotoUri(uri ?? null)
     }
 
     loadLatestPhoto()
   }, [mediaLibraryPermission])
+
 
   const getGalleryThumbnail = async () => {
     try {

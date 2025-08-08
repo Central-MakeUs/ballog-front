@@ -1,5 +1,5 @@
 import messaging from '@react-native-firebase/messaging'
-import { Alert } from 'react-native'
+import { Alert, Platform, PermissionsAndroid } from 'react-native'
 
 /**
  * IOS 에서 사용자에게 푸시 알림 권한 요청 함수
@@ -60,10 +60,53 @@ export const listenForegroundMessages = () => {
       remoteMessage.notification?.body || '',
       [
         { text: '닫기', style: 'cancel' },
-        { text: '확인', style: 'default' }
-      ]
-    );
-    
+        { text: '확인', style: 'default' },
+      ],
+    )
+
     // 예: Alert.alert(remoteMessage.notification?.title ?? '알림')
   })
+}
+
+export const listenBackgroundMessages = () => {
+  return messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+    console.log('앱이 백그라운드에서 실행됨:', remoteMessage)
+    return Promise.resolve()
+  })
+}
+
+// POST_NOTIFICATIONS 권한 요청
+export const requestAndroidNotificationPermission = async () => {
+  if (Platform.OS !== 'android') {
+    return true // iOS는 Firebase messaging으로 처리
+  }
+
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    )
+
+    console.log('Android 알림 권한 결과:', granted)
+    return granted === PermissionsAndroid.RESULTS.GRANTED
+  } catch (error) {
+    console.error('Android 알림 권한 요청 실패:', error)
+    return false
+  }
+}
+
+// 권한 요청 (통합 함수)
+
+export const requestPlatformPermission = async () => {
+  if (Platform.OS === 'android') {
+    // Android: POST_NOTIFICATIONS 권한 먼저 요청
+    const androidPermission = await requestAndroidNotificationPermission()
+    if (!androidPermission) {
+      console.log('Android 알림 권한이 거부되었습니다')
+      return false
+    }
+  }
+
+  // iOS & Android: Firebase messaging 권한 요청
+  const firebasePermission = await requestUserPermission()
+  return firebasePermission
 }
