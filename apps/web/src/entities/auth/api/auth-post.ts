@@ -7,11 +7,6 @@ import type {
   SocialLoginResponseDTO,
 } from '../model/auth.type'
 
-const setAccessToken = (response: SocialLoginResponseDTO) => {
-  const { accessToken: serverAccessToken } = response.data
-  localStorage.setItem('accessToken', serverAccessToken)
-}
-
 export const authPost = {
   signup: async ({
     baseballTeam,
@@ -37,7 +32,6 @@ export const authPost = {
         },
       })
       .json<SocialLoginResponseDTO>()
-    setAccessToken(response)
     return response
   },
 
@@ -46,22 +40,11 @@ export const authPost = {
   }: {
     authorizationCode: string
   }): Promise<SocialLoginResponseDTO> => {
-    try {
-      const response = await api
-        .post(`auth/login/apple?code=${authorizationCode}`)
-        .json<SocialLoginResponseDTO>()
-      setAccessToken(response)
-      return response
-    } catch (error) {
-      // 에러 콘솔 출력
-      window.ReactNativeWebView?.postMessage(
-        JSON.stringify({
-          eventName: 'SEND_IMAGE_ECHO',
-          payload: error,
-        }),
-      )
-      throw error
-    }
+    const response = await api
+      .post(`auth/login/apple?code=${authorizationCode}`)
+      .json<SocialLoginResponseDTO>()
+
+    return response
   },
   logout: async (): Promise<LogoutResponseDTO> => {
     const response = await api.post('auth/logout').json<LogoutResponseDTO>()

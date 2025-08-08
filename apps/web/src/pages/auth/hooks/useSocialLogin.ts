@@ -16,6 +16,23 @@ type SocialLoginVariables =
   | { accessToken: string; refreshToken: string }
   | { authorizationCode: string }
 
+const getMutationFn = (
+  social: 'kakao' | 'apple',
+  variables: SocialLoginVariables,
+) => {
+  switch (social) {
+    case 'kakao':
+      if ('accessToken' in variables) {
+        return authPost.kakaoLogin(
+          variables as { accessToken: string; refreshToken: string },
+        )
+      }
+      throw new Error('accessToken is not defined')
+    case 'apple':
+      return authPost.appleLogin(variables as { authorizationCode: string })
+  }
+}
+
 /**
  * 소셜 로그인 훅
  * @param object social, onSuccess, onError
@@ -23,11 +40,13 @@ type SocialLoginVariables =
  */
 export const useSocialLogin = ({
   social,
-  onSuccess,
+  onSignupSuccess,
+  onLoginSuccess,
   onError,
 }: {
   social: 'kakao' | 'apple'
-  onSuccess: () => void
+  onSignupSuccess: (response: SocialLoginResponseDTO) => void
+  onLoginSuccess: (response: SocialLoginResponseDTO) => void
   onError: (error: Error | ExtendedKyHttpError) => void
 }) => {
   const { send, isRNEnvironment } = useBridge()
@@ -36,15 +55,13 @@ export const useSocialLogin = ({
     ExtendedKyHttpError,
     SocialLoginVariables
   >({
-    mutationFn: (variables) => {
-      if ('authorizationCode' in variables) {
-        return authPost.appleLogin(variables)
+    mutationFn: (variables) => getMutationFn(social, variables),
+    onSuccess: (response) => {
+      if (response.success.includes('회원가입')) {
+        onSignupSuccess(response)
       } else {
-        return authPost.kakaoLogin(variables)
+        onLoginSuccess(response)
       }
-    },
-    onSuccess: () => {
-      onSuccess()
     },
     onError: (error) => {
       onError(error)
@@ -62,7 +79,15 @@ export const useSocialLogin = ({
           break
       }
     } else {
-      onSuccess()
+      onSignupSuccess({
+        status: 200,
+        message: '로그인 성공',
+        success: '로그인 성공',
+        data: {
+          accessToken: '_example_access_token_',
+          refreshToken: '_example_refresh_token_',
+        },
+      })
     }
   }
 
@@ -70,7 +95,7 @@ export const useSocialLogin = ({
     (payload: LoginResponsePayload) => {
       if (payload.status === 'success') {
         const { accessToken, refreshToken } = payload
-        
+
         socialLogin({
           accessToken,
           refreshToken,

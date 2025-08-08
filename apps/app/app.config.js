@@ -28,10 +28,10 @@ export default {
       },
     },
     android: {
-      // adaptiveIcon: {
-      //   foregroundImage: './assets/images/adaptive-icon.png',
-      //   backgroundColor: '#ffffff',
-      // },
+      adaptiveIcon: {
+        foregroundImage: './assets/images/icon.png',
+        backgroundColor: '#ffffff',
+      },
       edgeToEdgeEnabled: true,
       package: 'com.ballog.app',
       googleServicesFile: './android/app/google-services.json',

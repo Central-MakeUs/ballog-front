@@ -34,6 +34,8 @@ export const useAuthAction = () => {
     try {
       await authPost.logout()
       bridge.send(POST_MESSAGE_EVENT.LOGOUT, { message: 'logout' })
+      clearSession()
+      replace('Login', {})
     } catch {
       toast.error('로그아웃에 실패했습니다.')
     }
@@ -42,6 +44,7 @@ export const useAuthAction = () => {
   const deleteUser = async () => {
     try {
       await authDelete.deleteUser()
+      bridge.send(POST_MESSAGE_EVENT.LOGOUT, { message: 'deleteUser' })
       clearSession()
       replace('Login', {})
     } catch {

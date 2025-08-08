@@ -99,10 +99,7 @@ export const createWebBridge = (() => {
     // 전역 이벤트 리스너 등록 (한 번만)
     if (isReady && !isGlobalListenerRegistered) {
       window.addEventListener('message', globalMessageHandler)
-      document.addEventListener(
-        'message',
-        globalMessageHandler as EventListener,
-      )
+      document.addEventListener('message', globalMessageHandler)
       isGlobalListenerRegistered = true
     }
 
