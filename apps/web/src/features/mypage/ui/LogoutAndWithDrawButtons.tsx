@@ -30,6 +30,13 @@ export const LogoutAndWithdrawButtons = () => {
         {
           label: '탈퇴',
           onClick: () => {
+            window.ReactNativeWebView?.postMessage(
+              JSON.stringify({
+                eventName: 'SEND_IMAGE_ECHO',
+                payload: "탈퇴해요",
+              }),
+            )
+
             deleteUser()
           },
         },

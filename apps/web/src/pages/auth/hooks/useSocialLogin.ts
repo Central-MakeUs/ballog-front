@@ -13,23 +13,22 @@ import type { SocialLoginResponseDTO } from '@/entities/auth/model/auth.type'
 import type { ExtendedKyHttpError } from '@/types/api/common'
 
 type SocialLoginVariables =
-  | { accessToken: string; refreshToken: string }
-  | { authorizationCode: string }
+  | { type: 'kakao'; accessToken: string; refreshToken: string }
+  | { type: 'apple'; authorizationCode: string }
 
-const getMutationFn = (
-  social: 'kakao' | 'apple',
-  variables: SocialLoginVariables,
-) => {
+const getMutationFn = (variables: SocialLoginVariables) => {
+  const social = variables.type
+  // window.ReactNativeWebView?.postMessage(
+  //   JSON.stringify({
+  //     eventName: 'SEND_IMAGE_ECHO',
+  //     payload: `이거 ${social}`,
+  //   }),
+  // )
   switch (social) {
     case 'kakao':
-      if ('accessToken' in variables) {
-        return authPost.kakaoLogin(
-          variables as { accessToken: string; refreshToken: string },
-        )
-      }
-      throw new Error('accessToken is not defined')
+      return authPost.kakaoLogin(variables)
     case 'apple':
-      return authPost.appleLogin(variables as { authorizationCode: string })
+      return authPost.appleLogin(variables)
   }
 }
 
@@ -55,7 +54,7 @@ export const useSocialLogin = ({
     ExtendedKyHttpError,
     SocialLoginVariables
   >({
-    mutationFn: (variables) => getMutationFn(social, variables),
+    mutationFn: (variables) => getMutationFn(variables),
     onSuccess: (response) => {
       if (response.success.includes('회원가입')) {
         onSignupSuccess(response)
@@ -75,6 +74,12 @@ export const useSocialLogin = ({
           send(POST_MESSAGE_EVENT.LOGIN_KAKAO, { social })
           break
         case 'apple':
+          window.ReactNativeWebView?.postMessage(
+            JSON.stringify({
+              eventName: 'SEND_IMAGE_ECHO',
+              payload: social,
+            }),
+          )
           send(POST_MESSAGE_EVENT.LOGIN_APPLE, { social })
           break
       }
@@ -96,10 +101,7 @@ export const useSocialLogin = ({
       if (payload.status === 'success') {
         const { accessToken, refreshToken } = payload
 
-        socialLogin({
-          accessToken,
-          refreshToken,
-        })
+        socialLogin({ type: 'kakao', accessToken, refreshToken })
       } else {
         onError(new Error('로그인에 실패했습니다.'))
       }
@@ -112,7 +114,7 @@ export const useSocialLogin = ({
       if (payload.status === 'success') {
         const { authorizationCode } = payload
 
-        socialLogin({ authorizationCode })
+        socialLogin({ type: 'apple', authorizationCode })
       } else {
         onError(new Error('로그인에 실패했습니다.'))
       }

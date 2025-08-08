@@ -50,6 +50,7 @@ export const EmotionVoteWidget = ({
               onEmotionSubmit?.('POSITIVE')
             }}
             scale={isZero ? 1 : getScale(joyPercent)}
+            percent={joyPercent}
             className="transition-all duration-300 origin-bottom w-full"
           >
             기뻐요
@@ -64,6 +65,7 @@ export const EmotionVoteWidget = ({
               onEmotionSubmit?.('NEGATIVE')
             }}
             scale={isZero ? 1 : getScale(angryPercent)}
+            percent={angryPercent}
             className="transition-all duration-300 origin-bottom w-full"
           >
             화나요
@@ -83,15 +85,6 @@ export const EmotionVoteWidget = ({
             width: `${dominant === 'joy' ? joyPercent : angryPercent}%`,
           }}
         />
-      </div>
-      <div
-        className={cn(
-          'heading-lg-bold text-usage-text-default',
-          'flex justify-between',
-        )}
-      >
-        <span>{Math.round(joyPercent)}%</span>
-        <span>{Math.round(angryPercent)}%</span>
       </div>
     </div>
   )

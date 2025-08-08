@@ -30,6 +30,7 @@ export const AngryIcon = () => (
 interface EmotionButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
   emotionType?: 'joy' | 'angry'
   scale: number
+  percent: number
 }
 
 const getButtonScale = (scale: number): string => {
@@ -40,9 +41,9 @@ const getButtonScale = (scale: number): string => {
 }
 
 const getHeightClass = (scale: number): string => {
-  if (scale === 0.7) return 'h-29'
-  else if (scale === 0.8) return 'h-33'
-  else if (scale === 0.9) return 'h-37'
+  if (scale === 0.7) return 'h-29.5'
+  else if (scale === 0.8) return 'h-33.5'
+  else if (scale === 0.9) return 'h-38'
   else return 'h-40.5'
 }
 
@@ -67,6 +68,7 @@ export const EmotionButton = ({
   emotionType = 'joy',
   className,
   scale,
+  percent,
   ...props
 }: EmotionButtonProps) => {
   const label = emotionType === 'joy' ? '기뻐요' : '화나요'
@@ -84,7 +86,7 @@ export const EmotionButton = ({
       <button
         className={cn(
           'bg-usage-background-strong flex flex-col',
-          'items-center justify-end rounded-xlarge w-full px-4 py-6',
+          'items-center justify-end rounded-xlarge w-full px-4 py-4',
           className,
           getButtonScale(scale),
         )}
@@ -93,13 +95,14 @@ export const EmotionButton = ({
       >
         <div
           className={cn(
-            'flex flex-col items-center justify-center w-full gap-4',
+            'flex flex-col items-center justify-center w-full',
           )}
         >
           <IconButton className={cn('size-20 mx-auto')} state={emotionType} />
-          <span className={cn('body-sm-light text-usage-text-subtle')}>
+          <span className={cn('body-sm-light text-usage-text-subtle  mt-1')}>
             {label}
           </span>
+          <span className='heading-md-bold text-usage-text-default'>{Math.round(percent)}%</span>
         </div>
       </button>
     </div>

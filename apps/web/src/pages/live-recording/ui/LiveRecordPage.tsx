@@ -2,7 +2,9 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
+import { useFlow } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import {
@@ -88,7 +90,7 @@ const LiveRecordPageInner = ({
         />
 
         {/* 하단 버튼 */}
-        <EndRecordingButton matchRecordId={recordingData.matchRecordId} />
+        <EndRecordingButton />
       </div>
     </AppScreen>
   )
@@ -99,28 +101,32 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
 }: {
   params: { matchId: string }
 }) => {
+  const { replace } = useFlow()
+
   const matchId = Number(params.matchId)
   const [isPostComplete, setIsPostComplete] = useState<boolean>(false)
 
-  const key = `recording_started_${matchId}`
-
-  
   const { mutate } = useMutation<RecordingPostResponseDTO, Error, number>({
     mutationFn: (matchId) => recordingPost.postRecording(matchId),
     onSuccess: () => {
-      localStorage.setItem(key, 'true')
       setIsPostComplete(true)
+    },
+    onError: () => {
+      // setIsPostComplete(true)
+      toast('이미 경기 기록이 존재합니다')
+      replace(
+        'Home',
+        {},
+        {
+          animate: false,
+        },
+      )
     },
   })
 
   useEffect(() => {
-    if (!localStorage.getItem(key)) {
-      mutate(matchId)
-    } else {
-      // 이미 POST를 보낸 적이 있다면 바로 GET
-      setIsPostComplete(true)
-    }
-  }, [mutate, matchId])
+    mutate(matchId)
+  }, [matchId])
 
   const { data: recordingData, isLoading: isRecordingLoading } = useQuery({
     ...recording.getRecording(matchId),
