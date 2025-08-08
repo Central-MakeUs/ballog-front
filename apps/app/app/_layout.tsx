@@ -45,7 +45,7 @@ export default function RootLayout() {
     <>
       <ImageBridgeProvider>
         <Stack screenOptions={{ headerShown: false }} />
-        <StatusBar style="auto" />
+        <StatusBar style="light"  />
       </ImageBridgeProvider>
     </>
   )
