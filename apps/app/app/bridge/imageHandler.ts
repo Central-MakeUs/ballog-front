@@ -135,7 +135,7 @@ export const createImageHandler = (bridge: AppBridge) => ({
       // 인스타그램 스토리 공유 옵션
       Share.shareSingle({
         social: Social.InstagramStories,
-        appId: '621-2-1',
+        appId: '3052022994973102',
         backgroundImage: downloadResult.uri,
         backgroundBottomColor: '#837DF4',
         backgroundTopColor: '#906df4',
