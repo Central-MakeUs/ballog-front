@@ -61,11 +61,15 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
           size="lg"
           className="flex-3 w-full"
           data-testid="share-button"
-          onClick={() =>
-            push('ShareBottomSheet', {
-              imageUrl: images[0].imageUrl,
-            })
-          }
+          onClick={() => {
+            if (images[0].imageUrl) {
+              push('ShareBottomSheet', {
+                imageUrl: images[0].imageUrl,
+              })
+            } else {
+              toast('이미지가 없습니다.')
+            }
+          }}
         >
           공유하기
         </Button>

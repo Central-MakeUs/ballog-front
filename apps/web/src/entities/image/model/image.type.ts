@@ -6,7 +6,7 @@ export interface PresignedUrlResponse {
 }
 
 export interface ImageRequestDTO {
-  recordId: number
+  matchRecordId: number
   imageUrl: string
 }
 
@@ -19,5 +19,5 @@ export interface ImageUploadResponse {
   recordId: number
 }
 
-export type PresignedUrlResponseDTO = ApiResponse<PresignedUrlResponse>
+export type PresignedUrlResponseDTO = PresignedUrlResponse
 export type ImageUploadResponseDTO = ApiResponse<ImageUploadResponse>

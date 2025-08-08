@@ -59,11 +59,11 @@ export const ImageTimeLineContent = () => {
   )
 }
 
-export const ImageTimeLine = ({ recordId }: { recordId: number }) => {
+export const ImageTimeLine = ({ matchRecordId }: { matchRecordId: number }) => {
   const { images, setImages } = useImageContext()
   const { requestImagePick, uploadState, uploadedImages } =
     useImagePickerWithUpload({
-      recordId,
+      matchRecordId,
       initialImages: images,
     })
 
