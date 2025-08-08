@@ -6,12 +6,12 @@ import { useImageUpload } from '@/shared/hooks/image/useImageUpload'
 import type { ImageUploadResponse } from '@/entities/image/model/image.type'
 
 interface UseImagePickerWithUploadProps {
-  recordId: number
+  matchRecordId: number
   initialImages?: Image[]
 }
 
 export const useImagePickerWithUpload = ({
-  recordId,
+  matchRecordId,
   initialImages = [],
 }: UseImagePickerWithUploadProps) => {
   const [uploadedImages, setUploadedImages] = useState<ImageUploadResponse[]>(
@@ -21,7 +21,7 @@ export const useImagePickerWithUpload = ({
   const { newImages, requestImagePick } = useImagePicker({
     initialImages,
   })
-  const { uploadImage, uploadState } = useImageUpload({ recordId })
+  const { uploadImage, uploadState } = useImageUpload({ matchRecordId })
 
   // 새로운 이미지가 선택되면 자동으로 병렬 업로드
   useEffect(() => {

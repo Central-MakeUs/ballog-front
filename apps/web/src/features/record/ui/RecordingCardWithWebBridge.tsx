@@ -19,7 +19,7 @@ export const RecordingCardWithWebBridge = ({
   const bridge = createWebBridge()
   const { hasImage, addImage } = useRecordingImages()
   const { uploadImage, uploadState } = useImageUpload({
-    recordId: recordingData.matchRecordId,
+    matchRecordId: recordingData.matchRecordId,
   })
   useEffect(() => {
     if (!recordingData.imageList || recordingData.imageList.length === 0) return

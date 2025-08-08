@@ -17,11 +17,11 @@ const RecordMainContent = ({
 }: {
   data: RecordResponseDTO | undefined
 }) => {
-  const { totalCount, winRate, positiveEmotionPercent, records } =
+  const { totalCount, winRate, totalNegativeEmotionPercent, records } =
     data?.data ?? {
       totalCount: 0,
       winRate: 0,
-      positiveEmotionPercent: 0,
+      totalNegativeEmotionPercent: 0,
       records: [],
     }
 
@@ -44,7 +44,7 @@ const RecordMainContent = ({
           ) : (
             <EmotionCard.Active
               emotion={'기뻐요'}
-              rate={positiveEmotionPercent}
+              rate={parseInt(totalNegativeEmotionPercent.toString())}
             />
           )}
         </div>

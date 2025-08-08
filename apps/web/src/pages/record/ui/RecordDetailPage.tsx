@@ -58,8 +58,9 @@ export const RecordDetailPage = ({
             </RecordLogCard.Root>
           </div>
 
-          <ImageTimeLine recordId={data?.data.matchRecordId ?? 0} />
+          <ImageTimeLine matchRecordId={data?.data.matchRecordId ?? 0} />
           <EmotionTimeLine
+            positiveEmotionPercent={data?.data.totalPositiveEmotionPercent ?? 0}
             emotionGroupList={data?.data.emotionGroupList ?? []}
           />
           <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} />
