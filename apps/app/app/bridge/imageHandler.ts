@@ -118,7 +118,6 @@ export const createImageHandler = (bridge: AppBridge) => ({
     console.log('RN: 인스타그램 스토리 공유 요청 처리', payload)
 
     try {
-      // 이미지를 임시 디렉토리에 다운로드
       const fileName = `ballog_share_${Date.now()}.jpg`
       const customDir = `${FileSystem.documentDirectory}ballog-temp/`
       await FileSystem.makeDirectoryAsync(customDir, { intermediates: true })
@@ -134,28 +133,23 @@ export const createImageHandler = (bridge: AppBridge) => ({
         throw new Error('이미지 다운로드 실패')
       }
 
-      console.log('다운로드 결과 URI:', downloadResult.uri)
-      const imagePath = downloadResult.uri
-
-      console.log('원본 이미지 URL:', payload.imageUrl)
-      console.log('로컬 이미지 경로:', imagePath)
+      // 파일 존재 확인
+      const fileInfo = await FileSystem.getInfoAsync(downloadResult.uri)
+      if (!fileInfo.exists) {
+        throw new Error('다운로드된 파일이 존재하지 않습니다')
+      }
 
       const shareOptions = {
         social: Social.InstagramStories,
         appId: EXPO_PUBLIC_FACEBOOK_APP_ID ?? '',
-        backgroundImage: `${downloadResult.uri}`,
+        backgroundImage: downloadResult.uri, // file:// 제거
         backgroundBottomColor: '#837DF4',
         backgroundTopColor: '#906df4',
       }
 
-      // 인스타그램 스토리 공유 옵션
-      await Share.shareSingle({
-        ...shareOptions,
-      })
-
-      // 임시 파일 삭제
-      await FileSystem.deleteAsync(fileUri, { idempotent: true })
-
+      // 인스타그램 스토리 공유
+      await Share.shareSingle(shareOptions)
+      // 성공 메시지 전송
       bridge.send(POST_MESSAGE_EVENT.INSTAGRAM_SHARE_RESPONSE, {
         message: MESSAGE_STATUS.SHARE_COMPLETED,
       })
@@ -182,14 +176,14 @@ export const createImageHandler = (bridge: AppBridge) => ({
           message: MESSAGE_STATUS.SHARE_FAILED,
         })
       } else {
-        // 기타 오류
-        Alert.alert(
-          '공유 실패',
-          '인스타그램 스토리 공유에 실패했습니다. 다시 시도해주세요.',
-        )
-        bridge.send(POST_MESSAGE_EVENT.INSTAGRAM_SHARE_RESPONSE, {
-          message: MESSAGE_STATUS.SHARE_FAILED,
-        })
+        // // 기타 오류
+        // Alert.alert(
+        //   '공유 실패',
+        //   '인스타그램 스토리 공유에 실패했습니다. 다시 시도해주세요.',
+        // )
+        // bridge.send(POST_MESSAGE_EVENT.INSTAGRAM_SHARE_RESPONSE, {
+        //   message: MESSAGE_STATUS.SHARE_FAILED,
+        // })
       }
     }
   },
