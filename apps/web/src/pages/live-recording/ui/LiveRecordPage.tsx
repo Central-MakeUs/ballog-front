@@ -4,6 +4,7 @@ import { useQuery, useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
+import { useFlow } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
 import {
@@ -100,6 +101,8 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
 }: {
   params: { matchId: string }
 }) => {
+  const { replace } = useFlow()
+
   const matchId = Number(params.matchId)
   const [isPostComplete, setIsPostComplete] = useState<boolean>(false)
 
@@ -111,6 +114,13 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
     onError: () => {
       // setIsPostComplete(true)
       toast('이미 경기 기록이 존재합니다')
+      replace(
+        'Home',
+        {},
+        {
+          animate: false,
+        },
+      )
     },
   })
 
