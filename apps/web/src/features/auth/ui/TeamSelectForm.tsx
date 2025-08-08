@@ -5,9 +5,10 @@ import { Button } from '@/shared/ui/common'
 
 interface TeamSelectionFormProps {
   onSubmit: (team: TeamKey) => void
+  isSignUpFlow?: boolean
 }
 
-export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
+export const TeamSelectionForm = ({ onSubmit, isSignUpFlow }: TeamSelectionFormProps) => {
   const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(null)
 
   const handleSelect = (team: TeamKey) => {
@@ -55,7 +56,7 @@ export const TeamSelectionForm = ({ onSubmit }: TeamSelectionFormProps) => {
         onClick={handleSubmit}
         className="fixed bottom-10 left-4 right-4"
       >
-        시작하기
+        {isSignUpFlow ? '시작하기' : '완료'}
       </Button>
     </div>
   )

@@ -9,6 +9,8 @@ import type { TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyTeamMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
 
+const isSignUpFlow = false
+
 const ChangeTeamSelectPage = () => {
   const { pop } = useFlow()
   const { user, setUser } = useSessionContext()
@@ -39,7 +41,7 @@ const ChangeTeamSelectPage = () => {
       }}
     >
       <AppLayout>
-        <TeamSelectionForm onSubmit={handleSubmit} />
+        <TeamSelectionForm onSubmit={handleSubmit} isSignUpFlow={isSignUpFlow} />
       </AppLayout>
     </AppScreen>
   )
