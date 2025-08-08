@@ -41,6 +41,7 @@ export const EndRecordingButton = ({
       leavePage()
     },
     onError: () => {
+      close()
       toast("기록 저장에 실패했습니다")
     }
   })
