@@ -11,18 +11,12 @@ const App = () => {
   window.ReactNativeWebView?.postMessage(
     JSON.stringify({
       eventName: 'SEND_IMAGE_ECHO',
-      payload: `액세스토큰 : ${localStorage.getItem('accessToken')}`,
-    }),
-  )
-  // localStorage.setItem("accessToken", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNzU0NzM2MTc3fQ.dMgntIM7bn0-4Vd-AhNm-H0WfzCrbgFGoi9F5ZibIXQ")
-
-  window.ReactNativeWebView?.postMessage(
-    JSON.stringify({
-      eventName: 'SEND_IMAGE_ECHO',
-      payload: "dfdfdfdfdf",
+      payload: `dd액세스토큰 : ${localStorage.getItem('accessToken')}`,
     }),
   )
   // localStorage.clear()
+  // localStorage.setItem("accessToken", "uVEHwH2njYh1sPmK7MhiFbKZEN8gd4gNAAAAAQoXEC8AAAGYiXgx-9IOHznOlwLN")
+
   return (
     <SessionProvider>
       <OverlayProvider>
