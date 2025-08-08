@@ -4,7 +4,7 @@ import { render, renderHook, type RenderOptions } from '@testing-library/react'
 
 import QueryProvider from '@/app/Provider/QueryProvider'
 import { SessionProvider } from '@/shared/contexts/sessionContext'
-import { OverlayProvider } from '@/hooks/useOverlay'
+import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
 export const wrapper = ({ children }: { children: ReactNode }) => {
   return (

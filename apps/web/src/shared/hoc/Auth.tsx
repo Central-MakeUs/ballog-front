@@ -1,7 +1,7 @@
 import { type ComponentType, useEffect } from 'react'
 
 import { useFlow } from '@/shared/lib/stackflow'
-import { useOverlay } from '@/hooks/useOverlay'
+import { useOverlay } from '@/shared/hooks/useOverlay'
 
 import { OverlayModal } from '../ui/common/OverlayModal'
 import { useStack } from '../hooks/stackflow/useStack'
