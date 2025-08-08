@@ -34,6 +34,9 @@ describe('TeamSelectPage', () => {
 
     expect(mockPush).toHaveBeenCalledWith('Nickname', {
       selectedTeam: 'DOOSAN_BEARS',
+      serviceAgree: true,
+      marketingAgree: true,
+      privacyAgree: true,
     })
   })
 
