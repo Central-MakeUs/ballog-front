@@ -2,6 +2,7 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
@@ -88,7 +89,7 @@ const LiveRecordPageInner = ({
         />
 
         {/* 하단 버튼 */}
-        <EndRecordingButton matchRecordId={recordingData.matchRecordId} />
+        <EndRecordingButton />
       </div>
     </AppScreen>
   )
@@ -108,8 +109,8 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
       setIsPostComplete(true)
     },
     onError: () => {
-      // 에러가 나도 GET
-      setIsPostComplete(true)
+      // setIsPostComplete(true)
+      toast('이미 경기 기록이 존재합니다')
     },
   })
 
