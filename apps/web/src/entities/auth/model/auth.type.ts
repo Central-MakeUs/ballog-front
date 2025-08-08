@@ -4,6 +4,11 @@ import type { ApiResponseWithNoSuccess } from '@/types/api/common'
 export interface SignupRequestDTO {
   baseballTeam: string
   nickname: string
+  termAgree: {
+    privacyAgree: boolean
+    serviceAgree: boolean
+    marketingAgree: boolean
+  }
 }
 
 export interface UserType {

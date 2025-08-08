@@ -11,9 +11,10 @@ export const authPost = {
   signup: async ({
     baseballTeam,
     nickname,
+    termAgree,
   }: SignupRequestDTO): Promise<SignupResponseDTO> => {
     const response = await api
-      .post('auth/signup', { json: { baseballTeam, nickname } })
+      .post('auth/signup', { json: { baseballTeam, nickname, termAgree } })
       .json<SignupResponseDTO>()
     return response
   },
