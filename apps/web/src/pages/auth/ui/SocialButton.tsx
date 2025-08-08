@@ -1,41 +1,19 @@
 import { type ComponentProps } from 'react'
-import { toast } from 'sonner'
 
 import { KakaoTalk } from '@/assets/KakaoTalk'
-import { useFlow } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { Chevron } from '@/assets/Chevron'
 import { Button } from '@/shared/ui/common/Button/Button'
 import { Apple } from '@/assets/Apple'
 
-import { useSocialLogin } from '../hooks/useSocialLogin'
+import { useSocialLoginFlow } from '../hooks/useSocialLoginFlow'
 
 interface SocialButtonProps extends ComponentProps<'button'> {
   className?: string
 }
 
 export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
-  const { push } = useFlow()
-  // 카카오 로그인 훅
-  const { handleLogin, isPending } = useSocialLogin({
-    social: 'kakao',
-    onSuccess: () => {
-      push('TeamSelect', {
-        selectedTeam: null,
-      })
-    },
-    onError: (error) => {
-      if (error && typeof error === 'object' && 'errorData' in error) {
-        toast.error(error.errorData?.error)
-        return
-      }
-
-      if (error instanceof Error) {
-        toast.error(error.message)
-        return
-      }
-    },
-  })
+  const { handleLogin, isPending } = useSocialLoginFlow('kakao')
 
   return (
     <Button
@@ -60,28 +38,8 @@ export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
 }
 
 export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
-  const { push } = useFlow()
   const ua = navigator.userAgent
-  // 애플 로그인 훅
-  const { handleLogin, isPending } = useSocialLogin({
-    social: 'apple',
-    onSuccess: () => {
-      push('TeamSelect', {
-        selectedTeam: null,
-      })
-    },
-    onError: (error) => {
-      if (error && typeof error === 'object' && 'errorData' in error) {
-        toast.error(error.errorData?.error)
-        return
-      }
-
-      if (error instanceof Error) {
-        toast.error(error.message)
-        return
-      }
-    },
-  })
+  const { handleLogin, isPending } = useSocialLoginFlow('apple')
 
   // IOS일 경우에만 애플 로그인 버튼 렌더링
   if (!/iPhone|iPad|iPod/.test(ua)) {

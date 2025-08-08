@@ -1,12 +1,5 @@
 import React, { useRef } from 'react'
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-  Image,
-} from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
 import { CameraView } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
@@ -18,6 +11,7 @@ import Animated from 'react-native-reanimated'
 // import FlipButton from '@/assets/images/flipButton.svg'
 import { useCamera } from '@/hooks/useCamera'
 import { useGallery } from '@/hooks/useGallery'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 export default function CameraScreen() {
   const router = useRouter()
@@ -58,80 +52,87 @@ export default function CameraScreen() {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        {/* 상단 헤더 */}
-        <View style={styles.header}>
-          <View style={styles.placeholder} />
-          <Text style={styles.headerTitle}>촬영하기</Text>
-          <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
-            <Ionicons name="close" size={28} color="white" />
-          </TouchableOpacity>
-        </View>
+      <SafeAreaProvider>
+        <SafeAreaView style={styles.container}>
+          {/* 상단 헤더 */}
+          <View style={styles.header}>
+            <View style={styles.placeholder} />
+            <Text style={styles.headerTitle}>촬영하기</Text>
+            <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
+              <Ionicons name="close" size={28} color="white" />
+            </TouchableOpacity>
+          </View>
 
-        {/* 카메라 뷰 */}
-        <View style={styles.cameraContainer}>
-          <TouchableOpacity
-            style={styles.flashButton}
-            onPress={() => setFlash(flash === 'off' ? 'on' : 'off')}
-          >
-            <Ionicons
-              name={flash === 'off' ? 'flash-off' : 'flash'}
-              size={24}
-              color="white"
-            />
-          </TouchableOpacity>
-
-          <GestureDetector gesture={pinchGesture}>
-            <Animated.View style={styles.camera}>
-              <CameraView
-                style={styles.camera}
-                facing={facing}
-                flash={flash}
-                zoom={zoom}
-                ref={cameraRef}
+          {/* 카메라 뷰 */}
+          <View style={styles.cameraContainer}>
+            <TouchableOpacity
+              style={styles.flashButton}
+              onPress={() => setFlash(flash === 'off' ? 'on' : 'off')}
+            >
+              <Ionicons
+                name={flash === 'off' ? 'flash-off' : 'flash'}
+                size={24}
+                color="white"
               />
-            </Animated.View>
-          </GestureDetector>
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.shutterButton} onPress={takePicture}>
-            <View style={styles.shutterInner} />
-          </TouchableOpacity>
-          {zoom > 0 && (
-            <View style={styles.zoomIndicator}>
-              <Text style={styles.zoomText}>{(zoom * 10 + 1).toFixed(1)}x</Text>
-            </View>
-          )}
-        </View>
+            <GestureDetector gesture={pinchGesture}>
+              <Animated.View style={styles.camera}>
+                <CameraView
+                  style={styles.camera}
+                  facing={facing}
+                  flash={flash}
+                  zoom={zoom}
+                  ref={cameraRef}
+                />
+              </Animated.View>
+            </GestureDetector>
 
-        {/* 하단 컨트롤 */}
-        <View style={styles.bottomControls}>
-          <TouchableOpacity
-            style={styles.galleryButton}
-            onPress={pickImageFromGallery}
-          >
-            {latestPhotoUri ? (
-              <Image
-                source={{ uri: latestPhotoUri }}
-                style={styles.galleryThumbnail}
-              />
-            ) : (
-              <Text style={{ color: '#000' }}>갤러리</Text>
+            <TouchableOpacity
+              style={styles.shutterButton}
+              onPress={takePicture}
+            >
+              <View style={styles.shutterInner} />
+            </TouchableOpacity>
+            {zoom > 0 && (
+              <View style={styles.zoomIndicator}>
+                <Text style={styles.zoomText}>
+                  {(zoom * 10 + 1).toFixed(1)}x
+                </Text>
+              </View>
             )}
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            style={styles.flipButton}
-            onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
-          >
-            {/* <FlipButton /> */}
-             <Ionicons
-              name={flash === 'off' ? 'flash-off' : 'flash'}
-              size={24}
-              color="white"
-            />
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+          {/* 하단 컨트롤 */}
+          <View style={styles.bottomControls}>
+            <TouchableOpacity
+              style={styles.galleryButton}
+              onPress={pickImageFromGallery}
+            >
+              {latestPhotoUri ? (
+                <Image
+                  source={{ uri: latestPhotoUri }}
+                  style={styles.galleryThumbnail}
+                />
+              ) : (
+                <Text style={{ color: '#000' }}>갤러리</Text>
+              )}
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.flipButton}
+              onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
+            >
+              {/* <FlipButton /> */}
+              <Ionicons
+                name={flash === 'off' ? 'flash-off' : 'flash'}
+                size={24}
+                color="white"
+              />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   )
 }

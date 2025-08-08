@@ -1,4 +1,4 @@
-import { useOverlay } from '@/hooks/useOverlay'
+import { useOverlay } from '@/shared/hooks/useOverlay'
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 
 interface ModalButton {
