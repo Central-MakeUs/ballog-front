@@ -18,12 +18,6 @@ type SocialLoginVariables =
 
 const getMutationFn = (variables: SocialLoginVariables) => {
   const social = variables.type
-  // window.ReactNativeWebView?.postMessage(
-  //   JSON.stringify({
-  //     eventName: 'SEND_IMAGE_ECHO',
-  //     payload: `이거 ${social}`,
-  //   }),
-  // )
   switch (social) {
     case 'kakao':
       return authPost.kakaoLogin(variables)
@@ -64,6 +58,12 @@ export const useSocialLogin = ({
     },
     onError: (error) => {
       onError(error)
+      window.ReactNativeWebView?.postMessage(
+        JSON.stringify({
+          eventName: 'SEND_IMAGE_ECHO',
+          payload: error,
+        }),
+      )
     },
   })
 
@@ -74,12 +74,6 @@ export const useSocialLogin = ({
           send(POST_MESSAGE_EVENT.LOGIN_KAKAO, { social })
           break
         case 'apple':
-          window.ReactNativeWebView?.postMessage(
-            JSON.stringify({
-              eventName: 'SEND_IMAGE_ECHO',
-              payload: social,
-            }),
-          )
           send(POST_MESSAGE_EVENT.LOGIN_APPLE, { social })
           break
       }
