@@ -1,13 +1,7 @@
-import {
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-} from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { useBase64Image } from '@/hooks/useBase64Image'
 import * as FileSystem from 'expo-file-system'
 import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
@@ -56,37 +50,39 @@ export default function PhotoResultScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.placeholder} />
-        <Text style={styles.headerTitle}>촬영하기</Text>
-        <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
-          <Ionicons name="close" size={28} color="white" />
-        </TouchableOpacity>
-      </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.placeholder} />
+          <Text style={styles.headerTitle}>촬영하기</Text>
+          <TouchableOpacity style={styles.closeButton} onPress={handleClose}>
+            <Ionicons name="close" size={28} color="white" />
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.photoContainer}>
-        {photoUri ? (
-          <Image
-            source={{ uri: photoUri }}
-            style={styles.photo}
-            resizeMode="cover"
-          />
-        ) : (
-          <Text style={{ color: '#fff' }}>사진 없음</Text>
-        )}
-      </View>
+        <View style={styles.photoContainer}>
+          {photoUri ? (
+            <Image
+              source={{ uri: photoUri }}
+              style={styles.photo}
+              resizeMode="cover"
+            />
+          ) : (
+            <Text style={{ color: '#fff' }}>사진 없음</Text>
+          )}
+        </View>
 
-      <View style={styles.bottomControls}>
-        <TouchableOpacity style={styles.retakeButton} onPress={handleRetake}>
-          <Text style={styles.retakeText}>다시 찍기</Text>
-        </TouchableOpacity>
+        <View style={styles.bottomControls}>
+          <TouchableOpacity style={styles.retakeButton} onPress={handleRetake}>
+            <Text style={styles.retakeText}>다시 찍기</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
-          <Text style={styles.uploadText}>업로드</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+          <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
+            <Text style={styles.uploadText}>업로드</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 
