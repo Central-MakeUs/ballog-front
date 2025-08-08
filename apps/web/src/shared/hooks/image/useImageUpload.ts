@@ -9,7 +9,7 @@ import { base64ToFile, getMimeTypeFromBase64 } from '@/shared/lib/image-utils'
 import type { ImageUploadResponse } from '@/entities/image/model/image.type'
 
 interface UseImageUploadOptions {
-  recordId: number
+  matchRecordId: number
 }
 
 interface UploadState {
@@ -18,7 +18,7 @@ interface UploadState {
   error: string | null
 }
 
-export const useImageUpload = ({ recordId }: UseImageUploadOptions) => {
+export const useImageUpload = ({ matchRecordId }: UseImageUploadOptions) => {
   const [uploadState, setUploadState] = useState<UploadState>({
     isUploading: false,
     progress: 'presigned',
@@ -41,7 +41,7 @@ export const useImageUpload = ({ recordId }: UseImageUploadOptions) => {
         const mimeType = getMimeTypeFromBase64(base64Image)
 
         // 2. presigned URL 요청
-        const { data: presignedData } = await getPresignedUrl(fileName)
+        const presignedData = await getPresignedUrl(fileName)
 
         setUploadState((prev) => ({ ...prev, progress: 'upload' }))
 
@@ -58,7 +58,7 @@ export const useImageUpload = ({ recordId }: UseImageUploadOptions) => {
 
         // 6. 서버에 이미지 정보 저장
         const { data: imageData } = await saveImageToServer({
-          recordId,
+          matchRecordId,
           imageUrl,
         })
 
@@ -84,7 +84,7 @@ export const useImageUpload = ({ recordId }: UseImageUploadOptions) => {
         return null
       }
     },
-    [recordId],
+    [matchRecordId],
   )
 
   const resetUploadState = useCallback(() => {

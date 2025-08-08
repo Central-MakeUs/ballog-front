@@ -7,11 +7,24 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
-const TeamSelectPage = () => {
+interface TeamSelectPageProps {
+  params: {
+    serviceAgree: boolean
+    marketingAgree: boolean
+    privacyAgree: boolean
+  }
+}
+
+const TeamSelectPage = ({ params }: TeamSelectPageProps) => {
   const { push } = useFlow()
 
   const handleTeamSelect = (selectedTeam: TeamKey) => {
-    push('Nickname', { selectedTeam })
+    push('Nickname', {
+      selectedTeam,
+      serviceAgree: params.serviceAgree,
+      marketingAgree: params.marketingAgree,
+      privacyAgree: params.privacyAgree,
+    })
   }
 
   return (

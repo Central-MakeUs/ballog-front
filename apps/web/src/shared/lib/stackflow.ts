@@ -14,6 +14,8 @@ import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
 import RecordMainPage from '@/pages/record/ui/RecordMainPage'
 import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
 import ShareBottomSheet from '@/pages/record/ui/ShareBottomSheet'
+import TermAgreePage from '@/pages/auth/ui/TermAgreePage'
+import TermPage from '@/pages/term/ui/TermPage'
 import { withAuth } from '@/shared/hoc/Auth'
 
 export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
@@ -32,7 +34,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
     historySyncPlugin({
       routes: {
         Home: '/',
-        LiveRecord: '/live-record/:matchId',
+        LiveRecord: '/live-record/:matchId', // 라이브 녹화
         Login: '/login',
         TeamSelect: '/team-select',
         Nickname: '/nickname',
@@ -42,6 +44,8 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
         Record: '/record',
         RecordDetail: '/record/:matchRecordId',
         ShareBottomSheet: '/share-bottom-sheet',
+        TermAgree: '/term-agree',
+        Term: '/term',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -51,25 +55,16 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
     Home: withAuth(HomePage),
     LiveRecord: withAuth(LiveRecordPage),
     Login: LoginPage,
-    TeamSelect: withAuth(TeamSelectPage),
-    Nickname: withAuth(NickNamePage),
+    TeamSelect: TeamSelectPage,
+    Nickname: NickNamePage,
     My: withAuth(MyPage),
     ChangeTeamSelect: withAuth(ChangeTeamSelectPage),
     ChangeNickName: withAuth(ChangeNickNamePage),
     Record: withAuth(RecordMainPage),
     RecordDetail: withAuth(RecordDetailPage),
     ShareBottomSheet,
-    //  Home: (HomePage),
-    // LiveRecord: (LiveRecordPage),
-    // Login: LoginPage,
-    // TeamSelect: (TeamSelectPage),
-    // Nickname: (NickNamePage),
-    // My: (MyPage),
-    // ChangeTeamSelect: (ChangeTeamSelectPage),
-    // ChangeNickName: (ChangeNickNamePage),
-    // Record: (RecordMainPage),
-    // RecordDetail: (RecordDetailPage),
-    // ShareBottomSheet,
+    TermAgree: TermAgreePage,
+    Term: TermPage,
   },
   initialActivity: () => 'Home',
 })

@@ -24,6 +24,7 @@ export const SessionProvider = ({
       setUser(data.data)
     } catch (error) {
       setUser(null)
+      localStorage.removeItem('accessToken')
       throw error
     }
   }

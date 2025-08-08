@@ -36,6 +36,16 @@ export default {
       edgeToEdgeEnabled: true,
       package: 'com.ballog.app',
       googleServicesFile: './android/app/google-services.json',
+      // Instagram 공유를 위한 추가 설정
+      intentFilters: [
+        {
+          action: 'android.intent.action.SEND',
+          category: ['android.intent.category.DEFAULT'],
+          data: {
+            mimeType: 'image/*',
+          },
+        },
+      ],
     },
     web: {
       bundler: 'metro',
@@ -84,12 +94,13 @@ export default {
         'react-native-share',
         {
           ios: ['fb', 'instagram', 'twitter', 'tiktoksharesdk'],
-          android: [
-            'com.facebook.katana',
-            'com.instagram.android',
-            'com.twitter.android',
-            'com.zhiliaoapp.musically',
-          ],
+          android: ['com.facebook.katana', 'com.instagram.android'],
+          // Instagram Stories 공유를 위한 추가 설정
+          instagramStories: {
+            backgroundImage: true,
+            backgroundBottomColor: true,
+            backgroundTopColor: true,
+          },
         },
       ],
     ],

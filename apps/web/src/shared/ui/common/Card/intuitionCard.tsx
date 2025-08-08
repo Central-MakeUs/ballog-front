@@ -50,7 +50,7 @@ const Active = ({
         {matchCount} <span className="body-md-bold">회</span>
       </div>
       <div className="body-sm-medium mt-4 mb-2">승률</div>
-      <div className="heading-md-bold">{winRate}%</div>
+      <div className="heading-md-bold">{parseInt(winRate.toString())}%</div>
     </div>
   </div>
 )

@@ -15,7 +15,7 @@ export const authHandlers = [
   http.post<never, SignupRequestDTO, ApiErrorMessage | SignupResponseDTO>(
     `${AUTH_API_PREFIX}/signup`,
     async ({ request }) => {
-      const { baseballTeam, nickname } = await request.json()
+      const { baseballTeam, nickname, termAgree } = await request.json()
       const accessToken = request.headers.get('Authorization')
 
       // 존재하는 닉네임 목록
@@ -24,7 +24,7 @@ export const authHandlers = [
       // 네트워크 지연 효과 추가
       await new Promise((resolve) => setTimeout(resolve, auth.signup.delay))
 
-      if (!baseballTeam || !nickname || !accessToken) {
+      if (!baseballTeam || !nickname || !accessToken || !termAgree) {
         return HttpResponse.json<ApiErrorMessage>(
           {
             error: '필수 정보가 누락되었습니다.',
