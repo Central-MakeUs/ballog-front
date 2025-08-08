@@ -12,8 +12,6 @@ export const createLoginHandler = (bridge: AppBridge) => {
         if (res.accessToken) {
           await AsyncStorage.setItem('accessToken', res.accessToken)
         }
-       console.log("액세스토큰큰큰: ",res.accessToken)
-       console.log("리프레시토큰큰큰: ",res.refreshToken)
         // 단순히 성공 상태만 전송
         bridge.send(POST_MESSAGE_EVENT.LOGIN_RESPONSE_KAKAO, {
           status: 'success',
@@ -57,7 +55,7 @@ export const createLoginHandler = (bridge: AppBridge) => {
       try {
         await logout()
       } catch (error) {
-        console.log(error)
+        console.log("로그아웃 에러", error)
         bridge.send(POST_MESSAGE_EVENT.LOGOUT_RESPONSE, {
           status: 'error',
         })

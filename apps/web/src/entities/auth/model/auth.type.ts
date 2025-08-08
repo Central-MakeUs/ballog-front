@@ -6,6 +6,10 @@ export interface ChangeNicknameRequestDTO {
   nickname: string
 }
 
+export interface ChangeTeamRequestDTO {
+  baseballTeam: string
+}
+
 export interface SignupRequestDTO {
   baseballTeam: string
   nickname: string

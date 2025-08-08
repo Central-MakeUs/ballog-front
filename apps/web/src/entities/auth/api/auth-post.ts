@@ -44,7 +44,6 @@ export const authPost = {
     const response = await api
       .post(`auth/login/apple?code=${authorizationCode}`)
       .json<SocialLoginResponseDTO>()
-
     return response
   },
   logout: async (): Promise<LogoutResponseDTO> => {

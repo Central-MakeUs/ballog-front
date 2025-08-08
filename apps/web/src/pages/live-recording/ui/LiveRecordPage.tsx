@@ -22,6 +22,7 @@ import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
 import InfoIcon from '@/assets/infoIcon.svg?react'
 import { recordingPost } from '@/entities/record/api/recording-post'
 import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
+import { Loading } from '@/shared/ui/common'
 
 const LiveRecordPageInner = ({
   recordingData,
@@ -139,7 +140,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   })
 
   if (!emotionData || !recordingData) {
-    return <div>로딩 중이거나 데이터를 불러올 수 없습니다.</div>
+    return <Loading text="오늘의 경기를 불러오는 중..." />
   }
 
   const joy = emotionData?.data.positivePercent ?? 50

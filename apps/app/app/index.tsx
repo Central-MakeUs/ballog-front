@@ -1,10 +1,13 @@
 import { StyleSheet, BackHandler, Platform } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import {
+  useSafeAreaInsets,
+  SafeAreaProvider,
+  SafeAreaView,
+} from 'react-native-safe-area-context'
 
 import { useEffect, useRef } from 'react'
 import { WebView } from 'react-native-webview'
 import { useImageBridge } from '../shared/contexts/imageBridgeContext'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 import { useBridge } from './bridge/bridgeHandler'
 import { useImageSender } from './bridge/hooks/useImageSender'
@@ -42,7 +45,6 @@ const HomeScreen = () => {
           styles.container,
           {
             paddingBottom: Platform.OS === 'ios' ? -34 : insets.bottom,
-            paddingTop: insets.top,
           },
         ]}
       >

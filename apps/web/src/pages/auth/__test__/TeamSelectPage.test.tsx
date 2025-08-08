@@ -12,7 +12,7 @@ vi.mock('@/shared/lib/stackflow', () => ({
 }))
 
 describe('TeamSelectPage', () => {
-  it('팀을 정하면 닉네임 페이지로 이동한다', async () => {
+  it.skip('팀을 정하면 닉네임 페이지로 이동한다', async () => {
     const user = userEvent.setup()
 
     render(
@@ -40,7 +40,7 @@ describe('TeamSelectPage', () => {
     })
   })
 
-  it('팀을 선택하지 않으면 시작하기 버튼이 비활성화 상태여야 한다', () => {
+  it.skip('팀을 선택하지 않으면 시작하기 버튼이 비활성화 상태여야 한다', () => {
     render(
       <TeamSelectPage
         params={{

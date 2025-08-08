@@ -19,7 +19,7 @@ expo-env.d.ts
 *.key
 *.mobileprovision
 android
-ios
+
 
 # Metro
 .metro-health-check*
@@ -82,6 +82,16 @@ yarn-error.*
 *.tsbuildinfo
 
 # Ingore IOS
+ios/build/
+ios/Pods/
+ios/DerivedData/
+ios/*.xcworkspace
+ios/*.xcuserstate
+ios/*.xcuserdatad
+ios/*.xcscmblueprint
+ios/GoogleService-Info.plist
+
+
 android/
-ios/
+
 
