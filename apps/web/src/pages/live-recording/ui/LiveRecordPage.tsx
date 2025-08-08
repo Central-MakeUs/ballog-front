@@ -102,25 +102,20 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   const matchId = Number(params.matchId)
   const [isPostComplete, setIsPostComplete] = useState<boolean>(false)
 
-  const key = `recording_started_${matchId}`
-
-  
   const { mutate } = useMutation<RecordingPostResponseDTO, Error, number>({
     mutationFn: (matchId) => recordingPost.postRecording(matchId),
     onSuccess: () => {
-      localStorage.setItem(key, 'true')
+      setIsPostComplete(true)
+    },
+    onError: () => {
+      // 에러가 나도 GET
       setIsPostComplete(true)
     },
   })
 
   useEffect(() => {
-    if (!localStorage.getItem(key)) {
-      mutate(matchId)
-    } else {
-      // 이미 POST를 보낸 적이 있다면 바로 GET
-      setIsPostComplete(true)
-    }
-  }, [mutate, matchId])
+    mutate(matchId)
+  }, [matchId])
 
   const { data: recordingData, isLoading: isRecordingLoading } = useQuery({
     ...recording.getRecording(matchId),
