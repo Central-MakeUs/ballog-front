@@ -6,6 +6,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 import { useBridge } from './bridge/bridgeHandler'
 import { useImageSender } from './bridge/hooks/useImageSender'
+import { router } from 'expo-router'
 
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
@@ -17,11 +18,16 @@ const HomeScreen = () => {
   // 뒤로가기 버튼 처리
   useEffect(() => {
     const backAction = () => {
+      if (router.canGoBack()) {
+        router.back()
+        return true
+      }
       if (webViewRef.current) {
         webViewRef.current.goBack()
         return true // 이벤트 소비
       }
-      return false // 기본 동작 허용
+
+      return false
     }
 
     const backHandler = BackHandler.addEventListener(

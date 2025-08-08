@@ -1,14 +1,18 @@
+require('dotenv').config()
+
 const KAKAO_NATIVE_APP_KEY = process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL
+const EAS_PROJECT_ID = process.env.EXPO_PUBLIC_EAS_PROJECT_ID
 
 export default {
   expo: {
     owner: 'kych0912',
     name: '볼로그',
-    slug: '볼로그',
+    slug: 'ballog',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
-    scheme: '볼로그',
+    scheme: 'ballog',
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     ios: {
@@ -54,15 +58,15 @@ export default {
       'expo-router',
       '@react-native-firebase/app',
       '@react-native-firebase/messaging',
-      // [
-      //   'expo-splash-screen',
-      //   {
-      //     image: './assets/images/splash-icon.png',
-      //     imageWidth: 200,
-      //     resizeMode: 'contain',
-      //     backgroundColor: '#ffffff',
-      //   },
-      // ],
+      [
+        'expo-splash-screen',
+        {
+          image: './assets/images/icon.png',
+          imageWidth: 200,
+          resizeMode: 'contain',
+          backgroundColor: '#ffffff',
+        },
+      ],
       [
         'expo-build-properties',
         {
@@ -81,9 +85,9 @@ export default {
         '@react-native-kakao/core',
         {
           nativeAppKey: KAKAO_NATIVE_APP_KEY,
-          // android: {
-          //   authCodeHandlerActivity: true,
-          // },
+          android: {
+            authCodeHandlerActivity: true,
+          },
           ios: {
             handleKakaoOpenUrl: true,
           },
@@ -107,9 +111,9 @@ export default {
       typedRoutes: true,
     },
     extra: {
-      API_BASE_URL: process.env.API_BASE_URL,
+      API_BASE_URL: API_BASE_URL,
       eas: {
-        projectId: process.env.EXPO_PUBLIC_EAS_PROJECT_ID,
+        projectId: EAS_PROJECT_ID,
       },
     },
   },
