@@ -18,6 +18,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'com.ballog.app',
+      googleServicesFile: './ios/GoogleService-Info.plist',
       infoPlist: {
         LSApplicationQueriesSchemes: [
           'kakaokompassauth',
