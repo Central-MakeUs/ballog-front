@@ -1,7 +1,10 @@
 import { http, HttpResponse } from 'msw'
 
 import { recording } from '@/mocks/data/recording'
-import type { RecordingResponseDTO } from '@/entities/record/model/recording.type'
+import type {
+  RecordingResponseDTO,
+  RecordingPostResponseDTO,
+} from '@/entities/record/model/recording.type'
 import type { ApiErrorMessage } from '@/types/api/common'
 
 type MatchResult = 'WIN' | 'LOSS' | 'DRAW' | 'SKIP'
@@ -59,5 +62,26 @@ export const recordingHandlers = [
       })
     },
   ),
-]
 
+  http.post<
+    never,
+    { matchesId: number },
+    ApiErrorMessage | RecordingPostResponseDTO
+  >(MATCH_API_PREFIX, async ({ request }) => {
+    const body = await request.json()
+    const { matchesId } = body
+
+    const found = recording[matchesId]
+
+    await new Promise((res) => setTimeout(res, 500))
+
+    const response: RecordingPostResponseDTO = {
+      status: 200,
+      message: '기록 생성 성공',
+      success: 'true',
+      data: found,
+    }
+
+    return HttpResponse.json(response, { status: 200 })
+  }),
+]

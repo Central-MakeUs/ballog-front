@@ -63,6 +63,7 @@ export const Buttons = ({
           onClick={btn.onClick}
           className={cn(
             'w-full py-2.5 text-center body-md-medium',
+            idx === 0 && 'border-t-[0.333px]',
             idx < buttons.length - 1
               ? 'text-brand-neutral-70'
               : 'text-brand-primary-pressed',

@@ -75,8 +75,7 @@ export const EndRecordingButton = ({
   // 첫 번째 모달
   const confirmEndRecord = () => {
     openHorizontalModal({
-      heading: '기록을 종료하시겠습니까?',
-      body: 'Body text',
+      heading: '기록을 완료하시겠습니까?',
       buttons: [
         { label: '취소', onClick: close },
         {
