@@ -11,7 +11,7 @@ import {
 } from '@ballog/bridge'
 import { Alert } from 'react-native'
 
-const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID
+const FACEBOOK_APP_ID = process.env.EXPO_PUBLIC_FACEBOOK_APP_ID
 
 export const createImageHandler = (bridge: AppBridge) => ({
   PICK_IMAGE: async () => {
@@ -134,11 +134,17 @@ export const createImageHandler = (bridge: AppBridge) => ({
         throw new Error('이미지 다운로드 실패')
       }
 
+      console.log('다운로드 결과 URI:', downloadResult.uri)
+      const imagePath = downloadResult.uri
+
+      console.log('원본 이미지 URL:', payload.imageUrl)
+      console.log('로컬 이미지 경로:', imagePath)
+
       // 인스타그램 스토리 공유 옵션
-      Share.shareSingle({
+      await Share.shareSingle({
         social: Social.InstagramStories,
         appId: FACEBOOK_APP_ID ?? '',
-        backgroundImage: downloadResult.uri,
+        backgroundImage: imagePath,
         backgroundBottomColor: '#837DF4',
         backgroundTopColor: '#906df4',
       })
@@ -173,6 +179,10 @@ export const createImageHandler = (bridge: AppBridge) => ({
         })
       } else {
         // 기타 오류
+        Alert.alert(
+          '공유 실패',
+          '인스타그램 스토리 공유에 실패했습니다. 다시 시도해주세요.',
+        )
         bridge.send(POST_MESSAGE_EVENT.INSTAGRAM_SHARE_RESPONSE, {
           message: MESSAGE_STATUS.SHARE_FAILED,
         })
