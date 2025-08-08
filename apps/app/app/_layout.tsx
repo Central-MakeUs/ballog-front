@@ -5,7 +5,7 @@ import { initializeKakaoSDK } from '@react-native-kakao/core'
 
 import { ImageBridgeProvider } from '@/shared/contexts/imageBridgeContext'
 import {
-  requestUserPermission,
+  requestPlatformPermission,
   getFcmToken,
   listenForegroundMessages,
 } from '@/shared/lib/firebase/messaging'
@@ -16,10 +16,20 @@ export default function RootLayout() {
     initializeKakaoSDK(`${process.env.EXPO_PUBLIC_KAKAO_NATIVE_KEY}`)
     const setupFCM = async () => {
       try {
-        await requestUserPermission()
-        await getFcmToken()
-        const unsubscribe = listenForegroundMessages()
-        return unsubscribe
+        // 플랫폼별 권한 요청
+        const permissionGranted = await requestPlatformPermission()
+        console.log('권한 허용됨:', permissionGranted)
+
+        if (permissionGranted) {
+          await getFcmToken()
+          const unsubscribe = listenForegroundMessages()
+
+          return () => {
+            unsubscribe()
+          }
+        } else {
+          console.log('알림 권한이 거부되어 FCM 설정을 건너뜁니다')
+        }
       } catch (error) {
         console.error('FCM setup error:', error)
       }

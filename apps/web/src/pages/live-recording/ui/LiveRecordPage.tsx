@@ -1,6 +1,7 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { useEffect } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
@@ -17,6 +18,8 @@ import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { recording } from '@/entities/record/api/recording.queries'
 import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
 import InfoIcon from '@/assets/infoIcon.svg?react'
+import { recordingPost } from '@/entities/record/api/recording-post'
+import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
 
 const LiveRecordPageInner = ({
   recordingData,
@@ -97,6 +100,20 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   params: { matchId: string }
 }) => {
   const matchId = Number(params.matchId)
+
+  const { mutate } = useMutation<RecordingPostResponseDTO, Error, number>({
+    mutationFn: (matchId) => recordingPost.postRecording(null, matchId),
+  })
+
+  useEffect(() => {
+    const key = `recording_started_${matchId}`
+
+    if (!localStorage.getItem(key)) {
+      mutate(matchId)
+      localStorage.setItem(key, 'true') // post 딱 한 번만
+    }
+  }, [mutate, matchId])
+
   const { data: emotionData } = useQuery(emotions.record(matchId))
   const { data: recordingData, isLoading: isRecordingLoading } = useQuery(
     recording.getRecording(matchId),
