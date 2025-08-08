@@ -47,16 +47,15 @@ const HomeScreen = () => {
         style={[
           styles.container,
           {
-            paddingBottom: Platform.OS === 'ios' ? -34 : insets.bottom,
-            paddingTop: insets.top,
+            paddingBottom: Platform.OS === 'ios' ? -34 : 0,
+            paddingTop: Platform.OS === 'ios' ? insets.top : 0,
           },
         ]}
       >
         <WebView
           ref={webViewRef}
           source={{
-            uri: 'http://192.168.1.163:5173/',
-            // uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+            uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
           }}
           onMessage={bridge.processMessage}
           javaScriptEnabled={true}

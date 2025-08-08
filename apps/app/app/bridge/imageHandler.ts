@@ -140,13 +140,17 @@ export const createImageHandler = (bridge: AppBridge) => ({
       console.log('원본 이미지 URL:', payload.imageUrl)
       console.log('로컬 이미지 경로:', imagePath)
 
-      // 인스타그램 스토리 공유 옵션
-      await Share.shareSingle({
+      const shareOptions = {
         social: Social.InstagramStories,
         appId: EXPO_PUBLIC_FACEBOOK_APP_ID ?? '',
-        backgroundImage: downloadResult.uri,
+        backgroundImage: `${downloadResult.uri}`,
         backgroundBottomColor: '#837DF4',
         backgroundTopColor: '#906df4',
+      }
+
+      // 인스타그램 스토리 공유 옵션
+      await Share.shareSingle({
+        ...shareOptions,
       })
 
       // 임시 파일 삭제

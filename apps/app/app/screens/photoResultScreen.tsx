@@ -1,10 +1,18 @@
-import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Text,
+  BackHandler,
+} from 'react-native'
 import { useRouter, useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { useBase64Image } from '@/hooks/useBase64Image'
 import * as FileSystem from 'expo-file-system'
 import { useImageBridge } from '@/shared/contexts/imageBridgeContext'
+import { useEffect } from 'react'
 
 export default function PhotoResultScreen() {
   const router = useRouter()
@@ -40,12 +48,30 @@ export default function PhotoResultScreen() {
     handleClose()
   }
 
+  useEffect(() => {
+    const backAction = () => {
+      if (router.canGoBack()) {
+        router.back()
+        return true // 이벤트 소비
+      }
+
+      // 더 이상 뒤로 갈 수 없으면 앱 종료
+      BackHandler.exitApp()
+      return true
+    }
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    )
+
+    return () => backHandler.remove()
+  }, [router])
+
   // 그냥 뒤로가기 2번 함
   const handleClose = () => {
+    // 카메라 화면을 건너뛰고 원래 화면으로 바로 이동
     router.back()
-    setTimeout(() => {
-      router.back()
-    }, 1)
   }
 
   return (
