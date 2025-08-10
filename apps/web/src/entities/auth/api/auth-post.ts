@@ -25,6 +25,10 @@ export const authPost = {
     accessToken: string
     refreshToken: string
   }): Promise<SocialLoginResponseDTO> => {
+    if (localStorage.getItem('accessToken')) {
+      localStorage.removeItem('accessToken')
+    }
+
     const response = await api
       .post('auth/login/kakao', {
         headers: {

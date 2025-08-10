@@ -41,7 +41,7 @@ const ChangeNickNamePage = () => {
       preventSwipeBack={true}
     >
       <AppLayout>
-        <div className="flex flex-col items-center justify-center w-full h-full px-4 gap-20">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-20">
           <NickNameForm
             onSubmit={handleSubmit}
             isLoading={false}
