@@ -57,7 +57,9 @@ const HomeScreen = () => {
         <WebView
           ref={webViewRef}
           source={{
-            uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
+            // uri: 'https://ballog-front-web.vercel.app/',
+            uri: 'http://172.30.1.62:5173/',
+            // uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
           }}
           onMessage={bridge.processMessage}
           javaScriptEnabled={true}
