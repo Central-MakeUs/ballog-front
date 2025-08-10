@@ -11,15 +11,14 @@ const App = () => {
   // localStorage.clean()
   //   localStorage.setItem(
   //   "accessToken",
-  //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMiIsImV4cCI6MTc1NDg5NDY0N30.zlgoJQH_grlncD_7P6gjwcaXNJoi61eBMhFZOpQLhIs"
+  //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNiIsImV4cCI6MTc1NDg5NjgzMX0.mVr5g6mioko3RBlO6MczT45TNMKFZsw0r8azkTS8ZD4"
   // );
-
-  window.ReactNativeWebView?.postMessage(
-        JSON.stringify({
-          eventName: 'SEND_IMAGE_ECHO',
-          payload: `액세스토큰 : ${localStorage.getItem("accessToken")}`,
-        }),
-      )
+  //  window.ReactNativeWebView?.postMessage(
+  //       JSON.stringify({
+  //         eventName: 'SEND_IMAGE_ECHO',
+  //         payload: `액세스토큰 : ${localStorage.getItem("accessToken")}`,
+  //       }),
+  //     )
 
   return (
     <SessionProvider>

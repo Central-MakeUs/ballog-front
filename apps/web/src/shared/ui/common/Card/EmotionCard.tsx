@@ -43,15 +43,15 @@ const Active = ({
       fill: 'var(--color-brand-red-hover)',
     },
     {
-      name: '좋아요',
+      name: '기뻐요',
       value: emotion === '기뻐요' ? rate : 100 - rate,
       fill: 'var(--color-brand-green-hover)',
     },
   ]
 
   const madValue = chartData.find((d) => d.name === '화나요')!.value
-  const happyValue = chartData.find((d) => d.name === '좋아요')!.value
-
+  const happyValue = chartData.find((d) => d.name === '기뻐요')!.value
+  
   const centerEmotion = madValue >= happyValue ? '화나요' : '기뻐요'
   const centerRate = centerEmotion === '화나요' ? madValue : happyValue
 
