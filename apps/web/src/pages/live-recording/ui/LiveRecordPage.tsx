@@ -35,6 +35,7 @@ const LiveRecordPageInner = ({
 }) => {
   const { mutate } = usePostEmotion()
   const { joyPercent, angryPercent } = useEmotionVote()
+  const dominant = joyPercent >= angryPercent ? '기뻐요' : '화나요'
 
   let bgColor = 'transparent'
 
@@ -77,7 +78,7 @@ const LiveRecordPageInner = ({
             지금의 감정 클릭하기! <InfoIcon className="ml-1 w-5 h-5" />
           </p>
           <p className="body-sm-light text-usage-text-subtle">
-            기뻐요가 이기고 있어요! <br />
+            {dominant} 이기고 있어요! <br />
             하지만 지금 기분은 또 다를 수도?
           </p>
         </div>
