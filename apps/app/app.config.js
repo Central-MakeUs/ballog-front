@@ -16,7 +16,7 @@ export default {
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     ios: {
-      supportsTablet: true,
+      supportsTablet: false,
       bundleIdentifier: 'com.ballog.app',
       googleServicesFile: './ios/GoogleService-Info.plist',
       infoPlist: {

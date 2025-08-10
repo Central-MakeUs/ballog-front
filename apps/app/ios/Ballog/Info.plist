@@ -67,9 +67,10 @@
       <string>$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route</string>
     </array>
     <key>UIBackgroundModes</key>
+    <array/>
+    <key>UIDeviceFamily</key>
     <array>
-      <string>processing</string>
-      <string>remote-notification</string>
+      <integer>1</integer>
     </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
