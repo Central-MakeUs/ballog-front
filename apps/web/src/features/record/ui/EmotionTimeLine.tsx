@@ -12,7 +12,8 @@ export const EmotionTimeLine = ({
   positiveEmotionPercent: number
 }) => {
   const chartData = getChartData(emotionGroupList)
-
+  console.log(positiveEmotionPercent)
+  console.log(chartData)
   return (
     <div className="w-full mt-10 flex flex-col gap-4">
       <SectionHeader title="감정 타임라인" className="px-4" />

@@ -28,7 +28,7 @@ export const RecordDetailPage = ({
   if (error) {
     toast('직관 기록을 불러오는 중 오류가 발생했습니다.')
   }
-
+  console.log(data)
   return (
     <AppScreen
       appBar={{
@@ -60,7 +60,7 @@ export const RecordDetailPage = ({
 
           <ImageTimeLine matchRecordId={data?.data.matchRecordId ?? 0} />
           <EmotionTimeLine
-            positiveEmotionPercent={data?.data.totalPositiveEmotionPercent ?? 0}
+            positiveEmotionPercent={Math.round(data?.data.positiveEmotionPercent) ?? 0}
             emotionGroupList={data?.data.emotionGroupList ?? []}
           />
           <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} />

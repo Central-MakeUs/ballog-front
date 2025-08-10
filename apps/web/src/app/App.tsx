@@ -8,17 +8,6 @@ import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 
 const App = () => {
   useFcmToken()
-  // localStorage.clean()
-  //   localStorage.setItem(
-  //   "accessToken",
-  //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNiIsImV4cCI6MTc1NDg5NjgzMX0.mVr5g6mioko3RBlO6MczT45TNMKFZsw0r8azkTS8ZD4"
-  // );
-  //  window.ReactNativeWebView?.postMessage(
-  //       JSON.stringify({
-  //         eventName: 'SEND_IMAGE_ECHO',
-  //         payload: `액세스토큰 : ${localStorage.getItem("accessToken")}`,
-  //       }),
-  //     )
 
   return (
     <SessionProvider>

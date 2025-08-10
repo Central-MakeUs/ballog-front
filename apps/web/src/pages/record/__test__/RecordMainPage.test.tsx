@@ -53,8 +53,8 @@ describe('RecordMainPage', () => {
       data: {
         totalCount: 0,
         winRate: 0,
-        totalPositiveEmotionPercent: 0,
-        totalNegativeEmotionPercent: 0,
+        positiveEmotionPercent: 0,
+        negativeEmotionPercent: 0,
         records: [],
       },
       success: '오늘 경기 일정 조회 성공',
@@ -74,8 +74,8 @@ describe('RecordMainPage', () => {
       data: {
         totalCount: 1,
         winRate: 0,
-        totalPositiveEmotionPercent: 0,
-        totalNegativeEmotionPercent: 0,
+        positiveEmotionPercent: 0,
+        negativeEmotionPercent: 0,
         records: [
           {
             matchRecordId: 5,
