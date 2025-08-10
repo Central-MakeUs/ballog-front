@@ -49,8 +49,8 @@ export interface RecordDetailResponse {
   watchCnt: number
   result: RecordResult
   baseballTeam: TeamKey
-  totalPositiveEmotionPercent: number
-  totalNegativeEmotionPercent: number
+  positiveEmotionPercent: number
+  negativeEmotionPercent: number
   defaultImageUrl: string | null
   imageList: Image[]
   emotionGroupList: EmotionGroup[]

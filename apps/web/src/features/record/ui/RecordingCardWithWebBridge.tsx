@@ -73,23 +73,6 @@ export const RecordingCardWithWebBridge = ({
     }
   }, [uploadState.error])
 
-  // 디버깅용 echo (images 배열 출력)
-  //   useEffect(() => {
-  //   if (!images.length) return
-
-  //   const simplifiedImages = images.map((img) => ({
-  //     ...img,
-  //     base64: img.base64.slice(0, 50) + '...',
-  //   }))
-
-  //   window.ReactNativeWebView?.postMessage(
-  //     JSON.stringify({
-  //       eventName: 'SEND_IMAGE_ECHO',
-  //       payload: simplifiedImages,
-  //     }),
-  //   )
-  // }, [images])
-
   return (
     <RecordingCard.Root className="w-full">
       <RecordingCard.Icon

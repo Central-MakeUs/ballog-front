@@ -17,7 +17,7 @@ export const requestUserPermission = async () => {
 
   if (enabled) {
     console.log('Authorization status:', authStatus)
-    // 🔥 중요: 디바이스를 원격 메시지에 등록
+
     await messaging().registerDeviceForRemoteMessages()
   }
 
@@ -31,7 +31,7 @@ export const requestUserPermission = async () => {
 export const getFcmToken = async () => {
   try {
     const token = await messaging().getToken()
-    console.log('FCM 토큰 가져오기 성공:', token)
+    console.error('FCM 토큰 가져오기 성공:', token)
     return token
   } catch (error) {
     console.error('FCM 토큰 가져오기 실패:', error)

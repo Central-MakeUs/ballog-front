@@ -243,8 +243,8 @@ export const record: {
       watchCnt: 4,
       result: 'DRAW',
       baseballTeam: 'LG_TWINS',
-      totalPositiveEmotionPercent: 60,
-      totalNegativeEmotionPercent: 40,
+      positiveEmotionPercent: 60,
+      negativeEmotionPercent: 40,
       defaultImageUrl: null,
       imageList: [
         {
@@ -272,8 +272,8 @@ export const record: {
       watchCnt: 3,
       result: 'WIN',
       baseballTeam: 'LG_TWINS',
-      totalPositiveEmotionPercent: 80,
-      totalNegativeEmotionPercent: 20,
+      positiveEmotionPercent: 80,
+      negativeEmotionPercent: 20,
       defaultImageUrl: null,
       imageList: [
         {

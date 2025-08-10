@@ -60,7 +60,9 @@ export const RecordDetailPage = ({
 
           <ImageTimeLine matchRecordId={data?.data.matchRecordId ?? 0} />
           <EmotionTimeLine
-            positiveEmotionPercent={data?.data.totalPositiveEmotionPercent ?? 0}
+            positiveEmotionPercent={Math.round(
+              data?.data?.positiveEmotionPercent ?? 0,
+            )}
             emotionGroupList={data?.data.emotionGroupList ?? []}
           />
           <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} />

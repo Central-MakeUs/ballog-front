@@ -7,7 +7,8 @@ import { OverlayProvider } from '@/shared/hooks/useOverlay'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 
 const App = () => {
-  useFcmToken()
+  useFcmToken() 
+
   return (
     <SessionProvider>
       <OverlayProvider>

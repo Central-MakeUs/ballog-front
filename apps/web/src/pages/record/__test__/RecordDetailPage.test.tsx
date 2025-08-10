@@ -65,8 +65,8 @@ const mockRecordData = {
     watchCnt: 4,
     result: 'DRAW' as RecordResult,
     baseballTeam: 'LG_TWINS' as TeamKey,
-    totalPositiveEmotionPercent: 60,
-    totalNegativeEmotionPercent: 40,
+    positiveEmotionPercent: 60,
+    negativeEmotionPercent: 40,
     defaultImageUrl: null,
     imageList: [
       {

@@ -12,10 +12,11 @@ interface FcmTokenPayload {
 
 export const useFcmToken = () => {
   const { bridge } = useBridge()
+  const accessToken = localStorage.getItem('accessToken')
 
   useEffect(() => {
     if (!bridge.isRNEnvironment()) return
-
+    if (!accessToken) return
     bridge.send(POST_MESSAGE_EVENT.GET_MY_FCM_TOKEN, { token: '' })
   }, [bridge])
 
@@ -26,9 +27,11 @@ export const useFcmToken = () => {
 
       if (payload.token && payload.token !== prevToken) {
         try {
-          await fcmPost.postFcmToken(payload.token)
-          localStorage.setItem('fcmToken', payload.token)
-          // 필요하면 toast.success('FCM 토큰 등록 완료') 추가
+          const response = await fcmPost.postFcmToken(payload.token)
+
+          if (response.ok) {
+            localStorage.setItem('fcmToken', payload.token)
+          }
         } catch {
           toast.error('토큰 전송 실패')
         }
