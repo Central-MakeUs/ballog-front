@@ -59,6 +59,15 @@ export default {
       'expo-router',
       '@react-native-firebase/app',
       '@react-native-firebase/messaging',
+       [
+        'expo-splash-screen',
+        {
+          image: './assets/images/icon.png',
+          imageWidth: 200,
+          resizeMode: 'contain',
+          backgroundColor: '#36C1B3',
+        },
+      ],
       [
         'expo-build-properties',
         {
