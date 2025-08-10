@@ -21,8 +21,8 @@ export interface Record {
 export interface RecordResponse {
   totalCount: number
   winRate: number
-  positiveEmotionPercent: number
-  negativeEmotionPercent: number
+  totalPositiveEmotionPercent: number
+  totalNegativeEmotionPercent: number
   records: Record[]
 }
 

@@ -24,8 +24,8 @@ export const recordHandlers = [
           data: {
             totalCount: 0,
             winRate: 0,
-            positiveEmotionPercent: 0,
-            negativeEmotionPercent: 0,
+            totalPositiveEmotionPercent: 0,
+            totalNegativeEmotionPercent: 0,
             records: [],
           },
           status: 200,
@@ -39,8 +39,8 @@ export const recordHandlers = [
           data: {
             totalCount: record.records.length,
             winRate: 50,
-            positiveEmotionPercent: 70,
-            negativeEmotionPercent: 30,
+            totalPositiveEmotionPercent: 70,
+            totalNegativeEmotionPercent: 30,
             records: record.records,
           },
           status: 200,

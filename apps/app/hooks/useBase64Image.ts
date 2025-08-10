@@ -33,12 +33,6 @@ export const useBase64Image = () => {
       fileName,
       createdAt,
     }
-
-    // console.log("디버깅용 imageData 출력",{ 
-    //   ...imageData,
-    //   base64: imageData.base64.slice(0, 50) + '...',
-    // })
-
     return imageData
   }
 
