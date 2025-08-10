@@ -55,7 +55,7 @@ export const createLoginHandler = (bridge: AppBridge) => {
       try {
         await logout()
       } catch (error) {
-        console.log("로그아웃 에러", error)
+        console.log('로그아웃 에러', error)
         bridge.send(POST_MESSAGE_EVENT.LOGOUT_RESPONSE, {
           status: 'error',
         })
