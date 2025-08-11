@@ -7,7 +7,13 @@ import { OverlayProvider } from '@/shared/hooks/useOverlay'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 
 const App = () => {
-  useFcmToken() 
+  useFcmToken()
+  window.ReactNativeWebView?.postMessage(
+    JSON.stringify({
+      eventName: 'SEND_IMAGE_ECHO',
+      payload: `ㅇㅇㅇ ${localStorage.getItem('fcmToken')}`,
+    }),
+  )
 
   return (
     <SessionProvider>
