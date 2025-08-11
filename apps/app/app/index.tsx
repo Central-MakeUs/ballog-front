@@ -58,7 +58,7 @@ const HomeScreen = () => {
           ref={webViewRef}
           source={{
             uri: process.env.EXPO_PUBLIC_WEB_URL || 'http://127.0.0.1:5173/',
-          }}
+          }}  
           onMessage={bridge.processMessage}
           javaScriptEnabled={true}
           domStorageEnabled={true}
