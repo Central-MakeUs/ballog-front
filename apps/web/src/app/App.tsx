@@ -4,16 +4,8 @@ import QueryProvider from '@/app/Provider/QueryProvider'
 import { SessionProvider } from '@/shared/contexts/sessionContext'
 import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
-import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 
 const App = () => {
-  useFcmToken()
-  window.ReactNativeWebView?.postMessage(
-    JSON.stringify({
-      eventName: 'SEND_IMAGE_ECHO',
-      payload: `ㅇㅇㅇ ${localStorage.getItem('fcmToken')}`,
-    }),
-  )
 
   return (
     <SessionProvider>
