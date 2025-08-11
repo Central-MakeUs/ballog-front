@@ -1,5 +1,12 @@
 import React, { useRef } from 'react'
-import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  Linking,
+} from 'react-native'
 import { CameraView } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
@@ -35,15 +42,18 @@ export default function IosCameraScreen() {
   const handleClose = () => {
     router.back()
   }
-  if (!cameraPermission || !cameraPermission.granted) {
+  if (!cameraPermission?.granted) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.permissionText}>카메라 권한이 필요합니다</Text>
+      <View style={styles.permissionContainer}>
+        <Text style={styles.permissionText}>
+          직관 사진을 촬영해 기록을 남기려면 카메라 접근이 필요합니다.
+        </Text>
+        // 설정에서 꺼진 상태: 설정으로 보내기
         <TouchableOpacity
           style={styles.permissionButton}
-          onPress={requestCameraPermission}
+          onPress={() => Linking.openSettings()}
         >
-          <Text>권한 요청</Text>
+          <Text>설정 열기</Text>
         </TouchableOpacity>
       </View>
     )
@@ -127,6 +137,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
+  },
+  permissionContainer: {
+    flex: 1,
+    backgroundColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
   header: {
     flexDirection: 'row',
