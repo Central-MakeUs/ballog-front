@@ -5,7 +5,7 @@ import { useFlow } from '@/shared/lib/stackflow'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
-import type { TeamKey } from '@/shared/constants/teams'
+import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyTeamMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
 
@@ -30,6 +30,9 @@ const ChangeTeamSelectPage = () => {
     )
   }
 
+  const isTeamKey = (value: string): value is TeamKey => {
+    return value in TEAMS
+  }
   return (
     <AppScreen
       appBar={{
@@ -41,7 +44,15 @@ const ChangeTeamSelectPage = () => {
       }}
     >
       <AppLayout>
-        <TeamSelectionForm onSubmit={handleSubmit} isSignUpFlow={isSignUpFlow} />
+        <TeamSelectionForm
+          baseBallTeam={
+            user?.baseballTeam && isTeamKey(user.baseballTeam)
+              ? user.baseballTeam
+              : undefined
+          }
+          onSubmit={handleSubmit}
+          isSignUpFlow={isSignUpFlow}
+        />
       </AppLayout>
     </AppScreen>
   )
