@@ -1,10 +1,24 @@
-import messaging from '@react-native-firebase/messaging'
+import {
+  getMessaging,
+  requestPermission,
+  AuthorizationStatus,
+  registerDeviceForRemoteMessages,
+  getAPNSToken,
+  getToken,
+  deleteToken,
+  onMessage,
+  setBackgroundMessageHandler,
+} from '@react-native-firebase/messaging'
+import { getApp } from '@react-native-firebase/app'
 import { Alert, Platform, PermissionsAndroid } from 'react-native'
+
+const app = getApp()
+const messaging = getMessaging(app)
 
 const waitForApnsToken = async (timeoutMs = 3000, stepMs = 100) => {
   const start = Date.now()
   while (Date.now() - start < timeoutMs) {
-    const apns = await messaging().getAPNSToken()
+    const apns = await getAPNSToken(messaging)
     if (apns) return apns
     await new Promise((r) => setTimeout(r, stepMs))
   }
@@ -14,19 +28,19 @@ const waitForApnsToken = async (timeoutMs = 3000, stepMs = 100) => {
  * IOS 에서 사용자에게 푸시 알림 권한 요청 함수
  */
 export const requestUserPermission = async () => {
-  const authStatus = await messaging().requestPermission({
+  const authStatus = await requestPermission(messaging, {
     sound: true,
     badge: true,
     alert: true,
   })
   const enabled =
-    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    authStatus === AuthorizationStatus.AUTHORIZED ||
+    authStatus === AuthorizationStatus.PROVISIONAL
 
   if (enabled) {
     console.log('Authorization status:', authStatus)
 
-    await messaging().registerDeviceForRemoteMessages()
+    await registerDeviceForRemoteMessages(messaging)
   }
 
   return enabled
@@ -40,7 +54,7 @@ export const getFcmToken = async () => {
   try {
     if (Platform.OS === 'ios') {
       // ios 에서 기기를 APNs 에 등록
-      await messaging().registerDeviceForRemoteMessages()
+      await registerDeviceForRemoteMessages(messaging)
 
       // 100ms 마다 APNs 요청
       const apns = await waitForApnsToken(3000, 100)
@@ -50,7 +64,7 @@ export const getFcmToken = async () => {
       }
     }
 
-    const token = await messaging().getToken()
+    const token = await getToken(messaging)
     console.log('FCM 토큰 가져오기 성공:', token)
     return token
   } catch (error) {
@@ -62,7 +76,7 @@ export const getFcmToken = async () => {
 // 토큰 삭제 함수
 export const disableFcmToken = async () => {
   try {
-    await messaging().deleteToken()
+    await deleteToken(messaging)
     console.log('FCM 토큰 삭제됨')
   } catch (error) {
     console.error('FCM 토큰 삭제 실패:', error)
@@ -74,7 +88,7 @@ export const disableFcmToken = async () => {
  * 앱이 켜져있는 상태에서 알림 수신 시 호출됨
  */
 export const listenForegroundMessages = () => {
-  return messaging().onMessage(async (remoteMessage) => {
+  return onMessage(messaging, async (remoteMessage) => {
     console.log('알림 수신:', remoteMessage)
     Alert.alert(
       remoteMessage.notification?.title || '알림',
@@ -88,7 +102,7 @@ export const listenForegroundMessages = () => {
 }
 
 export const listenBackgroundMessages = () => {
-  return messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  return setBackgroundMessageHandler(messaging, async (remoteMessage) => {
     console.log('앱이 백그라운드에서 실행됨:', remoteMessage)
     return Promise.resolve()
   })
