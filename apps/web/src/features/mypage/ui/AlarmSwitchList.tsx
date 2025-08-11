@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { toast } from 'sonner'
 
 import { List } from '@/shared/ui/common/List/List'
 import type { Alert } from '@/entities/mypage/model/alert.type'
@@ -17,16 +18,32 @@ export const AlarmToggleList = () => {
   const [localStartAlert, setLocalStartAlert] = useState<boolean | null>(null)
   const [localInGameAlert, setLocalInGameAlert] = useState<boolean | null>(null)
 
-  const { mutate } = useMutation({
+  const timersRef = useRef<number[]>([])
+  
+  const scheduleReset = () => {
+    const id = window.setTimeout(() => {
+      setLocalStartAlert(null)
+      setLocalInGameAlert(null)
+    }, 100)
+    timersRef.current.push(id)
+  }
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach(clearTimeout)
+      timersRef.current = []
+    }
+  }, [])
+
+  const { mutate, isPending } = useMutation({
     mutationFn: (payload: Alert) => alertPatch.patchAlert(payload),
     onSuccess: (data) => {
       queryClient.setQueryData(alertQueryKeys.setting().queryKey, data)
-      setLocalStartAlert(null)
-      setLocalInGameAlert(null)
+      scheduleReset()
     },
     onError: () => {
-      setLocalStartAlert(null)
-      setLocalInGameAlert(null)
+      scheduleReset()
+      toast.error('설정을 변경하는데 실패했습니다.')
     },
   })
   if (isLoading || !data) return null
@@ -51,10 +68,22 @@ export const AlarmToggleList = () => {
   return (
     <div className="space-y-4 mb-6">
       <p className="body-sm-bold text-brand-neutral-white">알람 설정</p>
-      <List type="switch" value={startAlert} onToggle={handleToggleMatchStart}>
+      <List
+        type="switch"
+        value={displayStartAlert}
+        onToggle={() => {
+          if (!isPending) handleToggleMatchStart()
+        }}
+      >
         경기 시작 알림 받기
       </List>
-      <List type="switch" value={inGameAlert} onToggle={handleToggleInGame}>
+      <List
+        type="switch"
+        value={displayInGameAlert}
+        onToggle={() => {
+          if (!isPending) handleToggleInGame()
+        }}
+      >
         경기 중 알림 받기
       </List>
     </div>
