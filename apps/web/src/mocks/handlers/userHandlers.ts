@@ -3,7 +3,6 @@ import { http, HttpResponse, delay } from 'msw'
 import { user } from '@/mocks/data/user'
 import { mockAlert } from '@/mocks/data/alert'
 import type {
-  SignupRequestDTO,
   UserResponseDTO,
   ChangeNicknameRequestDTO,
   ChangeTeamRequestDTO,
