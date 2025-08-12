@@ -5,7 +5,7 @@ export const user: { data: UserType; delay: number } = {
     userId: 4,
     email: 'inha0319@naver.com',
     nickname: '구단주',
-    baseballTeam: null,
+    baseballTeam: 'LG_TWINS',
     isNewUser: false,
     role: 'USER',
   },

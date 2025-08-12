@@ -33,7 +33,6 @@ export const SessionProvider = ({
     refetchUser()
   }, [])
   
-  console.log(user)
   return (
     <SessionContext.Provider value={{ user, setUser, refetchUser }}>
       {children}
