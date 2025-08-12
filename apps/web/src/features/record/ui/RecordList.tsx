@@ -24,6 +24,7 @@ export const RecordList = ({ records }: { records: Record[] }) => {
       {records.map((record) => (
         <RecordLogCard.Root
           key={record.matchRecordId}
+          data-testid="record-card"
           onClick={() =>
             push('RecordDetail', {
               matchRecordId: record.matchRecordId.toString(),
