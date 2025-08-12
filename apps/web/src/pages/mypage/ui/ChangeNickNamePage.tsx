@@ -1,4 +1,5 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { toast } from 'sonner'
 
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BallogLogo } from '@/assets/BallogLogo'
@@ -23,6 +24,7 @@ const ChangeNickNamePage = () => {
       {
         onSuccess: () => {
           pop()
+          toast("닉네임 변경이 완료되었습니다!")
           setUser({ ...user, nickname: data.nickname })
         },
       },
