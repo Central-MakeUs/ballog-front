@@ -5,7 +5,7 @@ import { ErrorMessageFactory } from '@/features/auth/ui'
 import { Button } from '@/shared/ui/common'
 
 interface NickNameFormProps {
-  nickname?: string
+  nickname?: string | null
   onSubmit: (data: { nickname: string }) => void
   isLoading?: boolean
   error: ExtendedKyHttpError | null
