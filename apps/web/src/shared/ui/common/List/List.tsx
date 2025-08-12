@@ -6,6 +6,7 @@ import { Switch } from '@/shared/ui/common/switch'
 
 interface ListProps {
   type: 'arrow' | 'switch'
+  disabled?: boolean
   onClick?: () => void
   value?: boolean // switch일 때 필요
   onToggle?: (val: boolean) => void
@@ -14,6 +15,7 @@ interface ListProps {
 
 export const List = ({
   type,
+  disabled,
   onClick,
   value,
   onToggle,
@@ -33,7 +35,7 @@ export const List = ({
           <RightArrow className={cn('size-6 shrink-0')} />
         </button>
       ) : (
-        <Switch checked={value} onCheckedChange={onToggle} />
+        <Switch disabled={disabled} checked={value} onCheckedChange={onToggle} />
       )}
     </div>
   )

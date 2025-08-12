@@ -18,20 +18,21 @@ export const AlarmToggleList = () => {
   const [localStartAlert, setLocalStartAlert] = useState<boolean | null>(null)
   const [localInGameAlert, setLocalInGameAlert] = useState<boolean | null>(null)
 
-  const timersRef = useRef<number[]>([])
-  
+  const timerRef = useRef<number | null>(null)
+
   const scheduleReset = () => {
-    const id = window.setTimeout(() => {
+    if (timerRef.current) clearTimeout(timerRef.current)
+
+    timerRef.current = window.setTimeout(() => {
       setLocalStartAlert(null)
       setLocalInGameAlert(null)
+      timerRef.current = null
     }, 100)
-    timersRef.current.push(id)
   }
 
   useEffect(() => {
     return () => {
-      timersRef.current.forEach(clearTimeout)
-      timersRef.current = []
+      if (timerRef.current) clearTimeout(timerRef.current)
     }
   }, [])
 
@@ -70,19 +71,16 @@ export const AlarmToggleList = () => {
       <p className="body-sm-bold text-brand-neutral-white">알람 설정</p>
       <List
         type="switch"
+        disabled={isPending}
         value={displayStartAlert}
-        onToggle={() => {
-          if (!isPending) handleToggleMatchStart()
-        }}
+        onToggle={handleToggleMatchStart}
       >
         경기 시작 알림 받기
       </List>
       <List
         type="switch"
         value={displayInGameAlert}
-        onToggle={() => {
-          if (!isPending) handleToggleInGame()
-        }}
+        onToggle={handleToggleInGame}
       >
         경기 중 알림 받기
       </List>

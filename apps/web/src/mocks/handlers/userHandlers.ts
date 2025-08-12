@@ -69,7 +69,8 @@ export const userHandlers = [
     })
   }),
 
-  http.patch<never, Alert>(`${ME_API_PREFIX}/alertㅅ`, async ({ request }) => {
+  http.patch<never, Alert>(`${ME_API_PREFIX}/alert`, async ({ request }) => {
+    await delay(1000)
     const body = await request.json()
 
     const { startAlert, inGameAlert } = body
