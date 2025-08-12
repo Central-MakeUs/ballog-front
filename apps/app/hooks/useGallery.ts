@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Alert, Platform } from 'react-native'
+import { Alert, Platform, Linking } from 'react-native'
 
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
@@ -58,9 +58,21 @@ export const useGallery = (router: ReturnType<typeof useRouter>) => {
   }
 
   const pickImageFromGallery = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+    const { status, canAskAgain } =
+      await ImagePicker.requestMediaLibraryPermissionsAsync()
     if (status !== 'granted') {
-      Alert.alert('권한 필요', '갤러리 접근 권한이 필요합니다.')
+      if (canAskAgain) {
+        Alert.alert('권한 필요', '갤러리 접근 권한이 필요합니다.')
+      } else {
+        Alert.alert(
+          '권한 필요',
+          '갤러리 접근이 차단되어 있습니다. 설정에서 권한을 허용해 주세요.',
+          [
+            { text: '취소', style: 'cancel' },
+            { text: '설정 열기', onPress: () => Linking.openSettings() },
+          ],
+        )
+      }
       return
     }
 

@@ -22,6 +22,7 @@ export const useCamera = (
   const [zoom, setZoom] = useState(0)
   const savedZoom = useSharedValue(0)
 
+
   // 카메라 권한 요청을 더 적극적으로 처리
   useEffect(() => {
     if (cameraPermission?.status !== 'granted') {

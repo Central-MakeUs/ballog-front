@@ -4,12 +4,19 @@ import { TEAM_ICONS, TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { Button } from '@/shared/ui/common'
 
 interface TeamSelectionFormProps {
+  baseBallTeam?: TeamKey
   onSubmit: (team: TeamKey) => void
   isSignUpFlow?: boolean
 }
 
-export const TeamSelectionForm = ({ onSubmit, isSignUpFlow }: TeamSelectionFormProps) => {
-  const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(null)
+export const TeamSelectionForm = ({
+  baseBallTeam,
+  onSubmit,
+  isSignUpFlow,
+}: TeamSelectionFormProps) => {
+  const [selectedTeam, setSelectedTeam] = useState<TeamKey | null>(
+    baseBallTeam ?? null,
+  )
 
   const handleSelect = (team: TeamKey) => {
     setSelectedTeam(team)
