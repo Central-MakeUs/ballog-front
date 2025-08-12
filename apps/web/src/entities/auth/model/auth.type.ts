@@ -23,8 +23,8 @@ export interface SignupRequestDTO {
 export interface UserType {
   userId: number
   email: string
-  nickname: string
-  baseballTeam: string
+  nickname: string | null
+  baseballTeam: string | null
   isNewUser: boolean
   role: 'USER' | 'ADMIN'
 }

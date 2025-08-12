@@ -6,7 +6,6 @@ import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
 const App = () => {
-
   return (
     <SessionProvider>
       <OverlayProvider>
