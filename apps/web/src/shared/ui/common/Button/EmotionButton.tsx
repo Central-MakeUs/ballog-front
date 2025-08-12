@@ -79,13 +79,13 @@ export const EmotionButton = ({
         getHeightClass(scale),
         'bg-usage-background-strong flex flex-col shadow-medium',
         'items-center  justify-end rounded-xlarge w-full',
-        'active:bg-usage-background-strong/80',
+        'has-[button:active]:bg-brand-secondary-pressed',
         className,
       )}
     >
       <button
         className={cn(
-          'bg-usage-background-strong flex flex-col',
+          'bg-transparent flex flex-col',
           'items-center justify-end rounded-xlarge w-full px-4 py-4',
           className,
           getButtonScale(scale),
@@ -93,16 +93,14 @@ export const EmotionButton = ({
         type="button"
         {...props}
       >
-        <div
-          className={cn(
-            'flex flex-col items-center justify-center w-full',
-          )}
-        >
+        <div className={cn('flex flex-col items-center justify-center w-full')}>
           <IconButton className={cn('size-20 mx-auto')} state={emotionType} />
           <span className={cn('body-sm-light text-usage-text-subtle  mt-1')}>
             {label}
           </span>
-          <span className='heading-md-bold text-usage-text-default'>{Math.round(percent)}%</span>
+          <span className="heading-md-bold text-usage-text-default">
+            {Math.round(percent)}%
+          </span>
         </div>
       </button>
     </div>

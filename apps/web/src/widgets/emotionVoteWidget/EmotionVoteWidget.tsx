@@ -26,8 +26,6 @@ export const EmotionVoteWidget = ({
 
   const isZero = joyPercent === 0 && angryPercent === 0
 
-  const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
-
   return (
     <div className={cn('flex flex-col w-full h-full', className)} {...rest}>
       <div

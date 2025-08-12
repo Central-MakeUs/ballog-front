@@ -27,7 +27,6 @@ export const IconButton = ({ className, state, ...props }: IconButtonProps) => {
     <div
       className={cn(
         'flex items-center justify-center',
-        'active:bg-usage-background-subtle/80',
         'min-w-16 min-h-16',
         className,
       )}
