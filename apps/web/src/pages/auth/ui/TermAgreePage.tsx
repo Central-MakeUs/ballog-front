@@ -32,6 +32,7 @@ const TermAgreePage = () => {
     <AppScreen
       appBar={{
         title: <WhiteBallogLogo />,
+        height: '48px',
         backButton: {
           renderIcon: () => <BackArrow />,
         },
