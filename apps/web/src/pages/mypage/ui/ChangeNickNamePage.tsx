@@ -1,12 +1,12 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
-import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import { NickNameForm } from '@/features/auth/ui'
 import { useUpdateMyInfoMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
 import { useFlow } from '@/shared/lib/stackflow'
+import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
 
 const ChangeNickNamePage = () => {
   const { pop } = useFlow()
@@ -32,7 +32,7 @@ const ChangeNickNamePage = () => {
   return (
     <AppScreen
       appBar={{
-        title: <BallogLogo />,
+        title: <WhiteBallogLogo />,
         backButton: {
           renderIcon: () => <BackArrow />,
         },

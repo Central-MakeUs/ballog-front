@@ -4,7 +4,7 @@ import { SectionHeader } from '@/entities/match/ui/SectionHeader'
 import { useFlow } from '@/shared/lib/stackflow'
 
 export const MatchEmptySection = () => {
-  const { push } = useFlow()
+  const { replace } = useFlow()
   return (
     <div className="flex flex-col items-center justify-start w-full pb-20">
       <SectionHeader
@@ -19,7 +19,7 @@ export const MatchEmptySection = () => {
             variant="primary"
             size="sm"
             className="bg-brand-primary-default text-white"
-            onClick={() => push('Record', {})}
+            onClick={() => replace('Record', {}, { animate: false })}
           >
             직관로그 가기
           </Button>

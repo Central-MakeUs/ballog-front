@@ -52,7 +52,7 @@ const RecordMainContent = ({
 
       {/* 기록 목록 섹션 */}
       <div className="mt-10 px-4 gap-4 flex flex-col w-full">
-        <SectionHeader title="직관 횟수/승률" />
+        <SectionHeader title="전체 관람로그" />
         <RecordList records={records} />
       </div>
     </>

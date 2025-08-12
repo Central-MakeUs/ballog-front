@@ -1,9 +1,5 @@
 import { StyleSheet, BackHandler, Platform } from 'react-native'
-import {
-  useSafeAreaInsets,
-  SafeAreaProvider,
-  SafeAreaView,
-} from 'react-native-safe-area-context'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 import { useEffect, useRef } from 'react'
 import { WebView } from 'react-native-webview'
@@ -16,7 +12,6 @@ import { router } from 'expo-router'
 const HomeScreen = () => {
   const webViewRef = useRef<WebView>(null)
   const { bridge } = useBridge(webViewRef)
-  const insets = useSafeAreaInsets()
 
   const { imageData, clearImageData } = useImageBridge()
   useImageSender(bridge, imageData, clearImageData)

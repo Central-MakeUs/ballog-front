@@ -20,11 +20,10 @@ export const WithRecord: Story = {
         awayTeam="SSG_LANDERS"
         stadium="잠실야구장"
         date="2025.07.09 (수) 오후 6:30"
+        result="WIN"
       />
       <RecordLogCard.Badge result="WIN" />
-      <RecordLogCard.Footer onClick={() => alert('클릭')}>
-        경기 결과 보러가기
-      </RecordLogCard.Footer>
+      <RecordLogCard.Action />
     </RecordLogCard.Root>
   ),
   name: 'WithRecord',

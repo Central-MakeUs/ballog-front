@@ -1,13 +1,9 @@
 import { type ComponentType, useEffect } from 'react'
-import { useRef } from 'react'
 
 import { useFlow } from '@/shared/lib/stackflow'
-import { useOverlay } from '@/shared/hooks/useOverlay'
 
-import { OverlayModal } from '../ui/common/OverlayModal'
 import { useStack } from '../hooks/stackflow/useStack'
 
-let hasVisitedOnce = false
 /**
  * 인증이 필요한 컴포넌트를 감싸는 HOC
  * localStorage에 accessToken이 없으면 Login 페이지로 이동
@@ -15,52 +11,15 @@ let hasVisitedOnce = false
 export const withAuth = <P extends object>(Component: ComponentType<P>) => {
   const AuthenticatedComponent = (props: P) => {
     const { replace } = useFlow()
-    const overlay = useOverlay()
     const { popAll } = useStack()
-    const redirectedRef = useRef(false)
     useEffect(() => {
       const accessToken = localStorage.getItem('accessToken')
 
-      if (!hasVisitedOnce) {
-        hasVisitedOnce = true
-        if (redirectedRef.current) return
-        redirectedRef.current = true
+      if (!accessToken) {
         popAll()
         replace('Login', {}, { animate: false })
-        return
       }
-
-      if (!accessToken) {
-        overlay.open(({ isOpen }) => (
-          <OverlayModal.Root
-            open={isOpen}
-            onOpenChange={(open) => {
-              if (!open) {
-                // 모달 닫힐 때
-                overlay.close()
-                popAll()
-                replace('Login', {})
-              }
-            }}
-          >
-            <OverlayModal.Text heading="로그인이 필요합니다." />
-            <OverlayModal.Buttons
-              layout="horizontal"
-              buttons={[
-                {
-                  label: '확인',
-                  onClick: () => {
-                    overlay.close()
-                    popAll()
-                    replace('Login', {})
-                  },
-                },
-              ]}
-            />
-          </OverlayModal.Root>
-        ))
-      }
-    }, [replace])
+    }, [replace, popAll])
 
     // accessToken이 있는지 확인
     const accessToken = localStorage.getItem('accessToken')

@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib/classnames'
 interface GNBButtonProps extends ComponentProps<'button'> {
   active?: boolean
   disabled?: boolean
-  icon?: React.ComponentType<{ className?: string }>
+  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   children?: React.ReactNode // 텍스트용
 }
 
@@ -34,10 +34,7 @@ export const GNBButton = ({
   children,
   ...props
 }: GNBButtonProps) => {
-  const logoColor = active
-    ? 'text-brand-neutral-white'
-    : 'text-brand-secondary-default'
-  const textColor = active
+  const iconColor = active
     ? 'text-brand-neutral-white'
     : 'text-brand-secondary-default'
 
@@ -49,9 +46,9 @@ export const GNBButton = ({
       disabled={disabled}
       {...props}
     >
-      {IconComponent && <IconComponent className={cn(logoColor, 'w-7 h-7')} />}
+      {IconComponent && <IconComponent className={cn('w-7 h-7', iconColor)} />}
       {children && (
-        <span className={`caption-md-medium ${textColor}`}>{children}</span>
+        <span className={cn('caption-md-medium', iconColor)}>{children}</span>
       )}
     </button>
   )

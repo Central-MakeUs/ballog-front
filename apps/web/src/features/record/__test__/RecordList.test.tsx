@@ -70,7 +70,7 @@ describe('RecordList', () => {
 
     render(<RecordList records={records} />)
 
-    const detailButton = screen.getAllByText('경기 결과 보러가기')
+    const detailButton = screen.getAllByTestId('record-card')
 
     await user.click(detailButton[0])
 

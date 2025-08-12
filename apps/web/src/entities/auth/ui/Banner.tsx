@@ -5,7 +5,7 @@ export const Banner = () => {
   return (
     <div className="flex flex-col items-center">
       <img src={LoginPageIcon} alt="ballog icon" className="w-20 h-20 mb-4" />
-      <p className="text-center text-lg font-semibold">
+      <p className="text-center text-lg body-md-bold">
         오늘의 경기 선택하고 <br /> 감정 기록하기
       </p>
     </div>
