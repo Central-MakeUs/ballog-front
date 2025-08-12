@@ -5,7 +5,7 @@ import { ErrorMessageFactory } from '@/features/auth/ui'
 import { Button } from '@/shared/ui/common'
 
 interface NickNameFormProps {
-  nickname?: string | null
+  nickname?: string
   onSubmit: (data: { nickname: string }) => void
   isLoading?: boolean
   error: ExtendedKyHttpError | null
@@ -39,7 +39,7 @@ export const NickNameForm = ({
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             placeholder={AUTH_MESSAGES.nickname.placeholder}
-            className="w-full py-3 px-4 rounded-lg bg-gray-700 text-white mb-4 placeholder-gray-400"
+            className="w-full py-3 px-4 rounded-lg body-lg-bold bg-gray-700 text-center text-white mb-4 placeholder-gray-400"
           />
 
           {/* 에러 메시지 노출 */}
