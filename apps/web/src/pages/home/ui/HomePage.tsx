@@ -8,8 +8,11 @@ import { MatchSection } from '@/features/match/ui/MatchSection'
 import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { Loading } from '@/shared/ui/common'
+import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 
 const HomePage: ActivityComponentType = () => {
+  useFcmToken()
+
   const { data, isLoading } = useQuery(matches.today())
 
   const isEmpty = !data?.data || data.data.length === 0
@@ -22,7 +25,7 @@ const HomePage: ActivityComponentType = () => {
       <MatchSection matches={data.data} />
     )
   }
-
+  
   return (
     <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>
       <HomeContent />

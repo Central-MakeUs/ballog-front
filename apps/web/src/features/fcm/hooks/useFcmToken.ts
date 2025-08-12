@@ -24,7 +24,7 @@ export const useFcmToken = () => {
     POST_MESSAGE_EVENT.GET_MY_FCM_TOKEN,
     async (payload: FcmTokenPayload) => {
       const prevToken = localStorage.getItem('fcmToken')
-
+      
       if (payload.token && payload.token !== prevToken) {
         try {
           const response = await fcmPost.postFcmToken(payload.token)

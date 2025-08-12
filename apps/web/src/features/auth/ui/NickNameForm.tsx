@@ -5,18 +5,21 @@ import { ErrorMessageFactory } from '@/features/auth/ui'
 import { Button } from '@/shared/ui/common'
 
 interface NickNameFormProps {
+  nickname?: string
   onSubmit: (data: { nickname: string }) => void
   isLoading?: boolean
   error: ExtendedKyHttpError | null
 }
 
 export const NickNameForm = ({
+  nickname: initialNickname,
   onSubmit,
   isLoading,
   error,
 }: NickNameFormProps) => {
-  const { nickname, setNickname, errors, validateNickname } =
-    useNickNameForm('')
+  const { nickname, setNickname, errors, validateNickname } = useNickNameForm(
+    initialNickname ?? '',
+  )
 
   const handleSubmit = () => {
     if (!validateNickname(nickname)) return
