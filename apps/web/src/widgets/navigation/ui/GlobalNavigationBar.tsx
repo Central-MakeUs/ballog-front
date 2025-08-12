@@ -1,6 +1,8 @@
 import { useState, useEffect, type ComponentType } from 'react'
 
-import HomeIcon from '@/assets/home.svg?react'
+import HomeGNB from '@/assets/HomeGNB'
+import RecordGNB from '@/assets/RecordGNB'
+import MypageGNB from '@/assets/MyPageGNB'
 import { useFlow, activities, actions } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { GNBButton } from '@/shared/ui/common'
@@ -15,17 +17,17 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   {
     label: '홈',
-    icon: HomeIcon,
+    icon: HomeGNB,
     activity: 'Home',
   },
   {
     label: '직관로그',
-    icon: HomeIcon,
+    icon: RecordGNB,
     activity: 'Record',
   },
   {
     label: '마이페이지',
-    icon: HomeIcon,
+    icon: MypageGNB,
     activity: 'My',
   },
 ]
