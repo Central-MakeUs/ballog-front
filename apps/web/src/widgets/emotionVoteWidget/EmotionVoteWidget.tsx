@@ -26,8 +26,6 @@ export const EmotionVoteWidget = ({
 
   const isZero = joyPercent === 0 && angryPercent === 0
 
-  const dominant = joyPercent >= angryPercent ? 'joy' : 'angry'
-
   return (
     <div className={cn('flex flex-col w-full h-full', className)} {...rest}>
       <div
@@ -76,14 +74,19 @@ export const EmotionVoteWidget = ({
       <div className="relative w-full h-4 mt-8 mb-2 bg-usage-background-strong rounded-full overflow-hidden">
         <div
           className={cn(
-            'absolute top-0 h-full transition-all duration-1000',
-            dominant === 'joy'
-              ? 'left-0 bg-brand-green-default'
-              : 'right-0 bg-brand-red-default',
+            'absolute inset-y-0 left-0 h-full',
+            'transition-[width] duration-1000',
+            'bg-brand-green-default',
           )}
-          style={{
-            width: `${dominant === 'joy' ? joyPercent : angryPercent}%`,
-          }}
+          style={{ width: `${joyPercent}%` }}
+        />
+        <div
+          className={cn(
+            'absolute inset-y-0 right-0 h-full',
+            'transition-[width] duration-1000',
+            'bg-brand-red-default',
+          )}
+          style={{ width: `${angryPercent}%` }}
         />
       </div>
     </div>

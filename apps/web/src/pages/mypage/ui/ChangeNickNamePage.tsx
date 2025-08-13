@@ -1,4 +1,5 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { toast } from 'sonner'
 
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
@@ -18,11 +19,12 @@ const ChangeNickNamePage = () => {
     mutate(
       {
         nickname: data.nickname,
-        baseballTeam: user.baseballTeam,
+        baseballTeam: user.baseballTeam ?? '응원팀 없음',
       },
       {
         onSuccess: () => {
           pop()
+          toast("닉네임 변경이 완료되었습니다!")
           setUser({ ...user, nickname: data.nickname })
         },
       },
@@ -43,7 +45,7 @@ const ChangeNickNamePage = () => {
       <AppLayout>
         <div className="flex flex-col items-center justify-center w-full h-full gap-20">
           <NickNameForm
-            nickname={user?.nickname}
+            nickname={user?.nickname ?? ''}
             onSubmit={handleSubmit}
             isLoading={false}
             error={null}

@@ -63,6 +63,7 @@ export const ProgressBar = ({
           )}
           style={progressStyle}
         />
+        
       </div>
 
       <div

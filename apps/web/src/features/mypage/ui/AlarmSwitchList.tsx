@@ -79,6 +79,7 @@ export const AlarmToggleList = () => {
       </List>
       <List
         type="switch"
+        disabled={isPending}
         value={displayInGameAlert}
         onToggle={handleToggleInGame}
       >

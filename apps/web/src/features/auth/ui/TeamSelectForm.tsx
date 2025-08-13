@@ -43,8 +43,8 @@ export const TeamSelectionForm = ({
               <Button
                 key={key}
                 size="lg"
-                variant={isSelected ? 'primary' : 'secondary'}
-                state={isSelected ? 'subtle' : undefined} // 선택 시만 subtle, 아니면 기본
+                variant="secondary"
+                state={isSelected ? 'pressed' : undefined} // 선택 시만 subtle, 아니면 기본
                 className={`self-stretch row-start-${row} col-start-${col} flex-1 h-full gap-0`}
                 onClick={() => handleSelect(key as TeamKey)}
               >

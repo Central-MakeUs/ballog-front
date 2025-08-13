@@ -85,9 +85,9 @@ export const EndRecordingButton = () => {
           state="pressed"
           size="lg"
           onClick={confirmEndRecord}
-          className="w-full"
+          className="w-full bg-brand-secondary-default"
         >
-          기록 종료하기
+          기록 완료하기
         </Button>
       </div>
     </div>

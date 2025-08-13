@@ -9,10 +9,12 @@ import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { Loading } from '@/shared/ui/common'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
+import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 
 const HomePage: ActivityComponentType = () => {
   useFcmToken()
-
+  useCheckSignupFinished()
+  
   const { data, isLoading } = useQuery(matches.today())
 
   const isEmpty = !data?.data || data.data.length === 0
