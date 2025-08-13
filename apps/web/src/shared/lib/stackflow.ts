@@ -19,6 +19,17 @@ import TermPage from '@/pages/term/ui/TermPage'
 import OnBoardingPage from '@/pages/onBoarding/ui/OnBoardingPage'
 import { withAuth } from '@/shared/hoc/Auth'
 
+// 온보딩 페이지 처리 로직
+try {
+  const isOnboardingSeen = !!localStorage.getItem('onBoarding')
+  const isRootPath = location.pathname === '/'
+  if (!isOnboardingSeen && isRootPath) {
+    history.replaceState(null, '', '/onboarding')
+  }
+} catch {
+  // 로컬스토리지 접근 불가시 무시
+}
+
 export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   transitionDuration: 350,
 

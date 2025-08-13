@@ -1,4 +1,5 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { useEffect } from 'react'
 
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { Button } from '@/shared/ui/common'
@@ -10,6 +11,10 @@ import { OnBoardingCarousel } from './OnBoardCarousel'
 const OnBoardingPage = () => {
   const { popAll } = useStack()
   const { replace } = useFlow()
+
+  useEffect(() => {
+    localStorage.setItem('onBoarding', 'true')
+  }, [])
 
   return (
     <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>

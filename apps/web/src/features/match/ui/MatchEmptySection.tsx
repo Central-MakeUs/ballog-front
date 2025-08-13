@@ -9,7 +9,6 @@ export const MatchEmptySection = () => {
     <div className="flex flex-col items-center justify-start w-full pb-20">
       <SectionHeader title={['오늘 예정된', '경기가 없습니다']} />
 
-      {/* 하단 disabled 카드 */}
       <div className="flex justify-center pt-8 px-23 w-full">
         <HomeCard.Disabled>
           <Button
