@@ -4,11 +4,11 @@ import { toast } from 'sonner'
 import { TeamSelectionForm } from '@/features/auth/ui'
 import { useFlow } from '@/shared/lib/stackflow'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
-import { BallogLogo } from '@/assets/BallogLogo'
 import { BackArrow } from '@/assets/BackArrow'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyTeamMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
+import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
 
 const isSignUpFlow = false
 
@@ -38,7 +38,7 @@ const ChangeTeamSelectPage = () => {
   return (
     <AppScreen
       appBar={{
-        title: <BallogLogo />,
+        title: <WhiteBallogLogo />,
         height: '48px',
         backButton: {
           renderIcon: () => <BackArrow />,

@@ -22,23 +22,23 @@ export const RecordList = ({ records }: { records: Record[] }) => {
   return (
     <div className="w-full flex-col flex justify-center align-center gap-4">
       {records.map((record) => (
-        <RecordLogCard.Root key={record.matchRecordId}>
+        <RecordLogCard.Root
+          key={record.matchRecordId}
+          data-testid="record-card"
+          onClick={() =>
+            push('RecordDetail', {
+              matchRecordId: record.matchRecordId.toString(),
+            })
+          }
+        >
           <RecordLogCard.Info
             homeTeam={record.homeTeam}
             awayTeam={record.awayTeam}
             stadium={'잠실야구장'}
             date={record.matchDate}
+            result={record.result ?? 'DRAW'}
           />
-          <RecordLogCard.Badge result={record.result ?? 'DRAW'} />
-          <RecordLogCard.Footer
-            onClick={() =>
-              push('RecordDetail', {
-                matchRecordId: record.matchRecordId.toString(),
-              })
-            }
-          >
-            경기 결과 보러가기
-          </RecordLogCard.Footer>
+          <RecordLogCard.Action />
         </RecordLogCard.Root>
       ))}
     </div>

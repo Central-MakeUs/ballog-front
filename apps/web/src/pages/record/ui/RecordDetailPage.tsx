@@ -51,10 +51,8 @@ export const RecordDetailPage = ({
                 awayTeam={data?.data.awayTeam ?? 'LG_TWINS'}
                 stadium={data?.data.stadium ?? '잠실야구장'}
                 date={data?.data.matchDate ?? '2025.07.09 (수) 오후 6:30'}
+                result={data?.data.result ?? 'DRAW'}
               />
-              {data?.data.result && (
-                <RecordLogCard.Badge result={data?.data.result} />
-              )}
             </RecordLogCard.Root>
           </div>
 
