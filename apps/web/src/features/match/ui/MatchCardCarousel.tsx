@@ -62,7 +62,9 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
           <div
             key={index}
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-              index === current ? 'bg-brand-neutral-70' : 'bg-brand-neutral-30'
+              index === current
+                ? 'bg-brand-neutral-white'
+                : 'bg-brand-neutral-50'
             }`}
           />
         ))}

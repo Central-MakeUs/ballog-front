@@ -16,6 +16,7 @@ import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
 import ShareBottomSheet from '@/pages/record/ui/ShareBottomSheet'
 import TermAgreePage from '@/pages/auth/ui/TermAgreePage'
 import TermPage from '@/pages/term/ui/TermPage'
+import OnBoardingPage from '@/pages/onBoarding/ui/OnBoardingPage'
 import { withAuth } from '@/shared/hoc/Auth'
 
 export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
@@ -46,6 +47,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
         ShareBottomSheet: '/share-bottom-sheet',
         TermAgree: '/term-agree',
         Term: '/term',
+        OnBoarding: '/onboarding',
       },
       fallbackActivity: () => 'Home',
     }),
@@ -65,6 +67,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
     ShareBottomSheet,
     TermAgree: TermAgreePage,
     Term: TermPage,
+    OnBoarding: OnBoardingPage,
   },
   initialActivity: () => 'Home',
 })
