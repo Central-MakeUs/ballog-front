@@ -1,14 +1,12 @@
-import type { ComponentType, SVGProps } from 'react'
-
-import ChangwonNCPark from '@/assets/stadium/ChangwonNCPark.svg?react'
-import GocheokDome from '@/assets/stadium/GocheokDome.svg?react'
-import HanhwaBallPark from '@/assets/stadium/HanhwaBallPark.svg?react'
-import JamsilStadium from '@/assets/stadium/JamsilStadium.svg?react'
-import KiaChampionsField from '@/assets/stadium/KIAChampionsField.svg?react'
-import KTWizPark from '@/assets/stadium/KTWizPark.svg?react'
-import SSGLandersField from '@/assets/stadium/SSGLandersField.svg?react'
-import SajikStadium from '@/assets/stadium/SajikStadium.svg?react'
-import SamsungLionsPark from '@/assets/stadium/SamsungLionsPark.svg?react'
+import ChangwonNCPark from '@/assets/stadium/ChangwonNCPark.png'
+import GocheokDome from '@/assets/stadium/GocheokDome.png'
+import HanhwaBallPark from '@/assets/stadium/HanhwaBallPark.png'
+import JamsilStadium from '@/assets/stadium/JamsilStadium.png'
+import KiaChampionsField from '@/assets/stadium/KiaChampionsField.png'
+import KTWizPark from '@/assets/stadium/KTWizPark.png'
+import SSGLandersField from '@/assets/stadium/SSGLandersField.png'
+import SajikStadium from '@/assets/stadium/SajikStadium.png'
+import SamsungLionsPark from '@/assets/stadium/SamsungLionsPark.png'
 
 export const STADIUM = {
   JAMSIL: '잠실경기장',
@@ -25,11 +23,7 @@ export const STADIUM = {
 
 export const stadium = Object.values(STADIUM)
 
-type StadiumIcon = ComponentType<SVGProps<SVGSVGElement>>
-
-const EmptyIcon: StadiumIcon = () => null
-
-export const STADIUM_IMAGES: Record<StadiumKey, StadiumIcon> = {
+export const STADIUM_IMAGES: Record<StadiumKey, string> = {
   JAMSIL: JamsilStadium,
   SAJIK: SajikStadium,
   DAEGU: SamsungLionsPark,
@@ -39,7 +33,7 @@ export const STADIUM_IMAGES: Record<StadiumKey, StadiumIcon> = {
   SUWON: KTWizPark,
   CHANGWON: ChangwonNCPark,
   INCHEON: SSGLandersField,
-  NONE: EmptyIcon,
+  NONE: KTWizPark,
 }
 
 export const getStadiumName = (key: StadiumKey): StadiumValue => STADIUM[key]

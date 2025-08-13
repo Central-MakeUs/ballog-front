@@ -16,11 +16,19 @@ export const HomeCardStadiumInfo = ({
 
   return (
     <div
-      className={cn('flex flex-col items-center w-full gap-1 pt-4 pb-6', className)}
+      className={cn(
+        'flex flex-col items-center w-full gap-1 pt-4 pb-6',
+        className,
+      )}
       data-name="img-wrapper"
       {...rest}
     >
-      <StadiumImage />
+      <img
+        src={StadiumImage}
+        alt={`${stadiumName} 일러스트`}
+        className="w-full object-contain"
+        decoding="async"
+      />
       <p className="body-sm-light">{stadiumName}</p>
     </div>
   )
