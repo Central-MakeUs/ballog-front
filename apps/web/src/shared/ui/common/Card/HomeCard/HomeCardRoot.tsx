@@ -18,7 +18,7 @@ export const HomeCardRoot = ({
     <div
       className={cn(
         'flex flex-col',
-        'items-center justify-start overflow-clip p-4 relative rounded-lg min-w-50 w-full',
+        'items-center justify-start overflow-clip p-4 relative rounded-md min-w-50 w-full',
         '[background:linear-gradient(180deg,_#4EB65A_0%,_#36C1B3_100%)]',
         className,
       )}

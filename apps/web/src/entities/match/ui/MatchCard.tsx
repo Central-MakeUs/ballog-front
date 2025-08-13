@@ -25,7 +25,7 @@ export const MatchCard = ({
       <div className="w-full">
         <Button
           variant="secondary"
-          className="w-full bg-brand-secondary-default"
+          className="w-full bg-brand-secondary-default rounded-md"
           onClick={onClick}
         >
           기록 시작하기
