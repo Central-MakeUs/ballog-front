@@ -1,5 +1,6 @@
 import { type ApiResponse } from '@/types/api/common'
 import { type TeamKey } from '@/shared/constants/teams'
+import type { StadiumKey } from '@/shared/constants/stadium'
 
 export interface Match {
   matchesId: number
@@ -7,7 +8,7 @@ export interface Match {
   matchesTime: string
   homeTeam: TeamKey
   awayTeam: TeamKey
-  stadium: string
+  stadium: StadiumKey
   matchesResult: string | null
 }
 

@@ -12,7 +12,7 @@ export const matchHandlers = [
     async () => {
       const matches = match.today.data
 
-      const isEmpty = Math.random() < 0.5
+      const isEmpty = Math.random() < 0
 
       await new Promise((resolve) => setTimeout(resolve, match.today.delay))
       return HttpResponse.json(

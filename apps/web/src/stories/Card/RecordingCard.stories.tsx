@@ -16,15 +16,15 @@ type Story = StoryObj<typeof RecordingCard.Root>
 export const Default: Story = {
   name: 'Default',
   render: () => (
-    <RecordingCard.Root>
-      <RecordingCard.Icon state={true} onClick={() => alert('클릭')} />
-      <RecordingCard.Info
-        homeTeam="LG 트윈스"
-        awayTeam="SSG 랜더스"
-        stadium="잠실야구장"
-        date="2025.07.10"
-      />
-    </RecordingCard.Root>
+      <RecordingCard.Root>
+        <RecordingCard.Icon state={true} onClick={() => alert('클릭')} />
+        <RecordingCard.Info
+          homeTeam="LG 트윈스"
+          awayTeam="SSG 랜더스"
+          stadium="잠실야구장"
+          date="2025.07.10"
+        />
+      </RecordingCard.Root>
   ),
 }
 

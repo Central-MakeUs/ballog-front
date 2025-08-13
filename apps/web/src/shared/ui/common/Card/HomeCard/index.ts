@@ -1,5 +1,5 @@
 import { HomeCardRoot } from './HomeCardRoot'
-import { HomeCardMatchInfo } from './HomeCardMatchInfo'
+import { HomeCardStadiumInfo } from './HomeCardStadiumInfo'
 import { HomeCardDetailInfo } from './HomeCardDetailInfo'
 import { Disabled } from './Disabled'
 
@@ -28,7 +28,7 @@ import { Disabled } from './Disabled'
 
 export const HomeCard = {
   Root: HomeCardRoot,
-  MatchInfo: HomeCardMatchInfo,
+  StadiumInfo: HomeCardStadiumInfo,
   DetailInfo: HomeCardDetailInfo,
   Disabled,
 }

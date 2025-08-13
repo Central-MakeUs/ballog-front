@@ -2,50 +2,33 @@ import React from 'react'
 import type { ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
+import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 
 interface HomeCardDetailInfoProps extends ComponentProps<'div'> {
-  stadium?: string
   dateTime?: string
+  homeTeam: TeamKey
+  awayTeam: TeamKey
   children?: React.ReactNode
 }
 
 export const HomeCardDetailInfo = ({
-  stadium = '잠실 경기장',
-  dateTime = '2025.06.18 17:30',
+  dateTime,
+  homeTeam,
+  awayTeam,
   className,
   children,
   ...rest
 }: HomeCardDetailInfoProps) => {
   return (
-    <div
-      className={cn(
-        'flex flex-col items-start justify-start p-0 relative shrink-0 w-full',
-        'bg-brand-neutral-10 pt-4 pb-6',
-        'rounded-b-lg',
-        className,
-      )}
-      data-name="text-wrapper"
-      {...rest}
-    >
-      <div
-        className="flex flex-col gap-2 items-center justify-center p-0 relative shrink-0 w-full"
-        data-name="text-group"
-      >
-        <div
-          className="flex flex-col gap-2.5 items-start justify-start p-0 relative rounded-lg shrink-0"
-          data-name="text"
-        >
-          <div className="body-sm-medium text-brand-neutral-90 text-center w-full">
-            {stadium}
-          </div>
+    <div className={cn('flex flex-col pt-2 w-full', className)} {...rest}>
+      <div className="flex flex-col items-center justify-center p-0 relative w-full">
+        <div className="body-md-medium text-usage-text-default text-center w-full">
+          경기시작 {dateTime}
         </div>
-        <div
-          className="flex flex-col gap-2.5 items-start justify-start p-0 relative rounded-lg shrink-0"
-          data-name="text"
-        >
-          <div className="body-sm-light text-brand-neutral-90 text-center w-full">
-            {dateTime}
-          </div>
+        <div className="heading-md-bold text-usage-text-default flex items-center gap-2">
+          <span>{TEAMS[homeTeam].split(' ')[0]}</span>
+          <span>vs</span>
+          <span>{TEAMS[awayTeam].split(' ')[0]}</span>
         </div>
 
         {children}
