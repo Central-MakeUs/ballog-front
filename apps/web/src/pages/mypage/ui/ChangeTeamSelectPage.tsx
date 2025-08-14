@@ -8,7 +8,7 @@ import { BackArrow } from '@/assets/BackArrow'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyTeamMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
+import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
 const isSignUpFlow = false
 

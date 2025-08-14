@@ -7,7 +7,7 @@ import { NickNameForm } from '@/features/auth/ui'
 import { useUpdateMyInfoMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
 import { useFlow } from '@/shared/lib/stackflow'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
+import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
 const ChangeNickNamePage = () => {
   const { pop } = useFlow()
