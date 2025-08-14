@@ -14,29 +14,50 @@ type Story = StoryObj<typeof HomeCard.Root>
 
 export const Default: Story = {
   render: () => (
-    <HomeCard.Root>
-      <HomeCard.MatchInfo homeTeam="LOTTE_GIANTS" awayTeam="KT_WIZ" />
-      <HomeCard.DetailInfo stadium="잠실 경기장" dateTime="2025.06.18 17:30" />
-    </HomeCard.Root>
+    <div style={{ width: 260, maxWidth: '100%' }}>
+      <HomeCard.Root>
+        <HomeCard.DetailInfo
+          dateTime="18:30"
+          homeTeam="DOOSAN_BEARS"
+          awayTeam="HANWHA_EAGLES"
+        />
+        <HomeCard.StadiumInfo stadium="JAMSIL" />
+      </HomeCard.Root>
+    </div>
   ),
 }
 
 export const HasButton: Story = {
   render: () => (
-    <HomeCard.Root>
-      <HomeCard.MatchInfo homeTeam="LOTTE_GIANTS" awayTeam="KT_WIZ" />
-      <HomeCard.DetailInfo stadium="잠실 경기장" dateTime="2025.06.18 17:30">
-        <Button>기록 시작하기</Button>
-      </HomeCard.DetailInfo>
-    </HomeCard.Root>
+    <div style={{ width: 260, maxWidth: '100%' }}>
+      <HomeCard.Root>
+        <HomeCard.DetailInfo
+          dateTime="18:30"
+          homeTeam="DOOSAN_BEARS"
+          awayTeam="HANWHA_EAGLES"
+        />
+        <HomeCard.StadiumInfo stadium="JAMSIL" />
+        <div className="w-full">
+          <Button className="w-full bg-brand-secondary-default">
+            기록 시작하기
+          </Button>
+        </div>
+      </HomeCard.Root>
+    </div>
   ),
 }
 
 export const Disabled: Story = {
   render: () => (
-    <div style={{ height: '500px' }}>
+    <div style={{ width: 260, height: '800px' }}>
       <HomeCard.Disabled>
-        <Button size="lg">기록 시작하기</Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          className="rounded-lg p-3 w-full"
+        >
+          <span className="body-md-medium">관람로그 보기</span>
+        </Button>
       </HomeCard.Disabled>
     </div>
   ),

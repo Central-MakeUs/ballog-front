@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
+    // marginRight: 23
   },
   closeButton: {
     padding: 5,
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#212121',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 3,
@@ -240,12 +241,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#212121',
     borderWidth: 3,
-    borderColor: '#000',
+    borderColor: '#fff',
   },
   placeholder: {
-    width: 60,
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   permissionText: {
     color: '#fff',

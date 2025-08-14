@@ -10,19 +10,27 @@ export const MatchCard = ({
   homeTeam,
   awayTeam,
   stadium,
-  matchesDate,
   matchesTime,
   onClick,
 }: MatchCardProps) => {
   return (
     <HomeCard.Root>
-      <HomeCard.MatchInfo homeTeam={homeTeam} awayTeam={awayTeam} />
       <HomeCard.DetailInfo
-        stadium={stadium}
-        dateTime={`${matchesDate} ${matchesTime}`}
-      >
-        <Button onClick={onClick}>기록 시작하기</Button>
-      </HomeCard.DetailInfo>
+        dateTime={matchesTime}
+        homeTeam={homeTeam}
+        awayTeam={awayTeam}
+      />
+      <HomeCard.StadiumInfo stadium={stadium} />
+
+      <div className="w-full">
+        <Button
+          variant="secondary"
+          className="w-full bg-brand-secondary-default rounded-md"
+          onClick={onClick}
+        >
+          기록 시작하기
+        </Button>
+      </div>
     </HomeCard.Root>
   )
 }

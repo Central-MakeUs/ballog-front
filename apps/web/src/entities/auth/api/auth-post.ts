@@ -28,7 +28,6 @@ export const authPost = {
     if (localStorage.getItem('accessToken')) {
       localStorage.removeItem('accessToken')
     }
-
     const response = await api
       .post('auth/login/kakao', {
         headers: {
