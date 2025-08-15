@@ -14,20 +14,25 @@ import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFini
 const HomePage: ActivityComponentType = () => {
   useFcmToken()
   useCheckSignupFinished()
-  
+
   const { data, isLoading } = useQuery(matches.today())
 
   const isEmpty = !data?.data || data.data.length === 0
 
   const HomeContent = () => {
-    if (isLoading) return <Loading text="오늘의 경기를 불러오는 중..." />
+    if (isLoading)
+      return (
+        <div className="flex items-center justify-center h-full">
+          <Loading text="오늘의 경기를 불러오는 중..." />
+        </div>
+      )
     return isEmpty ? (
       <MatchEmptySection />
     ) : (
       <MatchSection matches={data.data} />
     )
   }
-  
+
   return (
     <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>
       <HomeContent />

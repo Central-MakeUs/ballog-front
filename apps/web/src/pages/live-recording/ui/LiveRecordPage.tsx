@@ -141,7 +141,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   })
 
   if (!emotionData || !recordingData) {
-    return <Loading text="오늘의 경기를 불러오는 중..." />
+    return <Loading text="페이지 불러오는 중..." />
   }
 
   const joy = emotionData?.data.positivePercent ?? 50

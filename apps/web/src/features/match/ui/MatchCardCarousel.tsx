@@ -47,6 +47,7 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
             <CarouselItem key={index} className="basis-3/5 pl-6">
               <MatchCard
                 {...match}
+                isCenter={index === current}
                 onClick={() =>
                   replace('LiveRecord', { matchId: String(match.matchesId) })
                 }
@@ -54,15 +55,17 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-      </Carousel>
+      </Carousel> 
 
       {/* Pagination */}
       <div className="flex justify-center mt-4 gap-2 p-1 bg-usage-background-strong rounded-full w-fit mx-auto">
         {matches.map((_, index) => (
           <div
-            key={index}
+            key={index} 
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-              index === current ? 'bg-brand-neutral-70' : 'bg-brand-neutral-30'
+              index === current
+                ? 'bg-brand-neutral-white'
+                : 'bg-brand-neutral-50'
             }`}
           />
         ))}
