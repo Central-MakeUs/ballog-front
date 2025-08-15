@@ -30,7 +30,7 @@ const RecordMainContent = ({
       {/* 대시보드 카드 섹션 */}
       <div className="flex gap-4 px-4 mt-4 w-full">
         <div className="flex-1 flex flex-col gap-4">
-          <SectionHeader title="직관 횟수/승률" />
+          <SectionHeader title="관람 횟수/승률" />
           {totalCount === 0 ? (
             <IntuitionCard.Disabled />
           ) : (
@@ -63,20 +63,20 @@ export const RecordMainPage = () => {
   const { data, isLoading, error } = useQuery(queryKeys.getRecord())
 
   if (error) {
-    toast('직관 기록을 불러오는 중 오류가 발생했습니다.')
+    toast('관람 기록을 불러오는 중 오류가 발생했습니다.')
   }
 
   return (
     <AppScreen
       appBar={{
         title: (
-          <span className="text-usage-text-default body-md-bold">직관로그</span>
+          <span className="text-usage-text-default body-md-bold">관람로그</span>
         ),
       }}
     >
       <AppLayout>
         {isLoading ? (
-          <Loading text="직관 기록을 불러오는 중..." />
+          <Loading text="관람 기록을 불러오는 중..." />
         ) : (
           <RecordMainContent data={data} />
         )}

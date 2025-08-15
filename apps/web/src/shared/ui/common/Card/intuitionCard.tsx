@@ -14,8 +14,8 @@ interface DisabledIntuitionCardProps extends ComponentProps<'div'> {}
  *
  *
  * 컴포넌트 구성:
- * - `IntuitionCard.Active`: 기록된 직관 횟수와 승률 정보를 표시하는 활성 카드입니다.
- * - `IntuitionCard.Disabled`: 아직 직관 기록이 없을 때 보여주는 비활성 카드입니다.
+ * - `IntuitionCard.Active`: 기록된 관람 횟수와 승률 정보를 표시하는 활성 카드입니다.
+ * - `IntuitionCard.Disabled`: 아직 관람 기록이 없을 때 보여주는 비활성 카드입니다.
  *
  * @example 활성 상태
  * ```tsx

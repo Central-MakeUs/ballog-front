@@ -52,7 +52,7 @@ vi.stubGlobal('ResizeObserver', ResizeObserverMock)
 const mockRecordData = {
   status: 200,
   message: 'success',
-  success: '직관 기록 상세 조회 성공',
+  success: '관람 기록 상세 조회 성공',
   data: {
     matchRecordId: 1,
     matchesId: 1,
@@ -134,13 +134,13 @@ describe('RecordDetailPage', () => {
     })
   })
 
-  it('삭제 확인 모달에서 삭제 버튼을 클릭하면 직관 기록이 삭제된 후 직관 기록 메인 페이지에서 toast가 렌더링된다.', async () => {
+  it('삭제 확인 모달에서 삭제 버튼을 클릭하면 관람 기록이 삭제된 후 관람 기록 메인 페이지에서 toast가 렌더링된다.', async () => {
     render(<RecordDetailPage params={{ matchRecordId: '1' }} />)
 
     vi.mocked(recordDelete.deleteRecord).mockResolvedValue({
       status: 200,
       message: 'success',
-      success: '직관 기록 삭제 성공',
+      success: '관람 기록 삭제 성공',
       data: null,
     })
 

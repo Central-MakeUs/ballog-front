@@ -40,7 +40,7 @@ export const ImageTimeLineContent = () => {
           <p className="body-sm-light text-usage-text-subtle text-center">
             사진을 추가해
             <br />
-            나만의 직관 기록을 완성해보세요.
+            나만의 관람 기록을 완성해보세요.
           </p>
         </div>
       </RecordLogCard.Root>
