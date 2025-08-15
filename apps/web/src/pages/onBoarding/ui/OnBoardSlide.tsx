@@ -1,7 +1,5 @@
-import type React from 'react'
-
 interface OnBoardSlideProps {
-  image: React.ReactNode
+  image: string
   title: string
   subTitle: string
 }
@@ -9,7 +7,9 @@ interface OnBoardSlideProps {
 export const OnBoardSlide = ({ image, title, subTitle }: OnBoardSlideProps) => {
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="w-full px-6 flex items-center mb-6">{image}</div>
+      <div className="w-full px-6 flex items-center mb-6">
+        <img src={image} className="w-full h-auto object-contain" />
+      </div>
 
       <div className="px-6">
         <h2 className="body-lg-bold mb-2.5">{title}</h2>
