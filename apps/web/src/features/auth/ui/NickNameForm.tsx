@@ -1,8 +1,11 @@
+import { useRef, useState } from 'react'
+
 import { AUTH_MESSAGES } from '@/shared/ui/constants/messages'
 import { useNickNameForm } from '@/shared/hooks/auth/useNickNameForm'
 import type { ExtendedKyHttpError } from '@/types/api/common'
 import { ErrorMessageFactory } from '@/features/auth/ui'
 import { Button } from '@/shared/ui/common'
+import { cn } from '@/shared/lib/classnames'
 
 interface NickNameFormProps {
   nickname?: string
@@ -21,13 +24,22 @@ export const NickNameForm = ({
     initialNickname ?? '',
   )
 
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [triedSubmit, setTriedSubmit] = useState(false)
+
+  
   const handleSubmit = () => {
-    if (!validateNickname(nickname)) return
+    setTriedSubmit(true)
+    if (!validateNickname(nickname)) {
+      inputRef.current?.focus()
+      return
+    }
     onSubmit({ nickname })
   }
-
-  const isFormValid = nickname.trim() && errors.length === 0
-
+  
+  const isFormValid = Boolean(nickname.trim()) && errors.length === 0
+  const showInvalid = triedSubmit && !isFormValid
+  
   return (
     <div className="flex flex-col items-center justify-between w-full h-full px-4">
       <div className="flex flex-col items-center w-full gap-8">
@@ -35,11 +47,19 @@ export const NickNameForm = ({
 
         <div className="flex flex-col items-center w-full gap-2">
           <input
+            ref={inputRef}
             type="text"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             placeholder={AUTH_MESSAGES.nickname.placeholder}
-            className="w-full py-3 px-4 rounded-lg body-lg-bold bg-gray-700 text-center text-white mb-4 placeholder-gray-400"
+            aria-invalid={showInvalid}
+            className={cn(
+              'w-full py-3 px-4 rounded-lg body-lg-bold bg-gray-700 text-center text-white mb-4 placeholder-gray-400',
+              'focus:outline-none border-none transition-colors',
+              showInvalid
+                ? 'border-0 focus:ring-1 focus:ring-brand-red-default focus:ring-offset-0'
+                : 'border-0 focus:ring-1 focus:ring-brand-secondary-default focus:ring-offset-0',
+            )}
           />
 
           {/* 에러 메시지 노출 */}
