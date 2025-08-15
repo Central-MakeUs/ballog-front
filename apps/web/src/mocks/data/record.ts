@@ -69,49 +69,134 @@ const emotionGroupListShort: EmotionGroup[] = [
 
 export const emotionGroupList: EmotionGroup[] = [
   {
-    groupStart: '2025-08-15T14:03:00',
+    groupStart: '2025-07-28T19:04:00',
     emotionType: 'POSITIVE',
     count: 4,
   },
   {
-    groupStart: '2025-08-15T14:03:00',
+    groupStart: '2025-07-28T19:04:00',
     emotionType: 'NEGATIVE',
-    count: 9,
+    count: 4,
   },
   {
-    groupStart: '2025-08-15T14:03:00',
+    groupStart: '2025-07-28T19:05:01',
     emotionType: 'POSITIVE',
-    count: 5,
+    count: 4,
   },
   {
-    groupStart: '2025-08-15T14:03:00',
+    groupStart: '2025-07-28T19:05:01',
     emotionType: 'NEGATIVE',
-    count: 11,
+    count: 4,
   },
   {
-    groupStart: '2025-08-15T14:03:00',
+    groupStart: '2025-07-28T19:06:02',
+    emotionType: 'POSITIVE',
+    count: 54,
+  },
+  {
+    groupStart: '2025-07-28T19:06:02',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:07:03',
+    emotionType: 'POSITIVE',
+    count: 24,
+  },
+  {
+    groupStart: '2025-07-28T19:07:03',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:08:04',
+    emotionType: 'POSITIVE',
+    count: 54,
+  },
+  {
+    groupStart: '2025-07-28T19:08:04',
+    emotionType: 'NEGATIVE',
+    count: 34,
+  },
+  {
+    groupStart: '2025-07-28T19:09:05',
+    emotionType: 'POSITIVE',
+    count: 8,
+  },
+  {
+    groupStart: '2025-07-28T19:09:05',
+    emotionType: 'NEGATIVE',
+    count: 6,
+  },
+  {
+    groupStart: '2025-07-28T19:10:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:10:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:11:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:11:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:12:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:12:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:13:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:13:06',
+    emotionType: 'NEGATIVE',
+    count: 14,
+  },
+  {
+    groupStart: '2025-07-28T19:14:06',
+    emotionType: 'POSITIVE',
+    count: 2,
+  },
+  {
+    groupStart: '2025-07-28T19:14:06',
+    emotionType: 'NEGATIVE',
+    count: 41,
+  },
+  {
+    groupStart: '2025-07-28T19:15:06',
+    emotionType: 'POSITIVE',
+    count: 21,
+  },
+  {
+    groupStart: '2025-07-28T19:15:06',
+    emotionType: 'NEGATIVE',
+    count: 4,
+  },
+  {
+    groupStart: '2025-07-28T19:16:06',
     emotionType: 'POSITIVE',
     count: 22,
   },
   {
-    groupStart: '2025-08-15T14:03:00',
+    groupStart: '2025-07-28T19:16:06',
     emotionType: 'NEGATIVE',
     count: 4,
-  },
-  {
-    groupStart: '2025-08-15T14:03:00',
-    emotionType: 'POSITIVE',
-    count: 7,
-  },
-  {
-    groupStart: '2025-08-15T14:03:00',
-    emotionType: 'NEGATIVE',
-    count: 3,
-  },
-  {
-    groupStart: '2025-08-15T14:03:00',
-    emotionType: 'POSITIVE',
-    count: 51,
   },
 ]
 
