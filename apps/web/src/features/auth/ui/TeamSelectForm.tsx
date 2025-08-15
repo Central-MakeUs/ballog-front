@@ -63,7 +63,7 @@ export const TeamSelectionForm = ({
         onClick={handleSubmit}
         className="fixed bottom-10 left-4 right-4"
       >
-        {isSignUpFlow ? '시작하기' : '완료'}
+        {isSignUpFlow ? '다음' : '완료'}
       </Button>
     </div>
   )
