@@ -17,8 +17,7 @@ export const recordHandlers = [
       // 네트워크 지연 효과 추가
       delay(1000)
 
-      // const isEmpty = Math.random() > 0.7
-      const isEmpty = 0
+      const isEmpty = Math.random() > 0.7
 
       if (isEmpty) {
         return HttpResponse.json<RecordResponseDTO>({
