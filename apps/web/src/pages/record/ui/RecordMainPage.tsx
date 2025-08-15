@@ -17,13 +17,19 @@ const RecordMainContent = ({
 }: {
   data: RecordResponseDTO | undefined
 }) => {
-  const { totalCount, winRate, totalNegativeEmotionPercent, records } =
-    data?.data ?? {
-      totalCount: 0,
-      winRate: 0,
-      totalNegativeEmotionPercent: 0,
-      records: [],
-    }
+  const {
+    totalCount,
+    winRate,
+    totalNegativeEmotionPercent,
+    totalPositiveEmotionPercent,
+    records,
+  } = data?.data ?? {
+    totalCount: 0,
+    winRate: 0,
+    totalNegativeEmotionPercent: 0,
+    totalPositiveEmotionPercent: 0,
+    records: [],
+  }
 
   return (
     <>
@@ -50,7 +56,7 @@ const RecordMainContent = ({
                 },
                 {
                   name: '기뻐요',
-                  value: parseInt(totalNegativeEmotionPercent.toString()),
+                  value: parseInt(totalPositiveEmotionPercent.toString()),
                 },
               ]}
             />
