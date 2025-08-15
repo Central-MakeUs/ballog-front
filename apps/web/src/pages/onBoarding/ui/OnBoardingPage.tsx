@@ -23,6 +23,7 @@ const OnBoardingPage = () => {
 
         <Button
           className="mb-10"
+          size="lg"
           onClick={() => {
             popAll()
             replace('Login', {})
