@@ -51,17 +51,28 @@ const Active = ({
 
   const madValue = chartData.find((d) => d.name === '화나요')!.value
   const happyValue = chartData.find((d) => d.name === '기뻐요')!.value
-  
+
   const centerEmotion = madValue >= happyValue ? '화나요' : '기뻐요'
   const centerRate = centerEmotion === '화나요' ? madValue : happyValue
+
+  const progressColor =
+    centerEmotion === '화나요'
+      ? 'var(--color-brand-red-hover)'
+      : 'var(--color-brand-green-hover)'
+  const trackColor = 'var(--color-usage-background-strong)'
 
   const startAngle = madValue <= 50 ? 90 : 0
   const endAngle = madValue <= 50 ? 450 : 360
 
+  const dominantOnly = [
+    { name: 'progress', value: centerRate, fill: progressColor },
+    { name: 'rest', value: 100 - centerRate, fill: 'transparent' },
+  ]
+
   return (
     <div
       className={cn(
-        'relative flex flex-col',
+        'relative flex flex-col p-4',
         'w-full',
         'h-full',
         'justify-center items-center',
@@ -71,17 +82,38 @@ const Active = ({
       )}
       {...rest}
     >
-      <div className="relative flex justify-center items-center py-10 min-w-30 min-h-30">
+      <div className="relative flex justify-center items-center mb-3">
         <PieChart width={104} height={104}>
+          {/* 중앙 원 */}
           <Pie
-            data={chartData}
+            data={[{ value: 100, fill: trackColor }]}
             dataKey="value"
-            nameKey="name"
+            innerRadius={0}
+            outerRadius={35}
+            stroke="none"
+            isAnimationActive={false}
+          />
+          {/* 회색 트랙 */}
+          <Pie
+            data={[{ value: 100, fill: trackColor }]}
+            dataKey="value"
             innerRadius={35}
             outerRadius={52}
             startAngle={startAngle}
             endAngle={endAngle}
             stroke="none"
+            isAnimationActive={false}
+          />
+          {/* 우세 아크만 */}
+          <Pie
+            data={dominantOnly}
+            dataKey="value"
+            innerRadius={40}
+            outerRadius={52}
+            startAngle={startAngle}
+            endAngle={endAngle}
+            stroke="none"
+            isAnimationActive={false}
           />
         </PieChart>
 
@@ -93,17 +125,25 @@ const Active = ({
           pointer-events-none
         "
         >
-          <div>{centerEmotion}</div>
-          <div>{centerRate}%</div>
+          <div className="text-[23px]">{centerRate}%</div>
         </div>
       </div>
 
-      <div className="absolute top-4 left-4">
-        <AngryEmotion className="w-8 h-8" />
-      </div>
-      <div className="absolute bottom-4 right-4">
-        <JoyEmotion className="w-8 h-8" />
-      </div>
+      {centerEmotion === '화나요' ? (
+        <div className="flex flex-row justify-center items-center">
+          <AngryEmotion className="w-5 h-5" /> <span>{centerEmotion}</span>
+        </div>
+      ) : (
+        <div
+          className={cn(
+            'flex flex-row justify-center items-center py-1 w-33 rounded-md',
+            'bg-usage-background-strong',
+          )}
+        >
+          <JoyEmotion className="w-5 h-5" />
+          <span>{centerEmotion}</span>
+        </div>
+      )}
     </div>
   )
 }

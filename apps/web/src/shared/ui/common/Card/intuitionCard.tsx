@@ -45,7 +45,7 @@ const Active = ({
     {...rest}
   >
     <div className="text-center min-w-30 min-h-30">
-      <div className="body-md-medium mb-2">직관</div>
+      <div className="body-md-medium mb-2">관람</div>
       <div className="heading-md-bold">
         {matchCount} <span className="body-md-bold">회</span>
       </div>
@@ -67,7 +67,7 @@ const Disabled = ({ className, ...rest }: DisabledIntuitionCardProps) => (
     {...rest}
   >
     <div className="text-center">
-      <div className="body-md-medium mb-2">직관</div>
+      <div className="body-md-medium mb-2">관람</div>
       <div className="body-md-bold">- 회</div>
     </div>
   </div>
