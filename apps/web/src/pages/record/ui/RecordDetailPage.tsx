@@ -22,11 +22,11 @@ export const RecordDetailPage = ({
   )
 
   if (isLoading) {
-    return <Loading text="직관 기록을 불러오는 중..." />
+    return <Loading text="관람 기록을 불러오는 중..." />
   }
 
   if (error) {
-    toast('직관 기록을 불러오는 중 오류가 발생했습니다.')
+    toast('관람 기록을 불러오는 중 오류가 발생했습니다.')
   }
 
   return (

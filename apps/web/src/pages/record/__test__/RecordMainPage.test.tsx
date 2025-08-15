@@ -46,7 +46,7 @@ describe('RecordMainPage', () => {
     render(<RecordMainPage />)
   })
 
-  it('직관 기록이 없으면 Empty 컴포넌트가 렌더링된다.', () => {
+  it('관람 기록이 없으면 Empty 컴포넌트가 렌더링된다.', () => {
     vi.mocked(recordGet.getRecord).mockResolvedValue({
       status: 200,
       message: 'success',
@@ -63,11 +63,11 @@ describe('RecordMainPage', () => {
     render(<RecordMainPage />)
 
     waitFor(() =>
-      expect(screen.getByText('아직 직관 기록이 없어요!')).toBeInTheDocument(),
+      expect(screen.getByText('아직 관람 기록이 없어요!')).toBeInTheDocument(),
     )
   })
 
-  it('직관 기록이 있으면 RecordList 컴포넌트가 렌더링된다.', () => {
+  it('관람 기록이 있으면 RecordList 컴포넌트가 렌더링된다.', () => {
     vi.mocked(recordGet.getRecord).mockResolvedValue({
       status: 200,
       message: 'success',
@@ -117,14 +117,14 @@ describe('RecordMainPage', () => {
     vi.mocked(recordGet.getRecord).mockRejectedValue({
       message: 'fail',
       status: 408,
-      error: '해당 직관기록을 찾을 수 없습니다.',
+      error: '해당 관람기록을 찾을 수 없습니다.',
       code: 'RECORD001',
     })
 
     waitFor(() => {
-      expect(screen.getByText('아직 직관 기록이 없어요!')).toBeInTheDocument()
+      expect(screen.getByText('아직 관람 기록이 없어요!')).toBeInTheDocument()
       expect(screen.getByTestId('toast')).toHaveTextContent(
-        '해당 직관기록을 찾을 수 없습니다.',
+        '해당 관람기록을 찾을 수 없습니다.',
       )
     })
   })

@@ -46,7 +46,7 @@ export default function IosCameraScreen() {
     return (
       <View style={styles.permissionContainer}>
         <Text style={styles.permissionText}>
-          직관 사진을 촬영해 기록을 남기려면 카메라 접근이 필요합니다.
+          관람 사진을 촬영해 기록을 남기려면 카메라 접근이 필요합니다.
         </Text>
         <TouchableOpacity
           style={styles.permissionButton}

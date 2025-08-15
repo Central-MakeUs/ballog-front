@@ -71,7 +71,7 @@ export const recordHandlers = [
           data: recordDetail,
           status: 200,
           message: 'Success',
-          success: '직관 기록 상세 조회 성공',
+          success: '관람 기록 상세 조회 성공',
         },
         { status: 200 },
       )
@@ -82,7 +82,7 @@ export const recordHandlers = [
       {
         message: 'fail',
         status: 404,
-        error: '해당 직관기록을 찾을 수 없습니다.',
+        error: '해당 관람기록을 찾을 수 없습니다.',
         code: 'RECORD001',
       },
       { status: 404 },
@@ -108,7 +108,7 @@ export const recordHandlers = [
           data: null,
           status: 200,
           message: 'Success',
-          success: '직관 기록 삭제 성공',
+          success: '관람 기록 삭제 성공',
         },
         { status: 200 },
       )
@@ -119,7 +119,7 @@ export const recordHandlers = [
       {
         message: 'fail',
         status: 404,
-        error: '해당 직관기록을 찾을 수 없습니다.',
+        error: '해당 관람기록을 찾을 수 없습니다.',
         code: 'RECORD001',
       },
       { status: 404 },

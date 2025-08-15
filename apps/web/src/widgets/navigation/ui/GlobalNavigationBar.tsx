@@ -21,7 +21,7 @@ const NAV_ITEMS: NavItem[] = [
     activity: 'Home',
   },
   {
-    label: '직관로그',
+    label: '관람로그',
     icon: RecordGNB,
     activity: 'Record',
   },

@@ -9,7 +9,7 @@ const meta: Meta<typeof IntuitionCard.Active> = {
   argTypes: {
     matchCount: {
       control: 'number',
-      description: '직관 경기 수',
+      description: '관람 경기 수',
       defaultValue: 5,
     },
     winRate: {
