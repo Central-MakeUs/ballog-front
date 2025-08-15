@@ -65,7 +65,7 @@ describe('RecordList', () => {
     expect(screen.getByText('LG 트윈스', { exact: false })).toBeInTheDocument()
   })
 
-  it('RecordCard 컴포넌트를 클릭하면 직관 기록 상세 페이지로 이동한다.', async () => {
+  it('RecordCard 컴포넌트를 클릭하면 관람 기록 상세 페이지로 이동한다.', async () => {
     const user = userEvent.setup()
 
     render(<RecordList records={records} />)

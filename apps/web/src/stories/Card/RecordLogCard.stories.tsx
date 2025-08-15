@@ -33,7 +33,7 @@ export const NoRecord: Story = {
   render: () => (
     <RecordLogCard.Empty>
       <Button className="rounded-large px-6 bg-brand-secondary-default">
-        첫 직관 기록하기
+        첫 관람 기록하기
       </Button>
     </RecordLogCard.Empty>
   ),

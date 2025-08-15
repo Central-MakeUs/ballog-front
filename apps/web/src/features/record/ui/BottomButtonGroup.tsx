@@ -39,7 +39,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
           data-testid="delete-button"
           onClick={() =>
             openHorizontalModal({
-              heading: '이 직관로그를 정말\n삭제하시겠습니까?',
+              heading: '이 관람로그를 정말\n삭제하시겠습니까?',
               body: '삭제된 기록은 복구할 수 없습니다.',
               buttons: [
                 { label: '취소', onClick: () => {} },

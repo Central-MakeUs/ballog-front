@@ -13,7 +13,7 @@ export const RecordList = ({ records }: { records: Record[] }) => {
           className="rounded-large px-6 bg-brand-secondary-default"
           onClick={() => replace('Home', {}, { animate: false })}
         >
-          첫 직관 기록하기
+          첫 관람 기록하기
         </Button>
       </RecordLogCard.Empty>
     )
