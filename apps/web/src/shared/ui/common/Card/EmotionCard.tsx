@@ -5,9 +5,13 @@ import AngryEmotion from '@/assets/angryEmotion.svg?react'
 import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
+interface EmotionPieChartData {
+  name: '화나요' | '기뻐요'
+  value: number
+}
+
 interface ActiveEmotionCardProps extends ComponentProps<'div'> {
-  emotion: '화나요' | '기뻐요'
-  rate: number
+  data: EmotionPieChartData[]
 }
 
 interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
@@ -30,30 +34,14 @@ interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
  * <EmotionCard.Disabled />
  * ```
  */
-const Active = ({
-  emotion,
-  rate,
-  className,
-  ...rest
-}: ActiveEmotionCardProps) => {
-  const chartData = [
-    {
-      name: '화나요',
-      value: emotion === '화나요' ? rate : 100 - rate,
-      fill: 'var(--color-brand-red-hover)',
-    },
-    {
-      name: '기뻐요',
-      value: emotion === '기뻐요' ? rate : 100 - rate,
-      fill: 'var(--color-brand-green-hover)',
-    },
-  ]
+const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
+  const chartData = data
 
   const madValue = chartData.find((d) => d.name === '화나요')!.value
   const happyValue = chartData.find((d) => d.name === '기뻐요')!.value
-  
-  const centerEmotion = madValue >= happyValue ? '화나요' : '기뻐요'
-  const centerRate = centerEmotion === '화나요' ? madValue : happyValue
+
+  const centerEmotion = madValue <= happyValue ? '기뻐요' : '화나요'
+  const centerRate = centerEmotion === '기뻐요' ? happyValue : madValue
 
   const startAngle = madValue <= 50 ? 90 : 0
   const endAngle = madValue <= 50 ? 450 : 360

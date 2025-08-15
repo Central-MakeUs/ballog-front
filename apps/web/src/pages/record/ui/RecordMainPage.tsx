@@ -43,8 +43,16 @@ const RecordMainContent = ({
             <EmotionCard.Disabled />
           ) : (
             <EmotionCard.Active
-              emotion={'화나요'}
-              rate={parseInt(totalNegativeEmotionPercent.toString())}
+              data={[
+                {
+                  name: '화나요',
+                  value: parseInt(totalNegativeEmotionPercent.toString()),
+                },
+                {
+                  name: '기뻐요',
+                  value: parseInt(totalNegativeEmotionPercent.toString()),
+                },
+              ]}
             />
           )}
         </div>
