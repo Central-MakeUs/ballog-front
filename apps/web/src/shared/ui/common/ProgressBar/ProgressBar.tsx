@@ -83,7 +83,7 @@ export const ProgressBar = ({
       >
         <EmotionIconWithPercent
           emotion="joy"
-          percent={positiveEmotionPercent}
+          percent={Math.round(positiveEmotionPercent)}
         />
       </div>
       <div
@@ -110,7 +110,7 @@ export const ProgressBar = ({
       >
         <EmotionIconWithPercent
           emotion="angry"
-          percent={negativeEmotionPercent}
+          percent={Math.round(negativeEmotionPercent)}
         />
       </div>
     </div>
