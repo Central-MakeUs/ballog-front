@@ -7,11 +7,10 @@ const meta: Meta<typeof ProgressBar> = {
   component: ProgressBar,
   tags: ['autodocs'],
   argTypes: {
-    emotion: {
-      control: { type: 'radio' },
-      options: ['joy', 'angry'],
+    positiveEmotionPercent: {
+      control: { type: 'range', min: 0, max: 100, step: 1 },
     },
-    emotionPercent: {
+    negativeEmotionPercent: {
       control: { type: 'range', min: 0, max: 100, step: 1 },
     },
   },
@@ -22,8 +21,8 @@ type Story = StoryObj<typeof ProgressBar>
 
 export const JoyDominant: Story = {
   args: {
-    emotion: 'joy',
-    emotionPercent: 80,
+    positiveEmotionPercent: 80,
+    negativeEmotionPercent: 20,
   },
   decorators: [
     (Story) => (
@@ -36,8 +35,8 @@ export const JoyDominant: Story = {
 
 export const AngryDominant: Story = {
   args: {
-    emotion: 'angry',
-    emotionPercent: 75,
+    positiveEmotionPercent: 75,
+    negativeEmotionPercent: 25,
   },
   decorators: [
     (Story) => (
