@@ -16,7 +16,8 @@ export const SessionProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const accessToken = localStorage.getItem('accessToken')
+
+  const [accessToken, setAccessToken] = useState<string>('')
   const [user, setUser] = useState<UserType | null>(null)
 
   const refetchUser = async () => {
@@ -29,6 +30,10 @@ export const SessionProvider = ({
       throw error
     }
   }
+
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('accessToken') ?? "")
+  })
 
   useEffect(() => {
     if (accessToken) {
