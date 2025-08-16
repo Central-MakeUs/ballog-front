@@ -16,6 +16,7 @@ export const SessionProvider = ({
 }: {
   children: React.ReactNode
 }) => {
+  const accessToken = localStorage.getItem('accessToken')
   const [user, setUser] = useState<UserType | null>(null)
 
   const refetchUser = async () => {
@@ -30,8 +31,10 @@ export const SessionProvider = ({
   }
 
   useEffect(() => {
-    refetchUser()
-  })
+    if (accessToken) {
+      refetchUser()
+    }
+  }, [accessToken])
 
   return (
     <SessionContext.Provider value={{ user, setUser, refetchUser }}>
