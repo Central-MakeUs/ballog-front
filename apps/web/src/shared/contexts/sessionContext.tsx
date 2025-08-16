@@ -31,8 +31,8 @@ export const SessionProvider = ({
 
   useEffect(() => {
     refetchUser()
-  }, [])
-  
+  })
+
   return (
     <SessionContext.Provider value={{ user, setUser, refetchUser }}>
       {children}
