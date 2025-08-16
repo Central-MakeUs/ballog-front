@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 import { authGet } from '@/entities/auth/api'
 import type { UserType } from '@/entities/auth/model/auth.type'
@@ -18,13 +19,14 @@ export const SessionProvider = ({
 }) => {
   const accessToken = localStorage.getItem('accessToken')
   const [user, setUser] = useState<UserType | null>(null)
-
+  alert(user)
   const refetchUser = async () => {
     try {
       const data = await authGet.getUser()
       setUser(data.data)
     } catch (error) {
       setUser(null)
+      toast.error('로그인 정보가 만료되었습니다.')
       localStorage.removeItem('accessToken')
       throw error
     }
