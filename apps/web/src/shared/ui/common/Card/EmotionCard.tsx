@@ -5,9 +5,13 @@ import AngryEmotion from '@/assets/angryEmotion.svg?react'
 import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
+interface EmotionPieChartData {
+  name: '화나요' | '기뻐요'
+  value: number
+}
+
 interface ActiveEmotionCardProps extends ComponentProps<'div'> {
-  emotion: '화나요' | '기뻐요'
-  rate: number
+  data: EmotionPieChartData[]
 }
 
 interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
@@ -30,30 +34,14 @@ interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
  * <EmotionCard.Disabled />
  * ```
  */
-const Active = ({
-  emotion,
-  rate,
-  className,
-  ...rest
-}: ActiveEmotionCardProps) => {
-  const chartData = [
-    {
-      name: '화나요',
-      value: emotion === '화나요' ? rate : 100 - rate,
-      fill: 'var(--color-brand-red-hover)',
-    },
-    {
-      name: '기뻐요',
-      value: emotion === '기뻐요' ? rate : 100 - rate,
-      fill: 'var(--color-brand-green-hover)',
-    },
-  ]
+const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
+  const chartData = data
 
-  const madValue = chartData.find((d) => d.name === '화나요')!.value
-  const happyValue = chartData.find((d) => d.name === '기뻐요')!.value
+  const angryValue = chartData.find((d) => d.name === '화나요')!.value
+  const joyValue = chartData.find((d) => d.name === '기뻐요')!.value
 
-  const centerEmotion = madValue >= happyValue ? '화나요' : '기뻐요'
-  const centerRate = centerEmotion === '화나요' ? madValue : happyValue
+  const centerEmotion = angryValue >= joyValue ? '화나요' : '기뻐요'
+  const centerRate = centerEmotion === '화나요' ? angryValue : joyValue
 
   const progressColor =
     centerEmotion === '화나요'
@@ -61,8 +49,8 @@ const Active = ({
       : 'var(--color-brand-green-hover)'
   const trackColor = 'var(--color-usage-background-strong)'
 
-  const startAngle = madValue <= 50 ? 90 : 0
-  const endAngle = madValue <= 50 ? 450 : 360
+  const startAngle = angryValue <= 50 ? 90 : 0
+  const endAngle = angryValue <= 50 ? 450 : 360
 
   const dominantOnly = [
     { name: 'progress', value: centerRate, fill: progressColor },

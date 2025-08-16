@@ -5,11 +5,13 @@ import { EmotionLinearChart } from '@/entities/record/ui/EmotionLinearChart'
 import { getChartData } from '@/features/record/lib/getChartData'
 
 export const EmotionTimeLine = ({
-  emotionGroupList,
   positiveEmotionPercent,
+  negativeEmotionPercent,
+  emotionGroupList,
 }: {
-  emotionGroupList: EmotionGroup[]
   positiveEmotionPercent: number
+  negativeEmotionPercent: number
+  emotionGroupList: EmotionGroup[]
 }) => {
   const chartData = getChartData(emotionGroupList)
 
@@ -17,7 +19,10 @@ export const EmotionTimeLine = ({
     <div className="w-full mt-10 flex flex-col gap-4">
       <SectionHeader title="감정 타임라인" className="px-4" />
       <div className="flex justify-center px-4">
-        <ProgressBar emotion="joy" emotionPercent={positiveEmotionPercent} />
+        <ProgressBar
+          positiveEmotionPercent={positiveEmotionPercent}
+          negativeEmotionPercent={negativeEmotionPercent}
+        />
       </div>
       <div className="inline-block overflow-x-auto ">
         <EmotionLinearChart ChartData={chartData} />

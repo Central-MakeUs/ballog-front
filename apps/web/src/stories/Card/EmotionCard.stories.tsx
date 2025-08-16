@@ -7,16 +7,14 @@ const meta: Meta<typeof EmotionCard.Active> = {
   component: EmotionCard.Active,
   tags: ['autodocs'],
   args: {
-    emotion: '화나요',
-    rate: 50,
+    data: [
+      { name: '화나요', value: 50 },
+      { name: '기뻐요', value: 50 },
+    ],
   },
   argTypes: {
-    emotion: {
-      control: { type: 'radio' },
-      options: ['화나요', '기뻐요'],
-    },
-    rate: {
-      control: { type: 'range', min: 0, max: 100, step: 1 },
+    data: {
+      control: { type: 'object' },
     },
   },
 }
@@ -27,16 +25,22 @@ type Story = StoryObj<typeof EmotionCard.Active>
 export const Test: Story = {
   name: 'test',
   args: {
-    emotion: '화나요',
-    rate: 75,
+    data: [
+      { name: '화나요', value: 50 },
+      { name: '기뻐요', value: 50 },
+    ],
   },
 }
-
 
 export const Active_Mad: Story = {
   render: () => (
     <div style={{ height: '200px' }}>
-      <EmotionCard.Active emotion="화나요" rate={75} />
+      <EmotionCard.Active
+        data={[
+          { name: '화나요', value: 50 },
+          { name: '기뻐요', value: 50 },
+        ]}
+      />
     </div>
   ),
   name: 'Active - 화나요',
@@ -45,7 +49,12 @@ export const Active_Mad: Story = {
 export const Active_Happy: Story = {
   render: () => (
     <div style={{ height: '200px' }}>
-      <EmotionCard.Active emotion="기뻐요" rate={60} />
+      <EmotionCard.Active
+        data={[
+          { name: '화나요', value: 50 },
+          { name: '기뻐요', value: 50 },
+        ]}
+      />
     </div>
   ),
   name: 'Active - 기뻐요',

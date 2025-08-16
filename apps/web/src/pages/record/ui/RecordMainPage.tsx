@@ -17,13 +17,19 @@ const RecordMainContent = ({
 }: {
   data: RecordResponseDTO | undefined
 }) => {
-  const { totalCount, winRate, totalNegativeEmotionPercent, records } =
-    data?.data ?? {
-      totalCount: 0,
-      winRate: 0,
-      totalNegativeEmotionPercent: 0,
-      records: [],
-    }
+  const {
+    totalCount,
+    winRate,
+    totalNegativeEmotionPercent,
+    totalPositiveEmotionPercent,
+    records,
+  } = data?.data ?? {
+    totalCount: 0,
+    winRate: 0,
+    totalNegativeEmotionPercent: 0,
+    totalPositiveEmotionPercent: 0,
+    records: [],
+  }
 
   return (
     <>
@@ -43,8 +49,16 @@ const RecordMainContent = ({
             <EmotionCard.Disabled />
           ) : (
             <EmotionCard.Active
-              emotion={'화나요'}
-              rate={parseInt(totalNegativeEmotionPercent.toString())}
+              data={[
+                {
+                  name: '화나요',
+                  value: parseInt(totalNegativeEmotionPercent.toString()),
+                },
+                {
+                  name: '기뻐요',
+                  value: parseInt(totalPositiveEmotionPercent.toString()),
+                },
+              ]}
             />
           )}
         </div>

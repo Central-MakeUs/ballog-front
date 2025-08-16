@@ -1,4 +1,4 @@
-import { groupBy, pipe } from 'remeda'
+import { groupBy, mapValues, pipe } from 'remeda'
 
 import {
   type EmotionGroup,
@@ -17,19 +17,42 @@ export const getChartData = (emotionGroupList: EmotionGroup[]): ChartData[] => {
   const groupedData = pipe(
     emotionGroupList,
     groupBy((data) => formatTime(data.groupStart)),
+    mapValues((timeGroup) => {
+      const emotionTimeGroup = timeGroup.reduce(
+        (acc, item) => {
+          acc[item.emotionType] = {
+            ...acc[item.emotionType],
+            count: acc[item.emotionType].count + item.count,
+          }
+          return acc
+        },
+        {
+          POSITIVE: {
+            groupStart: '',
+            emotionType: 'POSITIVE',
+            count: 0,
+          },
+          NEGATIVE: {
+            groupStart: '',
+            emotionType: 'NEGATIVE',
+            count: 0,
+          },
+        } as Record<EmotionType, EmotionGroup>,
+      )
+
+      return emotionTimeGroup
+    }),
   )
 
   // 시간대별로 emotion Type 선정
   const parseData = Object.entries(groupedData).map((item) => {
-    const positiveData = item[1].find((data) => data.emotionType === 'POSITIVE')
-    const negativeData = item[1].find((data) => data.emotionType === 'NEGATIVE')
+    const positiveCount = item[1].POSITIVE.count
+    const negativeCount = item[1].NEGATIVE.count
 
-    const positiveCount = positiveData?.count ?? 0
-    const negativeCount = negativeData?.count ?? 0
     const totalCount = positiveCount + negativeCount
 
     // positive 수가 negative 초과 시
-    if (positiveCount > negativeCount) {
+    if (positiveCount >= negativeCount) {
       return {
         time: item[0],
         percent: parseFloat(((positiveCount / totalCount) * 100).toFixed(0)),
