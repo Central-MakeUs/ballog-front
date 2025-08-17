@@ -1,9 +1,9 @@
-import { Pie, PieChart } from 'recharts'
 import type { ComponentProps } from 'react'
 
 import AngryEmotion from '@/assets/angryEmotion.svg?react'
 import JoyEmotion from '@/assets/joyEmotion.svg?react'
 import { cn } from '@/shared/lib/classnames'
+import { EmotionDonutChart } from '@/shared/ui/common/Card/EmotionDonutChart'
 
 interface EmotionPieChartData {
   name: '화나요' | '기뻐요'
@@ -52,11 +52,6 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
   const startAngle = angryValue <= 50 ? 90 : 0
   const endAngle = angryValue <= 50 ? 450 : 360
 
-  const dominantOnly = [
-    { name: 'progress', value: centerRate, fill: progressColor },
-    { name: 'rest', value: 100 - centerRate, fill: 'transparent' },
-  ]
-
   return (
     <div
       className={cn(
@@ -70,52 +65,18 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
       )}
       {...rest}
     >
-      <div className="relative flex justify-center items-center mb-3">
-        <PieChart width={104} height={104}>
-          {/* 중앙 원 */}
-          <Pie
-            data={[{ value: 100, fill: trackColor }]}
-            dataKey="value"
-            innerRadius={0}
-            outerRadius={35}
-            stroke="none"
-            isAnimationActive={false}
-          />
-          {/* 회색 트랙 */}
-          <Pie
-            data={[{ value: 100, fill: trackColor }]}
-            dataKey="value"
-            innerRadius={35}
-            outerRadius={52}
-            startAngle={startAngle}
-            endAngle={endAngle}
-            stroke="none"
-            isAnimationActive={false}
-          />
-          {/* 우세 아크만 */}
-          <Pie
-            data={dominantOnly}
-            dataKey="value"
-            innerRadius={40}
-            outerRadius={52}
-            startAngle={startAngle}
-            endAngle={endAngle}
-            stroke="none"
-            isAnimationActive={false}
-          />
-        </PieChart>
-
-        <div
-          className="
-          absolute inset-0
-          flex flex-col items-center justify-center
-          body-sm-bold text-brand-neutral-white
-          pointer-events-none
-        "
-        >
-          <div className="text-[23px]">{centerRate}%</div>
-        </div>
-      </div>
+      <EmotionDonutChart
+        className="mb-3"
+        size={104}
+        trackOuter={52}
+        progressInner={40}
+        progressOuter={52}
+        centerRate={centerRate}
+        progressColor={progressColor}
+        trackColor={trackColor}
+        startAngle={startAngle}
+        endAngle={endAngle}
+      />
 
       {centerEmotion === '화나요' ? (
         <div className="flex flex-row justify-center items-center">
