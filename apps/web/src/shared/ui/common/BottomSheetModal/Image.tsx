@@ -8,7 +8,6 @@ interface ImageProps extends ComponentProps<'div'> {
   imgClassName?: string
   children?: ReactNode
   /** html-to-image용 CORS (S3 등에서 ACAO 열려 있어야 함) */
-  crossOrigin?: 'anonymous' | 'use-credentials'
   fit?: 'cover' | 'contain'
 }
 
@@ -38,7 +37,6 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
         <img
           src={src}
           alt={alt}
-          crossOrigin={crossOrigin}
           loading="lazy"
           className={cn(
             'w-full h-full',

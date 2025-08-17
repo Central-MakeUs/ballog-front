@@ -8,7 +8,7 @@ interface InfoProps extends ComponentProps<'div'> {
   awayTeam: TeamKey
   stadium: string
   date: string
-  result: 'WIN' | 'LOSE' | 'DRAW'
+  result: 'WIN' | 'LOSE' | 'DRAW' | null
 }
 
 export const Info = ({
@@ -37,8 +37,10 @@ export const Info = ({
       className={cn('relative p-6 gap-1 flex flex-col', className)}
       {...rest}
     >
-      <p className={cn('body-sm-bold', fontColor)}>{badgeText}</p>
-      <p className="body-lg-bold text-usage-text-default">
+      <p className={cn('body-sm-bold', fontColor, !result && 'invisible')}>
+        {badgeText}
+      </p>
+      <p className="body-lg-bold text-usage-text-default">  
         {TEAMS[homeTeam]} <span className="mx-2">vs</span> {TEAMS[awayTeam]}
       </p>
       <p className="body-sm-light text-usage-text-subtle">

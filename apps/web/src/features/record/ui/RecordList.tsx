@@ -36,7 +36,7 @@ export const RecordList = ({ records }: { records: Record[] }) => {
             awayTeam={record.awayTeam}
             stadium={'잠실야구장'}
             date={record.matchDate}
-            result={record.result ?? 'DRAW'}
+            result={record.result}
           />
           <RecordLogCard.Action />
         </RecordLogCard.Root>

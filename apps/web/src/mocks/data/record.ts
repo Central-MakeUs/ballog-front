@@ -226,7 +226,7 @@ export const record: {
       matchTime: '10:30',
       userId: 1,
       watchCnt: 3,
-      result: 'WIN',
+      result: null,
       baseballTeam: 'LG_TWINS',
     },
   ],
