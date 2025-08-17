@@ -1,7 +1,8 @@
 import { Button } from '@/shared/ui/common'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useModal } from '@/shared/hooks/modal/useModal'
-import CheckIcon from '@/assets/checkIcon.svg'
+
+import { SuccessLottie } from './SuccessLottie'
 
 export const EndRecordingButton = () => {
   const { replace } = useFlow()
@@ -11,55 +12,15 @@ export const EndRecordingButton = () => {
   const leavePage = () => {
     setTimeout(() => {
       replace('Record', {})
-    }, 1000)
+    }, 3000)
 
     openImageModal({
       heading: '기록이 완료되었어요!',
-      imgSrc: CheckIcon,
+      renderContent: () => (
+        <SuccessLottie onComplete={() => replace('Record', {})} />
+      ),
     })
   }
-
-  // const { mutate } = useMutation({
-  //   mutationFn: ({
-  //     result,
-  //     matchRecordId,
-  //   }: {
-  //     result: MatchResult
-  //     matchRecordId: number
-  //   }) => recordingPatch.patchRecording(result, matchRecordId),
-  //   onSuccess: () => {
-  //     leavePage()
-  //   },
-  //   onError: () => {
-  //     close()
-  //     toast("기록 저장에 실패했습니다")
-  //   }
-  // })
-
-  // 두번째 모달
-  // const selectMatchResult = () => {
-  //   openVerticalModal({
-  //     heading: '경기 결과를 선택해주세요.',
-  //     buttons: [
-  //       {
-  //         label: '승리',
-  //         onClick: () => mutate({ result: 'WIN', matchRecordId }),
-  //       },
-  //       {
-  //         label: '패배',
-  //         onClick: () => mutate({ result: 'LOSS', matchRecordId }),
-  //       },
-  //       {
-  //         label: '무승부',
-  //         onClick: () => mutate({ result: 'DRAW', matchRecordId }),
-  //       },
-  //       {
-  //         label: '건너뛰기',
-  //         onClick: () => mutate({ result: 'SKIP', matchRecordId }),
-  //       },
-  //     ],
-  //   })
-  // }
 
   // 첫 번째 모달
   const confirmEndRecord = () => {
