@@ -63,22 +63,32 @@ export const EmotionDonutChart = ({
         />
       </PieChart>
 
-      {centerTitle && (
-        <div className="body-sm-bold text-brand-neutral-white mb-0.5">
-          {centerTitle}
-        </div>
-      )}
-
-      <div
-        className="
+      {centerTitle ? (
+        <div
+          className="
           absolute inset-0
           flex flex-col items-center justify-center
           body-sm-bold text-brand-neutral-white
           pointer-events-none
         "
-      >
-        <div className="text-[23px]">{centerRate}%</div>
-      </div>
+        >
+          <div className="body-sm-bold text-brand-neutral-white mb-0.5">
+            {centerTitle}
+          </div>
+          <div className="text-[23px]">{centerRate}%</div>
+        </div>
+      ) : (
+        <div
+          className="
+          absolute inset-0
+          flex flex-col items-center justify-center
+          body-sm-bold text-brand-neutral-white
+          pointer-events-none
+        "
+        >
+          <div className="text-[23px]">{centerRate}%</div>
+        </div>
+      )}
     </div>
   )
 }

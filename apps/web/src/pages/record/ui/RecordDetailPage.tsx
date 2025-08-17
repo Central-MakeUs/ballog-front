@@ -62,7 +62,19 @@ export const RecordDetailPage = ({
             negativeEmotionPercent={data?.data.negativeEmotionPercent ?? 0}
             emotionGroupList={data?.data.emotionGroupList ?? []}
           />
-          <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} />
+          <BottomButtonGroup
+            recordId={data?.data.matchRecordId ?? 0}
+             data={[
+                {
+                  name: '화나요',
+                  value: parseInt((data?.data.negativeEmotionPercent ?? 0).toString()),
+                },
+                {
+                  name: '기뻐요',
+                  value: parseInt((data?.data.positiveEmotionPercent ?? 0).toString()),
+                },
+              ]}
+          />
         </AppLayout>
       </ImageContextProvider>
     </AppScreen>

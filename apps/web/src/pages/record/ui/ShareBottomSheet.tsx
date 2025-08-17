@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import * as htmlToImage from 'html-to-image'
 import { BottomSheet } from '@stackflow/plugin-basic-ui'
 import {
   createWebBridge,
@@ -9,14 +10,25 @@ import { toast } from 'sonner'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { useFlow } from '@/shared/lib/stackflow'
+import { EmotionDonutChart } from '@/shared/ui/common/Card/EmotionDonutChart'
+
+interface EmotionPieChartData {
+  name: '화나요' | '기뻐요'
+  value: number
+}
 
 export const ShareBottomSheet = ({
   params,
 }: {
-  params: { imageUrl: string }
+  params: { imageUrl: string; chartData: EmotionPieChartData[] }
 }) => {
   const { pop } = useFlow()
   const bridge = createWebBridge()
+
+  const composeRef = useRef<HTMLDivElement>(null)
+  const hasExportedRef = useRef(false)
+
+  const { chartData } = params
 
   const handleImageDownload = () => {
     if (bridge.isRNEnvironment()) {
@@ -60,6 +72,40 @@ export const ShareBottomSheet = ({
     )
   }, [])
 
+  const angryValue = chartData.find((d) => d.name === '화나요')!.value
+  const joyValue = chartData.find((d) => d.name === '기뻐요')!.value
+
+  const centerEmotion = angryValue >= joyValue ? '화나요' : '기뻐요'
+  const centerRate = centerEmotion === '화나요' ? angryValue : joyValue
+
+  const progressColor =
+    centerEmotion === '화나요'
+      ? 'var(--color-brand-red-hover)'
+      : 'var(--color-brand-green-hover)'
+  const trackColor = 'var(--color-usage-background-strong)'
+
+  const startAngle = angryValue <= 50 ? 90 : 0
+  const endAngle = angryValue <= 50 ? 450 : 360
+
+  const exportComposedPng = async () => {
+    if (!composeRef.current) return
+    try {
+      const dataUrl = await htmlToImage.toPng(composeRef.current, {
+        cacheBust: true,
+        pixelRatio: 3, // 선명도 (2~3 권장, 너무 크면 메모리 터짐)
+        // backgroundColor: '#000',   // 필요 시 배경 강제
+      })
+
+      // 웹 브라우저 다운로드
+      const a = document.createElement('a')
+      a.href = dataUrl
+      a.download = 'ballog-share.png'
+      a.click()
+    } catch {
+      toast.error('이미지 합성 실패')
+    }
+  }
+
   return (
     <BottomSheet data-testid="share-bottom-sheet">
       <BottomSheetModal.Root
@@ -71,11 +117,29 @@ export const ShareBottomSheet = ({
         dismissible={true}
       >
         <BottomSheetModal.Text heading="사진 공유하기" />
-        <BottomSheetModal.Image
-          className="rounded-md"
-          src={params.imageUrl}
-          data-testid="share-image"
-        />
+        <div ref={composeRef}>
+          <BottomSheetModal.Image
+            className="rounded-md"
+            src={params.imageUrl}
+            data-testid="share-image"
+          >
+            {/* 좌상단 워터마크(도넛) */}
+            <div className="absolute top-4 left-4">
+              <EmotionDonutChart
+                size={87}
+                trackOuter={43}
+                progressInner={28}
+                progressOuter={43}
+                startAngle={startAngle}
+                endAngle={endAngle}
+                centerRate={centerRate}
+                progressColor={progressColor}
+                trackColor={trackColor}
+                centerTitle={centerEmotion}
+              />
+            </div>
+          </BottomSheetModal.Image>
+        </div>
         <BottomSheetModal.Buttons
           buttons={[
             { label: '이미지 저장', onClick: handleImageDownload },

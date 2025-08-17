@@ -9,7 +9,18 @@ import { useFlow } from '@/shared/lib/stackflow'
 import { useImageContext } from '@/features/record/hooks/useImageContext'
 import { recordDelete } from '@/entities/record/api/record-delete'
 
-export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
+interface EmotionPieChartData {
+  name: '화나요' | '기뻐요'
+  value: number
+}
+
+export const BottomButtonGroup = ({
+  recordId,
+  data,
+}: {
+  recordId: number
+  data: EmotionPieChartData[]
+}) => {
   const { openHorizontalModal } = useModal()
   const { images } = useImageContext()
   const { push, replace } = useFlow()
@@ -67,6 +78,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
             } else {
               push('ShareBottomSheet', {
                 imageUrl: images[0].imageUrl,
+                chartData: data
               })
             }
           }}
