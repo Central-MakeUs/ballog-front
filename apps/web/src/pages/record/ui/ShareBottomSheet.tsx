@@ -15,6 +15,7 @@ import type { RecordDetailResponse } from '@/entities/record/model/record.type'
 import { Chip } from '@/shared/ui/common/Chip/Chip'
 import AngryEmotion from '@/assets/angryEmotionNoShadow.svg?react'
 import JoyEmotion from '@/assets/joyEmotionNoShadow.svg?react'
+import { TEAMS } from '@/shared/constants/teams'
 
 interface EmotionPieChartData {
   name: '화나요' | '기뻐요'
@@ -167,11 +168,11 @@ export const ShareBottomSheet = ({
       >
         <BottomSheetModal.Text heading="사진 공유하기" />
         <div ref={composeRef}>
-          <div className="flex flex-col px-6 pt-5 pb-4 bg-brand-neutral-90 rounded-t-md items-center">
+          <div className="flex flex-col py-4 bg-usage-background-subtle body-md-bold  rounded-t-md items-center">
             <div className="body-lg-bold">
-              {recordData.homeTeam} vs {recordData.awayTeam}
+              {TEAMS[recordData.homeTeam]} vs {TEAMS[recordData.awayTeam]}
             </div>
-            <div className="mt-1 caption-md text-brand-neutral-40">
+            <div className="mt-1 text-usage-text-subtle body-sm-light">
               {recordData.stadium} | {recordData.matchDate}
             </div>
           </div>
