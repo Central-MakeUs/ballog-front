@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ComponentType } from 'react'
+import { useEffect, useRef } from 'react'
 import * as htmlToImage from 'html-to-image'
 import { BottomSheet } from '@stackflow/plugin-basic-ui'
 import {
@@ -17,6 +17,7 @@ import {
   ResultChip,
   ResultEmotion,
 } from '@/pages/record/ui/BottomSheetElements'
+import { useEmotionChart } from '@/shared/lib/calculateEmotionChart'
 
 interface EmotionPieChartData {
   name: '화나요' | '기뻐요'
@@ -38,6 +39,15 @@ export const ShareBottomSheet = ({
   const composeRef = useRef<HTMLDivElement>(null)
 
   const { chartData, recordData } = params
+
+  const {
+    centerEmotion,
+    centerRate,
+    progressColor,
+    trackColor,
+    startAngle,
+    endAngle,
+  } = useEmotionChart(chartData)
 
   const composeShareImage = async (): Promise<string> => {
     const node = composeRef.current
@@ -93,21 +103,6 @@ export const ShareBottomSheet = ({
       },
     )
   }, [])
-
-  const angryValue = chartData.find((d) => d.name === '화나요')!.value
-  const joyValue = chartData.find((d) => d.name === '기뻐요')!.value
-
-  const centerEmotion = angryValue >= joyValue ? '화나요' : '기뻐요'
-  const centerRate = centerEmotion === '화나요' ? angryValue : joyValue
-
-  const progressColor =
-    centerEmotion === '화나요'
-      ? 'var(--color-brand-red-hover)'
-      : 'var(--color-brand-green-hover)'
-  const trackColor = 'var(--color-usage-background-strong)'
-
-  const startAngle = angryValue <= 50 ? 90 : 0
-  const endAngle = angryValue <= 50 ? 450 : 360
 
   return (
     <BottomSheet data-testid="share-bottom-sheet">
