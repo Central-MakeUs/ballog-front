@@ -249,8 +249,8 @@ export const record: {
       defaultImageUrl: null,
       imageList: [
         {
-          imageUrl: 
-            'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/a5ca9d7f-3514-41b7-9554-cf0de905e48a.png',
+          imageUrl: mock,
+            // 'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/a5ca9d7f-3514-41b7-9554-cf0de905e48a.png',
           createdAt: '2025-07-13T14:09:51.386663',
         },
         {
@@ -278,8 +278,8 @@ export const record: {
       defaultImageUrl: null,
       imageList: [
         {
-          imageUrl: 
-            'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/sample-image-1.jpg',
+          imageUrl: mock,
+            // 'https://ballog-bucket.s3.ap-northeast-2.amazonaws.com/images/sample-image-1.jpg',
           createdAt: '2025-07-08T11:15:30.123456',
         },
       ],

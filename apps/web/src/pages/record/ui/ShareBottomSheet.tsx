@@ -12,10 +12,11 @@ import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { useFlow } from '@/shared/lib/stackflow'
 import { EmotionDonutChart } from '@/shared/ui/common/Card/EmotionDonutChart'
 import type { RecordDetailResponse } from '@/entities/record/model/record.type'
-import { Chip } from '@/shared/ui/common/Chip/Chip'
-import AngryEmotion from '@/assets/angryEmotionNoShadow.svg?react'
-import JoyEmotion from '@/assets/joyEmotionNoShadow.svg?react'
 import { TEAMS } from '@/shared/constants/teams'
+import {
+  ResultChip,
+  ResultEmotion,
+} from '@/pages/record/ui/BottomSheetElements'
 
 interface EmotionPieChartData {
   name: '화나요' | '기뻐요'
@@ -108,47 +109,6 @@ export const ShareBottomSheet = ({
   const startAngle = angryValue <= 50 ? 90 : 0
   const endAngle = angryValue <= 50 ? 450 : 360
 
-  const resultChipMap: Record<
-    NonNullable<RecordDetailResponse['result']>,
-    { variant: 'red' | 'green' | 'secondary'; label: string }
-  > = {
-    LOSE: { variant: 'red', label: '패배' },
-    WIN: { variant: 'green', label: '승리' },
-    DRAW: { variant: 'secondary', label: '무승부' },
-  }
-
-  const renderResultChip = (result: RecordDetailResponse['result']) => {
-    if (!result) return null
-
-    const chip = resultChipMap[result]
-    if (!chip) return null
-    return (
-      <div className="absolute top-8 right-6 rotate-[18.51deg]">
-        <Chip variant={chip.variant} state="default">
-          {chip.label}
-        </Chip>
-      </div>
-    )
-  }
-
-  const resultEmotionMap: Record<'WIN' | 'LOSE', ComponentType> = {
-    WIN: JoyEmotion,
-    LOSE: AngryEmotion,
-  }
-
-  const renderResultEmotion = (result: RecordDetailResponse['result']) => {
-    if (!result) return null
-
-    const EmotionComp =
-      resultEmotionMap[result as keyof typeof resultEmotionMap]
-    if (!EmotionComp) return null
-    return (
-      <div className="absolute bottom-8 right-6">
-        <EmotionComp />
-      </div>
-    )
-  }
-
   return (
     <BottomSheet data-testid="share-bottom-sheet">
       <BottomSheetModal.Root
@@ -191,10 +151,16 @@ export const ShareBottomSheet = ({
             </div>
 
             {/* 경기 결과 칩 */}
-            {renderResultChip(recordData.result)}
+            <ResultChip
+              result={recordData.result}
+              className="top-8 right-6 rotate-[18.51deg]"
+            />
 
             {/* 감정 이모지 */}
-            {renderResultEmotion(recordData.result)}
+            <ResultEmotion
+              result={recordData.result}
+              className="bottom-8 right-6"
+            />
           </BottomSheetModal.Image>
         </div>
         <BottomSheetModal.Buttons
