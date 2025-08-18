@@ -166,8 +166,14 @@ export const ShareBottomSheet = ({
                 try {
                   const composedImage = await composeShareImage()
                   handleImageDownload(composedImage)
-                } catch {
+                } catch (error) {
                   toast.error('이미지 저장 실패')
+                  window.ReactNativeWebView?.postMessage(
+                    JSON.stringify({
+                      eventName: 'SEND_IMAGE_ECHO',
+                      payload: `${error}`,
+                    }),
+                  )
                 }
               },
             },
