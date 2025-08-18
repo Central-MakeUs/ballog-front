@@ -11,6 +11,8 @@ import { toast } from 'sonner'
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { useFlow } from '@/shared/lib/stackflow'
 import { EmotionDonutChart } from '@/shared/ui/common/Card/EmotionDonutChart'
+import type { RecordDetailResponse } from '@/entities/record/model/record.type'
+import { Chip } from '@/shared/ui/common/Chip/Chip'
 
 interface EmotionPieChartData {
   name: '화나요' | '기뻐요'
@@ -20,7 +22,11 @@ interface EmotionPieChartData {
 export const ShareBottomSheet = ({
   params,
 }: {
-  params: { imageUrl: string; chartData: EmotionPieChartData[] }
+  params: {
+    imageUrl: string
+    chartData: EmotionPieChartData[]
+    recordData: RecordDetailResponse
+  }
 }) => {
   const { pop } = useFlow()
   const bridge = createWebBridge()
@@ -28,7 +34,7 @@ export const ShareBottomSheet = ({
   const composeRef = useRef<HTMLDivElement>(null)
   const hasExportedRef = useRef(false)
 
-  const { chartData } = params
+  const { chartData, recordData } = params
 
   const handleImageDownload = () => {
     if (bridge.isRNEnvironment()) {
@@ -106,6 +112,29 @@ export const ShareBottomSheet = ({
     }
   }
 
+  const resultChipMap: Record<
+    NonNullable<RecordDetailResponse['result']>,
+    { variant: 'red' | 'green' | 'secondary'; label: string }
+  > = {
+    LOSE: { variant: 'red', label: '패배' },
+    WIN: { variant: 'green', label: '승리' },
+    DRAW: { variant: 'secondary', label: '무승부' },
+  }
+
+  const renderResultChip = (result: RecordDetailResponse['result']) => {
+    if (!result) return null
+
+    const chip = resultChipMap[result]
+    if (!chip) return null
+    return (
+      <div className="absolute top-8 right-6 rotate-[18.51deg]">
+        <Chip variant={chip.variant} state="default">
+          {chip.label}
+        </Chip>
+      </div>
+    )
+  }
+
   return (
     <BottomSheet data-testid="share-bottom-sheet">
       <BottomSheetModal.Root
@@ -123,7 +152,8 @@ export const ShareBottomSheet = ({
             src={params.imageUrl}
             data-testid="share-image"
           >
-            {/* 좌상단 워터마크(도넛) */}
+
+            {/* 감정 도넛 */}
             <div className="absolute top-4 left-4">
               <EmotionDonutChart
                 size={87}
@@ -138,6 +168,10 @@ export const ShareBottomSheet = ({
                 centerTitle={centerEmotion}
               />
             </div>
+
+            {/* 경기 결과 칩 */}
+            {renderResultChip(recordData.result)}
+
           </BottomSheetModal.Image>
         </div>
         <BottomSheetModal.Buttons

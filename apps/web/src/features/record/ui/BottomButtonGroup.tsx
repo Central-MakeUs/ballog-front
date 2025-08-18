@@ -8,6 +8,7 @@ import { useModal } from '@/shared/hooks/modal/useModal'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useImageContext } from '@/features/record/hooks/useImageContext'
 import { recordDelete } from '@/entities/record/api/record-delete'
+import type { RecordDetailResponse } from '@/entities/record/model/record.type'
 
 interface EmotionPieChartData {
   name: '화나요' | '기뻐요'
@@ -16,10 +17,12 @@ interface EmotionPieChartData {
 
 export const BottomButtonGroup = ({
   recordId,
-  data,
+  emotionData,
+  recordData,
 }: {
   recordId: number
-  data: EmotionPieChartData[]
+  emotionData: EmotionPieChartData[]
+  recordData: RecordDetailResponse
 }) => {
   const { openHorizontalModal } = useModal()
   const { images } = useImageContext()
@@ -78,7 +81,8 @@ export const BottomButtonGroup = ({
             } else {
               push('ShareBottomSheet', {
                 imageUrl: images[0].imageUrl,
-                chartData: data
+                chartData: emotionData,
+                recordData,
               })
             }
           }}
