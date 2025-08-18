@@ -13,6 +13,20 @@ import { Alert } from 'react-native'
 
 const EXPO_PUBLIC_FACEBOOK_APP_ID = process.env.EXPO_PUBLIC_FACEBOOK_APP_ID
 
+// 합성한 이미지 파싱 핸들러
+const parseDataUrl = (imgUrl: string) => {
+  const m = imgUrl.match(/^data:(image\/[\w+.-]+);base64,(.*)$/)
+  if (!m) throw new Error('invalid dataURL')
+  const [, mime, base64] = m
+  const ext =
+    mime === 'image/jpeg' || mime === 'image/jpg'
+      ? 'jpg'
+      : mime === 'image/webp'
+        ? 'webp'
+        : 'png'
+  return { mime, base64, ext }
+}
+
 export const createImageHandler = (bridge: AppBridge) => ({
   PICK_IMAGE: async () => {
     console.log('RN: 이미지 선택 요청 처리')
@@ -64,7 +78,9 @@ export const createImageHandler = (bridge: AppBridge) => ({
 
   DOWNLOAD_IMAGE: async (payload?: ImageDownloadPayload) => {
     if (!payload) return
-    console.log('RN: 이미지 다운로드 요청 처리', payload)
+    let fileUri: string | undefined
+
+    console.log('RN: 이미지 다운로드 요청 처리')
 
     try {
       // 미디어 라이브러리 권한 요청
@@ -77,31 +93,22 @@ export const createImageHandler = (bridge: AppBridge) => ({
         return
       }
 
+      const { base64, ext } = parseDataUrl(payload.imageUrl)
+
       // 파일명 생성 (없으면 기본값 사용)
-      const fileName = `ballog_image_${Date.now()}.jpg`
+      const fileName = `ballog_image_${Date.now()}.${ext}`
 
       // 임시 파일 경로 생성
       const customDir = `${FileSystem.documentDirectory}ballog-images/`
       await FileSystem.makeDirectoryAsync(customDir, { intermediates: true })
-      const fileUri = `${customDir}${fileName}`
+      fileUri = `${customDir}${fileName}`
 
-      // S3 URL에서 이미지를 로컬로 다운로드
-      const downloadResult = await FileSystem.downloadAsync(
-        payload.imageUrl,
-        fileUri,
-      )
+      await FileSystem.writeAsStringAsync(fileUri, base64, {
+        encoding: FileSystem.EncodingType.Base64,
+      })
 
-      if (!downloadResult.uri) {
-        throw new Error('이미지 다운로드 실패')
-      }
+      await MediaLibrary.saveToLibraryAsync(fileUri)
 
-      // 다운로드된 로컬 파일을 갤러리에 저장
-      const asset = await MediaLibrary.saveToLibraryAsync(downloadResult.uri)
-
-      // 임시 파일 삭제
-      await FileSystem.deleteAsync(fileUri, { idempotent: true })
-
-      console.log('이미지 저장 완료:', asset)
       bridge.send(POST_MESSAGE_EVENT.IMAGE_DOWNLOAD_RESPONSE, {
         message: MESSAGE_STATUS.DOWNLOAD_COMPLETED,
       })
@@ -110,39 +117,39 @@ export const createImageHandler = (bridge: AppBridge) => ({
       bridge.send(POST_MESSAGE_EVENT.IMAGE_DOWNLOAD_RESPONSE, {
         message: MESSAGE_STATUS.DOWNLOAD_FAILED,
       })
+    } finally {
+      // 임시 파일 정리
+      if (fileUri) {
+        try {
+          await FileSystem.deleteAsync(fileUri, { idempotent: true })
+        } catch {}
+      }
     }
   },
 
   SHARE_TO_INSTAGRAM_STORY: async (payload?: InstagramSharePayload) => {
     if (!payload) return
-    console.log('RN: 인스타그램 스토리 공유 요청 처리', payload)
+    let fileUri: string | undefined
+
+    console.log('RN: 인스타그램 스토리 공유 요청 처리')
 
     try {
-      const fileName = `ballog_share_${Date.now()}.jpg`
+      const { base64, ext } = parseDataUrl(payload.imageUrl)
+
+      const fileName = `ballog_share_${Date.now()}.${ext}`
+
       const customDir = `${FileSystem.documentDirectory}ballog-temp/`
       await FileSystem.makeDirectoryAsync(customDir, { intermediates: true })
-      const fileUri = `${customDir}${fileName}`
+      fileUri = `${customDir}${fileName}`
 
-      // S3 URL에서 이미지를 로컬로 다운로드
-      const downloadResult = await FileSystem.downloadAsync(
-        payload.imageUrl,
-        fileUri,
-      )
-
-      if (!downloadResult.uri) {
-        throw new Error('이미지 다운로드 실패')
-      }
-
-      // 파일 존재 확인
-      const fileInfo = await FileSystem.getInfoAsync(downloadResult.uri)
-      if (!fileInfo.exists) {
-        throw new Error('다운로드된 파일이 존재하지 않습니다')
-      }
+      await FileSystem.writeAsStringAsync(fileUri, base64, {
+        encoding: FileSystem.EncodingType.Base64,
+      })
 
       const shareOptions = {
         social: Social.InstagramStories,
         appId: EXPO_PUBLIC_FACEBOOK_APP_ID ?? '',
-        backgroundImage: downloadResult.uri, // file:// 제거
+        backgroundImage: fileUri,
         backgroundBottomColor: '#837DF4',
         backgroundTopColor: '#906df4',
       }
@@ -155,16 +162,6 @@ export const createImageHandler = (bridge: AppBridge) => ({
       })
     } catch (error) {
       console.error('RN: 인스타그램 스토리 공유 중 오류:', error)
-
-      // 임시 파일 정리
-      try {
-        const fileName = `ballog_share_${Date.now()}.jpg`
-        const customDir = `${FileSystem.documentDirectory}ballog-temp/`
-        const fileUri = `${customDir}${fileName}`
-        await FileSystem.deleteAsync(fileUri, { idempotent: true })
-      } catch (cleanupError) {
-        console.error('임시 파일 정리 실패:', cleanupError)
-      }
 
       if (error instanceof Error && error.message.includes('not installed')) {
         // 인스타그램이 설치되지 않은 경우
@@ -184,6 +181,13 @@ export const createImageHandler = (bridge: AppBridge) => ({
         // bridge.send(POST_MESSAGE_EVENT.INSTAGRAM_SHARE_RESPONSE, {
         //   message: MESSAGE_STATUS.SHARE_FAILED,
         // })
+      }
+    } finally {
+      // 임시 파일 정리
+      if (fileUri) {
+        try {
+          await FileSystem.deleteAsync(fileUri, { idempotent: true })
+        } catch {}
       }
     }
   },

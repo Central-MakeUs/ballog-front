@@ -35,22 +35,34 @@ export const ShareBottomSheet = ({
   const bridge = createWebBridge()
 
   const composeRef = useRef<HTMLDivElement>(null)
-  const hasExportedRef = useRef(false)
 
   const { chartData, recordData } = params
 
-  const handleImageDownload = () => {
+  const composeShareImage = async (): Promise<string> => {
+    const node = composeRef.current
+    if (!node) throw new Error('compose target not found')
+
+    await (document.fonts?.ready ?? Promise.resolve())
+
+    const dataUrl = await htmlToImage.toPng(node, {
+      cacheBust: true,
+      pixelRatio: 3,
+    })
+    return dataUrl
+  }
+
+  const handleImageDownload = (composedImage: string) => {
     if (bridge.isRNEnvironment()) {
       bridge.send(POST_MESSAGE_EVENT.DOWNLOAD_IMAGE, {
-        imageUrl: params.imageUrl,
+        imageUrl: composedImage,
       })
     }
   }
 
-  const handleInstagramShare = () => {
+  const handleInstagramShare = (composedImage: string) => {
     if (bridge.isRNEnvironment()) {
       bridge.send(POST_MESSAGE_EVENT.SHARE_TO_INSTAGRAM_STORY, {
-        imageUrl: params.imageUrl,
+        imageUrl: composedImage,
       })
     } else {
       toast('모바일 앱에서만 공유할 수 있습니다.')
@@ -95,25 +107,6 @@ export const ShareBottomSheet = ({
 
   const startAngle = angryValue <= 50 ? 90 : 0
   const endAngle = angryValue <= 50 ? 450 : 360
-
-  const exportComposedPng = async () => {
-    if (!composeRef.current) return
-    try {
-      const dataUrl = await htmlToImage.toPng(composeRef.current, {
-        cacheBust: true,
-        pixelRatio: 3, // 선명도 (2~3 권장, 너무 크면 메모리 터짐)
-        // backgroundColor: '#000',   // 필요 시 배경 강제
-      })
-
-      // 웹 브라우저 다운로드
-      const a = document.createElement('a')
-      a.href = dataUrl
-      a.download = 'ballog-share.png'
-      a.click()
-    } catch {
-      toast.error('이미지 합성 실패')
-    }
-  }
 
   const resultChipMap: Record<
     NonNullable<RecordDetailResponse['result']>,
@@ -206,10 +199,23 @@ export const ShareBottomSheet = ({
         </div>
         <BottomSheetModal.Buttons
           buttons={[
-            { label: '이미지 저장', onClick: handleImageDownload },
+            {
+              label: '이미지 저장',
+              onClick: async () => {
+                try {
+                  const composedImage = await composeShareImage()
+                  handleImageDownload(composedImage)
+                } catch {
+                  toast.error('이미지 저장 실패')
+                }
+              },
+            },
             {
               label: '공유하기',
-              onClick: handleInstagramShare,
+              onClick: async () => {
+                const composedImage = await composeShareImage()
+                handleInstagramShare(composedImage)
+              },
             },
           ]}
         />

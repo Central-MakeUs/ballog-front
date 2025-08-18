@@ -23,7 +23,7 @@ export const useFcmToken = () => {
   useBridgeEvent(
     POST_MESSAGE_EVENT.GET_MY_FCM_TOKEN,
     async (payload: FcmTokenPayload) => {
-      alert(payload.token)
+      // alert(payload.token)
       const prevToken = localStorage.getItem('fcmToken')
       
       if (payload.token && payload.token !== prevToken) {
