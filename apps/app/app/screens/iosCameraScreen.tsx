@@ -124,7 +124,8 @@ export default function IosCameraScreen() {
             <TouchableOpacity
               style={styles.flipButton}
               onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
-            ></TouchableOpacity>
+            >
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       </SafeAreaProvider>

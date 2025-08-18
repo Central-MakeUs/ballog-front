@@ -70,12 +70,14 @@ export const EmotionDonutChart = ({
           flex flex-col items-center justify-center
           body-sm-bold text-brand-neutral-white
           pointer-events-none
+          text-[12px]
+          leading-4
         "
         >
-          <div className="body-sm-bold text-brand-neutral-white mb-0.5">
+          <div className="body-sm-bold text-brand-neutral-white mb-0.5 text-[12px] leading-4">
             {centerTitle}
           </div>
-          <div className="text-[23px]">{centerRate}%</div>
+          <div>{centerRate}%</div>
         </div>
       ) : (
         <div
@@ -84,9 +86,11 @@ export const EmotionDonutChart = ({
           flex flex-col items-center justify-center
           body-sm-bold text-brand-neutral-white
           pointer-events-none
+          text-[12px]
+          leading-4
         "
         >
-          <div className="text-[23px]">{centerRate}%</div>
+          <div>{centerRate}%</div>
         </div>
       )}
     </div>

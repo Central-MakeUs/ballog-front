@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type ComponentType } from 'react'
 import * as htmlToImage from 'html-to-image'
 import { BottomSheet } from '@stackflow/plugin-basic-ui'
 import {
@@ -13,6 +13,8 @@ import { useFlow } from '@/shared/lib/stackflow'
 import { EmotionDonutChart } from '@/shared/ui/common/Card/EmotionDonutChart'
 import type { RecordDetailResponse } from '@/entities/record/model/record.type'
 import { Chip } from '@/shared/ui/common/Chip/Chip'
+import AngryEmotion from '@/assets/angryEmotionNoShadow.svg?react'
+import JoyEmotion from '@/assets/joyEmotionNoShadow.svg?react'
 
 interface EmotionPieChartData {
   name: '화나요' | '기뻐요'
@@ -135,6 +137,24 @@ export const ShareBottomSheet = ({
     )
   }
 
+  const resultEmotionMap: Record<'WIN' | 'LOSE', ComponentType> = {
+    WIN: JoyEmotion,
+    LOSE: AngryEmotion,
+  }
+
+  const renderResultEmotion = (result: RecordDetailResponse['result']) => {
+    if (!result) return null
+
+    const EmotionComp =
+      resultEmotionMap[result as keyof typeof resultEmotionMap]
+    if (!EmotionComp) return null
+    return (
+      <div className="absolute bottom-8 right-6">
+        <EmotionComp />
+      </div>
+    )
+  }
+
   return (
     <BottomSheet data-testid="share-bottom-sheet">
       <BottomSheetModal.Root
@@ -147,12 +167,19 @@ export const ShareBottomSheet = ({
       >
         <BottomSheetModal.Text heading="사진 공유하기" />
         <div ref={composeRef}>
+          <div className="flex flex-col px-6 pt-5 pb-4 bg-brand-neutral-90 rounded-t-md items-center">
+            <div className="body-lg-bold">
+              {recordData.homeTeam} vs {recordData.awayTeam}
+            </div>
+            <div className="mt-1 caption-md text-brand-neutral-40">
+              {recordData.stadium} | {recordData.matchDate}
+            </div>
+          </div>
           <BottomSheetModal.Image
-            className="rounded-md"
+            className="rounded-b-md"
             src={params.imageUrl}
             data-testid="share-image"
           >
-
             {/* 감정 도넛 */}
             <div className="absolute top-4 left-4">
               <EmotionDonutChart
@@ -172,6 +199,8 @@ export const ShareBottomSheet = ({
             {/* 경기 결과 칩 */}
             {renderResultChip(recordData.result)}
 
+            {/* 감정 이모지 */}
+            {renderResultEmotion(recordData.result)}
           </BottomSheetModal.Image>
         </div>
         <BottomSheetModal.Buttons
