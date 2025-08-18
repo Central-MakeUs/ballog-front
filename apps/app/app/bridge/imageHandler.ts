@@ -78,6 +78,7 @@ export const createImageHandler = (bridge: AppBridge) => ({
 
   DOWNLOAD_IMAGE: async (payload?: ImageDownloadPayload) => {
     if (!payload) return
+
     let fileUri: string | undefined
 
     console.log('RN: 이미지 다운로드 요청 처리')

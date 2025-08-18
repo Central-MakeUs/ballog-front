@@ -3,7 +3,6 @@ import type {
   RecordDetailResponse,
   EmotionGroup,
 } from '@/entities/record/model/record.type'
-import mock from '@/assets/defaultProfile.png'
 
 const emotionGroupListShort: EmotionGroup[] = [
   {

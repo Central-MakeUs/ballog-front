@@ -11,12 +11,14 @@ import { ImageTimeLine } from '@/features/record/ui/ImageTimeLine'
 import { EmotionTimeLine } from '@/features/record/ui/EmotionTimeLine'
 import { BottomButtonGroup } from '@/features/record/ui/BottomButtonGroup'
 import { ImageContextProvider } from '@/features/record/hooks/ImageContextProvider'
+import { useFlow } from '@/shared/lib/stackflow'
 
 export const RecordDetailPage = ({
   params,
 }: {
   params: { matchRecordId: string }
 }) => {
+  const { pop } = useFlow()
   const { data, isLoading, error } = useQuery(
     queryKeys.getRecordDetail(Number(params.matchRecordId)),
   )
@@ -27,6 +29,11 @@ export const RecordDetailPage = ({
 
   if (error) {
     toast('관람 기록을 불러오는 중 오류가 발생했습니다.')
+  }
+
+  if (!data) {
+    pop()
+    return
   }
 
   return (
@@ -78,7 +85,7 @@ export const RecordDetailPage = ({
                 ),
               },
             ]}
-            recordData={data.data}
+            recordData={data?.data}
           />
         </AppLayout>
       </ImageContextProvider>

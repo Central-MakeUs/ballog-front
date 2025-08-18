@@ -54,11 +54,22 @@ export const ShareBottomSheet = ({
     if (!node) throw new Error('compose target not found')
 
     await (document.fonts?.ready ?? Promise.resolve())
-
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({
+        eventName: 'SEND_IMAGE_ECHO',
+        payload: "1번",
+      }),
+    )
     const dataUrl = await htmlToImage.toPng(node, {
       cacheBust: true,
       pixelRatio: 3,
     })
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({
+        eventName: 'SEND_IMAGE_ECHO',
+        payload: "2번",
+      }),
+    )
     return dataUrl
   }
 
@@ -171,7 +182,7 @@ export const ShareBottomSheet = ({
                   window.ReactNativeWebView?.postMessage(
                     JSON.stringify({
                       eventName: 'SEND_IMAGE_ECHO',
-                      payload: `${error}`,
+                      payload: error,
                     }),
                   )
                 }
