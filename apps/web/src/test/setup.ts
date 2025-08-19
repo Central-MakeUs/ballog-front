@@ -11,7 +11,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 vi.mock('lottie-react', () => {
-  const LottieMock = React.forwardRef((_props: any, _ref: any) =>
+  const LottieMock = React.forwardRef((_, __) =>
     React.createElement('div', { 'data-testid': 'lottie-mock' }),
   )
   return { __esModule: true, default: LottieMock }
@@ -23,4 +23,4 @@ class RO {
   public unobserve() {}
   public disconnect() {}
 }
-;(globalThis as any).ResizeObserver = (globalThis as any).ResizeObserver || RO
+;globalThis.ResizeObserver = globalThis.ResizeObserver || RO
