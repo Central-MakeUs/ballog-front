@@ -15,7 +15,7 @@ import {
   GestureDetector,
 } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
-// import FlipButton from '@/assets/images/flipButton.svg'
+import FlipButton from '@/assets/images/flipButton.svg'
 import { useCamera } from '@/hooks/useCamera'
 import { useGallery } from '@/hooks/useGallery'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
@@ -124,7 +124,9 @@ export default function IosCameraScreen() {
             <TouchableOpacity
               style={styles.flipButton}
               onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
-            ></TouchableOpacity>
+            >
+              <FlipButton width={48} height={48} />
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       </SafeAreaProvider>
