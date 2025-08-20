@@ -1,9 +1,11 @@
-import type { ComponentProps } from 'react'
-import type { LottieRef } from 'lottie-react'
+import type { ComponentProps, RefObject } from 'react'
+import type { LottieRefCurrentProps } from 'lottie-react'
 
 import { cn } from '@/shared/lib/classnames'
 
 import { AngryIcon, JoyIcon } from './EmotionButton'
+
+type LottieRef = RefObject<LottieRefCurrentProps | null>
 
 interface IconButtonProps extends ComponentProps<'div'> {
   state: 'angry' | 'joy'

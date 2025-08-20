@@ -1,11 +1,13 @@
 import Lottie, {
-  type LottieRef,
+  type LottieRefCurrentProps,
 } from 'lottie-react'
+import type { RefObject } from 'react'
 
 import joyAnimation from '@/assets/lottie/joy.json'
 import angryAnimation from '@/assets/lottie/angry.json'
 import { cn } from '@/shared/lib/classnames'
 
+type LottieRef = RefObject<LottieRefCurrentProps | null>
 
 interface EmotionLottieProps {
   emotion: 'joy' | 'angry'

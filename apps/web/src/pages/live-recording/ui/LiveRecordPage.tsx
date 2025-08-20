@@ -23,6 +23,7 @@ import InfoIcon from '@/assets/infoIcon.svg?react'
 import { recordingPost } from '@/entities/record/api/recording-post'
 import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
 import { Loading } from '@/shared/ui/common'
+import { LottieRefProvider } from '@/shared/contexts/lottieRefContext'
 
 const LiveRecordPageInner = ({
   recordingData,
@@ -84,13 +85,18 @@ const LiveRecordPageInner = ({
         </div>
 
         {/* 버튼 인터랙션 부분 */}
-        <EmotionVoteWidget
-          emotions={emotionData}
-          onEmotionSubmit={(emotionType) => {
-            mutate({ matchRecordId: recordingData.matchRecordId, emotionType })
-          }}
-        />
-
+        <LottieRefProvider>
+          <EmotionVoteWidget
+            emotions={emotionData}
+            onEmotionSubmit={(emotionType) => {
+              mutate({
+                matchRecordId: recordingData.matchRecordId,
+                emotionType,
+              })
+            }}
+          />
+        </LottieRefProvider>
+        
         {/* 하단 버튼 */}
         <EndRecordingButton />
       </div>

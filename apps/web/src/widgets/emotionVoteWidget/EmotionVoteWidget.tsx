@@ -1,11 +1,10 @@
-import { useState, useRef } from 'react'
-import type { ComponentProps } from 'react'
-import type { LottieRefCurrentProps } from 'lottie-react'
+import { useState, type ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
+import { useLottieRefs } from '@/shared/contexts/lottieRefContext'
 
 import { getScale } from './utils/getScale'
 import { getGridRatio } from './utils/getGridRatio'
@@ -21,8 +20,7 @@ export const EmotionVoteWidget = ({
   className,
   ...rest
 }: EmotionVoteWidgetProps) => {
-  const joyRef = useRef<LottieRefCurrentProps>(null)
-  const angryRef = useRef<LottieRefCurrentProps>(null)
+  const { joyRef, angryRef } = useLottieRefs()
 
   const [, setSelectedEmotion] = useState<'joy' | 'angry' | null>(null)
 

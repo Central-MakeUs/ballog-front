@@ -1,10 +1,12 @@
-import { type MouseEventHandler, type ComponentProps } from 'react'
-import type { LottieRef } from 'lottie-react'
+import type { MouseEventHandler, ComponentProps, RefObject } from 'react'
+import type { LottieRefCurrentProps } from 'lottie-react'
 
 import { cn } from '@/shared/lib/classnames'
 
 import { EmotionLottie } from './EmotionLottie'
 import { IconButton } from './IconButton'
+
+type LottieRef = RefObject<LottieRefCurrentProps | null>
 
 export const JoyIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
   return (
@@ -12,7 +14,6 @@ export const JoyIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
       role="img"
       aria-label="화나요"
       className="flex items-center justify-center size-18"
-
     >
       <EmotionLottie
         emotion="joy"
