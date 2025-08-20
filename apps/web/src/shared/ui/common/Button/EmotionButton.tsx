@@ -1,24 +1,17 @@
-import {
-  useRef,
-  type MouseEventHandler,
-  type ComponentProps,
-} from 'react'
-import type { LottieRefCurrentProps, LottieRef } from 'lottie-react'
+import { type MouseEventHandler, type ComponentProps } from 'react'
+import type { LottieRef } from 'lottie-react'
 
 import { cn } from '@/shared/lib/classnames'
 
 import { EmotionLottie } from './EmotionLottie'
 import { IconButton } from './IconButton'
 
-// TODO: 실제 감정별 SVG 아이콘으로 교체 필요
 export const JoyIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
-
   return (
     <span
       role="img"
       aria-label="화나요"
       className="flex items-center justify-center size-18"
-      // onClick={handleClick}
     >
       <EmotionLottie
         emotion="joy"
@@ -30,13 +23,11 @@ export const JoyIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
 }
 
 export const AngryIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
-
   return (
     <span
       role="img"
       aria-label="화나요"
       className="flex items-center justify-center size-18"
-      // onClick={handleClick}
     >
       <EmotionLottie
         emotion="angry"
@@ -51,6 +42,8 @@ interface EmotionButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
   emotionType?: 'joy' | 'angry'
   scale: number
   percent: number
+  lottieRef: LottieRef
+  peerRef: LottieRef
 }
 
 const getButtonScale = (scale: number): string => {
@@ -89,16 +82,23 @@ export const EmotionButton = ({
   className,
   scale,
   percent,
+  lottieRef,
+  peerRef,
   onClick,
   ...props
 }: EmotionButtonProps) => {
   const label = emotionType === 'joy' ? '기뻐요' : '화나요'
 
-  const lottieRef = useRef<LottieRefCurrentProps>(null)
+  const isNeutral = (p: number) => p >= 41 && p <= 59
+
+  const play = (ref: LottieRef) => {
+    ref.current?.stop()
+    ref.current?.goToAndPlay(0, true)
+  }
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    lottieRef.current?.stop()
-    lottieRef.current?.goToAndPlay(0, true)
+    play(lottieRef)
+    if (isNeutral(percent)) play(peerRef)
     onClick?.(e)
   }
 
@@ -124,7 +124,11 @@ export const EmotionButton = ({
         {...props}
       >
         <div className={cn('flex flex-col items-center justify-center w-full')}>
-          <IconButton className={cn('size-20 mx-auto')} state={emotionType} lottieRef={lottieRef} />
+          <IconButton
+            className={cn('size-20 mx-auto')}
+            state={emotionType}
+            lottieRef={lottieRef}
+          />
           <span className={cn('body-sm-light text-usage-text-subtle  mt-1')}>
             {label}
           </span>
