@@ -13,6 +13,7 @@ export interface Record {
   awayTeam: TeamKey
   matchDate: string
   matchTime: string
+  stadium: StadiumKey
   userId: number
   watchCnt: number
   result: RecordResult
