@@ -1,8 +1,8 @@
 import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
 import { useEffect } from 'react'
 import type { ImageData } from '@ballog/bridge/types'
-import { toast } from 'sonner'
 
+import { Toast } from '@/shared/lib/toast'
 import { RecordingCard } from '@/entities/record/ui/RecordingCard'
 import { useRecordingImages } from '@/features/record/hooks/useRecordImages'
 import { useWebViewBridgeListener } from '@/features/record/hooks/useWebViewBridgeListener'
@@ -57,19 +57,19 @@ export const RecordingCardWithWebBridge = ({
 
   useEffect(() => {
     if (uploadState.isUploading) {
-      toast('이미지 업로드 중...')
+      Toast.info('이미지 업로드 중...')
     }
   }, [uploadState.isUploading])
 
   useEffect(() => {
     if (!uploadState.isUploading && uploadState.progress === 'complete') {
-      toast.success('업로드 완료!')
+      Toast.success('업로드 완료!')
     }
   }, [uploadState.isUploading, uploadState.progress])
 
   useEffect(() => {
     if (uploadState.error) {
-      toast.error(`업로드 실패: ${uploadState.error}`)
+      Toast.error(`업로드 실패: ${uploadState.error}`)
     }
   }, [uploadState.error])
 

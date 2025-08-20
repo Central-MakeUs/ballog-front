@@ -1,5 +1,4 @@
-import { toast } from 'sonner'
-
+import { Toast } from '@/shared/lib/toast'
 import type { ExtendedKyHttpError } from '@/types/api/common'
 import type { SocialLoginResponseDTO } from '@/entities/auth/model/auth.type'
 
@@ -30,16 +29,16 @@ export const useSocialLoginFlow = (social: 'kakao' | 'apple') => {
     },
     onError: (error: Error | ExtendedKyHttpError) => {
       if (error && typeof error === 'object' && 'errorData' in error) {
-        toast.error(error.errorData?.error || '로그인에 실패했습니다.')
+        Toast.error(error.errorData?.error || '로그인에 실패했습니다.')
         return
       }
 
       if (error instanceof Error) {
-        toast.error(error.message || '로그인에 실패했습니다.')
+        Toast.error(error.message || '로그인에 실패했습니다.')
         return
       }
 
-      toast.error('알 수 없는 오류가 발생했습니다.')
+      Toast.error('알 수 없는 오류가 발생했습니다.')
     },
   })
 

@@ -1,6 +1,6 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { toast } from 'sonner'
 
+import { Toast } from '@/shared/lib/toast'
 import { TeamSelectionForm } from '@/features/auth/ui'
 import { useFlow } from '@/shared/lib/stackflow'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
@@ -25,7 +25,7 @@ const ChangeTeamSelectPage = () => {
       {
         onSuccess: () => {
           pop()
-          toast("응원 팀 변경이 완료되었습니다!")
+          Toast.success("응원 팀 변경이 완료되었습니다!")
           setUser({ ...user, baseballTeam: selectedTeam })
         },
       },

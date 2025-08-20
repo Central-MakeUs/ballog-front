@@ -2,8 +2,8 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 import type { ActivityComponentType } from '@stackflow/react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { toast } from 'sonner'
 
+import { Toast } from '@/shared/lib/toast'
 import { useFlow } from '@/shared/lib/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
@@ -115,7 +115,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
     },
     onError: () => {
       // setIsPostComplete(true)
-      toast('이미 경기 기록이 존재합니다')
+      Toast.info('이미 경기 기록이 존재합니다')
       replace(
         'Home',
         {},

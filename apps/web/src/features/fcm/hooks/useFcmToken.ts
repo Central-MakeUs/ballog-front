@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
-import { toast } from 'sonner'
 
+import { Toast } from '@/shared/lib/toast'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 import { fcmPost } from '@/entities/fcm/api/fcm-post'
@@ -33,7 +33,7 @@ export const useFcmToken = () => {
             localStorage.setItem('fcmToken', payload.token)
           }
         } catch {
-          toast.error('토큰 전송 실패')
+          Toast.error('토큰 전송 실패')
         }
       }
     },

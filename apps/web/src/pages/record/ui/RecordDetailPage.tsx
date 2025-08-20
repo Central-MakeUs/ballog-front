@@ -1,7 +1,7 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { useQuery } from '@tanstack/react-query'
-import { toast } from 'sonner'
 
+import { Toast } from '@/shared/lib/toast'
 import { BackArrow } from '@/assets/BackArrow'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { queryKeys } from '@/entities/record/api/record.queries'
@@ -26,7 +26,7 @@ export const RecordDetailPage = ({
   }
 
   if (error) {
-    toast('관람 기록을 불러오는 중 오류가 발생했습니다.')
+    Toast.error('관람 기록을 불러오는 중 오류가 발생했습니다.')
   }
 
   return (

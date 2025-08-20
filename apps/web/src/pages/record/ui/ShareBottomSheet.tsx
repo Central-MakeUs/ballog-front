@@ -5,8 +5,8 @@ import {
   POST_MESSAGE_EVENT,
   MESSAGE_STATUS,
 } from '@ballog/bridge'
-import { toast } from 'sonner'
 
+import { Toast } from '@/shared/lib/toast'
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { useFlow } from '@/shared/lib/stackflow'
 
@@ -32,7 +32,7 @@ export const ShareBottomSheet = ({
         imageUrl: params.imageUrl,
       })
     } else {
-      toast('모바일 앱에서만 공유할 수 있습니다.')
+      Toast.info('모바일 앱에서만 공유할 수 있습니다.')
     }
   }
 
@@ -41,9 +41,9 @@ export const ShareBottomSheet = ({
       POST_MESSAGE_EVENT.IMAGE_DOWNLOAD_RESPONSE,
       (payload: { message: string }) => {
         if (payload.message === MESSAGE_STATUS.DOWNLOAD_COMPLETED) {
-          toast('이미지가 저장되었습니다.')
+          Toast.success('이미지가 저장되었습니다.')
         } else if (payload.message === MESSAGE_STATUS.DOWNLOAD_FAILED) {
-          toast('이미지 저장에 실패했습니다.')
+          Toast.error('이미지 저장에 실패했습니다.')
         }
       },
     )
@@ -52,9 +52,9 @@ export const ShareBottomSheet = ({
       POST_MESSAGE_EVENT.INSTAGRAM_SHARE_RESPONSE,
       (payload: { message: string }) => {
         if (payload.message === MESSAGE_STATUS.SHARE_COMPLETED) {
-          toast('인스타그램 스토리로 공유되었습니다.')
+          Toast.success('인스타그램 스토리로 공유되었습니다.')
         } else if (payload.message === MESSAGE_STATUS.SHARE_FAILED) {
-          toast('공유에 실패했습니다.')
+          Toast.error('공유에 실패했습니다.')
         }
       },
     )

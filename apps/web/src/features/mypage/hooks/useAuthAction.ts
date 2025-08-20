@@ -1,6 +1,6 @@
-import { toast } from 'sonner'
 import { POST_MESSAGE_EVENT, type LogoutResponsePayload } from '@ballog/bridge'
 
+import { Toast } from '@/shared/lib/toast'
 import { authPost, authDelete } from '@/entities/auth/api'
 import { useFlow } from '@/shared/lib/stackflow'
 import { useSessionContext } from '@/shared/contexts/sessionContext'
@@ -37,7 +37,7 @@ export const useAuthAction = () => {
       clearSession()
       replace('Login', {})
     } catch {
-      toast.error('로그아웃에 실패했습니다.')
+      Toast.error('로그아웃에 실패했습니다.')
     }
   }
 
@@ -48,7 +48,7 @@ export const useAuthAction = () => {
       clearSession()
       replace('Login', {})
     } catch {
-      toast.error('탈퇴에 실패했습니다.')
+      Toast.error('탈퇴에 실패했습니다.')
     }
   }
 
