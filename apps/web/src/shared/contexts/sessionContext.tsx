@@ -20,7 +20,7 @@ export const SessionProvider = ({
 
   const [accessToken, setAccessToken] = useState<string>('')
   const [user, setUser] = useState<UserType | null>(null)
-  alert(user)
+
   const refetchUser = async () => {
     try {
       const data = await authGet.getUser()
