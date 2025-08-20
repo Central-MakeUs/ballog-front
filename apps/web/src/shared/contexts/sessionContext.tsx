@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useEffect } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 import { authGet } from '@/entities/auth/api'
 import type { UserType } from '@/entities/auth/model/auth.type'
 
-import { useSessionStorage } from '../hooks/auth/useSessionStorage'
+import { useAccessTokenStorage } from '../hooks/auth/useAccessTokenStorage'
 
 interface SessionContextType {
   user: UserType | null
@@ -21,13 +21,9 @@ export const SessionProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const {
-    accessToken,
-    setAccessTokenInStorage,
-    user,
-    setUser,
-    clearSessionStorage,
-  } = useSessionStorage()
+  const [user, setUser] = useState<UserType | null>(null)
+  const { accessToken, setAccessTokenInStorage, clearSessionStorage } =
+    useAccessTokenStorage()
 
   const refetchUser = async () => {
     try {

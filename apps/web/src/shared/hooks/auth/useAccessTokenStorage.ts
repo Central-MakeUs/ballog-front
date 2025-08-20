@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import type { UserType } from '@/entities/auth/model/auth.type'
-
-export const useSessionStorage = () => {
+// 로컬스토리지에 accessToken을 관리해 유저 상태를 관리하는 훅
+export const useAccessTokenStorage = () => {
   const [accessToken, setAccessToken] = useState<string>(
     localStorage.getItem('accessToken') ?? '',
   )
-  const [user, setUser] = useState<UserType | null>(null)
 
   const setAccessTokenInStorage = (accessToken: string) => {
     localStorage.setItem('accessToken', accessToken)
@@ -16,7 +14,6 @@ export const useSessionStorage = () => {
   const clearSessionStorage = () => {
     localStorage.removeItem('accessToken')
     setAccessToken('')
-    setUser(null)
   }
 
   useEffect(() => {
@@ -27,9 +24,7 @@ export const useSessionStorage = () => {
   }, [])
 
   return {
-    user,
     accessToken,
-    setUser,
     setAccessTokenInStorage,
     clearSessionStorage,
   }
