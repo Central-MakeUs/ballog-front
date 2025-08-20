@@ -1,31 +1,27 @@
 import { toast } from 'sonner'
 
 import type { ExtendedKyHttpError } from '@/types/api/common'
-import type { SocialLoginResponseDTO } from '@/entities/auth/model/auth.type'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 
 import { useSocialLogin } from './useSocialLogin'
 import { useSocialNavigation } from './useSocialNavigation'
-
-const setAccessToken = (response: SocialLoginResponseDTO) => {
-  const { accessToken: serverAccessToken } = response.data
-  localStorage.setItem('accessToken', serverAccessToken)
-}
 
 /**
  * 토스트 알림이 포함된 소셜 로그인 훅
  * 에러 처리와 네비게이션을 자동으로 처리
  */
 export const useSocialLoginFlow = (social: 'kakao' | 'apple') => {
+  const { setAccessTokenInStorage } = useSessionContext()
   const { handleSignupSuccess, handleLoginSuccess } = useSocialNavigation()
 
   const { handleLogin, isPending } = useSocialLogin({
     social,
     onSignupSuccess: (response) => {
-      setAccessToken(response)
+      setAccessTokenInStorage(response.data.accessToken)
       handleSignupSuccess()
     },
     onLoginSuccess: (response) => {
-      setAccessToken(response)
+      setAccessTokenInStorage(response.data.accessToken)
       handleLoginSuccess()
     },
     onError: (error: Error | ExtendedKyHttpError) => {
