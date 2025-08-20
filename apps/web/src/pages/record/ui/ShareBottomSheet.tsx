@@ -47,17 +47,6 @@ export const ShareBottomSheet = ({
         }
       },
     )
-
-    bridge.addEventListener(
-      POST_MESSAGE_EVENT.INSTAGRAM_SHARE_RESPONSE,
-      (payload: { message: string }) => {
-        if (payload.message === MESSAGE_STATUS.SHARE_COMPLETED) {
-          toast('인스타그램 스토리로 공유되었습니다.')
-        } else if (payload.message === MESSAGE_STATUS.SHARE_FAILED) {
-          toast('공유에 실패했습니다.')
-        }
-      },
-    )
   }, [])
 
   return (
