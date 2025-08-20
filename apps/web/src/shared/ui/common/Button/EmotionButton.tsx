@@ -1,5 +1,9 @@
-import { useRef, type MouseEventHandler, type ComponentProps } from 'react'
-import type { LottieRefCurrentProps } from 'lottie-react'
+import {
+  useRef,
+  type MouseEventHandler,
+  type ComponentProps,
+} from 'react'
+import type { LottieRefCurrentProps, LottieRef } from 'lottie-react'
 
 import { cn } from '@/shared/lib/classnames'
 
@@ -7,42 +11,38 @@ import { EmotionLottie } from './EmotionLottie'
 import { IconButton } from './IconButton'
 
 // TODO: 실제 감정별 SVG 아이콘으로 교체 필요
-export const JoyIcon = () => {
-  const joyRef = useRef<LottieRefCurrentProps>(null)
-
-  const handleClick = () => {
-    joyRef.current?.stop()
-    joyRef.current?.goToAndPlay(0, true)
-  }
+export const JoyIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
 
   return (
     <span
       role="img"
       aria-label="화나요"
       className="flex items-center justify-center size-18"
-      onClick={handleClick}
+      // onClick={handleClick}
     >
-      <EmotionLottie emotion='joy' lottieRef={joyRef} className="w-full h-full" />
+      <EmotionLottie
+        emotion="joy"
+        lottieRef={lottieRef}
+        className="w-full h-full pointer-events-none"
+      />
     </span>
   )
 }
 
-export const AngryIcon = () => {
-  const angryRef = useRef<LottieRefCurrentProps>(null)
-
-  const handleClick = () => {
-    angryRef.current?.stop()
-    angryRef.current?.goToAndPlay(0, true)
-  }
+export const AngryIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
 
   return (
     <span
       role="img"
       aria-label="화나요"
       className="flex items-center justify-center size-18"
-      onClick={handleClick}
+      // onClick={handleClick}
     >
-      <EmotionLottie emotion='angry' lottieRef={angryRef} className="w-full h-full" />
+      <EmotionLottie
+        emotion="angry"
+        lottieRef={lottieRef}
+        className="w-full h-full"
+      />
     </span>
   )
 }
@@ -94,13 +94,11 @@ export const EmotionButton = ({
 }: EmotionButtonProps) => {
   const label = emotionType === 'joy' ? '기뻐요' : '화나요'
 
-  const joyRef = useRef<import('lottie-react').LottieRefCurrentProps>(null)
+  const lottieRef = useRef<LottieRefCurrentProps>(null)
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    if (emotionType === 'joy') {
-      joyRef.current?.stop()
-      joyRef.current?.goToAndPlay(0, true)
-    }
+    lottieRef.current?.stop()
+    lottieRef.current?.goToAndPlay(0, true)
     onClick?.(e)
   }
 
@@ -126,7 +124,7 @@ export const EmotionButton = ({
         {...props}
       >
         <div className={cn('flex flex-col items-center justify-center w-full')}>
-          <IconButton className={cn('size-20 mx-auto')} state={emotionType} />
+          <IconButton className={cn('size-20 mx-auto')} state={emotionType} lottieRef={lottieRef} />
           <span className={cn('body-sm-light text-usage-text-subtle  mt-1')}>
             {label}
           </span>

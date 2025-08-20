@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react'
+import type { LottieRef } from 'lottie-react'
 
 import { cn } from '@/shared/lib/classnames'
 
@@ -6,6 +7,7 @@ import { AngryIcon, JoyIcon } from './EmotionButton'
 
 interface IconButtonProps extends ComponentProps<'div'> {
   state: 'angry' | 'joy'
+  lottieRef: LottieRef
 }
 
 /**
@@ -22,7 +24,12 @@ interface IconButtonProps extends ComponentProps<'div'> {
  * @returns
  */
 
-export const IconButton = ({ className, state, ...props }: IconButtonProps) => {
+export const IconButton = ({
+  className,
+  state,
+  lottieRef,
+  ...props
+}: IconButtonProps) => {
   return (
     <div
       className={cn(
@@ -32,7 +39,11 @@ export const IconButton = ({ className, state, ...props }: IconButtonProps) => {
       )}
       {...props}
     >
-      {state === 'joy' ? <JoyIcon /> : <AngryIcon />}
+      {state === 'joy' ? (
+        <JoyIcon lottieRef={lottieRef} />
+      ) : (
+        <AngryIcon lottieRef={lottieRef} />
+      )}
     </div>
   )
 }

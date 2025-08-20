@@ -1,6 +1,4 @@
-import React from 'react'
 import Lottie, {
-  type LottieRefCurrentProps,
   type LottieRef,
 } from 'lottie-react'
 
@@ -8,13 +6,12 @@ import joyAnimation from '@/assets/lottie/joy.json'
 import angryAnimation from '@/assets/lottie/angry.json'
 import { cn } from '@/shared/lib/classnames'
 
-type LottieCtlRef = LottieRef | React.RefObject<LottieRefCurrentProps>
 
 interface EmotionLottieProps {
   emotion: 'joy' | 'angry'
   className?: string
   size?: number
-  lottieRef: LottieCtlRef
+  lottieRef: LottieRef
 }
 
 const animations = {
@@ -34,7 +31,7 @@ export const EmotionLottie = ({
       animationData={animations[emotion]}
       loop={false}
       autoplay={false}
-      className={cn(className)}
+      className={cn(className, 'pointer-events-none')}
       style={{ width: size, height: size }}
     />
   )
