@@ -2,11 +2,12 @@ import type { ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
+import { getStadiumName, type StadiumKey } from '@/shared/constants/stadium'
 
 interface InfoProps extends ComponentProps<'div'> {
   homeTeam: TeamKey
   awayTeam: TeamKey
-  stadium: string
+  stadium: StadiumKey
   date: string
   result: 'WIN' | 'LOSE' | 'DRAW'
 }
@@ -42,7 +43,7 @@ export const Info = ({
         {TEAMS[homeTeam]} <span className="mx-2">vs</span> {TEAMS[awayTeam]}
       </p>
       <p className="body-sm-light text-usage-text-subtle">
-        {stadium} <span className="mx-2">|</span> {date}
+        {getStadiumName(stadium)} <span className="mx-2">|</span> {date}
       </p>
     </div>
   )
