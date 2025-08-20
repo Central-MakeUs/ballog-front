@@ -4,10 +4,14 @@ import { toast } from 'sonner'
 import { authGet } from '@/entities/auth/api'
 import type { UserType } from '@/entities/auth/model/auth.type'
 
+import { useAccessTokenStorage } from '../hooks/auth/useAccessTokenStorage'
+
 interface SessionContextType {
   user: UserType | null
   setUser: (user: UserType | null) => void
   refetchUser: () => Promise<void>
+  accessToken: string
+  setAccessTokenInStorage: (accessToken: string) => void
 }
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined)
@@ -17,9 +21,10 @@ export const SessionProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-
-  const [accessToken, setAccessToken] = useState<string>('')
   const [user, setUser] = useState<UserType | null>(null)
+  const { accessToken, setAccessTokenInStorage, clearSessionStorage } =
+    useAccessTokenStorage()
+
 
   const refetchUser = async () => {
     try {
@@ -28,14 +33,10 @@ export const SessionProvider = ({
     } catch (error) {
       setUser(null)
       toast.error('로그인 정보가 만료되었습니다.')
-      localStorage.removeItem('accessToken')
+      clearSessionStorage()
       throw error
     }
   }
-
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('accessToken') ?? "")
-  })
 
   useEffect(() => {
     if (accessToken) {
@@ -44,7 +45,15 @@ export const SessionProvider = ({
   }, [accessToken])
 
   return (
-    <SessionContext.Provider value={{ user, setUser, refetchUser }}>
+    <SessionContext.Provider
+      value={{
+        user,
+        setUser,
+        accessToken,
+        setAccessTokenInStorage,
+        refetchUser,
+      }}
+    >
       {children}
     </SessionContext.Provider>
   )
