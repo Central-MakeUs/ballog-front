@@ -12,6 +12,7 @@ export const JoyIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
       role="img"
       aria-label="화나요"
       className="flex items-center justify-center size-18"
+
     >
       <EmotionLottie
         emotion="joy"

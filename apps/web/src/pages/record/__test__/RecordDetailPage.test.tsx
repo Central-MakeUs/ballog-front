@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { toast } from 'sonner'
 
-import { Toast } from '@/shared/lib/toast'
 import { render } from '@/test/QueryWrapper'
 import { recordGet } from '@/entities/record/api/record-get'
 import type { RecordResult } from '@/entities/record/model/record.type'
@@ -20,6 +20,13 @@ vi.mock('@/shared/lib/stackflow', () => ({
     push: mockPush,
     replace: mockReplace,
   }),
+}))
+
+// 실제 toast 함수 모킹
+// 테스트 시 const mockToast = vi.mocked(toast) 로 사용
+// toast함수 모킹
+vi.mock('sonner', () => ({
+  toast: vi.fn(),
 }))
 
 vi.mock('@/entities/record/api/record-get', () => ({
@@ -143,7 +150,6 @@ describe('RecordDetailPage', () => {
       expect(screen.getByTestId('delete-button')).toBeInTheDocument()
     })
 
-    const successSpy = vi.spyOn(Toast, 'success')
     await user.click(screen.getByTestId('delete-button'))
 
     expect(screen.getByText('확인')).toBeInTheDocument()
@@ -152,7 +158,7 @@ describe('RecordDetailPage', () => {
 
     // 비동기 작업 완료 대기
     await waitFor(() => {
-      expect(successSpy).toHaveBeenCalledWith('관람로그 삭제가 완료되었습니다!')
+      expect(toast).toHaveBeenCalledWith('관람로그 삭제가 완료되었습니다!')
       expect(mockReplace).toHaveBeenCalledWith('Record', {}, { animate: false })
     })
   })

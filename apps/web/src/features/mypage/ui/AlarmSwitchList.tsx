@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState, useRef, useEffect } from 'react'
+import { toast } from 'sonner'
 
-import { Toast } from '@/shared/lib/toast'
 import { List } from '@/shared/ui/common/List/List'
 import type { Alert } from '@/entities/mypage/model/alert.type'
 import {
@@ -44,7 +44,7 @@ export const AlarmToggleList = () => {
     },
     onError: () => {
       scheduleReset()
-      Toast.error('설정을 변경하는데 실패했습니다.')
+      toast.error('설정을 변경하는데 실패했습니다.')
     },
   })
   if (isLoading || !data) return null

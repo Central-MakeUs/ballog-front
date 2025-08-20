@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { Trash } from 'lucide-react'
+import { toast } from 'sonner'
 
-import { Toast } from '@/shared/lib/toast'
 import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common'
 import { useModal } from '@/shared/hooks/modal/useModal'
@@ -16,7 +16,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
   const { mutate: deleteRecord } = useMutation({
     mutationFn: (recordId: number) => recordDelete.deleteRecord(recordId),
     onSuccess: () => {
-      Toast.success('관람로그 삭제가 완료되었습니다!')
+      toast('관람로그 삭제가 완료되었습니다!')
       replace('Record', {}, { animate: false })
     },
   })
@@ -63,7 +63,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
           data-testid="share-button"
           onClick={() => {
             if (!images[0]?.imageUrl) {
-              Toast.info('이미지가 없습니다.')
+              toast.info('이미지가 없습니다.')
             } else {
               push('ShareBottomSheet', {
                 imageUrl: images[0].imageUrl,

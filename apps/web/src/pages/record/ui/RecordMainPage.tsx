@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { toast } from 'sonner'
 
-import { Toast } from '@/shared/lib/toast'
 import { IntuitionCard } from '@/shared/ui/common/Card/intuitionCard'
 import { RecordList } from '@/features/record/ui/RecordList'
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
@@ -77,7 +77,7 @@ export const RecordMainPage = () => {
   const { data, isLoading, error } = useQuery(queryKeys.getRecord())
 
   if (error) {
-    Toast.error('관람 기록을 불러오는 중 오류가 발생했습니다.')
+    toast.error('관람 기록을 불러오는 중 오류가 발생했습니다.')
   }
 
   return (
