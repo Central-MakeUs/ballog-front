@@ -3,8 +3,7 @@ import type { LottieRefCurrentProps } from 'lottie-react'
 
 import { cn } from '@/shared/lib/classnames'
 
-import { JoyLottie } from './JoyLottie'
-import { AngryLottie } from './angryLottie'
+import { EmotionLottie } from './EmotionLottie'
 import { IconButton } from './IconButton'
 
 // TODO: 실제 감정별 SVG 아이콘으로 교체 필요
@@ -23,7 +22,7 @@ export const JoyIcon = () => {
       className="flex items-center justify-center size-18"
       onClick={handleClick}
     >
-      <JoyLottie lottieRef={joyRef} className="w-full h-full" />
+      <EmotionLottie emotion='joy' lottieRef={joyRef} className="w-full h-full" />
     </span>
   )
 }
@@ -43,7 +42,7 @@ export const AngryIcon = () => {
       className="flex items-center justify-center size-18"
       onClick={handleClick}
     >
-      <AngryLottie lottieRef={angryRef} className="w-full h-full" />
+      <EmotionLottie emotion='angry' lottieRef={angryRef} className="w-full h-full" />
     </span>
   )
 }

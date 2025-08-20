@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useOverlay } from '@/shared/hooks/useOverlay'
 import { OverlayModal } from '@/shared/ui/common/OverlayModal'
 
@@ -22,7 +24,8 @@ interface VerticalModalProps {
 interface ImageModalProps {
   heading: string
   body?: string
-  imgSrc: string
+  imgSrc?: string
+  renderContent?: () => React.ReactNode
 }
 
 /**
@@ -114,10 +117,19 @@ export const useModal = () => {
     ))
   }
 
-  const openImageModal = ({ heading, body, imgSrc }: ImageModalProps) => {
+  const openImageModal = ({
+    heading,
+    body,
+    imgSrc,
+    renderContent,
+  }: ImageModalProps) => {
     return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close}>
-        <OverlayModal.Image imgSrc={imgSrc} />
+        {renderContent ? (
+          <OverlayModal.Image>{renderContent()}</OverlayModal.Image>
+        ) : (
+          <OverlayModal.Image imgSrc={imgSrc} />
+        )}
         <OverlayModal.Text heading={heading} body={body} isImageModal />
       </OverlayModal.Root>
     ))

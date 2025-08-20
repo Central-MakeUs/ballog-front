@@ -7,7 +7,7 @@ export const emotionPost = {
     emotionType: string,
   ): Promise<EmotionResponseDTO> => {
     const response = await api
-      .post(`emotion/new`, { json: { matchRecordId, emotionType } })
+      .post(`emotion`, { json: { matchRecordId, emotionType } })
       .json<EmotionResponseDTO>()
     return response
   },
