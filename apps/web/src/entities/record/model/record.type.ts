@@ -1,5 +1,6 @@
 import { type ApiResponse } from '@/types/api/common'
 import { type TeamKey } from '@/shared/constants/teams'
+import type { StadiumKey } from '@/shared/constants/stadium'
 
 export type RecordResult = 'WIN' | 'LOSE' | 'DRAW' | null
 
@@ -12,6 +13,7 @@ export interface Record {
   awayTeam: TeamKey
   matchDate: string
   matchTime: string
+  stadium: StadiumKey
   userId: number
   watchCnt: number
   result: RecordResult
@@ -44,7 +46,7 @@ export interface RecordDetailResponse {
   awayTeam: TeamKey
   matchDate: string
   matchTime: string
-  stadium: string
+  stadium: StadiumKey
   userId: number
   watchCnt: number
   result: RecordResult

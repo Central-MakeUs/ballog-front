@@ -18,7 +18,7 @@ export const WithRecord: Story = {
       <RecordLogCard.Info
         homeTeam="LG_TWINS"
         awayTeam="SSG_LANDERS"
-        stadium="잠실야구장"
+        stadium="JAMSIL"
         date="2025.07.09 (수) 오후 6:30"
         result="WIN"
       />

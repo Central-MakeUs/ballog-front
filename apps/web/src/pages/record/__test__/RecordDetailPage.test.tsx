@@ -9,6 +9,7 @@ import type { RecordResult } from '@/entities/record/model/record.type'
 import type { TeamKey } from '@/shared/constants/teams'
 import { recordDelete } from '@/entities/record/api/record-delete'
 import { emotionGroupList } from '@/mocks/data/record'
+import type { StadiumKey } from '@/shared/constants/stadium'
 
 import { RecordDetailPage } from '../ui/RecordDetailPage'
 
@@ -60,7 +61,7 @@ const mockRecordData = {
     awayTeam: 'KT_WIZ' as TeamKey,
     matchDate: '2025-07-08',
     matchTime: '21:30',
-    stadium: '잠실야구장',
+    stadium: 'JAMSIL' as StadiumKey,
     userId: 1,
     watchCnt: 4,
     result: 'DRAW' as RecordResult,
