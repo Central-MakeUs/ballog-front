@@ -19,11 +19,12 @@ import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWi
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { recording } from '@/entities/record/api/recording.queries'
 import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
-import InfoIcon from '@/assets/infoIcon.svg?react'
 import { recordingPost } from '@/entities/record/api/recording-post'
 import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
 import { Loading } from '@/shared/ui/common'
 import { LottieRefProvider } from '@/shared/contexts/lottieRefContext'
+
+import { ToolTipPopover } from './ToolTipPopover'
 
 const LiveRecordPageInner = ({
   recordingData,
@@ -75,8 +76,8 @@ const LiveRecordPageInner = ({
             'mt-8 mb-8',
           )}
         >
-          <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center">
-            지금의 감정 클릭하기! <InfoIcon className="ml-1 w-5 h-5" />
+          <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center relative">
+            지금의 감정 클릭하기! <ToolTipPopover />
           </p>
           <p className="body-sm-light text-usage-text-subtle">
             {dominant} 이기고 있어요! <br />
@@ -96,7 +97,7 @@ const LiveRecordPageInner = ({
             }}
           />
         </LottieRefProvider>
-        
+
         {/* 하단 버튼 */}
         <EndRecordingButton />
       </div>
