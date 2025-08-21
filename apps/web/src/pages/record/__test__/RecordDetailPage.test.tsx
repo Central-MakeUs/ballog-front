@@ -15,11 +15,13 @@ import { RecordDetailPage } from '../ui/RecordDetailPage'
 
 const mockPush = vi.fn()
 const mockReplace = vi.fn()
+const mockPop = vi.fn()
 
 vi.mock('@/shared/lib/stackflow', () => ({
   useFlow: () => ({
     push: mockPush,
     replace: mockReplace,
+    pop: mockPop,
   }),
 }))
 
@@ -160,7 +162,7 @@ describe('RecordDetailPage', () => {
     // 비동기 작업 완료 대기
     await waitFor(() => {
       expect(toast).toHaveBeenCalledWith('관람로그 삭제가 완료되었습니다!')
-      expect(mockReplace).toHaveBeenCalledWith('Record', {}, { animate: false })
+      expect(mockPop).toHaveBeenCalled()
     })
   })
 
