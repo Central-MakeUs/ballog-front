@@ -26,7 +26,7 @@ export const RecordDetailPage = ({
   }
 
   if (error) {
-    toast('관람 기록을 불러오는 중 오류가 발생했습니다.')
+    toast.error('관람 기록을 불러오는 중 오류가 발생했습니다.')
   }
 
   return (
@@ -49,7 +49,7 @@ export const RecordDetailPage = ({
               <RecordLogCard.Info
                 homeTeam={data?.data.homeTeam ?? 'SSG_LANDERS'}
                 awayTeam={data?.data.awayTeam ?? 'LG_TWINS'}
-                stadium={data?.data.stadium ?? '잠실야구장'}
+                stadium={data?.data.stadium ?? 'JAMSIL'}
                 date={data?.data.matchDate ?? '2025.07.09 (수) 오후 6:30'}
                 result={data?.data.result ?? 'DRAW'}
               />

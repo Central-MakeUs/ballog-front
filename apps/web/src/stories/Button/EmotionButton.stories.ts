@@ -27,11 +27,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const mockLottieRef = { current: null };
+const mockPeerRef = { current: null };
+
 export const Joy: Story = {
   args: {
     emotionType: 'joy',
     scale: 50,
     percent: 50,
+    lottieRef: mockLottieRef,
+    peerRef: mockPeerRef,
   },
 }
 
@@ -40,5 +45,7 @@ export const Angry: Story = {
     emotionType: 'angry',
     scale: 50,
     percent: 50,
+    lottieRef: mockLottieRef,
+    peerRef: mockPeerRef,
   },
 }

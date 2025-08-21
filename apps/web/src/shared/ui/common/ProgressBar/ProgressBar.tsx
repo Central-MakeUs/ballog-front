@@ -26,16 +26,6 @@ interface RecordLogProgressProps extends ComponentProps<'div'> {
  * <ProgressBar positiveEmotionPercent={75} negativeEmotionPercent={25} />
  */
 
-const getBarColor = (
-  positiveEmotionPercent: number,
-  negativeEmotionPercent: number,
-) => {
-  if (positiveEmotionPercent >= negativeEmotionPercent) {
-    return ['bg-brand-green-default', 'bg-brand-red-default']
-  }
-  return ['bg-brand-red-default', 'bg-brand-green-default']
-}
-
 const EmotionIconWithPercent = ({
   emotion,
   percent,
@@ -63,10 +53,6 @@ export const ProgressBar = ({
   className,
   ...rest
 }: RecordLogProgressProps) => {
-  const [barColor, backgroundColor] = getBarColor(
-    positiveEmotionPercent,
-    negativeEmotionPercent,
-  )
   const progressStyle = { width: `${positiveEmotionPercent}%` }
 
   return (
@@ -89,17 +75,15 @@ export const ProgressBar = ({
       <div
         className={cn(
           'relative w-full h-4 rounded-full overflow-hidden',
-          backgroundColor,
+          'bg-brand-red-default',
         )}
       >
         <div
           className={cn(
             'absolute top-0 h-full',
             'transition-all duration-1000', // 멋진 효과
-            barColor,
-            positiveEmotionPercent >= negativeEmotionPercent
-              ? 'left-0'
-              : 'right-0',
+            'bg-brand-green-default',
+            'left-0',
           )}
           style={progressStyle}
         />

@@ -77,7 +77,7 @@ export const RecordMainPage = () => {
   const { data, isLoading, error } = useQuery(queryKeys.getRecord())
 
   if (error) {
-    toast('관람 기록을 불러오는 중 오류가 발생했습니다.')
+    toast.error('관람 기록을 불러오는 중 오류가 발생했습니다.')
   }
 
   return (

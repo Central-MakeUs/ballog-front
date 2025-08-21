@@ -1,36 +1,51 @@
-import type { ComponentProps } from 'react'
+import type { MouseEventHandler, ComponentProps, RefObject } from 'react'
+import type { LottieRefCurrentProps } from 'lottie-react'
 
 import { cn } from '@/shared/lib/classnames'
-import JoyEmotion from '@/assets/joyEmotion.svg?react'
-import AngryEmotion from '@/assets/angryEmotion.svg?react'
 
+import { EmotionLottie } from './EmotionLottie'
 import { IconButton } from './IconButton'
 
-// TODO: 실제 감정별 SVG 아이콘으로 교체 필요
-export const JoyIcon = () => (
-  <span
-    role="img"
-    aria-label="기뻐요"
-    className="flex items-center justify-center size-18"
-  >
-    <JoyEmotion className="w-full h-full" />
-  </span>
-)
+type LottieRef = RefObject<LottieRefCurrentProps | null>
 
-export const AngryIcon = () => (
-  <span
-    role="img"
-    aria-label="화나요"
-    className="flex items-center justify-center size-18"
-  >
-    <AngryEmotion className="w-full h-full" />
-  </span>
-)
+export const JoyIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
+  return (
+    <span
+      role="img"
+      aria-label="화나요"
+      className="flex items-center justify-center size-18"
+    >
+      <EmotionLottie
+        emotion="joy"
+        lottieRef={lottieRef}
+        className="w-full h-full pointer-events-none"
+      />
+    </span>
+  )
+}
+
+export const AngryIcon = ({ lottieRef }: { lottieRef: LottieRef }) => {
+  return (
+    <span
+      role="img"
+      aria-label="화나요"
+      className="flex items-center justify-center size-18"
+    >
+      <EmotionLottie
+        emotion="angry"
+        lottieRef={lottieRef}
+        className="w-full h-full"
+      />
+    </span>
+  )
+}
 
 interface EmotionButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
   emotionType?: 'joy' | 'angry'
   scale: number
   percent: number
+  lottieRef: LottieRef
+  peerRef: LottieRef
 }
 
 const getButtonScale = (scale: number): string => {
@@ -69,9 +84,25 @@ export const EmotionButton = ({
   className,
   scale,
   percent,
+  lottieRef,
+  peerRef,
+  onClick,
   ...props
 }: EmotionButtonProps) => {
   const label = emotionType === 'joy' ? '기뻐요' : '화나요'
+
+  const isNeutral = (p: number) => p >= 41 && p <= 59
+
+  const play = (ref: LottieRef) => {
+    ref.current?.stop()
+    ref.current?.goToAndPlay(0, true)
+  }
+
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    play(lottieRef)
+    if (isNeutral(percent)) play(peerRef)
+    onClick?.(e)
+  }
 
   return (
     <div
@@ -91,10 +122,15 @@ export const EmotionButton = ({
           getButtonScale(scale),
         )}
         type="button"
+        onClick={handleClick}
         {...props}
       >
         <div className={cn('flex flex-col items-center justify-center w-full')}>
-          <IconButton className={cn('size-20 mx-auto')} state={emotionType} />
+          <IconButton
+            className={cn('size-20 mx-auto')}
+            state={emotionType}
+            lottieRef={lottieRef}
+          />
           <span className={cn('body-sm-light text-usage-text-subtle  mt-1')}>
             {label}
           </span>
