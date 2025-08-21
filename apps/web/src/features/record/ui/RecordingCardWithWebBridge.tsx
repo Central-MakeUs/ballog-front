@@ -57,13 +57,13 @@ export const RecordingCardWithWebBridge = ({
 
   useEffect(() => {
     if (uploadState.isUploading) {
-      toast('이미지 업로드 중...')
+      toast.info('이미지 업로드 중...')
     }
   }, [uploadState.isUploading])
 
   useEffect(() => {
     if (!uploadState.isUploading && uploadState.progress === 'complete') {
-      toast.success('업로드 완료!')
+      toast('업로드 완료!')
     }
   }, [uploadState.isUploading, uploadState.progress])
 

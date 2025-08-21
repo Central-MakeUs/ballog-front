@@ -24,14 +24,19 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+
+const lottieRef = { current: null } as const
+
 export const Joy: Story = {
   args: {
     state: 'joy',
+    lottieRef,
   },
 }
 
 export const Angry: Story = {
   args: {
     state: 'angry',
+    lottieRef,
   },
 }

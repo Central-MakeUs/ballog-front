@@ -63,7 +63,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
           data-testid="share-button"
           onClick={() => {
             if (!images[0]?.imageUrl) {
-              toast('이미지가 없습니다.')
+              toast.info('이미지가 없습니다.')
             } else {
               push('ShareBottomSheet', {
                 imageUrl: images[0].imageUrl,

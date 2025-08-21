@@ -10,6 +10,7 @@ defaultConfig.watchFolders = [monorepoRoot]
 
 defaultConfig.transformer = {
   ...defaultConfig.transformer,
+  babelTransformerPath: require.resolve('react-native-svg-transformer'),
 }
 
 defaultConfig.resolver = {
