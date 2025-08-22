@@ -11,6 +11,7 @@ import { GlobalNavigationBar } from '@/widgets/navigation'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { SectionHeader } from '@/shared/ui/common'
 import type { RecordResponseDTO } from '@/entities/record/model/record.type'
+import { DEFAULT_RECORD_DATA } from '@/shared/constants/record'
 
 const RecordMainContent = ({
   data,
@@ -23,13 +24,7 @@ const RecordMainContent = ({
     totalNegativeEmotionPercent,
     totalPositiveEmotionPercent,
     records,
-  } = data?.data ?? {
-    totalCount: 0,
-    winRate: 0,
-    totalNegativeEmotionPercent: 0,
-    totalPositiveEmotionPercent: 0,
-    records: [],
-  }
+  } = data?.data ?? DEFAULT_RECORD_DATA.RecordMain
 
   return (
     <>

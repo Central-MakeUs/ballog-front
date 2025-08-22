@@ -23,6 +23,8 @@ import { recordingPost } from '@/entities/record/api/recording-post'
 import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
 import { Loading } from '@/shared/ui/common'
 import { LottieRefProvider } from '@/shared/contexts/lottieRefContext'
+import { BackArrow } from '@/assets/BackArrow'
+import { useEndRecordingFlow } from '@/features/record/hooks/useEndRecordingFlow'
 
 import { ToolTipPopover } from './ToolTipPopover'
 
@@ -35,6 +37,7 @@ const LiveRecordPageInner = ({
   recordingData: RecordingResponse
   emotionData: EmotionType
 }) => {
+  const { confirmEndRecord } = useEndRecordingFlow()
   const { mutate } = usePostEmotion()
   const { joyPercent, angryPercent } = useEmotionVote()
   const dominant = joyPercent >= angryPercent ? '기뻐요' : '화나요'
@@ -54,6 +57,15 @@ const LiveRecordPageInner = ({
         title: (
           <span className="flex text-usage-text-default">감정 기록 중</span>
         ),
+        activityEnterStyle: 'slideInLeft',
+        backButton: {
+          renderIcon: () => <BackArrow />,
+          onClick: (e) => {
+            // stackflow default event 방지
+            e.preventDefault()
+            confirmEndRecord()
+          },
+        },
         height: '48px',
       }}
     >
@@ -65,7 +77,7 @@ const LiveRecordPageInner = ({
         }}
       />
 
-      <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
+      <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2 w-full">
         {/* Recording Card */}
         <RecordingCardWithWebBridge recordingData={recordingData} />
 

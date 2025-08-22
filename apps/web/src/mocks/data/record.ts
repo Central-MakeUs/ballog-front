@@ -215,7 +215,7 @@ export const record: {
       stadium: 'JAMSIL',
       userId: 1,
       watchCnt: 4,
-      result: 'DRAW',
+      result: null,
       baseballTeam: 'LG_TWINS',
     },
     {
@@ -243,7 +243,7 @@ export const record: {
       matchTime: '21:30',
       userId: 1,
       watchCnt: 4,
-      result: 'DRAW',
+      result: null,
       baseballTeam: 'LG_TWINS',
       positiveEmotionPercent: 60,
       negativeEmotionPercent: 40,

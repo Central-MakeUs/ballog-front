@@ -1,42 +1,8 @@
 import { Button } from '@/shared/ui/common'
-import { useFlow } from '@/shared/lib/stackflow'
-import { useModal } from '@/shared/hooks/modal/useModal'
-
-import { SuccessLottie } from './SuccessLottie'
+import { useEndRecordingFlow } from '@/features/record/hooks/useEndRecordingFlow'
 
 export const EndRecordingButton = () => {
-  const { replace } = useFlow()
-  const { openHorizontalModal, openImageModal } = useModal()
-
-  // 마지막 모달
-  const leavePage = () => {
-    setTimeout(() => {
-      replace('Record', {})
-    }, 3000)
-
-    openImageModal({
-      heading: '기록이 완료되었어요!',
-      renderContent: () => (
-        <SuccessLottie onComplete={() => replace('Record', {})} />
-      ),
-    })
-  }
-
-  // 첫 번째 모달
-  const confirmEndRecord = () => {
-    openHorizontalModal({
-      heading: '기록을 완료하시겠습니까?',
-      buttons: [
-        { label: '취소', onClick: close },
-        {
-          label: '종료하기',
-          onClick: () => {
-            leavePage()
-          },
-        },
-      ],
-    })
-  }
+  const { confirmEndRecord } = useEndRecordingFlow()
 
   return (
     <div className="fixed bottom-10 w-full">

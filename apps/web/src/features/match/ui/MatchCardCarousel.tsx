@@ -15,7 +15,7 @@ interface MatchCardCarouselProps {
 }
 
 export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
-  const { replace } = useFlow()
+  const { push } = useFlow()
 
   const [api, setApi] = useState<CarouselApi | null>(null)
   const [current, setCurrent] = useState(0)
@@ -49,19 +49,25 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
                 {...match}
                 isCenter={index === current}
                 onClick={() =>
-                  replace('LiveRecord', { matchId: String(match.matchesId) })
+                  push(
+                    'LiveRecord',
+                    { matchId: String(match.matchesId) },
+                    {
+                      animate: false,
+                    },
+                  )
                 }
               />
             </CarouselItem>
           ))}
         </CarouselContent>
-      </Carousel> 
+      </Carousel>
 
       {/* Pagination */}
       <div className="flex justify-center mt-4 gap-2 p-1 bg-usage-background-strong rounded-full w-fit mx-auto">
         {matches.map((_, index) => (
           <div
-            key={index} 
+            key={index}
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
               index === current
                 ? 'bg-brand-neutral-white'

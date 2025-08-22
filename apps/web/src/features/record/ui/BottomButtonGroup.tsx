@@ -12,12 +12,12 @@ import { recordDelete } from '@/entities/record/api/record-delete'
 export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
   const { openHorizontalModal } = useModal()
   const { images } = useImageContext()
-  const { push, replace } = useFlow()
+  const { push, pop } = useFlow()
   const { mutate: deleteRecord } = useMutation({
     mutationFn: (recordId: number) => recordDelete.deleteRecord(recordId),
     onSuccess: () => {
       toast('관람로그 삭제가 완료되었습니다!')
-      replace('Record', {}, { animate: false })
+      pop()
     },
   })
 
