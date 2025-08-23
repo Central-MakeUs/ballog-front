@@ -13,14 +13,13 @@ interface SocialButtonProps extends ComponentProps<'button'> {
 }
 
 export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
-  const { handleLogin, isPending } = useSocialLoginFlow('kakao')
+  const { handleLogin } = useSocialLoginFlow('kakao')
 
   return (
     <Button
       leftIcon={<KakaoTalk className="size-6" />}
       rightIcon={<Chevron className="size-6" />}
       size="lg"
-      disabled={isPending}
       className={cn(
         'bg-[#FFD337]',
         'justify-between body-sm-medium text-usage-text-inverse',
@@ -32,14 +31,14 @@ export const KakaoButton = ({ className, ...props }: SocialButtonProps) => {
       }}
       {...props}
     >
-      {isPending ? '로그인 중...' : '카카오로 시작하기'}
+      {'카카오로 시작하기'}
     </Button>
   )
 }
 
 export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
   const ua = navigator.userAgent
-  const { handleLogin, isPending } = useSocialLoginFlow('apple')
+  const { handleLogin } = useSocialLoginFlow('apple')
 
   // IOS일 경우에만 애플 로그인 버튼 렌더링
   if (!/iPhone|iPad|iPod/.test(ua)) {
@@ -51,7 +50,6 @@ export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
       leftIcon={<Apple className="size-6" />}
       rightIcon={<Chevron className="size-6" />}
       size="lg"
-      disabled={isPending}
       className={cn(
         'bg-brand-neutral-5 justify-between body-sm-medium text-usage-text-inverse',
         'active:bg-brand-neutral-5/80 py-4',
@@ -62,7 +60,7 @@ export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
       }}
       {...props}
     >
-      {isPending ? '로그인 중...' : '애플로 시작하기'}
+      {'애플로 시작하기'}
     </Button>
   )
 }
