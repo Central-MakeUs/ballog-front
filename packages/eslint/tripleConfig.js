@@ -4,6 +4,7 @@ import promisePlugin from 'eslint-plugin-promise'
 import typescriptEslint from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
 import globals from 'globals'
+import boundaries from 'eslint-plugin-boundaries'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -165,6 +166,100 @@ export default [
       'promise/catch-or-return': ['error', { allowFinally: true }],
       'promise/prefer-await-to-callbacks': 'error',
       'promise/prefer-await-to-then': 'error',
+    },
+  },
+
+  // FSD rule
+  {
+    plugins: { boundaries },
+    settings: {
+      'boundaries/elements': [
+        { type: 'shared', pattern: '**/src/shared/*' },
+        { type: 'entities', pattern: '**/src/entities/*' },
+        { type: 'features', pattern: '**/src/features/*' },
+        { type: 'widgets', pattern: '**/src/widgets/*' },
+        { type: 'pages', pattern: '**/src/pages/*' },
+      ],
+    },
+    rules: {
+      'boundaries/element-types': [
+        'error',
+        {
+          default: 'disallow',
+          rules: [
+            // shared: shared 내부만
+            { from: 'shared', allow: ['shared'] },
+
+            // entities: shared, entities 만
+            { from: 'entities', allow: ['shared', 'entities'] },
+
+            // features: shared, entities, features 만
+            { from: 'features', allow: ['shared', 'entities', 'features'] },
+
+            // widgets: shared, entities, features, widgets만
+            {
+              from: 'widgets',
+              allow: ['shared', 'entities', 'features', 'widgets'],
+            },
+
+            // pages: 제약 없음
+            {
+              from: 'pages',
+              allow: ['shared', 'entities', 'features', 'widgets', 'pages'],
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // 동일 레이어 import 는 경고 처리
+  {
+    files: ['**/src/entities/**/*.{ts,tsx,js,jsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'warn',
+        {
+          patterns: [
+            '@/entities/**',
+            '../entities/**',
+            '../../entities/**',
+            '../../../entities/**',
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/src/features/**/*.{ts,tsx,js,jsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'warn',
+        {
+          patterns: [
+            '@/features/**',
+            '../features/**',
+            '../../features/**',
+            '../../../features/**',
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/src/widgets/**/*.{ts,tsx,js,jsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'warn',
+        {
+          patterns: [
+            '@/widgets/**',
+            '../widgets/**',
+            '../../widgets/**',
+            '../../../widgets/**',
+          ],
+        },
+      ],
     },
   },
 ]
