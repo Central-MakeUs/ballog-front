@@ -13,7 +13,7 @@ import type { UserType } from '@/entities/auth/model/auth.type'
 
 const mockSetUser = vi.fn()
 
-vi.mock('@/shared/lib/stackflow', () => ({
+vi.mock('@/app/routes/stackflow', () => ({
   useFlow: () => ({
     push: vi.fn(),
   }),
@@ -28,10 +28,10 @@ vi.mock('@/entities/auth/api', () => ({
   },
 }))
 
-vi.mock('@/shared/contexts/sessionContext', async () => {
+vi.mock('@/app/Provider/contexts/sessionContext', async () => {
   const actual = await vi.importActual<
     typeof import('@/app/Provider/contexts/sessionContext')
-  >('@/shared/contexts/sessionContext')
+  >('@/app/Provider/contexts/sessionContext')
 
   return {
     ...actual,

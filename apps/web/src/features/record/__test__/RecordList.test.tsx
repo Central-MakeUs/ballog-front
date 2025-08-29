@@ -9,7 +9,7 @@ import { RecordList } from '../ui/RecordList'
 // stackflow mock
 const mockPush = vi.fn()
 
-vi.mock('@/shared/lib/stackflow', () => ({
+vi.mock('@/app/routes/stackflow', () => ({
   useFlow: () => ({
     push: mockPush,
   }),
