@@ -8,7 +8,7 @@ import {
 import type { CarouselApi } from '@/shared/ui/common/carousel'
 import { MatchCard } from '@/entities/match/ui/MatchCard'
 import type { Match } from '@/entities/match/model/match.type'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 interface MatchCardCarouselProps {
   matches: Match[]
@@ -55,13 +55,13 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-      </Carousel> 
+      </Carousel>
 
       {/* Pagination */}
       <div className="flex justify-center mt-4 gap-2 p-1 bg-usage-background-strong rounded-full w-fit mx-auto">
         {matches.map((_, index) => (
           <div
-            key={index} 
+            key={index}
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
               index === current
                 ? 'bg-brand-neutral-white'

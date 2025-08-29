@@ -8,7 +8,7 @@ import {
 import { toast } from 'sonner'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 export const ShareBottomSheet = ({
   params,

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
 
-import type { Image } from '@/entities/record/model/record.type'
+interface Image {
+  imageUrl: string
+  createdAt: string
+}
 
 interface UseImagePickerProps {
   initialImages?: Image[]

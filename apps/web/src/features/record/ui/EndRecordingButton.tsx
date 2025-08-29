@@ -1,5 +1,5 @@
 import { Button } from '@/shared/ui/common'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 import { useModal } from '@/shared/hooks/modal/useModal'
 
 import { SuccessLottie } from './SuccessLottie'

@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react'
 
 import type { Image } from '@/entities/record/model/record.type'
-import { useImagePicker } from '@/shared/hooks/image/useImagePicker'
-import { useImageUpload } from '@/shared/hooks/image/useImageUpload'
+import { useImagePicker } from '@/features/image-management/hooks/useImagePicker'
+import { useImageUpload } from '@/features/image-management/hooks/useImageUpload'
 import type { ImageUploadResponse } from '@/entities/image/model/image.type'
 
 interface UseImagePickerWithUploadProps {

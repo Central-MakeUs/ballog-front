@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { Button } from '@/shared/ui/common'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 import { OnBoardingCarousel } from './OnBoardCarousel'
 

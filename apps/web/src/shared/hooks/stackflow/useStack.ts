@@ -1,4 +1,4 @@
-import { actions } from '@/shared/lib/stackflow'
+import { actions } from '@/app/routes/stackflow'
 
 export const useStack = () => {
   const stack = actions.getStack()

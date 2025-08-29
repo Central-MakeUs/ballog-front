@@ -1,7 +1,7 @@
 import type { Record } from '@/entities/record/model/record.type'
 import { RecordLogCard } from '@/entities/record/ui'
 import { Button } from '@/shared/ui/common'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 export const RecordList = ({ records }: { records: Record[] }) => {
   const { push, replace } = useFlow()

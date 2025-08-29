@@ -5,7 +5,7 @@ import { toast } from 'sonner'
 import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common'
 import { useModal } from '@/shared/hooks/modal/useModal'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 import { useImageContext } from '@/features/record/hooks/useImageContext'
 import { recordDelete } from '@/entities/record/api/record-delete'
 

@@ -4,9 +4,9 @@ import { toast } from 'sonner'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { NickNameForm } from '@/features/auth/ui'
-import { useUpdateMyInfoMutation } from '@/shared/hooks/auth/useUpdateMyInfoMutation'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useUpdateMyInfoMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
+import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useFlow } from '@/app/routes/stackflow'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
 const ChangeNickNamePage = () => {
@@ -24,7 +24,7 @@ const ChangeNickNamePage = () => {
       {
         onSuccess: () => {
           pop()
-          toast("닉네임 변경이 완료되었습니다!")
+          toast('닉네임 변경이 완료되었습니다!')
           setUser({ ...user, nickname: data.nickname })
         },
       },

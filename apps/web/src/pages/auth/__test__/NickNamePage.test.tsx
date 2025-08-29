@@ -30,7 +30,7 @@ vi.mock('@/entities/auth/api', () => ({
 
 vi.mock('@/shared/contexts/sessionContext', async () => {
   const actual = await vi.importActual<
-    typeof import('@/shared/contexts/sessionContext')
+    typeof import('@/app/Provider/contexts/sessionContext')
   >('@/shared/contexts/sessionContext')
 
   return {

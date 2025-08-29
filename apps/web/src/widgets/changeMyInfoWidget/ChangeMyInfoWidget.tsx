@@ -1,5 +1,5 @@
 import { List } from '@/shared/ui/common/List/List'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 export const ChangeMyInfoWidget = () => {
   const { push } = useFlow()

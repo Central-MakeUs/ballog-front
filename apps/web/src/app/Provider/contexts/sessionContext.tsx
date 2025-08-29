@@ -3,8 +3,7 @@ import { toast } from 'sonner'
 
 import { authGet } from '@/entities/auth/api'
 import type { UserType } from '@/entities/auth/model/auth.type'
-
-import { useAccessTokenStorage } from '../hooks/auth/useAccessTokenStorage'
+import { useAccessTokenStorage } from '@/shared/hooks/auth/useAccessTokenStorage'
 
 interface SessionContextType {
   user: UserType | null

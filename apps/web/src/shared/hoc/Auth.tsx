@@ -1,6 +1,6 @@
 import { type ComponentType, useEffect } from 'react'
 
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 import { useStack } from '../hooks/stackflow/useStack'
 

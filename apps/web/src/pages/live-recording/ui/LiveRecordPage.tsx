@@ -4,16 +4,16 @@ import { useQuery, useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
-import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
+import { EmotionVoteWidget } from '@/pages/live-recording/ui/EmotionVoteWidget'
 import {
   EmotionVoteProvider,
   useEmotionVote,
 } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
 import { emotions } from '@/entities/record/api/emotion.queries'
-import { usePostEmotion } from '@/features/record/hooks/usePostEmotion'
+import { usePostEmotion } from '@/pages/live-recording/hooks/usePostEmotion'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWithWebBridge'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
