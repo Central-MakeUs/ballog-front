@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import type { ComponentProps } from 'react'
+import { useState, type ComponentProps } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
+import { useLottieRefs } from '@/pages/live-recording/contexts/lottieRefContext'
 
 import { getScale } from '../utils/getScale'
 import { getGridRatio } from '../utils/getGridRatio'
@@ -20,6 +20,8 @@ export const EmotionVoteWidget = ({
   className,
   ...rest
 }: EmotionVoteWidgetProps) => {
+  const { joyRef, angryRef } = useLottieRefs()
+
   const [, setSelectedEmotion] = useState<'joy' | 'angry' | null>(null)
 
   const { joyPercent, angryPercent } = useEmotionVote()
@@ -49,6 +51,8 @@ export const EmotionVoteWidget = ({
             }}
             scale={isZero ? 1 : getScale(joyPercent)}
             percent={joyPercent}
+            lottieRef={joyRef}
+            peerRef={angryRef}
             className="transition-all duration-300 origin-bottom w-full"
           >
             기뻐요
@@ -64,6 +68,8 @@ export const EmotionVoteWidget = ({
             }}
             scale={isZero ? 1 : getScale(angryPercent)}
             percent={angryPercent}
+            lottieRef={angryRef}
+            peerRef={joyRef}
             className="transition-all duration-300 origin-bottom w-full"
           >
             화나요

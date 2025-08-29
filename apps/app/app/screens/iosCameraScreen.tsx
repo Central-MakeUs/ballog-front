@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import {
+  Alert,
   View,
   StyleSheet,
   TouchableOpacity,
@@ -15,7 +16,7 @@ import {
   GestureDetector,
 } from 'react-native-gesture-handler'
 import Animated from 'react-native-reanimated'
-// import FlipButton from '@/assets/images/flipButton.svg'
+import FlipButton from '@/assets/images/flipButton.svg'
 import { useCamera } from '@/hooks/useCamera'
 import { useGallery } from '@/hooks/useGallery'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
@@ -24,6 +25,13 @@ export default function IosCameraScreen() {
   const router = useRouter()
 
   const cameraRef = useRef<CameraView>(null) as React.RefObject<CameraView>
+
+  const openGalleryOrSettings = () => {
+    Alert.alert('갤러리 권한이 없어요', '갤러리 썸네일 표시와 사진 업로드를 위해 사진 보관함 접근이 필요합니다.', [
+      { text: '취소', style: 'cancel' },
+      { text: '설정 열기', onPress: () => Linking.openSettings() },
+    ])
+  }
 
   const {
     cameraPermission,
@@ -118,13 +126,20 @@ export default function IosCameraScreen() {
                   style={styles.galleryThumbnail}
                 />
               ) : (
-                <Text style={{ color: '#000' }}>갤러리</Text>
+                <TouchableOpacity onPress={openGalleryOrSettings}>
+                  <View
+                    style={styles.galleryPlaceholder}
+                    
+                  />
+                </TouchableOpacity>
               )}
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.flipButton}
               onPress={() => setFacing(facing === 'back' ? 'front' : 'back')}
-            ></TouchableOpacity>
+            >
+              <FlipButton width={48} height={48} />
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       </SafeAreaProvider>
@@ -216,7 +231,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 8,
-    backgroundColor: '#fff',
+    backgroundColor: '#424242',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -224,6 +239,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 8,
+  },
+  galleryPlaceholder: {
+    width: 44,
+    height: 44,
+    borderRadius: 8,
+    backgroundColor: '#424242',
   },
   shutterButton: {
     position: 'absolute',

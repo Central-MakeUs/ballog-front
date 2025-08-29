@@ -11,6 +11,7 @@ import { ImageTimeLine } from '@/features/record/ui/ImageTimeLine'
 import { EmotionTimeLine } from '@/features/record/ui/EmotionTimeLine'
 import { BottomButtonGroup } from '@/features/record/ui/BottomButtonGroup'
 import { ImageContextProvider } from '@/features/record/hooks/ImageContextProvider'
+import { DEFAULT_RECORD_DATA } from '@/entities/record/constants/record'
 
 export const RecordDetailPage = ({
   params,
@@ -21,12 +22,25 @@ export const RecordDetailPage = ({
     queryKeys.getRecordDetail(Number(params.matchRecordId)),
   )
 
+  const {
+    matchRecordId,
+    homeTeam,
+    awayTeam,
+    stadium,
+    matchDate,
+    result,
+    positiveEmotionPercent,
+    negativeEmotionPercent,
+    emotionGroupList,
+    imageList,
+  } = data?.data ?? DEFAULT_RECORD_DATA.RecordDetail
+
   if (isLoading) {
     return <Loading text="관람 기록을 불러오는 중..." />
   }
 
-  if (error) {
-    toast('관람 기록을 불러오는 중 오류가 발생했습니다.')
+  if (error || !data) {
+    toast.error('관람 기록을 불러오는 중 오류가 발생했습니다.')
   }
 
   return (
@@ -42,27 +56,27 @@ export const RecordDetailPage = ({
         },
       }}
     >
-      <ImageContextProvider initialImages={data?.data.imageList ?? []}>
+      <ImageContextProvider initialImages={imageList}>
         <AppLayout>
           <div className="px-4 pt-4 w-full">
-            <RecordLogCard.Root key={data?.data.matchRecordId}>
+            <RecordLogCard.Root key={matchRecordId}>
               <RecordLogCard.Info
-                homeTeam={data?.data.homeTeam ?? 'SSG_LANDERS'}
-                awayTeam={data?.data.awayTeam ?? 'LG_TWINS'}
-                stadium={data?.data.stadium ?? 'JAMSIL'}
-                date={data?.data.matchDate ?? '2025.07.09 (수) 오후 6:30'}
-                result={data?.data.result ?? 'DRAW'}
+                homeTeam={homeTeam}
+                awayTeam={awayTeam}
+                stadium={stadium}
+                date={matchDate}
+                result={result}
               />
             </RecordLogCard.Root>
           </div>
 
-          <ImageTimeLine matchRecordId={data?.data.matchRecordId ?? 0} />
+          <ImageTimeLine matchRecordId={matchRecordId} />
           <EmotionTimeLine
-            positiveEmotionPercent={data?.data.positiveEmotionPercent ?? 0}
-            negativeEmotionPercent={data?.data.negativeEmotionPercent ?? 0}
-            emotionGroupList={data?.data.emotionGroupList ?? []}
+            positiveEmotionPercent={positiveEmotionPercent}
+            negativeEmotionPercent={negativeEmotionPercent}
+            emotionGroupList={emotionGroupList}
           />
-          <BottomButtonGroup recordId={data?.data.matchRecordId ?? 0} />
+          <BottomButtonGroup recordId={matchRecordId} />
         </AppLayout>
       </ImageContextProvider>
     </AppScreen>

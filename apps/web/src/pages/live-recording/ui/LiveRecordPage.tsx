@@ -19,10 +19,14 @@ import { RecordingCardWithWebBridge } from '@/features/record/ui/RecordingCardWi
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { recording } from '@/entities/record/api/recording.queries'
 import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
-import InfoIcon from '@/assets/infoIcon.svg?react'
 import { recordingPost } from '@/entities/record/api/recording-post'
 import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
 import { Loading } from '@/shared/ui/common'
+import { LottieRefProvider } from '@/pages/live-recording/contexts/lottieRefContext'
+import { BackArrow } from '@/assets/BackArrow'
+import { useEndRecordingFlow } from '@/features/record/hooks/useEndRecordingFlow'
+
+import { ToolTipPopover } from './ToolTipPopover'
 
 const LiveRecordPageInner = ({
   recordingData,
@@ -33,6 +37,7 @@ const LiveRecordPageInner = ({
   recordingData: RecordingResponse
   emotionData: EmotionType
 }) => {
+  const { confirmEndRecord } = useEndRecordingFlow()
   const { mutate } = usePostEmotion()
   const { joyPercent, angryPercent } = useEmotionVote()
   const dominant = joyPercent >= angryPercent ? '기뻐요' : '화나요'
@@ -52,6 +57,15 @@ const LiveRecordPageInner = ({
         title: (
           <span className="flex text-usage-text-default">감정 기록 중</span>
         ),
+        activityEnterStyle: 'slideInLeft',
+        backButton: {
+          renderIcon: () => <BackArrow />,
+          onClick: (e) => {
+            // stackflow default event 방지
+            e.preventDefault()
+            confirmEndRecord()
+          },
+        },
         height: '48px',
       }}
     >
@@ -63,7 +77,7 @@ const LiveRecordPageInner = ({
         }}
       />
 
-      <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2">
+      <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2 w-full">
         {/* Recording Card */}
         <RecordingCardWithWebBridge recordingData={recordingData} />
 
@@ -74,8 +88,8 @@ const LiveRecordPageInner = ({
             'mt-8 mb-8',
           )}
         >
-          <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center">
-            지금의 감정 클릭하기! <InfoIcon className="ml-1 w-5 h-5" />
+          <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center relative">
+            지금의 감정 클릭하기! <ToolTipPopover />
           </p>
           <p className="body-sm-light text-usage-text-subtle">
             {dominant} 이기고 있어요! <br />
@@ -84,12 +98,17 @@ const LiveRecordPageInner = ({
         </div>
 
         {/* 버튼 인터랙션 부분 */}
-        <EmotionVoteWidget
-          emotions={emotionData}
-          onEmotionSubmit={(emotionType) => {
-            mutate({ matchRecordId: recordingData.matchRecordId, emotionType })
-          }}
-        />
+        <LottieRefProvider>
+          <EmotionVoteWidget
+            emotions={emotionData}
+            onEmotionSubmit={(emotionType) => {
+              mutate({
+                matchRecordId: recordingData.matchRecordId,
+                emotionType,
+              })
+            }}
+          />
+        </LottieRefProvider>
 
         {/* 하단 버튼 */}
         <EndRecordingButton />
@@ -115,7 +134,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
     },
     onError: () => {
       // setIsPostComplete(true)
-      toast('이미 경기 기록이 존재합니다')
+      toast.info('이미 경기 기록이 존재합니다')
       replace(
         'Home',
         {},

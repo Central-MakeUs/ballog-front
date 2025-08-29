@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { Trash } from 'lucide-react'
 import { toast } from 'sonner'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common'
@@ -8,16 +9,21 @@ import { useModal } from '@/shared/hooks/modal/useModal'
 import { useFlow } from '@/app/routes/stackflow'
 import { useImageContext } from '@/features/record/hooks/useImageContext'
 import { recordDelete } from '@/entities/record/api/record-delete'
+import { queryKeys } from '@/entities/record/api/record.queries'
 
 export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
   const { openHorizontalModal } = useModal()
   const { images } = useImageContext()
-  const { push, replace } = useFlow()
+  const { push, pop } = useFlow()
+  const queryClient = useQueryClient()
   const { mutate: deleteRecord } = useMutation({
     mutationFn: (recordId: number) => recordDelete.deleteRecord(recordId),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.getRecord().queryKey,
+      })
       toast('관람로그 삭제가 완료되었습니다!')
-      replace('Record', {}, { animate: false })
+      pop()
     },
   })
 
@@ -63,7 +69,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
           data-testid="share-button"
           onClick={() => {
             if (!images[0]?.imageUrl) {
-              toast('이미지가 없습니다.')
+              toast.info('이미지가 없습니다.')
             } else {
               push('ShareBottomSheet', {
                 imageUrl: images[0].imageUrl,

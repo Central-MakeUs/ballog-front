@@ -1,5 +1,5 @@
-import { toast } from 'sonner'
 import { POST_MESSAGE_EVENT, type LogoutResponsePayload } from '@ballog/bridge'
+import { toast } from 'sonner'
 
 import { authPost, authDelete } from '@/entities/auth/api'
 import { useFlow } from '@/app/routes/stackflow'

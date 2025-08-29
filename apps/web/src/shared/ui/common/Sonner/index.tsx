@@ -8,6 +8,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       data-testid="toast"
       theme={theme as ToasterProps['theme']}
       className="toaster group !bottom-30"
+      duration={1500}
       toastOptions={{
         className:
           '!bg-usage-background-inverse !text-usage-text-inverse body-sm-medium',

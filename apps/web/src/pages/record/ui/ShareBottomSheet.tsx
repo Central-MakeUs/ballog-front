@@ -32,7 +32,7 @@ export const ShareBottomSheet = ({
         imageUrl: params.imageUrl,
       })
     } else {
-      toast('모바일 앱에서만 공유할 수 있습니다.')
+      toast.info('모바일 앱에서만 공유할 수 있습니다.')
     }
   }
 
@@ -43,7 +43,7 @@ export const ShareBottomSheet = ({
         if (payload.message === MESSAGE_STATUS.DOWNLOAD_COMPLETED) {
           toast('이미지가 저장되었습니다.')
         } else if (payload.message === MESSAGE_STATUS.DOWNLOAD_FAILED) {
-          toast('이미지 저장에 실패했습니다.')
+          toast.error('이미지 저장에 실패했습니다.')
         }
       },
     )
