@@ -6,7 +6,7 @@ import { render } from '@/test/QueryWrapper'
 
 import { RecordMainPage } from '../ui/RecordMainPage'
 
-vi.mock('@/shared/lib/stackflow', () => ({
+vi.mock('@/app/routes/stackflow', () => ({
   useFlow: () => ({
     push: vi.fn(),
   }),

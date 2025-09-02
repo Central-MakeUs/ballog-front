@@ -8,7 +8,7 @@ import {
 import type { CarouselApi } from '@/shared/ui/common/carousel'
 import { MatchCard } from '@/entities/match/ui/MatchCard'
 import type { Match } from '@/entities/match/model/match.type'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 interface MatchCardCarouselProps {
   matches: Match[]

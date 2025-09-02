@@ -17,7 +17,7 @@ const mockPush = vi.fn()
 const mockReplace = vi.fn()
 const mockPop = vi.fn()
 
-vi.mock('@/shared/lib/stackflow', () => ({
+vi.mock('@/app/routes/stackflow', () => ({
   useFlow: () => ({
     push: mockPush,
     replace: mockReplace,

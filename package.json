@@ -31,6 +31,7 @@
     "@titicaca/eslint-config-triple": "^5.3.1",
     "@titicaca/prettier-config-triple": "^1.2.1",
     "eslint": "^9.29.0",
+    "eslint-plugin-boundaries": "^5.0.1",
     "prettier": "^3.5.3"
   },
   "prettier": "@titicaca/prettier-config-triple",

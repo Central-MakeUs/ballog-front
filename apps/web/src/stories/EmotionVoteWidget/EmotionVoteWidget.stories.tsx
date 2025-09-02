@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { EmotionVoteWidget } from '@/widgets/emotionVoteWidget/EmotionVoteWidget'
+import { EmotionVoteWidget } from '@/pages/live-recording/ui/EmotionVoteWidget'
 
 const meta: Meta<typeof EmotionVoteWidget> = {
   title: 'Widgets/EmotionVoteWidget',
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof EmotionVoteWidget>
 
 export const Default: Story = {
   render: (args) => (
-    <div className='bg-black'>
+    <div className="bg-black">
       {' '}
       <EmotionVoteWidget {...args} />
     </div>

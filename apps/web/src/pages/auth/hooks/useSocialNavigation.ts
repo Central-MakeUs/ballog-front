@@ -1,4 +1,4 @@
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 
 export const useSocialNavigation = () => {

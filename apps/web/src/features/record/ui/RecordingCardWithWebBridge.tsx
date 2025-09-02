@@ -9,7 +9,7 @@ import { useWebViewBridgeListener } from '@/features/record/hooks/useWebViewBrid
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { TEAMS } from '@/shared/constants/teams'
 import { STADIUM } from '@/shared/constants/stadium'
-import { useImageUpload } from '@/shared/hooks/image'
+import { useImageUpload } from '@/features/image-management/hooks'
 
 export const RecordingCardWithWebBridge = ({
   recordingData,

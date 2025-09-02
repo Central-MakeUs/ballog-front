@@ -24,7 +24,6 @@ export const MatchCard = ({
         awayTeam={awayTeam}
       />
       <HomeCard.StadiumInfo stadium={stadium} />
-
       <div className="w-full">
         <Button
           variant="secondary"

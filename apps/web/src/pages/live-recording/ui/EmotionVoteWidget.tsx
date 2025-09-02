@@ -4,10 +4,10 @@ import { cn } from '@/shared/lib/classnames'
 import { EmotionButton } from '@/shared/ui/common'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
-import { useLottieRefs } from '@/shared/contexts/lottieRefContext'
+import { useLottieRefs } from '@/pages/live-recording/contexts/lottieRefContext'
 
-import { getScale } from './utils/getScale'
-import { getGridRatio } from './utils/getGridRatio'
+import { getScale } from '../utils/getScale'
+import { getGridRatio } from '../utils/getGridRatio'
 
 interface EmotionVoteWidgetProps extends ComponentProps<'div'> {
   emotions?: EmotionType

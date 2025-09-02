@@ -1,7 +1,7 @@
 import { HomeCard } from '@/shared/ui/common/Card/HomeCard'
 import { Button } from '@/shared/ui/common/Button'
 import { SectionHeader } from '@/entities/match/ui/SectionHeader'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 
 export const MatchEmptySection = () => {
   const { replace } = useFlow()

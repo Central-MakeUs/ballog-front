@@ -1,4 +1,4 @@
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 import { useTermAgreement } from '@/pages/auth/hooks/useTermAgreement'
 import { TermCheckList } from '@/entities/term/ui/TermCheckList'
 import { Button } from '@/shared/ui/common'

@@ -11,7 +11,7 @@ import { GlobalNavigationBar } from '@/widgets/navigation'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { SectionHeader } from '@/shared/ui/common'
 import type { RecordResponseDTO } from '@/entities/record/model/record.type'
-import { DEFAULT_RECORD_DATA } from '@/shared/constants/record'
+import { DEFAULT_RECORD_DATA } from '@/entities/record/constants/record'
 
 const RecordMainContent = ({
   data,

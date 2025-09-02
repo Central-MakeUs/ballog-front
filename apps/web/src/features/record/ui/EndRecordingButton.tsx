@@ -1,6 +1,7 @@
 import { Button } from '@/shared/ui/common'
 import { useEndRecordingFlow } from '@/features/record/hooks/useEndRecordingFlow'
 
+
 export const EndRecordingButton = () => {
   const { confirmEndRecord } = useEndRecordingFlow()
 

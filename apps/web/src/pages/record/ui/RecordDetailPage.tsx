@@ -11,7 +11,7 @@ import { ImageTimeLine } from '@/features/record/ui/ImageTimeLine'
 import { EmotionTimeLine } from '@/features/record/ui/EmotionTimeLine'
 import { BottomButtonGroup } from '@/features/record/ui/BottomButtonGroup'
 import { ImageContextProvider } from '@/features/record/hooks/ImageContextProvider'
-import { DEFAULT_RECORD_DATA } from '@/shared/constants/record'
+import { DEFAULT_RECORD_DATA } from '@/entities/record/constants/record'
 
 export const RecordDetailPage = ({
   params,

@@ -2,8 +2,8 @@ import { POST_MESSAGE_EVENT, type LogoutResponsePayload } from '@ballog/bridge'
 import { toast } from 'sonner'
 
 import { authPost, authDelete } from '@/entities/auth/api'
-import { useFlow } from '@/shared/lib/stackflow'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
+import { useFlow } from '@/app/routes/stackflow'
+import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 

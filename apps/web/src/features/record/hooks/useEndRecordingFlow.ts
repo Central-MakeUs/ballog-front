@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useFlow, activities } from '@/shared/lib/stackflow'
+import { useFlow, activities } from '@/app/routes/stackflow'
 import { useModal } from '@/shared/hooks/modal/useModal'
 import { SuccessLottie } from '@/features/record/ui/SuccessLottie'
 

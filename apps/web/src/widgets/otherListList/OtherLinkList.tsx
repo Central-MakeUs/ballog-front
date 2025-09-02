@@ -1,6 +1,6 @@
 import { List } from '@/shared/ui/common/List/List'
 import { BallogInstagramList } from '@/features/mypage/ui/BallogInstagramList'
-import { useFlow } from '@/shared/lib/stackflow'
+import { useFlow } from '@/app/routes/stackflow'
 import { TERM_ID } from '@/entities/term/constants/termId'
 
 export const OtherLinkList = () => {
