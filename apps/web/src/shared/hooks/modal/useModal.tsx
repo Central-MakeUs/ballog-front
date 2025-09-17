@@ -141,7 +141,7 @@ export const useModal = () => {
 
   const openTextModal = ({ heading, body }: TextModalProps) => {
     return overlay.open(({ isOpen }) => (
-      <OverlayModal.Root open={isOpen} className="w-72 pb-4 px-4">
+      <OverlayModal.Root open={isOpen} className="w-76 pt-8 pb-10 px-6">
         <OverlayModal.Text heading={heading} body={body} />
       </OverlayModal.Root>
     ))
