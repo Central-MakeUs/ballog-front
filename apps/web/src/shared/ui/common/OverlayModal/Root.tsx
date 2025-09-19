@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib/classnames'
 
 interface RootProps extends ComponentProps<'div'> {
   open: boolean
-  onOpenChange: (open: boolean) => void
+  onOpenChange?: (open: boolean) => void
   dismissible?: boolean
   children: ReactNode
 }

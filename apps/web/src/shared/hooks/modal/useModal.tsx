@@ -28,6 +28,10 @@ interface ImageModalProps {
   renderContent?: () => React.ReactNode
 }
 
+interface TextModalProps {
+  heading: string
+  body?: string
+}
 /**
  * - openHorizontalModal
  * 좌우 2버튼 형태의 모달을 띄웁니다.
@@ -135,9 +139,18 @@ export const useModal = () => {
     ))
   }
 
+  const openTextModal = ({ heading, body }: TextModalProps) => {
+    return overlay.open(({ isOpen }) => (
+      <OverlayModal.Root open={isOpen} className="w-76 pt-8 pb-10 px-6">
+        <OverlayModal.Text heading={heading} body={body} />
+      </OverlayModal.Root>
+    ))
+  }
+
   return {
     openHorizontalModal,
     openVerticalModal,
     openImageModal,
+    openTextModal,
   }
 }
