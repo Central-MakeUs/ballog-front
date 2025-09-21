@@ -12,7 +12,6 @@ import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { Loading } from '@/shared/ui/common'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
-import { Calendar } from '@/shared/ui/common/calendar'
 import { CalendarHeader } from '@/features/match/ui/CalendarHeader'
 
 const HomePage: ActivityComponentType = () => {
@@ -41,12 +40,6 @@ const HomePage: ActivityComponentType = () => {
         <MatchEmptySection />
       </div>
     ) : (
-      // <Calendar
-      //   mode="single"
-      //   selected={date}
-      //   onSelect={setDate}
-      //   className="rounded-lg border"
-      // />
       <div>
         <CalendarHeader
           month={month}
@@ -55,13 +48,6 @@ const HomePage: ActivityComponentType = () => {
         />
         <MatchSection matches={data.data} />
       </div>
-
-      // <Calendar
-      //   mode="single"
-      //   selected={date}
-      //   onSelect={setDate}
-      //   className="rounded-lg border"
-      // />
     )
   }
 
