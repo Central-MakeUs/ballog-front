@@ -5,7 +5,7 @@ import { SessionProvider } from '@/app/Provider/contexts/sessionContext'
 import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
-import { NoticeModal } from './Notice/NoticeModal'
+// import { NoticeModal } from './Notice/NoticeModal'
 
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
       <OverlayProvider>
         <QueryProvider>
           <Stack />
-          <NoticeModal />
+          {/* <NoticeModal /> */}
           <Toaster position="bottom-center" />
         </QueryProvider>
       </OverlayProvider>
