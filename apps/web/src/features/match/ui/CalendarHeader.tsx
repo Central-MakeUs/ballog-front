@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
 
 import CalendarIcon from '@/assets/calendar.svg?react'
@@ -12,6 +12,7 @@ export const CalendarHeader = ({ month }: { month: Date }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date())
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
   const [baseDate, setBaseDate] = useState(new Date())
+  const calendarRef = useRef<HTMLDivElement>(null)
 
   const goToPrevMonth = () => {
     const prevMonthLastDay = endOfMonth(addMonths(baseDate, -1))
@@ -27,6 +28,21 @@ export const CalendarHeader = ({ month }: { month: Date }) => {
     setSelectedDate(d)
     setBaseDate(d)
   }
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(e.target as Node)
+      ) {
+        setShowCalendar(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   return (
     <div>
@@ -59,13 +75,13 @@ export const CalendarHeader = ({ month }: { month: Date }) => {
 
       {/* 캘린더 모달 */}
       {showCalendar && (
-        <div className="absolute top-10 left-0 right-0 z-50">
+        <div ref={calendarRef} className="absolute top-10 left-0 right-0 z-50">
           <Calendar
             mode="single"
             selected={selectedDate ?? undefined}
             onSelect={(d) => {
               d && setSelectedDate(d)
-            //   setShowCalendar(false)  << 이거 해야하는건지?
+              //   setShowCalendar(false)
             }}
             className="rounded-lg border mx-auto"
           />
