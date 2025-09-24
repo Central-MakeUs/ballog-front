@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { addDays } from 'date-fns'
+import { useEffect, useMemo, useState } from 'react'
+import { addDays, startOfWeek, differenceInWeeks } from 'date-fns'
 
 import {
   Carousel,
@@ -10,56 +10,83 @@ import {
 
 import { CalendarWeekHeader } from './CalendarWeekHeader'
 
-export function CalendarWeekCarousel() {
-  const [baseDate, setBaseDate] = useState(new Date())
+interface CalendarWeekCarouselProps {
+  onChange: (date: Date) => void
+  selectedDate: Date | null
+  onSelect: (d: Date) => void
+}
+
+const TOTAL_WEEKS = 208
+const CENTER = Math.floor(TOTAL_WEEKS / 2)
+const weekStart = (d: Date) => startOfWeek(d, { weekStartsOn: 0 })
+
+export const CalendarWeekCarousel = ({
+  onChange,
+  selectedDate,
+  onSelect,
+}: CalendarWeekCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>()
+
+  const weeks = useMemo(() => {
+    const todayWeek = weekStart(new Date())
+    return Array.from({ length: 208 }, (_, i) =>
+      addDays(todayWeek, (i - 104) * 7),
+    )
+  }, [])
+
+  useEffect(() => {
+    if (!api || !selectedDate) return
+
+    const todayWeek = weekStart(new Date())
+    const targetWeek = weekStart(selectedDate)
+
+    const delta = differenceInWeeks(targetWeek, todayWeek)
+    const targetIndex = CENTER + delta
+
+    if (targetIndex >= 0 && targetIndex < TOTAL_WEEKS) {
+      api.scrollTo(targetIndex, true)
+    }
+  }, [api, selectedDate])
 
   useEffect(() => {
     if (!api) return
 
     const handler = () => {
       const idx = api.selectedScrollSnap()
-      if (idx === 0) {
-        setBaseDate((prev) => addDays(prev, -7))
-      } else if (idx === 2) {
-        setBaseDate((prev) => addDays(prev, 7))
+      const newBaseDate = weeks[idx]
+      if (newBaseDate) {
+        onChange(newBaseDate)
       }
-
-      setTimeout(() => {
-        api.scrollTo(1, true)
-      }, 100)
     }
 
     api.on('select', handler)
     return () => {
       api.off('select', handler)
     }
-  }, [api])
+  }, [api, weeks, onChange])
 
   return (
-    <Carousel opts={{ align: 'center', loop: false }} setApi={setApi}>
+    <Carousel
+      opts={{
+        align: 'center',
+        loop: true,
+        duration: 20,
+      }}
+      setApi={setApi}
+    >
       <CarouselContent>
-        <CarouselItem className="basis-full">
-          <CalendarWeekHeader
-            date={addDays(baseDate, -7)}
-            selectedDate={null}
-            onSelect={() => {}}
-          />
-        </CarouselItem>
-        <CarouselItem className="basis-full">
-          <CalendarWeekHeader
-            date={baseDate}
-            selectedDate={null}
-            onSelect={() => {}}
-          />
-        </CarouselItem>
-        <CarouselItem className="basis-full">
-          <CalendarWeekHeader
-            date={addDays(baseDate, 7)}
-            selectedDate={null}
-            onSelect={() => {}}
-          />
-        </CarouselItem>
+        {weeks.map((weekDate) => (
+          <CarouselItem key={weekDate.toISOString()} className="basis-full">
+            <CalendarWeekHeader
+              date={weekDate}
+              selectedDate={selectedDate}
+              onSelect={(d) => {
+                onSelect(d)
+                onChange(d)
+              }}
+            />
+          </CarouselItem>
+        ))}
       </CarouselContent>
     </Carousel>
   )
