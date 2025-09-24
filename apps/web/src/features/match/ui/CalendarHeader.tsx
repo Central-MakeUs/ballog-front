@@ -63,7 +63,10 @@ export const CalendarHeader = ({ month }: { month: Date }) => {
           <Calendar
             mode="single"
             selected={selectedDate ?? undefined}
-            onSelect={(d) => d && setSelectedDate(d)}
+            onSelect={(d) => {
+              d && setSelectedDate(d)
+            //   setShowCalendar(false)  << 이거 해야하는건지?
+            }}
             className="rounded-lg border mx-auto"
           />
         </div>
