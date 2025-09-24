@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import CalendarIcon from '@/assets/calendar.svg?react'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
@@ -74,19 +75,30 @@ export const CalendarHeader = ({ month }: { month: Date }) => {
       />
 
       {/* 캘린더 모달 */}
-      {showCalendar && (
-        <div ref={calendarRef} className="absolute top-10 left-0 right-0 z-50">
-          <Calendar
-            mode="single"
-            selected={selectedDate ?? undefined}
-            onSelect={(d) => {
-              d && setSelectedDate(d)
-              //   setShowCalendar(false)
-            }}
-            className="rounded-lg border mx-auto"
-          />
-        </div>
-      )}
+      <div className="relative">
+        <AnimatePresence>
+          {showCalendar && (
+            <motion.div
+              ref={calendarRef}
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="absolute -top-14 left-1/2 -translate-x-1/2  z-50 bg-usage-background-strong rounded-lg shadow-lg"
+            >
+              <Calendar
+                mode="single"
+                selected={selectedDate ?? undefined}
+                onSelect={(d) => {
+                  if (!d) return
+                  setSelectedDate(d)
+                //   setShowCalendar(false)
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   )
 }
