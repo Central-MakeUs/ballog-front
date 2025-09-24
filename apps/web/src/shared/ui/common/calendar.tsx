@@ -1,10 +1,7 @@
 import * as React from 'react'
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from 'lucide-react'
+import { ChevronDownIcon } from 'lucide-react'
 import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
+import { ko } from 'date-fns/locale'
 
 import { cn } from '@/shared/lib/classnames'
 import { Button, buttonVariants } from '@/shared/ui/common/Button/Button'
@@ -28,20 +25,23 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      locale={ko}
       className={cn(
-        'bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
+        'bg-usage-background-strong group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
         String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
         className,
       )}
       captionLayout={captionLayout}
       formatters={{
-        formatMonthDropdown: (date) =>
-          date.toLocaleString('default', { month: 'short' }),
+        // formatMonthDropdown: (date) =>
+        //   date.toLocaleString('default', { month: 'short' }),
+        formatCaption: (month, options) =>
+          `${month.getFullYear()} - ${String(month.getMonth() + 1).padStart(2, '0')}`,
         ...formatters,
       }}
       classNames={{
-        root: cn('w-fit', defaultClassNames.root),
+        root: cn('w-fit border-none rounded-xlarge', defaultClassNames.root),
         months: cn(
           'flex gap-4 flex-col md:flex-row relative',
           defaultClassNames.months,
@@ -78,19 +78,19 @@ function Calendar({
           defaultClassNames.dropdown,
         ),
         caption_label: cn(
-          'select-none font-medium',
-          captionLayout === 'label'
-            ? 'text-sm'
-            : 'rounded-md pl-2 pr-1 flex items-center gap-1 text-sm h-8 [&>svg]:text-muted-foreground [&>svg]:size-3.5',
+          'select-none text-[18px] font-400 leading-[25.2px] text-usage-text-default',
           defaultClassNames.caption_label,
         ),
-        table: 'w-full border-collapse',
-        weekdays: cn('flex', defaultClassNames.weekdays),
+        table: 'w-full border-collapse border-none',
+        weekdays: cn(
+          'flex border-b border-brand-neutral-50 pb-4',
+          defaultClassNames.weekdays,
+        ),
         weekday: cn(
-          'text-muted-foreground rounded-md flex-1 font-normal text-[0.8rem] select-none',
+          'text-usage-text-default rounded-md flex-1 font-normal text-[15px] font-400 leading-[21px]',
           defaultClassNames.weekday,
         ),
-        week: cn('flex w-full mt-2', defaultClassNames.week),
+        week: cn('flex w-full first:mt-0 mt-2 pt-1', defaultClassNames.week),
         week_number_header: cn(
           'select-none w-(--cell-size)',
           defaultClassNames.week_number_header,
@@ -109,14 +109,8 @@ function Calendar({
         ),
         range_middle: cn('rounded-none', defaultClassNames.range_middle),
         range_end: cn('rounded-r-md bg-accent', defaultClassNames.range_end),
-        today: cn(
-          'bg-accent text-accent-foreground rounded-md data-[selected=true]:rounded-none',
-          defaultClassNames.today,
-        ),
-        outside: cn(
-          'text-muted-foreground aria-selected:text-muted-foreground',
-          defaultClassNames.outside,
-        ),
+        today: cn(defaultClassNames.today),
+        outside: cn(defaultClassNames.outside),
         disabled: cn(
           'text-muted-foreground opacity-50',
           defaultClassNames.disabled,
@@ -181,7 +175,7 @@ function CalendarDayButton({
   return (
     <Button
       ref={ref}
-      variant="primary"
+      variant="secondary"
       size="icon"
       data-day={day.date.toLocaleDateString()}
       data-selected-single={
@@ -194,8 +188,16 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        'data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 dark:hover:text-accent-foreground flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70',
-        defaultClassNames.day,
+        'w-full aspect-square text-[15px] font-normal rounded-full text-usage-text-default',
+
+        modifiers.outside && 'text-brand-neutral-70',
+        // 선택된 날짜 스타일
+        modifiers.selected
+          ? 'bg-brand-primary-default'
+          : 'bg-usage-background-strong',
+
+        // 오늘 표시 (선택 안 됐을 때만 테두리 표시하고 싶다면 여기에 조건부 추가)
+        modifiers.today && !modifiers.selected && defaultClassNames.day,
         className,
       )}
       {...props}
