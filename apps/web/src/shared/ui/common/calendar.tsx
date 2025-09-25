@@ -4,7 +4,7 @@ import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
 import { ko } from 'date-fns/locale'
 
 import { cn } from '@/shared/lib/classnames'
-import { Button, buttonVariants } from '@/shared/ui/common/Button/Button'
+import { Button } from '@/shared/ui/common/Button/Button'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
 import RightArrow from '@/assets/calendarRightArrow.svg?react'
 
@@ -13,7 +13,6 @@ function Calendar({
   classNames,
   showOutsideDays = true,
   captionLayout = 'label',
-  buttonVariant = 'ghost',
   formatters,
   components,
   ...props
@@ -34,9 +33,7 @@ function Calendar({
       )}
       captionLayout={captionLayout}
       formatters={{
-        // formatMonthDropdown: (date) =>
-        //   date.toLocaleString('default', { month: 'short' }),
-        formatCaption: (month, options) =>
+        formatCaption: (month) =>
           `${month.getFullYear()} - ${String(month.getMonth() + 1).padStart(2, '0')}`,
         ...formatters,
       }}
@@ -52,12 +49,10 @@ function Calendar({
           defaultClassNames.nav,
         ),
         button_previous: cn(
-          buttonVariants({ variant: buttonVariant }),
           'size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
           defaultClassNames.button_previous,
         ),
         button_next: cn(
-          buttonVariants({ variant: buttonVariant }),
           'size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
           defaultClassNames.button_next,
         ),
