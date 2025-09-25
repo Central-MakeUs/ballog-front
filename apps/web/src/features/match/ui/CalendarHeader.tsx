@@ -9,7 +9,8 @@ import { Calendar } from '@/shared/ui/common/calendar'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
-export const CalendarHeader = ({ month }: { month: Date }) => {
+export const CalendarHeader = () => {
+  const [month] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date())
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
   const [baseDate, setBaseDate] = useState(new Date())
@@ -92,7 +93,7 @@ export const CalendarHeader = ({ month }: { month: Date }) => {
                 onSelect={(d) => {
                   if (!d) return
                   setSelectedDate(d)
-                //   setShowCalendar(false)
+                  //   setShowCalendar(false)
                 }}
               />
             </motion.div>

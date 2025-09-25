@@ -64,7 +64,7 @@ export const CalendarWeekCarousel = ({
       api.off('select', handler)
     }
   }, [api, weeks, onChange])
-  console.log(selectedDate)
+
   return (
     <Carousel
       opts={{
