@@ -11,6 +11,7 @@ import {
 import { CalendarWeekHeader } from './CalendarWeekHeader'
 
 interface CalendarWeekCarouselProps {
+  baseDate: Date
   onChange: (date: Date) => void
   selectedDate: Date | null
   onSelect: (d: Date) => void
@@ -21,6 +22,7 @@ const CENTER = Math.floor(TOTAL_WEEKS / 2)
 const weekStart = (d: Date) => startOfWeek(d, { weekStartsOn: 0 })
 
 export const CalendarWeekCarousel = ({
+  baseDate,
   onChange,
   selectedDate,
   onSelect,
@@ -34,19 +36,19 @@ export const CalendarWeekCarousel = ({
     )
   }, [])
 
-  useEffect(() => {
-    if (!api || !selectedDate) return
+useEffect(() => {
+  if (!api || !baseDate) return
 
-    const todayWeek = weekStart(new Date())
-    const targetWeek = weekStart(selectedDate)
+  const todayWeek = weekStart(new Date())
+  const targetWeek = weekStart(baseDate)
 
-    const delta = differenceInWeeks(targetWeek, todayWeek)
-    const targetIndex = CENTER + delta
-
-    if (targetIndex >= 0 && targetIndex < TOTAL_WEEKS) {
-      api.scrollTo(targetIndex, true)
-    }
-  }, [api, selectedDate])
+  const delta = differenceInWeeks(targetWeek, todayWeek)
+  const targetIndex = CENTER + delta
+  
+  if (targetIndex >= 0 && targetIndex < TOTAL_WEEKS) {
+    api.scrollTo(targetIndex, true)
+  }
+}, [api, baseDate])
 
   useEffect(() => {
     if (!api) return
@@ -55,7 +57,7 @@ export const CalendarWeekCarousel = ({
       const idx = api.selectedScrollSnap()
       const newBaseDate = weeks[idx]
       if (newBaseDate) {
-        onChange(newBaseDate)
+        // onChange(newBaseDate)
       }
     }
 

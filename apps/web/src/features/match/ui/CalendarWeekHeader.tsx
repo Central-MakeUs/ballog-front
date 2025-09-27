@@ -19,9 +19,10 @@ export const CalendarWeekHeader = ({
   return (
     <div className="grid grid-cols-7 gap-2 text-center py-2 px-4">
       {weekDates.map((d) => {
-        const isToday =
-          d.toDateString() === new Date().toDateString() ||
-          (selectedDate && d.toDateString() === selectedDate.toDateString())
+        const isSelected =
+          selectedDate && d.toDateString() === selectedDate.toDateString()
+        const isToday = d.toDateString() === new Date().toDateString()
+        const isActive = isSelected || (!selectedDate && isToday)
 
         return (
           <div
@@ -31,14 +32,14 @@ export const CalendarWeekHeader = ({
           >
             <span
               className={`body-sm-light ${
-                isToday ? 'text-usage-text-default' : 'text-brand-neutral-70'
+                isActive ? 'text-usage-text-default' : 'text-brand-neutral-70'
               }`}
             >
               {d.toLocaleDateString('ko-KR', { weekday: 'short' })}
             </span>
             <span
               className={`mt-1 body-md-bold ${
-                isToday ? 'text-usage-text-default' : 'text-brand-neutral-70'
+                isActive ? 'text-usage-text-default' : 'text-brand-neutral-70'
               }`}
             >
               {d.getDate()}
