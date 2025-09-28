@@ -11,7 +11,11 @@ import { Calendar } from '@/shared/ui/common/calendar'
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
 export const CalendarHeader = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date())
+  const koreaDate = new Date(
+    new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+  )
+
+  const [selectedDate, setSelectedDate] = useState<Date | null>(koreaDate)
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
   const [baseDate, setBaseDate] = useState(new Date())
   const calendarRef = useRef<HTMLDivElement>(null)
