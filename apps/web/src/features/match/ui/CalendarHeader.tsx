@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
 import { motion, AnimatePresence } from 'framer-motion'
 import { RefreshCw } from 'lucide-react'
+import { toZonedTime } from 'date-fns-tz'
 
 import CalendarIcon from '@/assets/calendar.svg?react'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
@@ -10,14 +11,14 @@ import { Calendar } from '@/shared/ui/common/calendar'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
+const timeZone = 'Asia/Seoul'
+
 export const CalendarHeader = () => {
-  const koreaDate = new Date(
-    new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
-  )
+  const koreaDate = toZonedTime(new Date(), timeZone)
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(koreaDate)
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
-  const [baseDate, setBaseDate] = useState(new Date())
+  const [baseDate, setBaseDate] = useState(koreaDate)
   const calendarRef = useRef<HTMLDivElement>(null)
 
   const goToPrevMonth = () => {
@@ -59,7 +60,7 @@ export const CalendarHeader = () => {
         <RefreshCw
           className="size-6 absolute left-6"
           onClick={() => {
-            const today = new Date()
+            const today = toZonedTime(new Date(), timeZone)
             setSelectedDate(today)
             setBaseDate(today)
           }}
