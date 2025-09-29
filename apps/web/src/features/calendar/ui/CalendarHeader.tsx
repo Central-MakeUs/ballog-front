@@ -10,6 +10,8 @@ import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/shared/ui/common/calendar'
 import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
 
+import { useDate } from '../context/DateContext'
+
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
 const timeZone = 'Asia/Seoul'
@@ -17,7 +19,8 @@ const timeZone = 'Asia/Seoul'
 export const CalendarHeader = () => {
   const koreaDate = toZonedTime(new Date(), timeZone)
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(koreaDate)
+  const { selectedDate, setSelectedDate } = useDate()
+
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
   const [baseDate, setBaseDate] = useState(koreaDate)
   const calendarRef = useRef<HTMLDivElement>(null)

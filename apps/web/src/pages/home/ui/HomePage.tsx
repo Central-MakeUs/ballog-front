@@ -11,6 +11,7 @@ import { Loading } from '@/shared/ui/common'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
+import { DateProvider } from '@/features/calendar/context/DateContext'
 
 const HomePage: ActivityComponentType = () => {
   useFcmToken()
@@ -28,8 +29,14 @@ const HomePage: ActivityComponentType = () => {
       )
     return (
       <div>
-        <CalendarHeader />
-        {isEmpty ? <MatchEmptySection /> : <MatchSection matches={data.data} />}
+        <DateProvider>
+          <CalendarHeader />
+          {isEmpty ? (
+            <MatchEmptySection />
+          ) : (
+            <MatchSection matches={data.data} />
+          )}
+        </DateProvider>
       </div>
     )
   }
