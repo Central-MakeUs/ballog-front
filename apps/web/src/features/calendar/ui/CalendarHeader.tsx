@@ -8,6 +8,7 @@ import CalendarIcon from '@/assets/calendar.svg?react'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
 import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/shared/ui/common/calendar'
+import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
@@ -20,6 +21,13 @@ export const CalendarHeader = () => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
   const [baseDate, setBaseDate] = useState(koreaDate)
   const calendarRef = useRef<HTMLDivElement>(null)
+
+  useTomorrowTrigger({
+    onTomorrow: (newDate) => {
+      setSelectedDate(newDate)
+      setBaseDate(newDate)
+    },
+  })
 
   const goToPrevMonth = () => {
     const prevMonthLastDay = endOfMonth(addMonths(baseDate, -1))

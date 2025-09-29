@@ -10,7 +10,7 @@ import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { Loading } from '@/shared/ui/common'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
-import { CalendarHeader } from '@/features/match/ui/CalendarHeader'
+import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
 
 const HomePage: ActivityComponentType = () => {
   useFcmToken()
