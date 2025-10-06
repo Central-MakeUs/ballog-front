@@ -40,9 +40,7 @@ export const HomeCardResultInfo = ({
         <p className={cn('body-sm-light text-primary-subtle')}>{homeResult}</p>
       </div>
 
-      <div>
-        <p className="text-lg font-bold text-usage-text-default">vs</p>
-      </div>
+      <p className="heading-md-bold text-usage-text-default">vs</p>
 
       {/* 원정팀 */}
       <div className="flex flex-col items-center">
