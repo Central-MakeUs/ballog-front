@@ -144,7 +144,6 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
       )
     },
   })
-
   useEffect(() => {
     mutate(matchId)
   }, [matchId])
@@ -156,7 +155,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
 
   const { data: emotionData } = useQuery({
     ...emotions.record(recordingData?.data.matchRecordId ?? 0),
-    enabled: !!recordingData?.data.matchRecordId,
+    enabled: isPostComplete && !!recordingData?.data?.matchRecordId,
   })
 
   if (!emotionData || !recordingData) {
