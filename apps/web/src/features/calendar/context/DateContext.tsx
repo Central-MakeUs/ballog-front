@@ -23,6 +23,6 @@ export const DateProvider = ({ children }: { children: ReactNode }) => {
 
 export const useDate = () => {
   const ctx = useContext(DateContext)
-  if (!ctx) throw new Error('useCalendar must be used within CalendarProvider')
+  if (!ctx) throw new Error('useCalendar must be used within DateProvider')
   return ctx
 }

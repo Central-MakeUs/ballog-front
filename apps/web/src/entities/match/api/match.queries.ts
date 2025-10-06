@@ -7,4 +7,8 @@ export const matches = createQueryKeys('matches', {
     queryKey: ['today'],
     queryFn: matchGet.getTodayMatches,
   }),
+  bySelectedDate: (selectedDate: string) => ({
+    queryKey: ['matches', selectedDate],
+    queryFn: () => matchGet.getMatchByDate(selectedDate),
+  }),
 })
