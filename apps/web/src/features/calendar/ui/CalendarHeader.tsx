@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
 import { motion, AnimatePresence } from 'framer-motion'
-import { RefreshCw } from 'lucide-react'
 import { toZonedTime } from 'date-fns-tz'
 
 import CalendarIcon from '@/assets/calendar.svg?react'
@@ -14,7 +13,6 @@ import { Button } from '@/shared/ui/common'
 import { useDate } from '../context/DateContext'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
-import { Secondary } from '@/stories/Button/Button.stories'
 
 const timeZone = 'Asia/Seoul'
 
