@@ -88,9 +88,9 @@ const LiveRecordPageInner = ({
             'mt-8 mb-8',
           )}
         >
-          <p className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center relative">
+          <div className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center relative">
             지금의 감정 클릭하기! <ToolTipPopover />
-          </p>
+          </div>
           <p className="body-sm-light text-usage-text-subtle">
             {dominant} 이기고 있어요! <br />
             하지만 지금 기분은 또 다를 수도?
