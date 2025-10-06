@@ -11,7 +11,6 @@ import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
-import { DateProvider } from '@/features/calendar/context/DateContext'
 import { useDate } from '@/features/calendar/context/DateContext'
 
 const HomeContent = () => {
@@ -26,11 +25,16 @@ const HomeContent = () => {
   const matchesList = data?.data?.[formattedDate] ?? []
   const isEmpty = matchesList.length === 0
 
-  if (isLoading) return <MatchLoadingSection />
   return (
     <div>
       <CalendarHeader />
-      {isEmpty ? <MatchEmptySection /> : <MatchSection matches={matchesList} />}
+      {isLoading ? (
+        <MatchLoadingSection />
+      ) : isEmpty ? (
+        <MatchEmptySection />
+      ) : (
+        <MatchSection matches={matchesList} />
+      )}
     </div>
   )
 }
@@ -41,10 +45,8 @@ const HomePage: ActivityComponentType = () => {
 
   return (
     <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>
-      <DateProvider>
-        <HomeContent />
-        <GlobalNavigationBar />
-      </DateProvider>
+      <HomeContent />
+      <GlobalNavigationBar />
     </AppScreen>
   )
 }
