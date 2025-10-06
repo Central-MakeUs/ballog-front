@@ -6,8 +6,8 @@ import { matches } from '@/entities/match/api/match.queries'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { MatchSection } from '@/features/match/ui/MatchSection'
 import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'
+import { MatchLoadingSection } from '@/features/match/ui/MatchLoadingSection'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
-import { Loading } from '@/shared/ui/common'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
@@ -25,13 +25,8 @@ const HomeContent = () => {
 
   const matchesList = data?.data?.[formattedDate] ?? []
   const isEmpty = matchesList.length === 0
-  
-  if (isLoading)
-    return (
-      <div className="flex items-center justify-center h-full">
-        <Loading text="오늘의 경기를 불러오는 중..." />
-      </div>
-    )
+
+  if (isLoading) return <MatchLoadingSection />
   return (
     <div>
       <CalendarHeader />
