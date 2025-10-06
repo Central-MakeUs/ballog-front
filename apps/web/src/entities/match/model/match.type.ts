@@ -10,6 +10,7 @@ export interface Match {
   awayTeam: TeamKey
   stadium: StadiumKey
   matchesResult: string | null
+  status: 'SCHEDULED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELED' // 아직 쓰지 않으므로 일단 이렇게 둠
 }
 
 export type MacthResponseDTO = ApiResponse<Match[]>
