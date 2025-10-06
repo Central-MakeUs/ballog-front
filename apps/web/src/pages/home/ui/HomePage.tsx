@@ -12,6 +12,7 @@ import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
 import { useDate } from '@/features/calendar/context/DateContext'
+import { DateProvider } from '@/features/calendar/context/DateContext'
 
 const HomeContent = () => {
   const { selectedDate } = useDate()
@@ -42,10 +43,12 @@ const HomeContent = () => {
 const HomePage: ActivityComponentType = () => {
   useFcmToken()
   useCheckSignupFinished()
-
+  
   return (
     <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>
-      <HomeContent />
+      <DateProvider>
+        <HomeContent />
+      </DateProvider>
       <GlobalNavigationBar />
     </AppScreen>
   )
