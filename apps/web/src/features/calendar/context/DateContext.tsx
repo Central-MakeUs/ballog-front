@@ -4,6 +4,7 @@ import { createContext, useContext, useState, type ReactNode } from 'react'
 const timeZone = 'Asia/Seoul'
 
 interface DateContextValue {
+  todayDate: Date
   selectedDate: Date | null
   setSelectedDate: (d: Date | null) => void
 }
@@ -11,11 +12,11 @@ interface DateContextValue {
 const DateContext = createContext<DateContextValue | undefined>(undefined)
 
 export const DateProvider = ({ children }: { children: ReactNode }) => {
-  const koreaDate = toZonedTime(new Date(), timeZone)
-  const [selectedDate, setSelectedDate] = useState<Date | null>(koreaDate)
+  const todayDate = toZonedTime(new Date(), timeZone)
+  const [selectedDate, setSelectedDate] = useState<Date | null>(todayDate)
 
   return (
-    <DateContext.Provider value={{ selectedDate, setSelectedDate }}>
+    <DateContext.Provider value={{ todayDate, selectedDate, setSelectedDate }}>
       {children}
     </DateContext.Provider>
   )

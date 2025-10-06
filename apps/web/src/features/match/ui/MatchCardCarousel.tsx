@@ -6,10 +6,10 @@ import {
   CarouselItem,
 } from '@/shared/ui/common/carousel'
 import type { CarouselApi } from '@/shared/ui/common/carousel'
-import { MatchCard } from '@/entities/match/ui/MatchCard'
 import type { Match } from '@/entities/match/model/match.type'
 import { useFlow } from '@/app/routes/stackflow'
-import { cn } from '@/shared/lib/classnames'
+
+import { MatchCardFactory } from './MatchCardFactory'
 
 interface MatchCardCarouselProps {
   matches: Match[]
@@ -68,8 +68,8 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
 
           {matches.map((match, index) => (
             <CarouselItem key={index} className="basis-3/5 pl-6">
-              <MatchCard
-                {...match}
+              <MatchCardFactory
+                match={match}
                 isCenter={index === current}
                 onClick={() =>
                   push(

@@ -85,7 +85,7 @@ export const matchByDate: {
         homeTeam: 'HANWHA_EAGLES',
         awayTeam: 'KIA_TIGERS',
         stadium: 'DAEJEON',
-        matchesResult: null,
+        matchesResult: "5:3",
         status: 'SCHEDULED',
       },
     ] as Match[],
@@ -97,7 +97,7 @@ export const matchByDate: {
         homeTeam: 'KT_WIZ',
         awayTeam: 'DOOSAN_BEARS',
         stadium: 'SUWON',
-        matchesResult: null,
+        matchesResult: "5:3",
         status: 'SCHEDULED',
       },
       {
@@ -107,7 +107,7 @@ export const matchByDate: {
         homeTeam: 'LOTTE_GIANTS',
         awayTeam: 'NC_DINOS',
         stadium: 'SAJIK',
-        matchesResult: null,
+        matchesResult: "5:3",
         status: 'SCHEDULED',
       },
       {
@@ -117,7 +117,7 @@ export const matchByDate: {
         homeTeam: 'HANWHA_EAGLES',
         awayTeam: 'KIA_TIGERS',
         stadium: 'DAEJEON',
-        matchesResult: null,
+        matchesResult: "5:3",
         status: 'SCHEDULED',
       },
       {
@@ -139,7 +139,7 @@ export const matchByDate: {
         homeTeam: 'KIWOOM_HEROES',
         awayTeam: 'SSG_LANDERS',
         stadium: 'GOCHUK',
-        matchesResult: null,
+        matchesResult: "5:3",
         status: 'CANCELED',
       },
       {
@@ -149,7 +149,7 @@ export const matchByDate: {
         homeTeam: 'HANWHA_EAGLES',
         awayTeam: 'LG_TWINS',
         stadium: 'DAEJEON',
-        matchesResult: null,
+        matchesResult: "5:3",
         status: 'SCHEDULED',
       },
       {
