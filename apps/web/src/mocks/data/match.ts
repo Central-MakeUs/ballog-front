@@ -62,7 +62,10 @@ export const match = {
   },
 }
 
-export const matchByDate = {
+export const matchByDate: {
+  data: Record<string, Match[]>
+  delay: number
+} = {
   data: {
     '2025-10-05': [
       {
@@ -123,7 +126,7 @@ export const matchByDate = {
         matchesTime: '18:30:00',
         homeTeam: 'LOTTE_GIANTS',
         awayTeam: 'NC_DINOS',
-        stadium: 'SAJIK', 
+        stadium: 'SAJIK',
         matchesResult: null,
         status: 'SCHEDULED',
       },
@@ -163,4 +166,3 @@ export const matchByDate = {
   },
   delay: 800,
 }
-
