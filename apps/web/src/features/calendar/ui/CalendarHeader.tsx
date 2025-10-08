@@ -15,7 +15,6 @@ import { useDate } from '../context/DateContext'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
-
 export const CalendarHeader = () => {
   const koreaDate = toZonedTime(new Date(), TIME_ZONE)
 

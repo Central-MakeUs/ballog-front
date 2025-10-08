@@ -1,5 +1,6 @@
 import { cn } from '@/shared/lib/classnames'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
+import { getMatchResult } from '@/shared/lib/getMatchResult'
 
 interface HomeCardResultInfoProps {
   homeTeam: TeamKey
@@ -14,18 +15,10 @@ export const HomeCardResultInfo = ({
   homeScore,
   awayScore,
 }: HomeCardResultInfoProps) => {
-  const homeResult =
-    Number(homeScore) > Number(awayScore)
-      ? '승'
-      : Number(homeScore) < Number(awayScore)
-        ? '패'
-        : '무'
-  const awayResult =
-    Number(awayScore) > Number(homeScore)
-      ? '승'
-      : Number(awayScore) < Number(homeScore)
-        ? '패'
-        : '무'
+  const { home: homeResult, away: awayResult } = getMatchResult(
+    homeScore,
+    awayScore,
+  )
 
   return (
     <div className="flex items-center justify-center mt-2 -mb-1.5 text-center gap-4">
