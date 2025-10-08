@@ -110,7 +110,7 @@ const buttonVariants = cva(
         state: 'hover',
         buttonType: 'filled',
         class: cn('bg-brand-primary-subtle text-brand-primary-white'),
-      },
+      },  
       {
         variant: 'secondary',
         state: 'hover',

@@ -9,15 +9,15 @@ import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/shared/ui/common/calendar'
 import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
 import { Button } from '@/shared/ui/common'
+import { TIME_ZONE } from '@/shared/constants/time'
 
 import { useDate } from '../context/DateContext'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
-const timeZone = 'Asia/Seoul'
 
 export const CalendarHeader = () => {
-  const koreaDate = toZonedTime(new Date(), timeZone)
+  const koreaDate = toZonedTime(new Date(), TIME_ZONE)
 
   const { selectedDate, setSelectedDate } = useDate()
 
@@ -89,7 +89,7 @@ export const CalendarHeader = () => {
           size="sm"
           className="absolute right-4"
           onClick={() => {
-            const today = toZonedTime(new Date(), timeZone)
+            const today = toZonedTime(new Date(), TIME_ZONE)
             setSelectedDate(today)
             setBaseDate(today)
           }}

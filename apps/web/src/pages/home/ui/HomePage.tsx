@@ -14,19 +14,20 @@ import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
 import { useDate } from '@/features/calendar/context/DateContext'
+import { TIME_ZONE } from '@/shared/constants/time'
 
 const HomeContent = () => {
   const { selectedDate } = useDate()
 
   const formattedDate = selectedDate
-    ? format(selectedDate, 'yyyy-MM-dd', { timeZone: 'Asia/Seoul' })
+    ? format(selectedDate, 'yyyy-MM-dd', { timeZone: TIME_ZONE })
     : ''
 
   const { data, isLoading } = useQuery(matches.bySelectedDate(formattedDate))
 
   const matchesList = data?.data?.[formattedDate] ?? []
   const isEmpty = matchesList.length === 0
-  
+
   const today = new Date()
 
   let dateType: 'past' | 'today' | 'future' | null = null
@@ -36,7 +37,6 @@ const HomeContent = () => {
     else if (isBefore(selectedDate, today)) dateType = 'past'
     else if (isAfter(selectedDate, today)) dateType = 'future'
   }
-
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import { toZonedTime } from 'date-fns-tz'
 import { useEffect } from 'react'
 
-const timeZone = 'Asia/Seoul'
+import { TIME_ZONE } from '@/shared/constants/time'
 
 interface UseTomorrowTriggerProps {
   onTomorrow: (date: Date) => void
@@ -10,7 +10,7 @@ interface UseTomorrowTriggerProps {
 // 자정 이벤트 감지 훅
 export const useTomorrowTrigger = ({ onTomorrow }: UseTomorrowTriggerProps) => {
   useEffect(() => {
-    const getNow = () => toZonedTime(new Date(), timeZone)
+    const getNow = () => toZonedTime(new Date(), TIME_ZONE)
 
     const scheduleTomorrow = () => {
       const now = getNow()
