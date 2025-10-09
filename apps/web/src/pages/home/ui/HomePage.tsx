@@ -13,9 +13,8 @@ import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
-import { useDate } from '@/features/calendar/context/DateContext'
+import { useDate, DateProvider } from '@/features/calendar/context/DateContext'
 import { TIME_ZONE } from '@/shared/constants/time'
-import { DateProvider } from '@/features/calendar/context/DateContext'
 
 const HomeContent = () => {
   const { selectedDate } = useDate()
