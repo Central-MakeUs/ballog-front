@@ -178,4 +178,182 @@ export const recording: Record<number, RecordingResponse> = {
       },
     ],
   },
+
+  101: {
+    matchRecordId: 201,
+    matchesId: 101,
+    stadium: 'JAMSIL',
+    homeTeam: 'LG_TWINS',
+    awayTeam: 'SSG_LANDERS',
+    matchDate: '2025-10-05',
+    matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
+    userId: 7,
+    watchCnt: 2,
+    result: 'WIN',
+    baseballTeam: 'LG_TWINS',
+    positiveEmotionPercent: 85,
+    negativeEmotionPercent: 15,
+    defaultImageUrl: 'https://example.com/default101.jpg',
+    imageList: [
+      {
+        imageUrl: 'https://example.com/image101-1.jpg',
+        createdAt: '2025-10-05T18:45:00Z',
+      },
+      {
+        imageUrl: 'https://example.com/image101-2.jpg',
+        createdAt: '2025-10-05T19:00:00Z',
+      },
+    ],
+    emotionGroupList: [
+      {
+        groupStart: '2025-10-05T19:15:00Z',
+        emotionType: 'POSITIVE',
+        count: 3,
+      },
+    ],
+  },
+
+  102: {
+    matchRecordId: 202,
+    matchesId: 102,
+    stadium: 'DAEJEON',
+    homeTeam: 'HANWHA_EAGLES',
+    awayTeam: 'KIA_TIGERS',
+    matchDate: '2025-10-05',
+    matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
+    userId: 8,
+    watchCnt: 1,
+    result: 'LOSS',
+    baseballTeam: 'HANWHA_EAGLES',
+    positiveEmotionPercent: 30,
+    negativeEmotionPercent: 70,
+    defaultImageUrl: 'https://example.com/default102.jpg',
+    imageList: [],
+    emotionGroupList: [
+      {
+        groupStart: '2025-10-05T19:10:00Z',
+        emotionType: 'NEGATIVE',
+        count: 2,
+      },
+    ],
+  },
+
+  103: {
+    matchRecordId: 203,
+    matchesId: 103,
+    stadium: 'SUWON',
+    homeTeam: 'KT_WIZ',
+    awayTeam: 'DOOSAN_BEARS',
+    matchDate: '2025-10-06',
+    matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
+    userId: 9,
+    watchCnt: 4,
+    result: 'WIN',
+    baseballTeam: 'KT_WIZ',
+    positiveEmotionPercent: 75,
+    negativeEmotionPercent: 25,
+    defaultImageUrl: 'https://example.com/default103.jpg',
+    imageList: [
+      {
+        imageUrl: 'https://example.com/image103-1.jpg',
+        createdAt: '2025-10-06T18:50:00Z',
+      },
+    ],
+    emotionGroupList: [
+      {
+        groupStart: '2025-10-06T19:20:00Z',
+        emotionType: 'POSITIVE',
+        count: 3,
+      },
+    ],
+  },
+
+  104: {
+    matchRecordId: 204,
+    matchesId: 104,
+    stadium: 'SAJIK',
+    homeTeam: 'LOTTE_GIANTS',
+    awayTeam: 'NC_DINOS',
+    matchDate: '2025-10-06',
+    matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
+    userId: 10,
+    watchCnt: 3,
+    result: 'LOSS',
+    baseballTeam: 'LOTTE_GIANTS',
+    positiveEmotionPercent: 45,
+    negativeEmotionPercent: 55,
+    defaultImageUrl: 'https://example.com/default104.jpg',
+    imageList: [
+      {
+        imageUrl: 'https://example.com/image104-1.jpg',
+        createdAt: '2025-10-06T18:45:00Z',
+      },
+      {
+        imageUrl: 'https://example.com/image104-2.jpg',
+        createdAt: '2025-10-06T19:00:00Z',
+      },
+    ],
+    emotionGroupList: [
+      {
+        groupStart: '2025-10-06T19:30:00Z',
+        emotionType: 'NEGATIVE',
+        count: 2,
+      },
+    ],
+  },
+
+  105: {
+    matchRecordId: 205,
+    matchesId: 105,
+    stadium: 'DAEJEON',
+    homeTeam: 'HANWHA_EAGLES',
+    awayTeam: 'KIA_TIGERS',
+    matchDate: '2025-10-06',
+    matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
+    userId: 11,
+    watchCnt: 1,
+    result: 'WIN',
+    baseballTeam: 'HANWHA_EAGLES',
+    positiveEmotionPercent: 65,
+    negativeEmotionPercent: 35,
+    defaultImageUrl: 'https://example.com/default105.jpg',
+    imageList: [
+      {
+        imageUrl: 'https://example.com/image105-1.jpg',
+        createdAt: '2025-10-06T18:55:00Z',
+      },
+    ],
+    emotionGroupList: [
+      {
+        groupStart: '2025-10-06T19:20:00Z',
+        emotionType: 'POSITIVE',
+        count: 1,
+      },
+    ],
+  },
+
+  106: {
+    matchRecordId: 206,
+    matchesId: 106,
+    stadium: 'SAJIK',
+    homeTeam: 'LOTTE_GIANTS',
+    awayTeam: 'NC_DINOS',
+    matchDate: '2025-10-06',
+    matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
+    userId: 12,
+    watchCnt: 0,
+    result: null,
+    baseballTeam: 'NC_DINOS',
+    positiveEmotionPercent: 50,
+    negativeEmotionPercent: 50,
+    defaultImageUrl: 'https://example.com/default106.jpg',
+    imageList: [],
+    emotionGroupList: [
+      {
+        groupStart: '2025-10-06T19:00:00Z',
+        emotionType: 'NEGATIVE',
+        count: 1,
+      },
+    ],
+  },
 } as const

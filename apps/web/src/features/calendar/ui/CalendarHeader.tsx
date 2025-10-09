@@ -1,24 +1,35 @@
 import { useState, useEffect, useRef } from 'react'
 import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
 import { motion, AnimatePresence } from 'framer-motion'
-import { RefreshCw } from 'lucide-react'
+import { toZonedTime } from 'date-fns-tz'
 
 import CalendarIcon from '@/assets/calendar.svg?react'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
 import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/shared/ui/common/calendar'
+import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
+import { Button } from '@/shared/ui/common'
+import { TIME_ZONE } from '@/shared/constants/time'
+
+import { useDate } from '../context/DateContext'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
 export const CalendarHeader = () => {
-  const koreaDate = new Date(
-    new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
-  )
+  const koreaDate = toZonedTime(new Date(), TIME_ZONE)
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(koreaDate)
+  const { selectedDate, setSelectedDate } = useDate()
+
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
-  const [baseDate, setBaseDate] = useState(new Date())
+  const [baseDate, setBaseDate] = useState(koreaDate)
   const calendarRef = useRef<HTMLDivElement>(null)
+
+  useTomorrowTrigger({
+    onTomorrow: (newDate) => {
+      setSelectedDate(newDate)
+      setBaseDate(newDate)
+    },
+  })
 
   const goToPrevMonth = () => {
     const prevMonthLastDay = endOfMonth(addMonths(baseDate, -1))
@@ -56,13 +67,9 @@ export const CalendarHeader = () => {
   return (
     <div>
       <div className="flex items-center justify-between px-6 py-1">
-        <RefreshCw
-          className="size-6 absolute left-6"
-          onClick={() => {
-            const today = new Date()
-            setSelectedDate(today)
-            setBaseDate(today)
-          }}
+        <CalendarIcon
+          className="calendar-trigger size-6 absolute left-6"
+          onClick={() => setShowCalendar((prev) => !prev)}
         />
         <div className="flex flex-1 items-center justify-center gap-4">
           <button onClick={goToPrevMonth}>
@@ -76,10 +83,18 @@ export const CalendarHeader = () => {
             <RightArrow className="size-5.5" />
           </button>
         </div>
-        <CalendarIcon
-          className="calendar-trigger size-6 absolute right-6"
-          onClick={() => setShowCalendar((prev) => !prev)}
-        />
+        <Button
+          variant="secondary"
+          size="sm"
+          className="absolute right-4"
+          onClick={() => {
+            const today = toZonedTime(new Date(), TIME_ZONE)
+            setSelectedDate(today)
+            setBaseDate(today)
+          }}
+        >
+          오늘
+        </Button>
       </div>
 
       {/* week 캐러셀 */}

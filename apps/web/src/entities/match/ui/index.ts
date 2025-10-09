@@ -1,1 +1,1 @@
-export { MatchCard } from './MatchCard'
+export { MatchCardToday, MatchCardFuture, MatchCardPast } from './MatchCard'

@@ -4,11 +4,11 @@ import { Button } from '@/shared/ui/common/Button'
 import { type Match } from '@/entities/match/model/match.type'
 
 interface MatchCardProps extends Match {
-  isCenter: boolean
+  isCenter?: boolean
   onClick?: () => void
 }
 
-export const MatchCard = ({
+export const MatchCardToday = ({
   homeTeam,
   awayTeam,
   stadium,
@@ -37,6 +37,47 @@ export const MatchCard = ({
           기록 시작하기
         </Button>
       </div>
+    </HomeCard.Root>
+  )
+}
+
+export const MatchCardFuture = ({
+  homeTeam,
+  awayTeam,
+  stadium,
+  matchesTime,
+}: MatchCardProps) => {
+  return (
+    <HomeCard.Root>
+      <HomeCard.DetailInfo
+        dateTime={matchesTime}
+        homeTeam={homeTeam}
+        awayTeam={awayTeam}
+      />
+      <HomeCard.StadiumInfo stadium={stadium} />
+    </HomeCard.Root>
+  )
+}
+
+export const MatchCardPast = ({
+  homeTeam,
+  awayTeam,
+  stadium,
+  matchesResult,
+}: MatchCardProps) => {
+  const [homeScore, awayScore] = matchesResult
+    ? matchesResult.replace(/\s/g, '').split(':')
+    : ['-', '-']
+
+  return (
+    <HomeCard.Root>
+      <HomeCard.ResultInfo
+        homeTeam={homeTeam}
+        awayTeam={awayTeam}
+        homeScore={homeScore}
+        awayScore={awayScore}
+      />
+      <HomeCard.StadiumInfo stadium={stadium} className='pb-2' />
     </HomeCard.Root>
   )
 }

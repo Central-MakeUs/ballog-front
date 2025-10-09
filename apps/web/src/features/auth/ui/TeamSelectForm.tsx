@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { TEAM_ICONS, TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { Button } from '@/shared/ui/common'
+import { cn } from '@/shared/lib/classnames'
 
 interface TeamSelectionFormProps {
   baseBallTeam?: TeamKey
@@ -45,7 +46,11 @@ export const TeamSelectionForm = ({
                 size="lg"
                 variant="secondary"
                 state={isSelected ? 'pressed' : undefined} // 선택 시만 subtle, 아니면 기본
-                className={`self-stretch row-start-${row} col-start-${col} flex-1 h-full gap-0`}
+                className={cn(
+                  `self-stretch row-start-${row} col-start-${col} flex-1 h-full gap-0`,
+                  isSelected &&
+                    'border border-brand-primary-default text-brand-primary-default',
+                )}
                 onClick={() => handleSelect(key as TeamKey)}
               >
                 {Icon && <Icon className="size-6 mr-1 -ml-2" />} {value}
