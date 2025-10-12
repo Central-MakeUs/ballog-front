@@ -1,4 +1,3 @@
-<!-- apps/admin/src/lib/components/MatchItem.svelte -->
 <script lang="ts">
 	import { TEAMS } from '../enums/teams';
 	import { STADIUM } from '../enums/stadiums';

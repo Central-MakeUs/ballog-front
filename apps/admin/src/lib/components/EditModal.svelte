@@ -1,4 +1,3 @@
-<!-- apps/admin/src/lib/components/EditModal.svelte -->
 <script lang="ts">
 	import { TEAMS } from '../enums/teams';
 	import { STADIUM } from '../enums/stadiums';

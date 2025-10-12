@@ -4,7 +4,6 @@
 	import DeleteModal from '../lib/components/DeleteModal.svelte';
 	import MatchItem from '../lib/components/MatchItem.svelte';
 	import CreateModal from '../lib/components/CreateModal.svelte';
-	import { goto } from '$app/navigation';
 	import type { Match } from '../lib/interface/match';
 	import EditModal from '../lib/components/EditModal.svelte';
 
@@ -35,7 +34,6 @@
 		});
 
 		if (response.ok) {
-			// 성공 시 모달 닫기 및 페이지 새로고침
 			showDeleteModal = false;
 			window.location.reload();
 		}

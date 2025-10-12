@@ -1,4 +1,3 @@
-<!-- apps/admin/src/lib/components/CreateModal.svelte -->
 <script lang="ts">
 	import { TEAMS } from '../enums/teams';
 	import { STADIUM } from '../enums/stadiums';
@@ -11,7 +10,6 @@
 		onCancel: () => void;
 	}>();
 
-	// 폼 데이터를 위한 반응형 상태 (새로운 경기용)
 	let formData = $state({
 		matchesDate: '',
 		matchesTime: '',
