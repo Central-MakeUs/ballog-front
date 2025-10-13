@@ -8,7 +8,7 @@ import {
   type CarouselApi,
 } from '@/shared/ui/common/carousel'
 
-import { CalendarWeekHeader } from './CalendarWeekHeader'
+import { CalendarWeekContent } from './CalendarWeekContent'
 
 interface CalendarWeekCarouselProps {
   baseDate: Date
@@ -79,7 +79,7 @@ useEffect(() => {
       <CarouselContent>
         {weeks.map((weekDate) => (
           <CarouselItem key={weekDate.toISOString()} className="basis-full">
-            <CalendarWeekHeader
+            <CalendarWeekContent
               date={weekDate}
               selectedDate={selectedDate}
               onSelect={(d) => {
