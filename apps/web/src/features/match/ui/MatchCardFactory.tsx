@@ -1,6 +1,12 @@
-import { MatchCardToday, MatchCardFuture, MatchCardPast } from '@/entities/match/ui/MatchCard'
+import {
+  MatchCardToday,
+  MatchCardFuture,
+  MatchCardPast,
+} from '@/entities/match/ui/MatchCard'
 import { type Match } from '@/entities/match/model/match.type'
 import { useDate } from '@/features/calendar/context/DateContext'
+
+import { formatDate } from '../utils/matchUtils'
 
 interface MatchCardFactoryProps {
   match: Match
@@ -17,8 +23,8 @@ export const MatchCardFactory = ({
 
   if (!selectedDate) return null
 
-  const todayStr = todayDate.toISOString().slice(0, 10)
-  const selectedStr = selectedDate?.toISOString().slice(0, 10)
+  const todayStr = formatDate(todayDate)
+  const selectedStr = formatDate(selectedDate)
 
   const isPast = selectedStr < todayStr
   const isFuture = selectedStr > todayStr

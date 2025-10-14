@@ -179,7 +179,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  101: {
+  107: {
     matchRecordId: 201,
     matchesId: 101,
     stadium: 'JAMSIL',
@@ -213,7 +213,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  102: {
+  108: {
     matchRecordId: 202,
     matchesId: 102,
     stadium: 'DAEJEON',
@@ -238,7 +238,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  103: {
+  109: {
     matchRecordId: 203,
     matchesId: 103,
     stadium: 'SUWON',
@@ -268,7 +268,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  104: {
+  110: {
     matchRecordId: 204,
     matchesId: 104,
     stadium: 'SAJIK',
@@ -302,7 +302,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  105: {
+  111: {
     matchRecordId: 205,
     matchesId: 105,
     stadium: 'DAEJEON',
@@ -332,7 +332,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  106: {
+  112: {
     matchRecordId: 206,
     matchesId: 106,
     stadium: 'SAJIK',
