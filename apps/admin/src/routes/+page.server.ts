@@ -7,7 +7,7 @@ import { fail, type Actions } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({ fetch }) => {
 	const response = await fetch(`${environment.apiUrl}/api/v1/match/all`, {
 		headers: {
-			Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzYwNzc0MDA3fQ.WSClN0WcTo2fHyqJQ4cwzpaczJ4Z3_lCX9qK2ADanNk`
+			Authorization: `${environment.token}`
 		}
 	});
 	const matches: ApiResponse<Match[]> = await response.json();
