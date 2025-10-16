@@ -7,12 +7,15 @@ import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
+  // @ts-expect-error
+  // 현재 타입 이슈
+  // https://github.com/tailwindlabs/tailwindcss/issues/18802
   plugins: [react(), tailwindcss(), svgr()],
   server: {
     host: '0.0.0.0',
     port: 5173,
   },
-  
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
