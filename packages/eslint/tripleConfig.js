@@ -89,7 +89,6 @@ export default [
       },
     },
     plugins: {
-      '@typescript-eslint': typescriptEslint,
       import: importPlugin,
       promise: promisePlugin,
     },
