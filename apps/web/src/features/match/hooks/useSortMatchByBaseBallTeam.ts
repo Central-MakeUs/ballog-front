@@ -22,7 +22,7 @@ export const useSortMatchByBaseBallTeam = (matches: Match[]) => {
     )
 
     const others = matches.filter(
-      (m) => m.homeTeam !== team || m.awayTeam !== team,
+      (m) => m.homeTeam !== team && m.awayTeam !== team,
     )
     return [...favorite, ...others]
   }, [matches, user?.baseballTeam])

@@ -67,7 +67,7 @@ export const matchByDate: {
   delay: number
 } = {
   data: {
-    '2025-10-05': [
+    '2025-10-19': [
       {
         matchesId: 101,
         matchesDate: '2025-10-05',
@@ -85,11 +85,11 @@ export const matchByDate: {
         homeTeam: 'HANWHA_EAGLES',
         awayTeam: 'KIA_TIGERS',
         stadium: 'DAEJEON',
-        matchesResult: "3:5",
+        matchesResult: '3:5',
         status: 'SCHEDULED',
       },
     ] as Match[],
-    '2025-10-13': [
+    '2025-10-20': [
       {
         matchesId: 103,
         matchesDate: '2025-10-13',
@@ -97,7 +97,7 @@ export const matchByDate: {
         homeTeam: 'KT_WIZ',
         awayTeam: 'DOOSAN_BEARS',
         stadium: 'SUWON',
-        matchesResult: "5:3",
+        matchesResult: '5:3',
         status: 'COMPLETED',
       },
       {
@@ -107,7 +107,7 @@ export const matchByDate: {
         homeTeam: 'LOTTE_GIANTS',
         awayTeam: 'NC_DINOS',
         stadium: 'SAJIK',
-        matchesResult: "3:5",
+        matchesResult: '3:5',
         status: 'COMPLETED',
       },
       {
@@ -115,9 +115,9 @@ export const matchByDate: {
         matchesDate: '2025-10-13',
         matchesTime: '18:30:00',
         homeTeam: 'HANWHA_EAGLES',
-        awayTeam: 'KIA_TIGERS',
+        awayTeam: 'LG_TWINS',
         stadium: 'DAEJEON',
-        matchesResult: "5:3",
+        matchesResult: '5:3',
         status: 'COMPLETED',
       },
       {
@@ -127,11 +127,11 @@ export const matchByDate: {
         homeTeam: 'LOTTE_GIANTS',
         awayTeam: 'NC_DINOS',
         stadium: 'SAJIK',
-        matchesResult: "3:5",
+        matchesResult: '3:5',
         status: 'COMPLETED',
       },
     ] as Match[],
-    '2025-10-14': [
+    '2025-10-21': [
       {
         matchesId: 107,
         matchesDate: '2025-10-14',
@@ -162,8 +162,8 @@ export const matchByDate: {
         matchesResult: null,
         status: 'SCHEDULED',
       },
-      
-    ], '2025-10-15': [
+    ],
+    '2025-10-22': [
       {
         matchesId: 110,
         matchesDate: '2025-10-15',
@@ -171,7 +171,7 @@ export const matchByDate: {
         homeTeam: 'KIWOOM_HEROES',
         awayTeam: 'SSG_LANDERS',
         stadium: 'GOCHUK',
-        matchesResult: "5:3",
+        matchesResult: '5:3',
         status: 'SCHEDULED',
       },
       {
@@ -181,7 +181,7 @@ export const matchByDate: {
         homeTeam: 'HANWHA_EAGLES',
         awayTeam: 'LG_TWINS',
         stadium: 'DAEJEON',
-        matchesResult: "1:3",
+        matchesResult: '1:3',
         status: 'SCHEDULED',
       },
       {
@@ -194,8 +194,7 @@ export const matchByDate: {
         matchesResult: null,
         status: 'SCHEDULED',
       },
-      
-     ] as Match[],
+    ] as Match[],
   },
   delay: 800,
 }
