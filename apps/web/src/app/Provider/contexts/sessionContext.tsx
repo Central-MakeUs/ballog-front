@@ -24,7 +24,7 @@ export const SessionProvider = ({
   const { accessToken, setAccessTokenInStorage, clearSessionStorage } =
     useAccessTokenStorage()
 
-
+  console.log(user)
   const refetchUser = async () => {
     try {
       const data = await authGet.getUser()
