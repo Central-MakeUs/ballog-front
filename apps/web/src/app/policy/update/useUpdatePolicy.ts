@@ -8,6 +8,8 @@ import {
 import { useCheckForUpdate } from './useCheckForUpdate'
 import { useUpdateModal } from './useUpdateModal'
 
+const DISMISS_KEY = 'UPDATE_MODAL_DISMISSED'
+
 /**
  * @TODO : 버전 api 연동
  * 접속 시점 기준 48시간이 지나 있는지만 체크.
@@ -16,7 +18,7 @@ import { useUpdateModal } from './useUpdateModal'
 export const useUpdatePolicy = () => {
   const { openUpdateModal } = useUpdateModal()
 
-  const { needUpdate } = useCheckForUpdate('1.0.2')
+  const { needUpdate, localVersion } = useCheckForUpdate('1.0.2')
 
   const handleUpdatePolicy = (
     openUpdateModal: ReturnType<typeof useUpdateModal>['openUpdateModal'],
@@ -34,7 +36,13 @@ export const useUpdatePolicy = () => {
   }
 
   useEffect(() => {
-    if (!needUpdate) return
+    if (!localVersion) return
+
+    if (!needUpdate) {
+      localStorage.removeItem(DISMISS_KEY)
+      return
+    }
+
     handleUpdatePolicy(openUpdateModal)
   }, [needUpdate])
 }
