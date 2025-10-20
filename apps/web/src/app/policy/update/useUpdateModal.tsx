@@ -5,25 +5,33 @@ import { useBridge } from '@/shared/hooks/bridge/useBridge'
 
 interface UpdateModalProps {
   type: 'optional' | 'force'
+  onDismiss: () => void
 }
 
 export const useUpdateModal = () => {
   const { bridge } = useBridge()
   const { openHorizontalModal, openVerticalModal } = useModal()
 
-  const openUpdateModal = ({ type }: UpdateModalProps) => {
+  const openUpdateModal = ({ type, onDismiss }: UpdateModalProps) => {
     if (type === 'optional') {
       return openHorizontalModal({
         heading: '새로운 버전이 업데이트 되었어요',
         body: `최신 버전으로 업데이트하고\n더 나은 서비스를 이용해보세요`,
         buttons: [
-          { label: '나중에', onClick: () => {} },
+          {
+            label: '나중에',
+            onClick: () => {
+              onDismiss?.()
+            },
+          },
           {
             label: '업데이트',
-            onClick: () =>
+            onClick: () => {
+              onDismiss?.()
               bridge.send(POST_MESSAGE_EVENT.STORE_DEEP_LINK, {
                 payload: 'link to store',
-              }),
+              })
+            },
           },
         ],
       })
