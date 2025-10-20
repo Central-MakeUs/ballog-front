@@ -1,10 +1,14 @@
+import { POST_MESSAGE_EVENT } from '@ballog/bridge'
+
 import { useModal } from '@/shared/hooks/modal/useModal'
+import { useBridge } from '@/shared/hooks/bridge/useBridge'
 
 interface UpdateModalProps {
   type: 'optional' | 'force'
 }
 
 export const useUpdateModal = () => {
+  const { bridge } = useBridge()
   const { openHorizontalModal, openVerticalModal } = useModal()
 
   const openUpdateModal = ({ type }: UpdateModalProps) => {
@@ -17,9 +21,9 @@ export const useUpdateModal = () => {
           {
             label: '업데이트',
             onClick: () =>
-              
-              (window.location.href =
-                'https://apps.apple.com/kr/app/ballog-%EB%B3%BC%EB%A1%9C%EA%B7%B8/id6749778947'),
+              bridge.send(POST_MESSAGE_EVENT.STORE_DEEP_LINK, {
+                payload: 'link to store',
+              }),
           },
         ],
       })
@@ -34,8 +38,9 @@ export const useUpdateModal = () => {
           {
             label: '업데이트',
             onClick: () =>
-              (window.location.href =
-                'https://apps.apple.com/kr/app/ballog-%EB%B3%BC%EB%A1%9C%EA%B7%B8/id6749778947'),
+              bridge.send(POST_MESSAGE_EVENT.STORE_DEEP_LINK, {
+                payload: 'link to store',
+              }),
           },
         ],
       })
