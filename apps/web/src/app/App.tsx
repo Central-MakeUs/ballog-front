@@ -5,7 +5,7 @@ import { SessionProvider } from '@/app/Provider/contexts/sessionContext'
 import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
-import { useUpdatePolicy } from './AppPolicy/useUpdatePolicy'
+import { useUpdatePolicy } from './policy/update/useUpdatePolicy'
 // import { NoticeModal } from './Notice/NoticeModal'
 
 const AppInner = () => {

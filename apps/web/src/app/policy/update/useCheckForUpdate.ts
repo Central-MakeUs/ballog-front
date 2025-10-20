@@ -22,7 +22,7 @@ export const useCheckForUpdate = (latestVersion: string) => {
   useEffect(() => {
     getMyAppVersion()
   }, [getMyAppVersion])
-
+  
   useBridgeEvent(POST_MESSAGE_EVENT.GET_MY_APP_VERSION, storeAppVersion)
 
   const needUpdate =
@@ -30,5 +30,5 @@ export const useCheckForUpdate = (latestVersion: string) => {
       ? semver.lt(localVersion, latestVersion)
       : false
 
-  return { needUpdate }
+  return { needUpdate, localVersion }
 }
