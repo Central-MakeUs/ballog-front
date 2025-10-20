@@ -9,6 +9,7 @@ import { useCheckForUpdate } from './useCheckForUpdate'
 import { useUpdateModal } from './useUpdateModal'
 
 const DISMISS_KEY = 'UPDATE_MODAL_DISMISSED'
+const UPDATE_MODAL_DELAY = 3000
 
 /**
  * @TODO : 버전 api 연동
@@ -20,9 +21,7 @@ export const useUpdatePolicy = () => {
 
   const { needUpdate, localVersion } = useCheckForUpdate('1.0.2')
 
-  const handleUpdatePolicy = (
-    openUpdateModal: ReturnType<typeof useUpdateModal>['openUpdateModal'],
-  ) => {
+  const handleUpdatePolicy = () => {
     if (!shouldShowUpdateModal()) return
 
     const timer = setTimeout(() => {
@@ -30,7 +29,7 @@ export const useUpdatePolicy = () => {
         type: 'optional',
         onDismiss: countUpdateModalDismissed,
       })
-    }, 3000)
+    }, UPDATE_MODAL_DELAY)
 
     return () => clearTimeout(timer)
   }
@@ -43,6 +42,7 @@ export const useUpdatePolicy = () => {
       return
     }
 
-    handleUpdatePolicy(openUpdateModal)
-  }, [needUpdate])
+    const cleanup = handleUpdatePolicy()
+    return cleanup
+  }, [needUpdate, localVersion])
 }

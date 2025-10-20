@@ -8,6 +8,10 @@ interface UpdateModalProps {
   onDismiss: () => void
 }
 
+/**
+ * 강제 업데이트와 선택적 업데이트 모달 띄우는 훅
+ * @type : optional, force
+ */
 export const useUpdateModal = () => {
   const { bridge } = useBridge()
   const { openHorizontalModal, openVerticalModal } = useModal()
