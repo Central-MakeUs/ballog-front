@@ -89,7 +89,7 @@ export const matchByDate: {
         status: 'SCHEDULED',
       },
     ] as Match[],
-    '2025-10-20': [
+    '2025-10-21': [
       {
         matchesId: 103,
         matchesDate: '2025-10-13',
@@ -131,7 +131,7 @@ export const matchByDate: {
         status: 'COMPLETED',
       },
     ] as Match[],
-    '2025-10-21': [
+    '2025-10-22': [
       {
         matchesId: 107,
         matchesDate: '2025-10-14',
@@ -163,7 +163,7 @@ export const matchByDate: {
         status: 'SCHEDULED',
       },
     ],
-    '2025-10-22': [
+    '2025-10-23': [
       {
         matchesId: 110,
         matchesDate: '2025-10-15',

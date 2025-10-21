@@ -23,11 +23,11 @@ export const MatchCardFactory = ({
 
   if (!selectedDate) return null
 
-  const todayStr = formatDate(todayDate)
-  const selectedStr = formatDate(selectedDate)
+  const formatedtodayDate = formatDate(todayDate)
+  const formatedselectedDate = formatDate(selectedDate)
 
-  const isPast = selectedStr < todayStr
-  const isFuture = selectedStr > todayStr
+  const isPast = formatedselectedDate < formatedtodayDate
+  const isFuture = formatedselectedDate > formatedtodayDate
 
   // 이전 경기
   if (isPast) {
