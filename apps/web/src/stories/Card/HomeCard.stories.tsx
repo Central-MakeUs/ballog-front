@@ -39,7 +39,7 @@ export const HasButton: Story = {
         <HomeCard.StadiumInfo stadium="JAMSIL" />
         <div className="w-full">
           <Button className="w-full bg-brand-secondary-default">
-            기록 시작하기
+            감정 남기기
           </Button>
         </div>
       </HomeCard.Root>
@@ -51,11 +51,7 @@ export const Disabled: Story = {
   render: () => (
     <div style={{ width: 260, height: '800px' }}>
       <HomeCard.Disabled>
-        <Button
-          variant="secondary"
-          size="sm"
-          className="rounded-lg p-3 w-full"
-        >
+        <Button variant="secondary" size="sm" className="rounded-lg p-3 w-full">
           <span className="body-md-medium">관람로그 보기</span>
         </Button>
       </HomeCard.Disabled>

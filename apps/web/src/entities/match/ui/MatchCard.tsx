@@ -34,7 +34,7 @@ export const MatchCardToday = ({
           )}
           onClick={onClick}
         >
-          기록 시작하기
+          감정 남기기
         </Button>
       </div>
     </HomeCard.Root>

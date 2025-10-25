@@ -17,11 +17,11 @@ import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
 export const CalendarHeader = () => {
   const koreaDate = toZonedTime(new Date(), TIME_ZONE)
-
   const { selectedDate, setSelectedDate } = useDate()
 
   const [showCalendar, setShowCalendar] = useState<boolean>(false)
   const [baseDate, setBaseDate] = useState(koreaDate)
+
   const calendarRef = useRef<HTMLDivElement>(null)
 
   useTomorrowTrigger({
