@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
-import semver from 'semver'
 
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
