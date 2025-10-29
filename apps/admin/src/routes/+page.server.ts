@@ -43,7 +43,6 @@ export const actions = {
 				Authorization: `${environment.token}`
 			}
 		});
-
 		if (!response.ok) {
 			return fail(400, { message: 'Failed to update match' });
 		}
@@ -60,6 +59,7 @@ export const actions = {
 			},
 			body: JSON.stringify(match)
 		});
+
 		if (!response.ok) {
 			return fail(400, { message: 'Failed to update match' });
 		}

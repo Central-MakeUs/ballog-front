@@ -21,21 +21,24 @@
 	let showCreateModal = $state(false);
 
 	// 선택된 match 저장
-	let selectedMatch = $state<Match | null>(null);
+	let selectedMatch = $state<Match>();
 
 	const deleteMatch = async (match: Match) => {
-		const formData = new FormData();
-		formData.append('matchId', match.matchesId.toString());
-
-		// deleteMatch action 호출
 		const response = await fetch('?/deleteMatch', {
 			method: 'POST',
-			body: formData
+			body: JSON.stringify({
+				matchId: match.matchesId
+			})
 		});
+		
+		const result = await response.json();
 
-		if (response.ok) {
+		if (result.type === 'success') {
 			showDeleteModal = false;
 			window.location.reload();
+		} else {
+			// 에러 처리 추가
+			alert('삭제에 실패했습니다.');
 		}
 	};
 
@@ -56,7 +59,6 @@
 	};
 
 	const createMatch = async (newMatch: Omit<Match, 'matchesId' | 'matchesResult'>) => {
-		console.log(newMatch);
 		const response = await fetch('?/createMatch', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -140,14 +142,16 @@
 		<h2>삭제</h2>
 	{/snippet}
 
-	<DeleteModal
-		onDelete={(match) => {
-			deleteMatch(match);
-		}}
-		onCancel={() => {
-			showDeleteModal = false;
-		}}
-	/>
+
+	{#if selectedMatch}
+		<DeleteModal
+			match={selectedMatch}
+			onDelete={deleteMatch}
+			onCancel={() => {
+				showDeleteModal = false;
+			}}
+		/>
+	{/if}
 </Modal>
 
 <!-- 수정 모달 -->
