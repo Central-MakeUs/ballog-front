@@ -1,15 +1,17 @@
 import { useEffect } from 'react'
+import semver from 'semver'
 
 import {
   shouldShowUpdateModal,
   countUpdateModalDismissed,
 } from '../utils/updatePolicyUtils'
 
-import { useCheckForUpdate } from './useCheckForUpdate'
+import { useGetAppVersion } from './useGetAppVersion'
 import { useUpdateModal } from './useUpdateModal'
 
 const DISMISS_KEY = 'UPDATE_MODAL_DISMISSED'
 const UPDATE_MODAL_DELAY = 3000
+const VITE_FORCE_UPDATE_VERSION = import.meta.env.VITE_FORCE_UPDATE_VERSION
 
 /**
  * @TODO : 버전 api 연동
@@ -19,14 +21,14 @@ const UPDATE_MODAL_DELAY = 3000
 export const useUpdatePolicy = () => {
   const { openUpdateModal } = useUpdateModal()
 
-  const { needUpdate, localVersion } = useCheckForUpdate('1.0.2')
+  const { localVersion } = useGetAppVersion()
 
   const handleUpdatePolicy = () => {
     if (!shouldShowUpdateModal()) return
 
     const timer = setTimeout(() => {
       openUpdateModal({
-        type: 'optional',
+        type: 'force',
         onDismiss: countUpdateModalDismissed,
       })
     }, UPDATE_MODAL_DELAY)
@@ -36,13 +38,14 @@ export const useUpdatePolicy = () => {
 
   useEffect(() => {
     if (!localVersion) return
+    const needForceUpdate = semver.lt(localVersion, VITE_FORCE_UPDATE_VERSION)
 
-    if (!needUpdate) {
+    if (!needForceUpdate) {
       localStorage.removeItem(DISMISS_KEY)
       return
     }
 
     const cleanup = handleUpdatePolicy()
     return cleanup
-  }, [needUpdate, localVersion])
+  }, [localVersion])
 }

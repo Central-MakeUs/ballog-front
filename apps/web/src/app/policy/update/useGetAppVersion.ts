@@ -8,10 +8,9 @@ import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 /**
  * 현재 앱 버전(localVersion)을 가져오고, 최신 앱 버전(latestVersion) 을 받아 비교 후
  * 업데이트 필요 여부 (needUpdate) 를 판단하는 훅
- * @param latestVersion
- * @returns 업데이트 필요 여부, 로컬 앱 버전
+ * @returns  로컬 앱 버전
  */
-export const useCheckForUpdate = (latestVersion: string) => {
+export const useGetAppVersion = () => {
   const { bridge } = useBridge()
   const [localVersion, setLocalVersion] = useState<string | null>(null)
 
@@ -31,10 +30,5 @@ export const useCheckForUpdate = (latestVersion: string) => {
 
   useBridgeEvent(POST_MESSAGE_EVENT.GET_MY_APP_VERSION, storeAppVersion)
 
-  const needUpdate =
-    localVersion && latestVersion
-      ? semver.lt(localVersion, latestVersion)
-      : false
-
-  return { needUpdate, localVersion }
+  return { localVersion }
 }
