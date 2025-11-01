@@ -8,6 +8,7 @@ import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
 import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/shared/ui/common/calendar'
 import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
+import type { MatchDateMap } from '@/entities/match/model/match.type'
 import { Button } from '@/shared/ui/common'
 import { TIME_ZONE } from '@/shared/constants/time'
 
@@ -15,7 +16,11 @@ import { useDate } from '../context/DateContext'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
-export const CalendarHeader = () => {
+interface CalendarHeaderProps {
+  allMatches: MatchDateMap
+}
+
+export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
   const koreaDate = toZonedTime(new Date(), TIME_ZONE)
   const { selectedDate, setSelectedDate } = useDate()
 
@@ -99,6 +104,7 @@ export const CalendarHeader = () => {
 
       {/* week 캐러셀 */}
       <CalendarWeekCarousel
+        allMatches={allMatches}
         baseDate={baseDate}
         onChange={setBaseDate}
         selectedDate={selectedDate}
