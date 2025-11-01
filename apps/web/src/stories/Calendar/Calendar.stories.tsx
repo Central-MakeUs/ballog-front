@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import { Calendar } from '@/features/calendar/ui/calendar'
+import { matchByDate } from '@/mocks/data/match'
 
 // Storybook 메타 정보
 const meta: Meta<typeof Calendar> = {
@@ -25,9 +26,11 @@ const DefaultCalendar = () => {
   return (
     <Calendar
       mode="single"
+      required={true}
       selected={date}
       onSelect={setDate}
       className="rounded-lg border"
+      allMatches={matchByDate.data}
     />
   )
 }
