@@ -19,7 +19,6 @@ function Calendar({
   formatters,
   components,
   allMatches,
-
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   allMatches: MatchDateMap
@@ -184,7 +183,6 @@ function CalendarDayButton({
       ref={ref}
       variant="secondary"
       size="icon"
-      // disabled={!clickable}
       data-day={day.date.toLocaleDateString()}
       data-selected-single={
         modifiers.selected &&
@@ -199,7 +197,7 @@ function CalendarDayButton({
         'w-full aspect-square text-[15px] font-normal rounded-full',
 
         modifiers.selected
-          ? '!bg-brand-primary-default text-white'
+          ? '!bg-brand-primary-subtle text-[#17A093] border-brand-primary-default border-[1px]'
           : hasMatch
             ? '!bg-usage-background-strong text-white'
             : '!bg-usage-background-strong text-brand-neutral-40',
