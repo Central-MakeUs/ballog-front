@@ -10,6 +10,6 @@ export interface Match {
 	homeTeam: TeamKey;
 	awayTeam: TeamKey;
 	stadium: StadiumKey;
-	matchesResult: null;
+	matchesResult: string | null;
 	status: MatchStatus;
 }
