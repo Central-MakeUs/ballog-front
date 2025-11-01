@@ -2,7 +2,10 @@ import * as React from 'react'
 import { ChevronDownIcon } from 'lucide-react'
 import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
 import { ko } from 'date-fns/locale'
+import { format } from 'date-fns-tz'
 
+import type { MatchDateMap } from '@/entities/match/model/match.type'
+import { TIME_ZONE } from '@/shared/constants/time'
 import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common/Button/Button'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
@@ -15,8 +18,11 @@ function Calendar({
   captionLayout = 'label',
   formatters,
   components,
+  allMatches,
+
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
+  allMatches: MatchDateMap
   buttonVariant?: React.ComponentProps<typeof Button>['variant']
 }) {
   const defaultClassNames = getDefaultClassNames()
@@ -137,7 +143,9 @@ function Calendar({
             <ChevronDownIcon className={cn('size-4', className)} {...props} />
           )
         },
-        DayButton: CalendarDayButton,
+        DayButton: (dayButtonProps) => (
+          <CalendarDayButton {...dayButtonProps} allMatches={allMatches} />
+        ),
         WeekNumber: ({ children, ...props }) => {
           return (
             <td {...props}>
@@ -155,11 +163,12 @@ function Calendar({
 }
 
 function CalendarDayButton({
+  allMatches,
   className,
   day,
   modifiers,
   ...props
-}: React.ComponentProps<typeof DayButton>) {
+}: React.ComponentProps<typeof DayButton> & { allMatches: MatchDateMap }) {
   const defaultClassNames = getDefaultClassNames()
 
   const ref = React.useRef<HTMLButtonElement>(null)
@@ -167,11 +176,15 @@ function CalendarDayButton({
     if (modifiers.focused) ref.current?.focus()
   }, [modifiers.focused])
 
+  const formatted = format(day.date, 'yyyy-MM-dd', { timeZone: TIME_ZONE })
+  const hasMatch = !!allMatches[formatted]?.length
+
   return (
     <Button
       ref={ref}
       variant="secondary"
       size="icon"
+      // disabled={!clickable}
       data-day={day.date.toLocaleDateString()}
       data-selected-single={
         modifiers.selected &&
@@ -183,15 +196,15 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        'w-full aspect-square text-[15px] font-normal rounded-full text-usage-text-default',
+        'w-full aspect-square text-[15px] font-normal rounded-full',
+
+        modifiers.selected
+          ? '!bg-brand-primary-default text-white'
+          : hasMatch
+            ? '!bg-usage-background-strong text-white'
+            : '!bg-usage-background-strong text-brand-neutral-40',
 
         modifiers.outside && 'text-brand-neutral-70',
-        // 선택된 날짜 스타일
-        modifiers.selected
-          ? 'bg-brand-primary-default'
-          : 'bg-usage-background-strong',
-
-        // 오늘 표시 (선택 안 됐을 때만 테두리 표시하고 싶다면 여기에 조건부 추가)
         modifiers.today && !modifiers.selected && defaultClassNames.day,
         className,
       )}

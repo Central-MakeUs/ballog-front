@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { Calendar } from '@/shared/ui/common/calendar'
+import { Calendar } from '@/features/calendar/ui/calendar'
 
 // Storybook 메타 정보
 const meta: Meta<typeof Calendar> = {
