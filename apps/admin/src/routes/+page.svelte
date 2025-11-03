@@ -6,6 +6,9 @@
 	import CreateModal from '../lib/components/CreateModal.svelte';
 	import type { Match } from '../lib/interface/match';
 	import EditModal from '../lib/components/EditModal.svelte';
+	import type { TeamKey } from '../lib/enums/teams';
+	import type { StadiumKey } from '../lib/enums/stadiums';
+	import type { MatchStatus } from '../lib/interface/match';
 
 	let { data }: PageProps = $props();
 
@@ -23,6 +26,19 @@
 	// 선택된 match 저장
 	let selectedMatch = $state<Match>();
 
+	// 파일 input 참조
+	let fileInput: HTMLInputElement;
+
+	const excelConfig = [
+		'matchesDate',
+		'matchesTime',
+		'homeTeam',
+		'awayTeam',
+		'stadium',
+		'status',
+		'matchesResult'
+	];
+
 	const deleteMatch = async (match: Match) => {
 		const response = await fetch('?/deleteMatch', {
 			method: 'POST',
@@ -30,7 +46,7 @@
 				matchId: match.matchesId
 			})
 		});
-		
+
 		const result = await response.json();
 
 		if (result.type === 'success') {
@@ -49,7 +65,7 @@
 				updatedMatch
 			})
 		});
-		
+
 		const result = await response.json();
 
 		if (result.type === 'success') {
@@ -58,16 +74,14 @@
 		}
 	};
 
-	const createMatch = async (newMatch: Omit<Match, 'matchesId' | 'matchesResult'>) => {
+	const createMatch = async (newMatch: Omit<Match, 'matchesId'>) => {
 		const response = await fetch('?/createMatch', {
 			method: 'POST',
 			body: JSON.stringify({
 				match: newMatch
 			})
 		});
-		
 		const result = await response.json();
-
 		if (result.type === 'success') {
 			showCreateModal = false;
 			window.location.reload();
@@ -88,17 +102,79 @@
 	const handleCreate = () => {
 		showCreateModal = true;
 	};
+
+	// CSV 파일 업로드 핸들러
+	const handleFileUpload = () => {
+		fileInput?.click();
+	};
+
+	const handleFileChange = async (event: Event) => {
+		const target = event.target as HTMLInputElement;
+		const file = target.files?.[0];
+
+		if (file) {
+			const reader = new FileReader();
+
+			reader.onload = async (e) => {
+				const csvContent = e.target?.result as string;
+				const length = csvContent.split('\n').length;
+
+				if (length > 1) {
+					const matchData = csvContent
+						.split('\n')
+						.slice(1)
+						.map((row) => row.split(','));
+					const createMatchPromise = [
+						...matchData.map((row) => {
+							const match = {
+								matchesDate: row[0],
+								matchesTime: row[1],
+								homeTeam: row[2] as TeamKey,
+								awayTeam: row[3] as TeamKey,
+								stadium: row[4] as StadiumKey,
+								status: row[5] as MatchStatus,
+								matchesResult: row[6] as string | null
+							};
+							return createMatch(match);
+						})
+					];
+					await Promise.all(createMatchPromise);
+				}
+			};
+
+			reader.onerror = () => {
+				console.error('파일 읽기 실패');
+			};
+
+			reader.readAsText(file, 'UTF-8');
+		}
+	};
 </script>
 
 <div class="container mx-auto px-4 py-8">
 	<div class="mb-8 flex items-center justify-between">
 		<h1 class="text-3xl font-bold">경기 일정</h1>
-		<button
-			onclick={handleCreate}
-			class="rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700 transition-colors"
-		>
-			+ 경기 추가
-		</button>
+		<div class="flex gap-3">
+			<button
+				onclick={handleFileUpload}
+				class="rounded bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-700"
+			>
+				CSV 업로드
+			</button>
+			<input
+				bind:this={fileInput}
+				type="file"
+				accept=".csv"
+				onchange={handleFileChange}
+				class="hidden"
+			/>
+			<button
+				onclick={handleCreate}
+				class="rounded bg-green-600 px-6 py-2 text-white transition-colors hover:bg-green-700"
+			>
+				+ 경기 추가
+			</button>
+		</div>
 	</div>
 
 	{#if sortedDates.length === 0}
@@ -118,15 +194,16 @@
 
 					<div class="grid gap-4">
 						{#each matchesData[date] as match}
-							<MatchItem {match} 
+							<MatchItem
+								{match}
 								onEdit={(match) => {
 									const { matchesDate, ...rest } = match;
-									return handleEdit({...rest, matchesDate: date});
-								}} 
+									return handleEdit({ ...rest, matchesDate: date });
+								}}
 								onDelete={(match) => {
 									const { matchesDate, ...rest } = match;
-									return handleDelete({...rest, matchesDate: date});
-								}} 
+									return handleDelete({ ...rest, matchesDate: date });
+								}}
 							/>
 						{/each}
 					</div>
@@ -141,7 +218,6 @@
 	{#snippet header()}
 		<h2>삭제</h2>
 	{/snippet}
-
 
 	{#if selectedMatch}
 		<DeleteModal

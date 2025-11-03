@@ -6,7 +6,7 @@
 	import type { StadiumKey } from '../enums/stadiums';
 
 	let { onSave, onCancel } = $props<{
-		onSave: (newMatch: Omit<Match, 'matchesId' | 'matchesResult'>) => void;
+		onSave: (newMatch: Omit<Match, 'matchesId'>) => void;
 		onCancel: () => void;
 	}>();
 
@@ -43,8 +43,11 @@
 	<div class="grid grid-cols-2 gap-4">
 		<!-- 홈팀 선택 -->
 		<div>
-			<label class="block text-sm font-medium text-gray-700 mb-1">홈팀</label>
-			<select bind:value={formData.homeTeam} class="w-full rounded border border-gray-300 px-3 py-2">
+			<label class="mb-1 block text-sm font-medium text-gray-700">홈팀</label>
+			<select
+				bind:value={formData.homeTeam}
+				class="w-full rounded border border-gray-300 px-3 py-2"
+			>
 				{#each teamOptions as team}
 					<option value={team.value}>{team.label}</option>
 				{/each}
@@ -53,8 +56,11 @@
 
 		<!-- 어웨이팀 선택 -->
 		<div>
-			<label class="block text-sm font-medium text-gray-700 mb-1">어웨이팀</label>
-			<select bind:value={formData.awayTeam} class="w-full rounded border border-gray-300 px-3 py-2">
+			<label class="mb-1 block text-sm font-medium text-gray-700">어웨이팀</label>
+			<select
+				bind:value={formData.awayTeam}
+				class="w-full rounded border border-gray-300 px-3 py-2"
+			>
 				{#each teamOptions as team}
 					<option value={team.value}>{team.label}</option>
 				{/each}
@@ -65,7 +71,7 @@
 	<div class="grid grid-cols-2 gap-4">
 		<!-- 경기장 선택 -->
 		<div>
-			<label class="block text-sm font-medium text-gray-700 mb-1">경기장</label>
+			<label class="mb-1 block text-sm font-medium text-gray-700">경기장</label>
 			<select bind:value={formData.stadium} class="w-full rounded border border-gray-300 px-3 py-2">
 				{#each stadiumOptions as stadium}
 					<option value={stadium.value}>{stadium.label}</option>
@@ -75,7 +81,7 @@
 
 		<!-- 경기 날짜 -->
 		<div>
-			<label class="block text-sm font-medium text-gray-700 mb-1">경기 날짜</label>
+			<label class="mb-1 block text-sm font-medium text-gray-700">경기 날짜</label>
 			<input
 				type="date"
 				bind:value={formData.matchesDate}
@@ -86,7 +92,7 @@
 
 	<!-- 경기 시간 -->
 	<div>
-		<label class="block text-sm font-medium text-gray-700 mb-1">경기 시간</label>
+		<label class="mb-1 block text-sm font-medium text-gray-700">경기 시간</label>
 		<input
 			type="time"
 			bind:value={formData.matchesTime}
@@ -96,10 +102,7 @@
 
 	<!-- 버튼 영역 -->
 	<div class="flex justify-end gap-2 pt-4">
-		<button
-			onclick={onCancel}
-			class="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
-		>
+		<button onclick={onCancel} class="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600">
 			취소
 		</button>
 		<button
