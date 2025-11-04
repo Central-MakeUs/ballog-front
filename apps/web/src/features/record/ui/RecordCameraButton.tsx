@@ -8,17 +8,20 @@ import { useImageUpload } from '@/features/image-management/hooks'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import CameraIcon from '@/assets/cameraIcon.svg?react'
 import RightArrow from '@/assets/rightArrow.svg?react'
+import { cn } from '@/shared/lib/classnames'
 
 import { useImageUploadToast } from '../hooks/useImageUploadToast'
 
 interface RecordCameraButtonProps {
   matchRecordId: number
   initialImages?: { imageUrl: string; createdAt: string }[]
+  className: string
 }
 
 export const RecordCameraButton = ({
   matchRecordId,
   initialImages = [],
+  className,
 }: RecordCameraButtonProps) => {
   const { send } = useBridge()
   const { images, hasImage, addImage } = useRecordingImages()
@@ -70,7 +73,10 @@ export const RecordCameraButton = ({
   return (
     <button
       onClick={goToCamera}
-      className="flex items-center justify-center gap-2 rounded-full bg-usage-background-default text-white p-4 mx-auto"
+      className={cn(
+        'flex items-center justify-center gap-2 rounded-full bg-usage-background-default text-white p-4 mx-auto',
+        className,
+      )}
     >
       <div className="relative flex items-center justify-center">
         <CameraIcon className="w-8 h-8 mt-1" />
@@ -80,7 +86,9 @@ export const RecordCameraButton = ({
           </span>
         )}
       </div>
-      <span className="body-sm-medium text-usage-text-default">사진으로 이 순간 기록</span>
+      <span className="body-sm-medium text-usage-text-default">
+        사진으로 이 순간 기록
+      </span>
       <RightArrow className="w-6 h-6" />
     </button>
   )
