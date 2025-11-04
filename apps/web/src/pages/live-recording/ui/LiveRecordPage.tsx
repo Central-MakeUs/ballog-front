@@ -76,7 +76,6 @@ const LiveRecordPageInner = ({
           background: `linear-gradient(to bottom, ${bgColor}, #030303 40%)`,
         }}
       />
-
       <div className="max-h-full flex flex-col justify-center items-center px-4 pt-2 w-full">
         {/* Recording Card */}
         <RecordingCardWithWebBridge recordingData={recordingData} />

@@ -12,6 +12,8 @@ import { STADIUM } from '@/shared/constants/stadium'
 import { useImageUpload } from '@/features/image-management/hooks'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 
+import { RecordCameraButton } from './RecordCameraButton'
+
 export const RecordingCardWithWebBridge = ({
   recordingData,
 }: {
@@ -22,6 +24,7 @@ export const RecordingCardWithWebBridge = ({
   const { uploadImage, uploadState } = useImageUpload({
     matchRecordId: recordingData.matchRecordId,
   })
+
   useEffect(() => {
     if (!recordingData.imageList || recordingData.imageList.length === 0) return
 
@@ -76,16 +79,17 @@ export const RecordingCardWithWebBridge = ({
 
   return (
     <RecordingCard.Root className="w-full">
-      <RecordingCard.Icon
+      {/* <RecordingCard.Icon
         state={hasImage ? true : false}
         onClick={handleClick}
-      />
-      <RecordingCard.Info
+      /> */}
+      <RecordCameraButton matchRecordId={recordingData.matchRecordId} />
+      {/* <RecordingCard.Info
         homeTeam={TEAMS[recordingData.homeTeam]}
         awayTeam={TEAMS[recordingData.awayTeam]}
         stadium={STADIUM[recordingData.stadium]}
         date={recordingData.matchDate}
-      />
+      /> */}
     </RecordingCard.Root>
   )
 }
