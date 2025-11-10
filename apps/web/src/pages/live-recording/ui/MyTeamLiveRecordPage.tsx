@@ -1,27 +1,13 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import type { ActivityComponentType } from '@stackflow/react'
-import { useQuery, useMutation } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-import { toast } from 'sonner'
 
-import { useFlow } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { EmotionVoteWidget } from '@/pages/live-recording/ui/EmotionVoteWidget'
-import {
-  EmotionVoteProvider,
-  useEmotionVote,
-} from '@/pages/live-recording/contexts/EmotionVoteContext'
+import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 import { calculateGradientColor } from '@/pages/live-recording/utils/calculateGradientColor'
-import { emotions } from '@/entities/record/api/emotion.queries'
 import { usePostEmotion } from '@/pages/live-recording/hooks/usePostEmotion'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
-import { recording } from '@/entities/record/api/recording.queries'
-import { EndRecordingButton } from '@/features/record/ui/EndRecordingButton'
-import { recordingPost } from '@/entities/record/api/recording-post'
-import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
-import { Loading } from '@/shared/ui/common'
 import { LottieRefProvider } from '@/pages/live-recording/contexts/lottieRefContext'
 import { BackArrow } from '@/assets/BackArrow'
 import { useEndRecordingFlow } from '@/features/record/hooks/useEndRecordingFlow'
@@ -32,7 +18,7 @@ import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 import { ToolTipPopover } from './ToolTipPopover'
 
 // 공통 Props 타입
-interface LiveRecordPageProps {
+interface MyTeamLiveRecordPageProps {
   matchId: number
   isLoading: boolean
   recordingData: RecordingResponse
@@ -43,7 +29,7 @@ interface LiveRecordPageProps {
 const MyTeamLiveRecordPage = ({
   recordingData,
   emotionData,
-}: LiveRecordPageProps) => {
+}: MyTeamLiveRecordPageProps) => {
   const { confirmEndRecord } = useEndRecordingFlow()
   const { mutate } = usePostEmotion()
   const { user } = useSessionContext()
