@@ -5,6 +5,8 @@ import { historySyncPlugin } from '@stackflow/plugin-history-sync'
 
 import HomePage from '@/pages/home/ui/HomePage'
 import LiveRecordPage from '@/pages/live-recording/ui/LiveRecordPage'
+import MyTeamLiveRecordPage from '@/pages/live-recording/ui/MyTeamLiveRecordPage'
+import OtherTeamLiveRecordPage from '@/pages/live-recording/ui/OtherTeamLiveRecordPage'
 import LoginPage from '@/pages/auth/ui/LoginPage'
 import TeamSelectPage from '@/pages/auth/ui/TeamSelectPage'
 import NickNamePage from '@/pages/auth/ui/NickNamePage'
@@ -47,6 +49,8 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
       routes: {
         Home: '/',
         LiveRecord: '/live-record/:matchId', // 라이브 녹화
+        MyTeamLiveRecord: '/live-record/my/:matchId',
+        OtherTeamLiveRecord: '/live-record/other/:matchId',
         Login: '/login',
         TeamSelect: '/team-select',
         Nickname: '/nickname',
@@ -67,6 +71,8 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   activities: {
     Home: withAuth(HomePage),
     LiveRecord: withAuth(LiveRecordPage),
+    MyTeamLiveRecord: withAuth(MyTeamLiveRecordPage),
+    OtherTeamLiveRecord: withAuth(OtherTeamLiveRecordPage),
     Login: LoginPage,
     TeamSelect: TeamSelectPage,
     Nickname: NickNamePage,

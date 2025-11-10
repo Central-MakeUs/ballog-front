@@ -5,6 +5,7 @@ import {
   CameraType,
   FlashMode,
   useCameraPermissions,
+  Camera,
 } from 'expo-camera'
 
 import { useRouter } from 'expo-router'
@@ -21,7 +22,6 @@ export const useCamera = (
   const [flash, setFlash] = useState<FlashMode>('off')
   const [zoom, setZoom] = useState(0)
   const savedZoom = useSharedValue(0)
-
 
   // 카메라 권한 요청을 더 적극적으로 처리
   useEffect(() => {
