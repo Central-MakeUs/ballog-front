@@ -11,6 +11,7 @@ import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
 import { queryKeys } from '@/entities/record/api/record.queries'
 import { TEAMS } from '@/shared/constants/teams'
+import GrayInfoIcon from '@/assets/grayInfoIcon.svg?react'
 
 import { useEmotionVote } from '../contexts/EmotionVoteContext'
 import { calculateGradientColor } from '../utils/calculateGradientColor'
@@ -90,39 +91,45 @@ const OtherTeamLiveRecordPage = ({
               다른 팬들의 감정을 실시간으로 확인해보세요.
             </p>
             {/* 감정 표시만 (투표 불가) */}
-            <div className="flex flex-row w-full justify-center bg-usage-background-default">
-              <div className="flex flex-col">
-                <p>{TEAMS[data.data.homeTeam]}</p>
-                <EmotionCard.Active
-                  data={[
-                    {
-                      name: '화나요',
-                      value: data.data.homeTeamNegativePercent,
-                    },
-                    {
-                      name: '기뻐요',
-                      value: data.data.homeTeamPositivePercent,
-                    },
-                  ]}
-                  className="bg-usage-background-default"
-                />
+            <div className="flex flex-col w-full body-md-medium bg-usage-background-default py-8 rounded-xl">
+              <div className="flex flex-row justify-center gap-1">
+                <div className="flex flex-col">
+                  <p>{TEAMS[data.data.homeTeam]}</p>
+                  <EmotionCard.Active
+                    data={[
+                      {
+                        name: '화나요',
+                        value: data.data.homeTeamNegativePercent,
+                      },
+                      {
+                        name: '기뻐요',
+                        value: data.data.homeTeamPositivePercent,
+                      },
+                    ]}
+                    className="bg-usage-background-default"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <p>{TEAMS[data.data.awayTeam]}</p>
+                  <EmotionCard.Active
+                    data={[
+                      {
+                        name: '화나요',
+                        value: data.data.awayTeamNegativePercent,
+                      },
+                      {
+                        name: '기뻐요',
+                        value: data.data.awayTeamPositivePercent,
+                      },
+                    ]}
+                    className="bg-usage-background-default"
+                  />
+                </div>
               </div>
-              <div className="flex flex-col">
-                <p>{TEAMS[data.data.awayTeam]}</p>
-                <EmotionCard.Active
-                  data={[
-                    {
-                      name: '화나요',
-                      value: data.data.awayTeamNegativePercent,
-                    },
-                    {
-                      name: '기뻐요',
-                      value: data.data.awayTeamPositivePercent,
-                    },
-                  ]}
-                  className="bg-usage-background-default"
-                />
-              </div>
+              <p className="flex flex-row justify-center items-center body-sm-light text-brand-neutral-60 gap-1 mt-2">
+                <GrayInfoIcon />
+                그래프는 팀의 감정분포(%) 를 나타내요
+              </p>
             </div>
           </div>
           <RecordCameraButton
