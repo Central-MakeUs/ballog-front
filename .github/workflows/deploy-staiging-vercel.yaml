@@ -1,0 +1,103 @@
+name: Deploy Feature Server
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: '배포할 feature 브랜치'
+        required: true
+        type: string
+        default: 'feature/...'
+      feature_server:
+        description: 'Feature Server 선택'
+        required: true
+        type: choice
+        options:
+          - feat-1
+          - feat-2
+
+concurrency:
+  group: feature-${{ github.event.inputs.feature_server }}
+  cancel-in-progress: true
+
+jobs:
+  Show-Current-Deployments:
+    if: ${{ github.event.inputs.show_deployment_info == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+  # https://vercel.com/guides/how-can-i-use-github-actions-with-vercel 참조
+  Deploy:
+    if: ${{ github.event.inputs.show_deployment_info != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository (for branch list)
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Validate and checkout target branch
+        run: |
+          echo "🔍 Checking if branch '${{ github.event.inputs.branch }}' exists..."
+
+          if git ls-remote --exit-code --heads origin "${{ github.event.inputs.branch }}" > /dev/null 2>&1; then
+            echo "✅ Branch found!"
+            git checkout -B ${{ github.event.inputs.branch }} origin/${{ github.event.inputs.branch }}
+          else
+            echo "❌ Branch '${{ github.event.inputs.branch }}' not found!"
+            echo ""
+            echo "Available branches:"
+            git branch -r | sed 's/origin\///' | grep -v HEAD | head -30
+            exit 1
+          fi
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.10.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.11.0'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run linting
+        run: pnpm lint
+
+      - name: Run tests
+        run: pnpm --filter web exec vitest run
+        env:
+          VITE_PUBLIC_API_URL: http://localhost:5000
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information (preview)
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: |
+          echo "🔨 Building from branch: ${{ github.event.inputs.branch }}"
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to Feature Server
+        id: deploy
+        run: |
+          FEATURE_SERVER="${{ github.event.inputs.feature_server }}"
+          DOMAIN="${FEATURE_SERVER}.nextblog.me"
+
+          echo "🚀 Deploying (feature_server: $FEATURE_SERVER)"
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --yes --token=${{ secrets.VERCEL_TOKEN }})
+
+          vercel alias set $DEPLOYMENT_URL $DOMAIN --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
+          echo "Preview URL: $DEPLOYMENT_URL"
+          echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
