@@ -228,7 +228,16 @@ export const recording: Record<number, RecordingResponse> = {
     positiveEmotionPercent: 30,
     negativeEmotionPercent: 70,
     defaultImageUrl: 'https://example.com/default102.jpg',
-    imageList: [],
+    imageList: [
+      {
+        imageUrl: 'https://example.com/image101-1.jpg',
+        createdAt: '2025-10-05T18:45:00Z',
+      },
+      {
+        imageUrl: 'https://example.com/image101-2.jpg',
+        createdAt: '2025-10-05T19:00:00Z',
+      },
+    ],
     emotionGroupList: [
       {
         groupStart: '2025-10-05T19:10:00Z',

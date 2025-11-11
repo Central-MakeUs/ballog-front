@@ -17,7 +17,7 @@ export const GameInfoCard = ({
   return (
     <div
       className={cn(
-        'flex flex-col justify-center gap-2 w-fit flex-shrink-0',
+        'flex flex-col justify-center items-center gap-2 w-fit flex-shrink-0',
         className,
       )}
       {...rest}

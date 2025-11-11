@@ -84,7 +84,6 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
           recordingData={recordingData.data}
           matchId={matchId}
           isLoading={isRecordingLoading}
-          emotionData={emotionData?.data}
         />
       )}
     </EmotionVoteProvider>

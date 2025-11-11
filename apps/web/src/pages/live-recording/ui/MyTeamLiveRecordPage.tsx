@@ -10,7 +10,6 @@ import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { LottieRefProvider } from '@/pages/live-recording/contexts/lottieRefContext'
 import { BackArrow } from '@/assets/BackArrow'
-import { useEndRecordingFlow } from '@/features/record/hooks/useEndRecordingFlow'
 import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
@@ -30,7 +29,6 @@ const MyTeamLiveRecordPage = ({
   recordingData,
   emotionData,
 }: MyTeamLiveRecordPageProps) => {
-  const { confirmEndRecord } = useEndRecordingFlow()
   const { mutate } = usePostEmotion()
   const { user } = useSessionContext()
   const { joyPercent, angryPercent } = useEmotionVote()
@@ -55,10 +53,6 @@ const MyTeamLiveRecordPage = ({
         activityEnterStyle: 'slideInLeft',
         backButton: {
           renderIcon: () => <BackArrow />,
-          onClick: (e) => {
-            e.preventDefault()
-            confirmEndRecord()
-          },
         },
         height: '48px',
       }}
@@ -108,6 +102,7 @@ const MyTeamLiveRecordPage = ({
           {/* 카메라 버튼 */}
           <RecordCameraButton
             matchRecordId={recordingData.matchRecordId}
+            initialImages={recordingData.imageList}
             className="fixed bottom-10 left-1/2 -translate-x-1/2 w-max"
           />
         </div>

@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query'
 import { BackArrow } from '@/assets/BackArrow'
 import { cn } from '@/shared/lib/classnames'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
-import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
@@ -20,12 +19,10 @@ interface OtherTeamLiveRecordPageProps {
   matchId: number
   isLoading: boolean
   recordingData: RecordingResponse
-  emotionData: EmotionType
 }
 
 const OtherTeamLiveRecordPage = ({
   recordingData,
-  emotionData,
 }: OtherTeamLiveRecordPageProps) => {
   const { data, isLoading } = useQuery({
     ...queryKeys.getEmotionStats(recordingData.matchesId),
@@ -134,6 +131,7 @@ const OtherTeamLiveRecordPage = ({
           </div>
           <RecordCameraButton
             matchRecordId={recordingData.matchRecordId}
+            initialImages={recordingData.imageList}
             className="fixed bottom-10 left-1/2 -translate-x-1/2 w-max"
           />
         </div>
