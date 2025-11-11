@@ -3,7 +3,7 @@ import type { RecordingResponse } from '@/entities/record/model/recording.type'
 export const recording: Record<number, RecordingResponse> = {
   101: {
     matchRecordId: 101,
-    matchesId: 1,
+    matchesId: 101,
     stadium: 'JAMSIL',
     homeTeam: 'LG_TWINS',
     awayTeam: 'SSG_LANDERS',
@@ -41,7 +41,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   102: {
     matchRecordId: 102,
-    matchesId: 2,
+    matchesId: 102,
     stadium: 'JAMSIL',
     homeTeam: 'HANWHA_EAGLES',
     awayTeam: 'KIA_TIGERS',
@@ -66,7 +66,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   103: {
     matchRecordId: 103,
-    matchesId: 3,
+    matchesId: 103,
     stadium: 'SUWON',
     homeTeam: 'KT_WIZ',
     awayTeam: 'DOOSAN_BEARS',
@@ -96,7 +96,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   104: {
     matchRecordId: 104,
-    matchesId: 4,
+    matchesId: 104,
     stadium: 'SAJIK',
     homeTeam: 'LOTTE_GIANTS',
     awayTeam: 'NC_DINOS',
@@ -121,7 +121,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   105: {
     matchRecordId: 105,
-    matchesId: 5,
+    matchesId: 105,
     homeTeam: 'HANWHA_EAGLES',
     awayTeam: 'LG_TWINS',
     stadium: 'DAEJEON',
@@ -151,7 +151,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   106: {
     matchRecordId: 106,
-    matchesId: 6,
+    matchesId: 106,
     homeTeam: 'LOTTE_GIANTS',
     awayTeam: 'NC_DINOS',
     stadium: 'SAJIK',
@@ -181,7 +181,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   107: {
     matchRecordId: 201,
-    matchesId: 101,
+    matchesId: 107,
     homeTeam: 'KIWOOM_HEROES',
     awayTeam: 'SSG_LANDERS',
     stadium: 'GOCHUK',
@@ -215,7 +215,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   108: {
     matchRecordId: 202,
-    matchesId: 102,
+    matchesId: 108,
     homeTeam: 'HANWHA_EAGLES',
     awayTeam: 'LG_TWINS',
     stadium: 'DAEJEON',
@@ -240,7 +240,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   109: {
     matchRecordId: 203,
-    matchesId: 103,
+    matchesId: 109,
     homeTeam: 'HANWHA_EAGLES',
     awayTeam: 'LG_TWINS',
     stadium: 'DAEJEON',
@@ -270,7 +270,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   110: {
     matchRecordId: 204,
-    matchesId: 104,
+    matchesId: 110,
     homeTeam: 'KIWOOM_HEROES',
     awayTeam: 'SSG_LANDERS',
     stadium: 'GOCHUK',
@@ -304,7 +304,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   111: {
     matchRecordId: 205,
-    matchesId: 105,
+    matchesId: 111,
     homeTeam: 'HANWHA_EAGLES',
     awayTeam: 'LG_TWINS',
     stadium: 'DAEJEON',
@@ -334,7 +334,7 @@ export const recording: Record<number, RecordingResponse> = {
 
   112: {
     matchRecordId: 206,
-    matchesId: 106,
+    matchesId: 112,
     homeTeam: 'HANWHA_EAGLES',
     awayTeam: 'LG_TWINS',
     stadium: 'DAEJEON',

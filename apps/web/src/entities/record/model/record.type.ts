@@ -74,6 +74,10 @@ export interface RecordEmotionStatsResponse {
   positiveEmotionPercent: number
   negativeEmotionPercent: number
   emotionGroupList: EmotionGroup[]
+  homeTeamPositivePercent: number
+  homeTeamNegativePercent: number
+  awayTeamPositivePercent: number
+  awayTeamNegativePercent: number
 }
 
 export type RecordResponseDTO = ApiResponse<RecordResponse>

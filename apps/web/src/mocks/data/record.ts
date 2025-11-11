@@ -2,7 +2,7 @@ import type {
   Record,
   RecordDetailResponse,
   EmotionGroup,
-  RecordEmotionStatsResponse
+  RecordEmotionStatsResponse,
 } from '@/entities/record/model/record.type'
 
 const emotionGroupListShort: EmotionGroup[] = [
@@ -302,10 +302,22 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     positiveEmotionPercent: 75,
     negativeEmotionPercent: 25,
     emotionGroupList: [
-      { groupStart: '2025-10-05T18:10:00Z', emotionType: 'POSITIVE', count: 12 },
+      {
+        groupStart: '2025-10-05T18:10:00Z',
+        emotionType: 'POSITIVE',
+        count: 12,
+      },
       { groupStart: '2025-10-05T19:05:00Z', emotionType: 'NEGATIVE', count: 4 },
-      { groupStart: '2025-10-05T20:15:00Z', emotionType: 'POSITIVE', count: 15 },
+      {
+        groupStart: '2025-10-05T20:15:00Z',
+        emotionType: 'POSITIVE',
+        count: 15,
+      },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 102,
@@ -319,9 +331,17 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     negativeEmotionPercent: 60,
     emotionGroupList: [
       { groupStart: '2025-10-05T18:40:00Z', emotionType: 'POSITIVE', count: 3 },
-      { groupStart: '2025-10-05T19:30:00Z', emotionType: 'NEGATIVE', count: 10 },
+      {
+        groupStart: '2025-10-05T19:30:00Z',
+        emotionType: 'NEGATIVE',
+        count: 10,
+      },
       { groupStart: '2025-10-05T20:50:00Z', emotionType: 'NEGATIVE', count: 6 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 103,
@@ -335,9 +355,17 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     negativeEmotionPercent: 32,
     emotionGroupList: [
       { groupStart: '2025-10-13T18:20:00Z', emotionType: 'POSITIVE', count: 8 },
-      { groupStart: '2025-10-13T19:25:00Z', emotionType: 'POSITIVE', count: 10 },
+      {
+        groupStart: '2025-10-13T19:25:00Z',
+        emotionType: 'POSITIVE',
+        count: 10,
+      },
       { groupStart: '2025-10-13T20:45:00Z', emotionType: 'NEGATIVE', count: 5 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 104,
@@ -354,6 +382,10 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
       { groupStart: '2025-10-13T19:40:00Z', emotionType: 'POSITIVE', count: 9 },
       { groupStart: '2025-10-13T21:10:00Z', emotionType: 'POSITIVE', count: 4 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 105,
@@ -368,8 +400,16 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     emotionGroupList: [
       { groupStart: '2025-10-13T18:50:00Z', emotionType: 'POSITIVE', count: 5 },
       { groupStart: '2025-10-13T19:40:00Z', emotionType: 'NEGATIVE', count: 8 },
-      { groupStart: '2025-10-13T20:55:00Z', emotionType: 'NEGATIVE', count: 12 },
+      {
+        groupStart: '2025-10-13T20:55:00Z',
+        emotionType: 'NEGATIVE',
+        count: 12,
+      },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 106,
@@ -384,8 +424,16 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     emotionGroupList: [
       { groupStart: '2025-10-13T18:35:00Z', emotionType: 'POSITIVE', count: 6 },
       { groupStart: '2025-10-13T19:55:00Z', emotionType: 'NEGATIVE', count: 9 },
-      { groupStart: '2025-10-13T21:05:00Z', emotionType: 'NEGATIVE', count: 11 },
+      {
+        groupStart: '2025-10-13T21:05:00Z',
+        emotionType: 'NEGATIVE',
+        count: 11,
+      },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 107,
@@ -402,6 +450,10 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
       { groupStart: '2025-10-14T19:35:00Z', emotionType: 'NEGATIVE', count: 5 },
       { groupStart: '2025-10-14T20:50:00Z', emotionType: 'POSITIVE', count: 9 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 108,
@@ -414,10 +466,22 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     positiveEmotionPercent: 80,
     negativeEmotionPercent: 20,
     emotionGroupList: [
-      { groupStart: '2025-10-14T18:20:00Z', emotionType: 'POSITIVE', count: 10 },
-      { groupStart: '2025-10-14T19:00:00Z', emotionType: 'POSITIVE', count: 14 },
+      {
+        groupStart: '2025-10-14T18:20:00Z',
+        emotionType: 'POSITIVE',
+        count: 10,
+      },
+      {
+        groupStart: '2025-10-14T19:00:00Z',
+        emotionType: 'POSITIVE',
+        count: 14,
+      },
       { groupStart: '2025-10-14T20:30:00Z', emotionType: 'NEGATIVE', count: 3 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 109,
@@ -431,9 +495,17 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     negativeEmotionPercent: 48,
     emotionGroupList: [
       { groupStart: '2025-10-14T18:45:00Z', emotionType: 'NEGATIVE', count: 6 },
-      { groupStart: '2025-10-14T19:40:00Z', emotionType: 'POSITIVE', count: 10 },
+      {
+        groupStart: '2025-10-14T19:40:00Z',
+        emotionType: 'POSITIVE',
+        count: 10,
+      },
       { groupStart: '2025-10-14T21:10:00Z', emotionType: 'POSITIVE', count: 5 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 110,
@@ -450,6 +522,10 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
       { groupStart: '2025-10-15T19:45:00Z', emotionType: 'POSITIVE', count: 8 },
       { groupStart: '2025-10-15T20:50:00Z', emotionType: 'NEGATIVE', count: 4 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 111,
@@ -462,10 +538,18 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     positiveEmotionPercent: 77,
     negativeEmotionPercent: 23,
     emotionGroupList: [
-      { groupStart: '2025-10-15T18:40:00Z', emotionType: 'POSITIVE', count: 11 },
+      {
+        groupStart: '2025-10-15T18:40:00Z',
+        emotionType: 'POSITIVE',
+        count: 11,
+      },
       { groupStart: '2025-10-15T19:20:00Z', emotionType: 'POSITIVE', count: 9 },
       { groupStart: '2025-10-15T20:55:00Z', emotionType: 'NEGATIVE', count: 3 },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
   {
     matchId: 112,
@@ -480,8 +564,15 @@ export const recordDetailStats: RecordEmotionStatsResponse[] = [
     emotionGroupList: [
       { groupStart: '2025-10-15T18:35:00Z', emotionType: 'POSITIVE', count: 4 },
       { groupStart: '2025-10-15T19:30:00Z', emotionType: 'NEGATIVE', count: 7 },
-      { groupStart: '2025-10-15T21:00:00Z', emotionType: 'NEGATIVE', count: 10 },
+      {
+        groupStart: '2025-10-15T21:00:00Z',
+        emotionType: 'NEGATIVE',
+        count: 10,
+      },
     ],
+    homeTeamPositivePercent: 70,
+    homeTeamNegativePercent: 30,
+    awayTeamPositivePercent: 40,
+    awayTeamNegativePercent: 60,
   },
 ]
-

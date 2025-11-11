@@ -1,22 +1,19 @@
 import { useFlow } from '@stackflow/react/future'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { toast } from 'sonner'
-import { useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 import { BackArrow } from '@/assets/BackArrow'
 import { cn } from '@/shared/lib/classnames'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
-import { recordGet } from '@/entities/record/api/record-get'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
+import { queryKeys } from '@/entities/record/api/record.queries'
+import { TEAMS } from '@/shared/constants/teams'
 
-import { LottieRefProvider } from '../contexts/lottieRefContext'
 import { useEmotionVote } from '../contexts/EmotionVoteContext'
 import { calculateGradientColor } from '../utils/calculateGradientColor'
-
-import { EmotionVoteWidget } from './EmotionVoteWidget'
 
 interface OtherTeamLiveRecordPageProps {
   matchId: number
@@ -29,6 +26,11 @@ const OtherTeamLiveRecordPage = ({
   recordingData,
   emotionData,
 }: OtherTeamLiveRecordPageProps) => {
+  const { data, isLoading } = useQuery({
+    ...queryKeys.getEmotionStats(recordingData.matchesId),
+    refetchInterval: 30_000,
+  })
+
   const { pop } = useFlow()
   const { joyPercent, angryPercent } = useEmotionVote()
 
@@ -39,6 +41,10 @@ const OtherTeamLiveRecordPage = ({
   } else if (angryPercent > joyPercent && angryPercent > 50) {
     bgColor = calculateGradientColor('angry', angryPercent)
   }
+
+  if (isLoading) return <div>기록을 불러오는 중입니다</div>
+
+  if (!data) return <div>기록이 없습니다</div>
 
   return (
     <AppScreen
@@ -84,33 +90,39 @@ const OtherTeamLiveRecordPage = ({
               다른 팬들의 감정을 실시간으로 확인해보세요.
             </p>
             {/* 감정 표시만 (투표 불가) */}
-            <div className="flex flex-row w-full bg-usage-background-default">
-              <EmotionCard.Active
-                data={[
-                  {
-                    name: '화나요',
-                    value: 10,
-                  },
-                  {
-                    name: '기뻐요',
-                    value: 90,
-                  },
-                ]}
-                className="bg-usage-background-default"
-              />
-              <EmotionCard.Active
-                data={[
-                  {
-                    name: '화나요',
-                    value: 10,
-                  },
-                  {
-                    name: '기뻐요',
-                    value: 90,
-                  },
-                ]}
-                className="bg-usage-background-default"
-              />
+            <div className="flex flex-row w-full justify-center bg-usage-background-default">
+              <div className="flex flex-col">
+                <p>{TEAMS[data.data.homeTeam]}</p>
+                <EmotionCard.Active
+                  data={[
+                    {
+                      name: '화나요',
+                      value: data.data.homeTeamNegativePercent,
+                    },
+                    {
+                      name: '기뻐요',
+                      value: data.data.homeTeamPositivePercent,
+                    },
+                  ]}
+                  className="bg-usage-background-default"
+                />
+              </div>
+              <div className="flex flex-col">
+                <p>{TEAMS[data.data.awayTeam]}</p>
+                <EmotionCard.Active
+                  data={[
+                    {
+                      name: '화나요',
+                      value: data.data.awayTeamNegativePercent,
+                    },
+                    {
+                      name: '기뻐요',
+                      value: data.data.awayTeamPositivePercent,
+                    },
+                  ]}
+                  className="bg-usage-background-default"
+                />
+              </div>
             </div>
           </div>
           <RecordCameraButton
