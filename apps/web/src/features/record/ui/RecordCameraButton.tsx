@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 import type { ImageData } from '@ballog/bridge/types'
 
