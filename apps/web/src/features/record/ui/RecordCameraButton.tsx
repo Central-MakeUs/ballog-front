@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 import type { ImageData } from '@ballog/bridge/types'
 
+import { useModal } from '@/shared/hooks/modal/useModal'
 import { useRecordingImages } from '@/features/record/hooks/useRecordImages'
 import { useWebViewBridgeListener } from '@/features/record/hooks/useWebViewBridgeListener'
 import { useImageUpload } from '@/features/image-management/hooks'
@@ -24,8 +25,9 @@ export const RecordCameraButton = ({
   className,
 }: RecordCameraButtonProps) => {
   const { send } = useBridge()
-  const { images, hasImage, addImage } = useRecordingImages()
+  const { images, hasImage, addImage, isFull } = useRecordingImages()
   const { uploadImage, uploadState } = useImageUpload({ matchRecordId })
+  const { openVerticalModal } = useModal()
 
   // 이미지 업로드 상태 토스터
   useImageUploadToast(uploadState)
@@ -47,6 +49,22 @@ export const RecordCameraButton = ({
 
   // 카메라 열기
   const goToCamera = () => {
+    if (isFull) {
+      return openVerticalModal({
+        heading: `최대 등록 가능한\n사진 수를 초과했어요`,
+        body: `추가 등록은 관람로그에서 진행해주세요`,
+
+        buttons: [
+          {
+            label: '확인',
+            onClick: () => {
+              close()
+            },
+          },
+        ],
+      })
+    }
+
     send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })
   }
 

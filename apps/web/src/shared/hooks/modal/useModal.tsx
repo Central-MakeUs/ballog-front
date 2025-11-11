@@ -116,7 +116,16 @@ export const useModal = () => {
     return overlay.open(({ isOpen, close }) => (
       <OverlayModal.Root open={isOpen} onOpenChange={close} dismissible={false}>
         <OverlayModal.Text heading={heading} body={body} />
-        <OverlayModal.Buttons layout="vertical" buttons={buttons} />
+        <OverlayModal.Buttons
+          layout="vertical"
+          buttons={buttons.map((btn) => ({
+            ...btn,
+            onClick: () => {
+              close()
+              btn.onClick?.()
+            },
+          }))}
+        />
       </OverlayModal.Root>
     ))
   }
