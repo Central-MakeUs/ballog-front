@@ -1,19 +1,22 @@
 import { useFlow } from '@stackflow/react/future'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { toast } from 'sonner'
+import { useEffect } from 'react'
 
 import { BackArrow } from '@/assets/BackArrow'
 import { cn } from '@/shared/lib/classnames'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import type { EmotionType } from '@/entities/record/model/emotion.type'
 import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
+import { recordGet } from '@/entities/record/api/record-get'
+import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
+import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
 
 import { LottieRefProvider } from '../contexts/lottieRefContext'
 import { useEmotionVote } from '../contexts/EmotionVoteContext'
 import { calculateGradientColor } from '../utils/calculateGradientColor'
 
 import { EmotionVoteWidget } from './EmotionVoteWidget'
-import { ToolTipPopover } from './ToolTipPopover'
 
 interface OtherTeamLiveRecordPageProps {
   matchId: number
@@ -75,24 +78,45 @@ const OtherTeamLiveRecordPage = ({
             )}
           >
             <div className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center relative">
-              지금 경기 분위기 <ToolTipPopover />
+              지금 경기 팀 분위기
             </div>
             <p className="body-sm-light text-usage-text-subtle mb-6">
               다른 팬들의 감정을 실시간으로 확인해보세요.
             </p>
             {/* 감정 표시만 (투표 불가) */}
-
-            <LottieRefProvider>
-              <EmotionVoteWidget
-                emotions={emotionData}
-                onEmotionSubmit={() => {
-                  // 다른 팀 경기는 감정 투표 불가
-                  toast.info('내 팀 경기에서만 감정을 표현할 수 있습니다')
-                }}
-                // isReadOnly={true}
+            <div className="flex flex-row w-full bg-usage-background-default">
+              <EmotionCard.Active
+                data={[
+                  {
+                    name: '화나요',
+                    value: 10,
+                  },
+                  {
+                    name: '기뻐요',
+                    value: 90,
+                  },
+                ]}
+                className="bg-usage-background-default"
               />
-            </LottieRefProvider>
+              <EmotionCard.Active
+                data={[
+                  {
+                    name: '화나요',
+                    value: 10,
+                  },
+                  {
+                    name: '기뻐요',
+                    value: 90,
+                  },
+                ]}
+                className="bg-usage-background-default"
+              />
+            </div>
           </div>
+          <RecordCameraButton
+            matchRecordId={recordingData.matchRecordId}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 w-max"
+          />
         </div>
       </div>
     </AppScreen>

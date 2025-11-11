@@ -58,6 +58,26 @@ export interface RecordDetailResponse {
   emotionGroupList: EmotionGroup[]
 }
 
+export interface RecordEmotionStatsResponse {
+  matchId: number
+  stadium: StadiumKey
+  homeTeam: TeamKey
+  awayTeam: TeamKey
+  matchDate: string
+  matchTime: {
+    hour: number
+    minute: number
+    second: number
+    nano: number
+  }
+  userTeam: TeamKey
+  positiveEmotionPercent: number
+  negativeEmotionPercent: number
+  emotionGroupList: EmotionGroup[]
+}
+
 export type RecordResponseDTO = ApiResponse<RecordResponse>
 export type RecordDetailResponseDTO = ApiResponse<RecordDetailResponse>
 export type RecordDeleteResponseDTO = ApiResponse<null>
+export type RecordEmotionStatsResponseDTO =
+  ApiResponse<RecordEmotionStatsResponse>
