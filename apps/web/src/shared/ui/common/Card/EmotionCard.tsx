@@ -16,6 +16,34 @@ interface ActiveEmotionCardProps extends ComponentProps<'div'> {
 
 interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
 
+const EmotionBadge = ({
+  emotion,
+  className,
+  ...rest
+}: {
+  emotion: '화나요' | '기뻐요'
+
+  className?: string
+}) => {
+  const emotionIcon = {
+    화나요: <AngryEmotion className="w-5 h-5" />,
+    기뻐요: <JoyEmotion className="w-5 h-5" />,
+  }
+
+  return (
+    <div
+      className={cn(
+        'flex flex-row justify-center items-center py-1 w-full rounded-md',
+        'bg-usage-background-strong gap-1',
+        className,
+      )}
+      {...rest}
+    >
+      {emotionIcon[emotion]}
+      <span className="body-sm-bold">{emotion}</span>
+    </div>
+  )
+}
 /**
  * EmotionCard
  *
@@ -117,21 +145,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
         </div>
       </div>
 
-      {centerEmotion === '화나요' ? (
-        <div className="flex flex-row justify-center items-center">
-          <AngryEmotion className="w-5 h-5" /> <span>{centerEmotion}</span>
-        </div>
-      ) : (
-        <div
-          className={cn(
-            'flex flex-row justify-center items-center py-1 w-33 rounded-md',
-            'bg-usage-background-strong',
-          )}
-        >
-          <JoyEmotion className="w-5 h-5 mr-1" />
-          <span>{centerEmotion}</span>
-        </div>
-      )}
+      <EmotionBadge emotion={centerEmotion} />
     </div>
   )
 }
