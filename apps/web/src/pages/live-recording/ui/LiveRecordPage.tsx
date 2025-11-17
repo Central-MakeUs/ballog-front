@@ -1,5 +1,5 @@
 import type { ActivityComponentType } from '@stackflow/react'
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
@@ -22,17 +22,35 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
 }) => {
   const { replace } = useFlow()
   const { user } = useSessionContext()
+  const queryClient = useQueryClient()
 
   const matchId = Number(params.matchId)
-  const [isPostComplete, setIsPostComplete] = useState<boolean>(false)
 
-  const { mutate } = useMutation<RecordingPostResponseDTO, Error, number>({
-    mutationFn: (matchId) => recordingPost.postRecording(matchId),
+  const {
+    data: recordingData,
+    isLoading: isRecordingLoading,
+    isError,
+    error,
+  } = useQuery({
+    ...recording.getRecording(matchId),
+    retry: false,
+  })
+
+  if (isRecordingLoading) console.log("로딩")
+
+  if (isError) {
+    console.log(error.errorData)
+  }
+
+  const createMutation = useMutation({
+    mutationFn: () => recordingPost.postRecording(matchId),
     onSuccess: () => {
-      setIsPostComplete(true)
+      queryClient.invalidateQueries({
+        queryKey: recording.getRecording(matchId).queryKey,
+      })
     },
     onError: () => {
-      toast.info('이미 경기 기록이 존재합니다')
+      toast.info('알 수 없는 오류 발생')
       replace(
         'Home',
         {},
@@ -42,19 +60,16 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
       )
     },
   })
-
+  console.log(recordingData)
   useEffect(() => {
-    mutate(matchId)
-  }, [matchId])
-
-  const { data: recordingData, isLoading: isRecordingLoading } = useQuery({
-    ...recording.getRecording(matchId),
-    enabled: isPostComplete,
-  })
+    if (!isRecordingLoading && recordingData === null) {
+      createMutation.mutate()
+    }
+  }, [isRecordingLoading, recordingData])
 
   const { data: emotionData } = useQuery({
     ...emotions.record(recordingData?.data.matchRecordId ?? 0),
-    enabled: isPostComplete && !!recordingData?.data?.matchRecordId,
+    enabled: !!recordingData?.data?.matchRecordId,
   })
 
   if (!emotionData || !recordingData) {
