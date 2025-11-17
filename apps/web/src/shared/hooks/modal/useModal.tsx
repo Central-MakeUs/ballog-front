@@ -12,12 +12,14 @@ interface ModalButton {
 interface HorizontalModalProps {
   heading: string
   body?: string
+  dissmissible?: boolean
   buttons: [ModalButton, ModalButton]
 }
 
 interface VerticalModalProps {
   heading: string
   body?: string
+  dissmissible?: boolean
   buttons: ModalButton[]
 }
 
@@ -79,10 +81,15 @@ export const useModal = () => {
   const openHorizontalModal = ({
     heading,
     body,
+    dissmissible,
     buttons,
   }: HorizontalModalProps) => {
     return overlay.open(({ isOpen, close }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close} dismissible={false}>
+      <OverlayModal.Root
+        open={isOpen}
+        onOpenChange={close}
+        dismissible={dissmissible}
+      >
         <OverlayModal.Text heading={heading} body={body ?? ''} />
         <OverlayModal.Buttons
           layout="horizontal"
@@ -111,10 +118,15 @@ export const useModal = () => {
   const openVerticalModal = ({
     heading,
     body,
+    dissmissible,
     buttons,
   }: VerticalModalProps) => {
     return overlay.open(({ isOpen, close }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close} dismissible={false}>
+      <OverlayModal.Root
+        open={isOpen}
+        onOpenChange={close}
+        dismissible={dissmissible}
+      >
         <OverlayModal.Text heading={heading} body={body} />
         <OverlayModal.Buttons
           layout="vertical"
