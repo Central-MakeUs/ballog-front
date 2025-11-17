@@ -1,6 +1,6 @@
 import type { ActivityComponentType } from '@stackflow/react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'sonner'
 
 import { useFlow } from '@/app/routes/stackflow'
@@ -8,7 +8,6 @@ import { EmotionVoteProvider } from '@/pages/live-recording/contexts/EmotionVote
 import { emotions } from '@/entities/record/api/emotion.queries'
 import { recording } from '@/entities/record/api/recording.queries'
 import { recordingPost } from '@/entities/record/api/recording-post'
-import type { RecordingPostResponseDTO } from '@/entities/record/model/recording.type'
 import { Loading } from '@/shared/ui/common'
 import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
 
@@ -26,21 +25,10 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
 
   const matchId = Number(params.matchId)
 
-  const {
-    data: recordingData,
-    isLoading: isRecordingLoading,
-    isError,
-    error,
-  } = useQuery({
+  const { data: recordingData, isLoading: isRecordingLoading } = useQuery({
     ...recording.getRecording(matchId),
     retry: false,
   })
-
-  if (isRecordingLoading) console.log("로딩")
-
-  if (isError) {
-    console.log(error.errorData)
-  }
 
   const createMutation = useMutation({
     mutationFn: () => recordingPost.postRecording(matchId),
@@ -60,9 +48,9 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
       )
     },
   })
-  console.log(recordingData)
+
   useEffect(() => {
-    if (!isRecordingLoading && recordingData === null) {
+    if (!isRecordingLoading && !recordingData) {
       createMutation.mutate()
     }
   }, [isRecordingLoading, recordingData])
