@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useActivity } from '@stackflow/react'
 
 import {
   Carousel,
@@ -15,17 +14,25 @@ import { MatchCardFactory } from './MatchCardFactory'
 
 interface MatchCardCarouselProps {
   matches: Match[]
+  isActive?: boolean
 }
 
-export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
+export const MatchCardCarousel = ({
+  matches,
+  isActive,
+}: MatchCardCarouselProps) => {
   const { push } = useFlow()
-  const { isActive } = useActivity()
 
   const sortedMatches = useSortMatchByBaseBallTeam(matches)
 
   const [api, setApi] = useState<CarouselApi | null>(null)
   const [current, setCurrent] = useState(0)
 
+  const handleMatchClick = (match: Match) => {
+    push('LiveRecord', { matchId: String(match.matchesId) }, { animate: false })
+  }
+
+  // 마운트 시 캐러셀 초기화 함수
   const initCarousel = (
     api: CarouselApi,
     matchesLength: number,
@@ -55,6 +62,7 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
     return () => api.off('select', handleSnapChange)
   }
 
+  // pop 시 캐러셀 초기화 함수
   const initCarouselOnActive = (api: CarouselApi) => {
     if (!api) return () => {}
     const isSnapReady = () => {
@@ -94,15 +102,7 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
               <MatchCardFactory
                 match={match}
                 isCenter={index === current}
-                onClick={() =>
-                  push(
-                    'LiveRecord',
-                    { matchId: String(match.matchesId) },
-                    {
-                      animate: false,
-                    },
-                  )
-                }
+                onClick={() => handleMatchClick(match)}
               />
             </CarouselItem>
           ))}
