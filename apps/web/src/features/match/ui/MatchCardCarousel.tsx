@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useActivity } from '@stackflow/react'
 
 import {
   Carousel,
@@ -18,42 +19,62 @@ interface MatchCardCarouselProps {
 
 export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
   const { push } = useFlow()
+  const { isActive } = useActivity()
+
   const sortedMatches = useSortMatchByBaseBallTeam(matches)
 
   const [api, setApi] = useState<CarouselApi | null>(null)
   const [current, setCurrent] = useState(0)
 
-  useEffect(() => {
-    if (!api) return
+  const initCarousel = (
+    api: CarouselApi,
+    matchesLength: number,
+    setCurrent: (n: number) => void,
+  ) => {
+    if (!api) return () => {}
 
-    // 바로 1번째 아이템으로 이동시킴
     api.scrollTo(1, true)
 
-    const onSelect = () => {
+    const handleSnapChange = () => {
       const index = api.selectedScrollSnap()
-      const lastIndex = api.scrollSnapList().length - 2 // 더미 바로 전 인덱스
-      const realIndex = Math.min(Math.max(index, 1), lastIndex) // 앞, 뒤 더미 자른 값
+      const snapList = api.scrollSnapList()
+      if (snapList.length < 3) return
 
-      if (index === 0) {
-        api.scrollTo(1, false)
-      }
+      const lastIndex = snapList.length - 2
+      const realIndex = Math.min(Math.max(index, 1), lastIndex)
 
-      if (index > lastIndex) {
-        api.scrollTo(lastIndex, false)
-      }
+      if (index === 0) api.scrollTo(1, false)
+      if (index > lastIndex) api.scrollTo(lastIndex, false)
 
-      // 양쪽 더미 하나씩 있으니까 -1 보정
-      setCurrent(Math.max(0, Math.min(matches.length - 1, realIndex - 1)))
+      setCurrent(Math.max(0, Math.min(matchesLength - 1, realIndex - 1)))
     }
 
-    api.on('select', onSelect)
-    onSelect()
+    api.on('select', handleSnapChange)
+    handleSnapChange()
 
-    return () => {
-      api.off('select', onSelect)
+    return () => api.off('select', handleSnapChange)
+  }
+
+  const initCarouselOnActive = (api: CarouselApi) => {
+    if (!api) return () => {}
+    const isSnapReady = () => {
+      const snapList = api.scrollSnapList()
+      if (snapList.length >= 3) api.scrollTo(1, true)
+      else requestAnimationFrame(isSnapReady)
     }
+    requestAnimationFrame(isSnapReady)
+  }
+
+  useEffect(() => {
+    if (!api) return
+    return initCarousel(api, matches.length, setCurrent)
   }, [api, matches.length])
-  
+
+  useEffect(() => {
+    if (!api || !isActive) return
+    initCarouselOnActive(api)
+  }, [isActive, api])
+
   return (
     <div className="pt-6 w-full">
       <Carousel

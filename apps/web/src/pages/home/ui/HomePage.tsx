@@ -1,5 +1,5 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import type { ActivityComponentType } from '@stackflow/react'
+import { type ActivityComponentType, useActivity } from '@stackflow/react'
 import { useQuery } from '@tanstack/react-query'
 import { format, toZonedTime } from 'date-fns-tz'
 import { isBefore, isAfter, isToday } from 'date-fns'
@@ -18,7 +18,9 @@ import { TIME_ZONE } from '@/shared/constants/time'
 
 const HomeContent = () => {
   const { selectedDate } = useDate()
+  const { transitionState } = useActivity()
 
+  console.log(transitionState)
   const formattedDate = selectedDate
     ? format(selectedDate, 'yyyy-MM-dd', { timeZone: TIME_ZONE })
     : ''
