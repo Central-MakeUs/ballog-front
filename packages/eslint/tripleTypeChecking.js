@@ -8,9 +8,6 @@ export default [
     languageOptions: {
       parser: typescriptParser,
     },
-    plugins: {
-      '@typescript-eslint': typescriptEslint,
-    },
     rules: {
       ...typescriptEslint.configs['recommended-requiring-type-checking'].rules,
 

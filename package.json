@@ -11,7 +11,9 @@
     "lint": "pnpm -r lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    
+  ],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
@@ -37,5 +39,10 @@
   "prettier": "@titicaca/prettier-config-triple",
   "overrides": {
     "react-is": "19.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

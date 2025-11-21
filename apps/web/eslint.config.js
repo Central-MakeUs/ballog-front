@@ -1,4 +1,6 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import { fileURLToPath } from 'node:url'
+
 import ballogConfig from '@ballog/eslint'
 import js from '@eslint/js'
 import globals from 'globals'
@@ -20,7 +22,7 @@ export default tseslint.config(
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        root: true,
+        tsconfigRootDir: fileURLToPath(new URL('.', import.meta.url)),
         project: [
           './tsconfig.json',
           './tsconfig.app.json',
