@@ -8,10 +8,12 @@ import {
   type CarouselApi,
 } from '@/shared/ui/common/carousel'
 import { cn } from '@/shared/lib/classnames'
+import type { MatchDateMap } from '@/entities/match/model/match.type'
 
 import { CalendarWeekContent } from './CalendarWeekContent'
 
 interface CalendarWeekCarouselProps {
+  allMatches: MatchDateMap
   baseDate: Date
   onChange: (date: Date) => void
   selectedDate: Date | null
@@ -24,6 +26,7 @@ const weekStart = (d: Date) => startOfWeek(d, { weekStartsOn: 0 })
 const VISIBLE_RANGE = 5
 
 export const CalendarWeekCarousel = ({
+  allMatches,
   baseDate,
   onChange,
   selectedDate,
@@ -32,8 +35,6 @@ export const CalendarWeekCarousel = ({
   const [api, setApi] = useState<CarouselApi>()
 
   const [currentIndex, setCurrentIndex] = useState(CENTER)
-
-
 
   const weeks = useMemo(() => {
     const todayWeek = weekStart(new Date())
@@ -80,28 +81,28 @@ export const CalendarWeekCarousel = ({
       setApi={setApi}
     >
       <CarouselContent>
-        {
-          weeks.map((weekDate, idx) => {
-            const isVisible = Math.abs(idx - currentIndex) <= VISIBLE_RANGE
+        {weeks.map((weekDate, idx) => {
+          const isVisible = Math.abs(idx - currentIndex) <= VISIBLE_RANGE
 
-            return (
-              <CarouselItem
-                key={weekDate.toISOString()}
-                className={cn('basis-full', !isVisible && 'invisible')}
-              >
-                {isVisible && (
-                  <CalendarWeekContent
-                    date={weekDate}
-                    selectedDate={selectedDate}
-                    onSelect={(d) => {
-                      onSelect(d)
-                      onChange(d)
-                    }}
-                  />
-                )}
-              </CarouselItem>
-            )
-          })}
+          return (
+            <CarouselItem
+              key={weekDate.toISOString()}
+              className={cn('basis-full', !isVisible && 'invisible')}
+            >
+              {isVisible && (
+                <CalendarWeekContent
+                  allMatches={allMatches}
+                  date={weekDate}
+                  selectedDate={selectedDate}
+                  onSelect={(d) => {
+                    onSelect(d)
+                    onChange(d)
+                  }}
+                />
+              )}
+            </CarouselItem>
+          )
+        })}
       </CarouselContent>
     </Carousel>
   )

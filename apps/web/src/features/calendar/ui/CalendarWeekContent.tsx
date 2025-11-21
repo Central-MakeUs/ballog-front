@@ -1,4 +1,16 @@
 import { addDays, startOfWeek } from 'date-fns'
+import { format } from 'date-fns-tz'
+
+import type { MatchDateMap } from '@/entities/match/model/match.type'
+import { TIME_ZONE } from '@/shared/constants/time'
+import { cn } from '@/shared/lib/classnames'
+
+interface CalendarWeekContentProps {
+  allMatches: MatchDateMap
+  date: Date
+  selectedDate: Date | null
+  onSelect: (d: Date) => void
+}
 
 function getWeekDates(date: Date): Date[] {
   const start = startOfWeek(date, { weekStartsOn: 0 })
@@ -6,14 +18,11 @@ function getWeekDates(date: Date): Date[] {
 }
 
 export const CalendarWeekContent = ({
+  allMatches,
   date,
   selectedDate,
   onSelect,
-}: {
-  date: Date
-  selectedDate: Date | null
-  onSelect: (d: Date) => void
-}) => {
+}: CalendarWeekContentProps) => {
   const weekDates = getWeekDates(date)
 
   return (
@@ -24,22 +33,36 @@ export const CalendarWeekContent = ({
         const isToday = d.toDateString() === new Date().toDateString()
         const isActive = isSelected || (!selectedDate && isToday)
 
+        const formatted = format(d, 'yyyy-MM-dd', { timeZone: TIME_ZONE })
+        const hasMatch = !!allMatches[formatted]?.length
+
+        const clickable = hasMatch
+
         return (
           <div
             key={d.toISOString()}
-            onClick={() => onSelect(d)}
+            onClick={() => clickable && onSelect(d)}
             className="flex flex-col items-center"
           >
             <span
-              className={`body-sm-light ${
-                isActive ? 'text-usage-text-default' : 'text-brand-neutral-70'
-              }`}
+              className={cn(
+                'body-sm-light',
+                isActive
+                  ? 'text-brand-primary-default'
+                  : clickable
+                    ? 'text-brand-neutral-white'
+                    : 'text-brand-neutral-40',
+              )}
             >
               {d.toLocaleDateString('ko-KR', { weekday: 'short' })}
             </span>
             <span
               className={`mt-1 body-md-bold ${
-                isActive ? 'text-usage-text-default' : 'text-brand-neutral-70'
+                isActive
+                  ? 'text-brand-primary-default'
+                  : clickable
+                    ? 'text-brand-neutral-white'
+                    : 'text-brand-neutral-70'
               }`}
             >
               {d.getDate()}

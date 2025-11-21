@@ -1,4 +1,4 @@
-import { createWebBridge, POST_MESSAGE_EVENT } from '@ballog/bridge'
+import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 import { useEffect } from 'react'
 import type { ImageData } from '@ballog/bridge/types'
 import { toast } from 'sonner'
@@ -10,13 +10,14 @@ import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { TEAMS } from '@/shared/constants/teams'
 import { STADIUM } from '@/shared/constants/stadium'
 import { useImageUpload } from '@/features/image-management/hooks'
+import { useBridge } from '@/shared/hooks/bridge/useBridge'
 
 export const RecordingCardWithWebBridge = ({
   recordingData,
 }: {
   recordingData: RecordingResponse
 }) => {
-  const bridge = createWebBridge()
+  const { send } = useBridge()
   const { hasImage, addImage } = useRecordingImages()
   const { uploadImage, uploadState } = useImageUpload({
     matchRecordId: recordingData.matchRecordId,
@@ -37,7 +38,7 @@ export const RecordingCardWithWebBridge = ({
   }, [recordingData.imageList])
 
   const handleClick = () => {
-    bridge.send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })
+    send(POST_MESSAGE_EVENT.OPEN_CAMERA, { message: 'camera' })
   }
 
   useWebViewBridgeListener(async (image) => {

@@ -23,10 +23,11 @@ const HomeContent = () => {
     ? format(selectedDate, 'yyyy-MM-dd', { timeZone: TIME_ZONE })
     : ''
 
-  const { data, isLoading } = useQuery(matches.bySelectedDate(formattedDate))
+  const { data, isLoading } = useQuery(matches.all())
 
-  const matchesList = data?.data?.[formattedDate] ?? []
-  const isEmpty = matchesList.length === 0
+  const allMatches = data?.data ?? {}
+  const todayMatchesList = data?.data?.[formattedDate] ?? []
+  const isEmpty = todayMatchesList.length === 0
 
   const today = toZonedTime(new Date(), TIME_ZONE)
 
@@ -40,13 +41,13 @@ const HomeContent = () => {
 
   return (
     <div>
-      <CalendarHeader />
+      <CalendarHeader allMatches={allMatches} />
       {isLoading ? (
         <MatchLoadingSection />
       ) : isEmpty ? (
         <MatchEmptySection />
       ) : (
-        <MatchSection matches={matchesList} dateType={dateType} />
+        <MatchSection matches={todayMatchesList} dateType={dateType} />
       )}
     </div>
   )

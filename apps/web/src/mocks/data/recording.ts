@@ -1,7 +1,7 @@
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 
 export const recording: Record<number, RecordingResponse> = {
-  1: {
+  101: {
     matchRecordId: 101,
     matchesId: 1,
     stadium: 'JAMSIL',
@@ -39,7 +39,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  2: {
+  102: {
     matchRecordId: 102,
     matchesId: 2,
     stadium: 'JAMSIL',
@@ -64,7 +64,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  3: {
+  103: {
     matchRecordId: 103,
     matchesId: 3,
     stadium: 'JAMSIL',
@@ -94,7 +94,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  4: {
+  104: {
     matchRecordId: 104,
     matchesId: 4,
     stadium: 'JAMSIL',
@@ -119,7 +119,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  5: {
+  105: {
     matchRecordId: 105,
     matchesId: 5,
     stadium: 'JAMSIL',
@@ -149,7 +149,7 @@ export const recording: Record<number, RecordingResponse> = {
     ],
   },
 
-  6: {
+  106: {
     matchRecordId: 106,
     matchesId: 6,
     stadium: 'JAMSIL',
