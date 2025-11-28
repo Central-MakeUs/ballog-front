@@ -7,7 +7,7 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyTeamMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
 const isSignUpFlow = false

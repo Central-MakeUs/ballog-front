@@ -5,7 +5,7 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { NickNameForm } from '@/features/auth/ui'
 import { useUpdateMyInfoMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 import { useFlow } from '@/app/routes/stackflow'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 

@@ -12,7 +12,7 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { authGet } from '@/entities/auth/api'
 import { useFlow } from '@/app/routes/stackflow'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useSessionContext } from '@/shared/contexts/sessionContext'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 
