@@ -5,19 +5,29 @@ import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
 import { SessionProvider } from './provider/SessionProvider'
+import { useUpdatePolicy } from './policy/update/useUpdatePolicy'
+
+const AppInner = () => {
+  useUpdatePolicy()
+
+  return (
+    <>
+      <Stack />
+      {/* <NoticeModal /> */}
+      <Toaster position="bottom-center" />
+    </>
+  )
+}
 
 const App = () => {
   return (
-    <SessionProvider>
-      <OverlayProvider>
+    <OverlayProvider>
+      <SessionProvider>
         <QueryProvider>
-          <Stack />
-
-          {/* <NoticeModal /> */}
-          <Toaster position="bottom-center" />
+          <AppInner />
         </QueryProvider>
-      </OverlayProvider>
-    </SessionProvider>
+      </SessionProvider>
+    </OverlayProvider>
   )
 }
 

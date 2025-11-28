@@ -14,6 +14,5 @@ export interface Match {
 }
 
 export type MacthResponseDTO = ApiResponse<Match[]>
-
 export type MatchDateMap = Record<string, Match[]>
 export type MatchByDateResponseDTO = ApiResponse<MatchDateMap>

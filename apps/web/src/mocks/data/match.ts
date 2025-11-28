@@ -67,7 +67,7 @@ export const matchByDate: {
   delay: number
 } = {
   data: {
-    '2025-10-05': [
+    '2025-10-31': [
       {
         matchesId: 101,
         matchesDate: '2025-10-05',
@@ -89,7 +89,7 @@ export const matchByDate: {
         status: 'SCHEDULED',
       },
     ] as Match[],
-    '2025-10-21': [
+    '2025-11-01': [
       {
         matchesId: 103,
         matchesDate: '2025-10-13',
@@ -115,7 +115,7 @@ export const matchByDate: {
         matchesDate: '2025-10-13',
         matchesTime: '18:30:00',
         homeTeam: 'HANWHA_EAGLES',
-        awayTeam: 'KIA_TIGERS',
+        awayTeam: 'LG_TWINS',
         stadium: 'DAEJEON',
         matchesResult: '5:3',
         status: 'COMPLETED',
@@ -131,7 +131,7 @@ export const matchByDate: {
         status: 'COMPLETED',
       },
     ] as Match[],
-    '2025-10-22': [
+    '2025-11-02': [
       {
         matchesId: 107,
         matchesDate: '2025-10-14',
@@ -163,7 +163,7 @@ export const matchByDate: {
         status: 'SCHEDULED',
       },
     ],
-    '2025-10-23': [
+    '2025-11-03': [
       {
         matchesId: 110,
         matchesDate: '2025-10-15',

@@ -54,6 +54,14 @@ export type InstagramPayload = {
   username: string
 }
 
+export type AppVerionPayload = {
+  version: string
+}
+
+export type StoreDeepLinkPayload = {
+  payload: string
+}
+
 // 각 이벤트별 스키마 정의
 export type BridgeMessageSchema = {
   OPEN_CAMERA: {
@@ -107,6 +115,12 @@ export type BridgeMessageSchema = {
   OPEN_INSTAGRAM: {
     payload: InstagramPayload
   }
+  GET_MY_APP_VERSION: {
+    payload: AppVerionPayload
+  }
+  STORE_DEEP_LINK: {
+    payload: StoreDeepLinkPayload
+  }
 }
 
 // 기존 PostMessagePayload는 유니온 타입으로 변경
@@ -122,6 +136,8 @@ export type PostMessagePayload =
   | AppleLoginResponsePayload
   | FcmTokenPayload
   | InstagramPayload
+  | AppVerionPayload
+  | StoreDeepLinkPayload
 
 // {
 //   eventName: string

@@ -29,7 +29,7 @@ export const matchHandlers = [
       )
     },
   ),
-  
+
   http.get<
     never,
     MatchByDateResponseDTO,
@@ -51,6 +51,27 @@ export const matchHandlers = [
         data: {
           [date ?? '']: matches,
         },
+      },
+      { status: 200 },
+    )
+  }),
+
+  http.get<
+    never,
+    MatchByDateResponseDTO,
+    ApiErrorMessage | MatchByDateResponseDTO
+  >(`${MATCH_API_PREFIX}/all`, async () => {
+    // 목데이터 전체
+    const allMatches = matchByDate.data
+
+    await new Promise((resolve) => setTimeout(resolve, matchByDate.delay))
+
+    return HttpResponse.json(
+      {
+        message: 'success',
+        status: 200,
+        success: '전체 경기 일정 조회 성공',
+        data: allMatches,
       },
       { status: 200 },
     )

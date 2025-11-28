@@ -82,7 +82,7 @@ export const useModal = () => {
     buttons,
   }: HorizontalModalProps) => {
     return overlay.open(({ isOpen, close }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
+      <OverlayModal.Root open={isOpen} onOpenChange={close} dismissible={false}>
         <OverlayModal.Text heading={heading} body={body ?? ''} />
         <OverlayModal.Buttons
           layout="horizontal"
@@ -114,7 +114,7 @@ export const useModal = () => {
     buttons,
   }: VerticalModalProps) => {
     return overlay.open(({ isOpen, close }) => (
-      <OverlayModal.Root open={isOpen} onOpenChange={close}>
+      <OverlayModal.Root open={isOpen} onOpenChange={close} dismissible={false}>
         <OverlayModal.Text heading={heading} body={body} />
         <OverlayModal.Buttons layout="vertical" buttons={buttons} />
       </OverlayModal.Root>

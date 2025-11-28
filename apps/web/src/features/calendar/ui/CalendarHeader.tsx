@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
 import { motion, AnimatePresence } from 'framer-motion'
-import { toZonedTime } from 'date-fns-tz'
+import { toZonedTime, format } from 'date-fns-tz'
 
 import CalendarIcon from '@/assets/calendar.svg?react'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
 import RightArrow from '@/assets/calendarRightArrow.svg?react'
-import { Calendar } from '@/shared/ui/common/calendar'
+import { Calendar } from '@/features/calendar/ui/calendar'
 import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
+import type { MatchDateMap } from '@/entities/match/model/match.type'
 import { Button } from '@/shared/ui/common'
 import { TIME_ZONE } from '@/shared/constants/time'
 
@@ -15,7 +16,11 @@ import { useDate } from '../context/DateContext'
 
 import { CalendarWeekCarousel } from './CalendarWeekCarousel'
 
-export const CalendarHeader = () => {
+interface CalendarHeaderProps {
+  allMatches: MatchDateMap
+}
+
+export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
   const koreaDate = toZonedTime(new Date(), TIME_ZONE)
   const { selectedDate, setSelectedDate } = useDate()
 
@@ -99,6 +104,7 @@ export const CalendarHeader = () => {
 
       {/* week 캐러셀 */}
       <CalendarWeekCarousel
+        allMatches={allMatches}
         baseDate={baseDate}
         onChange={setBaseDate}
         selectedDate={selectedDate}
@@ -126,6 +132,13 @@ export const CalendarHeader = () => {
                   setSelectedDate(d)
                   setBaseDate(d)
                   setShowCalendar(false)
+                }}
+                allMatches={allMatches}
+                disabled={(date) => {
+                  const formatted = format(date, 'yyyy-MM-dd', {
+                    timeZone: TIME_ZONE,
+                  })
+                  return !allMatches[formatted]?.length
                 }}
               />
             </motion.div>
