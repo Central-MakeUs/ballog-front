@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks'
 import type { Match } from '@/entities/match/model/match.type'
 
 /**

@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 
 import { authPost, authDelete } from '@/entities/auth/api'
 import { useFlow } from '@/app/routes/stackflow'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 

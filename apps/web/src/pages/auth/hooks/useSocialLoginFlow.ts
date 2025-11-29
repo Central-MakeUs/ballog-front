@@ -1,7 +1,7 @@
 import { toast } from 'sonner'
 
 import type { ExtendedKyHttpError } from '@/types/api/common'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks'
 
 import { useSocialLogin } from './useSocialLogin'
 import { useSocialNavigation } from './useSocialNavigation'

@@ -5,7 +5,7 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { NickNameForm } from '@/features/auth/ui'
 import { useUpdateMyInfoMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
 import { useFlow } from '@/app/routes/stackflow'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 
@@ -19,7 +19,7 @@ const ChangeNickNamePage = () => {
     mutate(
       {
         nickname: data.nickname,
-        baseballTeam: user.baseballTeam ?? '응원팀 없음',
+        baseballTeam: user.baseballTeam ?? 'NONE',
       },
       {
         onSuccess: () => {

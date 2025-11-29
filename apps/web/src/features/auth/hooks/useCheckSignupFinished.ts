@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useFlow } from '@/app/routes/stackflow'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 
 export const useCheckSignupFinished = () => {

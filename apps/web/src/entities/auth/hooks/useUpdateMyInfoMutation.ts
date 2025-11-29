@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 
-import { authPatch, authGet } from '@/entities/auth/api'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
+import { authPatch, authGet } from '../api'
+
+import { useSessionContext } from './useSessionContext'
 
 export const useUpdateMyInfoMutation = () => {
   const { setUser } = useSessionContext()

@@ -1,10 +1,14 @@
 import { useContext } from 'react'
 
-import { SessionContext } from '../contexts/sessionContext'
+import {
+  SessionContext,
+  type SessionContextType,
+} from '../contexts/sessionContext'
 
-export const useSessionContext = () => {
+export const useSessionContext = (): SessionContextType => {
   const context = useContext(SessionContext)
-  if (!context)
+  if (!context) {
     throw new Error('useSessionContext must be used within SessionProvider')
+  }
   return context
 }

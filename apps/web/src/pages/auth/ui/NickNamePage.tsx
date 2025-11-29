@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 
-import { authPost } from '@/entities/auth/api'
+import { authPost, authGet } from '@/entities/auth/api'
 import type {
   SignupRequestDTO,
   SignupResponseDTO,
@@ -10,15 +10,15 @@ import { NickNameForm } from '@/features/auth/ui'
 import { type ExtendedKyHttpError } from '@/types/api/common'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
-import { authGet } from '@/entities/auth/api'
 import { useFlow } from '@/app/routes/stackflow'
-import { useSessionContext } from '@/shared/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
+import { type TeamKey } from '@/shared/constants/teams'
 
 interface NickNamePageProps {
   params: {
-    selectedTeam: string
+    selectedTeam: TeamKey
     serviceAgree: boolean
     marketingAgree: boolean
     privacyAgree: boolean
