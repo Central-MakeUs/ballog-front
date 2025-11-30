@@ -170,3 +170,6 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# vercel
+.secrets
