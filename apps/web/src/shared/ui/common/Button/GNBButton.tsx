@@ -35,8 +35,8 @@ export const GNBButton = ({
   ...props
 }: GNBButtonProps) => {
   const iconColor = active
-    ? 'text-brand-neutral-white'
-    : 'text-brand-secondary-default'
+    ? 'text-brand-neutral-white light:text-brand-primary-default'
+    : 'text-brand-secondary-default light:text-brand-neutral-40'
 
   return (
     <button
@@ -48,7 +48,14 @@ export const GNBButton = ({
     >
       {IconComponent && <IconComponent className={cn('w-7 h-7', iconColor)} />}
       {children && (
-        <span className={cn('caption-md-medium', iconColor)}>{children}</span>
+        <span
+          className={cn(
+            'caption-md-medium light:text-bg-green-default',
+            iconColor,
+          )}
+        >
+          {children}
+        </span>
       )}
     </button>
   )

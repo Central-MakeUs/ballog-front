@@ -57,7 +57,7 @@ export const GlobalNavigationBar = () => {
     <nav
       className={cn(
         'fixed bottom-0 left-0 right-0 z-50',
-        'w-full bg-[#2C2C2C] flex justify-around items-center',
+        'w-full bg-usage-background-default flex justify-around items-center',
         'rounded-t-xl border-[#3C3C3C]',
         'pt-2 pb-6',
       )}
