@@ -26,10 +26,10 @@ export const HomeCardStadiumInfo = ({
       <img
         src={StadiumImage}
         alt={`${stadiumName} 일러스트`}
-        className="w-full object-contain"
+        className="object-contain w-full"
         decoding="async"
       />
-      <p className="body-sm-light">{stadiumName}</p>
+      <p className="body-sm-light light:text-white">{stadiumName}</p>
     </div>
   )
 }

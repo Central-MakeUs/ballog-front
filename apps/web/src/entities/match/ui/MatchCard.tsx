@@ -28,7 +28,7 @@ export const MatchCardToday = ({
         <Button
           variant="secondary"
           className={cn(
-            `w-full bg-brand-secondary-default rounded-md duration-800
+            `w-full bg-brand-secondary-default rounded-large duration-800 light:text-brand-neutral-white
           ${isCenter ? 'opacity-100' : 'opacity-0 pointer-events-none'}
           `,
           )}
@@ -77,7 +77,7 @@ export const MatchCardPast = ({
         homeScore={homeScore}
         awayScore={awayScore}
       />
-      <HomeCard.StadiumInfo stadium={stadium} className='pb-2' />
+      <HomeCard.StadiumInfo stadium={stadium} className="pb-2" />
     </HomeCard.Root>
   )
 }

@@ -21,11 +21,11 @@ export const HomeCardDetailInfo = ({
 }: HomeCardDetailInfoProps) => {
   return (
     <div className={cn('flex flex-col pt-2 w-full', className)} {...rest}>
-      <div className="flex flex-col items-center justify-center p-0 relative w-full">
-        <div className="body-md-medium text-usage-text-default text-center w-full">
+      <div className="relative flex flex-col items-center justify-center w-full p-0">
+        <div className="w-full text-center body-md-medium text-usage-text-white default light:text-white">
           경기시작 {dateTime}
         </div>
-        <div className="heading-md-bold text-usage-text-default flex items-center gap-2">
+        <div className="flex items-center gap-2 heading-md-bold text-usage-text-default light:text-white">
           <span>{TEAMS[homeTeam].split(' ')[0]}</span>
           <span>vs</span>
           <span>{TEAMS[awayTeam].split(' ')[0]}</span>
