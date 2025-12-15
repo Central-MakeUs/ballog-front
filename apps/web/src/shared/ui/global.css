@@ -76,7 +76,33 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+.light {
+  /* light mode */
+  --color-usage-text-default: #212121;
+  --color-usage-text-hover: #757575;
+  --color-usage-text-subtle: #030303;
+  --color-usage-text-strong: #030303;
+  --color-usage-text-inverse: #ffffff;
+
+  --color-usage-background-default: #ffffff;
+  --color-usage-background-subtle: #eeeeee;
+  --color-usage-background-strong: #dcdcdc;
+  --color-usage-background-inverse: #333333;
+}
+
 .dark {
+  /* Dark mode */
+  --color-usage-text-default: #ffffff;
+  --color-usage-text-hover: #9e9e9e;
+  --color-usage-text-subtle: #e0e0e0;
+  --color-usage-text-strong: #ffffff;
+  --color-usage-text-inverse: #212121;
+
+  --color-usage-background-default: #030303;
+  --color-usage-background-subtle: #212121;
+  --color-usage-background-strong: #333333;
+  --color-usage-background-inverse: #fafafa;
+
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -184,16 +210,16 @@
   --color-brand-secondary-subtle: #e0e0e0;
 
   /* Usage colors */
-  --color-usage-text-default: #ffffff;
-  --color-usage-text-hover: #9e9e9e;
-  --color-usage-text-inverse: #212121;
-  --color-usage-text-strong: #ffffff;
-  --color-usage-text-subtle: #e0e0e0;
+  --color-usage-text-default: initial;
+  --color-usage-text-hover: initial;
+  --color-usage-text-inverse: initial;
+  --color-usage-text-strong: initial;
+  --color-usage-text-subtle: initial;
 
-  --color-usage-background-default: #030303;
-  --color-usage-background-subtle: #212121;
-  --color-usage-background-strong: #333333;
-  --color-usage-background-inverse: #fafafa;
+  --color-usage-background-default: initial;
+  --color-usage-background-subtle: initial;
+  --color-usage-background-strong: initial;
+  --color-usage-background-inverse: initial;
 
   /* Border radius */
   --radius-base: 8px;
