@@ -54,10 +54,10 @@ const buttonVariants = cva(
         variant: 'secondary',
         buttonType: 'filled',
         class: cn(
-          'bg-brand-secondary-default text-brand-secondary-white',
-          'hover:bg-brand-secondary-hover hover:text-brand-secondary-white',
-          'active:bg-brand-secondary-pressed active:text-brand-secondary-white',
-          'disabled:bg-brand-secondary-disabled disabled:text-brand-secondary-white',
+          'bg-brand-secondary-default text-brand-secondary-white light:text-brand-neutral-80',
+          'hover:bg-brand-secondary-hover hover:text-brand-secondary-white light:hover:bg-brand-secondary-hover light:hover:text-brand-neutral-80',
+          'active:bg-brand-secondary-pressed active:text-brand-secondary-white light:active:text-brand-neutral-80',
+          'disabled:bg-brand-secondary-disabled disabled:text-brand-secondary-white light:disabled:text-brand-neutral-40',
         ),
       },
       // Primary Outline
@@ -76,10 +76,10 @@ const buttonVariants = cva(
         variant: 'secondary',
         buttonType: 'outline',
         class: cn(
-          'border-brand-secondary-default text-brand-secondary-default',
-          'hover:text-brand-secondary-hover hover:border-brand-secondary-hover',
-          'active:text-brand-secondary-pressed active:border-brand-secondary-pressed',
-          'disabled:text-brand-secondary-disabled disabled:border-brand-secondary-disabled',
+          'border-brand-secondary-default text-brand-secondary-default light:text-brand-neutral-80',
+          'hover:text-brand-secondary-hover hover:border-brand-secondary-hover light:hover:text-brand-secondary-hover',
+          'active:text-brand-secondary-pressed active:border-brand-secondary-pressed light:active:text-brand-secondary-pressed',
+          'disabled:text-brand-secondary-disabled disabled:border-brand-secondary-disabled light:disabled:text-brand-secondary-disabled',
         ),
       },
       // Primary Naked
@@ -98,10 +98,10 @@ const buttonVariants = cva(
         variant: 'secondary',
         buttonType: 'naked',
         class: cn(
-          'text-brand-secondary-default',
-          'hover:text-brand-secondary-hover hover:border-brand-secondary-hover',
-          'active:text-brand-secondary-pressed active:border-brand-secondary-pressed',
-          'disabled:text-brand-secondary-disabled disabled:border-brand-secondary-disabled',
+          'text-brand-secondary-default light:text-brand-neutral-80',
+          'hover:text-brand-secondary-hover hover:border-brand-secondary-hover light:hover:text-brand-secondary-hover',
+          'active:text-brand-secondary-pressed active:border-brand-secondary-pressed light:active:text-brand-secondary-pressed',
+          'disabled:text-brand-secondary-disabled disabled:border-brand-secondary-disabled light:disabled:text-brand-secondary-disabled',
         ),
       },
 
@@ -110,7 +110,7 @@ const buttonVariants = cva(
         state: 'hover',
         buttonType: 'filled',
         class: cn('bg-brand-primary-subtle text-brand-primary-white'),
-      },  
+      },
       {
         variant: 'secondary',
         state: 'hover',
@@ -188,13 +188,15 @@ const buttonVariants = cva(
         variant: 'primary',
         state: 'subtle',
         buttonType: 'filled',
-        class: cn('bg-brand-primary-subtle text-brand-primary-default'),
+        class: cn('bg-brand-primary-subtle text-brand-primary-pressed'),
       },
       {
         variant: 'secondary',
         state: 'subtle',
         buttonType: 'filled',
-        class: cn('bg-brand-secondary-subtle text-brand-secondary-default'),
+        class: cn(
+          'bg-brand-secondary-subtle text-brand-secondary-default light:text-brand-neutral-white',
+        ),
       },
       {
         variant: 'primary',
@@ -206,7 +208,9 @@ const buttonVariants = cva(
         variant: 'secondary',
         buttonType: ['outline', 'naked'],
         state: 'subtle',
-        class: cn('border-brand-secondary-subtle text-brand-secondary-subtle'),
+        class: cn(
+          'border-brand-secondary-subtle text-brand-secondary-subtle light:text-brand-secondary-subtle',
+        ),
       },
     ],
   },
