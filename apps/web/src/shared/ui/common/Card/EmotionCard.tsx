@@ -1,8 +1,8 @@
 import { Pie, PieChart } from 'recharts'
 import type { ComponentProps } from 'react'
 
-import AngryEmotion from '@/assets/angryEmotion.svg?react'
-import JoyEmotion from '@/assets/joyEmotion.svg?react'
+import AngryEmotion from '@/assets/angryEmotionNoShadow.svg?react'
+import JoyEmotion from '@/assets/joyEmotionNoShadow.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
 interface EmotionPieChartData {
@@ -70,7 +70,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
       )}
       {...rest}
     >
-      <div className="relative flex justify-center items-center mb-3">
+      <div className="relative flex justify-center items-center mb-4">
         <PieChart width={104} height={104}>
           {/* 중앙 원 */}
           <Pie
@@ -118,14 +118,18 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
       </div>
 
       {centerEmotion === '화나요' ? (
-        <div className="flex flex-row justify-center items-center">
-          <AngryEmotion className="w-5 h-5" /> <span>{centerEmotion}</span>
+        <div
+          className={cn(
+            'flex flex-row justify-center items-center text-brand-red-default bg-[#F3B3B8] py-1 px-2 rounded-md',
+          )}
+        >
+          <AngryEmotion className="w-5 h-5 mr-1" />
+          <span>{centerEmotion}</span>
         </div>
       ) : (
         <div
           className={cn(
-            'flex flex-row justify-center items-center py-1 w-33 rounded-md',
-            'bg-usage-background-strong',
+            'flex flex-row justify-center items-center text-[#3F8F46] bg-[#A4D4AA] py-1 px-2 rounded-md',
           )}
         >
           <JoyEmotion className="w-5 h-5 mr-1" />

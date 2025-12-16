@@ -25,10 +25,11 @@ export const MatchCardToday = ({
       />
       <HomeCard.StadiumInfo stadium={stadium} />
       <div className="w-full">
+        {/* TODO : 라이트모드 bg 색상 하드코딩 수정 */}
         <Button
           variant="secondary"
           className={cn(
-            `w-full bg-brand-secondary-default rounded-large duration-800 light:text-brand-neutral-white
+            `w-full bg-brand-secondary-default light:bg-[#424242] rounded-large duration-800 light:text-brand-neutral-white
           ${isCenter ? 'opacity-100' : 'opacity-0 pointer-events-none'}
           `,
           )}

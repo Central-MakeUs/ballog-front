@@ -6,7 +6,6 @@ import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
 import { useUpdatePolicy } from './policy/update/useUpdatePolicy'
-// import { NoticeModal } from './Notice/NoticeModal'
 
 const AppInner = () => {
   useUpdatePolicy()
@@ -14,7 +13,6 @@ const AppInner = () => {
   return (
     <>
       <Stack />
-      {/* <NoticeModal /> */}
       <Toaster position="bottom-center" />
     </>
   )

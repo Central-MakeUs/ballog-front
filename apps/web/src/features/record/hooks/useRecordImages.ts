@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import type { ImageData } from '@ballog/bridge/types'
+
+const MAX_IMAGES = 99
 
 /**
  * recording-page 에서 업로드된 이미지를 관리하는 배열
@@ -8,23 +10,27 @@ import type { ImageData } from '@ballog/bridge/types'
 export const useRecordingImages = () => {
   const [images, setImages] = useState<ImageData[]>([])
 
-  const addImage = (data: ImageData) => {
-    setImages((prev) =>
-      [...prev, data].sort(
+  const addImage = useCallback((data: ImageData) => {
+    setImages((prev) => {
+      if (prev.length >= MAX_IMAGES) return prev
+      return [...prev, data].sort(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-      ),
-    )
-  }
+      )
+    })
+  }, [])
 
   const clearImages = () => {
     setImages([])
   }
+
+  const isFull = images.length >= MAX_IMAGES
 
   return {
     images,
     addImage,
     clearImages,
     hasImage: images.length > 0,
+    isFull,
   }
 }
