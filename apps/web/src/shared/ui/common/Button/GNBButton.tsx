@@ -35,8 +35,8 @@ export const GNBButton = ({
   ...props
 }: GNBButtonProps) => {
   const iconColor = active
-    ? 'text-brand-neutral-white light:text-brand-primary-default'
-    : 'text-brand-secondary-default light:text-brand-neutral-40'
+    ? 'text-brand-neutral-white light:text-brand-neutral-80'
+    : 'text-brand-secondary-default light:text-brand-neutral-30'
 
   return (
     <button
