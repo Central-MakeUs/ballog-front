@@ -190,14 +190,19 @@
     -o-user-drag: none;
     user-drag: none;
   }
-  body {
-    /* @apply bg-usage-background-default text-usage-text-default; */
-  }
   html,
   body {
     -webkit-user-select: none; /* iOS Safari/WKWebView */
     user-select: none;
     -webkit-touch-callout: none; /* iOS 롱탭 메뉴 차단 */
+  }
+
+  body,
+  [data-theme-transition] {
+    transition:
+      background-color 250ms ease,
+      color 250ms ease,
+      border-color 250ms ease;
   }
 
   /* 이미지 드래그 금지 */
@@ -213,6 +218,32 @@
     user-select: text;
     -webkit-touch-callout: default;
   }
+}
+
+/* .theme-transition,
+.theme-transition * {
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    fill 300ms ease;
+} */
+
+html[data-theme-transition],
+html[data-theme-transition] * {
+  transition:
+    background-color 500ms ease,
+    color 500ms ease,
+    border-color 500ms ease,
+    fill 500ms ease,
+    stroke 500ms ease,
+    outline-color 500ms ease,
+    box-shadow 500ms ease;
+}
+
+/* iOS 느낌 조금 더: 깜빡임/대비 완화 */
+html[data-theme-transition] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 @theme {

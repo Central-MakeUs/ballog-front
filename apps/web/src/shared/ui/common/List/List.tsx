@@ -26,13 +26,13 @@ export const List = ({
       className="flex items-center justify-between w-full p-4 min-w-82 bg-usage-background-subtle rounded-xlarge"
       onClick={onClick}
     >
-      <span className="text-brand-neutral-white body-sm-medium">
-        {children}
-      </span>
+      <span className="text-usage-text-default body-sm-medium">{children}</span>
 
       {type === 'arrow' ? (
         <button>
-          <RightArrow className={cn('size-6 shrink-0')} />
+          <RightArrow
+            className={cn('size-6 shrink-0 light:text-brand-neutral-60')}
+          />
         </button>
       ) : (
         <Switch
