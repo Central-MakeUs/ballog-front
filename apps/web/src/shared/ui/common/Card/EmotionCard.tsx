@@ -70,7 +70,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
       )}
       {...rest}
     >
-      <div className="relative flex justify-center items-center mb-4">
+      <div className="relative flex items-center justify-center mb-4">
         <PieChart width={104} height={104}>
           {/* 중앙 원 */}
           <Pie
@@ -106,12 +106,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
         </PieChart>
 
         <div
-          className="
-          absolute inset-0
-          flex flex-col items-center justify-center
-          body-sm-bold text-brand-neutral-white
-          pointer-events-none
-        "
+          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none body-sm-bold text-brand-neutral-white"
         >
           <div className="text-[23px]">{centerRate}%</div>
         </div>
@@ -129,7 +124,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
       ) : (
         <div
           className={cn(
-            'flex flex-row justify-center items-center text-[#3F8F46] bg-[#A4D4AA] py-1 px-2 rounded-md',
+            'flex flex-row justify-center items-center text-brand-green-pressed bg-brand-green-disabled py-1 px-2 rounded-md',
           )}
         >
           <JoyEmotion className="w-5 h-5 mr-1" />
@@ -152,10 +147,7 @@ const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
     {...rest}
   >
     <div
-      className="
-        flex items-center justify-center
-        w-full h-full
-        rounded-full bg-usage-background-strong"
+      className="flex items-center justify-center w-full h-full rounded-full bg-usage-background-strong"
     >
       <div className="flex items-center justify-center gap-4 mt-4.25 text-brand-neutral-white min-w-30 min-h-30">
         <div className="flex flex-col items-center">
