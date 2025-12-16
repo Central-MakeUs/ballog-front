@@ -22,7 +22,7 @@ export const HomeCardDetailInfo = ({
   return (
     <div className={cn('flex flex-col pt-2 w-full', className)} {...rest}>
       <div className="relative flex flex-col items-center justify-center w-full p-0">
-        <div className="w-full text-center body-md-medium text-usage-text-white default light:text-white">
+        <div className="w-full text-center body-md-medium dark:text-usage-text-default light:text-white">
           경기시작 {dateTime}
         </div>
         <div className="flex items-center gap-2 heading-md-bold text-usage-text-default light:text-white">

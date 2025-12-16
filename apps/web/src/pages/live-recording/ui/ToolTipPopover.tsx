@@ -30,7 +30,7 @@ export function ToolTipPopover() {
         side="bottom"
         align="center"
         className="
-            flex flex-col w-62.5 rounded-md bg-brand-neutral-80 relative
+            flex flex-col w-62.5 rounded-md bg-brand-neutral-80 light:bg-brand-neutral-70 relative
             text-brand-neutral-10 border-0 gap-4 py-6 px-4
          "
       >

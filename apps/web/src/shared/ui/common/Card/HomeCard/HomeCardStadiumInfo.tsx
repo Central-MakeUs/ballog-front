@@ -29,7 +29,7 @@ export const HomeCardStadiumInfo = ({
         className="object-contain w-full"
         decoding="async"
       />
-      <p className="body-sm-light light:text-white">{stadiumName}</p>
+      <p className="text-white body-sm-light">{stadiumName}</p>
     </div>
   )
 }

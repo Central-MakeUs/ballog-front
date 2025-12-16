@@ -47,12 +47,9 @@ const MyTeamLiveRecordPage = ({
   return (
     <AppScreen
       appBar={{
-        title: (
-          <span className="flex text-usage-text-default">감정 기록 중</span>
-        ),
         activityEnterStyle: 'slideInLeft',
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />,
         },
         height: '48px',
       }}

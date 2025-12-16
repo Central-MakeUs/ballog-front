@@ -6,7 +6,7 @@ import { toZonedTime, format } from 'date-fns-tz'
 // import CalendarIcon from '@/assets/calendar.svg?react'
 import CalendarIcon from '@/assets/CalendarIcon'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
-import RightArrow from "@/assets/calendarRightArrow.svg?react"
+import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/features/calendar/ui/calendar'
 import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
 import type { MatchDateMap } from '@/entities/match/model/match.type'
@@ -97,7 +97,7 @@ export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
         <Button
           variant="secondary"
           size="sm"
-          className="absolute right-4 text-brand-neutral-70"
+          className="absolute right-4 dark:text-brand-neutral-white dark:bg-brand-secondary-pressed light:text-brand-neutral-70"
           onClick={() => {
             const today = toZonedTime(new Date(), TIME_ZONE)
             setSelectedDate(today)
