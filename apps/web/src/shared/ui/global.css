@@ -95,6 +95,21 @@
   --color-usage-background-subtle: #eeeeee;
   --color-usage-background-strong: #dcdcdc;
   --color-usage-background-inverse: #333333;
+
+  /* emotion colors */
+  --color-emotion-angry-100: #e63946;
+  --color-emotion-angry-90: #ec6670;
+  --color-emotion-angry-80: #f1949b;
+  --color-emotion-angry-70: #f7c1c5;
+  --color-emotion-angry-60: #fdeeef;
+  --color-emotion-angry-50: #030303;
+
+  --color-emotion-joy-100: #4eb65a;
+  --color-emotion-joy-90: #72c57c;
+  --color-emotion-joy-80: #96d49d;
+  --color-emotion-joy-70: #bae3bf;
+  --color-emotion-joy-60: #def2e1;
+  --color-emotion-joy-50: #030303;
 }
 
 .dark {
@@ -116,6 +131,21 @@
   --color-usage-background-subtle: #212121;
   --color-usage-background-strong: #333333;
   --color-usage-background-inverse: #fafafa;
+
+  /* emotion colors */
+  --color-emotion-angry-100: #e63946;
+  --color-emotion-angry-90: #d21a28;
+  --color-emotion-angry-80: #a41520;
+  --color-emotion-angry-70: #770f17;
+  --color-emotion-angry-60: #4a090e;
+  --color-emotion-angry-50: #030303;
+
+  --color-emotion-joy-100: #4eb65a;
+  --color-emotion-joy-90: #3d9447;
+  --color-emotion-joy-80: #2e7036;
+  --color-emotion-joy-70: #1f4c24;
+  --color-emotion-joy-60: #102813;
+  --color-emotion-joy-50: #030303;
 
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -236,19 +266,19 @@
   --color-usage-background-inverse: var(--color-usage-background-inverse);
 
   /* emotion colors */
-  --color-emotion-angry-100: #e63946;
-  --color-emotion-angry-90: #d21a28;
-  --color-emotion-angry-80: #a41520;
-  --color-emotion-angry-70: #770f17;
-  --color-emotion-angry-60: #4a090e;
-  --color-emotion-angry-50: #030303;
+  --color-emotion-angry-100: var(--color-emotion-angry-100);
+  --color-emotion-angry-90: var(--color-emotion-angry-90);
+  --color-emotion-angry-80: var(--color-emotion-angry-80);
+  --color-emotion-angry-70: var(--color-emotion-angry-70);
+  --color-emotion-angry-60: var(--color-emotion-angry-60);
+  --color-emotion-angry-50: var(--color-emotion-angry-50);
 
-  --color-emotion-joy-100: #4eb65a;
-  --color-emotion-joy-90: #3d9447;
-  --color-emotion-joy-80: #2e7036;
-  --color-emotion-joy-70: #1f4c24;
-  --color-emotion-joy-60: #102813;
-  --color-emotion-joy-50: #030303;
+  --color-emotion-joy-100: var(--color-emotion-joy-100);
+  --color-emotion-joy-90: var(--color-emotion-joy-90);
+  --color-emotion-joy-80: var(--color-emotion-joy-80);
+  --color-emotion-joy-70: var(--color-emotion-joy-70);
+  --color-emotion-joy-60: var(--color-emotion-joy-60);
+  --color-emotion-joy-50: var(--color-emotion-joy-50);
 
   /* Border radius */
   --radius-base: 8px;

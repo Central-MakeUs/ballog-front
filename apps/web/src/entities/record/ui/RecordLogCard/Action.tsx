@@ -1,7 +1,7 @@
 import type { ComponentProps, ReactNode } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
-import RightArrow from '@/assets/rightArrow.svg?react'
+import RightArrow from '@/assets/RightArrow'
 import { Button } from '@/shared/ui/common'
 
 interface ActionProps extends ComponentProps<'button'> {

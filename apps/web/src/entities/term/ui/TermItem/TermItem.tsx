@@ -1,4 +1,4 @@
-import RightArrow from '@/assets/rightArrow.svg?react'
+import RightArrow from '@/assets/RightArrow'
 import { Button } from '@/shared/ui/common/Button'
 import { Checkbox } from '@/shared/ui/common/Checkbox'
 import { type TermType } from '@/entities/term/model/term.type'
@@ -20,7 +20,7 @@ export const TermItem = ({
   onDetailClicks,
 }: TermItemProps) => {
   return (
-    <div className="flex items-center justify-between h-16 pl-4 py-4 w-full">
+    <div className="flex items-center justify-between w-full h-16 py-4 pl-4">
       <div className="flex items-center justify-between w-full gap-4">
         <div className="flex items-center gap-2">
           <Checkbox checked={checked} onToggle={() => onToggle(id)} />
@@ -30,7 +30,7 @@ export const TermItem = ({
           variant="secondary"
           buttonType="naked"
           size="icon"
-          className="overflow-clip relative shrink-0 size-6 p-0"
+          className="relative p-0 overflow-clip shrink-0 size-6"
           onClick={() => onDetailClicks(id)}
           aria-label="상세보기"
         >

@@ -53,23 +53,23 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
       api.off('select', onSelect)
     }
   }, [api, matches.length])
-  
+
   return (
-    <div className="pt-6 w-full">
+    <div className="w-full pt-6">
       <Carousel
-        className="w-full justify-center items-center"
+        className="items-center justify-center w-full"
         setApi={setApi}
         opts={{ loop: false, align: 'center' }}
       >
         <CarouselContent className="-ml-6">
           {/* 더미 아이템 */}
           <div
-            className="basis-3/5 pl-6 shrink-0 pointer-events-none"
+            className="pl-6 pointer-events-none basis-3/5 shrink-0"
             aria-hidden="true"
           />
 
           {sortedMatches.map((match, index) => (
-            <CarouselItem key={index} className="basis-3/5 pl-6">
+            <CarouselItem key={index} className="pl-6 basis-3/5">
               <MatchCardFactory
                 match={match}
                 isCenter={index === current}
@@ -86,20 +86,20 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
             </CarouselItem>
           ))}
           <div
-            className="basis-3/5 pl-6 shrink-0 pointer-events-none"
+            className="pl-6 pointer-events-none basis-3/5 shrink-0"
             aria-hidden="true"
           />
         </CarouselContent>
       </Carousel>
 
       {/* Pagination */}
-      <div className="flex justify-center mt-4 gap-2 p-1 bg-usage-background-strong rounded-full w-fit mx-auto">
+      <div className="flex justify-center gap-2 p-1 mx-auto mt-4 rounded-full bg-usage-background-strong w-fit">
         {matches.map((_, index) => (
           <div
             key={index}
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
               index === current
-                ? 'bg-brand-neutral-white'
+                ? 'bg-brand-neutral-white light:bg-brand-neutral-70'
                 : 'bg-brand-neutral-50'
             }`}
           />

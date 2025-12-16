@@ -202,7 +202,8 @@ function CalendarDayButton({
             ? 'dark:bg-usage-background-strong light:bg-white text-usage-text-default'
             : 'dark:bg-usage-background-strong light:bg-white text-brand-neutral-40',
 
-        modifiers.outside && 'text-brand-neutral-70 light:text-brand-neutral-40',
+        modifiers.outside &&
+          'text-brand-neutral-70 light:text-brand-neutral-40',
         modifiers.today && !modifiers.selected && defaultClassNames.day,
         className,
       )}

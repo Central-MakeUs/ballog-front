@@ -6,7 +6,7 @@ import { toZonedTime, format } from 'date-fns-tz'
 // import CalendarIcon from '@/assets/calendar.svg?react'
 import CalendarIcon from '@/assets/CalendarIcon'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
-import RightArrow from '@/assets/calendarRightArrow.svg?react'
+import RightArrow from "@/assets/calendarRightArrow.svg?react"
 import { Calendar } from '@/features/calendar/ui/calendar'
 import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
 import type { MatchDateMap } from '@/entities/match/model/match.type'
