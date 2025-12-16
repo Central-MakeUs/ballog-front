@@ -1,7 +1,7 @@
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import ColoredBallogLogo from '@/assets/coloredBallogLogo.svg?react'
 
-const BallogAppBarTitle = () => {
+const BallogAppBar = () => {
   return (
     <>
       <WhiteBallogLogo className="hidden dark:block" />
@@ -10,4 +10,4 @@ const BallogAppBarTitle = () => {
   )
 }
 
-export default BallogAppBarTitle
+export default BallogAppBar

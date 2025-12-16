@@ -31,7 +31,7 @@ export const List = ({
       {type === 'arrow' ? (
         <button>
           <RightArrow
-            className={cn('size-6 shrink-0 light:text-brand-neutral-60')}
+            className={cn('size-6 shrink-0 dark:text-brand-neutral-white light:text-brand-neutral-60')}
           />
         </button>
       ) : (

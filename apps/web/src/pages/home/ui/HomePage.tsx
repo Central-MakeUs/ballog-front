@@ -14,7 +14,7 @@ import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFini
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
 import { useDate, DateProvider } from '@/features/calendar/context/DateContext'
 import { TIME_ZONE } from '@/shared/constants/time'
-import BallogAppBarTitle from '@/assets/AppBarLogo'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 const HomeContent = () => {
   const { selectedDate } = useDate()
@@ -58,7 +58,7 @@ const HomePage: ActivityComponentType = () => {
   useCheckSignupFinished()
 
   return (
-    <AppScreen appBar={{ title: <BallogAppBarTitle /> }}>
+    <AppScreen appBar={{ title: <BallogAppBar /> }}>
       <DateProvider>
         <HomeContent />
         <GlobalNavigationBar />

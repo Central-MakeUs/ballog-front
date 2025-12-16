@@ -31,7 +31,9 @@ export const TeamSelectionForm = ({
   return (
     <div className="flex flex-col items-center w-full h-full px-4">
       <div className="flex flex-col items-center w-full gap-8">
-        <p className="body-lg-bold mt-8">응원하는 팀을 선택해주세요</p>
+        <p className="mt-8 body-lg-bold text-usage-text-default">
+          응원하는 팀을 선택해주세요
+        </p>
 
         <div className="grid grid-cols-2 grid-rows-6 gap-x-4 gap-y-4 w-full mb-8 h-[488px]">
           {Object.entries(TEAMS).map(([key, value], idx) => {
@@ -47,13 +49,13 @@ export const TeamSelectionForm = ({
                 variant="secondary"
                 state={isSelected ? 'pressed' : undefined} // 선택 시만 subtle, 아니면 기본
                 className={cn(
-                  `self-stretch row-start-${row} col-start-${col} flex-1 h-full gap-0`,
+                  `self-stretch row-start-${row} col-start-${col} flex-1 h-full gap-0 text-usage-text-default`,
                   isSelected &&
-                    'border border-brand-primary-default text-brand-primary-default',
+                    'border border-brand-primary-default text-brand-primary-default light:bg-brand-primary-subtle light:text-brand-primary-default',
                 )}
                 onClick={() => handleSelect(key as TeamKey)}
               >
-                {Icon && <Icon className="size-6 mr-1 -ml-2" />} {value}
+                {Icon && <Icon className="mr-1 -ml-2 size-6" />} {value}
               </Button>
             )
           })}
@@ -66,7 +68,7 @@ export const TeamSelectionForm = ({
         variant="primary"
         disabled={!selectedTeam}
         onClick={handleSubmit}
-        className="fixed bottom-10 left-4 right-4"
+        className="fixed bottom-10 left-4 right-4 text-brand-neutral-white"
       >
         {isSignUpFlow ? '다음' : '완료'}
       </Button>
