@@ -58,7 +58,7 @@ const OtherTeamLiveRecordPage = ({
         height: '48px',
       }}
     >
-      <div className="max-h-full flex flex-col justify-center items-center px-4 pt-4">
+      <div className="flex flex-col items-center justify-center max-h-full px-4 pt-4">
         {/* 경기 정보 */}
         <GameInfoCard recordingData={recordingData} className="mb-6" />
 
@@ -68,8 +68,8 @@ const OtherTeamLiveRecordPage = ({
           )}
           style={{
             background: bgColor
-              ? `linear-gradient(to bottom, ${bgColor}, #212121 50%)`
-              : '#212121',
+              ? `linear-gradient(to bottom, ${bgColor}, bg-brand-neutral-90 50%)`
+              : 'bg-brand-neutral-90',
           }}
         >
           {/* 텍스트 */}
@@ -79,10 +79,10 @@ const OtherTeamLiveRecordPage = ({
               'mt-8 mb-8',
             )}
           >
-            <div className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center relative">
+            <div className="relative inline-flex items-center mb-2 body-lg-bold text-usage-text-default">
               지금 경기 팀 분위기
             </div>
-            <p className="body-sm-light text-usage-text-subtle mb-6">
+            <p className="mb-6 body-sm-light text-usage-text-subtle">
               다른 팬들의 감정을 실시간으로 확인해보세요.
             </p>
             {/* 팀 감정분포 */}
@@ -98,7 +98,7 @@ const OtherTeamLiveRecordPage = ({
           <RecordCameraButton
             matchRecordId={recordingData.matchRecordId}
             initialImages={recordingData.imageList}
-            className="fixed bottom-10 left-1/2 -translate-x-1/2 w-max"
+            className="fixed -translate-x-1/2 bottom-10 left-1/2 w-max"
           />
         </div>
       </div>
