@@ -63,13 +63,19 @@ export const CalendarWeekCarousel = ({
     const handler = () => {
       const idx = api.selectedScrollSnap()
       setCurrentIndex(idx)
+
+      const newBaseDate = weeks[idx]
+
+      if (newBaseDate.getMonth() !== baseDate.getMonth()) {
+        onChange(newBaseDate)
+      }
     }
 
-    api.on('select', handler)
+    api.on('settle', handler)
     return () => {
-      api.off('select', handler)
+      api.off('settle', handler)
     }
-  }, [api, weeks, onChange])
+  }, [api, weeks, onChange, baseDate])
 
   return (
     <Carousel

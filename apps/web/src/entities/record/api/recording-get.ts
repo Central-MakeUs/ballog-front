@@ -4,7 +4,7 @@ import type { RecordingResponseDTO } from '@/entities/record/model/recording.typ
 export const recordingGet = {
   getRecording: async (matchId: number): Promise<RecordingResponseDTO> => {
     const response = await api
-      .get(`record/${matchId}/match`)
+      .get(`record/${matchId}/match`, { retry: 0 })
       .json<RecordingResponseDTO>()
 
     return response

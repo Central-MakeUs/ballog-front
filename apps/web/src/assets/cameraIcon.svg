@@ -1,0 +1,23 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2740_12865)" filter="url(#filter0_d_2740_12865)">
+<circle cx="17.7927" cy="16" r="16" fill="white"/>
+<path d="M22.5869 10.8117H12.9619L13.4844 9.60169C13.7136 9.07002 14.4286 8.71252 15.2444 8.71252H20.3044C21.1202 8.71252 21.8261 9.07919 22.0644 9.60169L22.5869 10.8117Z" fill="#424242"/>
+<path d="M17.7836 19.685C18.9936 19.685 19.9744 18.7041 19.9744 17.4942C19.9744 16.2842 18.9936 15.3033 17.7836 15.3033C16.5736 15.3033 15.5928 16.2842 15.5928 17.4942C15.5928 18.7041 16.5736 19.685 17.7836 19.685Z" fill="white"/>
+<path d="M25.0615 11.6919C26.079 11.6919 26.9041 12.5163 26.9043 13.5337V21.4448C26.9043 22.4624 26.0791 23.2876 25.0615 23.2876H10.5049C9.48739 23.2875 8.66211 22.4623 8.66211 21.4448V13.5337C8.66234 12.5164 9.48753 11.692 10.5049 11.6919H25.0615ZM17.7832 13.9194C15.8125 13.9196 14.2179 15.5233 14.2178 17.4849C14.2178 19.4465 15.8216 21.0512 17.7832 21.0513C19.7449 21.0513 21.3496 19.4465 21.3496 17.4849C21.3495 15.5233 19.7448 13.9194 17.7832 13.9194ZM17.7832 15.2944C18.9932 15.2944 19.9745 16.2749 19.9746 17.4849C19.9746 18.6949 18.9932 19.6763 17.7832 19.6763C16.5733 19.6762 15.5928 18.6948 15.5928 17.4849C15.5929 16.275 16.5734 15.2946 17.7832 15.2944Z" fill="#424242"/>
+</g>
+<defs>
+<filter id="filter0_d_2740_12865" x="7.51019e-06" y="0" width="35.5854" height="35.5854" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="1.79272"/>
+<feGaussianBlur stdDeviation="0.896359"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2740_12865"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2740_12865" result="shape"/>
+</filter>
+<clipPath id="clip0_2740_12865">
+<rect width="32" height="32" fill="white" transform="translate(1.79272)"/>
+</clipPath>
+</defs>
+</svg>

@@ -108,7 +108,7 @@ export const EmotionButton = ({
     <div
       className={cn(
         getHeightClass(scale),
-        'bg-usage-background-strong flex flex-col shadow-medium',
+        'bg-usage-background-default flex flex-col shadow-medium',
         'items-center  justify-end rounded-xlarge w-full',
         'has-[button:active]:bg-brand-secondary-pressed',
         className,

@@ -1,19 +1,19 @@
-const colorMap = {
+export const colorMap = {
   joy: [
-    '#030303', // 50~59
-    '#102813', // 60~69
-    '#1f4c24', // 70~79
-    '#2e7036', // 80~89
-    '#3d9447', // 90~99
-    '#4EB65A', // 100
+    'var(--color-emotion-joy-50)', // 50~59
+    'var(--color-emotion-joy-60)', // 60~69
+    'var(--color-emotion-joy-70)', // 70~79
+    'var(--color-emotion-joy-80)', // 80~89
+    'var(--color-emotion-joy-90)', // 90~99
+    'var(--color-emotion-joy-100)', // 100
   ],
   angry: [
-    '#030303', // 50~59
-    '#4a090e', // 60~69
-    '#770f17', // 70~79
-    '#a41520', // 80~89
-    '#d21a28', // 90~99
-    '#e63946', // 100
+    'var(--color-emotion-angry-50)', // 50~59
+    'var(--color-emotion-angry-60)', // 60~69
+    'var(--color-emotion-angry-70)', // 70~79
+    'var(--color-emotion-angry-80)', // 80~89
+    'var(--color-emotion-angry-90)', // 90~99
+    'var(--color-emotion-angry-100)', // 100
   ],
 }
 

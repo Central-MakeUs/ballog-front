@@ -4,9 +4,10 @@ import type {
   RecordResponseDTO,
   RecordDetailResponseDTO,
   RecordDeleteResponseDTO,
+  RecordEmotionStatsResponseDTO,
 } from '@/entities/record/model/record.type'
 import type { ApiErrorMessage } from '@/types/api/common'
-import { record } from '@/mocks/data/record'
+import { record, recordDetailStats } from '@/mocks/data/record'
 
 const RECORD_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/record`
 
@@ -51,6 +52,7 @@ export const recordHandlers = [
       )
     },
   ),
+
   http.get<
     { recordId: string },
     never,
@@ -88,6 +90,7 @@ export const recordHandlers = [
       { status: 404 },
     )
   }),
+  
   http.delete<
     { recordId: string },
     never,
@@ -121,6 +124,42 @@ export const recordHandlers = [
         status: 404,
         error: '해당 관람기록을 찾을 수 없습니다.',
         code: 'RECORD001',
+      },
+      { status: 404 },
+    )
+  }),
+
+  http.get<
+    { matchId: string },
+    never,
+    ApiErrorMessage | RecordEmotionStatsResponseDTO
+  >(`${RECORD_API_PREFIX}/matches/:matchId/team`, async ({ params }) => {
+    const { matchId } = params
+
+    await delay(1000)
+
+    const recordEmotionStat = recordDetailStats.find(
+      (stat) => stat.matchId === Number(matchId),
+    )
+
+    if (recordEmotionStat) {
+      return HttpResponse.json<RecordEmotionStatsResponseDTO>(
+        {
+          data: recordEmotionStat,
+          status: 200,
+          message: 'Success',
+          success: '감정 통계 조회 성공',
+        },
+        { status: 200 },
+      )
+    }
+
+    return HttpResponse.json<ApiErrorMessage>(
+      {
+        message: 'fail',
+        status: 404,
+        error: '해당 경기의 감정 통계를 찾을 수 없습니다.',
+        code: 'RECORD_STATS_001',
       },
       { status: 404 },
     )

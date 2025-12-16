@@ -53,7 +53,7 @@ export const MatchCardCarousel = ({ matches }: MatchCardCarouselProps) => {
       api.off('select', onSelect)
     }
   }, [api, matches.length])
-
+  
   return (
     <div className="pt-6 w-full">
       <Carousel

@@ -3,7 +3,8 @@ import { format } from 'date-fns-tz'
 
 import type { MatchDateMap } from '@/entities/match/model/match.type'
 import { TIME_ZONE } from '@/shared/constants/time'
-import { cn } from '@/shared/lib/classnames'
+
+import { CalendarWeekButton } from './CalendarWeekButton'
 
 interface CalendarWeekContentProps {
   allMatches: MatchDateMap
@@ -39,35 +40,13 @@ export const CalendarWeekContent = ({
         const clickable = hasMatch
 
         return (
-          <div
-            key={d.toISOString()}
-            onClick={() => clickable && onSelect(d)}
-            className="flex flex-col items-center"
-          >
-            <span
-              className={cn(
-                'body-sm-light',
-                isActive
-                  ? 'text-brand-primary-default'
-                  : clickable
-                    ? 'text-brand-neutral-white'
-                    : 'text-brand-neutral-40',
-              )}
-            >
-              {d.toLocaleDateString('ko-KR', { weekday: 'short' })}
-            </span>
-            <span
-              className={`mt-1 body-md-bold ${
-                isActive
-                  ? 'text-brand-primary-default'
-                  : clickable
-                    ? 'text-brand-neutral-white'
-                    : 'text-brand-neutral-70'
-              }`}
-            >
-              {d.getDate()}
-            </span>
-          </div>
+          <CalendarWeekButton
+            key={formatted}
+            clickable={clickable}
+            date={d}
+            onSelect={onSelect}
+            isActive={isActive}
+          />
         )
       })}
     </div>
