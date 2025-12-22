@@ -229,18 +229,6 @@
     fill 300ms ease;
 } */
 
-html[data-theme-transition],
-html[data-theme-transition] * {
-  transition:
-    background-color 500ms ease,
-    color 500ms ease,
-    border-color 500ms ease,
-    fill 500ms ease,
-    stroke 500ms ease,
-    outline-color 500ms ease,
-    box-shadow 500ms ease;
-}
-
 /* iOS 느낌 조금 더: 깜빡임/대비 완화 */
 html[data-theme-transition] {
   -webkit-tap-highlight-color: transparent;
