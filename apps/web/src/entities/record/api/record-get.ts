@@ -3,6 +3,7 @@ import { api } from '@/shared/lib/ky'
 import type {
   RecordResponseDTO,
   RecordDetailResponseDTO,
+  RecordEmotionStatsResponseDTO,
 } from '../model/record.type'
 
 export const recordGet = {
@@ -16,6 +17,14 @@ export const recordGet = {
     const response = await api
       .get(`record/${recordId}`)
       .json<RecordDetailResponseDTO>()
+    return response
+  },
+  getRecordEmotionStats: async (
+    matchId: number,
+  ): Promise<RecordEmotionStatsResponseDTO> => {
+    const response = await api
+      .get(`record/matches/${matchId}/team`)
+      .json<RecordEmotionStatsResponseDTO>()
     return response
   },
 }

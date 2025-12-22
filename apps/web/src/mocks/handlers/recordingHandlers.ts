@@ -23,6 +23,18 @@ export const recordingHandlers = [
 
     await new Promise((res) => setTimeout(res, 1000)) // delay 1000ms
 
+    if (!found) {
+      return HttpResponse.json(
+        {
+          error: 'fail',
+          message: '해당 직관기록을 찾을 수 없습니다.',
+          status: 408,
+          code: 'RECORD001',
+        },
+        { status: 408 },
+      )
+    }
+
     return HttpResponse.json(
       {
         status: 200,

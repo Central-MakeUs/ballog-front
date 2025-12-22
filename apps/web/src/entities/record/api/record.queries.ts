@@ -11,4 +11,8 @@ export const queryKeys = createQueryKeys('record', {
     queryKey: ['getRecordDetail', recordId],
     queryFn: () => recordGet.getRecordDetail(recordId),
   }),
+  getEmotionStats: (matchId: number) => ({
+    queryKey: ['getEmotionStats', matchId],
+    queryFn: () => recordGet.getRecordEmotionStats(matchId),
+  }),
 })

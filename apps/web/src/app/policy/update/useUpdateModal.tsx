@@ -6,6 +6,7 @@ import { useBridge } from '@/shared/hooks/bridge/useBridge'
 interface UpdateModalProps {
   type: 'optional' | 'force'
   onDismiss: () => void
+  dissmissible?: boolean
 }
 
 /**
@@ -16,11 +17,16 @@ export const useUpdateModal = () => {
   const { bridge } = useBridge()
   const { openHorizontalModal, openVerticalModal } = useModal()
 
-  const openUpdateModal = ({ type, onDismiss }: UpdateModalProps) => {
+  const openUpdateModal = ({
+    type,
+    onDismiss,
+    dissmissible,
+  }: UpdateModalProps) => {
     if (type === 'optional') {
       return openHorizontalModal({
         heading: '새로운 버전이 업데이트 되었어요',
         body: `최신 버전으로 업데이트하고\n더 나은 서비스를 이용해보세요`,
+        dissmissible,
         buttons: [
           {
             label: '나중에',
@@ -45,7 +51,7 @@ export const useUpdateModal = () => {
       return openVerticalModal({
         heading: '새로운 버전이 업데이트 되었어요',
         body: `안전하고 원활한 서비스 이용을 위해\n최신 버전 업데이트가 필요해요`,
-
+        dissmissible,
         buttons: [
           {
             label: '업데이트',

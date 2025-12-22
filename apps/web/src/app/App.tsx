@@ -13,7 +13,6 @@ const AppInner = () => {
   return (
     <>
       <Stack />
-      {/* <NoticeModal /> */}
       <Toaster position="bottom-center" />
     </>
   )

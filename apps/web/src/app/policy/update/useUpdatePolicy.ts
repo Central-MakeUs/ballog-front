@@ -30,6 +30,7 @@ export const useUpdatePolicy = () => {
       openUpdateModal({
         type: 'force',
         onDismiss: countUpdateModalDismissed,
+        dissmissible: false,
       })
     }, UPDATE_MODAL_DELAY)
 
