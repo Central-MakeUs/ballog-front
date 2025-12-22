@@ -32,7 +32,7 @@ export const Root = ({
       >
         {dismissible && (
           <CloseIcon
-            className="absolute top-2 right-2 light:text-black"
+            className="absolute top-2 right-2 dark:text-white light:text-black"
             onClick={() => onOpenChange(false)}
           />
         )}

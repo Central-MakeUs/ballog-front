@@ -151,7 +151,7 @@
   --color-emotion-joy-50: #030303;
 
   /* rechart 용 색상 */
-  --color-chart-reference-line: #e5e7eb;
+  --color-chart-reference-line: #616161;
 
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

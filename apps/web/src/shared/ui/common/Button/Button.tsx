@@ -54,10 +54,10 @@ const buttonVariants = cva(
         variant: 'secondary',
         buttonType: 'filled',
         class: cn(
-          'bg-brand-secondary-default text-brand-secondary-white light:text-brand-neutral-80',
-          'hover:bg-brand-secondary-hover hover:text-brand-secondary-white light:hover:bg-brand-secondary-hover light:hover:text-brand-neutral-80',
-          'active:bg-brand-secondary-pressed active:text-brand-secondary-white light:active:text-brand-neutral-80',
-          'disabled:bg-brand-secondary-disabled disabled:text-brand-secondary-white light:disabled:text-brand-neutral-40',
+          'bg-brand-secondary-default text-brand-neutral-white light:text-brand-neutral-80',
+          'hover:bg-brand-secondary-hover hover:text-brand-neutral-white light:hover:bg-brand-secondary-hover light:hover:text-brand-neutral-80',
+          'active:bg-brand-secondary-pressed active:text-brand-neutral-white light:active:text-brand-neutral-80',
+          'disabled:bg-brand-secondary-disabled disabled:text-brand-neutral-white light:disabled:text-brand-neutral-40',
         ),
       },
       // Primary Outline

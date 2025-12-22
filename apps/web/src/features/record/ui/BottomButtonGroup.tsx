@@ -65,7 +65,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
         <Button
           variant="primary"
           size="lg"
-          className="flex-3 w-full light:text-white"
+          className="flex-3 w-full text-white"
           data-testid="share-button"
           onClick={() => {
             if (!images[0]?.imageUrl) {

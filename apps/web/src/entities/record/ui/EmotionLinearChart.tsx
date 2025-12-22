@@ -95,11 +95,11 @@ const EmotionCountCard = ({
         className,
       )}
     >
-      <div className="flex items-center gap-1 body-sm-medium">
+      <div className="flex items-center gap-1 body-sm-medium text-usage-text-default">
         <JoyEmotion height={16} width={16} />
         {String(joyCount) + '회'}
       </div>
-      <div className="flex items-center gap-1 body-sm-medium">
+      <div className="flex items-center gap-1 body-sm-medium text-usage-text-default">
         <AngryEmotion height={16} width={16} />
         {String(angerCount) + '회'}
       </div>
