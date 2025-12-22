@@ -76,6 +76,8 @@ function checkIsDuringMatch({
 }) {
   const now = toZonedTime(new Date(), TIME_ZONE)
   const matchDateObj = toZonedTime(new Date(matchDate), TIME_ZONE)
+  console.log(result, matchDateObj, now)
+  console.log(result === null && matchDateObj <= now)
   return result === null && matchDateObj <= now
 }
 

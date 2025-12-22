@@ -8,8 +8,9 @@ import { ImageTimeLine } from '@/features/record/ui/ImageTimeLine'
 import { EmotionTimeLine } from '@/features/record/ui/EmotionTimeLine'
 import { BottomButtonGroup } from '@/features/record/ui/BottomButtonGroup'
 import { ImageContextProvider } from '@/features/record/hooks/ImageContextProvider'
-import { useGetRecordDetail } from '@/pages/record/hooks/useGetRecordDetail'
+import { useGetRecordDetail } from '@/features/record/hooks/useGetRecordDetail'
 import { MatchTeamEmotionDistribution } from '@/entities/record/ui/MatchTeamEmotionDistribution'
+import { EmotionDistribution } from '@/features/record/ui/EmotionDistribution'
 
 export const RecordDetailPage = ({
   params,
@@ -70,17 +71,7 @@ export const RecordDetailPage = ({
             </RecordLogCard.Root>
           </div>
 
-          {/* 경기 중 표시 & 경기 팀 감정분포 */}
-          {/*경기중이면 안보이고, 경기중이면 보이는 컴포넌트 */}
-          {isDuringMatch && (
-            <div className="flex flex-col items-center justify-center">
-              <span className="text-usage-text-default body-md-bold">
-                경기 중
-              </span>
-            </div>
-          )}
-
-          <MatchTeamEmotionDistribution.Empty />
+          <EmotionDistribution matchRecordId={matchRecordId} />
 
           {/* 응원 팀 감정분포 */}
           {isUserSupportingTeam && (
