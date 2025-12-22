@@ -163,7 +163,7 @@ export const EmotionLinearChart = ({
               height="100%"
             >
               <rect
-                fill="#252525"
+                fill="var(--color-usage-background-subtle)"
                 rx="12"
                 ry="12"
                 x={0}
@@ -184,9 +184,21 @@ export const EmotionLinearChart = ({
             }}
           />
 
-          <ReferenceLine y={25} stroke="#e5e7eb" strokeDasharray="0" />
-          <ReferenceLine y={50} stroke="#e5e7eb" strokeDasharray="0" />
-          <ReferenceLine y={75} stroke="#e5e7eb" strokeDasharray="0" />
+          <ReferenceLine
+            y={25}
+            stroke="var(--color-chart-reference-line)"
+            strokeDasharray="0"
+          />
+          <ReferenceLine
+            y={50}
+            stroke="var(--color-chart-reference-line)"
+            strokeDasharray="0"
+          />
+          <ReferenceLine
+            y={75}
+            stroke="var(--color-chart-reference-line)"
+            strokeDasharray="0"
+          />
 
           <XAxis
             className="body-sm-light"

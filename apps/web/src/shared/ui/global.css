@@ -110,6 +110,9 @@
   --color-emotion-joy-70: #bae3bf;
   --color-emotion-joy-60: #def2e1;
   --color-emotion-joy-50: #030303;
+
+  /* rechart 용 색상 */
+  --color-chart-reference-line: #bdbdbd;
 }
 
 .dark {
@@ -146,6 +149,9 @@
   --color-emotion-joy-70: #1f4c24;
   --color-emotion-joy-60: #102813;
   --color-emotion-joy-50: #030303;
+
+  /* rechart 용 색상 */
+  --color-chart-reference-line: #e5e7eb;
 
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

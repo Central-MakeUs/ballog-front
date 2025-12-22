@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react'
 import type { ReactNode } from 'react'
 
 import { cn } from '@/shared/lib/classnames'
-import WhiteCloseButton from '@/assets/whiteCloseButton.svg?react'
+import { CloseIcon } from '@/assets/CloseIcon'
 
 interface RootProps extends ComponentProps<'div'> {
   open: boolean
@@ -27,12 +27,12 @@ export const Root = ({
         className={cn(
           'relative w-full',
           'rounded-t-2xl rounded-b-none p-8 border-none',
-          'bg-usage-background-strong gap-6 flex flex-col',
+          'bg-usage-background-strong light:bg-usage-background-default gap-6 flex flex-col',
         )}
       >
         {dismissible && (
-          <WhiteCloseButton
-            className="absolute top-2 right-2"
+          <CloseIcon
+            className="absolute top-2 right-2 light:text-black"
             onClick={() => onOpenChange(false)}
           />
         )}

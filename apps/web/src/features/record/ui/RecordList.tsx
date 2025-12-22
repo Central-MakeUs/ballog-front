@@ -10,7 +10,7 @@ export const RecordList = ({ records }: { records: Record[] }) => {
     return (
       <RecordLogCard.Empty>
         <Button
-          className="rounded-large px-6 bg-brand-secondary-default"
+          className="rounded-large px-6 bg-brand-secondary-default light:bg-brand-neutral-80"
           onClick={() => replace('Home', {}, { animate: false })}
         >
           첫 관람 기록하기
