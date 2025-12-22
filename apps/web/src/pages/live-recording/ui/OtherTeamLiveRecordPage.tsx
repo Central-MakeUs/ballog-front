@@ -10,6 +10,9 @@ import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 import { queryKeys } from '@/entities/record/api/record.queries'
 import { TeamsEmotionStatWidget } from '@/widgets/TeamsEmotionStatWidget'
 
+import { useEmotionVote } from '../contexts/EmotionVoteContext'
+import { calculateGradientColor } from '../utils/calculateGradientColor'
+
 interface OtherTeamLiveRecordPageProps {
   matchId: number
   isLoading: boolean
@@ -25,26 +28,35 @@ const OtherTeamLiveRecordPage = ({
   })
 
   const { pop } = useFlow()
+  const { joyPercent, angryPercent } = useEmotionVote()
+
+  let bgColor: string | undefined = undefined
+
+  if (joyPercent > angryPercent && joyPercent > 50) {
+    bgColor = calculateGradientColor('joy', joyPercent)
+  } else if (angryPercent > joyPercent && angryPercent > 50) {
+    bgColor = calculateGradientColor('angry', angryPercent)
+  }
 
   if (isLoading) return <div>기록을 불러오는 중입니다</div>
 
   if (!data) return <div>기록이 없습니다</div>
 
   return (
-      <AppScreen
-        appBar={{
-          activityEnterStyle: 'slideInLeft',
-          backButton: {
-            renderIcon: () => (
-              <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
-            ),
-            onClick: () => {
-              pop()
-            },
+    <AppScreen
+      appBar={{
+        activityEnterStyle: 'slideInLeft',
+        backButton: {
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
+          onClick: () => {
+            pop()
           },
-          height: '48px',
-        }} 
-      >
+        },
+        height: '48px',
+      }}
+    >
       <div className="flex flex-col items-center justify-center max-h-full px-4 pt-4">
         {/* 경기 정보 */}
         <GameInfoCard recordingData={recordingData} className="mb-6" />
@@ -53,6 +65,11 @@ const OtherTeamLiveRecordPage = ({
           className={cn(
             'rounded-t-xlarge border-none border-usage-border-strong bg-usage-background-subtle w-screen h-screen -px-4',
           )}
+          style={{
+            background: bgColor
+              ? `linear-gradient(to bottom, ${bgColor}, bg-brand-neutral-90 50%)`
+              : 'bg-brand-neutral-90',
+          }}
         >
           {/* 텍스트 */}
           <div
