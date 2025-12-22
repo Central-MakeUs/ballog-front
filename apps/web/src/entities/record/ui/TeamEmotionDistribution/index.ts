@@ -1,7 +1,7 @@
 import { Empty } from './Empty'
 import { ClickCount } from './ClickCount'
 
-export const MatchTeamEmotionDistribution = {
+export const TeamEmotionDistribution = {
   Empty,
   ClickCount,
 }

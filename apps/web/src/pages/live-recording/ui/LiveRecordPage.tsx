@@ -9,7 +9,7 @@ import { emotions } from '@/entities/record/api/emotion.queries'
 import { recording } from '@/entities/record/api/recording.queries'
 import { recordingPost } from '@/entities/record/api/recording-post'
 import { Loading } from '@/shared/ui/common'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
 
 import MyTeamLiveRecordPage from './MyTeamLiveRecordPage'
 import OtherTeamLiveRecordPage from './OtherTeamLiveRecordPage'

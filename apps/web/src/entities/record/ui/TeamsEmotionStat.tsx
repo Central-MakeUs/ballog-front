@@ -1,28 +1,33 @@
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import GrayInfoIcon from '@/assets/grayInfoIcon.svg?react'
+import { cn } from '@/shared/lib/classnames'
 
-interface TeamsEmotionStatWidgetProps {
+// TODO: Props 개선하기
+// 의존주입? 역전? 
+interface TeamsEmotionStatProps {
   homeTeamKey: TeamKey
   awayTeamKey: TeamKey
   homePositive: number
   homeNegative: number
   awayPositive: number
   awayNegative: number
+  isRecording?: boolean
 }
 
-export const TeamsEmotionStatWidget = ({
+export const TeamsEmotionStat = ({
   homeTeamKey,
   awayTeamKey,
   homePositive,
   homeNegative,
   awayPositive,
   awayNegative,
-}: TeamsEmotionStatWidgetProps) => {
+  isRecording = false,
+}: TeamsEmotionStatProps) => {
   return (
-    <div className="flex flex-col w-full body-md-medium bg-usage-background-default py-8 rounded-xl">
+    <StatContainer isRecording={isRecording}>
       <div className="flex flex-row justify-center gap-1">
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <p>{TEAMS[homeTeamKey]}</p>
           <EmotionCard.Active
             data={[
@@ -35,10 +40,10 @@ export const TeamsEmotionStatWidget = ({
                 value: homePositive,
               },
             ]}
-            className="bg-usage-background-default"
+            className={cn(isRecording ? "bg-usage-background-subtle" : "bg-usage-background-default")}   
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <p>{TEAMS[awayTeamKey]}</p>
           <EmotionCard.Active
             data={[
@@ -51,7 +56,7 @@ export const TeamsEmotionStatWidget = ({
                 value: awayPositive,
               },
             ]}
-            className="bg-usage-background-default"
+            className={cn(isRecording ? "bg-usage-background-subtle" : "bg-usage-background-default")}
           />
         </div>
       </div>
@@ -59,6 +64,14 @@ export const TeamsEmotionStatWidget = ({
         <GrayInfoIcon />
         그래프는 팀의 감정분포(%) 를 나타내요
       </p>
+    </StatContainer>
+  )
+}
+
+const StatContainer = ({ children, isRecording = false }: { children: React.ReactNode, isRecording: boolean }) => {
+  return (
+    <div className={cn("flex flex-col w-full body-md-medium py-8 rounded-xl", isRecording ? "bg-usage-background-subtle" : "bg-usage-background-default px-4")}>
+      {children}
     </div>
   )
 }

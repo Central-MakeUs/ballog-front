@@ -9,7 +9,6 @@ import { EmotionTimeLine } from '@/features/record/ui/EmotionTimeLine'
 import { BottomButtonGroup } from '@/features/record/ui/BottomButtonGroup'
 import { ImageContextProvider } from '@/features/record/hooks/ImageContextProvider'
 import { useGetRecordDetail } from '@/features/record/hooks/useGetRecordDetail'
-import { MatchTeamEmotionDistribution } from '@/entities/record/ui/MatchTeamEmotionDistribution'
 import { EmotionDistribution } from '@/features/record/ui/EmotionDistribution'
 
 export const RecordDetailPage = ({
@@ -19,7 +18,7 @@ export const RecordDetailPage = ({
 }) => {
   const matchRecordIdParam = Number(params.matchRecordId)
 
-  const { recordDetail, isLoading, isUserSupportingTeam, isDuringMatch } =
+  const { recordDetail, isLoading, isUserSupportingTeam } =
     useGetRecordDetail({
       matchRecordId: matchRecordIdParam,
     })

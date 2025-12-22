@@ -1,4 +1,5 @@
-import { MatchTeamEmotionDistribution } from '@/entities/record/ui/MatchTeamEmotionDistribution'
+import { TeamEmotionDistribution } from '@/entities/record/ui/TeamEmotionDistribution'
+import { TeamsEmotionStat } from '@/entities/record/ui/TeamsEmotionStat'
 import { useGetRecordDetail } from '@/features/record/hooks/useGetRecordDetail'
 
 export const EmotionDistribution = ({
@@ -11,26 +12,37 @@ export const EmotionDistribution = ({
       matchRecordId: matchRecordId,
     })
 
-  const { positiveEmotionPercent, negativeEmotionPercent, emotionGroupList } =
+  if (!recordDetail) return <></>
+
+  const { homeTeam, awayTeam, positiveEmotionPercent, negativeEmotionPercent, emotionGroupList } =
     recordDetail
 
   if (isDuringMatch) {
     return (
       <>
         <SectionContainer>
-          <MatchTeamEmotionDistribution.Empty />
+          <TeamEmotionDistribution.Empty />
         </SectionContainer>
       </>
     )
   }
 
-  if(!isDuringMatch && !isUserSupportingTeam) {
+  if(!isDuringMatch) {
     return (
-      <>
         <SectionContainer>
-          <MatchTeamEmotionDistribution.ClickCount emotionGroupList={emotionGroupList} />
+          <TeamsEmotionStat
+            homeTeamKey={homeTeam}
+            awayTeamKey={awayTeam}
+            homePositive={positiveEmotionPercent}
+            homeNegative={negativeEmotionPercent}
+            awayPositive={positiveEmotionPercent}
+            awayNegative={negativeEmotionPercent}
+            isRecording={true}
+          />
+          {isUserSupportingTeam && (
+            <TeamEmotionDistribution.ClickCount emotionGroupList={emotionGroupList} />
+          )}
         </SectionContainer>
-      </>
     )
   }
 

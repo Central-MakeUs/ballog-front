@@ -10,7 +10,7 @@ import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { LottieRefProvider } from '@/pages/live-recording/contexts/lottieRefContext'
 import { BackArrow } from '@/assets/BackArrow'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 
