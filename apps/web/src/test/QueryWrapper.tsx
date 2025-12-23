@@ -3,7 +3,7 @@ import type { JSX, ReactElement, ReactNode } from 'react'
 import { render, renderHook, type RenderOptions } from '@testing-library/react'
 
 import QueryProvider from '@/app/provider/QueryProvider'
-import { SessionProvider } from '@/shared/contexts/sessionContext'
+import { SessionProvider } from '@/app/provider/SessionProvider'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
 export const wrapper = ({ children }: { children: ReactNode }) => {
