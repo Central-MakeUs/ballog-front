@@ -163,7 +163,7 @@ export const matchByDate: {
         status: 'SCHEDULED',
       },
     ],
-    '2025-12-22': [
+    '2025-12-23': [
       {
         matchesId: 110,
         matchesDate: '2025-10-15',
