@@ -9,20 +9,23 @@ interface UploadState {
 
 export const useImageUploadToast = (uploadState: UploadState) => {
   useEffect(() => {
-    if (uploadState.isUploading) {
-      toast.info('이미지 업로드 중...')
-    }
-  }, [uploadState.isUploading])
+    const { isUploading, progress, error } = uploadState
 
-  useEffect(() => {
-    if (!uploadState.isUploading && uploadState.progress === 'complete') {
-      toast.success('업로드 완료!')
-    }
-  }, [uploadState.isUploading, uploadState.progress])
+    switch (true) {
+      case !!error:
+        toast.error(`업로드 실패: ${error}`)
+        break
 
-  useEffect(() => {
-    if (uploadState.error) {
-      toast.error(`업로드 실패: ${uploadState.error}`)
+      case isUploading:
+        toast.info('이미지 업로드 중...')
+        break
+
+      case progress === 'complete':
+        toast.success('업로드 완료!')
+        break
+
+      default:
+        break
     }
-  }, [uploadState.error])
+  }, [uploadState])
 }

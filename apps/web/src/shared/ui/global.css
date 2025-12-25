@@ -195,6 +195,21 @@
   --color-usage-background-strong: #333333;
   --color-usage-background-inverse: #fafafa;
 
+  /* emotion colors */
+  --color-emotion-angry-100: #e63946;
+  --color-emotion-angry-90: #d21a28;
+  --color-emotion-angry-80: #a41520;
+  --color-emotion-angry-70: #770f17;
+  --color-emotion-angry-60: #4a090e;
+  --color-emotion-angry-50: #030303;
+
+  --color-emotion-joy-100: #4eb65a;
+  --color-emotion-joy-90: #3d9447;
+  --color-emotion-joy-80: #2e7036;
+  --color-emotion-joy-70: #1f4c24;
+  --color-emotion-joy-60: #102813;
+  --color-emotion-joy-50: #030303;
+
   /* Border radius */
   --radius-base: 8px;
   --radius-small: calc(var(--radius-base) - 4px); /* 4px */

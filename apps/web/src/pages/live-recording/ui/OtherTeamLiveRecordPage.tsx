@@ -7,10 +7,8 @@ import { cn } from '@/shared/lib/classnames'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
-import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
 import { queryKeys } from '@/entities/record/api/record.queries'
-import { TEAMS } from '@/shared/constants/teams'
-import GrayInfoIcon from '@/assets/grayInfoIcon.svg?react'
+import { TeamsEmotionStatWidget } from '@/widgets/TeamsEmotionStatWidget'
 
 import { useEmotionVote } from '../contexts/EmotionVoteContext'
 import { calculateGradientColor } from '../utils/calculateGradientColor'
@@ -60,7 +58,7 @@ const OtherTeamLiveRecordPage = ({
         height: '48px',
       }}
     >
-      <div className="max-h-full flex flex-col justify-center items-center px-4 pt-4">
+      <div className="flex flex-col items-center justify-center max-h-full px-4 pt-4">
         {/* 경기 정보 */}
         <GameInfoCard recordingData={recordingData} className="mb-6" />
 
@@ -70,8 +68,8 @@ const OtherTeamLiveRecordPage = ({
           )}
           style={{
             background: bgColor
-              ? `linear-gradient(to bottom, ${bgColor}, #212121 50%)`
-              : '#212121',
+              ? `linear-gradient(to bottom, ${bgColor}, bg-brand-neutral-90 50%)`
+              : 'bg-brand-neutral-90',
           }}
         >
           {/* 텍스트 */}
@@ -81,58 +79,26 @@ const OtherTeamLiveRecordPage = ({
               'mt-8 mb-8',
             )}
           >
-            <div className="body-lg-bold text-usage-text-default mb-2 inline-flex items-center relative">
+            <div className="relative inline-flex items-center mb-2 body-lg-bold text-usage-text-default">
               지금 경기 팀 분위기
             </div>
-            <p className="body-sm-light text-usage-text-subtle mb-6">
+            <p className="mb-6 body-sm-light text-usage-text-subtle">
               다른 팬들의 감정을 실시간으로 확인해보세요.
             </p>
-            {/* 감정 표시만 (투표 불가) */}
-            <div className="flex flex-col w-full body-md-medium bg-usage-background-default py-8 rounded-xl">
-              <div className="flex flex-row justify-center gap-1">
-                <div className="flex flex-col">
-                  <p>{TEAMS[data.data.homeTeam]}</p>
-                  <EmotionCard.Active
-                    data={[
-                      {
-                        name: '화나요',
-                        value: data.data.homeTeamNegativePercent,
-                      },
-                      {
-                        name: '기뻐요',
-                        value: data.data.homeTeamPositivePercent,
-                      },
-                    ]}
-                    className="bg-usage-background-default"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <p>{TEAMS[data.data.awayTeam]}</p>
-                  <EmotionCard.Active
-                    data={[
-                      {
-                        name: '화나요',
-                        value: data.data.awayTeamNegativePercent,
-                      },
-                      {
-                        name: '기뻐요',
-                        value: data.data.awayTeamPositivePercent,
-                      },
-                    ]}
-                    className="bg-usage-background-default"
-                  />
-                </div>
-              </div>
-              <p className="flex flex-row justify-center items-center body-sm-light text-brand-neutral-60 gap-1 mt-2">
-                <GrayInfoIcon />
-                그래프는 팀의 감정분포(%) 를 나타내요
-              </p>
-            </div>
+            {/* 팀 감정분포 */}
+            <TeamsEmotionStatWidget
+              homeTeamKey={data.data.homeTeam}
+              awayTeamKey={data.data.awayTeam}
+              homePositive={data.data.homeTeamPositivePercent}
+              homeNegative={data.data.homeTeamNegativePercent}
+              awayPositive={data.data.awayTeamPositivePercent}
+              awayNegative={data.data.awayTeamNegativePercent}
+            />
           </div>
           <RecordCameraButton
             matchRecordId={recordingData.matchRecordId}
             initialImages={recordingData.imageList}
-            className="fixed bottom-10 left-1/2 -translate-x-1/2 w-max"
+            className="fixed -translate-x-1/2 bottom-10 left-1/2 w-max"
           />
         </div>
       </div>

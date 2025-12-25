@@ -2,7 +2,7 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { cn } from '@/shared/lib/classnames'
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import { ChangeMyInfoWidget } from '@/widgets/changeMyInfoWidget/ChangeMyInfoWidget'
+import { ChangeMyInfoWidget } from '@/widgets/ChangeMyInfoWidget'
 import { AlarmToggleList } from '@/features/mypage/ui/AlarmSwitchList'
 import { OtherLinkList } from '@/widgets/otherListList/OtherLinkList'
 import { LogoutAndWithdrawButtons } from '@/features/mypage/ui/LogoutAndWithDrawButtons'
