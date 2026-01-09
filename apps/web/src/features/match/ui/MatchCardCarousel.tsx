@@ -33,19 +33,14 @@ export const MatchCardCarousel = ({
   }
 
   // 마운트 시 캐러셀 초기화 함수
-  const initCarousel = (
-    api: CarouselApi,
-    matchesLength: number,
-    setCurrent: (n: number) => void,
-  ) => {
+  const initCarousel = (api: CarouselApi, matchesLength: number) => {
     if (!api) return () => {}
+    const scrollToStart = () => api.scrollTo(1, true)
 
-    const isSnapReady = () => {
-      const snapList = api.scrollSnapList()
-      if (snapList.length >= 3) api.scrollTo(1, true)
-      else requestAnimationFrame(isSnapReady)
-    }
-    isSnapReady()
+    scrollToStart()
+
+    api.on('reInit', scrollToStart)
+    api.on('resize', scrollToStart)
 
     const handleSnapChange = () => {
       const index = api.selectedScrollSnap()
@@ -64,12 +59,16 @@ export const MatchCardCarousel = ({
     api.on('select', handleSnapChange)
     handleSnapChange()
 
-    return () => api.off('select', handleSnapChange)
+    return () => {
+      api.off('reInit', scrollToStart)
+      api.off('resize', scrollToStart)
+      api.off('select', handleSnapChange)
+    }
   }
 
   useEffect(() => {
     if (!api || !isActive) return
-    return initCarousel(api, matches.length, setCurrent)
+    return initCarousel(api, matches.length)
   }, [api, matches.length, isActive])
 
   return (
