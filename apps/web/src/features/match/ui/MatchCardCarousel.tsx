@@ -40,7 +40,12 @@ export const MatchCardCarousel = ({
   ) => {
     if (!api) return () => {}
 
-    api.scrollTo(1, true)
+    const isSnapReady = () => {
+      const snapList = api.scrollSnapList()
+      if (snapList.length >= 3) api.scrollTo(1, true)
+      else requestAnimationFrame(isSnapReady)
+    }
+    isSnapReady()
 
     const handleSnapChange = () => {
       const index = api.selectedScrollSnap()
@@ -62,26 +67,10 @@ export const MatchCardCarousel = ({
     return () => api.off('select', handleSnapChange)
   }
 
-  // pop 시 캐러셀 초기화 함수
-  const initCarouselOnActive = (api: CarouselApi) => {
-    if (!api) return () => {}
-    const isSnapReady = () => {
-      const snapList = api.scrollSnapList()
-      if (snapList.length >= 3) api.scrollTo(1, true)
-      else requestAnimationFrame(isSnapReady)
-    }
-    requestAnimationFrame(isSnapReady)
-  }
-
-  useEffect(() => {
-    if (!api) return
-    return initCarousel(api, matches.length, setCurrent)
-  }, [api, matches.length])
-
   useEffect(() => {
     if (!api || !isActive) return
-    initCarouselOnActive(api)
-  }, [isActive, api])
+    return initCarousel(api, matches.length, setCurrent)
+  }, [api, matches.length, isActive])
 
   return (
     <div className="pt-6 w-full">
