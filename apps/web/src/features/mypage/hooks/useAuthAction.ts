@@ -1,20 +1,24 @@
 import { POST_MESSAGE_EVENT, type LogoutResponsePayload } from '@ballog/bridge'
 import { toast } from 'sonner'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { authPost, authDelete } from '@/entities/auth/api'
 import { useFlow } from '@/app/routes/stackflow'
-import { useSessionContext } from '@/entities/auth/hooks'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
+import { useAccessTokenStorage } from '@/shared/hooks/auth/useAccessTokenStorage'
+import { authQueries } from '@/entities/auth/api/auth.queries'
 
 export const useAuthAction = () => {
   const { replace } = useFlow()
-  const { setUser } = useSessionContext()
   const { bridge } = useBridge()
+  const { clearSessionStorage } = useAccessTokenStorage()
+  const queryClient = useQueryClient()
+  const userQueryOptions = authQueries.getUser()
 
   const clearSession = () => {
-    localStorage.removeItem('accessToken')
-    setUser(null)
+    clearSessionStorage()
+    queryClient.removeQueries({ queryKey: userQueryOptions.queryKey })
   }
 
   // 로그아웃 브릿지 이벤트 핸들러

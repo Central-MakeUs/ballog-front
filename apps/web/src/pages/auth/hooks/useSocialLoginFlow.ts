@@ -1,7 +1,7 @@
 import { toast } from 'sonner'
 
 import type { ExtendedKyHttpError } from '@/types/api/common'
-import { useSessionContext } from '@/entities/auth/hooks'
+import { useAccessTokenStorage } from '@/shared/hooks/auth/useAccessTokenStorage'
 
 import { useSocialLogin } from './useSocialLogin'
 import { useSocialNavigation } from './useSocialNavigation'
@@ -11,7 +11,7 @@ import { useSocialNavigation } from './useSocialNavigation'
  * 에러 처리와 네비게이션을 자동으로 처리
  */
 export const useSocialLoginFlow = (social: 'kakao' | 'apple') => {
-  const { setAccessTokenInStorage } = useSessionContext()
+  const { setAccessTokenInStorage } = useAccessTokenStorage()
   const { handleSignupSuccess, handleLoginSuccess } = useSocialNavigation()
 
   const { handleLogin, isPending } = useSocialLogin({
