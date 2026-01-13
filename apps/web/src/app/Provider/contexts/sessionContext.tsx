@@ -35,7 +35,7 @@ export const SessionProvider = ({
       throw error
     }
   }
-
+  
   useEffect(() => {
     if (accessToken) {
       refetchUser()
