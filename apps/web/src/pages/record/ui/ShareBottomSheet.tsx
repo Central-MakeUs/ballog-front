@@ -59,7 +59,7 @@ export const ShareBottomSheet = ({
         }}
         dismissible={true}
       >
-        <BottomSheetModal.Text heading="사진 공유하기" />
+        <BottomSheetModal.Text heading="공유하기" />
         <BottomSheetModal.Image
           className="rounded-md"
           src={params.imageUrl}

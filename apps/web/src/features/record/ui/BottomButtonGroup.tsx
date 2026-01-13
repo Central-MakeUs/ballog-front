@@ -31,12 +31,12 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
     <nav
       className={cn(
         'fixed bottom-0 left-0 right-0 z-50',
-        'w-full bg-[#2C2C2C] flex justify-around items-center',
+        'w-full bg-usage-background-subtle flex justify-around items-center',
         'rounded-t-xl border-[#3C3C3C]',
         'pt-2 pb-10 px-4',
       )}
     >
-      <div className="flex gap-4 w-full">
+      <div className="flex gap-4 w-full bg-usage-background-subtle">
         <Button
           variant="secondary"
           size="lg"
@@ -65,7 +65,7 @@ export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
         <Button
           variant="primary"
           size="lg"
-          className="flex-3 w-full"
+          className="flex-3 w-full text-white"
           data-testid="share-button"
           onClick={() => {
             if (!images[0]?.imageUrl) {

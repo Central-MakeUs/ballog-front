@@ -28,7 +28,7 @@ export const TeamsEmotionStat = ({
     <StatContainer isRecording={isRecording}>
       <div className="flex flex-row justify-center gap-1">
         <div className="flex flex-col items-center">
-          <p>{TEAMS[homeTeamKey]}</p>
+        <p className="text-usage-text-default">{TEAMS[homeTeamKey]}</p>
           <EmotionCard.Active
             data={[
               {
@@ -44,7 +44,7 @@ export const TeamsEmotionStat = ({
           />
         </div>
         <div className="flex flex-col items-center">
-          <p>{TEAMS[awayTeamKey]}</p>
+        <p className="text-usage-text-default">{TEAMS[awayTeamKey]}</p>
           <EmotionCard.Active
             data={[
               {
@@ -60,7 +60,7 @@ export const TeamsEmotionStat = ({
           />
         </div>
       </div>
-      <p className="flex flex-row justify-center items-center body-sm-light text-brand-neutral-60 gap-1 mt-2">
+      <p className="flex flex-row items-center justify-center gap-1 mt-2 body-sm-light text-brand-neutral-60">
         <GrayInfoIcon />
         그래프는 팀의 감정분포(%) 를 나타내요
       </p>

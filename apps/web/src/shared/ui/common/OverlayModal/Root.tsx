@@ -23,7 +23,7 @@ export const Root = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          'w-67.5 px-0 pb-0 pt-4 flex flex-col bg-usage-background-inverse border-none',
+          'w-67.5 px-0 pb-0 pt-4 flex flex-col bg-usage-background-inverse light: border-none light:[&>button]:text-white',
           !dismissible && '[&>button]:hidden',
           className,
         )}

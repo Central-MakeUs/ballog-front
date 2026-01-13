@@ -7,8 +7,8 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyTeamMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
-import { useSessionContext } from '@/entities/auth/hooks'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
+import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 const isSignUpFlow = false
 
@@ -38,10 +38,12 @@ const ChangeTeamSelectPage = () => {
   return (
     <AppScreen
       appBar={{
-        title: <WhiteBallogLogo />,
+        title: <BallogAppBar />,
         height: '48px',
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
         },
       }}
     >

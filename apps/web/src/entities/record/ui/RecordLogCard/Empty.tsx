@@ -15,7 +15,7 @@ export const Empty = ({ className, children, ...rest }: EmptyProps) => (
     {...rest}
   >
     <div className="text-center w-full body-lg-bold py-10 text-brand-neutral-white">
-      <div className="body-lg-bold">아직 관람 기록이 없어요!</div>
+      <div className="body-lg-bold text-usage-text-default">아직 관람 기록이 없어요!</div>
       <p className="body-sm-light py-4 text-usage-text-subtle">
         관람 중인 경기를 선택하고
         <br />

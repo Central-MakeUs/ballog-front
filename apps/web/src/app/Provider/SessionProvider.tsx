@@ -22,7 +22,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
       throw error
     }
   }
-
+  
   useEffect(() => {
     if (accessToken) {
       refetchUser()

@@ -52,13 +52,15 @@ export const RecordDetailPage = ({
           </span>
         ),
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
         },
       }}
     >
       <ImageContextProvider initialImages={imageList}>
         <AppLayout>
-          <div className="px-4 pt-4 w-full">
+          <div className="w-full px-4 pt-4">
             <RecordLogCard.Root key={matchRecordId}>
               <RecordLogCard.Info
                 homeTeam={homeTeam}

@@ -8,9 +8,14 @@ type DateType = 'past' | 'today' | 'future' | null
 interface MatchSectionProps {
   matches: Match[]
   dateType: DateType
+  isActive?: boolean
 }
 
-export const MatchSection = ({ matches, dateType }: MatchSectionProps) => {
+export const MatchSection = ({
+  matches,
+  dateType,
+  isActive,
+}: MatchSectionProps) => {
   const headerText = (() => {
     switch (dateType) {
       case 'past':
@@ -26,7 +31,7 @@ export const MatchSection = ({ matches, dateType }: MatchSectionProps) => {
   return (
     <div className="flex flex-col items-center w-full pb-20">
       <SectionHeader title={headerText} />
-      <MatchCardCarousel matches={matches} />
+      <MatchCardCarousel matches={matches} isActive={isActive} />
     </div>
   )
 }

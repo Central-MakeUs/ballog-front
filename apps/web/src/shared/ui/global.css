@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(.light *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -76,7 +77,82 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+.light {
+  /* light mode secondary */
+  --color-brand-secondary-default: #e0e0e0;
+  --color-brand-secondary-hover: #afadad;
+  --color-brand-secondary-pressed: #919191;
+  --color-brand-secondary-disabled: #f5f5f5;
+  --color-brand-secondary-subtle: #565656;
+
+  /* light mode usage */
+  --color-usage-text-default: #212121;
+  --color-usage-text-subtle: #757575;
+  --color-usage-text-strong: #030303;
+  --color-usage-text-inverse: #ffffff;
+
+  --color-usage-background-default: #ffffff;
+  --color-usage-background-subtle: #eeeeee;
+  --color-usage-background-strong: #dcdcdc;
+  --color-usage-background-inverse: #333333;
+
+  /* emotion colors */
+  --color-emotion-angry-100: #e63946;
+  --color-emotion-angry-90: #ec6670;
+  --color-emotion-angry-80: #f1949b;
+  --color-emotion-angry-70: #f7c1c5;
+  --color-emotion-angry-60: #fdeeef;
+  --color-emotion-angry-50: #030303;
+
+  --color-emotion-joy-100: #4eb65a;
+  --color-emotion-joy-90: #72c57c;
+  --color-emotion-joy-80: #96d49d;
+  --color-emotion-joy-70: #bae3bf;
+  --color-emotion-joy-60: #def2e1;
+  --color-emotion-joy-50: #030303;
+
+  /* rechart 용 색상 */
+  --color-chart-reference-line: #bdbdbd;
+}
+
 .dark {
+  /* Dark mode secondary */
+  --color-brand-secondary-default: #424242;
+  --color-brand-secondary-hover: #565656;
+  --color-brand-secondary-pressed: #1c1c1c;
+  --color-brand-secondary-disabled: #9e9e9e;
+  --color-brand-secondary-subtle: #e0e0e0;
+
+  /* Dark mode usage */
+  --color-usage-text-default: #ffffff;
+  --color-usage-text-hover: #9e9e9e;
+  --color-usage-text-subtle: #e0e0e0;
+  --color-usage-text-strong: #ffffff;
+  --color-usage-text-inverse: #212121;
+
+  --color-usage-background-default: #030303;
+  --color-usage-background-subtle: #212121;
+  --color-usage-background-strong: #333333;
+  --color-usage-background-inverse: #fafafa;
+
+  /* emotion colors */
+  --color-emotion-angry-100: #e63946;
+  --color-emotion-angry-90: #d21a28;
+  --color-emotion-angry-80: #a41520;
+  --color-emotion-angry-70: #770f17;
+  --color-emotion-angry-60: #4a090e;
+  --color-emotion-angry-50: #030303;
+
+  --color-emotion-joy-100: #4eb65a;
+  --color-emotion-joy-90: #3d9447;
+  --color-emotion-joy-80: #2e7036;
+  --color-emotion-joy-70: #1f4c24;
+  --color-emotion-joy-60: #102813;
+  --color-emotion-joy-50: #030303;
+
+  /* rechart 용 색상 */
+  --color-chart-reference-line: #616161;
+
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -120,14 +196,19 @@
     -o-user-drag: none;
     user-drag: none;
   }
-  body {
-    @apply bg-usage-background-default text-usage-text-default;
-  }
   html,
   body {
     -webkit-user-select: none; /* iOS Safari/WKWebView */
     user-select: none;
     -webkit-touch-callout: none; /* iOS 롱탭 메뉴 차단 */
+  }
+
+  body,
+  [data-theme-transition] {
+    transition:
+      background-color 250ms ease,
+      color 250ms ease,
+      border-color 250ms ease;
   }
 
   /* 이미지 드래그 금지 */
@@ -143,6 +224,20 @@
     user-select: text;
     -webkit-touch-callout: default;
   }
+}
+
+/* .theme-transition,
+.theme-transition * {
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    fill 300ms ease;
+} */
+
+/* iOS 느낌 조금 더: 깜빡임/대비 완화 */
+html[data-theme-transition] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 @theme {
@@ -177,38 +272,38 @@
   --color-brand-green-disabled: #a4d4aa;
   --color-brand-green-subtle: #e8f6e9;
 
-  --color-brand-secondary-default: #424242;
-  --color-brand-secondary-hover: #565656;
-  --color-brand-secondary-pressed: #1c1c1c;
-  --color-brand-secondary-disabled: #9e9e9e;
-  --color-brand-secondary-subtle: #e0e0e0;
+  --color-brand-secondary-default: var(--color-brand-secondary-default);
+  --color-brand-secondary-hover: var(--color-brand-secondary-hover);
+  --color-brand-secondary-pressed: var(--color-brand-secondary-pressed);
+  --color-brand-secondary-disabled: var(--color-brand-secondary-disabled);
+  --color-brand-secondary-subtle: var(--color-brand-secondary-subtle);
 
   /* Usage colors */
-  --color-usage-text-default: #ffffff;
-  --color-usage-text-hover: #9e9e9e;
-  --color-usage-text-inverse: #212121;
-  --color-usage-text-strong: #ffffff;
-  --color-usage-text-subtle: #e0e0e0;
+  --color-usage-text-default: var(--color-usage-text-default);
+  --color-usage-text-hover: var(--color-usage-text-hover);
+  --color-usage-text-inverse: var(--color-usage-text-inverse);
+  --color-usage-text-strong: var(--color-usage-text-strong);
+  --color-usage-text-subtle: var(--color-usage-text-subtle);
 
-  --color-usage-background-default: #030303;
-  --color-usage-background-subtle: #212121;
-  --color-usage-background-strong: #333333;
-  --color-usage-background-inverse: #fafafa;
+  --color-usage-background-default: var(--color-usage-background-default);
+  --color-usage-background-subtle: var(--color-usage-background-subtle);
+  --color-usage-background-strong: var(--color-usage-background-strong);
+  --color-usage-background-inverse: var(--color-usage-background-inverse);
 
   /* emotion colors */
-  --color-emotion-angry-100: #e63946;
-  --color-emotion-angry-90: #d21a28;
-  --color-emotion-angry-80: #a41520;
-  --color-emotion-angry-70: #770f17;
-  --color-emotion-angry-60: #4a090e;
-  --color-emotion-angry-50: #030303;
+  --color-emotion-angry-100: var(--color-emotion-angry-100);
+  --color-emotion-angry-90: var(--color-emotion-angry-90);
+  --color-emotion-angry-80: var(--color-emotion-angry-80);
+  --color-emotion-angry-70: var(--color-emotion-angry-70);
+  --color-emotion-angry-60: var(--color-emotion-angry-60);
+  --color-emotion-angry-50: var(--color-emotion-angry-50);
 
-  --color-emotion-joy-100: #4eb65a;
-  --color-emotion-joy-90: #3d9447;
-  --color-emotion-joy-80: #2e7036;
-  --color-emotion-joy-70: #1f4c24;
-  --color-emotion-joy-60: #102813;
-  --color-emotion-joy-50: #030303;
+  --color-emotion-joy-100: var(--color-emotion-joy-100);
+  --color-emotion-joy-90: var(--color-emotion-joy-90);
+  --color-emotion-joy-80: var(--color-emotion-joy-80);
+  --color-emotion-joy-70: var(--color-emotion-joy-70);
+  --color-emotion-joy-60: var(--color-emotion-joy-60);
+  --color-emotion-joy-50: var(--color-emotion-joy-50);
 
   /* Border radius */
   --radius-base: 8px;

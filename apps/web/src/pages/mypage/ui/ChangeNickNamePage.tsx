@@ -7,7 +7,7 @@ import { NickNameForm } from '@/features/auth/ui'
 import { useUpdateMyInfoMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
 import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
 import { useFlow } from '@/app/routes/stackflow'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 const ChangeNickNamePage = () => {
   const { pop } = useFlow()
@@ -34,9 +34,11 @@ const ChangeNickNamePage = () => {
   return (
     <AppScreen
       appBar={{
-        title: <WhiteBallogLogo />,
+        title: <BallogAppBar />,
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
         },
         height: '48px',
       }}

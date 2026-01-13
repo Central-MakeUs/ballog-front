@@ -1,5 +1,5 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import type { ActivityComponentType } from '@stackflow/react'
+import { type ActivityComponentType, useActivity } from '@stackflow/react'
 import { useQuery } from '@tanstack/react-query'
 import { format, toZonedTime } from 'date-fns-tz'
 import { isBefore, isAfter, isToday } from 'date-fns'
@@ -9,15 +9,16 @@ import { GlobalNavigationBar } from '@/widgets/navigation'
 import { MatchSection } from '@/features/match/ui/MatchSection'
 import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'
 import { MatchLoadingSection } from '@/features/match/ui/MatchLoadingSection'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
 import { useDate, DateProvider } from '@/features/calendar/context/DateContext'
 import { TIME_ZONE } from '@/shared/constants/time'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 const HomeContent = () => {
   const { selectedDate } = useDate()
+  const { isActive } = useActivity()
 
   const formattedDate = selectedDate
     ? format(selectedDate, 'yyyy-MM-dd', { timeZone: TIME_ZONE })
@@ -47,7 +48,11 @@ const HomeContent = () => {
       ) : isEmpty ? (
         <MatchEmptySection />
       ) : (
-        <MatchSection matches={todayMatchesList} dateType={dateType} />
+        <MatchSection
+          matches={todayMatchesList}
+          dateType={dateType}
+          isActive={isActive}
+        />
       )}
     </div>
   )
@@ -58,7 +63,7 @@ const HomePage: ActivityComponentType = () => {
   useCheckSignupFinished()
 
   return (
-    <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>
+    <AppScreen appBar={{ title: <BallogAppBar /> }}>
       <DateProvider>
         <HomeContent />
         <GlobalNavigationBar />
