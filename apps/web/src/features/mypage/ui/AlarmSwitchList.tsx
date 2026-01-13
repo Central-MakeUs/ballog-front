@@ -67,8 +67,8 @@ export const AlarmToggleList = () => {
   }
 
   return (
-    <div className="space-y-4 mb-6">
-      <p className="body-sm-bold text-brand-neutral-white">알람 설정</p>
+    <div className="mb-6 space-y-4">
+      <p className="body-sm-bold text-usage-text-default">알람 설정</p>
       <List
         type="switch"
         disabled={isPending}

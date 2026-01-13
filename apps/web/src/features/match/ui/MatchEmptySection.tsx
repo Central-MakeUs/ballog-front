@@ -9,11 +9,11 @@ export const MatchEmptySection = () => {
     <div className="flex flex-col items-center justify-start w-full pb-20">
       <SectionHeader title={['오늘 예정된', '경기가 없습니다']} />
 
-      <div className="flex justify-center pt-8 px-23 w-full">
+      <div className="flex justify-center w-full pt-8 px-23">
         <HomeCard.Disabled>
           <Button
             variant="secondary"
-            className="body-md-medium rounded-lg py-3 w-full mt-4"
+            className="w-full py-3 mt-4 rounded-lg body-md-medium light:bg-brand-neutral-80 light:text-white"
             onClick={() => replace('Record', {}, { animate: false })}
           >
             관람로그 보기

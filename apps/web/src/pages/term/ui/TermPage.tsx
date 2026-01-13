@@ -10,11 +10,11 @@ const TermPage = ({ params }: { params: { type: TermType } }) => {
       appBar={{
         title: (
           <span className="text-usage-text-default body-md-bold">
-            기록 상세보기
+            서비스 이용약관
           </span>
         ),
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />,
         },
       }}
     >

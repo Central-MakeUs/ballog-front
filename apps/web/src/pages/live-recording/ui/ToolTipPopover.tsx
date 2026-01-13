@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverAnchor,
 } from '@/shared/ui/common/popover'
-import InfoIcon from '@/assets/infoIcon.svg?react'
+import InfoIcon from '@/assets/InfoIcon'
 import ToolTipImage from '@/assets/toolTipImage.png'
 
 export function ToolTipPopover() {
@@ -16,21 +16,21 @@ export function ToolTipPopover() {
         <button
           type="button"
           aria-label="감정 기록 도움말"
-          className="ml-1 w-5 h-5 inline-flex items-center justify-center"
+          className="inline-flex items-center justify-center w-5 h-5 ml-1"
         >
-          <InfoIcon className="w-5 h-5 text-usage-text-subtle hover:text-usage-text-default" />
+          <InfoIcon className="w-5 h-5 text-usage-text-subtle light:text-brand-neutral-70" />
         </button>
       </PopoverTrigger>
 
       <PopoverAnchor asChild>
-        <div className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 h-0 w-0" />
+        <div className="absolute w-0 h-0 -translate-x-1/2 pointer-events-none left-1/2 top-6" />
       </PopoverAnchor>
 
       <PopoverContent
         side="bottom"
         align="center"
         className="
-            flex flex-col w-62.5 rounded-md bg-brand-neutral-80 relative
+            flex flex-col w-62.5 rounded-md bg-brand-neutral-80 light:bg-brand-neutral-70 relative
             text-brand-neutral-10 border-0 gap-4 py-6 px-4
          "
       >

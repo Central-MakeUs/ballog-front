@@ -3,7 +3,8 @@ import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toZonedTime, format } from 'date-fns-tz'
 
-import CalendarIcon from '@/assets/calendar.svg?react'
+// import CalendarIcon from '@/assets/calendar.svg?react'
+import CalendarIcon from '@/assets/CalendarIcon'
 import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
 import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/features/calendar/ui/calendar'
@@ -11,6 +12,7 @@ import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger
 import type { MatchDateMap } from '@/entities/match/model/match.type'
 import { Button } from '@/shared/ui/common'
 import { TIME_ZONE } from '@/shared/constants/time'
+import { cn } from '@/shared/lib/classnames'
 
 import { useDate } from '../context/DateContext'
 
@@ -73,14 +75,18 @@ export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
     <div>
       <div className="flex items-center justify-between px-6 py-1">
         <CalendarIcon
-          className="calendar-trigger size-6 absolute left-6"
+          className={cn(
+            'absolute calendar-trigger size-6 left-6',
+            'dark:[--calendar-frame-color:theme(colors.brand.neutral.white)] dark:[--calendar-inside-color:theme(colors.brand.neutral.90)]',
+            'light:[--calendar-frame-color:theme(colors.brand.neutral.50)] light:[--calendar-inside-color:theme(colors.brand.neutral.10)]',
+          )}
           onClick={() => setShowCalendar((prev) => !prev)}
         />
-        <div className="flex flex-1 items-center justify-center gap-4">
+        <div className="flex items-center justify-center flex-1 gap-4">
           <button onClick={goToPrevMonth}>
             <LeftArrow className="size-5.5" />
           </button>
-          <span className="heading-md-bold">
+          <span className="heading-md-bold text-usage-text-default">
             {baseDate.getFullYear()}.
             {String(baseDate.getMonth() + 1).padStart(2, '0')}
           </span>
@@ -91,7 +97,7 @@ export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
         <Button
           variant="secondary"
           size="sm"
-          className="absolute right-4"
+          className="absolute right-4 dark:text-brand-neutral-white dark:bg-brand-secondary-pressed light:text-brand-neutral-70"
           onClick={() => {
             const today = toZonedTime(new Date(), TIME_ZONE)
             setSelectedDate(today)
@@ -120,7 +126,7 @@ export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="absolute -top-14 left-1/2 -translate-x-1/2  z-50 bg-usage-background-strong rounded-lg shadow-lg"
+              className="absolute z-50 -translate-x-1/2 rounded-lg shadow-lg -top-14 left-1/2 bg-usage-background-strong"
             >
               <Calendar
                 mode="single"

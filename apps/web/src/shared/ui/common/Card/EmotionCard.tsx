@@ -105,7 +105,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
           />
         </PieChart>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none body-sm-bold text-brand-neutral-white">
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none body-sm-bold text-usage-text-default">
           <div className="text-[23px]">{centerRate}%</div>
         </div>
       </div>
@@ -148,11 +148,11 @@ const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
       <div className="flex items-center justify-center gap-4 mt-4.25 text-brand-neutral-white min-w-30 min-h-30">
         <div className="flex flex-col items-center">
           <AngryEmotion className="w-8 h-8" />
-          <p className="body-sm-bold">- %</p>
+          <p className="body-sm-bold text-usage-text-default">- %</p>
         </div>
         <div className="flex flex-col items-center">
           <JoyEmotion className="w-8 h-8" />
-          <p className="body-sm-bold">- %</p>
+          <p className="body-sm-bold text-usage-text-default">- %</p>
         </div>
       </div>
     </div>

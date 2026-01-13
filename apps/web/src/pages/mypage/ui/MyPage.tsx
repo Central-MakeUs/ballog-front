@@ -17,7 +17,7 @@ const MyPageInner = () => {
     >
       <div className={cn('flex flex-col w-full px-4 py-4 pb-27.5')}>
         <div>
-          <p className="body-sm-bold text-brand-neutral-white mb-4">내 정보</p>
+          <p className="mb-4 body-sm-bold text-usage-text-default">내 정보</p>
           <ChangeMyInfoWidget />
         </div>
         <AlarmToggleList />

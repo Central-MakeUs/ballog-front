@@ -9,12 +9,12 @@ import { GlobalNavigationBar } from '@/widgets/navigation'
 import { MatchSection } from '@/features/match/ui/MatchSection'
 import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'
 import { MatchLoadingSection } from '@/features/match/ui/MatchLoadingSection'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { CalendarHeader } from '@/features/calendar/ui/CalendarHeader'
 import { useDate, DateProvider } from '@/features/calendar/context/DateContext'
 import { TIME_ZONE } from '@/shared/constants/time'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 const HomeContent = () => {
   const { selectedDate } = useDate()
@@ -63,7 +63,7 @@ const HomePage: ActivityComponentType = () => {
   useCheckSignupFinished()
 
   return (
-    <AppScreen appBar={{ title: <WhiteBallogLogo /> }}>
+    <AppScreen appBar={{ title: <BallogAppBar /> }}>
       <DateProvider>
         <HomeContent />
         <GlobalNavigationBar />

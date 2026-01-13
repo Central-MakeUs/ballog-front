@@ -18,8 +18,8 @@ export const Disabled = ({ children, className, ...rest }: DisabledProps) => {
       )}
       {...rest}
     >
-      <div className="flex flex-col justify-between h-full w-full">
-        <div className="flex flex-col body-sm-light text-usage-text-inverse items-center justify-center text-center">
+      <div className="flex flex-col justify-between w-full h-full">
+        <div className="flex flex-col items-center justify-center text-center body-sm-light text-usage-text-inverse light:text-usage-text-default">
           <span className="pt-2">다음 경기를 기대하며,</span>
           <span className="pb-4">지난 기록을 돌아볼까요?</span>
           <MatchEmpty className="w-full mb-2 h-28.5" />

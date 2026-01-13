@@ -21,7 +21,7 @@ export const Buttons = ({ buttons, className, ...rest }: ButtonsProps) => {
         onClick={left.onClick}
         variant="secondary"
         size="lg"
-        className="flex-1"
+        className="flex-1 dark:text-brand-neutral-white"
       >
         {left.label}
       </Button>
@@ -29,7 +29,7 @@ export const Buttons = ({ buttons, className, ...rest }: ButtonsProps) => {
         onClick={right.onClick}
         variant="primary"
         size="lg"
-        className="flex-1"
+        className="flex-1 text-brand-neutral-white"
       >
         {right.label}
       </Button>

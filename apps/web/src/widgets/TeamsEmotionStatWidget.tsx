@@ -20,10 +20,10 @@ export const TeamsEmotionStatWidget = ({
   awayNegative,
 }: TeamsEmotionStatWidgetProps) => {
   return (
-    <div className="flex flex-col w-full body-md-medium bg-usage-background-default py-8 rounded-xl">
+    <div className="flex flex-col w-full py-8 body-md-medium bg-usage-background-default rounded-xl">
       <div className="flex flex-row justify-center gap-1">
         <div className="flex flex-col">
-          <p>{TEAMS[homeTeamKey]}</p>
+          <p className="text-usage-text-default">{TEAMS[homeTeamKey]}</p>
           <EmotionCard.Active
             data={[
               {
@@ -39,7 +39,7 @@ export const TeamsEmotionStatWidget = ({
           />
         </div>
         <div className="flex flex-col">
-          <p>{TEAMS[awayTeamKey]}</p>
+          <p className="text-usage-text-default">{TEAMS[awayTeamKey]}</p>
           <EmotionCard.Active
             data={[
               {
@@ -55,7 +55,7 @@ export const TeamsEmotionStatWidget = ({
           />
         </div>
       </div>
-      <p className="flex flex-row justify-center items-center body-sm-light text-brand-neutral-60 gap-1 mt-2">
+      <p className="flex flex-row items-center justify-center gap-1 mt-2 body-sm-light text-brand-neutral-60">
         <GrayInfoIcon />
         그래프는 팀의 감정분포(%) 를 나타내요
       </p>

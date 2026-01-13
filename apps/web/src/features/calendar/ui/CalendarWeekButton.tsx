@@ -21,12 +21,12 @@ export const CalendarWeekButton = ({
     >
       <span
         className={cn(
-          'body-sm-light',
+          'body-sm-bold',
           isActive
             ? 'text-brand-primary-default'
             : clickable
-              ? 'text-brand-neutral-white'
-              : 'text-brand-neutral-40',
+              ? 'text-usage-text-default'
+              : 'text-brand-neutral-40 light:text-brand-neutral-70',
         )}
       >
         {date.toLocaleDateString('ko-KR', { weekday: 'short' })}
@@ -38,7 +38,7 @@ export const CalendarWeekButton = ({
           isActive
             ? 'text-brand-primary-default'
             : clickable
-              ? 'text-brand-neutral-white'
+              ? 'text-usage-text-default'
               : 'text-brand-neutral-70',
         )}
       >

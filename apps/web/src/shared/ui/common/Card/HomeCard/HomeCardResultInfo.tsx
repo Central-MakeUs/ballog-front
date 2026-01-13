@@ -24,26 +24,30 @@ export const HomeCardResultInfo = ({
     <div className="flex items-center justify-center mt-2 -mb-1.5 text-center gap-4">
       {/* 홈팀 */}
       <div className="flex flex-col items-center">
-        <p className="body-lg-bold text-white">
+        <p className="text-white body-lg-bold">
           {TEAMS[homeTeam].split(' ')[0]}
         </p>
-        <p className="text-[48px] font-bold leading-[48px] tracking-[0] text-usage-text-default">
+        <p className="text-[48px] font-bold leading-[48px] tracking-[0] text-white">
           {homeScore}
         </p>
-        <p className={cn('body-sm-light text-primary-subtle')}>{homeResult}</p>
+        <p className={cn('body-sm-light text-primary-subtle text-white')}>
+          {homeResult}
+        </p>
       </div>
 
-      <p className="heading-md-bold text-usage-text-default">vs</p>
+      <p className="text-white heading-md-bold">vs</p>
 
       {/* 원정팀 */}
       <div className="flex flex-col items-center">
-        <p className="body-lg-bold text-usage-text-default">
+        <p className="text-white body-lg-bold">
           {TEAMS[awayTeam].split(' ')[0]}
         </p>
         <p className="text-[48px] font-bold leading-[48px] tracking-[0] text-white">
           {awayScore}
         </p>
-        <p className={cn('body-sm-light text-primary-subtle')}>{awayResult}</p>
+        <p className={cn('body-sm-light text-primary-subtle text-white')}>
+          {awayResult}
+        </p>
       </div>
     </div>
   )

@@ -45,12 +45,11 @@ const OtherTeamLiveRecordPage = ({
   return (
     <AppScreen
       appBar={{
-        title: (
-          <span className="flex text-usage-text-default">경기 관전 중</span>
-        ),
         activityEnterStyle: 'slideInLeft',
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
           onClick: () => {
             pop()
           },
@@ -64,7 +63,7 @@ const OtherTeamLiveRecordPage = ({
 
         <div
           className={cn(
-            'rounded-xlarge border-none border-usage-border-strong bg-usage-background-subtle w-screen h-screen -px-4',
+            'rounded-t-xlarge border-none border-usage-border-strong bg-usage-background-subtle w-screen h-screen -px-4',
           )}
           style={{
             background: bgColor
