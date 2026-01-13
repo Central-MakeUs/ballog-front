@@ -9,7 +9,7 @@ import { emotions } from '@/entities/record/api/emotion.queries'
 import { recording } from '@/entities/record/api/recording.queries'
 import { recordingPost } from '@/entities/record/api/recording-post'
 import { Loading } from '@/shared/ui/common'
-import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
 
 import MyTeamLiveRecordPage from './MyTeamLiveRecordPage'
 import OtherTeamLiveRecordPage from './OtherTeamLiveRecordPage'
@@ -20,7 +20,7 @@ const LiveRecordPage: ActivityComponentType<{ matchId: string }> = ({
   params: { matchId: string }
 }) => {
   const { replace } = useFlow()
-  const { user } = useSessionContext()
+  const { user } = useUserQuery()
   const queryClient = useQueryClient()
 
   const matchId = Number(params.matchId)

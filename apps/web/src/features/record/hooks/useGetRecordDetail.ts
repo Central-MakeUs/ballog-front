@@ -10,7 +10,7 @@ import type {
 } from '@/entities/record/model/record.type'
 import type { TeamKey } from '@/shared/constants/teams'
 import { TIME_ZONE } from '@/shared/constants/time'
-import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
 import type { RecordDetailResponseDTO } from '@/entities/record/model/record.type'
 
 interface UseGetRecordDetailParams {
@@ -27,7 +27,7 @@ export const useGetRecordDetail = ({
   matchRecordId,
 }: UseGetRecordDetailParams): UseGetRecordDetailResult &
   UseQueryResult<RecordDetailResponseDTO, Error> => {
-  const { user } = useSessionContext()
+  const { user } = useUserQuery()
 
   const RecordDetailQuery = useQuery(queryKeys.getRecordDetail(matchRecordId))
 

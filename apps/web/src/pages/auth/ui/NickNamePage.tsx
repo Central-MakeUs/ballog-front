@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { authPost, authGet } from '@/entities/auth/api'
 import type {
@@ -11,10 +12,10 @@ import { type ExtendedKyHttpError } from '@/types/api/common'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { useFlow } from '@/app/routes/stackflow'
-import { useSessionContext } from '@/entities/auth/hooks'
 import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 import { type TeamKey } from '@/shared/constants/teams'
+import { authQueries } from '@/entities/auth/api/auth.queries'
 
 interface NickNamePageProps {
   params: {
@@ -27,8 +28,9 @@ interface NickNamePageProps {
 
 const NickNamePage = ({ params }: NickNamePageProps) => {
   const { replace } = useFlow()
-  const { setUser } = useSessionContext()
   const { popAll } = useStack()
+  const queryClient = useQueryClient()
+  const userQueryOptions = authQueries.getUser()
 
   const {
     mutate: signup,
@@ -38,9 +40,9 @@ const NickNamePage = ({ params }: NickNamePageProps) => {
     mutationFn: authPost.signup,
 
     onSuccess: async (data) => {
-      const user = await authGet.getUser()
-      setUser(user.data)
       if (data.status === 200) {
+        const user = await authGet.getUser()
+        queryClient.setQueryData(userQueryOptions.queryKey, user)
         popAll()
         replace('Home', {}, { animate: false })
       }

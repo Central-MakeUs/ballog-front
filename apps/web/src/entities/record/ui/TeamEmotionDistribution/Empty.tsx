@@ -1,4 +1,4 @@
-import InfoIcon from '@/assets/infoIcon.svg?react'
+import InfoIcon from '@/assets/InfoIcon'
 
 export const Empty = () => {
   return (

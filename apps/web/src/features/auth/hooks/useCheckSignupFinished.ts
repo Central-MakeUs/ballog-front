@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 
 import { useFlow } from '@/app/routes/stackflow'
-import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 
 export const useCheckSignupFinished = () => {
   const { replace } = useFlow()
   const { popAll } = useStack()
-  const { user } = useSessionContext()
+  const { user } = useUserQuery()
 
   useEffect(() => {
     if (user && (!user.nickname || !user.baseballTeam)) {

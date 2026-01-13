@@ -10,7 +10,7 @@ import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { LottieRefProvider } from '@/pages/live-recording/contexts/lottieRefContext'
 import { BackArrow } from '@/assets/BackArrow'
-import { useSessionContext } from '@/entities/auth/hooks/useSessionContext'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 
@@ -30,7 +30,7 @@ const MyTeamLiveRecordPage = ({
   emotionData,
 }: MyTeamLiveRecordPageProps) => {
   const { mutate } = usePostEmotion()
-  const { user } = useSessionContext()
+  const { user } = useUserQuery()
   const { joyPercent, angryPercent } = useEmotionVote()
 
   let bgColor: string | undefined = undefined
