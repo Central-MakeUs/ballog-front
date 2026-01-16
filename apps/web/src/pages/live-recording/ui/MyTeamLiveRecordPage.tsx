@@ -11,7 +11,7 @@ import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { LottieRefProvider } from '@/pages/live-recording/contexts/lottieRefContext'
 import { BackArrow } from '@/assets/BackArrow'
 import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
-import { TEAMS, type TeamKey } from '@/shared/constants/teams'
+import { TEAMS } from '@/shared/constants/teams'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 
 import { ToolTipPopover } from './ToolTipPopover'
@@ -42,14 +42,16 @@ const MyTeamLiveRecordPage = ({
   }
 
   const teamKey = user?.baseballTeam ?? 'NONE'
-  const teamName = TEAMS[teamKey as TeamKey]
+  const teamName = TEAMS[teamKey]
 
   return (
     <AppScreen
       appBar={{
         activityEnterStyle: 'slideInLeft',
         backButton: {
-          renderIcon: () => <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />,
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
         },
         height: '48px',
       }}
