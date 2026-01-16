@@ -45,12 +45,12 @@ const Active = ({
     {...rest}
   >
     <div className="text-center min-w-30 min-h-30">
-      <div className="body-md-medium mb-2">관람</div>
-      <div className="heading-md-bold">
+      <div className="body-md-medium mb-2 text-usage-text-default">관람</div>
+      <div className="heading-md-bold text-usage-text-default">
         {matchCount} <span className="body-md-bold">회</span>
       </div>
-      <div className="body-sm-medium mt-4 mb-2">승률</div>
-      <div className="heading-md-bold">{parseInt(winRate.toString())}%</div>
+      <div className="body-sm-medium mt-4 mb-2 text-usage-text-default">승률</div>
+      <div className="heading-md-bold text-usage-text-default">{parseInt(winRate.toString())}%</div>
     </div>
   </div>
 )
@@ -67,8 +67,8 @@ const Disabled = ({ className, ...rest }: DisabledIntuitionCardProps) => (
     {...rest}
   >
     <div className="text-center">
-      <div className="body-md-medium mb-2">관람</div>
-      <div className="body-md-bold">- 회</div>
+      <div className="body-md-medium mb-2 text-usage-text-default">관람</div>
+      <div className="body-md-bold text-usage-text-default">- 회</div>
     </div>
   </div>
 )

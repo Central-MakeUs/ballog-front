@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import GrayInfoIcon from '@/assets/grayInfoIcon.svg?react'
@@ -14,6 +16,15 @@ interface TeamsEmotionStatProps {
   awayNegative: number
   isRecording?: boolean
 }
+
+const StatContainer = ({ children, isRecording = false }: { children: ReactNode, isRecording: boolean }) => {
+  return (
+    <div className={cn("flex flex-col w-full body-md-medium py-8 rounded-xl", isRecording ? "bg-usage-background-subtle" : "bg-usage-background-default px-4")}>
+      {children}
+    </div>
+  )
+}
+
 
 export const TeamsEmotionStat = ({
   homeTeamKey,
@@ -65,13 +76,5 @@ export const TeamsEmotionStat = ({
         그래프는 팀의 감정분포(%) 를 나타내요
       </p>
     </StatContainer>
-  )
-}
-
-const StatContainer = ({ children, isRecording = false }: { children: React.ReactNode, isRecording: boolean }) => {
-  return (
-    <div className={cn("flex flex-col w-full body-md-medium py-8 rounded-xl", isRecording ? "bg-usage-background-subtle" : "bg-usage-background-default px-4")}>
-      {children}
-    </div>
   )
 }
