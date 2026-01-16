@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
 import type { Match } from '@/entities/match/model/match.type'
 
 /**
@@ -10,7 +10,7 @@ import type { Match } from '@/entities/match/model/match.type'
  * @returns 사용자의 응원팀 경기가 앞에 위치한 matches 배열
  */
 export const useSortMatchByBaseBallTeam = (matches: Match[]) => {
-  const { user } = useSessionContext()
+  const { user } = useUserQuery()
 
   const sortedMatches = useMemo(() => {
     if (!user?.baseballTeam || !matches) return matches

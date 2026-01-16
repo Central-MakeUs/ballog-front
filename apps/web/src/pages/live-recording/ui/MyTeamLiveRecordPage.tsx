@@ -10,8 +10,8 @@ import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { LottieRefProvider } from '@/pages/live-recording/contexts/lottieRefContext'
 import { BackArrow } from '@/assets/BackArrow'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
-import { TEAMS, type TeamKey } from '@/shared/constants/teams'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
+import { TEAMS } from '@/shared/constants/teams'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 
 import { ToolTipPopover } from './ToolTipPopover'
@@ -30,7 +30,7 @@ const MyTeamLiveRecordPage = ({
   emotionData,
 }: MyTeamLiveRecordPageProps) => {
   const { mutate } = usePostEmotion()
-  const { user } = useSessionContext()
+  const { user } = useUserQuery()
   const { joyPercent, angryPercent } = useEmotionVote()
 
   let bgColor: string | undefined = undefined
@@ -42,14 +42,16 @@ const MyTeamLiveRecordPage = ({
   }
 
   const teamKey = user?.baseballTeam ?? 'NONE'
-  const teamName = TEAMS[teamKey as TeamKey]
+  const teamName = TEAMS[teamKey]
 
   return (
     <AppScreen
       appBar={{
         activityEnterStyle: 'slideInLeft',
         backButton: {
-          renderIcon: () => <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />,
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
         },
         height: '48px',
       }}

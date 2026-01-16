@@ -11,8 +11,6 @@ import type {
 } from '@/entities/auth/model/auth.type'
 import type { UserType } from '@/entities/auth/model/auth.type'
 
-const mockSetUser = vi.fn()
-
 vi.mock('@/app/routes/stackflow', () => ({
   useFlow: () => ({
     push: vi.fn(),
@@ -27,19 +25,6 @@ vi.mock('@/entities/auth/api', () => ({
     getUser: vi.fn(),
   },
 }))
-
-vi.mock('@/app/Provider/contexts/sessionContext', async () => {
-  const actual = await vi.importActual<
-    typeof import('@/app/Provider/contexts/sessionContext')
-  >('@/app/Provider/contexts/sessionContext')
-
-  return {
-    ...actual,
-    useSessionContext: () => ({
-      setUser: mockSetUser,
-    }),
-  }
-})
 
 describe.skip('NickNamePage', () => {
   it('should render', () => {
@@ -172,10 +157,9 @@ describe.skip('NickNamePage', () => {
     await user.type(input, '유효한닉네임임')
     await user.click(submitButton)
 
-    // Then: getUser → setUser 호출 확인
+    // Then: getUser 호출 확인
     await waitFor(() => {
       expect(authGet.getUser).toHaveBeenCalled()
-      expect(mockSetUser).toHaveBeenCalledWith(mockUserData)
     })
   })
 })

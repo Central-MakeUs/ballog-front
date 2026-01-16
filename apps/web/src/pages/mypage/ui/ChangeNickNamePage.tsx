@@ -5,13 +5,13 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { NickNameForm } from '@/features/auth/ui'
 import { useUpdateMyInfoMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
 import { useFlow } from '@/app/routes/stackflow'
 import BallogAppBar from '@/assets/BallogAppBar'
 
 const ChangeNickNamePage = () => {
   const { pop } = useFlow()
-  const { user, setUser } = useSessionContext()
+  const { user } = useUserQuery()
   const { mutate } = useUpdateMyInfoMutation()
 
   const handleSubmit = (data: { nickname: string }) => {
@@ -19,13 +19,12 @@ const ChangeNickNamePage = () => {
     mutate(
       {
         nickname: data.nickname,
-        baseballTeam: user.baseballTeam ?? '응원팀 없음',
+        baseballTeam: user.baseballTeam ?? 'NONE',
       },
       {
         onSuccess: () => {
           pop()
           toast('닉네임 변경이 완료되었습니다!')
-          setUser({ ...user, nickname: data.nickname })
         },
       },
     )

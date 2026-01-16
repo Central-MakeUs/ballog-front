@@ -8,7 +8,7 @@ import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
 import { queryKeys } from '@/entities/record/api/record.queries'
-import { TeamsEmotionStatWidget } from '@/widgets/TeamsEmotionStatWidget'
+import { TeamsEmotionStat } from '@/entities/record/ui/TeamsEmotionStat'
 
 import { useEmotionVote } from '../contexts/EmotionVoteContext'
 import { calculateGradientColor } from '../utils/calculateGradientColor'
@@ -41,6 +41,15 @@ const OtherTeamLiveRecordPage = ({
   if (isLoading) return <div>기록을 불러오는 중입니다</div>
 
   if (!data) return <div>기록이 없습니다</div>
+
+  const {
+    homeTeam,
+    awayTeam,
+    homeTeamPositivePercent,
+    homeTeamNegativePercent,
+    awayTeamPositivePercent,
+    awayTeamNegativePercent,
+  } = data.data
 
   return (
     <AppScreen
@@ -85,13 +94,13 @@ const OtherTeamLiveRecordPage = ({
               다른 팬들의 감정을 실시간으로 확인해보세요.
             </p>
             {/* 팀 감정분포 */}
-            <TeamsEmotionStatWidget
-              homeTeamKey={data.data.homeTeam}
-              awayTeamKey={data.data.awayTeam}
-              homePositive={data.data.homeTeamPositivePercent}
-              homeNegative={data.data.homeTeamNegativePercent}
-              awayPositive={data.data.awayTeamPositivePercent}
-              awayNegative={data.data.awayTeamNegativePercent}
+            <TeamsEmotionStat
+              homeTeamKey={homeTeam}
+              awayTeamKey={awayTeam}
+              homePositive={homeTeamPositivePercent}
+              homeNegative={homeTeamNegativePercent}
+              awayPositive={awayTeamPositivePercent}
+              awayNegative={awayTeamNegativePercent}
             />
           </div>
           <RecordCameraButton

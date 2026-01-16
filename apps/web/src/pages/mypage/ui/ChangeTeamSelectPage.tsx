@@ -7,14 +7,14 @@ import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { TEAMS, type TeamKey } from '@/shared/constants/teams'
 import { useUpdateMyTeamMutation } from '@/entities/auth/hooks/useUpdateMyInfoMutation'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
 import BallogAppBar from '@/assets/BallogAppBar'
 
 const isSignUpFlow = false
 
 const ChangeTeamSelectPage = () => {
   const { pop } = useFlow()
-  const { user, setUser } = useSessionContext()
+  const { user } = useUserQuery()
 
   const { mutate } = useUpdateMyTeamMutation()
 
@@ -26,7 +26,6 @@ const ChangeTeamSelectPage = () => {
         onSuccess: () => {
           pop()
           toast('응원 팀 변경이 완료되었습니다!')
-          setUser({ ...user, baseballTeam: selectedTeam })
         },
       },
     )

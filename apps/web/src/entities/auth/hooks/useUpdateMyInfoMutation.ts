@@ -1,28 +1,28 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { authPatch, authGet } from '@/entities/auth/api'
-import { useSessionContext } from '@/app/Provider/contexts/sessionContext'
+import { authPatch } from '../api'
+import { authQueries } from '../api/auth.queries'
 
 export const useUpdateMyInfoMutation = () => {
-  const { setUser } = useSessionContext()
+  const queryClient = useQueryClient()
+  const userQueryOptions = authQueries.getUser()
 
   return useMutation({
     mutationFn: authPatch.patchUserInfo,
-    onSuccess: async () => {
-      const updated = await authGet.getUser()
-      setUser(updated.data)
+    onSuccess: (updated) => {
+      queryClient.setQueryData(userQueryOptions.queryKey, updated)
     },
   })
 }
 
 export const useUpdateMyTeamMutation = () => {
-  const { setUser } = useSessionContext()
+  const queryClient = useQueryClient()
+  const userQueryOptions = authQueries.getUser()
 
   return useMutation({
     mutationFn: authPatch.patchUserTeam,
-    onSuccess: async () => {
-      const updated = await authGet.getUser()
-      setUser(updated.data)
+    onSuccess: (updated) => {
+      queryClient.setQueryData(userQueryOptions.queryKey, updated)
     },
   })
 }

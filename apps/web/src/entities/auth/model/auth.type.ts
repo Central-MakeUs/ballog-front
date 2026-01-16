@@ -1,17 +1,18 @@
 import type { ApiResponse } from '@/types/api/common'
 import type { ApiResponseWithNoSuccess } from '@/types/api/common'
+import type { TeamKey } from '@/shared/constants/teams'
 
 export interface ChangeNicknameRequestDTO {
-  baseballTeam: string
+  baseballTeam: TeamKey
   nickname: string
 }
 
 export interface ChangeTeamRequestDTO {
-  baseballTeam: string
+  baseballTeam: TeamKey
 }
 
 export interface SignupRequestDTO {
-  baseballTeam: string
+  baseballTeam: TeamKey
   nickname: string
   termAgree: {
     privacyAgree: boolean
@@ -24,7 +25,7 @@ export interface UserType {
   userId: number
   email: string
   nickname: string | null
-  baseballTeam: string | null
+  baseballTeam: TeamKey | null
   isNewUser: boolean
   role: 'USER' | 'ADMIN'
 }

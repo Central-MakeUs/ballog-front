@@ -1,18 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
-import type { JSX, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { render, renderHook, type RenderOptions } from '@testing-library/react'
 
 import QueryProvider from '@/app/Provider/QueryProvider'
-import { SessionProvider } from '@/app/Provider/contexts/sessionContext'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
 
 export const wrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <SessionProvider>
-      <OverlayProvider>
-        <QueryProvider>{children as JSX.Element[]}</QueryProvider>
-      </OverlayProvider>
-    </SessionProvider>
+    <OverlayProvider>
+      <QueryProvider>
+        {children}
+      </QueryProvider>
+    </OverlayProvider>
   )
 }
 

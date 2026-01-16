@@ -16,6 +16,43 @@ interface ActiveEmotionCardProps extends ComponentProps<'div'> {
 
 interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
 
+const EmotionBadge = ({
+  emotion,
+  className,
+  ...rest
+}: {
+  emotion: '화나요' | '기뻐요'
+
+  className?: string
+}) => {
+  const isAngry = emotion === '화나요'
+  const emotionIcon = {
+    화나요: <AngryEmotion className="w-5 h-5" />,
+    기뻐요: <JoyEmotion className="w-5 h-5" />,
+  }
+
+  return (
+    <div
+      className={cn(
+        'flex flex-row justify-center items-center py-1 w-full rounded-md',
+        'gap-1 px-2',
+        isAngry ? 'bg-brand-red-disabled:' : 'bg-brand-green-disabled',
+        className,
+      )}
+      {...rest}
+    >
+      {emotionIcon[emotion]}
+      <span
+        className={cn(
+          'body-sm-bold ',
+          isAngry ? 'text-brand-red-hover' : 'text-brand-green-hover',
+        )}
+      >
+        {emotion}
+      </span>
+    </div>
+  )
+}
 /**
  * EmotionCard
  *
@@ -106,29 +143,15 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
         </PieChart>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none body-sm-bold text-usage-text-default">
-          <div className="text-[23px]">{centerRate}%</div>
+          <div className="text-[23px] text-color-brand-neutral-white">
+            {centerRate}%
+          </div>
         </div>
       </div>
 
-      {centerEmotion === '화나요' ? (
-        <div
-          className={cn(
-            'flex flex-row justify-center items-center text-brand-red-default bg-brand-red-disabled py-1 px-2 rounded-md',
-          )}
-        >
-          <AngryEmotion className="w-5 h-5 mr-1" />
-          <span>{centerEmotion}</span>
-        </div>
-      ) : (
-        <div
-          className={cn(
-            'flex flex-row justify-center items-center text-brand-green-pressed bg-brand-green-disabled py-1 px-2 rounded-md',
-          )}
-        >
-          <JoyEmotion className="w-5 h-5 mr-1" />
-          <span>{centerEmotion}</span>
-        </div>
-      )}
+      <div className="mx-4">
+        <EmotionBadge emotion={centerEmotion} />
+      </div>
     </div>
   )
 }

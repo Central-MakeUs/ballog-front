@@ -28,6 +28,7 @@ export const api = ky.create({
       (_, __, response) => {
         // 리프레시 토큰 처리 로직 필요
         if (response.status === 401) {
+          localStorage.removeItem('accessToken')
           window.location.href = '/login'
         }
         return response
