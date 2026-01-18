@@ -34,7 +34,7 @@ export const Text = ({
           {heading}
         </DialogTitle>
         {body && (
-          <DialogDescription className="body-sm-medium whitespace-pre-line">
+          <DialogDescription className="body-sm-medium whitespace-pre-line px-4">
             {body}
           </DialogDescription>
         )}
