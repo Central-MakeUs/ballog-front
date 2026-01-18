@@ -1,5 +1,7 @@
 export class SubscribeStore<T> {
+  // 싱글톤 인스턴스 저장
   private static instances = new Map<string, SubscribeStore<unknown>>()
+  // 구독중인 컴포넌트들 저장
   private Listeners = new Set<() => void>()
   private getSnapShot: () => T
 
@@ -7,6 +9,7 @@ export class SubscribeStore<T> {
     this.getSnapShot = getSnapShot
   }
 
+  // 싱글톤 인스턴스 반환
   public static getInstance<T>(
     key: string,
     getSnapShot: () => T,
@@ -26,8 +29,10 @@ export class SubscribeStore<T> {
     }
   }
 
+  // 현재 상태를 반환
   public getSnapshot = () => this.getSnapShot()
 
+  // 구독중인 컴포넌트들에게  notify 이벤트를 발생시킴
   public notify() {
     this.Listeners.forEach((listener) => listener())
   }
