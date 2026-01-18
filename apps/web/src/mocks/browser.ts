@@ -1,11 +1,18 @@
 import { setupWorker } from 'msw/browser'
 
+import { SubscribeStore } from '@/shared/lib/subscribeStore'
+
 import { handlers } from './handlers'
 
 export const worker = setupWorker(...handlers)
 
 // MSW 활성화 상태
 export let isMswEnabled = false
+
+export const mswEnabledStore = SubscribeStore.getInstance<boolean>(
+  'mswEnabled',
+  () => isMswEnabled,
+)
 
 // 백엔드 health check
 const checkBackendConnection = async (): Promise<boolean> => {
@@ -33,5 +40,8 @@ export const startMocking = async () => {
   }
 
   await worker.start()
-  isMswEnabled = true
+  if (!isMswEnabled) {
+    isMswEnabled = true
+    mswEnabledStore.notify()
+  }
 }
