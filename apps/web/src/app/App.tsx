@@ -7,6 +7,7 @@ import { OverlayProvider } from '@/shared/hooks/useOverlay'
 import { getTheme, setTheme } from '@/shared/lib/theme'
 
 import { useUpdatePolicy } from './policy/update/useUpdatePolicy'
+import { useMswNotice } from './policy/msw/useMswNotice'
 import QueryProvider from './Provider/QueryProvider'
 
 export const ThemeInitializer = () => {
@@ -19,6 +20,7 @@ export const ThemeInitializer = () => {
 
 const AppInner = () => {
   useUpdatePolicy()
+  useMswNotice()
 
   return (
     <>
