@@ -6,9 +6,7 @@ import { startMocking } from '@/mocks/browser'
 import App from './App'
 
 function bootstrap() {
-  if (import.meta.env.DEV) {
-    startMocking()
-  }
+  startMocking()
 
   createRoot(document.getElementById('root')!).render(
     <>
