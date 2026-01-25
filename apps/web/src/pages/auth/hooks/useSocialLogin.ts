@@ -4,13 +4,14 @@ import {
   type AppleLoginResponsePayload,
 } from '@ballog/bridge'
 import { useMutation } from '@tanstack/react-query'
-import { useCallback } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
 
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 import { authPost } from '@/entities/auth/api/auth-post'
 import type { SocialLoginResponseDTO } from '@/entities/auth/model/auth.type'
 import type { ExtendedKyHttpError } from '@/types/api/common'
+import { mswEnabledStore } from '@/mocks/browser'
 
 type SocialLoginVariables =
   | { type: 'kakao'; accessToken: string; refreshToken: string }
@@ -42,6 +43,10 @@ export const useSocialLogin = ({
   onLoginSuccess: (response: SocialLoginResponseDTO) => void
   onError: (error: Error | ExtendedKyHttpError) => void
 }) => {
+  const isMswEnabled = useSyncExternalStore(
+    mswEnabledStore.subscribe,
+    mswEnabledStore.getSnapshot,
+  )
   const { send, isRNEnvironment } = useBridge()
   const { mutate: socialLogin, isPending } = useMutation<
     SocialLoginResponseDTO,
@@ -62,7 +67,7 @@ export const useSocialLogin = ({
   })
 
   const handleLogin = () => {
-    if (isRNEnvironment) {
+    if (isRNEnvironment && !isMswEnabled) {
       switch (social) {
         case 'kakao':
           send(POST_MESSAGE_EVENT.LOGIN_KAKAO, { social })
