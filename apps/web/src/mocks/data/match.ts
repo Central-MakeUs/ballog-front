@@ -67,11 +67,11 @@ export const matchByDate: {
   delay: number
 } = {
   data: {
-    '2026-01-09': [
+    '2026-02-01': [
       {
         matchesId: 101,
-        matchesDate: '2025-10-05',
-        matchesTime: '18:30:00',
+        matchesDate: '2026-02-01',
+        matchesTime: '22:10:00',
         homeTeam: 'LG_TWINS',
         awayTeam: 'SSG_LANDERS',
         stadium: 'JAMSIL',
@@ -80,7 +80,7 @@ export const matchByDate: {
       },
       {
         matchesId: 102,
-        matchesDate: '2025-10-05',
+        matchesDate: '2026-02-01',
         matchesTime: '18:30:00',
         homeTeam: 'HANWHA_EAGLES',
         awayTeam: 'KIA_TIGERS',
