@@ -27,6 +27,7 @@ export const useRecordingData = (options?: UseRecordingDataOptions) => {
   } = useQuery({
     ...recording.getRecording(matchId),
     retry: false,
+    refetchInterval: 3000,
   })
 
   const createMutation = useMutation({
