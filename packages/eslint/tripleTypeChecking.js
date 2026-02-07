@@ -9,8 +9,6 @@ export default [
       parser: typescriptParser,
     },
     rules: {
-      ...typescriptEslint.configs['recommended-requiring-type-checking'].rules,
-
       '@typescript-eslint/naming-convention': [
         'error',
         {
