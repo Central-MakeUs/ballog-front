@@ -1,46 +1,26 @@
-import { useFlow } from '@stackflow/react/future'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { useQuery } from '@tanstack/react-query'
 
 import { BackArrow } from '@/assets/BackArrow'
 import { cn } from '@/shared/lib/classnames'
-import type { RecordingResponse } from '@/entities/record/model/recording.type'
 import { GameInfoCard } from '@/entities/record/ui/GameInfoCard'
 import { RecordCameraButton } from '@/features/record/ui/RecordCameraButton'
-import { queryKeys } from '@/entities/record/api/record.queries'
 import { TeamsEmotionStat } from '@/entities/record/ui/TeamsEmotionStat'
+import { useOtherTeamLiveRecord } from '@/pages/live-recording/hooks'
 
-import { useEmotionVote } from '../contexts/EmotionVoteContext'
-import { calculateGradientColor } from '../utils/calculateGradientColor'
+const OtherTeamLiveRecordPage = () => {
+  const {
+    recordingData,
+    stats,
+    isStatsLoading,
+    gradientStyle,
+    goBack,
+    matchRecordId,
+    imageList,
+  } = useOtherTeamLiveRecord()
 
-interface OtherTeamLiveRecordPageProps {
-  matchId: number
-  isLoading: boolean
-  recordingData: RecordingResponse
-}
+  if (isStatsLoading) return <div>기록을 불러오는 중입니다</div>
 
-const OtherTeamLiveRecordPage = ({
-  recordingData,
-}: OtherTeamLiveRecordPageProps) => {
-  const { data, isLoading } = useQuery({
-    ...queryKeys.getEmotionStats(recordingData.matchesId),
-    refetchInterval: 30_000,
-  })
-
-  const { pop } = useFlow()
-  const { joyPercent, angryPercent } = useEmotionVote()
-
-  let bgColor: string | undefined = undefined
-
-  if (joyPercent > angryPercent && joyPercent > 50) {
-    bgColor = calculateGradientColor('joy', joyPercent)
-  } else if (angryPercent > joyPercent && angryPercent > 50) {
-    bgColor = calculateGradientColor('angry', angryPercent)
-  }
-
-  if (isLoading) return <div>기록을 불러오는 중입니다</div>
-
-  if (!data) return <div>기록이 없습니다</div>
+  if (!recordingData || !stats) return <div>기록이 없습니다</div>
 
   const {
     homeTeam,
@@ -49,7 +29,7 @@ const OtherTeamLiveRecordPage = ({
     homeTeamNegativePercent,
     awayTeamPositivePercent,
     awayTeamNegativePercent,
-  } = data.data
+  } = stats
 
   return (
     <AppScreen
@@ -59,28 +39,20 @@ const OtherTeamLiveRecordPage = ({
           renderIcon: () => (
             <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
           ),
-          onClick: () => {
-            pop()
-          },
+          onClick: goBack,
         },
         height: '48px',
       }}
     >
       <div className="flex flex-col items-center justify-center max-h-full px-4 pt-4">
-        {/* 경기 정보 */}
         <GameInfoCard recordingData={recordingData} className="mb-6" />
 
         <div
           className={cn(
             'rounded-t-xlarge border-none border-usage-border-strong bg-usage-background-subtle w-screen h-screen -px-4',
           )}
-          style={{
-            background: bgColor
-              ? `linear-gradient(to bottom, ${bgColor}, bg-brand-neutral-90 50%)`
-              : 'bg-brand-neutral-90',
-          }}
+          style={gradientStyle}
         >
-          {/* 텍스트 */}
           <div
             className={cn(
               'flex flex-col items-center text-center w-full px-4',
@@ -93,7 +65,7 @@ const OtherTeamLiveRecordPage = ({
             <p className="mb-6 body-sm-light text-usage-text-subtle">
               다른 팬들의 감정을 실시간으로 확인해보세요.
             </p>
-            {/* 팀 감정분포 */}
+
             <TeamsEmotionStat
               homeTeamKey={homeTeam}
               awayTeamKey={awayTeam}
@@ -103,9 +75,10 @@ const OtherTeamLiveRecordPage = ({
               awayNegative={awayTeamNegativePercent}
             />
           </div>
+
           <RecordCameraButton
-            matchRecordId={recordingData.matchRecordId}
-            initialImages={recordingData.imageList}
+            matchRecordId={matchRecordId}
+            initialImages={imageList}
             className="fixed -translate-x-1/2 bottom-10 left-1/2 w-max"
           />
         </div>
