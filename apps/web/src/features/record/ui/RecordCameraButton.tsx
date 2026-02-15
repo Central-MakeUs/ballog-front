@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from 'react'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 import type { ImageData } from '@ballog/bridge/types'
+import { CameraIcon } from '@ballog/asset/icons'
 
 import { useModal } from '@/shared/hooks/modal/useModal'
 import { useRecordingImages } from '@/features/record/hooks/useRecordImages'
 import { useWebViewBridgeListener } from '@/features/record/hooks/useWebViewBridgeListener'
 import { useImageUpload } from '@/features/image-management/hooks'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
-import CameraIcon from '@/assets/cameraIcon.svg?react'
 import RightArrow from '@/assets/RightArrow'
 import { cn } from '@/shared/lib/classnames'
 

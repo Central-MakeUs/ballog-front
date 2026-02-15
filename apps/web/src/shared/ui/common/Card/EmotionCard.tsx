@@ -1,8 +1,7 @@
-import { Pie, PieChart } from 'recharts'
+import { AngryEmotionNoShadow, JoyEmotionNoShadow } from '@ballog/asset/icons'
 import type { ComponentProps } from 'react'
+import { Pie, PieChart } from 'recharts'
 
-import AngryEmotion from '@/assets/angryEmotionNoShadow.svg?react'
-import JoyEmotion from '@/assets/joyEmotionNoShadow.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
 interface EmotionPieChartData {
@@ -27,8 +26,8 @@ const EmotionBadge = ({
 }) => {
   const isAngry = emotion === '화나요'
   const emotionIcon = {
-    화나요: <AngryEmotion className="w-5 h-5" />,
-    기뻐요: <JoyEmotion className="w-5 h-5" />,
+    화나요: <AngryEmotionNoShadow className="w-5 h-5" />,
+    기뻐요: <JoyEmotionNoShadow className="w-5 h-5" />,
   }
 
   return (
@@ -170,11 +169,11 @@ const Disabled = ({ className, ...rest }: DisabledEmotionCardProps) => (
     <div className="flex items-center justify-center w-full h-full rounded-full bg-usage-background-strong">
       <div className="flex items-center justify-center gap-4 mt-4.25 text-brand-neutral-white min-w-30 min-h-30">
         <div className="flex flex-col items-center">
-          <AngryEmotion className="w-8 h-8" />
+          <AngryEmotionNoShadow className="w-8 h-8" />
           <p className="body-sm-bold text-usage-text-default">- %</p>
         </div>
         <div className="flex flex-col items-center">
-          <JoyEmotion className="w-8 h-8" />
+          <JoyEmotionNoShadow className="w-8 h-8" />
           <p className="body-sm-bold text-usage-text-default">- %</p>
         </div>
       </div>

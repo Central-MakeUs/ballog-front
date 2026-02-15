@@ -1,8 +1,7 @@
 import type { ComponentProps } from 'react'
+import { AngryEmotion, JoyEmotion } from '@ballog/asset/icons'
 
 import { cn } from '@/shared/lib/classnames'
-import JoyEmotion from '@/assets/joyEmotion.svg?react'
-import AngryEmotion from '@/assets/angryEmotion.svg?react'
 
 interface RecordLogProgressProps extends ComponentProps<'div'> {
   positiveEmotionPercent: number
