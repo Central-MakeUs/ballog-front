@@ -1,0 +1,18 @@
+{
+  "name": "@ballog/svg2tsx",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate:help": "node --import tsx src/cli.ts --help",
+    "generate:web": "node --import tsx src/cli.ts --input ../../asset/assets/svg --output ../../asset/src/generated",
+    "generate:web:skip": "node --import tsx src/cli.ts --input ../../asset/assets/svg --output ../../asset/src/generated --skip-existing"
+  },
+  "dependencies": {
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
+    "fast-glob": "^3.3.3",
+    "tsx": "^4.20.6"
+  }
+}
