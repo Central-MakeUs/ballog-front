@@ -3,13 +3,15 @@ import { ChevronDownIcon } from 'lucide-react'
 import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
 import { ko } from 'date-fns/locale'
 import { format } from 'date-fns-tz'
+import {
+  CalendarLeftArrow as LeftArrow,
+  CalendarRightArrow as RightArrow,
+} from '@ballog/asset/icons'
 
 import type { MatchDateMap } from '@/entities/match/model/match.type'
 import { TIME_ZONE } from '@/shared/constants/time'
 import { cn } from '@/shared/lib/classnames'
 import { Button } from '@/shared/ui/common/Button/Button'
-import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
-import RightArrow from '@/assets/calendarRightArrow.svg?react'
 
 function Calendar({
   className,

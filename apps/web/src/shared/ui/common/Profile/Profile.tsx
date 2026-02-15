@@ -1,9 +1,8 @@
 import type { ComponentProps } from 'react'
+import { CameraNoBorder, CameraWithBorder } from '@ballog/asset/icons'
 
 import DefaultProfile from '@/assets/defaultProfile.png'
 import { cn } from '@/shared/lib/classnames'
-import CameraNoBorder from '@/assets/cameraNoBorder.svg?react'
-import CameraWithBorder from '@/assets/cameraWithBorder.svg?react'
 
 interface ProfileProps extends ComponentProps<'div'> {
   border: boolean

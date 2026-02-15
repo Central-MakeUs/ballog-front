@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import type { ComponentProps } from 'react'
+import { MatchEmpty } from '@ballog/asset/icons'
 
-import MatchEmpty from '@/assets/matchEmpty.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
 interface DisabledProps extends ComponentProps<'div'> {

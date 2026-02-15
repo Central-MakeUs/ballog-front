@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from 'react'
 import { addMonths, endOfMonth, startOfMonth } from 'date-fns'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toZonedTime, format } from 'date-fns-tz'
+import {
+  CalendarLeftArrow as LeftArrow,
+  CalendarRightArrow as RightArrow,
+} from '@ballog/asset/icons'
 
 // import CalendarIcon from '@/assets/calendar.svg?react'
 import CalendarIcon from '@/assets/CalendarIcon'
-import LeftArrow from '@/assets/calendarLeftArrow.svg?react'
-import RightArrow from '@/assets/calendarRightArrow.svg?react'
 import { Calendar } from '@/features/calendar/ui/calendar'
 import { useTomorrowTrigger } from '@/features/calendar/hooks/useTomorrowTrigger'
 import type { MatchDateMap } from '@/entities/match/model/match.type'

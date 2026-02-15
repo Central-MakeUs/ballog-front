@@ -1,7 +1,7 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { useEffect } from 'react'
+import { WhiteBallogLogo } from '@ballog/asset/icons'
 
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { Button } from '@/shared/ui/common'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 import { useFlow } from '@/app/routes/stackflow'

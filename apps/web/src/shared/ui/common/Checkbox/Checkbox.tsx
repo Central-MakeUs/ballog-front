@@ -1,6 +1,6 @@
 import React from 'react'
+import { CheckStroke } from '@ballog/asset/icons'
 
-import CheckStroke from '@/assets/CheckStroke.svg?react'
 import { cn } from '@/shared/lib/classnames'
 
 interface CheckboxProps {

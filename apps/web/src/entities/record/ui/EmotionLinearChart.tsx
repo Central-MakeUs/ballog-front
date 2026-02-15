@@ -7,10 +7,9 @@ import {
   Line,
   CartesianGrid,
 } from 'recharts'
+import { AngryEmotion, JoyEmotion } from '@ballog/asset/icons'
 
 import { type ChartConfig, ChartContainer } from '@/shared/ui/common/chart'
-import JoyEmotion from '@/assets/joyEmotion.svg?react'
-import AngryEmotion from '@/assets/angryEmotion.svg?react'
 import { type EmotionType } from '@/entities/record/model/record.type'
 import { cn } from '@/shared/lib/classnames'
 

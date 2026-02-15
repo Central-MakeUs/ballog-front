@@ -1,15 +1,16 @@
 import React from 'react'
-
-import LgIcon from '@/assets/lgIcon.svg?react'
-import DoosanIcon from '@/assets/doosanIcon.svg?react'
-import KtIcon from '@/assets/ktIcon.svg?react'
-import KiaIcon from '@/assets/kiaIcon.svg?react'
-import LotteIcon from '@/assets/lotteIcon.svg?react'
-import KiwoomIcon from '@/assets/kiwoomIcon.svg?react'
-import SamsungIcon from '@/assets/samsungIcon.svg?react'
-import NcIcon from '@/assets/ncIcon.svg?react'
-import SsgIcon from '@/assets/ssgIcon.svg?react'
-import HanhwaIcon from '@/assets/hanwhaIcon.svg?react'
+import {
+  DoosanIcon,
+  HanwhaIcon,
+  KiaIcon,
+  KiwoomIcon,
+  KtIcon,
+  LgIcon,
+  LotteIcon,
+  NcIcon,
+  SamsungIcon,
+  SsgIcon,
+} from '@ballog/asset/icons'
 
 type SvgComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>
 
@@ -37,7 +38,7 @@ export const TEAM_ICONS: Record<TeamKey, SvgComponent | null> = {
   LOTTE_GIANTS: LotteIcon,
   SAMSUNG_LIONS: SamsungIcon,
   KIWOOM_HEROES: KiwoomIcon,
-  HANWHA_EAGLES: HanhwaIcon,
+  HANWHA_EAGLES: HanwhaIcon,
   KIA_TIGERS: KiaIcon,
   KT_WIZ: KtIcon,
   LG_TWINS: LgIcon,
