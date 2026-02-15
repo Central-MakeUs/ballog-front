@@ -3,15 +3,15 @@ import { useQuery, type UseQueryResult } from '@tanstack/react-query'
 import { toZonedTime } from 'date-fns-tz'
 import { toast } from 'sonner'
 
-import { queryKeys } from '@/entities/record/api/record.queries'
-import type {
-  RecordDetailResponse,
-  RecordResult,
-} from '@/entities/record/model/record.type'
+import {
+  queryKeys,
+  type RecordDetailResponse,
+  type RecordResult,
+  type RecordDetailResponseDTO,
+} from '@/entities/record'
 import type { TeamKey } from '@/shared/constants/teams'
 import { TIME_ZONE } from '@/shared/constants/time'
 import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
-import type { RecordDetailResponseDTO } from '@/entities/record/model/record.type'
 
 interface UseGetRecordDetailParams {
   matchRecordId: number

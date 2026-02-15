@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { emotionPost } from '@/entities/record/api/emotion-post'
-import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
-import { emotions } from '@/entities/record/api/emotion.queries'
+import {
+  emotionPost,
+  emotions,
+  type EmotionResponseDTO,
+} from '@/entities/record'
 import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
 
 interface PostEmotionProps {

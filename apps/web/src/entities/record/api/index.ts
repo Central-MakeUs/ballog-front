@@ -1,1 +1,6 @@
-export * from './emotion-get'
+export * from './emotion.api'
+export * from './emotion.queries'
+export * from './record.api'
+export * from './record.queries'
+export * from './recording.api'
+export * from './recording.queries'
