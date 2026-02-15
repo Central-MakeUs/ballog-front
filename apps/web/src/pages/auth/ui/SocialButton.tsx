@@ -51,8 +51,9 @@ export const AppleButton = ({ className, ...props }: SocialButtonProps) => {
       rightIcon={<Chevron className="size-6" />}
       size="lg"
       className={cn(
-        'bg-brand-neutral-5 justify-between body-sm-medium text-usage-text-inverse',
-        'active:bg-brand-neutral-5/80 py-4',
+        'bg-brand-neutral-5 justify-between body-sm-medium text-brand-neutral-90',
+        'dark:bg-brand-neutral-90 dark:text-brand-neutral-5',
+        'active:bg-brand-neutral-5/80 dark:active:bg-brand-neutral-90/80 py-4',
         className,
       )}
       onClick={() => {
