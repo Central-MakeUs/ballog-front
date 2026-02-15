@@ -3,7 +3,7 @@ import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { Banner } from '@/entities/auth/ui/Banner'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 import { KakaoButton, AppleButton } from './SocialButton'
 
@@ -11,7 +11,7 @@ const LoginPage: ActivityComponentType = () => {
   return (
     <AppScreen
       appBar={{
-        title: <img src={WhiteBallogLogo} alt="ballog" />,
+        title: <BallogAppBar aria-label="ballog" />,
         height: '48px',
       }}
     >

@@ -1,0 +1,16 @@
+{
+  "name": "@ballog/asset",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./icons": "./src/generated/index.ts"
+  },
+  "scripts": {
+    "icons:generate": "pnpm --filter @ballog/svg2tsx generate:web",
+    "icons:generate:skip": "pnpm --filter @ballog/svg2tsx generate:web:skip"
+  },
+  "devDependencies": {
+    "@ballog/svg2tsx": "workspace:*"
+  }
+}

@@ -6,7 +6,7 @@ import { TermAgreementForm } from '@/pages/auth/ui/TermAgreementForm'
 import { useFlow } from '@/app/routes/stackflow'
 import { type TermItemData } from '@/entities/term/model/term.type'
 import { TERM_ID } from '@/entities/term/constants/termId'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 // terms에서 id에 따라 checked 여부를 추출하여 반환
 const extractTermData = (terms: TermItemData[]) => {
@@ -31,10 +31,12 @@ const TermAgreePage = () => {
   return (
     <AppScreen
       appBar={{
-        title: <WhiteBallogLogo />,
+        title: <BallogAppBar />,
         height: '48px',
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => (
+            <BackArrow className="text-brand-neutral-70 dark:text-brand-neutral-white" />
+          ),
         },
       }}
       preventSwipeBack={true}

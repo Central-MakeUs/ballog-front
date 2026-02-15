@@ -2,4 +2,4 @@
 import tripleConfig from './tripleConfig.js'
 import tripleTypeChecking from './tripleTypeChecking.js'
 
-export default [tripleConfig, tripleTypeChecking]
+export default [...tripleConfig, ...tripleTypeChecking]

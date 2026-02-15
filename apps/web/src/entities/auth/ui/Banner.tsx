@@ -1,12 +1,12 @@
-import LoginPageIcon from '@/assets/loginPageIcon.svg'
+import { LoginPageIcon } from '@ballog/asset/icons'
 
 // Entities에는 순수 데이터 표시
 export const Banner = () => {
   return (
     <div className="flex flex-col items-center">
-      <img src={LoginPageIcon} alt="ballog icon" className="w-20 h-20 mb-4" />
-      <p className="text-center text-lg body-md-bold">
-        오늘의 경기 선택하고 <br /> 감정 기록하기
+      <LoginPageIcon aria-label="ballog icon" className="w-20 h-20 mb-4" />
+      <p className="text-center text-lg body-md-bold text-usage-text-default">
+        나만의 경기 순간 기록하기
       </p>
     </div>
   )

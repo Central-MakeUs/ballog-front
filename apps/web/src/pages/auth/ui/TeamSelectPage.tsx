@@ -5,7 +5,7 @@ import { useFlow } from '@/app/routes/stackflow'
 import type { TeamKey } from '@/shared/constants/teams'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 interface TeamSelectPageProps {
   params: {
@@ -30,10 +30,12 @@ const TeamSelectPage = ({ params }: TeamSelectPageProps) => {
   return (
     <AppScreen
       appBar={{
-        title: <WhiteBallogLogo />,
+        title: <BallogAppBar />,
         height: '48px',
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => (
+            <BackArrow className="text-brand-neutral-70 dark:text-brand-neutral-white" />
+          ),
         },
       }}
       preventSwipeBack={true}

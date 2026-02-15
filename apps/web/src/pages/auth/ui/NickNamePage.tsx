@@ -12,10 +12,10 @@ import { type ExtendedKyHttpError } from '@/types/api/common'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { BackArrow } from '@/assets/BackArrow'
 import { useFlow } from '@/app/routes/stackflow'
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 import { type TeamKey } from '@/shared/constants/teams'
 import { authQueries } from '@/entities/auth/api/auth.queries'
+import BallogAppBar from '@/assets/BallogAppBar'
 
 interface NickNamePageProps {
   params: {
@@ -52,9 +52,11 @@ const NickNamePage = ({ params }: NickNamePageProps) => {
   return (
     <AppScreen
       appBar={{
-        title: <WhiteBallogLogo />,
+        title: <BallogAppBar />,
         backButton: {
-          renderIcon: () => <BackArrow />,
+          renderIcon: () => (
+            <BackArrow className="text-brand-neutral-70 dark:text-brand-neutral-white" />
+          ),
         },
         height: '48px',
       }}
