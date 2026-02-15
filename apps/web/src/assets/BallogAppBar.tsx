@@ -1,11 +1,10 @@
-import WhiteBallogLogo from '@/assets/whiteBallogLogo.svg?react'
-import ColoredBallogLogo from '@/assets/coloredBallogLogo.svg?react'
+import { ColoredBallogLogo, WhiteBallogLogo } from '@ballog/asset/icons'
 
 const BallogAppBar = () => {
   return (
     <>
-      <WhiteBallogLogo className="hidden dark:block" />
-      <ColoredBallogLogo className="block dark:hidden" />
+      <WhiteBallogLogo className="h-16 w-auto hidden dark:block" />
+      <ColoredBallogLogo className="h-16 w-auto block dark:hidden" />
     </>
   )
 }
