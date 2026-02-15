@@ -1,4 +1,2 @@
-export * from './auth-post'
-export * from './auth-get'
-export * from './auth-patch'
-export * from './auth-delete'
+export * from './auth.api'
+export * from './auth.queries'

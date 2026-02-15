@@ -1,11 +1,26 @@
 import { api } from '@/shared/lib/ky'
 
 import type {
+  ChangeNicknameRequestDTO,
+  ChangeTeamRequestDTO,
+  LogoutResponseDTO,
   SignupRequestDTO,
   SignupResponseDTO,
-  LogoutResponseDTO,
   SocialLoginResponseDTO,
+  UserResponseDTO,
+  WithDrawResponseDTO,
 } from '../model/auth.type'
+
+export const authGet = {
+  getNickname: async (nickname: string) => {
+    const response = await api.get(`/auth/nickname/${nickname}`)
+    return response.json()
+  },
+  getUser: async (): Promise<UserResponseDTO> => {
+    const response = await api.get('mypage/user')
+    return response.json()
+  },
+}
 
 export const authPost = {
   signup: async ({
@@ -38,7 +53,6 @@ export const authPost = {
       .json<SocialLoginResponseDTO>()
     return response
   },
-
   appleLogin: async ({
     authorizationCode,
   }: {
@@ -52,6 +66,32 @@ export const authPost = {
   },
   logout: async (): Promise<LogoutResponseDTO> => {
     const response = await api.post('auth/logout').json<LogoutResponseDTO>()
+    return response
+  },
+}
+
+export const authPatch = {
+  patchUserInfo: async ({
+    nickname,
+    baseballTeam,
+  }: ChangeNicknameRequestDTO) => {
+    const response = await api
+      .patch('mypage/user', { json: { baseballTeam, nickname } })
+      .json<UserResponseDTO>()
+    return response
+  },
+  patchUserTeam: async ({ baseballTeam }: ChangeTeamRequestDTO) => {
+    const response = await api
+      .patch('mypage/user', { json: { baseballTeam } })
+      .json<UserResponseDTO>()
+    return response
+  },
+}
+
+export const authDelete = {
+  deleteUser: async (): Promise<WithDrawResponseDTO> => {
+    const response = await api.delete('auth/withdraw').json<WithDrawResponseDTO>()
+
     return response
   },
 }

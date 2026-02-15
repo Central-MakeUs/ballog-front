@@ -1,13 +1,10 @@
 import { api } from '@/shared/lib/ky'
 
-import type {
-  MacthResponseDTO,
-  MatchByDateResponseDTO,
-} from '../model/match.type'
+import type { MatchResponseDTO, MatchByDateResponseDTO } from '../model/match.type'
 
 export const matchGet = {
-  getTodayMatches: async (): Promise<MacthResponseDTO> => {
-    const response = await api.get('match').json<MacthResponseDTO>()
+  getTodayMatches: async (): Promise<MatchResponseDTO> => {
+    const response = await api.get('match').json<MatchResponseDTO>()
     return response
   },
   getMatchByDate: async (date: string): Promise<MatchByDateResponseDTO> => {
