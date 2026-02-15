@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from 'react'
 import * as RechartsPrimitive from 'recharts'
 
@@ -192,7 +191,6 @@ function ChartTooltipContent({
               )}
             >
               {formatter && item?.value !== undefined && item.name ? (
-                 
                 formatter(item.value, item.name, item, index, item.payload)
               ) : (
                 <>
