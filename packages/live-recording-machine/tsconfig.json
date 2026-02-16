@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig/base.json",
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext"
+  },
+  "include": ["index.ts", "src"]
+}
