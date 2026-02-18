@@ -1,6 +1,7 @@
 import type { ApiResponse } from '@/types/api/common'
 import type { TeamKey } from '@/shared/constants/teams'
 import type { StadiumKey } from '@/shared/constants/stadium'
+
 import type { RecordResult } from './record.type'
 
 export interface RecordingResponse {

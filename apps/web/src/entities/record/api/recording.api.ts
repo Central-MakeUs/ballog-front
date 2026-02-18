@@ -1,5 +1,4 @@
 import { api } from '@/shared/lib/ky'
-
 import type { RecordPatchResult } from '@/entities/record/model/record.type'
 import type {
   RecordingPatchResponseDTO,

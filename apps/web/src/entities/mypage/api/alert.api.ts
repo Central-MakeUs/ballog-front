@@ -1,5 +1,4 @@
 import { api } from '@/shared/lib/ky'
-
 import type { Alert, AlertResponseDTO } from '@/entities/mypage/model/alert.type'
 
 export const alertGet = {

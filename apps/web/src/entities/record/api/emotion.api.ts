@@ -1,5 +1,4 @@
 import { api } from '@/shared/lib/ky'
-
 import type { EmotionResponseDTO } from '@/entities/record/model/emotion.type'
 
 export const emotionGet = {
