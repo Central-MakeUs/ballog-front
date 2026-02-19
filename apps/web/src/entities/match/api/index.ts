@@ -1,1 +1,2 @@
-export * from './match-get'
+export * from './match.api'
+export * from './match.queries'

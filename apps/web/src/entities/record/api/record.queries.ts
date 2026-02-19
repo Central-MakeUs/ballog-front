@@ -1,6 +1,6 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 
-import { recordGet } from './record-get'
+import { recordGet } from './record.api'
 
 export const queryKeys = createQueryKeys('record', {
   getRecord: () => ({

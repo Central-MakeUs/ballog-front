@@ -2,7 +2,11 @@ import { type ApiResponse } from '@/types/api/common'
 import { type TeamKey } from '@/shared/constants/teams'
 import type { StadiumKey } from '@/shared/constants/stadium'
 
-export type RecordResult = 'WIN' | 'LOSE' | 'DRAW' | null
+export type MatchResult = 'WIN' | 'LOSS' | 'DRAW'
+
+export type RecordResult = MatchResult | null
+
+export type RecordPatchResult = MatchResult | 'SKIP'
 
 export type EmotionType = 'POSITIVE' | 'NEGATIVE'
 

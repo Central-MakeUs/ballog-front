@@ -4,10 +4,10 @@ import userEvent from '@testing-library/user-event'
 import { toast } from 'sonner'
 
 import { render } from '@/test/QueryWrapper'
-import { recordGet } from '@/entities/record/api/record-get'
+import { recordGet } from '@/entities/record/api/record.api'
 import type { RecordResult } from '@/entities/record/model/record.type'
 import type { TeamKey } from '@/shared/constants/teams'
-import { recordDelete } from '@/entities/record/api/record-delete'
+import { recordDelete } from '@/entities/record/api/record.api'
 import { emotionGroupList } from '@/mocks/data/record'
 import type { StadiumKey } from '@/shared/constants/stadium'
 
@@ -32,13 +32,10 @@ vi.mock('sonner', () => ({
   toast: vi.fn(),
 }))
 
-vi.mock('@/entities/record/api/record-get', () => ({
+vi.mock('@/entities/record/api/record.api', () => ({
   recordGet: {
     getRecordDetail: vi.fn(),
   },
-}))
-
-vi.mock('@/entities/record/api/record-delete', () => ({
   recordDelete: {
     deleteRecord: vi.fn(),
   },

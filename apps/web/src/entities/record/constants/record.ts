@@ -1,7 +1,4 @@
-import type {
-  RecordResponse,
-  RecordDetailResponse,
-} from '@/entities/record/model/record.type'
+import type { RecordResponse, RecordDetailResponse } from '../model/record.type'
 
 interface RecordMainData {
   RecordMain: RecordResponse

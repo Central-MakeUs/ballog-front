@@ -2,7 +2,7 @@ import type { ApiResponse } from '@/types/api/common'
 import type { TeamKey } from '@/shared/constants/teams'
 import type { StadiumKey } from '@/shared/constants/stadium'
 
-export type RecordResult = 'WIN' | 'LOSE' | 'DRAW' | null
+import type { RecordResult } from './record.type'
 
 export interface RecordingResponse {
   matchRecordId: number
@@ -19,7 +19,7 @@ export interface RecordingResponse {
   }
   userId: number
   watchCnt: number
-  result: 'WIN' | 'LOSS' | 'DRAW' | null
+  result: RecordResult
   baseballTeam: TeamKey
   positiveEmotionPercent: number
   negativeEmotionPercent: number

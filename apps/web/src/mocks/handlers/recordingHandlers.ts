@@ -5,9 +5,8 @@ import type {
   RecordingResponseDTO,
   RecordingPostResponseDTO,
 } from '@/entities/record/model/recording.type'
+import type { RecordPatchResult } from '@/entities/record/model/record.type'
 import type { ApiErrorMessage } from '@/types/api/common'
-
-type MatchResult = 'WIN' | 'LOSS' | 'DRAW' | 'SKIP'
 
 const MATCH_API_PREFIX = `${import.meta.env.VITE_PUBLIC_API_URL}/api/v1/record`
 
@@ -48,7 +47,7 @@ export const recordingHandlers = [
   http.patch<{ recordId: string }>(
     `${MATCH_API_PREFIX}/:recordId/result`,
     async ({ request }) => {
-      const body = (await request.json()) as { result: MatchResult }
+      const body = (await request.json()) as { result: RecordPatchResult }
 
       const isValidResult = ['WIN', 'LOSS', 'DRAW', 'SKIP'].includes(
         body.result,

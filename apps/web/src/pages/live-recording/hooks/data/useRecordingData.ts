@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { recording } from '@/entities/record/api/recording.queries'
-import { recordingPost } from '@/entities/record/api/recording-post'
+import { recording, recordingPost } from '@/entities/record'
 import { useLiveRecordContext } from '@/pages/live-recording/contexts/LiveRecordContext'
 
 interface UseRecordingDataOptions {

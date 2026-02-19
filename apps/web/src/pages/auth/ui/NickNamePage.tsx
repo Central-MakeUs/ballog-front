@@ -14,7 +14,7 @@ import { BackArrow } from '@/assets/BackArrow'
 import { useFlow } from '@/app/routes/stackflow'
 import { useStack } from '@/shared/hooks/stackflow/useStack'
 import { type TeamKey } from '@/shared/constants/teams'
-import { authQueries } from '@/entities/auth/api/auth.queries'
+import { authQueries } from '@/entities/auth/api'
 import BallogAppBar from '@/assets/BallogAppBar'
 
 interface NickNamePageProps {
