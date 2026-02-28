@@ -1,42 +1,65 @@
 import { useCallback } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
-import { useTeamDetection } from '../team/useTeamDetection'
+import { recording } from '@/entities/record/api/recording.queries'
+import { useUserQuery } from '@/entities/auth/hooks/useUserQuery'
+import { TEAMS, type TeamKey } from '@/shared/constants/teams'
+import { useLiveRecordContext } from '@/pages/live-recording/contexts/LiveRecordContext'
+import { useLiveRecordingMachineContext } from '@/pages/live-recording/contexts/LiveRecordingMachineContext'
+import { useEmotionVote } from '@/pages/live-recording/contexts/EmotionVoteContext'
+
 import { useBackgroundGradient } from '../ui/useBackgroundGradient'
-import { usePostEmotion } from '../data/usePostEmotion'
-import { useRecordingData } from '../data/useRecordingData'
-import { useEmotionData } from '../data/useEmotionData'
 
 /**
- * MyTeamLiveRecordPage의 상태와 로직을 통합하는 Facade hook
- * recordingData와 emotionData는 TanStack Query 캐시에서 자동으로 가져옴
+ * MyTeamLiveRecordPage facade
  *
- * @returns 내 팀 페이지에 필요한 데이터와 핸들러
+ * - FSM Context에서 상태/액션을 가져옴
+ * - recordingData는 React Query 캐시에서 읽기 전용으로 조회 (FSM Command가 setQueryData로 채움)
+ * - 팀 판별은 RQ 캐시 기반으로 직접 수행 (useRecordingData의 refetchInterval 회피)
  */
 export const useMyTeamLiveRecord = () => {
-  const { recordingData } = useRecordingData()
-  const { emotionData } = useEmotionData()
-  const { myTeamName } = useTeamDetection()
+  const { matchId } = useLiveRecordContext()
+  const { snapshot, dispatchEmotionClick } = useLiveRecordingMachineContext()
+  const { joyPercent, angryPercent } = useEmotionVote()
   const { gradientStyle } = useBackgroundGradient({ direction: 'to top' })
-  const { mutate } = usePostEmotion()
+
+  // 유저 정보
+  const { user } = useUserQuery()
+  const myTeamKey = user?.baseballTeam as TeamKey | undefined
+  const myTeamName = myTeamKey ? TEAMS[myTeamKey] : undefined
+
+  // RQ 캐시에서 읽기 전용 (FSM Command가 채워줌, 폴링 없음)
+  const { data: recordingResponse } = useQuery({
+    ...recording.getRecording(matchId),
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
+  const recordingData = recordingResponse?.data
+
+  // 팀 판별 (useTeamDetection이 useRecordingData를 호출하므로 직접 수행)
+  const isMyTeam =
+    !!recordingData &&
+    !!myTeamKey &&
+    (myTeamKey === recordingData.homeTeam ||
+      myTeamKey === recordingData.awayTeam)
 
   const handleEmotionSubmit = useCallback(
     (emotionType: 'POSITIVE' | 'NEGATIVE') => {
-      if (!recordingData) return
-      mutate({
-        matchRecordId: recordingData.matchRecordId,
-        emotionType,
-      })
+      dispatchEmotionClick(emotionType)
     },
-    [mutate, recordingData],
+    [dispatchEmotionClick],
   )
 
   return {
     recordingData,
-    emotionData,
+    isMyTeam,
     teamName: myTeamName ?? '',
     gradientStyle,
     handleEmotionSubmit,
+    machineState: snapshot.state,
     matchRecordId: recordingData?.matchRecordId ?? 0,
     imageList: recordingData?.imageList ?? [],
+    joyPercent,
+    angryPercent,
   }
 }
