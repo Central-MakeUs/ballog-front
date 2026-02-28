@@ -15,14 +15,14 @@ export class UpdatingState extends State {
         this.context.resetRetryCount()
 
         if (event.gameEnded || event.timeExpired) {
+          this.context.clearEmotionIntents()
           this.context.transitionTo(new TerminateState())
           return this.terminateOnce()
         }
 
         this.context.transitionTo(new RecordingState())
 
-        const intent = this.context.getLastEmotionIntent()
-        this.context.setLastEmotionIntent(null)
+        const intent = this.context.dequeueEmotionIntent()
 
         if (!intent) {
           return []
@@ -44,9 +44,14 @@ export class UpdatingState extends State {
           },
         ]
 
+      case 'EMOTION_CLICK':
+        this.context.enqueueEmotionIntent(event.emotion)
+        return []
+
       case 'TIME_EXPIRED':
       case 'GAME_ENDED':
         this.context.setUpdating(false)
+        this.context.clearEmotionIntents()
         this.context.transitionTo(new TerminateState())
         return this.terminateOnce()
 

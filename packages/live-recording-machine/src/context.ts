@@ -15,7 +15,7 @@ export class LiveRecordingContext {
   private isUpdating = false
   private retryCount = 0
   private readonly maxRetry: number
-  private lastEmotionIntent: EmotionType | null = null
+  private emotionIntentQueue: EmotionType[] = []
   private terminationRequested = false
 
   constructor(initialState: State, options?: LiveRecordingMachineOptions) {
@@ -38,7 +38,7 @@ export class LiveRecordingContext {
       isUpdating: this.isUpdating,
       retryCount: this.retryCount,
       maxRetry: this.maxRetry,
-      lastEmotionIntent: this.lastEmotionIntent,
+      lastEmotionIntent: this.emotionIntentQueue[0] ?? null,
       terminationRequested: this.terminationRequested,
     }
   }
@@ -55,12 +55,16 @@ export class LiveRecordingContext {
     return this.isUpdating
   }
 
-  public setLastEmotionIntent(intent: EmotionType | null): void {
-    this.lastEmotionIntent = intent
+  public enqueueEmotionIntent(emotion: EmotionType): void {
+    this.emotionIntentQueue.push(emotion)
   }
 
-  public getLastEmotionIntent(): EmotionType | null {
-    return this.lastEmotionIntent
+  public dequeueEmotionIntent(): EmotionType | null {
+    return this.emotionIntentQueue.shift() ?? null
+  }
+
+  public clearEmotionIntents(): void {
+    this.emotionIntentQueue = []
   }
 
   public incrementRetryCount(): void {

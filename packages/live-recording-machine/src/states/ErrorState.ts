@@ -18,9 +18,8 @@ export class ErrorState extends State {
         this.context.setUpdating(true)
         this.context.transitionTo(new UpdatingState())
 
-        const intent = this.context.getLastEmotionIntent()
+        const intent = this.context.dequeueEmotionIntent()
         if (intent) {
-          this.context.setLastEmotionIntent(null)
           return [{ type: 'START_UPDATE_FROM_CLICK', emotion: intent }]
         }
 

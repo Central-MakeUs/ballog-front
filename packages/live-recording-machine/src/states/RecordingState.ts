@@ -11,12 +11,11 @@ export class RecordingState extends State {
     switch (event.type) {
       case 'EMOTION_CLICK':
         if (this.context.getUpdating()) {
-          this.context.setLastEmotionIntent(event.emotion)
+          this.context.enqueueEmotionIntent(event.emotion)
           return []
         }
 
         this.context.setUpdating(true)
-        this.context.setLastEmotionIntent(event.emotion)
         this.context.transitionTo(new UpdatingState())
         return [{ type: 'START_UPDATE_FROM_CLICK', emotion: event.emotion }]
 
