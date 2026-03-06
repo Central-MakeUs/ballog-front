@@ -10,13 +10,13 @@ interface BadgeProps extends ComponentProps<'div'> {
 export const Badge = ({ result = 'DRAW', className, ...rest }: BadgeProps) => {
   const badgeColor = {
     WIN: 'bg-brand-green-subtle text-brand-green-default',
-    LOSE: 'bg-brand-red-subtle text-brand-red-default',
+    LOSS: 'bg-brand-red-subtle text-brand-red-default',
     DRAW: 'bg-brand-secondary-subtle text-brand-neutral-70',
   }[result ?? 'DRAW']
 
   const badgeText = {
     WIN: '승리',
-    LOSE: '패배',
+    LOSS: '패배',
     DRAW: '무승부',
   }[result ?? 'DRAW']
 

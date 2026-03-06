@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
-import { fcmPost } from '@/entities/fcm/api/fcm-post'
+import { fcmPost } from '@/entities/fcm/api'
 
 interface FcmTokenPayload {
   token: string

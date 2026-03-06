@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { format, toZonedTime } from 'date-fns-tz'
 import { isBefore, isAfter, isToday } from 'date-fns'
 
-import { matches } from '@/entities/match/api/match.queries'
+import { matches } from '@/entities/match/api'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { MatchSection } from '@/features/match/ui/MatchSection'
 import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'

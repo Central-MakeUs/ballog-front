@@ -1,7 +1,7 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { useQuery } from '@tanstack/react-query'
 
-import { alertGet } from './alert-get'
+import { alertGet } from './alert.api'
 
 export const alertQueryKeys = createQueryKeys('alert', {
   setting: () => ({

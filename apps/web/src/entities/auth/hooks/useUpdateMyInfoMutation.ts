@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { authPatch } from '../api'
-import { authQueries } from '../api/auth.queries'
+import { authQueries } from '../api'
 
 export const useUpdateMyInfoMutation = () => {
   const queryClient = useQueryClient()

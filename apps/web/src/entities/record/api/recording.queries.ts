@@ -1,6 +1,6 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 
-import { recordingGet } from './recording-get'
+import { recordingGet } from './recording.api'
 
 export const recording = createQueryKeys('recording', {
   getRecording: (matchId: number) => ({

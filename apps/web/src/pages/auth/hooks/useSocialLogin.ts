@@ -8,7 +8,7 @@ import { useCallback, useSyncExternalStore } from 'react'
 
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
-import { authPost } from '@/entities/auth/api/auth-post'
+import { authPost } from '@/entities/auth/api'
 import type { SocialLoginResponseDTO } from '@/entities/auth/model/auth.type'
 import type { ExtendedKyHttpError } from '@/types/api/common'
 import { mswEnabledStore } from '@/mocks/browser'

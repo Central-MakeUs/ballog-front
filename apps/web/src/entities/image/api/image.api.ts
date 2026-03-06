@@ -6,9 +6,6 @@ import type {
   ImageUploadResponseDTO,
 } from '../model/image.type'
 
-/**
- * presigned URL을 요청합니다
- */
 export const getPresignedUrl = async (
   originalFileName: string,
 ): Promise<PresignedUrlResponseDTO> => {
@@ -19,14 +16,10 @@ export const getPresignedUrl = async (
   return response
 }
 
-/**
- * S3에 파일을 업로드합니다
- */
 export const uploadToS3 = async (
   presignedUrl: string,
   file: File,
 ): Promise<void> => {
-  // presigned URL로 직접 PUT 요청
   await fetch(presignedUrl, {
     method: 'PUT',
     body: file,
@@ -36,9 +29,6 @@ export const uploadToS3 = async (
   })
 }
 
-/**
- * 서버에 이미지 정보를 저장합니다
- */
 export const saveImageToServer = async (
   imageRequest: ImageRequestDTO,
 ): Promise<ImageUploadResponseDTO> => {

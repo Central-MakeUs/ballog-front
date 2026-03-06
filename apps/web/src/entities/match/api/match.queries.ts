@@ -1,6 +1,6 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 
-import { matchGet } from './match-get'
+import { matchGet } from './match.api'
 
 export const matches = createQueryKeys('matches', {
   today: () => ({

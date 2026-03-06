@@ -8,8 +8,7 @@ import { Button } from '@/shared/ui/common'
 import { useModal } from '@/shared/hooks/modal/useModal'
 import { useFlow } from '@/app/routes/stackflow'
 import { useImageContext } from '@/features/record/hooks/useImageContext'
-import { recordDelete } from '@/entities/record/api/record-delete'
-import { queryKeys } from '@/entities/record/api/record.queries'
+import { recordDelete, queryKeys } from '@/entities/record'
 
 export const BottomButtonGroup = ({ recordId }: { recordId: number }) => {
   const { openHorizontalModal } = useModal()

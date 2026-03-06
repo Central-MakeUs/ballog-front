@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { screen, waitFor } from '@testing-library/react'
 
-import { recordGet } from '@/entities/record/api/record-get'
+import { recordGet } from '@/entities/record/api/record.api'
 import { render } from '@/test/QueryWrapper'
 
 import { RecordMainPage } from '../ui/RecordMainPage'
@@ -31,7 +31,7 @@ vi.mock('@/app/routes/stackflow', () => ({
   useStepFlow: vi.fn(),
 }))
 
-vi.mock('@/entities/record/api/record-get', () => ({
+vi.mock('@/entities/record/api/record.api', () => ({
   recordGet: {
     getRecord: vi.fn(),
   },

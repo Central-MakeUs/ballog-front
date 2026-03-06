@@ -7,7 +7,7 @@ import { useFlow } from '@/app/routes/stackflow'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { useBridgeEvent } from '@/shared/hooks/bridge/useBridgeEvent'
 import { useAccessTokenStorage } from '@/shared/hooks/auth/useAccessTokenStorage'
-import { authQueries } from '@/entities/auth/api/auth.queries'
+import { authQueries } from '@/entities/auth/api'
 
 export const useAuthAction = () => {
   const { replace } = useFlow()

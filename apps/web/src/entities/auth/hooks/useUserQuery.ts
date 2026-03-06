@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { authQueries } from '@/entities/auth/api/auth.queries'
+import { authQueries } from '@/entities/auth/api'
 import { useAccessTokenStorage } from '@/shared/hooks/auth/useAccessTokenStorage'
 
 export const useUserQuery = () => {
@@ -17,5 +17,4 @@ export const useUserQuery = () => {
 
   return { user, userQuery }
 }
-
 

@@ -5,13 +5,15 @@ import { toast } from 'sonner'
 import { IntuitionCard } from '@/shared/ui/common/Card/intuitionCard'
 import { RecordList } from '@/features/record/ui/RecordList'
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
-import { queryKeys } from '@/entities/record/api/record.queries'
+import {
+  queryKeys,
+  type RecordResponseDTO,
+  DEFAULT_RECORD_DATA,
+} from '@/entities/record'
 import { Loading } from '@/shared/ui/common'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { AppLayout } from '@/shared/ui/layout/AppLayout'
 import { SectionHeader } from '@/shared/ui/common'
-import type { RecordResponseDTO } from '@/entities/record/model/record.type'
-import { DEFAULT_RECORD_DATA } from '@/entities/record/constants/record'
 
 const RecordMainContent = ({
   data,

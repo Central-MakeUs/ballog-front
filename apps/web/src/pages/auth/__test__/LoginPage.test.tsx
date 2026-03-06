@@ -17,7 +17,7 @@ vi.mock('@/shared/lib/stackflow', () => ({
 const mockKakaoLogin = vi.fn()
 const mockAppleLogin = vi.fn()
 
-vi.mock('@/entities/auth/api/auth-post', () => ({
+vi.mock('@/entities/auth/api', () => ({
   authPost: {
     kakaoLogin: () => mockKakaoLogin,
     appleLogin: () => mockAppleLogin,

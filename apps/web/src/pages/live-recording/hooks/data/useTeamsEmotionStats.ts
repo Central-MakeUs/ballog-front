@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { queryKeys } from '@/entities/record/api/record.queries'
+import { queryKeys } from '@/entities/record'
 
 const REFETCH_INTERVAL = 30_000 // 30초
 

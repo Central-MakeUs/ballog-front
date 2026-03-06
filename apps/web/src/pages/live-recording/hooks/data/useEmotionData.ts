@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { emotions } from '@/entities/record/api/emotion.queries'
+import { emotions } from '@/entities/record'
 
 import { useRecordingData } from './useRecordingData'
 

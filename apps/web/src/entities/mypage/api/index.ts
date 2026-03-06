@@ -1,4 +1,4 @@
-export * from './alert-get'
-export * from './alert-patch'
+export * from './alert.api'
 export * from './alert.queries'
-export * from './query-keys'
+export * from './mypage.api'
+export * from './mypage.queries'
