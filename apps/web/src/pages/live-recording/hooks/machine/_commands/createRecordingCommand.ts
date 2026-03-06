@@ -1,4 +1,4 @@
-import { recordingPost } from '@/entities/record/api/recording-post'
+import { recordingPost } from '@/entities/record'
 import { recording } from '@/entities/record/api/recording.queries'
 
 import type { CommandHandler } from './types'

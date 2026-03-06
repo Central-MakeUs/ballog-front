@@ -1,4 +1,4 @@
-import { emotionPost } from '@/entities/record/api/emotion-post'
+import { emotionPost } from '@/entities/record'
 import { emotions } from '@/entities/record/api/emotion.queries'
 import { matches } from '@/entities/match/api/match.queries'
 

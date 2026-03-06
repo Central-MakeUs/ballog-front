@@ -1,4 +1,4 @@
-import { recordingGet } from '@/entities/record/api/recording-get'
+import { recordingGet } from '@/entities/record'
 import { recording } from '@/entities/record/api/recording.queries'
 
 import type { CommandHandler } from './types'

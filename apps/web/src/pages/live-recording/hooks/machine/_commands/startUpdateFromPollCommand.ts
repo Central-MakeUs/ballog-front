@@ -1,4 +1,4 @@
-import { emotionGet } from '@/entities/record/api/emotion-get'
+import { emotionGet } from '@/entities/record'
 import { matches } from '@/entities/match/api/match.queries'
 
 import type { CommandHandler } from './types'
