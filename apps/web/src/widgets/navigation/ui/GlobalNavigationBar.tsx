@@ -3,7 +3,6 @@ import { CommunityGNB } from '@ballog/asset/icons'
 
 import HomeGNB from '@/assets/HomeGNB'
 import RecordGNB from '@/assets/RecordGNB'
-import MypageGNB from '@/assets/MyPageGNB'
 import { useFlow, activities, actions } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { GNBButton } from '@/shared/ui/common'
@@ -31,11 +30,6 @@ const NAV_ITEMS: NavItem[] = [
     icon: RecordGNB,
     activity: 'Record',
   },
-  // {
-  //   label: '마이페이지',
-  //   icon: MypageGNB,
-  //   activity: 'My',
-  // },
 ]
 
 // 타입 가드 함수

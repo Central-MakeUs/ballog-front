@@ -1,10 +1,11 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { Notification } from '@ballog/asset/icons'
 import { AngryEmotion, GrayInfoIcon, JoyEmotion } from '@ballog/asset/icons'
 
+import { useFlow } from '@/app/routes/stackflow'
 import RightArrow from '@/assets/RightArrow'
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import BallogAppBar from '@/assets/BallogAppBar'
+import { HomeHeaderV2 } from '@/features/home/ui/HomeHeaderV2'
+import { useUserQuery } from '@/entities/auth/hooks'
 
 interface FriendCard {
   nickname: string
@@ -102,96 +103,86 @@ const FriendEmotionCard = ({ nickname, team, emotion, tone }: FriendCard) => {
   )
 }
 
-export const CommunityPageHeader = () => {
-  return (
-    <header>
-      <div className="flex items-center justify-between pl-5 pr-2 h-14">
-        <button
-          type="button"
-          className="flex items-center text-white body-md-medium light:text-brand-neutral-70"
-        >
-          볼로그님
-          <RightArrow className="text-white size-6 light:text-brand-neutral-70" />
-        </button>
-        <button
-          type="button"
-          className="flex items-center justify-center w-12 h-12"
-        >
-          <Notification className="size-6" />
-        </button>
-      </div>
-    </header>
-  )
-}
-
 export const CommunityPage = () => {
+  const { user } = useUserQuery()
+  const { replace } = useFlow()
+
+  const nickname = user?.nickname ?? '볼로그'
   return (
     <AppScreen>
-      <CommunityPageHeader />
-      <div className="relative w-full pb-32light:bg-brand-neutral-10">
-        <main>
-          <section className="flex items-center justify-between px-8 pt-3.5">
-            <div className="flex flex-col justify-between flex-1 h-22">
-              <div>
-                <h1 className="heading-md-bold light:text-brand-neutral-black">
-                  {HERO_STAT.team}
-                </h1>
-                <div className="mt-0.5 flex items-center gap-1">
-                  <span className="body-lg-bold text-brand-primary-pressed">
-                    {HERO_STAT.rank}
-                  </span>
-                  <span className="body-md-medium light:text-brand-neutral-80">
-                    {HERO_STAT.label}
-                  </span>
-                  <GrayInfoIcon className="size-5" />
+      <div className="flex flex-col w-full h-full light:bg-brand-neutral-10">
+        <HomeHeaderV2
+          nickname={nickname}
+          onProfileClick={() => replace('My', {}, { animate: false })}
+          onNotificationClick={() => {}}
+        />
+        <div className="flex-1 min-h-0 overflow-y-auto">
+          <div className="relative w-full pb-32 light:bg-brand-neutral-10">
+            <main>
+              <section className="flex items-center justify-between px-8 pt-3.5">
+                <div className="flex flex-col justify-between flex-1 h-22">
+                  <div>
+                    <h1 className="text-white heading-md-bold light:text-brand-neutral-black">
+                      {HERO_STAT.team}
+                    </h1>
+                    <div className="mt-0.5 flex items-center gap-1">
+                      <span className="body-lg-bold text-brand-primary-pressed">
+                        {HERO_STAT.rank}
+                      </span>
+                      <span className="text-white body-md-medium light:text-brand-neutral-80">
+                        {HERO_STAT.label}
+                      </span>
+                      <GrayInfoIcon className="size-5" />
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="flex items-center body-sm-medium text-brand-neutral-60"
+                  >
+                    전체 리그 순위
+                    <RightArrow className="size-5 text-brand-neutral-60" />
+                  </button>
                 </div>
-              </div>
 
-              <button
-                type="button"
-                className="flex items-center body-sm-medium text-brand-neutral-60"
-              >
-                전체 리그 순위
-                <RightArrow className="size-5 text-brand-neutral-60" />
-              </button>
-            </div>
+                <div className="flex flex-col items-center gap-2 px-4 py-2 rounded-xlarge">
+                  <AngryEmotion className="size-22 text-brand-red-hover" />
+                  <div className="px-2 py-1 rounded-full bg-brand-red-subtle">
+                    <span className="body-sm-bold text-brand-red-default">
+                      {HERO_STAT.emotion} {HERO_STAT.value}
+                    </span>
+                  </div>
+                </div>
+              </section>
 
-            <div className="flex flex-col items-center gap-2 px-4 py-2 rounded-xlarge">
-              <AngryEmotion className="size-22 text-brand-red-hover" />
-              <div className="px-2 py-1 rounded-full bg-brand-red-subtle">
-                <span className="body-sm-bold text-brand-red-default">
-                  {HERO_STAT.emotion} {HERO_STAT.value}
-                </span>
-              </div>
-            </div>
-          </section>
+              <section className="pt-6">
+                <div className="flex items-center justify-between px-4">
+                  <h2 className="body-md-medium text-usage-text-default">
+                    친구 00 명
+                  </h2>
+                  <button
+                    type="button"
+                    className="text-white body-md-bold light:text-brand-neutral-80"
+                  >
+                    + 친구추가
+                  </button>
+                </div>
 
-          <section className="pt-6">
-            <div className="flex items-center justify-between px-4">
-              <h2 className="body-md-medium text-usage-text-default">
-                친구 00 명
-              </h2>
-              <button
-                type="button"
-                className="text-white body-md-bold light:text-brand-neutral-80"
-              >
-                + 친구추가
-              </button>
-            </div>
+                <div className="grid grid-cols-3 gap-x-[10px] gap-y-4 px-4 pb-8 pt-4">
+                  {FRIEND_CARDS.map((card, index) => (
+                    <FriendEmotionCard
+                      key={`${card.nickname}-${card.emotion}-${index}`}
+                      {...card}
+                    />
+                  ))}
+                </div>
+              </section>
+            </main>
+          </div>
+        </div>
 
-            <div className="grid grid-cols-3 gap-x-[10px] gap-y-4 px-4 pb-8 pt-4">
-              {FRIEND_CARDS.map((card, index) => (
-                <FriendEmotionCard
-                  key={`${card.nickname}-${card.emotion}-${index}`}
-                  {...card}
-                />
-              ))}
-            </div>
-          </section>
-        </main>
+        <GlobalNavigationBar />
       </div>
-
-      <GlobalNavigationBar />
     </AppScreen>
   )
 }

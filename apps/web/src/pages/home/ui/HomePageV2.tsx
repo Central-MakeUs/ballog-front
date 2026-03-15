@@ -1,3 +1,4 @@
+import React from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { type ActivityComponentType } from '@stackflow/react'
 import { useQuery } from '@tanstack/react-query'
@@ -67,10 +68,10 @@ const HomeContentV2 = ({
   }
 
   return (
-    <div className="flex flex-col items-center gap-2 pb-24 w-full">
+    <div className="flex flex-col items-center w-full gap-2 pb-24">
       <CharacterSection emotion={currentEmotion} />
 
-      <div className="flex flex-col gap-4 items-center w-full px-5">
+      <div className="flex flex-col items-center w-full gap-4 px-5">
         {isLoading ? (
           <TodayMatchCardSkeleton />
         ) : isNoMatch ? (
@@ -85,7 +86,7 @@ const HomeContentV2 = ({
 
         <button
           type="button"
-          className="flex items-center gap-1 h-5"
+          className="flex items-center h-5 gap-1"
           onClick={onViewAllMatches}
         >
           <CalendarIcon
