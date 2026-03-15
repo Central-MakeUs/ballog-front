@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { AngryEmotion, GrayInfoIcon, JoyEmotion } from '@ballog/asset/icons'
 
@@ -6,6 +7,7 @@ import RightArrow from '@/assets/RightArrow'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { HomeHeaderV2 } from '@/features/home/ui/HomeHeaderV2'
 import { useUserQuery } from '@/entities/auth/hooks'
+import { KBORankBottomSheet } from './KBORankBottomSheet'
 
 interface FriendCard {
   nickname: string
@@ -106,6 +108,8 @@ const FriendEmotionCard = ({ nickname, team, emotion, tone }: FriendCard) => {
 export const CommunityPage = () => {
   const { user } = useUserQuery()
   const { replace } = useFlow()
+  const [isKBORankBottomSheetOpen, setIsKBORankBottomSheetOpen] =
+    useState(false)
 
   const nickname = user?.nickname ?? '볼로그'
   return (
@@ -139,6 +143,7 @@ export const CommunityPage = () => {
                   <button
                     type="button"
                     className="flex items-center body-sm-medium text-brand-neutral-60"
+                    onClick={() => setIsKBORankBottomSheetOpen(true)}
                   >
                     전체 리그 순위
                     <RightArrow className="size-5 text-brand-neutral-60" />
@@ -182,6 +187,10 @@ export const CommunityPage = () => {
         </div>
 
         <GlobalNavigationBar />
+        <KBORankBottomSheet
+          open={isKBORankBottomSheetOpen}
+          onOpenChange={setIsKBORankBottomSheetOpen}
+        />
       </div>
     </AppScreen>
   )
