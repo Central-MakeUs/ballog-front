@@ -1,4 +1,5 @@
 export * from './Button'
+export * from './Skeleton'
 export * from './carousel'
 export * from './dialog'
 export * from './LazyImage'

@@ -33,6 +33,20 @@ export const teams = Object.values(TEAMS)
 export type Team = (typeof teams)[number]
 export type TeamKey = keyof typeof TEAMS
 
+export const SHORT_TEAM_NAMES: Record<TeamKey, string> = {
+  DOOSAN_BEARS: '두산',
+  LOTTE_GIANTS: '롯데',
+  SAMSUNG_LIONS: '삼성',
+  KIWOOM_HEROES: '키움',
+  HANWHA_EAGLES: '한화',
+  KIA_TIGERS: 'KIA',
+  KT_WIZ: 'KT',
+  LG_TWINS: 'LG',
+  NC_DINOS: 'NC',
+  SSG_LANDERS: 'SSG',
+  NONE: '미정',
+}
+
 export const TEAM_ICONS: Record<TeamKey, SvgComponent | null> = {
   DOOSAN_BEARS: DoosanIcon,
   LOTTE_GIANTS: LotteIcon,
