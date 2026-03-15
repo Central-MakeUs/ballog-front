@@ -7,6 +7,7 @@ import RightArrow from '@/assets/RightArrow'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { HomeHeaderV2 } from '@/features/home/ui/HomeHeaderV2'
 import { useUserQuery } from '@/entities/auth/hooks'
+import { AddFriendBottomSheet } from './AddFriendBottomSheet'
 import { KBORankBottomSheet } from './KBORankBottomSheet'
 
 interface FriendCard {
@@ -110,6 +111,8 @@ export const CommunityPage = () => {
   const { replace } = useFlow()
   const [isKBORankBottomSheetOpen, setIsKBORankBottomSheetOpen] =
     useState(false)
+  const [isAddFriendBottomSheetOpen, setIsAddFriendBottomSheetOpen] =
+    useState(false)
 
   const nickname = user?.nickname ?? '볼로그'
   return (
@@ -143,7 +146,10 @@ export const CommunityPage = () => {
                   <button
                     type="button"
                     className="flex items-center body-sm-medium text-brand-neutral-60"
-                    onClick={() => setIsKBORankBottomSheetOpen(true)}
+                    onClick={() => {
+                      setIsAddFriendBottomSheetOpen(false)
+                      setIsKBORankBottomSheetOpen(true)
+                    }}
                   >
                     전체 리그 순위
                     <RightArrow className="size-5 text-brand-neutral-60" />
@@ -168,6 +174,10 @@ export const CommunityPage = () => {
                   <button
                     type="button"
                     className="text-white body-md-bold light:text-brand-neutral-80"
+                    onClick={() => {
+                      setIsKBORankBottomSheetOpen(false)
+                      setIsAddFriendBottomSheetOpen(true)
+                    }}
                   >
                     + 친구추가
                   </button>
@@ -190,6 +200,10 @@ export const CommunityPage = () => {
         <KBORankBottomSheet
           open={isKBORankBottomSheetOpen}
           onOpenChange={setIsKBORankBottomSheetOpen}
+        />
+        <AddFriendBottomSheet
+          open={isAddFriendBottomSheetOpen}
+          onOpenChange={setIsAddFriendBottomSheetOpen}
         />
       </div>
     </AppScreen>
