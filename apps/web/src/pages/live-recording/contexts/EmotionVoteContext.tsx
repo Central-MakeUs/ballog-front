@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { createContext, useContext, useState, useMemo } from 'react'
+import { createContext, useCallback, useContext, useState, useMemo } from 'react'
 
 interface EmotionVoteContextType {
   joyPercent: number
@@ -32,10 +32,10 @@ export const EmotionVoteProvider = ({
   const [joyPercent, setJoyPercent] = useState(initialJoyPercent)
   const [angryPercent, setAngryPercent] = useState(initialAngryPercent)
 
-  const setEmotionPercent = (joy: number, angry: number) => {
+  const setEmotionPercent = useCallback((joy: number, angry: number) => {
     setJoyPercent(joy)
     setAngryPercent(angry)
-  }
+  }, [])
 
   const value = useMemo(
     () => ({

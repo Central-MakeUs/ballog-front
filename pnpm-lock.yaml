@@ -244,6 +244,9 @@ importers:
       '@ballog/bridge':
         specifier: workspace:*
         version: link:../../packages/bridge
+      '@ballog/live-recording-machine':
+        specifier: workspace:*
+        version: link:../../packages/live-recording-machine
       '@lukemorales/query-key-factory':
         specifier: ^1.3.4
         version: 1.3.4(@tanstack/query-core@5.83.0)(@tanstack/react-query@5.83.0(react@19.0.0))
@@ -504,6 +507,12 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.6.2
+
+  packages/live-recording-machine:
+    devDependencies:
+      '@ballog/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
 
   packages/tsconfig: {}
 

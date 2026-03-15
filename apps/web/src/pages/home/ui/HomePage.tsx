@@ -1,11 +1,11 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { type ActivityComponentType, useActivity } from '@stackflow/react'
+import { useFlow } from '@/app/routes/stackflow'
 import { useQuery } from '@tanstack/react-query'
 import { format, toZonedTime } from 'date-fns-tz'
 import { isBefore, isAfter, isToday } from 'date-fns'
 
 import { matches } from '@/entities/match/api'
-import { GlobalNavigationBar } from '@/widgets/navigation'
 import { MatchSection } from '@/features/match/ui/MatchSection'
 import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'
 import { MatchLoadingSection } from '@/features/match/ui/MatchLoadingSection'
@@ -62,11 +62,17 @@ const HomePage: ActivityComponentType = () => {
   useFcmToken()
   useCheckSignupFinished()
 
+  const { pop } = useFlow()
+
   return (
-    <AppScreen appBar={{ title: <BallogAppBar /> }}>
+    <AppScreen
+      appBar={{
+        title: <BallogAppBar />,
+        onPressBack: () => pop({ animate: false }),
+      }}
+    >
       <DateProvider>
         <HomeContent />
-        <GlobalNavigationBar />
       </DateProvider>
     </AppScreen>
   )

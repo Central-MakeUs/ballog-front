@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { toast } from 'sonner'
+import { useFlow } from '@/app/routes/stackflow'
 
 import { IntuitionCard } from '@/shared/ui/common/Card/intuitionCard'
 import { RecordList } from '@/features/record/ui/RecordList'
@@ -76,6 +77,7 @@ export const RecordMainPage = () => {
     staleTime: 0,
     gcTime: 0,
   })
+  const { pop } = useFlow()
 
   if (error) {
     toast.error('관람 기록을 불러오는 중 오류가 발생했습니다.')
@@ -86,6 +88,7 @@ export const RecordMainPage = () => {
         title: (
           <span className="text-usage-text-default body-md-bold">관람로그</span>
         ),
+        onPressBack: () => pop({ animate: false }),
       }}
     >
       <AppLayout>
