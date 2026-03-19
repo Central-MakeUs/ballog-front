@@ -80,7 +80,7 @@ export const KBORankBottomSheet = ({
               {KBO_RANK_ITEMS.map((item, index) => (
                 <div
                   key={`${item.rank}-${item.team}`}
-                  className={`grid grid-cols-[3.25rem_1fr_auto] items-center px-4 py-3 ${
+                  className={`grid grid-cols-[auto_auto_auto] justify-center items-center gap-4 px-4 py-3 ${
                     index !== KBO_RANK_ITEMS.length - 1
                       ? 'border-b border-brand-neutral-30'
                       : ''
