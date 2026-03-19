@@ -1,5 +1,6 @@
 import { AngryEmotion, JoyEmotion } from '@ballog/asset/icons'
 
+import { useFlow } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
 
 export interface CommunityFriendCardData {
@@ -49,26 +50,40 @@ const CommunityFriendCard = ({
   emotion,
   tone,
 }: CommunityFriendCardData) => {
+  const { push } = useFlow()
   const style = EMOTION_STYLES[tone]
 
   return (
-    <article className="flex flex-col items-center gap-1 px-2 py-4 overflow-hidden h-44 rounded-large bg-usage-background-default">
+    <button
+      type="button"
+      className="flex h-44 flex-col items-center gap-1 overflow-hidden rounded-large bg-usage-background-subtle px-2 py-4 light:bg-usage-background-default"
+      onClick={() => {
+        push('FriendDetail', {}, { animate: true })
+      }}
+    >
       <div
         className={cn(
           'flex items-center justify-center gap-1 rounded-full px-2 py-1',
           style.badge,
         )}
       >
-        <span className={cn('body-sm-medium dark:text-brand-neutral-60 light:text-usage-text-subtle', style.team)}>{team}</span>
+        <span
+          className={cn(
+            'body-sm-medium dark:text-brand-neutral-60 light:text-usage-text-subtle',
+            style.team,
+          )}
+        >
+          {team}
+        </span>
         <span className={cn('body-sm-bold', style.emotion)}>{emotion}</span>
       </div>
-      <div className="flex items-center justify-center h-22">
+      <div className="flex h-22 items-center justify-center">
         <CommunityFriendMascot tone={tone} />
       </div>
-      <p className="w-full text-center truncate body-sm-medium text-usage-text-default light:text-brand-neutral-60">
+      <p className="body-sm-medium w-full truncate text-center text-usage-text-default light:text-brand-neutral-60">
         {nickname}
       </p>
-    </article>
+    </button>
   )
 }
 

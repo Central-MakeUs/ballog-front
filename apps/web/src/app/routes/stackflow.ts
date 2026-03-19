@@ -13,6 +13,7 @@ import NickNamePage from '@/pages/auth/ui/NickNamePage'
 import MyPage from '@/pages/mypage/ui/MyPage'
 import ChangeTeamSelectPage from '@/pages/mypage/ui/ChangeTeamSelectPage'
 import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
+import FriendDetailPage from '@/pages/community/ui/FriendDetailPage'
 import FriendRequestPage from '@/pages/community/ui/FriendRequestPage'
 import RecordMainPage from '@/pages/record/ui/RecordMainPage'
 import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
@@ -56,6 +57,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
         TeamSelect: '/team-select',
         Nickname: '/nickname',
         My: '/mypage',
+        FriendDetail: '/community/friend-detail',
         FriendRequest: '/community/friend-request',
         ChangeTeamSelect: '/change-team-select',
         ChangeNickName: '/change-nickname',
@@ -79,6 +81,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
     TeamSelect: TeamSelectPage,
     Nickname: NickNamePage,
     My: withAuth(MyPage),
+    FriendDetail: withAuth(FriendDetailPage),
     FriendRequest: withAuth(FriendRequestPage),
     ChangeTeamSelect: withAuth(ChangeTeamSelectPage),
     ChangeNickName: withAuth(ChangeNickNamePage),
