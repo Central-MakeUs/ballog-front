@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { AngryEmotion, GrayInfoIcon, JoyEmotion } from '@ballog/asset/icons'
+import { AngryEmotion, JoyEmotion } from '@ballog/asset/icons'
 
 import { useFlow } from '@/app/routes/stackflow'
 import RightArrow from '@/assets/RightArrow'
@@ -14,6 +14,7 @@ import {
   type CommunityFriendCardData,
 } from './CommunityFriendGrid'
 import { CommunityEmptyState } from './CommunityEmptyState'
+import { CommunityRankTooltipPopover } from './CommunityRankTooltipPopover'
 import { KBORankBottomSheet } from './KBORankBottomSheet'
 
 const HERO_STAT = {
@@ -87,7 +88,7 @@ export const CommunityPage = () => {
                       <span className="text-white body-md-medium light:text-brand-neutral-80">
                         {HERO_STAT.label}
                       </span>
-                      <GrayInfoIcon className="size-5" />
+                      <CommunityRankTooltipPopover />
                     </div>
                   </div>
 

@@ -79,7 +79,7 @@ export const AddFriendBottomSheet = ({
         <BottomSheetModal.Root
           open={open}
           onOpenChange={onOpenChange}
-          contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-white px-4 pt-6 pb-4"
+          contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-90 light:bg-brand-neutral-white px-4 pt-6 pb-4"
         >
           <div className="w-full">
             <form
