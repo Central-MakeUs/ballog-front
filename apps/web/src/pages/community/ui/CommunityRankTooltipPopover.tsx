@@ -16,7 +16,7 @@ export const CommunityRankTooltipPopover = () => {
           aria-label="현재 순위 안내"
           className="inline-flex items-center justify-center size-5 shrink-0"
         >
-          <GrayInfoIcon className="size-5" />
+          <GrayInfoIcon className="text-white size-5 text-usage-text-subtle" />
         </button>
       </PopoverTrigger>
 
