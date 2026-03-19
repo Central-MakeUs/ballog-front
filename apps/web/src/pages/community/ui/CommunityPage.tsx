@@ -7,6 +7,7 @@ import RightArrow from '@/assets/RightArrow'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { HomeHeaderV2 } from '@/features/home/ui/HomeHeaderV2'
 import { useUserQuery } from '@/entities/auth/hooks'
+
 import { AddFriendBottomSheet } from './AddFriendBottomSheet'
 import {
   CommunityFriendGrid,
@@ -50,7 +51,7 @@ const FRIEND_CARDS: CommunityFriendCardData[] = [
 
 export const CommunityPage = () => {
   const { user } = useUserQuery()
-  const { replace } = useFlow()
+  const { push, replace } = useFlow()
   const [hasFriends] = useState(() => Math.random() >= 0.5)
   const [isKBORankBottomSheetOpen, setIsKBORankBottomSheetOpen] =
     useState(false)
@@ -112,9 +113,7 @@ export const CommunityPage = () => {
                   <div
                     className={`rounded-full px-2 py-1 ${heroEmotionBadgeClassName}`}
                   >
-                    <span className="body-sm-bold">
-                      {heroEmotionLabel}
-                    </span>
+                    <span className="body-sm-bold">{heroEmotionLabel}</span>
                   </div>
                 </div>
               </section>
@@ -142,8 +141,7 @@ export const CommunityPage = () => {
               ) : (
                 <CommunityEmptyState
                   onExploreFriends={() => {
-                    setIsKBORankBottomSheetOpen(false)
-                    setIsAddFriendBottomSheetOpen(true)
+                    push('FriendRequest', {}, { animate: true })
                   }}
                 />
               )}

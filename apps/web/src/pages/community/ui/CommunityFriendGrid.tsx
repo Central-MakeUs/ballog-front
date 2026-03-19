@@ -52,20 +52,20 @@ const CommunityFriendCard = ({
   const style = EMOTION_STYLES[tone]
 
   return (
-    <article className="flex h-44 flex-col items-center gap-1 overflow-hidden rounded-large bg-usage-background-default px-2 py-4">
+    <article className="flex flex-col items-center gap-1 px-2 py-4 overflow-hidden h-44 rounded-large bg-usage-background-default">
       <div
         className={cn(
           'flex items-center justify-center gap-1 rounded-full px-2 py-1',
           style.badge,
         )}
       >
-        <span className={cn('body-sm-medium', style.team)}>{team}</span>
+        <span className={cn('body-sm-medium dark:text-brand-neutral-60 light:text-usage-text-subtle', style.team)}>{team}</span>
         <span className={cn('body-sm-bold', style.emotion)}>{emotion}</span>
       </div>
-      <div className="flex h-22 items-center justify-center">
+      <div className="flex items-center justify-center h-22">
         <CommunityFriendMascot tone={tone} />
       </div>
-      <p className="body-sm-medium w-full truncate text-center text-usage-text-default">
+      <p className="w-full text-center truncate body-sm-medium text-usage-text-default light:text-brand-neutral-60">
         {nickname}
       </p>
     </article>
