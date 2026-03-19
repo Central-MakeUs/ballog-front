@@ -1,5 +1,7 @@
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 
+const today = new Date().toISOString().slice(0, 10)
+
 export const recording: Record<number, RecordingResponse> = {
   // today match (matchesId: 2, LG_TWINS vs SSG_LANDERS) — recording exists, no emotions yet
   2: {
@@ -8,7 +10,7 @@ export const recording: Record<number, RecordingResponse> = {
     stadium: 'JAMSIL',
     homeTeam: 'LG_TWINS',
     awayTeam: 'SSG_LANDERS',
-    matchDate: '2026-03-19',
+    matchDate: today,
     matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
     userId: 4,
     watchCnt: 1,

@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { toast } from 'sonner'
-import { useFlow } from '@/app/routes/stackflow'
 
+import { useFlow } from '@/app/routes/stackflow'
 import { IntuitionCard } from '@/shared/ui/common/Card/intuitionCard'
 import { RecordList } from '@/features/record/ui/RecordList'
 import { EmotionCard } from '@/shared/ui/common/Card/EmotionCard'
@@ -88,7 +88,7 @@ export const RecordMainPage = () => {
         title: (
           <span className="text-usage-text-default body-md-bold">관람로그</span>
         ),
-        onPressBack: () => pop({ animate: false }),
+        backButton: { onClick: () => pop({ animate: false }) },
       }}
     >
       <AppLayout>
