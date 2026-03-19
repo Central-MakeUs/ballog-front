@@ -23,12 +23,8 @@ const RECOMMENDED_FRIENDS: FriendRequestRecommendation[] = [
 ]
 
 export const FriendRequestPage = () => {
-  const { user } = useUserQuery()
-  const { replace } = useFlow()
   const [recommendedFriends, setRecommendedFriends] =
     useState(RECOMMENDED_FRIENDS)
-
-  const nickname = user?.nickname ?? '볼로그'
 
   return (
     <AppScreen
@@ -53,8 +49,8 @@ export const FriendRequestPage = () => {
             <h2 className="body-md-bold text-usage-text-default">
               내 구단 메이트 추천
             </h2>
-            <section className="mt-8">
-              <div className="mt-4">
+            <section className="mt-4">
+              <div>
                 {recommendedFriends.map((friend) => (
                   <FriendRequestListItem
                     key={friend.id}

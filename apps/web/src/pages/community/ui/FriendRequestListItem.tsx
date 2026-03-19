@@ -1,6 +1,7 @@
 import { AngryEmotionNoShadow } from '@ballog/asset/icons'
 
 import { Button } from '@/shared/ui/common/Button'
+import { Chip } from '@/shared/ui/common/Chip/Chip'
 
 export interface FriendRequestRecommendation {
   id: string
@@ -21,14 +22,14 @@ export const FriendRequestListItem = ({
 }: FriendRequestListItemProps) => {
   return (
     <article className="flex items-center justify-between py-2.5">
-      <div className="flex min-w-0 flex-1 items-center gap-4 pr-3">
-        <div className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-neutral-black bg-brand-neutral-white">
+      <div className="flex items-center flex-1 min-w-0 gap-4 pr-3">
+        <div className="flex items-center justify-center overflow-hidden border rounded-full size-11 shrink-0 border-brand-neutral-black bg-brand-neutral-white">
           <AngryEmotionNoShadow className="size-8" />
         </div>
 
-        <div className="flex min-w-0 flex-col items-start gap-1">
-          <p className="body-md-bold truncate text-usage-text-default">{name}</p>
-          <div className="rounded-full bg-brand-red-subtle px-3 py-1">
+        <div className="flex flex-col items-start min-w-0 gap-1">
+          <p className="truncate body-md-bold text-usage-text-default">{name}</p>
+          <div className="px-3 py-1 rounded-full bg-brand-red-subtle">
             <span className="body-sm-bold text-brand-red-default">
               {emotionLabel}
             </span>
@@ -36,12 +37,12 @@ export const FriendRequestListItem = ({
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex items-center gap-2 shrink-0">
         <Button
           type="button"
           variant="primary"
           size="lg"
-          className="w-20 px-4"
+          className="w-20 px-4 text-brand-neutral-white"
           onClick={onRequest}
         >
           친구요청
@@ -49,7 +50,7 @@ export const FriendRequestListItem = ({
         <button
           type="button"
           aria-label={`${name} 추천 숨기기`}
-          className="flex size-7 items-center justify-center body-md-medium text-usage-text-default"
+          className="flex items-center justify-center size-7 body-md-medium text-usage-text-default"
           onClick={onDismiss}
         >
           X

@@ -14,7 +14,7 @@ export const CommunityRankTooltipPopover = () => {
         <button
           type="button"
           aria-label="현재 순위 안내"
-          className="inline-flex size-5 shrink-0 items-center justify-center"
+          className="inline-flex items-center justify-center size-5 shrink-0"
         >
           <GrayInfoIcon className="size-5" />
         </button>
@@ -32,7 +32,7 @@ export const CommunityRankTooltipPopover = () => {
           height={8}
         />
 
-        <p className="body-sm-bold whitespace-nowrap text-center text-brand-neutral-10">
+        <p className="text-center body-sm-bold whitespace-nowrap text-brand-neutral-10">
           내 응원팀의 현재 순위를 보여줘요.
         </p>
       </PopoverContent>
