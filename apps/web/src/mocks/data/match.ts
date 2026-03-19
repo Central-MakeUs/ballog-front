@@ -5,7 +5,7 @@ export const match = {
     data: [
       {
         matchesId: 1,
-        matchesDate: '2025-09-23',
+        matchesDate: '2026-03-19',
         matchesTime: '18:30:00',
         homeTeam: 'LOTTE_GIANTS',
         awayTeam: 'KT_WIZ',
@@ -14,7 +14,7 @@ export const match = {
       },
       {
         matchesId: 2,
-        matchesDate: '2025-09-23',
+        matchesDate: '2026-03-19',
         matchesTime: '18:30:00',
         homeTeam: 'LG_TWINS',
         awayTeam: 'SSG_LANDERS',
@@ -23,7 +23,7 @@ export const match = {
       },
       {
         matchesId: 3,
-        matchesDate: '2025-09-23',
+        matchesDate: '2026-03-19',
         matchesTime: '19:30:00',
         homeTeam: 'LG_TWINS',
         awayTeam: 'SSG_LANDERS',
@@ -32,7 +32,7 @@ export const match = {
       },
       {
         matchesId: 4,
-        matchesDate: '2025-09-23',
+        matchesDate: '2026-03-19',
         matchesTime: '18:30:00',
         homeTeam: 'DOOSAN_BEARS',
         awayTeam: 'SSG_LANDERS',
@@ -41,7 +41,7 @@ export const match = {
       },
       {
         matchesId: 5,
-        matchesDate: '2025-09-23',
+        matchesDate: '2026-03-19',
         matchesTime: '19:30:00',
         homeTeam: 'LG_TWINS',
         awayTeam: 'SSG_LANDERS',
@@ -50,7 +50,7 @@ export const match = {
       },
       {
         matchesId: 6,
-        matchesDate: '2025-09-23',
+        matchesDate: '2026-03-19',
         matchesTime: '18:30:00',
         homeTeam: 'DOOSAN_BEARS',
         awayTeam: 'SSG_LANDERS',

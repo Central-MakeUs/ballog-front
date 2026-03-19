@@ -1,6 +1,26 @@
 import type { RecordingResponse } from '@/entities/record/model/recording.type'
 
 export const recording: Record<number, RecordingResponse> = {
+  // today match (matchesId: 2, LG_TWINS vs SSG_LANDERS) — recording exists, no emotions yet
+  2: {
+    matchRecordId: 2,
+    matchesId: 2,
+    stadium: 'JAMSIL',
+    homeTeam: 'LG_TWINS',
+    awayTeam: 'SSG_LANDERS',
+    matchDate: '2026-03-19',
+    matchTime: { hour: 18, minute: 30, second: 0, nano: 0 },
+    userId: 4,
+    watchCnt: 1,
+    result: null,
+    baseballTeam: 'LG_TWINS',
+    positiveEmotionPercent: 0,
+    negativeEmotionPercent: 0,
+    defaultImageUrl: '',
+    imageList: [],
+    emotionGroupList: [],
+  },
+
   101: {
     matchRecordId: 101,
     matchesId: 101,
