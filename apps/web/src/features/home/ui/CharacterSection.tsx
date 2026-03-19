@@ -16,7 +16,7 @@ export const CharacterSection = ({ emotion }: CharacterSectionProps) => {
   const { Character, label, emoji, badgeClass } = config
 
   const baseballTeam = user?.baseballTeam
-  const teamName = baseballTeam ? TEAMS[baseballTeam] : null
+  const teamName = baseballTeam ? TEAMS[baseballTeam] : TEAMS['NONE']
 
   return (
     <div className="flex flex-col items-center w-full pt-4">
