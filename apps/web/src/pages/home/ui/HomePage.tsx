@@ -1,10 +1,10 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { type ActivityComponentType, useActivity } from '@stackflow/react'
-import { useFlow } from '@/app/routes/stackflow'
 import { useQuery } from '@tanstack/react-query'
 import { format, toZonedTime } from 'date-fns-tz'
 import { isBefore, isAfter, isToday } from 'date-fns'
 
+import { useFlow } from '@/app/routes/stackflow'
 import { matches } from '@/entities/match/api'
 import { MatchSection } from '@/features/match/ui/MatchSection'
 import { MatchEmptySection } from '@/features/match/ui/MatchEmptySection'
@@ -68,9 +68,7 @@ const HomePage: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         title: <BallogAppBar />,
-        backButton: {
-          onClick: () => pop({ animate: false }),
-        },
+        backButton: { onClick: () => pop({ animate: false }) },
       }}
     >
       <DateProvider>

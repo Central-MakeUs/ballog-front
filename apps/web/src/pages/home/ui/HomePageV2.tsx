@@ -2,6 +2,7 @@ import React from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { type ActivityComponentType } from '@stackflow/react'
 import { useQuery } from '@tanstack/react-query'
+import type { CSSProperties } from 'react'
 
 import { matches } from '@/entities/match/api'
 import type { EmotionType } from '@/entities/record/model/record.type'
@@ -95,7 +96,7 @@ const HomeContentV2 = ({
               {
                 '--calendar-frame-color': '#757575',
                 '--calendar-inside-color': '#ffffff',
-              } as React.CSSProperties
+              } as CSSProperties
             }
           />
           <span className="body-sm-medium text-usage-text-subtle">
@@ -127,7 +128,9 @@ const HomePageV2: ActivityComponentType = () => {
         />
         <div className="flex-1 overflow-y-auto">
           <HomeContentV2
-            onViewAllMatches={() => push('MatchSchedule', {}, { animate: false })}
+            onViewAllMatches={() =>
+              push('MatchSchedule', {}, { animate: false })
+            }
           />
         </div>
         <GlobalNavigationBar />
