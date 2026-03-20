@@ -1,4 +1,3 @@
-import React from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { type ActivityComponentType } from '@stackflow/react'
 import { useQuery } from '@tanstack/react-query'
