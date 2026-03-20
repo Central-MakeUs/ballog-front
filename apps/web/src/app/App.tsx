@@ -20,7 +20,7 @@ export const ThemeInitializer = () => {
 
 const AppInner = () => {
   useUpdatePolicy()
-  // useMswNotice()
+  useMswNotice()
 
   return (
     <>

@@ -1,7 +1,6 @@
 import { AngryEmotionNoShadow } from '@ballog/asset/icons'
 
 import { Button } from '@/shared/ui/common/Button'
-import { Chip } from '@/shared/ui/common/Chip/Chip'
 
 export interface FriendRequestRecommendation {
   id: string

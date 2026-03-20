@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 
-import { useFlow } from '@/app/routes/stackflow'
-import { useUserQuery } from '@/entities/auth/hooks'
 import { BackArrow } from '@/assets/BackArrow'
 
 import {

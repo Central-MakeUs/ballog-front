@@ -68,7 +68,9 @@ const HomePage: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         title: <BallogAppBar />,
-        onPressBack: () => pop({ animate: false }),
+        backButton: {
+          onClick: () => pop({ animate: false }),
+        },
       }}
     >
       <DateProvider>

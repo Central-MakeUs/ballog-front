@@ -88,7 +88,9 @@ export const RecordMainPage = () => {
         title: (
           <span className="text-usage-text-default body-md-bold">관람로그</span>
         ),
-        onPressBack: () => pop({ animate: false }),
+        backButton: {
+          onClick: () => pop({ animate: false }),
+        },
       }}
     >
       <AppLayout>
