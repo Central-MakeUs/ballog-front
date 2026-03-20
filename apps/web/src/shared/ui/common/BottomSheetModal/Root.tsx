@@ -8,6 +8,7 @@ interface RootProps extends ComponentProps<'div'> {
   open: boolean
   onOpenChange: (open: boolean) => void
   dismissible?: boolean
+  contentClassName?: string
   children: ReactNode
 }
 
@@ -15,6 +16,7 @@ export const Root = ({
   open,
   onOpenChange,
   dismissible = false,
+  contentClassName,
   children,
   className,
   ...rest
@@ -28,6 +30,7 @@ export const Root = ({
           'relative w-full',
           'rounded-t-2xl rounded-b-none p-8 border-none',
           'bg-usage-background-strong light:bg-usage-background-default gap-6 flex flex-col',
+          contentClassName,
         )}
       >
         {dismissible && (

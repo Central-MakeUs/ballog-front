@@ -173,3 +173,6 @@ next-env.d.ts
 
 # vercel
 .secrets
+
+# AI
+opencode.jsonc

@@ -32,8 +32,8 @@ const RecordMainContent = ({
   return (
     <>
       {/* 대시보드 카드 섹션 */}
-      <div className="flex gap-4 px-4 mt-4 w-full">
-        <div className="flex-1 flex flex-col gap-4">
+      <div className="flex w-full gap-4 px-4 mt-4">
+        <div className="flex flex-col flex-1 gap-4">
           <SectionHeader title="관람 횟수/승률" />
           {totalCount === 0 ? (
             <IntuitionCard.Disabled />
@@ -41,7 +41,7 @@ const RecordMainContent = ({
             <IntuitionCard.Active matchCount={totalCount} winRate={winRate} />
           )}
         </div>
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex flex-col flex-1 gap-4">
           <SectionHeader title="감정분포" />
           {totalCount === 0 ? (
             <EmotionCard.Disabled />
@@ -63,7 +63,7 @@ const RecordMainContent = ({
       </div>
 
       {/* 기록 목록 섹션 */}
-      <div className="mt-10 px-4 gap-4 flex flex-col w-full">
+      <div className="flex flex-col w-full gap-4 px-4 mt-10">
         <SectionHeader title="전체 관람로그" />
         <RecordList records={records} />
       </div>
@@ -88,7 +88,9 @@ export const RecordMainPage = () => {
         title: (
           <span className="text-usage-text-default body-md-bold">관람로그</span>
         ),
-        backButton: { onClick: () => pop({ animate: false }) },
+        backButton: {
+          onClick: () => pop({ animate: false }),
+        },
       }}
     >
       <AppLayout>

@@ -12,7 +12,7 @@ export const HomeHeaderV2 = ({
   onProfileClick,
   onNotificationClick,
 }: HomeHeaderV2Props) => (
-  <header className="flex items-center justify-between pl-5 pr-2 h-14 w-full shrink-0 bg-usage-background-default">
+  <header className="flex items-center justify-between w-full pl-5 pr-2 h-14 shrink-0 bg-usage-background-default light:bg-brand-neutral-10">
     <button
       type="button"
       className="flex items-center gap-0.5"
@@ -27,7 +27,7 @@ export const HomeHeaderV2 = ({
       className="flex items-center justify-center w-12 h-12"
       onClick={onNotificationClick}
     >
-      <BellIcon className="text-brand-neutral-black" />
+      <BellIcon className="text-brand-neutral-50" />
     </button>
   </header>
 )

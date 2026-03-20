@@ -1,8 +1,8 @@
 import { useState, useEffect, type ComponentType } from 'react'
+import { CommunityGNB } from '@ballog/asset/icons'
 
 import HomeGNB from '@/assets/HomeGNB'
 import RecordGNB from '@/assets/RecordGNB'
-import MypageGNB from '@/assets/MyPageGNB'
 import { useFlow, activities, actions } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
 import { GNBButton } from '@/shared/ui/common'
@@ -16,6 +16,11 @@ interface NavItem {
 }
 const NAV_ITEMS: NavItem[] = [
   {
+    label: '커뮤니티',
+    icon: CommunityGNB,
+    activity: 'Community',
+  },
+  {
     label: '홈',
     icon: HomeGNB,
     activity: 'Home',
@@ -24,11 +29,6 @@ const NAV_ITEMS: NavItem[] = [
     label: '관람로그',
     icon: RecordGNB,
     activity: 'Record',
-  },
-  {
-    label: '마이페이지',
-    icon: MypageGNB,
-    activity: 'My',
   },
 ]
 

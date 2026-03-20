@@ -4,6 +4,7 @@ import { basicUIPlugin } from '@stackflow/plugin-basic-ui'
 import { historySyncPlugin } from '@stackflow/plugin-history-sync'
 
 import HomePage from '@/pages/home/ui/HomePage'
+import CommunityPage from '@/pages/community/ui/CommunityPage'
 import HomePageV2 from '@/pages/home/ui/HomePageV2'
 import LiveRecordPage from '@/pages/live-recording/ui/LiveRecordPage'
 import LoginPage from '@/pages/auth/ui/LoginPage'
@@ -12,6 +13,8 @@ import NickNamePage from '@/pages/auth/ui/NickNamePage'
 import MyPage from '@/pages/mypage/ui/MyPage'
 import ChangeTeamSelectPage from '@/pages/mypage/ui/ChangeTeamSelectPage'
 import ChangeNickNamePage from '@/pages/mypage/ui/ChangeNickNamePage'
+import FriendDetailPage from '@/pages/community/ui/FriendDetailPage'
+import FriendRequestPage from '@/pages/community/ui/FriendRequestPage'
 import RecordMainPage from '@/pages/record/ui/RecordMainPage'
 import RecordDetailPage from '@/pages/record/ui/RecordDetailPage'
 import ShareBottomSheet from '@/pages/record/ui/ShareBottomSheet'
@@ -47,12 +50,15 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
     historySyncPlugin({
       routes: {
         Home: '/',
+        Community: '/community',
         MatchSchedule: '/match-schedule',
         LiveRecord: '/live-record/:matchId', // 라이브 녹화
         Login: '/login',
         TeamSelect: '/team-select',
         Nickname: '/nickname',
         My: '/mypage',
+        FriendDetail: '/community/friend-detail',
+        FriendRequest: '/community/friend-request',
         ChangeTeamSelect: '/change-team-select',
         ChangeNickName: '/change-nickname',
         Record: '/record',
@@ -68,12 +74,15 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
 
   activities: {
     Home: withAuth(HomePageV2),
+    Community: withAuth(CommunityPage),
     MatchSchedule: withAuth(HomePage),
     LiveRecord: withAuth(LiveRecordPage),
     Login: LoginPage,
     TeamSelect: TeamSelectPage,
     Nickname: NickNamePage,
     My: withAuth(MyPage),
+    FriendDetail: withAuth(FriendDetailPage),
+    FriendRequest: withAuth(FriendRequestPage),
     ChangeTeamSelect: withAuth(ChangeTeamSelectPage),
     ChangeNickName: withAuth(ChangeNickNamePage),
     Record: withAuth(RecordMainPage),
