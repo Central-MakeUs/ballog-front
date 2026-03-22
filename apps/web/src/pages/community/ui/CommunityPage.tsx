@@ -72,7 +72,7 @@ export const CommunityPage = () => {
           onProfileClick={() => replace('My', {}, { animate: false })}
           onNotificationClick={() => {}}
         />
-        <div className="flex-1 min-h-0 overflow-y-auto">
+        <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hidden">
           <div className="relative w-full pb-32 light:bg-brand-neutral-10">
             <main>
               <section className="flex items-center justify-between px-8 pt-3.5">

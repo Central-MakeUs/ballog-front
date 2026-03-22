@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
-import { cn } from '@/shared/lib/classnames'
 import { List } from '@/shared/ui/common/List/List'
 
 interface ReportBottomSheetProps {
@@ -10,16 +9,9 @@ interface ReportBottomSheetProps {
   onReport?: () => void
 }
 
-const actionButtonClassName = cn(
-  'flex h-14 w-full items-center justify-center rounded-large',
-  'bg-usage-background-strong light:bg-brand-neutral-10',
-  'body-lg-bold transition-colors',
-)
-
 export const ReportBottomSheet = ({
   open,
   onOpenChange,
-  onReport,
 }: ReportBottomSheetProps) => {
   const [shouldRenderContent, setShouldRenderContent] = useState(open)
 

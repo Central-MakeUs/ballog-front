@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
@@ -8,8 +8,11 @@ interface PortalBottomSheetProps {
   open: boolean
   children: ReactNode
   onOutsideClick?: () => void
+  onEntered?: () => void
   onExited?: () => void
   overlayClassName?: string
+  sheetWrapperClassName?: string
+  sheetWrapperStyle?: CSSProperties
   sheetClassName?: string
 }
 
@@ -19,13 +22,21 @@ export const PortalBottomSheet = ({
   open,
   children,
   onOutsideClick,
+  onEntered,
   onExited,
   overlayClassName,
+  sheetWrapperClassName,
+  sheetWrapperStyle,
   sheetClassName,
 }: PortalBottomSheetProps) => {
   const [shouldRender, setShouldRender] = useState(open)
   const [isVisible, setIsVisible] = useState(false)
+  const onEnteredRef = useRef(onEntered)
   const onExitedRef = useRef(onExited)
+
+  useEffect(() => {
+    onEnteredRef.current = onEntered
+  }, [onEntered])
 
   useEffect(() => {
     onExitedRef.current = onExited
@@ -40,9 +51,13 @@ export const PortalBottomSheet = ({
       const frame = window.requestAnimationFrame(() => {
         setIsVisible(true)
       })
+      const timeout = window.setTimeout(() => {
+        onEnteredRef.current?.()
+      }, ANIMATION_DURATION_MS)
 
       return () => {
         window.cancelAnimationFrame(frame)
+        window.clearTimeout(timeout)
       }
     }
 
@@ -57,17 +72,6 @@ export const PortalBottomSheet = ({
       window.clearTimeout(timeout)
     }
   }, [open])
-
-  useEffect(() => {
-    if (!shouldRender || typeof document === 'undefined') return
-
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-
-    return () => {
-      document.body.style.overflow = previousOverflow
-    }
-  }, [shouldRender])
 
   if (!shouldRender || typeof document === 'undefined') return null
 
@@ -85,7 +89,13 @@ export const PortalBottomSheet = ({
           overlayClassName,
         )}
       />
-      <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-[512px]">
+      <div
+        className={cn(
+          'absolute inset-x-0 bottom-0 mx-auto w-full max-w-[512px]',
+          sheetWrapperClassName,
+        )}
+        style={sheetWrapperStyle}
+      >
         <div
           className={cn(
             'w-full transition-transform duration-300 ease-out',

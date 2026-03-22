@@ -5,6 +5,7 @@ import { AngryEmotionCharacter, KebobMenu } from '@ballog/asset/icons'
 import { BackArrow } from '@/assets/BackArrow'
 
 import { FriendPhotoBottomSheet } from './FriendPhotoBottomSheet'
+import { ReportBottomSheet } from './ReportBottomSheet'
 
 const FRIEND_GALLERY_IMAGE =
   'https://www.figma.com/api/mcp/asset/51183d4e-e8cf-4582-a42f-6981d41a49ba'
@@ -105,6 +106,7 @@ const FriendDetailEmptyState = () => {
 export const FriendDetailPage = () => {
   const [hasRecordedGames] = useState(() => Math.random() >= 0.5)
   const [selectedPhotoSrc, setSelectedPhotoSrc] = useState<string | null>(null)
+  const [isReportBottomSheetOpen, setIsReportBottomSheetOpen] = useState(false)
 
   return (
     <AppScreen
@@ -120,7 +122,9 @@ export const FriendDetailPage = () => {
             type="button"
             aria-label="더보기"
             className="flex items-center justify-center size-12"
-            onClick={() => {}}
+            onClick={() => {
+              setIsReportBottomSheetOpen(true)
+            }}
           >
             <KebobMenu className="text-white size-6 light:text-brand-neutral-60" />
           </button>
@@ -130,7 +134,7 @@ export const FriendDetailPage = () => {
       preventSwipeBack={true}
     >
       <div className="flex flex-col w-full h-full light:bg-brand-neutral-10">
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto scrollbar-hidden">
           <main className="flex flex-col pb-8">
             <section className="flex items-center gap-4 px-4 pt-6">
               <div className="flex items-center justify-center px-2 py-4 shrink-0">
@@ -191,6 +195,10 @@ export const FriendDetailPage = () => {
             setSelectedPhotoSrc(null)
           }
         }}
+      />
+      <ReportBottomSheet
+        open={isReportBottomSheetOpen}
+        onOpenChange={setIsReportBottomSheetOpen}
       />
     </AppScreen>
   )
