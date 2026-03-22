@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BottomSheet } from '@stackflow/plugin-basic-ui'
-import { AngryEmotionCharacter } from '@ballog/asset/icons'
+import { AngryEmotionCharacterWithNoArm } from '@ballog/asset/icons'
 import { toast } from 'sonner'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
@@ -47,7 +47,7 @@ export const FriendPhotoBottomSheet = ({
 
             <div className="flex items-center justify-between w-full gap-4">
               <div className="flex items-center flex-1 min-w-0 gap-4">
-                <AngryEmotionCharacter className="size-12 shrink-0" />
+                <AngryEmotionCharacterWithNoArm className="size-12 shrink-0" />
 
                 <div className="flex flex-col items-start min-w-0">
                   <p className="text-white body-md-bold light:text-brand-neutral-black">
