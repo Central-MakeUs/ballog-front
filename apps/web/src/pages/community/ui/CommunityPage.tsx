@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { AngryEmotion, JoyEmotion } from '@ballog/asset/icons'
+import { AngryEmotionCharacter, NoEmotionCharacter } from '@ballog/asset/icons'
 
 import { useFlow } from '@/app/routes/stackflow'
 import RightArrow from '@/assets/RightArrow'
@@ -107,9 +107,9 @@ export const CommunityPage = () => {
 
                 <div className="flex flex-col items-center gap-2 px-4 py-2 rounded-xlarge">
                   {hasFriends ? (
-                    <AngryEmotion className="size-22" />
+                    <AngryEmotionCharacter className="size-22" />
                   ) : (
-                    <JoyEmotion className="size-22 grayscale opacity-80" />
+                    <NoEmotionCharacter className="size-22" />
                   )}
                   <div
                     className={`rounded-full px-2 py-1 ${heroEmotionBadgeClassName}`}

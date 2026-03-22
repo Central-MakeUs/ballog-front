@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { AngryEmotion, KebobMenu } from '@ballog/asset/icons'
+import { AngryEmotionCharacter, KebobMenu } from '@ballog/asset/icons'
 
 import { BackArrow } from '@/assets/BackArrow'
 
@@ -133,7 +133,7 @@ export const FriendDetailPage = () => {
           <main className="flex flex-col pb-8">
             <section className="flex items-center gap-4 px-4 pt-6">
               <div className="flex items-center justify-center px-2 py-4 shrink-0">
-                <AngryEmotion className="size-22" />
+                <AngryEmotionCharacter className="size-22" />
               </div>
 
               <div className="flex flex-col items-start flex-1 min-w-0 gap-2">
