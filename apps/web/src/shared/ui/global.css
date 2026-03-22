@@ -565,3 +565,15 @@ html[data-theme-transition] {
     background: var(--gradient-primary);
   }
 }
+
+/* 스크롤바 숨김 유틸 */
+@layer utilities {
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
