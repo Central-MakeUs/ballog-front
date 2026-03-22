@@ -113,6 +113,9 @@
 
   /* rechart 용 색상 */
   --color-chart-reference-line: #bdbdbd;
+
+  /* 친구상세용 앱바 임시 색상 */
+  --color-usage-appbar-default: #f5f5f5;
 }
 
 .dark {
@@ -184,6 +187,9 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* 친구상세용 앱바 임시 색상 */
+  --color-usage-appbar-default: #030303;
 }
 
 @layer base {
@@ -360,6 +366,9 @@ html[data-theme-transition] {
   /* Breakpoints */
   --breakpoint-mobile: 360px; /* Mobile 최소 width */
   --breakpoint-tablet: 512px; /* Tablet & Desktop 시작점 */
+
+  /* 친구상세용 앱바 임시 색상 */
+  --color-usage-appbar-default: var(--color-usage-appbar-default);
 }
 
 @layer components {

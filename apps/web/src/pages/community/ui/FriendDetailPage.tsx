@@ -109,6 +109,7 @@ export const FriendDetailPage = () => {
   return (
     <AppScreen
       appBar={{
+        backgroundColor: 'var(--color-usage-appbar-default)',
         backButton: {
           renderIcon: () => (
             <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
