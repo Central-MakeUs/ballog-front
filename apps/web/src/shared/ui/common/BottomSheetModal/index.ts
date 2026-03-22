@@ -2,6 +2,7 @@ import { Root } from './Root'
 import { Text } from './Text'
 import { Image } from './Image'
 import { Buttons } from './Buttons'
+import { PortalBottomSheet } from './PortalBottomSheet'
 
 /**
  * BottomSheetModal - 화면 하단에서 올라오는 바텀시트 모달 컴포넌트 세트
@@ -49,6 +50,7 @@ import { Buttons } from './Buttons'
  */
 
 export const BottomSheetModal = {
+  PortalBottomSheet,
   Root,
   Text,
   Image,
