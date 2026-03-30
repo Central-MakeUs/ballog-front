@@ -66,5 +66,3 @@ export const ReportBottomSheet = ({
     </BottomSheetModal.PortalBottomSheet>
   )
 }
-
-export default ReportBottomSheet
