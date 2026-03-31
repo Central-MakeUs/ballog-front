@@ -1,5 +1,20 @@
-import type { SVGProps } from "react";
-import { memo } from "react";
-const CommunityGNB = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 28 28" focusable="false" {...props}><path fill="#424242" d="M24.5 24.033a1.1 1.1 0 0 1-.437-.087 1.2 1.2 0 0 1-.38-.263L21 21H9.334a2.25 2.25 0 0 1-1.648-.686A2.25 2.25 0 0 1 7 18.668V17.5h12.834q.962 0 1.647-.686a2.25 2.25 0 0 0 .686-1.647V7h1.166q.964 0 1.648.685.686.686.686 1.648v13.504q0 .525-.35.86a1.14 1.14 0 0 1-.817.336M3.5 18.2q-.466 0-.816-.335a1.14 1.14 0 0 1-.35-.86V4.666q0-.963.685-1.648a2.25 2.25 0 0 1 1.648-.686H17.5q.963 0 1.648.686.686.685.686 1.648v8.166q0 .963-.686 1.648a2.25 2.25 0 0 1-1.648.686H7L4.317 17.85a1.2 1.2 0 0 1-.38.262 1.1 1.1 0 0 1-.437.088" /></svg>;
-const Memo = memo(CommunityGNB);
-export default Memo;
+import type { SVGProps } from 'react'
+import { memo } from 'react'
+const CommunityGNB = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    fill="none"
+    viewBox="0 0 28 28"
+    focusable="false"
+    {...props}
+  >
+    <path
+      fill="currentColor"
+      d="M24.5 24.033a1.1 1.1 0 0 1-.437-.087 1.2 1.2 0 0 1-.38-.263L21 21H9.334a2.25 2.25 0 0 1-1.648-.686A2.25 2.25 0 0 1 7 18.668V17.5h12.834q.962 0 1.647-.686a2.25 2.25 0 0 0 .686-1.647V7h1.166q.964 0 1.648.685.686.686.686 1.648v13.504q0 .525-.35.86a1.14 1.14 0 0 1-.817.336M3.5 18.2q-.466 0-.816-.335a1.14 1.14 0 0 1-.35-.86V4.666q0-.963.685-1.648a2.25 2.25 0 0 1 1.648-.686H17.5q.963 0 1.648.686.686.685.686 1.648v8.166q0 .963-.686 1.648a2.25 2.25 0 0 1-1.648.686H7L4.317 17.85a1.2 1.2 0 0 1-.38.262 1.1 1.1 0 0 1-.437.088"
+    />
+  </svg>
+)
+const Memo = memo(CommunityGNB)
+export default Memo

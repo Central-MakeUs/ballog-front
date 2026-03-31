@@ -1,4 +1,8 @@
-import { AngryEmotion, JoyEmotion } from '@ballog/asset/icons'
+import {
+  AngryEmotionCharacter,
+  HappyEmotionCharacter,
+  NoEmotionCharacter,
+} from '@ballog/asset/icons'
 
 import { useFlow } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
@@ -34,14 +38,14 @@ const CommunityFriendMascot = ({
   tone: CommunityFriendCardData['tone']
 }) => {
   if (tone === 'negative') {
-    return <AngryEmotion className="size-18" />
+    return <AngryEmotionCharacter className="size-18" />
   }
 
-  return (
-    <JoyEmotion
-      className={cn('size-18', tone === 'neutral' && 'grayscale opacity-80')}
-    />
-  )
+  if (tone === 'positive') {
+    return <HappyEmotionCharacter className="size-18" />
+  }
+
+  return <NoEmotionCharacter className="size-18" />
 }
 
 const CommunityFriendCard = ({

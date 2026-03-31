@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { cn } from '@/shared/lib/classnames'
 
@@ -14,13 +15,21 @@ export const AddFriendBottomSheet = ({
   open,
   onOpenChange,
 }: AddFriendBottomSheetProps) => {
+  const { isRNEnvironment } = useBridge()
   const inputRef = useRef<HTMLInputElement>(null)
   const initialViewportHeightRef = useRef(0)
   const [nickname, setNickname] = useState('')
   const [keyboardInset, setKeyboardInset] = useState(0)
+  const [shouldRenderContent, setShouldRenderContent] = useState(open)
 
   useEffect(() => {
-    if (!open || typeof window === 'undefined') return
+    if (open) {
+      setShouldRenderContent(true)
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!shouldRenderContent || typeof window === 'undefined') return
 
     const viewport = window.visualViewport
     initialViewportHeightRef.current = viewport?.height ?? window.innerHeight
@@ -44,68 +53,73 @@ export const AddFriendBottomSheet = ({
     viewport?.addEventListener('scroll', updateKeyboardInset)
 
     const frame = window.requestAnimationFrame(() => {
-      inputRef.current?.focus()
+      if (!isRNEnvironment) {
+        inputRef.current?.focus()
+      }
     })
 
     return () => {
       window.cancelAnimationFrame(frame)
       viewport?.removeEventListener('resize', updateKeyboardInset)
       viewport?.removeEventListener('scroll', updateKeyboardInset)
-      setKeyboardInset(0)
     }
-  }, [open])
+  }, [isRNEnvironment, shouldRenderContent])
 
   useEffect(() => {
     if (!open) {
-      setNickname('')
+      inputRef.current?.blur()
     }
   }, [open])
 
-  if (!open) return null
+  if (!shouldRenderContent) return null
 
   return (
-    <div className="fixed inset-0 z-[70]">
-      <button
-        type="button"
-        aria-label="친구 추가 닫기"
-        className="absolute inset-0 bg-black/40"
-        onClick={() => onOpenChange(false)}
-      />
-
-      <div
-        className="absolute inset-x-0 bottom-0 transition-[bottom] duration-200 ease-out"
-        style={{ bottom: `${keyboardInset}px` }}
+    <BottomSheetModal.PortalBottomSheet
+      open={open}
+      onOutsideClick={() => onOpenChange(false)}
+      onEntered={() => {
+        if (isRNEnvironment) {
+          inputRef.current?.focus()
+        }
+      }}
+      onExited={() => {
+        setShouldRenderContent(false)
+        setNickname('')
+        setKeyboardInset(0)
+      }}
+      sheetWrapperClassName="transition-[bottom] duration-200 ease-out"
+      sheetWrapperStyle={{ bottom: `${keyboardInset}px` }}
+    >
+      <BottomSheetModal.Root
+        open={shouldRenderContent}
+        onOpenChange={onOpenChange}
+        contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-90 light:bg-brand-neutral-white px-4 pt-6 pb-4"
       >
-        <BottomSheetModal.Root
-          open={open}
-          onOpenChange={onOpenChange}
-          contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-90 light:bg-brand-neutral-white px-4 pt-6 pb-4"
-        >
-          <div className="w-full">
-            <form
-              onSubmit={(event) => {
-                event.preventDefault()
-              }}
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                inputMode="text"
-                enterKeyHint="done"
-                value={nickname}
-                onChange={(event) => setNickname(event.target.value)}
-                placeholder={PLACEHOLDER}
-                className={cn(
-                  'w-full rounded-large bg-usage-background-strong px-4 py-4 text-center',
-                  'body-lg-bold text-usage-text-default placeholder:text-brand-neutral-40',
-                  'border-none outline-none focus:ring-0',
-                )}
-              />
-            </form>
-          </div>
-        </BottomSheetModal.Root>
-      </div>
-    </div>
+        <div className="w-full">
+          <form
+            onSubmit={(event) => {
+              event.preventDefault()
+            }}
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              inputMode="text"
+              enterKeyHint="done"
+              autoFocus={!isRNEnvironment}
+              value={nickname}
+              onChange={(event) => setNickname(event.target.value)}
+              placeholder={PLACEHOLDER}
+              className={cn(
+                'w-full rounded-large bg-usage-background-strong px-4 py-4 text-center',
+                'body-lg-bold text-usage-text-default placeholder:text-brand-neutral-40',
+                'border-none outline-none focus:ring-0',
+              )}
+            />
+          </form>
+        </div>
+      </BottomSheetModal.Root>
+    </BottomSheetModal.PortalBottomSheet>
   )
 }
 
