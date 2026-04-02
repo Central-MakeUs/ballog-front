@@ -39,7 +39,7 @@ const EmotionIconWithPercent = ({
       ) : (
         <AngryEmotion className="w-8 h-8" />
       )}
-      <span className="body-sm-bold text-usage-text-default text-center">
+      <span className="body-sm-bold text-usage-text-default text-center hidden">
         {percent}%
       </span>
     </div>
