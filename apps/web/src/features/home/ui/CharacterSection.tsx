@@ -34,10 +34,10 @@ export const CharacterSection = ({ emotion }: CharacterSectionProps) => {
         </div>
       </div>
 
-      <Character className="w-[164px] h-[250px] -mt-3" />
+      <Character className="w-[120px] h-[180px] -mt-3" />
 
       <div
-        className={`flex items-center justify-center px-3 py-2 rounded-full mt-2 ${badgeClass}`}
+        className={`flex items-center justify-center px-3 py-2 rounded-full mt-[8px] ${badgeClass}`}
       >
         <span className="body-lg-bold">{label}</span>
       </div>
