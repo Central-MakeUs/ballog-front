@@ -1,6 +1,8 @@
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { cn } from '@/shared/lib/classnames'
+import { BackArrow } from '@/assets/BackArrow'
+import { useFlow } from '@/app/routes/stackflow'
 import { GlobalNavigationBar } from '@/widgets/navigation'
 import { ChangeMyInfoWidget } from '@/widgets/ChangeMyInfoWidget'
 import { AlarmToggleList } from '@/features/mypage/ui/AlarmSwitchList'
@@ -8,6 +10,8 @@ import { OtherLinkList } from '@/widgets/otherListList/OtherLinkList'
 import { LogoutAndWithdrawButtons } from '@/features/mypage/ui/LogoutAndWithDrawButtons'
 
 const MyPageInner = () => {
+  const { pop } = useFlow()
+
   return (
     <AppScreen
       appBar={{
@@ -16,6 +20,12 @@ const MyPageInner = () => {
             마이페이지
           </span>
         ),
+        backButton: {
+          renderIcon: () => (
+            <BackArrow className="dark:text-brand-neutral-white light:text-brand-neutral-70" />
+          ),
+          onClick: () => pop(),
+        },
         height: '44px',
       }}
     >
