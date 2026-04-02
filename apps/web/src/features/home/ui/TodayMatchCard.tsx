@@ -1,5 +1,7 @@
 import { format } from 'date-fns'
 
+import { Vs } from '@ballog/asset/icons'
+
 import type { Match } from '@/entities/match/model/match.type'
 import { STADIUM } from '@/shared/constants/stadium'
 import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
@@ -73,9 +75,7 @@ export const TodayMatchCard = ({
           <span className="body-lg-bold text-brand-neutral-80">
             {homeTeamShort}
           </span>
-          <span className="body-sm-medium text-brand-neutral-50 italic">
-            vs
-          </span>
+          <Vs className="w-5 h-5" />
           <span className="body-lg-bold text-brand-neutral-80">
             {awayTeamShort}
           </span>
