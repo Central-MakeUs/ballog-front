@@ -59,7 +59,7 @@ export const GlobalNavigationBar = () => {
         'fixed bottom-0 left-0 right-0 z-50',
         'w-full bg-usage-background-subtle light:bg-usage-background-default flex justify-around items-center',
         'rounded-t-xl border-t light:border-brand-neutral-20 dark:border-none',
-        'pt-2 pb-6',
+        'pt-3 pb-6',
       )}
     >
       {NAV_ITEMS.map(({ label, icon, activity }) => {
