@@ -63,6 +63,7 @@ export const TeamsEmotionStat = ({
                 value: homePositive,
               },
             ]}
+            showBadgeBg
             className={cn(
               isRecording
                 ? 'bg-usage-background-subtle'
@@ -83,6 +84,7 @@ export const TeamsEmotionStat = ({
                 value: awayPositive,
               },
             ]}
+            showBadgeBg
             className={cn(
               isRecording
                 ? 'bg-usage-background-subtle'
