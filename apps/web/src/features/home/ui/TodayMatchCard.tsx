@@ -1,5 +1,4 @@
 import { format } from 'date-fns'
-
 import { Vs } from '@ballog/asset/icons'
 
 import type { Match } from '@/entities/match/model/match.type'
