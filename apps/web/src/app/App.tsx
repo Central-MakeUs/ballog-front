@@ -4,7 +4,7 @@ import { Stack } from '@/app/routes/stackflow'
 import '@stackflow/plugin-basic-ui/index.css'
 import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
-import { getTheme, setTheme } from '@/shared/lib/theme'
+import { setTheme } from '@/shared/lib/theme'
 
 import { useUpdatePolicy } from './policy/update/useUpdatePolicy'
 import { useMswNotice } from './policy/msw/useMswNotice'
@@ -12,7 +12,7 @@ import QueryProvider from './Provider/QueryProvider'
 
 export const ThemeInitializer = () => {
   useEffect(() => {
-    setTheme(getTheme())
+    setTheme('light')
   }, [])
 
   return null

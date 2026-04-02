@@ -38,7 +38,7 @@ const BADGE_STYLES: Record<RankTone, string> = {
 const RankBadge = ({ tone, label }: { tone: RankTone; label: string }) => {
   return (
     <div
-      className={`flex items-center justify-center rounded-full px-2 py-1 body-sm-bold ${BADGE_STYLES[tone]}`}
+      className={`flex items-center justify-center rounded-full px-2 py-1 body-sm-bold w-[85px] ${BADGE_STYLES[tone]}`}
     >
       {label}
     </div>

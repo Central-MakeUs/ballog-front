@@ -11,17 +11,18 @@ interface EmotionPieChartData {
 
 interface ActiveEmotionCardProps extends ComponentProps<'div'> {
   data: EmotionPieChartData[]
+  showBadgeBg?: boolean
 }
 
 interface DisabledEmotionCardProps extends ComponentProps<'div'> {}
 
 const EmotionBadge = ({
   emotion,
+  showBadgeBg = false,
   className,
-  ...rest
 }: {
   emotion: '화나요' | '기뻐요'
-
+  showBadgeBg?: boolean
   className?: string
 }) => {
   const isAngry = emotion === '화나요'
@@ -33,18 +34,19 @@ const EmotionBadge = ({
   return (
     <div
       className={cn(
-        'flex flex-row justify-center items-center py-1 w-full rounded-md',
-        'gap-1 px-2',
-        isAngry ? 'bg-brand-red-disabled:' : 'bg-brand-green-disabled',
+        'flex flex-row justify-center items-center gap-1',
+        showBadgeBg && 'py-1 px-2 w-full rounded-md',
+        showBadgeBg && (isAngry ? 'bg-brand-red-disabled' : 'bg-brand-green-disabled'),
         className,
       )}
-      {...rest}
     >
       {emotionIcon[emotion]}
       <span
         className={cn(
-          'body-sm-bold ',
-          isAngry ? 'text-brand-red-hover' : 'text-brand-green-hover',
+          'body-sm-bold',
+          showBadgeBg
+            ? isAngry ? 'text-brand-red-hover' : 'text-brand-green-hover'
+            : 'text-brand-neutral-70',
         )}
       >
         {emotion}
@@ -70,7 +72,7 @@ const EmotionBadge = ({
  * <EmotionCard.Disabled />
  * ```
  */
-const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
+const Active = ({ data, showBadgeBg = false, className, ...rest }: ActiveEmotionCardProps) => {
   const chartData = data
 
   const angryValue = chartData.find((d) => d.name === '화나요')!.value
@@ -83,7 +85,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
     centerEmotion === '화나요'
       ? 'var(--color-brand-red-hover)'
       : 'var(--color-brand-green-hover)'
-  const trackColor = 'var(--color-usage-background-strong)'
+  const trackColor = 'var(--color-brand-neutral-white)'
 
   const startAngle = angryValue <= 50 ? 90 : 0
   const endAngle = angryValue <= 50 ? 450 : 360
@@ -110,7 +112,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
         <PieChart width={104} height={104}>
           {/* 중앙 원 */}
           <Pie
-            data={[{ value: 100, fill: trackColor }]}
+            data={[{ value: 100, fill: 'var(--color-brand-neutral-white)' }]}
             dataKey="value"
             innerRadius={0}
             outerRadius={35}
@@ -149,7 +151,7 @@ const Active = ({ data, className, ...rest }: ActiveEmotionCardProps) => {
       </div>
 
       <div className="mx-4">
-        <EmotionBadge emotion={centerEmotion} />
+        <EmotionBadge emotion={centerEmotion} showBadgeBg={showBadgeBg} />
       </div>
     </div>
   )

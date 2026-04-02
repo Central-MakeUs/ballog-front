@@ -21,7 +21,7 @@ export const SectionHeader = ({
       className={cn('flex justify-between items-center', className)}
     >
       <div
-        className={cn('body-sm-bold text-brand-neutral-white', titleClassName)}
+        className={cn('body-sm-bold text-[#212121]', titleClassName)}
       >
         {title}
       </div>

@@ -28,7 +28,7 @@ export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
   const koreaDate = toZonedTime(new Date(), TIME_ZONE)
   const { selectedDate, setSelectedDate } = useDate()
 
-  const [showCalendar, setShowCalendar] = useState<boolean>(false)
+  const [showCalendar, setShowCalendar] = useState<boolean>(true)
   const [baseDate, setBaseDate] = useState(koreaDate)
 
   const calendarRef = useRef<HTMLDivElement>(null)

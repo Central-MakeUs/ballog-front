@@ -46,7 +46,7 @@ export const GNBButton = ({
       disabled={disabled}
       {...props}
     >
-      {IconComponent && <IconComponent className={cn('w-7 h-7', iconColor)} />}
+      {IconComponent && <IconComponent className={cn('w-6 h-6', iconColor)} />}
       {children && (
         <span
           className={cn(
