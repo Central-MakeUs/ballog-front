@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
+import { toast } from 'sonner'
 
 import { BackArrow } from '@/assets/BackArrow'
+import { useRequestFriendMutation } from '@/entities/friend'
 
 import {
   FriendRequestListItem,
@@ -23,6 +25,33 @@ const RECOMMENDED_FRIENDS: FriendRequestRecommendation[] = [
 export const FriendRequestPage = () => {
   const [recommendedFriends, setRecommendedFriends] =
     useState(RECOMMENDED_FRIENDS)
+  const { mutate: requestFriend, isPending } = useRequestFriendMutation()
+
+  const dismissFriend = (id: string) => {
+    setRecommendedFriends((prev) => prev.filter((friend) => friend.id !== id))
+  }
+
+  const handleRequest = (friend: FriendRequestRecommendation) => {
+    if (isPending) return
+
+    requestFriend(
+      { nickname: friend.name },
+      {
+        onSuccess: () => {
+          toast.success('친구 요청을 보냈어요!')
+          dismissFriend(friend.id)
+        },
+        onError: (error) => {
+          const message =
+            error && typeof error === 'object' && 'errorData' in error
+              ? ((error as { errorData?: { error?: string } }).errorData
+                  ?.error ?? '친구 요청에 실패했어요.')
+              : '친구 요청에 실패했어요.'
+          toast.error(message)
+        },
+      },
+    )
+  }
 
   return (
     <AppScreen
@@ -53,14 +82,8 @@ export const FriendRequestPage = () => {
                   <FriendRequestListItem
                     key={friend.id}
                     {...friend}
-                    onDismiss={() => {
-                      setRecommendedFriends((prevFriends) =>
-                        prevFriends.filter(
-                          (prevFriend) => prevFriend.id !== friend.id,
-                        ),
-                      )
-                    }}
-                    onRequest={() => {}}
+                    onDismiss={() => dismissFriend(friend.id)}
+                    onRequest={() => handleRequest(friend)}
                   />
                 ))}
               </div>

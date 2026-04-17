@@ -8,6 +8,7 @@ import { useFlow } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
 
 export interface CommunityFriendCardData {
+  userId?: number
   nickname: string
   team: string
   emotion: string
@@ -100,7 +101,7 @@ export const CommunityFriendGrid = ({ cards }: CommunityFriendGridProps) => {
     <div className="grid grid-cols-3 gap-x-2.5 gap-y-4 px-4 pb-8 pt-4">
       {cards.map((card, index) => (
         <CommunityFriendCard
-          key={`${card.nickname}-${card.emotion}-${index}`}
+          key={card.userId ?? `${card.nickname}-${card.emotion}-${index}`}
           {...card}
         />
       ))}
