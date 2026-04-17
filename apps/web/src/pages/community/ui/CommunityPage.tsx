@@ -52,7 +52,7 @@ const FRIEND_CARDS: CommunityFriendCardData[] = [
 
 export const CommunityPage = () => {
   const { user } = useUserQuery()
-  const { replace } = useFlow()
+  const { replace, push } = useFlow()
   const [hasFriends] = useState(() => Math.random() >= 0.5)
   const [isKBORankBottomSheetOpen, setIsKBORankBottomSheetOpen] =
     useState(false)
@@ -141,10 +141,7 @@ export const CommunityPage = () => {
                 </section>
               ) : (
                 <CommunityEmptyState
-                  onExploreFriends={() => {
-                    setIsKBORankBottomSheetOpen(false)
-                    setIsAddFriendBottomSheetOpen(true)
-                  }}
+                  onExploreFriends={() => push('FriendRequest', {})}
                 />
               )}
             </main>
