@@ -5,6 +5,7 @@ import { userHandlers } from './handlers/userHandlers'
 import { recordHandlers } from './handlers/recordHandler'
 import { imageHandlers } from './handlers/imageHandler'
 import { recordingHandlers } from './handlers/recordingHandlers'
+import { friendHandlers } from './handlers/friendHandlers'
 
 export const handlers = [
   ...authHandlers,
@@ -14,4 +15,5 @@ export const handlers = [
   ...recordHandlers,
   ...imageHandlers,
   ...recordingHandlers,
+  ...friendHandlers,
 ]
