@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { toast } from 'sonner'
 
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
@@ -109,16 +108,7 @@ export const AddFriendBottomSheet = ({
                 { nickname: trimmed },
                 {
                   onSuccess: () => {
-                    toast.success('친구 요청을 보냈어요!')
                     onOpenChange(false)
-                  },
-                  onError: (error) => {
-                    const message =
-                      error && typeof error === 'object' && 'errorData' in error
-                        ? ((error as { errorData?: { error?: string } })
-                            .errorData?.error ?? '친구 요청에 실패했어요.')
-                        : '친구 요청에 실패했어요.'
-                    toast.error(message)
                   },
                 },
               )

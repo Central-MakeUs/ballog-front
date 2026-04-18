@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { toast } from 'sonner'
 
 import { BackArrow } from '@/assets/BackArrow'
 import { useRequestFriendMutation } from '@/entities/friend'
@@ -38,16 +37,7 @@ export const FriendRequestPage = () => {
       { nickname: friend.name },
       {
         onSuccess: () => {
-          toast.success('친구 요청을 보냈어요!')
           dismissFriend(friend.id)
-        },
-        onError: (error) => {
-          const message =
-            error && typeof error === 'object' && 'errorData' in error
-              ? ((error as { errorData?: { error?: string } }).errorData
-                  ?.error ?? '친구 요청에 실패했어요.')
-              : '친구 요청에 실패했어요.'
-          toast.error(message)
         },
       },
     )
