@@ -9,15 +9,12 @@ import type {
   RequestFriendRequestDTO,
 } from '../model/friend.type'
 
-const isExtendedKyHttpError = (e: unknown): e is ExtendedKyHttpError =>
-  typeof e === 'object' && e !== null && 'errorData' in e
-
 export const useRequestFriendMutation = () => {
   const queryClient = useQueryClient()
 
   return useMutation<
     FriendActionResponseDTO,
-    unknown,
+    ExtendedKyHttpError,
     RequestFriendRequestDTO
   >({
     mutationFn: friendPost.requestFriend,
@@ -26,10 +23,7 @@ export const useRequestFriendMutation = () => {
       queryClient.invalidateQueries({ queryKey: friendQueries.list().queryKey })
     },
     onError: (error) => {
-      const message = isExtendedKyHttpError(error)
-        ? (error.errorData?.error ?? '친구 요청에 실패했어요.')
-        : '친구 요청에 실패했어요.'
-      toast.error(message)
+      toast.error(error.errorData?.error ?? '친구 요청에 실패했어요.')
     },
   })
 }
