@@ -9,7 +9,7 @@ import { recording } from '@/entities/record/api/recording.queries'
 import { useCheckSignupFinished } from '@/features/auth/hooks/useCheckSignupFinished'
 import { useFcmToken } from '@/features/fcm/hooks/useFcmToken'
 import { CharacterSection } from '@/features/home/ui/CharacterSection'
-import { HomeHeaderV2 } from '@/features/home/ui/HomeHeaderV2'
+import { HomeHeaderV2 } from '@/widgets/header/ui/HomeHeaderV2'
 import {
   NoMatchCard,
   TodayMatchCard,
@@ -123,7 +123,6 @@ const HomePageV2: ActivityComponentType = () => {
         <HomeHeaderV2
           nickname={nickname}
           onProfileClick={() => replace('My', {}, { animate: false })}
-          onNotificationClick={() => {}}
         />
         <div className="flex-1 overflow-y-auto">
           <HomeContentV2

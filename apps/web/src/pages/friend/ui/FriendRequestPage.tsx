@@ -1,48 +1,10 @@
-import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 
 import { BackArrow } from '@/assets/BackArrow'
-import { useRequestFriendMutation } from '@/entities/friend'
 
-import {
-  FriendRequestListItem,
-  type FriendRequestRecommendation,
-} from './FriendRequestListItem'
-
-const RECOMMENDED_FRIENDS: FriendRequestRecommendation[] = [
-  { id: 'friend-1', name: '김 친구', emotionLabel: '화남70%' },
-  { id: 'friend-2', name: '박 메이트', emotionLabel: '화남70%' },
-  { id: 'friend-3', name: '이 응원단', emotionLabel: '화남70%' },
-  { id: 'friend-4', name: '최 직관러', emotionLabel: '화남70%' },
-  { id: 'friend-5', name: '정 원정팬', emotionLabel: '화남70%' },
-  { id: 'friend-6', name: '한 홈런볼', emotionLabel: '화남70%' },
-  { id: 'friend-7', name: '윤 캐치볼', emotionLabel: '화남70%' },
-  { id: 'friend-8', name: '장 마운드', emotionLabel: '화남70%' },
-  { id: 'friend-9', name: '오 타석러', emotionLabel: '화남70%' },
-]
+import { ReceivedRequestList } from './ReceivedRequestList'
 
 export const FriendRequestPage = () => {
-  const [recommendedFriends, setRecommendedFriends] =
-    useState(RECOMMENDED_FRIENDS)
-  const { mutate: requestFriend, isPending } = useRequestFriendMutation()
-
-  const dismissFriend = (id: string) => {
-    setRecommendedFriends((prev) => prev.filter((friend) => friend.id !== id))
-  }
-
-  const handleRequest = (friend: FriendRequestRecommendation) => {
-    if (isPending) return
-
-    requestFriend(
-      { nickname: friend.name },
-      {
-        onSuccess: () => {
-          dismissFriend(friend.id)
-        },
-      },
-    )
-  }
-
   return (
     <AppScreen
       appBar={{
@@ -61,23 +23,9 @@ export const FriendRequestPage = () => {
       preventSwipeBack={true}
     >
       <div className="flex flex-col w-full h-full bg-usage-background-default">
-        <div className="flex-1 overflow-y-auto">
-          <main className="flex flex-col px-4 pt-6 pb-8">
-            <h2 className="body-md-bold text-usage-text-default">
-              내 구단 메이트 추천
-            </h2>
-            <section className="mt-4">
-              <div>
-                {recommendedFriends.map((friend) => (
-                  <FriendRequestListItem
-                    key={friend.id}
-                    {...friend}
-                    onDismiss={() => dismissFriend(friend.id)}
-                    onRequest={() => handleRequest(friend)}
-                  />
-                ))}
-              </div>
-            </section>
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <main className="flex flex-col flex-1 px-4 pt-6 pb-8">
+            <ReceivedRequestList />
           </main>
         </div>
       </div>

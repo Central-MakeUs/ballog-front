@@ -5,7 +5,7 @@ import { AngryEmotionCharacter, NoEmotionCharacter } from '@ballog/asset/icons'
 import { useFlow } from '@/app/routes/stackflow'
 import RightArrow from '@/assets/RightArrow'
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import { HomeHeaderV2 } from '@/features/home/ui/HomeHeaderV2'
+import { HomeHeaderV2 } from '@/widgets/header/ui/HomeHeaderV2'
 import { useUserQuery } from '@/entities/auth/hooks'
 import { useFriendsQuery } from '@/entities/friend'
 import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
@@ -55,7 +55,6 @@ export const CommunityPage = () => {
         <HomeHeaderV2
           nickname={nickname}
           onProfileClick={() => replace('My', {}, { animate: false })}
-          onNotificationClick={() => {}}
         />
         <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hidden">
           <div className="relative w-full pb-32 light:bg-brand-neutral-10">
