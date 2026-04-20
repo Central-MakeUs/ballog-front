@@ -4,6 +4,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.omc/
 
 # Build outputs
 dist
@@ -177,3 +178,6 @@ next-env.d.ts
 # AI
 opencode.jsonc
 .omc
+.claude/settings.local.json
+WORKFLOW.md
+
