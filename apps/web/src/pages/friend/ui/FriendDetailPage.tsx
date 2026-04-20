@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { AngryEmotionCharacter, KebobMenu } from '@ballog/asset/icons'
+import { toast } from 'sonner'
 
 import { BackArrow } from '@/assets/BackArrow'
 
@@ -95,7 +96,7 @@ const FriendDetailEmptyState = () => {
       <button
         type="button"
         className="flex items-center justify-center h-10 px-3 rounded-large bg-brand-secondary-default body-md-medium text-brand-neutral-white"
-        onClick={() => {}}
+        onClick={() => toast('준비중입니다.')}
       >
         오늘 경기 보기
       </button>

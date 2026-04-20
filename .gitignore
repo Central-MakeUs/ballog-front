@@ -177,5 +177,7 @@ next-env.d.ts
 
 # AI
 opencode.jsonc
+.omc
 .claude/settings.local.json
 WORKFLOW.md
+

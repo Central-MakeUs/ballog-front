@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { List } from '@/shared/ui/common/List/List'
@@ -48,6 +49,7 @@ export const ReportBottomSheet = ({
               type="arrow"
               onClick={() => {
                 onOpenChange(false)
+                toast('준비중입니다.')
               }}
             >
               신고하기
@@ -56,6 +58,7 @@ export const ReportBottomSheet = ({
               type="arrow"
               onClick={() => {
                 onOpenChange(false)
+                toast('준비중입니다.')
               }}
             >
               친구 끊기

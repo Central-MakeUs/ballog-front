@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
+import { rankQueries } from '@/entities/match/api'
+import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
 
 type RankTone = 'negative' | 'positive' | 'none'
 
@@ -8,26 +11,6 @@ interface KBORankBottomSheetProps {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
-
-interface RankItem {
-  rank: number
-  team: string
-  tone: RankTone
-  label: string
-}
-
-const KBO_RANK_ITEMS: RankItem[] = [
-  { rank: 1, team: '롯데', tone: 'negative', label: '화나요 70%' },
-  { rank: 2, team: '키움', tone: 'positive', label: '기뻐요 70%' },
-  { rank: 3, team: 'SSG', tone: 'negative', label: '화나요 70%' },
-  { rank: 4, team: 'SSG', tone: 'positive', label: '기뻐요 70%' },
-  { rank: 5, team: 'SSG', tone: 'none', label: '감정없음' },
-  { rank: 6, team: 'SSG', tone: 'negative', label: '화나요 70%' },
-  { rank: 7, team: 'SSG', tone: 'positive', label: '기뻐요 70%' },
-  { rank: 8, team: 'SSG', tone: 'negative', label: '화나요 70%' },
-  { rank: 9, team: 'SSG', tone: 'negative', label: '화나요 70%' },
-  { rank: 10, team: 'SSG', tone: 'negative', label: '화나요 70%' },
-]
 
 const BADGE_STYLES: Record<RankTone, string> = {
   negative: 'bg-brand-red-subtle text-brand-red-default',
@@ -50,6 +33,9 @@ export const KBORankBottomSheet = ({
   onOpenChange,
 }: KBORankBottomSheetProps) => {
   const [shouldRenderContent, setShouldRenderContent] = useState(open)
+  const { data: ranks = [] } = useQuery(rankQueries.teams())
+
+  const updatedAtDisplay = ranks[0]?.updatedAt.slice(0, 10) ?? '----.--.--'
 
   useEffect(() => {
     if (open) {
@@ -86,16 +72,16 @@ export const KBORankBottomSheet = ({
                   KBO 순위
                 </h2>
                 <p className="text-white body-md-medium light:text-brand-neutral-90">
-                  2000.00.00 기준
+                  {updatedAtDisplay} 기준
                 </p>
               </div>
 
               <div className="w-full overflow-hidden rounded-xlarge bg-brand-neutral-10">
-                {KBO_RANK_ITEMS.map((item, index) => (
+                {ranks.map((item, index) => (
                   <div
-                    key={`${item.rank}-${item.team}`}
+                    key={item.teamCode}
                     className={`grid grid-cols-[auto_auto_auto] justify-center items-center gap-4 px-4 py-3 ${
-                      index !== KBO_RANK_ITEMS.length - 1
+                      index !== ranks.length - 1
                         ? 'border-b border-brand-neutral-30'
                         : ''
                     }`}
@@ -110,9 +96,9 @@ export const KBORankBottomSheet = ({
                       {item.rank}위
                     </span>
                     <span className="body-lg-medium text-brand-neutral-90">
-                      {item.team}
+                      {SHORT_TEAM_NAMES[item.teamCode]}
                     </span>
-                    <RankBadge tone={item.tone} label={item.label} />
+                    <RankBadge tone="none" label="감정없음" />
                   </div>
                 ))}
               </div>

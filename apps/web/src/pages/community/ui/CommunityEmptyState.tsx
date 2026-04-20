@@ -29,7 +29,7 @@ export const CommunityEmptyState = ({
         onClick={onExploreFriends}
         className="flex h-10 items-center justify-center rounded-large bg-brand-secondary-default px-3 body-md-medium text-brand-neutral-white"
       >
-        친구 추가하기
+        친구 탐색하기
       </button>
     </section>
   )

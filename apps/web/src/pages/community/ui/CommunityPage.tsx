@@ -5,8 +5,10 @@ import { AngryEmotionCharacter, NoEmotionCharacter } from '@ballog/asset/icons'
 import { useFlow } from '@/app/routes/stackflow'
 import RightArrow from '@/assets/RightArrow'
 import { GlobalNavigationBar } from '@/widgets/navigation'
-import { HomeHeaderV2 } from '@/features/home/ui/HomeHeaderV2'
+import { HomeHeaderV2 } from '@/widgets/header/ui/HomeHeaderV2'
 import { useUserQuery } from '@/entities/auth/hooks'
+import { useFriendsQuery } from '@/entities/friend'
+import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
 
 import { AddFriendBottomSheet } from './AddFriendBottomSheet'
 import {
@@ -23,41 +25,24 @@ const HERO_STAT = {
   label: '현재 순위',
 }
 
-const FRIEND_CARDS: CommunityFriendCardData[] = [
-  { team: '롯데', emotion: '짜증나', nickname: '볼로그', tone: 'negative' },
-  { team: '롯데', emotion: '행복해', nickname: '볼로그그그', tone: 'positive' },
-  {
-    team: 'SGG',
-    emotion: '무덤덤',
-    nickname: '볼로그그그...',
-    tone: 'neutral',
-  },
-  { team: '롯데', emotion: '짜증나', nickname: '볼로그', tone: 'negative' },
-  { team: '롯데', emotion: '행복해', nickname: '볼로그그그', tone: 'positive' },
-  {
-    team: 'SGG',
-    emotion: '무덤덤',
-    nickname: '볼로그그그...',
-    tone: 'neutral',
-  },
-  { team: '롯데', emotion: '짜증나', nickname: '볼로그', tone: 'negative' },
-  { team: '롯데', emotion: '행복해', nickname: '볼로그그그', tone: 'positive' },
-  {
-    team: 'SGG',
-    emotion: '무덤덤',
-    nickname: '볼로그그그...',
-    tone: 'neutral',
-  },
-]
-
 export const CommunityPage = () => {
   const { user } = useUserQuery()
-  const { replace } = useFlow()
-  const [hasFriends] = useState(() => Math.random() >= 0.5)
+  const { replace, push } = useFlow()
+  const { data: friendsData } = useFriendsQuery()
   const [isKBORankBottomSheetOpen, setIsKBORankBottomSheetOpen] =
     useState(false)
   const [isAddFriendBottomSheetOpen, setIsAddFriendBottomSheetOpen] =
     useState(false)
+
+  const friends = friendsData?.data ?? []
+  const hasFriends = friends.length > 0
+  const friendCards: CommunityFriendCardData[] = friends.map((friend) => ({
+    userId: friend.userId,
+    nickname: friend.nickname,
+    team: SHORT_TEAM_NAMES[friend.baseballTeam],
+    emotion: '감정없음',
+    tone: 'neutral',
+  }))
 
   const nickname = user?.nickname ?? '볼로그'
   const heroEmotionLabel = hasFriends ? '화나요 70%' : '감정없음'
@@ -70,7 +55,6 @@ export const CommunityPage = () => {
         <HomeHeaderV2
           nickname={nickname}
           onProfileClick={() => replace('My', {}, { animate: false })}
-          onNotificationClick={() => {}}
         />
         <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hidden">
           <div className="relative w-full pb-32 light:bg-brand-neutral-10">
@@ -123,7 +107,7 @@ export const CommunityPage = () => {
                 <section className="pt-6">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="body-md-medium text-usage-text-default">
-                      친구 00 명
+                      친구 {friends.length}명
                     </h2>
                     <button
                       type="button"
@@ -137,14 +121,11 @@ export const CommunityPage = () => {
                     </button>
                   </div>
 
-                  <CommunityFriendGrid cards={FRIEND_CARDS} />
+                  <CommunityFriendGrid cards={friendCards} />
                 </section>
               ) : (
                 <CommunityEmptyState
-                  onExploreFriends={() => {
-                    setIsKBORankBottomSheetOpen(false)
-                    setIsAddFriendBottomSheetOpen(true)
-                  }}
+                  onExploreFriends={() => push('FriendRequest', {})}
                 />
               )}
             </main>

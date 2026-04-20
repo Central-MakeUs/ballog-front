@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { cn } from '@/shared/lib/classnames'
+import { useRequestFriendMutation } from '@/entities/friend'
 
 interface AddFriendBottomSheetProps {
   open: boolean
@@ -21,6 +22,7 @@ export const AddFriendBottomSheet = ({
   const [nickname, setNickname] = useState('')
   const [keyboardInset, setKeyboardInset] = useState(0)
   const [shouldRenderContent, setShouldRenderContent] = useState(open)
+  const { mutate: requestFriend, isPending } = useRequestFriendMutation()
 
   useEffect(() => {
     if (open) {
@@ -99,6 +101,17 @@ export const AddFriendBottomSheet = ({
           <form
             onSubmit={(event) => {
               event.preventDefault()
+              const trimmed = nickname.trim()
+              if (!trimmed || isPending) return
+
+              requestFriend(
+                { nickname: trimmed },
+                {
+                  onSuccess: () => {
+                    onOpenChange(false)
+                  },
+                },
+              )
             }}
           >
             <input
@@ -110,10 +123,12 @@ export const AddFriendBottomSheet = ({
               value={nickname}
               onChange={(event) => setNickname(event.target.value)}
               placeholder={PLACEHOLDER}
+              disabled={isPending}
               className={cn(
                 'w-full rounded-large bg-usage-background-strong px-4 py-4 text-center',
                 'body-lg-bold text-usage-text-default placeholder:text-brand-neutral-40',
                 'border-none outline-none focus:ring-0',
+                'disabled:opacity-60',
               )}
             />
           </form>

@@ -5,13 +5,17 @@ import { userHandlers } from './handlers/userHandlers'
 import { recordHandlers } from './handlers/recordHandler'
 import { imageHandlers } from './handlers/imageHandler'
 import { recordingHandlers } from './handlers/recordingHandlers'
+import { friendHandlers } from './handlers/friendHandlers'
+import { rankHandlers } from './handlers/rankHandlers'
 
 export const handlers = [
   ...authHandlers,
   ...matchHandlers,
   ...emotionHandlers,
   ...userHandlers,
+  ...rankHandlers,
   ...recordHandlers,
   ...imageHandlers,
   ...recordingHandlers,
+  ...friendHandlers,
 ]

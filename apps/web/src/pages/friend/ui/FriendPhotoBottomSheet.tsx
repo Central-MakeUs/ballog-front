@@ -103,7 +103,7 @@ export const FriendPhotoBottomSheet = ({
                     )}
                     onClick={() => {
                       setActiveReaction(reaction)
-                      toast('반응 보내기 완료!', {
+                      toast('준비중입니다.', {
                         id: 'friend-photo-reaction',
                       })
                     }}
