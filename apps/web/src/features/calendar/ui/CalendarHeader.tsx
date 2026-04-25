@@ -18,7 +18,7 @@ import { cn } from '@/shared/lib/classnames'
 
 import { useDate } from '../context/DateContext'
 
-import { CalendarWeekCarousel } from './CalendarWeekCarousel'
+import { CalendarWeekCarouselV2 } from './CalendarWeekCarouselV2'
 
 interface CalendarHeaderProps {
   allMatches: MatchDateMap
@@ -111,7 +111,7 @@ export const CalendarHeader = ({ allMatches }: CalendarHeaderProps) => {
       </div>
 
       {/* week 캐러셀 */}
-      <CalendarWeekCarousel
+      <CalendarWeekCarouselV2
         allMatches={allMatches}
         baseDate={baseDate}
         onChange={setBaseDate}
