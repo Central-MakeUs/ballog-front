@@ -1,6 +1,8 @@
+import { formatInTimeZone } from 'date-fns-tz'
+
 import { type Match } from '@/entities/match/model/match.type'
 
-const today = new Date().toISOString().slice(0, 10)
+const today = formatInTimeZone(new Date(), 'Asia/Seoul', 'yyyy-MM-dd')
 
 export const match = {
   today: {
@@ -69,10 +71,10 @@ export const matchByDate: {
   delay: number
 } = {
   data: {
-    '2026-02-01': [
+    [today]: [
       {
         matchesId: 101,
-        matchesDate: '2026-02-01',
+        matchesDate: today,
         matchesTime: '22:10:00',
         homeTeam: 'LG_TWINS',
         awayTeam: 'SSG_LANDERS',
@@ -82,7 +84,7 @@ export const matchByDate: {
       },
       {
         matchesId: 102,
-        matchesDate: '2026-02-01',
+        matchesDate: today,
         matchesTime: '18:30:00',
         homeTeam: 'HANWHA_EAGLES',
         awayTeam: 'KIA_TIGERS',
