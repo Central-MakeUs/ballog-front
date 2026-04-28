@@ -3,9 +3,24 @@ import { useQuery } from '@tanstack/react-query'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { rankQueries } from '@/entities/match/api'
+import type { TeamRank } from '@/entities/match/model/rank.type'
 import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
 
 type RankTone = 'negative' | 'positive' | 'none'
+
+// TODO: 백엔드 명세 나오면 수정
+const getEmotionBadge = (
+  emotion: TeamRank['emotion'],
+  percent: TeamRank['emotionPercent'],
+): { tone: RankTone; label: string } => {
+  if (emotion === 'POSITIVE') {
+    return { tone: 'positive', label: `기뻐요 ${percent}%` }
+  }
+  if (emotion === 'NEGATIVE') {
+    return { tone: 'negative', label: `화나요 ${percent}%` }
+  }
+  return { tone: 'none', label: '감정없음' }
+}
 
 interface KBORankBottomSheetProps {
   open: boolean
@@ -21,7 +36,7 @@ const BADGE_STYLES: Record<RankTone, string> = {
 const RankBadge = ({ tone, label }: { tone: RankTone; label: string }) => {
   return (
     <div
-      className={`flex items-center justify-center rounded-full px-2 py-1 body-sm-bold w-[85px] ${BADGE_STYLES[tone]}`}
+      className={`flex items-center justify-center rounded-full px-2 py-1 body-sm-bold w-[85px] whitespace-nowrap ${BADGE_STYLES[tone]}`}
     >
       {label}
     </div>
@@ -77,30 +92,33 @@ export const KBORankBottomSheet = ({
               </div>
 
               <div className="w-full rounded-xlarge bg-brand-neutral-10">
-                {ranks.map((item, index) => (
-                  <div
-                    key={item.teamCode}
-                    className={`grid grid-cols-[auto_auto_auto] justify-center items-center gap-4 px-4 py-3 ${
-                      index !== ranks.length - 1
-                        ? 'border-b border-brand-neutral-30'
-                        : ''
-                    }`}
-                  >
-                    <span
-                      className={`body-lg-bold text-center ${
-                        item.rank <= 5
-                          ? 'text-brand-primary-pressed'
-                          : 'text-brand-neutral-80'
+                {ranks.map((item, index) => {
+                  const badge = getEmotionBadge(item.emotion, item.emotionPercent)
+                  return (
+                    <div
+                      key={item.teamCode}
+                      className={`grid grid-cols-[auto_auto_auto] justify-center items-center gap-4 px-4 py-3 ${
+                        index !== ranks.length - 1
+                          ? 'border-b border-brand-neutral-30'
+                          : ''
                       }`}
                     >
-                      {item.rank}위
-                    </span>
-                    <span className="body-lg-medium text-brand-neutral-90">
-                      {SHORT_TEAM_NAMES[item.teamCode]}
-                    </span>
-                    <RankBadge tone="none" label="감정없음" />
-                  </div>
-                ))}
+                      <span
+                        className={`body-lg-bold text-center ${
+                          item.rank <= 5
+                            ? 'text-brand-primary-pressed'
+                            : 'text-brand-neutral-80'
+                        }`}
+                      >
+                        {item.rank}위
+                      </span>
+                      <span className="body-lg-medium text-brand-neutral-90">
+                        {SHORT_TEAM_NAMES[item.teamCode]}
+                      </span>
+                      <RankBadge tone={badge.tone} label={badge.label} />
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
