@@ -55,9 +55,7 @@ export const AddFriendBottomSheet = ({
     viewport?.addEventListener('scroll', updateKeyboardInset)
 
     const frame = window.requestAnimationFrame(() => {
-      if (!isRNEnvironment) {
-        inputRef.current?.focus()
-      }
+      inputRef.current?.focus()
     })
 
     return () => {
@@ -79,11 +77,6 @@ export const AddFriendBottomSheet = ({
     <BottomSheetModal.PortalBottomSheet
       open={open}
       onOutsideClick={() => onOpenChange(false)}
-      onEntered={() => {
-        if (isRNEnvironment) {
-          inputRef.current?.focus()
-        }
-      }}
       onExited={() => {
         setShouldRenderContent(false)
         setNickname('')
@@ -95,7 +88,7 @@ export const AddFriendBottomSheet = ({
       <BottomSheetModal.Root
         open={shouldRenderContent}
         onOpenChange={onOpenChange}
-        contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-90 light:bg-brand-neutral-white px-4 pt-6 pb-4"
+        contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-90 light:bg-brand-neutral-white px-4 pt-6 pb-6"
       >
         <div className="w-full">
           <form
