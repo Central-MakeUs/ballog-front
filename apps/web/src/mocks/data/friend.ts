@@ -5,11 +5,11 @@ import type {
 
 export const friendList: { data: FriendItem[]; delay: number } = {
   data: [
-    { userId: 1, nickname: '영희', baseballTeam: 'LG_TWINS' },
-    { userId: 2, nickname: '철수', baseballTeam: 'DOOSAN_BEARS' },
-    { userId: 3, nickname: '수빈', baseballTeam: 'KIA_TIGERS' },
-    { userId: 4, nickname: '지민', baseballTeam: 'HANWHA_EAGLES' },
-    { userId: 5, nickname: '하늘', baseballTeam: 'SSG_LANDERS' },
+    { userId: 1, nickname: '영희', baseballTeam: 'LG_TWINS', emotion: 'POSITIVE' },
+    { userId: 2, nickname: '철수', baseballTeam: 'DOOSAN_BEARS', emotion: 'NEGATIVE' },
+    { userId: 3, nickname: '수빈', baseballTeam: 'KIA_TIGERS', emotion: 'NEUTRAL' },
+    { userId: 4, nickname: '지민', baseballTeam: 'HANWHA_EAGLES', emotion: 'POSITIVE' },
+    { userId: 5, nickname: '하늘', baseballTeam: 'SSG_LANDERS', emotion: 'NEGATIVE' },
   ],
   delay: 600,
 }

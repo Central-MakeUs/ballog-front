@@ -61,7 +61,7 @@ const CommunityFriendCard = ({
   return (
     <button
       type="button"
-      className="flex h-44 flex-col items-center gap-1 overflow-hidden rounded-large bg-usage-background-subtle px-2 py-4 light:bg-usage-background-default"
+      className="flex flex-col items-center gap-1 px-2 py-4 h-44 rounded-large bg-usage-background-subtle light:bg-usage-background-default"
       onClick={() => {
         push('FriendDetail', {}, { animate: true })
       }}
@@ -82,10 +82,10 @@ const CommunityFriendCard = ({
         </span>
         <span className={cn('body-sm-bold', style.emotion)}>{emotion}</span>
       </div>
-      <div className="flex h-22 items-center justify-center">
+      <div className="flex items-center justify-center h-22">
         <CommunityFriendMascot tone={tone} />
       </div>
-      <p className="body-sm-medium w-full truncate text-center text-usage-text-default light:text-brand-neutral-60">
+      <p className="w-full text-center truncate body-sm-medium text-usage-text-default light:text-brand-neutral-60">
         {nickname}
       </p>
     </button>
