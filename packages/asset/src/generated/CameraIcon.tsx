@@ -1,5 +1,65 @@
-import type { SVGProps } from "react";
-import { memo } from "react";
-const CameraIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 36 36" focusable="false" {...props}><g clipPath="url(#ico-CameraIcon__a)" filter="url(#ico-CameraIcon__b)"><circle cx={17.793} cy={16} r={16} fill="#fff" /><path fill="#424242" d="M22.587 10.812h-9.625l.522-1.21c.23-.532.945-.89 1.76-.89h5.06c.816 0 1.522.367 1.76.89z" /><path fill="#fff" d="M17.784 19.685a2.19 2.19 0 1 0 0-4.382 2.19 2.19 0 0 0 0 4.382" /><path fill="#424242" d="M25.062 11.692c1.017 0 1.842.824 1.842 1.842v7.91a1.843 1.843 0 0 1-1.843 1.844H10.506a1.843 1.843 0 0 1-1.843-1.843v-7.911c0-1.018.826-1.842 1.843-1.842zm-7.279 2.227a3.57 3.57 0 0 0-3.565 3.566 3.576 3.576 0 0 0 3.565 3.566 3.577 3.577 0 0 0 3.567-3.566 3.576 3.576 0 0 0-3.567-3.566m0 1.375a2.191 2.191 0 1 1 0 4.383 2.191 2.191 0 0 1 0-4.383" /></g><defs><clipPath id="ico-CameraIcon__a"><path fill="#fff" d="M1.793 0h32v32h-32z" /></clipPath><filter id="ico-CameraIcon__b" width={35.585} height={35.585} x={0} y={0} colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse"><feFlood floodOpacity={0} result="BackgroundImageFix" /><feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" /><feOffset dy={1.793} /><feGaussianBlur stdDeviation={0.896} /><feComposite in2="hardAlpha" operator="out" /><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" /><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_2740_12865" /><feBlend in="SourceGraphic" in2="effect1_dropShadow_2740_12865" result="shape" /></filter></defs></svg>;
-const Memo = memo(CameraIcon);
-export default Memo;
+import type { SVGProps } from 'react'
+import { memo } from 'react'
+const CameraIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    fill="none"
+    viewBox="0 0 36 36"
+    focusable="false"
+    {...props}
+  >
+    <g clipPath="url(#ico-CameraIcon__a)" filter="url(#ico-CameraIcon__b)">
+      <circle cx={17.793} cy={16} r={16} fill="#fff" />
+      <path
+        fill="#424242"
+        d="M22.587 10.812h-9.625l.522-1.21c.23-.532.945-.89 1.76-.89h5.06c.816 0 1.522.367 1.76.89z"
+      />
+      <path
+        fill="#fff"
+        d="M17.784 19.685a2.19 2.19 0 1 0 0-4.382 2.19 2.19 0 0 0 0 4.382"
+      />
+      <path
+        fill="#424242"
+        d="M25.062 11.692c1.017 0 1.842.824 1.842 1.842v7.91a1.843 1.843 0 0 1-1.843 1.844H10.506a1.843 1.843 0 0 1-1.843-1.843v-7.911c0-1.018.826-1.842 1.843-1.842zm-7.279 2.227a3.57 3.57 0 0 0-3.565 3.566 3.576 3.576 0 0 0 3.565 3.566 3.577 3.577 0 0 0 3.567-3.566 3.576 3.576 0 0 0-3.567-3.566m0 1.375a2.191 2.191 0 1 1 0 4.383 2.191 2.191 0 0 1 0-4.383"
+      />
+    </g>
+    <defs>
+      <clipPath id="ico-CameraIcon__a">
+        <path fill="#fff" d="M1.793 0h32v32h-32z" />
+      </clipPath>
+      <filter
+        id="ico-CameraIcon__b"
+        width={35.585}
+        height={35.585}
+        x={0}
+        y={0}
+        colorInterpolationFilters="sRGB"
+        filterUnits="userSpaceOnUse"
+      >
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          result="hardAlpha"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy={1.793} />
+        <feGaussianBlur stdDeviation={0.896} />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+        <feBlend
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_2740_12865"
+        />
+        <feBlend
+          in="SourceGraphic"
+          in2="effect1_dropShadow_2740_12865"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+)
+const Memo = memo(CameraIcon)
+export default Memo
