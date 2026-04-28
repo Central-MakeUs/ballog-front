@@ -58,14 +58,14 @@ export const KBORankBottomSheet = ({
       <BottomSheetModal.Root
         open={shouldRenderContent}
         onOpenChange={onOpenChange}
-        contentClassName="h-[80vh] gap-6 light:bg-brand-neutral-white px-4 pt-4 pb-10"
+        contentClassName="max-h-[80vh] gap-6 light:bg-brand-neutral-white px-4 pt-4 pb-10"
       >
-        <div className="flex h-full w-full flex-col overflow-hidden">
+        <div className="flex flex-col w-full min-h-0 overflow-hidden">
           <div className="flex justify-center shrink-0">
             <div className="w-12 h-1 mb-2 rounded-full bg-brand-neutral-30" />
           </div>
 
-          <div className="flex-1 overflow-y-auto scrollbar-hidden pt-4 pb-4">
+          <div className="min-h-0 pt-4 pb-4 overflow-y-auto scrollbar-hidden">
             <div className="flex flex-col items-center gap-6">
               <div className="flex flex-col items-center w-full gap-3 text-center shrink-0">
                 <h2 className="text-white heading-md-bold light:text-brand-neutral-90">
@@ -76,7 +76,7 @@ export const KBORankBottomSheet = ({
                 </p>
               </div>
 
-              <div className="w-full overflow-hidden rounded-xlarge bg-brand-neutral-10">
+              <div className="w-full rounded-xlarge bg-brand-neutral-10">
                 {ranks.map((item, index) => (
                   <div
                     key={item.teamCode}
