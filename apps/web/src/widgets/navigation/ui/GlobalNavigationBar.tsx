@@ -1,6 +1,6 @@
 import { useState, useEffect, type ComponentType } from 'react'
-import { CommunityGNB } from '@ballog/asset/icons'
 
+import CommunityGNB from '@/assets/CommunityGNB'
 import HomeGNB from '@/assets/HomeGNB'
 import RecordGNB from '@/assets/RecordGNB'
 import { useFlow, activities, actions } from '@/app/routes/stackflow'
