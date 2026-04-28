@@ -36,12 +36,18 @@ export const CommunityPage = () => {
 
   const friends = friendsData?.data ?? []
   const hasFriends = friends.length > 0
+  const EMOTION_MAP = {
+    POSITIVE: { label: '행복해', tone: 'positive' },
+    NEGATIVE: { label: '짜증나', tone: 'negative' },
+    NEUTRAL: { label: '무덤덤', tone: 'neutral' },
+  } as const
+
   const friendCards: CommunityFriendCardData[] = friends.map((friend) => ({
     userId: friend.userId,
     nickname: friend.nickname,
     team: SHORT_TEAM_NAMES[friend.baseballTeam],
-    emotion: '감정없음',
-    tone: 'neutral',
+    emotion: EMOTION_MAP[friend.emotion].label,
+    tone: EMOTION_MAP[friend.emotion].tone,
   }))
 
   const nickname = user?.nickname ?? '볼로그'
