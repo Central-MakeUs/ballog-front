@@ -8,18 +8,25 @@ import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
 
 type RankTone = 'negative' | 'positive' | 'none'
 
-// TODO: 백엔드 명세 나오면 수정
 const getEmotionBadge = (
-  emotion: TeamRank['emotion'],
-  percent: TeamRank['emotionPercent'],
+  positiveRate: TeamRank['positiveRate'],
+  negativeRate: TeamRank['negativeRate'],
 ): { tone: RankTone; label: string } => {
-  if (emotion === 'POSITIVE') {
-    return { tone: 'positive', label: `기뻐요 ${percent}%` }
+  const tone: RankTone =
+    positiveRate === 0 && negativeRate === 0
+      ? 'none'
+      : positiveRate > negativeRate
+        ? 'positive'
+        : 'negative'
+
+  switch (tone) {
+    case 'none':
+      return { tone, label: '감정없음' }
+    case 'positive':
+      return { tone, label: `기뻐요 ${Math.round(positiveRate)}%` }
+    case 'negative':
+      return { tone, label: `화나요 ${Math.round(negativeRate)}%` }
   }
-  if (emotion === 'NEGATIVE') {
-    return { tone: 'negative', label: `화나요 ${percent}%` }
-  }
-  return { tone: 'none', label: '감정없음' }
 }
 
 interface KBORankBottomSheetProps {
@@ -93,7 +100,7 @@ export const KBORankBottomSheet = ({
 
               <div className="w-full rounded-xlarge bg-brand-neutral-10">
                 {ranks.map((item, index) => {
-                  const badge = getEmotionBadge(item.emotion, item.emotionPercent)
+                  const badge = getEmotionBadge(item.positiveRate, item.negativeRate)
                   return (
                     <div
                       key={item.teamCode}
