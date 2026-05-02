@@ -25,14 +25,15 @@ const HERO_STAT = {
   label: '현재 순위',
 }
 
+type ActiveSheet = 'kbo' | 'addFriend' | null
+
 export const CommunityPage = () => {
   const { user } = useUserQuery()
   const { replace, push } = useFlow()
   const { data: friendsData } = useFriendsQuery()
-  const [isKBORankBottomSheetOpen, setIsKBORankBottomSheetOpen] =
-    useState(false)
-  const [isAddFriendBottomSheetOpen, setIsAddFriendBottomSheetOpen] =
-    useState(false)
+  const [activeSheet, setActiveSheet] = useState<ActiveSheet>(null)
+  const closeSheet = (sheet: Exclude<ActiveSheet, null>) =>
+    setActiveSheet((current) => (current === sheet ? null : current))
 
   const friends = friendsData?.data ?? []
   const hasFriends = friends.length > 0
@@ -79,10 +80,7 @@ export const CommunityPage = () => {
                   <button
                     type="button"
                     className="flex items-center body-sm-medium text-brand-neutral-60"
-                    onClick={() => {
-                      setIsAddFriendBottomSheetOpen(false)
-                      setIsKBORankBottomSheetOpen(true)
-                    }}
+                    onClick={() => setActiveSheet('kbo')}
                   >
                     전체 리그 순위
                     <RightArrow className="size-5 text-brand-neutral-60" />
@@ -112,10 +110,7 @@ export const CommunityPage = () => {
                     <button
                       type="button"
                       className="text-white body-md-bold light:text-brand-neutral-80"
-                      onClick={() => {
-                        setIsKBORankBottomSheetOpen(false)
-                        setIsAddFriendBottomSheetOpen(true)
-                      }}
+                      onClick={() => setActiveSheet('addFriend')}
                     >
                       + 친구추가
                     </button>
@@ -134,12 +129,16 @@ export const CommunityPage = () => {
 
         <GlobalNavigationBar />
         <KBORankBottomSheet
-          open={isKBORankBottomSheetOpen}
-          onOpenChange={setIsKBORankBottomSheetOpen}
+          open={activeSheet === 'kbo'}
+          onOpenChange={(open) => {
+            if (!open) closeSheet('kbo')
+          }}
         />
         <AddFriendBottomSheet
-          open={isAddFriendBottomSheetOpen}
-          onOpenChange={setIsAddFriendBottomSheetOpen}
+          open={activeSheet === 'addFriend'}
+          onOpenChange={(open) => {
+            if (!open) closeSheet('addFriend')
+          }}
         />
       </div>
     </AppScreen>
