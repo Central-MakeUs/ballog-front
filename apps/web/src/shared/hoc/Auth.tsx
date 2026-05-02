@@ -8,8 +8,7 @@ export const withAuth = <P extends object>(Component: ComponentType<P>) => {
     const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null
     useEffect(() => {
       if (!accessToken) replace('Login', {}, { animate: false })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [accessToken, replace])
     if (!accessToken) return null
     return <Component {...props} />
   }
