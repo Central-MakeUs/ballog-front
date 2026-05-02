@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { stackflow } from '@stackflow/react'
+import { stackflow, type ActivityComponentType } from '@stackflow/react'
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic'
 import { basicUIPlugin } from '@stackflow/plugin-basic-ui'
 import { historySyncPlugin } from '@stackflow/plugin-history-sync'
@@ -30,8 +30,8 @@ const stackflowTheme: 'cupertino' | 'android' = /Android/i.test(ua) ? 'android' 
 
 const WrappedHome = withAuth(HomePageV2)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const HomeForwarder = (props: any) => React.createElement(HomeWithOnboarding, props)
+const HomeForwarder: ActivityComponentType = () =>
+  React.createElement(HomeWithOnboarding)
 
 export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   transitionDuration: 350,
@@ -95,8 +95,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   initialActivity: () => 'Home',
 })
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const HomeWithOnboarding = (props: any) => {
+const HomeWithOnboarding: ActivityComponentType = () => {
   const { replace } = useFlow()
   useEffect(() => {
     try {
@@ -104,5 +103,5 @@ const HomeWithOnboarding = (props: any) => {
       if (!seen) replace('OnBoarding', {}, { animate: false })
     } catch {}
   }, [replace])
-  return React.createElement(WrappedHome, props)
+  return React.createElement(WrappedHome)
 }
