@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { stackflow, type ActivityComponentType } from '@stackflow/react'
+import { stackflow } from '@stackflow/react'
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic'
 import { basicUIPlugin } from '@stackflow/plugin-basic-ui'
 import { historySyncPlugin } from '@stackflow/plugin-history-sync'
@@ -26,12 +25,9 @@ import OnBoardingPage from '@/pages/onBoarding/ui/OnBoardingPage'
 import { withAuth } from '@/shared/hoc/Auth'
 
 const ua = typeof navigator !== 'undefined' ? navigator.userAgent : ''
-const stackflowTheme: 'cupertino' | 'android' = /Android/i.test(ua) ? 'android' : 'cupertino'
-
-const WrappedHome = withAuth(HomePageV2)
-
-const HomeForwarder: ActivityComponentType = () =>
-  React.createElement(HomeWithOnboarding)
+const stackflowTheme: 'cupertino' | 'android' = /Android/i.test(ua)
+  ? 'android'
+  : 'cupertino'
 
 export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   transitionDuration: 350,
@@ -72,7 +68,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   ],
 
   activities: {
-    Home: HomeForwarder,
+    Home: withAuth(HomePageV2),
     Community: withAuth(CommunityPage),
     MatchSchedule: withAuth(HomePage),
     LiveRecord: withAuth(LiveRecordPage),
@@ -94,14 +90,3 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   },
   initialActivity: () => 'Home',
 })
-
-const HomeWithOnboarding: ActivityComponentType = () => {
-  const { replace } = useFlow()
-  useEffect(() => {
-    try {
-      const seen = !!localStorage.getItem('onBoarding')
-      if (!seen) replace('OnBoarding', {}, { animate: false })
-    } catch {}
-  }, [replace])
-  return React.createElement(WrappedHome)
-}
