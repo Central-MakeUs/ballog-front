@@ -14,7 +14,7 @@ export const HomeHeaderV2 = ({
   const { push } = useFlow()
 
   return (
-    <header className="flex items-center justify-between w-full pl-5 pr-2 bg-transparent h-14 shrink-0">
+    <header className="flex items-center justify-between w-full pl-5 pr-2 bg-transparent h-14 shrink-0" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       <button
         type="button"
         className="flex items-center gap-0.5"
