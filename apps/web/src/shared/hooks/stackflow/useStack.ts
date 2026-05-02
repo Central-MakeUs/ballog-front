@@ -5,9 +5,8 @@ export const useStack = () => {
   const stackSize = stack.activities.length
 
   const popAll = () => {
-    for (let i = 0; i < stackSize; i++) {
-      actions.pop()
-    }
+    const current = actions.getStack().activities.length
+    if (current > 1) actions.pop(current - 1)
   }
 
   return { stack, popAll, stackSize }

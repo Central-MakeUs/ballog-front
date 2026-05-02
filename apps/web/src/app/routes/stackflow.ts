@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react'
 import { stackflow } from '@stackflow/react'
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic'
 import { basicUIPlugin } from '@stackflow/plugin-basic-ui'
@@ -24,16 +25,13 @@ import TermPage from '@/pages/term/ui/TermPage'
 import OnBoardingPage from '@/pages/onBoarding/ui/OnBoardingPage'
 import { withAuth } from '@/shared/hoc/Auth'
 
-// 온보딩 페이지 처리 로직
-try {
-  const isOnboardingSeen = !!localStorage.getItem('onBoarding')
-  const isRootPath = location.pathname === '/'
-  if (!isOnboardingSeen && isRootPath) {
-    history.replaceState(null, '', '/onboarding')
-  }
-} catch {
-  // 로컬스토리지 접근 불가시 무시
-}
+const ua = typeof navigator !== 'undefined' ? navigator.userAgent : ''
+const stackflowTheme: 'cupertino' | 'android' = /Android/i.test(ua) ? 'android' : 'cupertino'
+
+const WrappedHome = withAuth(HomePageV2)
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HomeForwarder = (props: any) => React.createElement(HomeWithOnboarding, props)
 
 export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   transitionDuration: 350,
@@ -41,8 +39,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   plugins: [
     basicRendererPlugin(),
     basicUIPlugin({
-      theme: 'cupertino', // cupertino | android 두가지 옵션 있음
-      // className 시 title 잔상 문제로 변수 사용
+      theme: stackflowTheme,
       backgroundColor: 'var(--color-usage-background-default)',
       rootClassName:
         'w-full min-h-screen max-w-[512px] mx-auto flex flex-col items-center justify-center relative',
@@ -53,7 +50,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
         Home: '/',
         Community: '/community',
         MatchSchedule: '/match-schedule',
-        LiveRecord: '/live-record/:matchId', // 라이브 녹화
+        LiveRecord: '/live-record/:matchId',
         Login: '/login',
         TeamSelect: '/team-select',
         Nickname: '/nickname',
@@ -75,7 +72,7 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   ],
 
   activities: {
-    Home: withAuth(HomePageV2),
+    Home: HomeForwarder,
     Community: withAuth(CommunityPage),
     MatchSchedule: withAuth(HomePage),
     LiveRecord: withAuth(LiveRecordPage),
@@ -97,3 +94,15 @@ export const { Stack, useFlow, useStepFlow, actions, activities } = stackflow({
   },
   initialActivity: () => 'Home',
 })
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HomeWithOnboarding = (props: any) => {
+  const { replace } = useFlow()
+  useEffect(() => {
+    try {
+      const seen = !!localStorage.getItem('onBoarding')
+      if (!seen) replace('OnBoarding', {}, { animate: false })
+    } catch {}
+  }, [replace])
+  return React.createElement(WrappedHome, props)
+}
