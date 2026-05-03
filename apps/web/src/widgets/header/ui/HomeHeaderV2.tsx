@@ -14,23 +14,28 @@ export const HomeHeaderV2 = ({
   const { push } = useFlow()
 
   return (
-    <header className="flex items-center justify-between w-full pl-5 pr-2 bg-transparent h-14 shrink-0">
-      <button
-        type="button"
-        className="flex items-center gap-0.5"
-        onClick={onProfileClick}
-      >
-        <span className="body-md-medium text-brand-neutral-70">{nickname}님</span>
-        <Chevron className="w-6 h-6 text-brand-neutral-70" />
-      </button>
+    <div
+      className="w-full bg-transparent shrink-0"
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
+      <header className="flex items-center justify-between w-full pl-5 pr-2 bg-transparent h-14">
+        <button
+          type="button"
+          className="flex items-center gap-0.5"
+          onClick={onProfileClick}
+        >
+          <span className="body-md-medium text-brand-neutral-70">{nickname}님</span>
+          <Chevron className="w-6 h-6 text-brand-neutral-70" />
+        </button>
 
-      <button
-        type="button"
-        className="flex items-center justify-center w-12 h-12"
-        onClick={() => push('Alerm', {})}
-      >
-        <BellIcon className="text-brand-neutral-50" />
-      </button>
-    </header>
+        <button
+          type="button"
+          className="flex items-center justify-center w-12 h-12"
+          onClick={() => push('Alerm', {})}
+        >
+          <BellIcon className="text-brand-neutral-50" />
+        </button>
+      </header>
+    </div>
   )
 }
