@@ -1,0 +1,46 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    "apps/web": {
+      "entry": [
+        "index.html",
+        "src/app/main.tsx",
+        "src/test/setup.ts",
+        "src/**/*.stories.@(ts|tsx)",
+        "src/**/*.test.@(ts|tsx)",
+        "src/**/*.d.ts",
+        "src/mocks/browser.ts",
+        "src/mocks/server.ts",
+        "vite.config.ts",
+        "vitest.config.ts",
+        "eslint.config.js",
+        "tailwind.config.js"
+      ],
+      "project": ["src/**/*.@(ts|tsx)"],
+      "ignore": ["src/types/api/**"],
+      "ignoreDependencies": [
+        "tailwindcss",
+        "tw-animate-css",
+        "@tailwindcss/vite",
+        "shadcn"
+      ]
+    },
+    "apps/app": {
+      "entry": [
+        "index.js",
+        "app.config.js",
+        "metro.config.js",
+        "eslint.config.js",
+        "app/**/*.@(ts|tsx)",
+        "scripts/*.js"
+      ],
+      "project": [
+        "app/**/*.@(ts|tsx)",
+        "entities/**/*.@(ts|tsx)",
+        "shared/**/*.@(ts|tsx)",
+        "hooks/**/*.@(ts|tsx)",
+        "types/**/*.@(ts|tsx)"
+      ]
+    }
+  }
+}
