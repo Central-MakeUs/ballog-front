@@ -10,8 +10,8 @@ import { withAuth } from '@/shared/hoc/Auth'
 const ua = typeof navigator !== 'undefined' ? navigator.userAgent : ''
 const stackflowTheme: 'cupertino' | 'android' = /Android/i.test(ua) ? 'android' : 'cupertino'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyComponent = React.ComponentType<any>
+type ActivityProps = { params: Record<string, unknown> }
+type AnyComponent = React.ComponentType<ActivityProps>
 type Importer = () => Promise<{ default: AnyComponent }>
 
 const lazyActivity = (importer: Importer): ActivityComponentType => {
@@ -20,8 +20,7 @@ const lazyActivity = (importer: Importer): ActivityComponentType => {
     React.createElement(
       Suspense,
       { fallback: null },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      React.createElement(Lazy, props as any),
+      React.createElement(Lazy, props as ActivityProps),
     )
   return Activity
 }
