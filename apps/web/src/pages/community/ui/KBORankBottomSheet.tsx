@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
-import { rankQueries } from '@/entities/match/api'
+import { useTeamRanksQuery } from '@/entities/match/api'
 import type { TeamRank } from '@/entities/match/model/rank.type'
 import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
 
@@ -55,7 +54,7 @@ export const KBORankBottomSheet = ({
   onOpenChange,
 }: KBORankBottomSheetProps) => {
   const [shouldRenderContent, setShouldRenderContent] = useState(open)
-  const { data: ranks = [] } = useQuery(rankQueries.teams())
+  const { data: ranks = [] } = useTeamRanksQuery()
 
   const updatedAtDisplay = ranks[0]?.updatedAt.slice(0, 10) ?? '----.--.--'
 

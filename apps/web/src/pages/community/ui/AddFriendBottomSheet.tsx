@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { cn } from '@/shared/lib/classnames'
 import { useRequestFriendMutation } from '@/entities/friend'
@@ -16,7 +15,6 @@ export const AddFriendBottomSheet = ({
   open,
   onOpenChange,
 }: AddFriendBottomSheetProps) => {
-  const { isRNEnvironment } = useBridge()
   const inputRef = useRef<HTMLInputElement>(null)
   const initialViewportHeightRef = useRef(0)
   const [nickname, setNickname] = useState('')
@@ -63,7 +61,7 @@ export const AddFriendBottomSheet = ({
       viewport?.removeEventListener('resize', updateKeyboardInset)
       viewport?.removeEventListener('scroll', updateKeyboardInset)
     }
-  }, [isRNEnvironment, shouldRenderContent])
+  }, [shouldRenderContent])
 
   useEffect(() => {
     if (!open) {
@@ -112,7 +110,6 @@ export const AddFriendBottomSheet = ({
               type="text"
               inputMode="text"
               enterKeyHint="done"
-              autoFocus={!isRNEnvironment}
               value={nickname}
               onChange={(event) => setNickname(event.target.value)}
               placeholder={PLACEHOLDER}
