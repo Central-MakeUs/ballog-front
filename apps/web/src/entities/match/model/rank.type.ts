@@ -1,3 +1,4 @@
+import type { ApiResponse } from '@/types/api/common'
 import type { TeamKey } from '@/shared/constants/teams'
 
 export interface TeamRank {
@@ -8,4 +9,4 @@ export interface TeamRank {
   negativeRate: number
 }
 
-export type TeamRankListResponseDTO = TeamRank[]
+export type TeamRankListResponseDTO = ApiResponse<TeamRank[]>

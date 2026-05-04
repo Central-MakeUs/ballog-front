@@ -10,4 +10,8 @@ export const rankQueries = createQueryKeys('rank', {
   }),
 })
 
-export const useTeamRanksQuery = () => useQuery(rankQueries.teams())
+export const useTeamRanksQuery = () =>
+  useQuery({
+    ...rankQueries.teams(),
+    select: (res) => res.data,
+  })
