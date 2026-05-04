@@ -1,5 +1,3 @@
-import type { KeyboardEvent } from 'react'
-
 import { cn } from '@/shared/lib/classnames'
 import type { MatchDateMap } from '@/entities/match/model/match.type'
 
@@ -24,33 +22,14 @@ export const CalendarWeekCarouselV2 = ({
 }: CalendarWeekCarouselV2Props) => {
   const {
     containerRef,
-    slotsData,
-    centerOffset,
+    slots,
     dragX,
-    transitionEnabled,
-    transitionMs,
     isDragging,
-    onPointerDown,
-    onPointerMove,
-    onPointerUp,
-    onPointerCancel,
+    transition,
+    pointerHandlers,
     onTransitionEnd,
-    goPrev,
-    goNext,
-  } = useWeekCarousel({
-    baseDate,
-    onBaseDateChange: onChange,
-  })
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      goPrev()
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      goNext()
-    }
-  }
+    onKeyDown,
+  } = useWeekCarousel({ baseDate, onBaseDateChange: onChange })
 
   return (
     <div
@@ -58,47 +37,37 @@ export const CalendarWeekCarouselV2 = ({
       role="region"
       aria-roledescription="carousel"
       tabIndex={0}
-      className="relative w-full overflow-hidden select-none outline-none"
+      className="relative w-full overflow-hidden outline-none select-none"
       style={{ touchAction: 'pan-y' }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerCancel}
-      onKeyDown={handleKeyDown}
+      {...pointerHandlers}
+      onKeyDown={onKeyDown}
     >
-      {slotsData.map((weekDate, i) => {
-        const offsetPercent = (i - centerOffset) * 100
-        const isCenter = i === centerOffset
-
-        return (
-          <div
-            key={i}
-            className={cn(
-              'left-0 top-0 w-full',
-              isCenter ? 'relative' : 'absolute',
-            )}
-            style={{
-              transform: `translate3d(calc(${offsetPercent}% + ${dragX}px), 0, 0)`,
-              transition: transitionEnabled
-                ? `transform ${transitionMs}ms ease-out`
-                : 'none',
-              willChange: 'transform',
+      {slots.map((slot, i) => (
+        <div
+          key={i}
+          className={cn(
+            'left-0 top-0 w-full',
+            slot.isCenter ? 'relative' : 'absolute',
+          )}
+          style={{
+            transform: `translate3d(calc(${slot.offsetIndex * 100}% + ${dragX}px), 0, 0)`,
+            transition,
+            willChange: 'transform',
+          }}
+          onTransitionEnd={slot.isCenter ? onTransitionEnd : undefined}
+        >
+          <CalendarWeekContent
+            allMatches={allMatches}
+            date={slot.date}
+            selectedDate={selectedDate}
+            onSelect={(d) => {
+              if (isDragging) return
+              onSelect(d)
+              onChange(d)
             }}
-            onTransitionEnd={isCenter ? onTransitionEnd : undefined}
-          >
-            <CalendarWeekContent
-              allMatches={allMatches}
-              date={weekDate}
-              selectedDate={selectedDate}
-              onSelect={(d) => {
-                if (isDragging) return
-                onSelect(d)
-                onChange(d)
-              }}
-            />
-          </div>
-        )
-      })}
+          />
+        </div>
+      ))}
     </div>
   )
 }
