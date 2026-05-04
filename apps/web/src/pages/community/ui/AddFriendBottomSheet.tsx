@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useBridge } from '@/shared/hooks/bridge/useBridge'
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
 import { cn } from '@/shared/lib/classnames'
 import { useRequestFriendMutation } from '@/entities/friend'
@@ -16,7 +15,6 @@ export const AddFriendBottomSheet = ({
   open,
   onOpenChange,
 }: AddFriendBottomSheetProps) => {
-  const { isRNEnvironment } = useBridge()
   const inputRef = useRef<HTMLInputElement>(null)
   const initialViewportHeightRef = useRef(0)
   const [nickname, setNickname] = useState('')
@@ -55,9 +53,7 @@ export const AddFriendBottomSheet = ({
     viewport?.addEventListener('scroll', updateKeyboardInset)
 
     const frame = window.requestAnimationFrame(() => {
-      if (!isRNEnvironment) {
-        inputRef.current?.focus()
-      }
+      inputRef.current?.focus()
     })
 
     return () => {
@@ -65,7 +61,7 @@ export const AddFriendBottomSheet = ({
       viewport?.removeEventListener('resize', updateKeyboardInset)
       viewport?.removeEventListener('scroll', updateKeyboardInset)
     }
-  }, [isRNEnvironment, shouldRenderContent])
+  }, [shouldRenderContent])
 
   useEffect(() => {
     if (!open) {
@@ -79,11 +75,6 @@ export const AddFriendBottomSheet = ({
     <BottomSheetModal.PortalBottomSheet
       open={open}
       onOutsideClick={() => onOpenChange(false)}
-      onEntered={() => {
-        if (isRNEnvironment) {
-          inputRef.current?.focus()
-        }
-      }}
       onExited={() => {
         setShouldRenderContent(false)
         setNickname('')
@@ -95,7 +86,7 @@ export const AddFriendBottomSheet = ({
       <BottomSheetModal.Root
         open={shouldRenderContent}
         onOpenChange={onOpenChange}
-        contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-90 light:bg-brand-neutral-white px-4 pt-6 pb-4"
+        contentClassName="gap-0 rounded-t-[15px] bg-brand-neutral-90 light:bg-brand-neutral-white px-4 pt-6 pb-6"
       >
         <div className="w-full">
           <form
@@ -119,7 +110,6 @@ export const AddFriendBottomSheet = ({
               type="text"
               inputMode="text"
               enterKeyHint="done"
-              autoFocus={!isRNEnvironment}
               value={nickname}
               onChange={(event) => setNickname(event.target.value)}
               placeholder={PLACEHOLDER}

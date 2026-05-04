@@ -10,8 +10,9 @@ export const rankHandlers = [
   http.get(RANK_API_URL, async () => {
     await delay(teamRanks.delay)
 
-    return HttpResponse.json<TeamRankListResponseDTO>(teamRanks.data, {
-      status: 200,
-    })
+    return HttpResponse.json<TeamRankListResponseDTO>(
+      { data: teamRanks.data, status: 200, message: 'success', success: 'true' },
+      { status: 200 },
+    )
   }),
 ]

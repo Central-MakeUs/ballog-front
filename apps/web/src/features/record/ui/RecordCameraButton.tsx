@@ -92,12 +92,12 @@ export const RecordCameraButton = ({
     <button
       onClick={goToCamera}
       className={cn(
-        'flex items-center justify-center gap-2 rounded-full bg-usage-background-default text-white p-4 mx-auto',
+        'flex items-center justify-center gap-2 rounded-full bg-usage-background-default text-white p-2 mx-auto',
         className,
       )}
     >
       <div className="relative flex items-center justify-center">
-        <CameraIcon className="w-8 h-8 mt-1" />
+        <CameraIcon className="mt-1 w-9 h-9" />
         {hasImage && (
           <span className="absolute top-0.5 -right-0.5 bg-brand-primary-default text-[10px] rounded-full px-[4px] py-[1px]">
             {images.length}

@@ -1,11 +1,32 @@
 import { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 
 import { BottomSheetModal } from '@/shared/ui/common/BottomSheetModal'
-import { rankQueries } from '@/entities/match/api'
+import { useTeamRanksQuery } from '@/entities/match/api'
+import type { TeamRank } from '@/entities/match/model/rank.type'
 import { SHORT_TEAM_NAMES } from '@/shared/constants/teams'
 
 type RankTone = 'negative' | 'positive' | 'none'
+
+const getEmotionBadge = (
+  positiveRate: TeamRank['positiveRate'],
+  negativeRate: TeamRank['negativeRate'],
+): { tone: RankTone; label: string } => {
+  const tone: RankTone =
+    positiveRate === 0 && negativeRate === 0
+      ? 'none'
+      : positiveRate > negativeRate
+        ? 'positive'
+        : 'negative'
+
+  switch (tone) {
+    case 'none':
+      return { tone, label: '감정없음' }
+    case 'positive':
+      return { tone, label: `기뻐요 ${Math.round(positiveRate)}%` }
+    case 'negative':
+      return { tone, label: `화나요 ${Math.round(negativeRate)}%` }
+  }
+}
 
 interface KBORankBottomSheetProps {
   open: boolean
@@ -21,7 +42,7 @@ const BADGE_STYLES: Record<RankTone, string> = {
 const RankBadge = ({ tone, label }: { tone: RankTone; label: string }) => {
   return (
     <div
-      className={`flex items-center justify-center rounded-full px-2 py-1 body-sm-bold w-[85px] ${BADGE_STYLES[tone]}`}
+      className={`flex items-center justify-center rounded-full px-2 py-1 body-sm-bold w-[85px] whitespace-nowrap ${BADGE_STYLES[tone]}`}
     >
       {label}
     </div>
@@ -33,7 +54,7 @@ export const KBORankBottomSheet = ({
   onOpenChange,
 }: KBORankBottomSheetProps) => {
   const [shouldRenderContent, setShouldRenderContent] = useState(open)
-  const { data: ranks = [] } = useQuery(rankQueries.teams())
+  const { data: ranks = [] } = useTeamRanksQuery()
 
   const updatedAtDisplay = ranks[0]?.updatedAt.slice(0, 10) ?? '----.--.--'
 
@@ -58,14 +79,14 @@ export const KBORankBottomSheet = ({
       <BottomSheetModal.Root
         open={shouldRenderContent}
         onOpenChange={onOpenChange}
-        contentClassName="h-[80vh] gap-6 light:bg-brand-neutral-white px-4 pt-4 pb-10"
+        contentClassName="max-h-[80vh] gap-6 light:bg-brand-neutral-white px-4 pt-4 pb-10"
       >
-        <div className="flex h-full w-full flex-col overflow-hidden">
+        <div className="flex flex-col w-full min-h-0 overflow-hidden">
           <div className="flex justify-center shrink-0">
             <div className="w-12 h-1 mb-2 rounded-full bg-brand-neutral-30" />
           </div>
 
-          <div className="flex-1 overflow-y-auto scrollbar-hidden pt-4 pb-4">
+          <div className="min-h-0 pt-4 pb-4 overflow-y-auto scrollbar-hidden">
             <div className="flex flex-col items-center gap-6">
               <div className="flex flex-col items-center w-full gap-3 text-center shrink-0">
                 <h2 className="text-white heading-md-bold light:text-brand-neutral-90">
@@ -76,31 +97,34 @@ export const KBORankBottomSheet = ({
                 </p>
               </div>
 
-              <div className="w-full overflow-hidden rounded-xlarge bg-brand-neutral-10">
-                {ranks.map((item, index) => (
-                  <div
-                    key={item.teamCode}
-                    className={`grid grid-cols-[auto_auto_auto] justify-center items-center gap-4 px-4 py-3 ${
-                      index !== ranks.length - 1
-                        ? 'border-b border-brand-neutral-30'
-                        : ''
-                    }`}
-                  >
-                    <span
-                      className={`body-lg-bold text-center ${
-                        item.rank <= 5
-                          ? 'text-brand-primary-pressed'
-                          : 'text-brand-neutral-80'
+              <div className="w-full rounded-xlarge bg-brand-neutral-10">
+                {ranks.map((item, index) => {
+                  const badge = getEmotionBadge(item.positiveRate, item.negativeRate)
+                  return (
+                    <div
+                      key={item.teamCode}
+                      className={`grid grid-cols-[auto_auto_auto] justify-center items-center gap-4 px-4 py-3 ${
+                        index !== ranks.length - 1
+                          ? 'border-b border-brand-neutral-30'
+                          : ''
                       }`}
                     >
-                      {item.rank}위
-                    </span>
-                    <span className="body-lg-medium text-brand-neutral-90">
-                      {SHORT_TEAM_NAMES[item.teamCode]}
-                    </span>
-                    <RankBadge tone="none" label="감정없음" />
-                  </div>
-                ))}
+                      <span
+                        className={`body-lg-bold text-center ${
+                          item.rank <= 5
+                            ? 'text-brand-primary-pressed'
+                            : 'text-brand-neutral-80'
+                        }`}
+                      >
+                        {item.rank}위
+                      </span>
+                      <span className="body-lg-medium text-brand-neutral-90">
+                        {SHORT_TEAM_NAMES[item.teamCode]}
+                      </span>
+                      <RankBadge tone={badge.tone} label={badge.label} />
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>

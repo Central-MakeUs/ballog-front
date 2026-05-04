@@ -58,6 +58,7 @@ const HomeScreen = () => {
           javaScriptEnabled={true}
           domStorageEnabled={true}
           originWhitelist={['*']}
+          keyboardDisplayRequiresUserAction={false}
           onError={(error) => console.error('WebView 에러:', error)}
           onLoadStart={() => console.log('WebView 로딩 시작...')}
           onLoadEnd={() => console.log('WebView 로딩 완료')}

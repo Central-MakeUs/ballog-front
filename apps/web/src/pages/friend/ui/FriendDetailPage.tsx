@@ -2,26 +2,14 @@ import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
 import { AngryEmotionCharacter, KebobMenu } from '@ballog/asset/icons'
 import { toast } from 'sonner'
+import { EmptyState } from '@ballog/asset/icons'
 
 import { BackArrow } from '@/assets/BackArrow'
 
 import { FriendPhotoBottomSheet } from './FriendPhotoBottomSheet'
 import { ReportBottomSheet } from './ReportBottomSheet'
 
-const FRIEND_GALLERY_IMAGE =
-  'https://www.figma.com/api/mcp/asset/51183d4e-e8cf-4582-a42f-6981d41a49ba'
-const EMPTY_SHADOW_IMAGE =
-  'https://www.figma.com/api/mcp/asset/06502ef9-c6b5-41b6-81c2-edffd17bf4fc'
-const EMPTY_BALL_IMAGE =
-  'https://www.figma.com/api/mcp/asset/cd0141bf-6ba8-4305-8f1b-27adf0c076a3'
-const EMPTY_BALL_MASK_IMAGE =
-  'https://www.figma.com/api/mcp/asset/14018a82-cfd0-4c2c-a0c7-ec23e0a6c8be'
-const EMPTY_BALL_TEXTURE_IMAGE =
-  'https://www.figma.com/api/mcp/asset/5524e6ea-5e04-4ef9-ba86-e3b14154bbef'
-const EMPTY_BUBBLE_IMAGE =
-  'https://www.figma.com/api/mcp/asset/6f5644ba-f7c4-44ba-a90f-faaefe56d8cc'
-const EMPTY_EXCLAMATION_IMAGE =
-  'https://www.figma.com/api/mcp/asset/288fd3ad-0174-4d4e-82e3-6954f40ccf52'
+const FRIEND_GALLERY_IMAGE = '/mockImg.png'
 
 const FRIEND_GALLERY_PHOTOS = Array.from({ length: 9 }, (_, index) => ({
   id: `friend-gallery-photo-${index + 1}`,
@@ -40,57 +28,7 @@ const FriendDetailEmptyState = () => {
             오늘 경기부터 감정을 남겨보세요.
           </p>
         </div>
-
-        <div className="flex items-center justify-center w-full py-2">
-          <div className="relative h-[114px] w-[83px]">
-            <img
-              alt=""
-              aria-hidden="true"
-              src={EMPTY_SHADOW_IMAGE}
-              className="absolute bottom-0 left-0 h-7 w-[83px]"
-            />
-            <div className="absolute left-[17px] top-[52px] h-[54px] w-[49px]">
-              <img
-                alt=""
-                aria-hidden="true"
-                src={EMPTY_BALL_IMAGE}
-                className="absolute top-0 left-0 size-12"
-              />
-              <div
-                className="absolute -left-[0.5px] -top-1 h-[53.401px] w-[48.971px]"
-                style={{
-                  WebkitMaskImage: `url('${EMPTY_BALL_MASK_IMAGE}')`,
-                  WebkitMaskPosition: '0.491px 4.017px',
-                  WebkitMaskRepeat: 'no-repeat',
-                  WebkitMaskSize: '47.995px 47.995px',
-                  maskImage: `url('${EMPTY_BALL_MASK_IMAGE}')`,
-                  maskPosition: '0.491px 4.017px',
-                  maskRepeat: 'no-repeat',
-                  maskSize: '47.995px 47.995px',
-                }}
-              >
-                <img
-                  alt=""
-                  aria-hidden="true"
-                  src={EMPTY_BALL_TEXTURE_IMAGE}
-                  className="size-full"
-                />
-              </div>
-            </div>
-            <img
-              alt=""
-              aria-hidden="true"
-              src={EMPTY_BUBBLE_IMAGE}
-              className="absolute left-[24.64px] top-0 h-[40.913px] w-[37.215px]"
-            />
-            <img
-              alt=""
-              aria-hidden="true"
-              src={EMPTY_EXCLAMATION_IMAGE}
-              className="absolute left-[40.61px] top-[6.8px] h-[21.194px] w-[5.227px]"
-            />
-          </div>
-        </div>
+        <EmptyState width={83} height={114} className="my-2" />
       </div>
 
       <button

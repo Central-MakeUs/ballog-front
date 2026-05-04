@@ -22,6 +22,7 @@ export interface FriendItem {
   userId: number
   nickname: string
   baseballTeam: TeamKey
+  emotion: 'POSITIVE' | 'NEGATIVE' | 'NEUTRAL'
 }
 
 export type FriendActionResponseDTO = ApiResponse<null>
