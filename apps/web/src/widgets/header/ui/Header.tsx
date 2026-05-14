@@ -16,7 +16,7 @@ export const Header = ({
   logo,
 }: HeaderProps) => {
   return (
-    <header className="h-14 flex items-center border-none px-4 relative bg-transparent">
+    <header className="h-12 flex items-center border-none px-4 relative bg-transparent">
       {left && <div className="absolute left-4">{left}</div>}
 
       {logo ? (
