@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { AppScreen } from '@stackflow/plugin-basic-ui'
-import { AngryEmotionCharacter, KebobMenu } from '@ballog/asset/icons'
+import { AngryEmotionCharacter, KebobMenu, EmptyState } from '@ballog/asset/icons'
 import { toast } from 'sonner'
-import { EmptyState } from '@ballog/asset/icons'
 
 import { BackArrow } from '@/assets/BackArrow'
 
