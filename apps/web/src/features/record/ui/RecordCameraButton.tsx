@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { POST_MESSAGE_EVENT } from '@ballog/bridge'
 import type { ImageData } from '@ballog/bridge/types'
 import { CameraIcon } from '@ballog/asset/icons'
@@ -32,11 +32,14 @@ export const RecordCameraButton = ({
   // 이미지 업로드 상태 토스터
   useImageUploadToast(uploadState)
 
-  // 마운트 시 초기 이미지 배열 세팅
+  // initialImages 변경 시 createdAt 기준으로 중복 없이 동기화
+  const seedCreatedAtRef = useRef<Set<string>>(new Set())
   const initializeImages = useCallback(() => {
-    if (!initializeImages || initialImages.length === 0) return
+    if (initialImages.length === 0) return
 
     initialImages.forEach((image) => {
+      if (seedCreatedAtRef.current.has(image.createdAt)) return
+      seedCreatedAtRef.current.add(image.createdAt)
       const newImage: ImageData = {
         uri: image.imageUrl,
         base64: '',
@@ -92,14 +95,14 @@ export const RecordCameraButton = ({
     <button
       onClick={goToCamera}
       className={cn(
-        'flex items-center justify-center gap-2 rounded-full bg-usage-background-default text-white p-2 mx-auto',
+        'flex items-center justify-center gap-2 rounded-full bg-usage-background-strong text-usage-text-default p-2 mx-auto',
         className,
       )}
     >
       <div className="relative flex items-center justify-center">
         <CameraIcon className="mt-1 w-9 h-9" />
         {hasImage && (
-          <span className="absolute top-0.5 -right-0.5 bg-brand-primary-default text-[10px] rounded-full px-[4px] py-[1px]">
+          <span className="absolute top-0.5 -right-0.5 bg-brand-primary-default text-brand-neutral-white text-[10px] rounded-full px-[4px] py-[1px]">
             {images.length}
           </span>
         )}

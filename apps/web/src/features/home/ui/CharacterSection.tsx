@@ -19,7 +19,7 @@ export const CharacterSection = ({ emotion }: CharacterSectionProps) => {
   const teamName = baseballTeam ? TEAMS[baseballTeam] : TEAMS['NONE']
 
   return (
-    <div className="flex flex-col items-center w-full pt-4">
+    <div className="flex flex-col items-center w-full pt-[32px] pb-[40px]">
       {/* Speech bubble — text centered in bubble body (top 43px), tail is bottom-right */}
       <div className="relative flex items-center justify-center">
         <SpeachBubble className="w-[138px] h-[56px]" />

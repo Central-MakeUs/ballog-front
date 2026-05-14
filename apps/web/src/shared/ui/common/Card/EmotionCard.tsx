@@ -45,7 +45,7 @@ const EmotionBadge = ({
         className={cn(
           'body-sm-bold',
           showBadgeBg
-            ? isAngry ? 'text-brand-red-hover' : 'text-brand-green-hover'
+            ? isAngry ? 'text-brand-red-default' : 'text-brand-green-pressed'
             : 'text-brand-neutral-70',
         )}
       >
@@ -85,7 +85,7 @@ const Active = ({ data, showBadgeBg = false, className, ...rest }: ActiveEmotion
     centerEmotion === '화나요'
       ? 'var(--color-brand-red-hover)'
       : 'var(--color-brand-green-hover)'
-  const trackColor = 'var(--color-brand-neutral-white)'
+  const trackColor = 'var(--color-usage-background-strong)'
 
   const startAngle = angryValue <= 50 ? 90 : 0
   const endAngle = angryValue <= 50 ? 450 : 360
