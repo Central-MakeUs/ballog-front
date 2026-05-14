@@ -26,7 +26,7 @@ const MyPageInner = () => {
           ),
           onClick: () => pop(),
         },
-        height: '44px',
+        height: '48px',
       }}
     >
       <div className={cn('flex flex-col w-full px-4 py-4 pb-27.5')}>
