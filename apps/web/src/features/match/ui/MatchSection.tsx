@@ -24,7 +24,7 @@ export const MatchSection = ({
         return ['다가올 경기 일정을', '미리 확인해보세요']
       case 'today':
       default:
-        return ['오늘의 경기를 선택하고', '감정을 공유해보세요']
+        return ['오늘의 경기를 선택하고', '감정을 기록해보세요']
     }
   })()
 
