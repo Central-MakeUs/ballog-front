@@ -11,7 +11,7 @@ const LoginPage: ActivityComponentType = () => {
   return (
     <AppScreen
       appBar={{
-        title: <BallogAppBar aria-label="ballog" />,
+        title: <BallogAppBar variant="login" aria-label="ballog" />,
         height: '48px',
       }}
     >
