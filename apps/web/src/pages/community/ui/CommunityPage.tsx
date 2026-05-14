@@ -27,7 +27,7 @@ const HERO_STAT = {
 
 export const CommunityPage = () => {
   const { user } = useUserQuery()
-  const { replace, push } = useFlow()
+  const { replace } = useFlow()
   const { data: friendsData } = useFriendsQuery()
   const [isKBORankBottomSheetOpen, setIsKBORankBottomSheetOpen] =
     useState(false)
@@ -131,7 +131,10 @@ export const CommunityPage = () => {
                 </section>
               ) : (
                 <CommunityEmptyState
-                  onExploreFriends={() => push('FriendRequest', {})}
+                  onAddFriend={() => {
+                    setIsKBORankBottomSheetOpen(false)
+                    setIsAddFriendBottomSheetOpen(true)
+                  }}
                 />
               )}
             </main>

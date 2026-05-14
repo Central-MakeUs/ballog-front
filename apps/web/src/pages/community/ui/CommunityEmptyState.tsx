@@ -3,11 +3,11 @@ import { ComunityEmpty } from '@ballog/asset/icons'
 import { Button } from '@/shared/ui/common'
 
 interface CommunityEmptyStateProps {
-  onExploreFriends: () => void
+  onAddFriend: () => void
 }
 
 export const CommunityEmptyState = ({
-  onExploreFriends,
+  onAddFriend,
 }: CommunityEmptyStateProps) => {
   return (
     <section className="flex flex-col items-center w-full gap-4 px-4 py-20">
@@ -29,7 +29,7 @@ export const CommunityEmptyState = ({
       <Button
         state={'default'}
         size={'default'}
-        onClick={onExploreFriends}
+        onClick={onAddFriend}
         className="flex items-center justify-center h-10 px-3 rounded-large bg-brand-neutral-80 body-md-medium text-brand-neutral-white"
       >
         친구 추가하기
