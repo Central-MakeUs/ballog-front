@@ -23,7 +23,7 @@ export const HomeCardDetailInfo = ({
     <div className={cn('flex flex-col pt-2 w-full', className)} {...rest}>
       <div className="relative flex flex-col items-center justify-center w-full p-0">
         <div className="w-full text-center body-md-medium dark:text-usage-text-default light:text-white">
-          경기시작 {dateTime}
+          경기시작 {dateTime?.split(':').slice(0, 2).join(':')}
         </div>
         <div className="flex items-center gap-2 heading-md-bold text-usage-text-default light:text-white">
           <span>{TEAMS[homeTeam].split(' ')[0]}</span>
