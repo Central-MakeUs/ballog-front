@@ -135,7 +135,7 @@ export const EmotionButton = ({
             {label}
           </span>
           <span className="heading-md-bold text-usage-text-default">
-            {Math.round(percent)}%
+            {Math.round(percent)}번
           </span>
         </div>
       </button>
