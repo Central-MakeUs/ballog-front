@@ -16,22 +16,27 @@ export const Header = ({
   logo,
 }: HeaderProps) => {
   return (
-    <header className="h-14 flex items-center border-none px-4 relative bg-transparent">
-      {left && <div className="absolute left-4">{left}</div>}
+    <div
+      className="bg-transparent"
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    >
+      <header className="h-14 flex items-center border-none px-4 relative bg-transparent">
+        {left && <div className="absolute left-4">{left}</div>}
 
-      {logo ? (
-        <div className="mx-auto flex justify-center items-center">{logo}</div>
-      ) : (
-        <div
-          className={`mx-auto text-base font-semibold ${
-            titlePosition === 'left' ? 'ml-0 mr-auto' : ''
-          }`}
-        >
-          {title}
-        </div>
-      )}
+        {logo ? (
+          <div className="mx-auto flex justify-center items-center">{logo}</div>
+        ) : (
+          <div
+            className={`mx-auto text-base font-semibold ${
+              titlePosition === 'left' ? 'ml-0 mr-auto' : ''
+            }`}
+          >
+            {title}
+          </div>
+        )}
 
-      {right && <div className="absolute right-4">{right}</div>}
-    </header>
+        {right && <div className="absolute right-4">{right}</div>}
+      </header>
+    </div>
   )
 }
