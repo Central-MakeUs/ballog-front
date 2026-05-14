@@ -35,8 +35,8 @@ interface KBORankBottomSheetProps {
 
 const BADGE_STYLES: Record<RankTone, string> = {
   negative: 'bg-brand-red-subtle text-brand-red-default',
-  positive: 'bg-brand-green-subtle text-brand-green-pressed',
-  none: 'bg-brand-neutral-20 text-brand-neutral-70',
+  positive: 'bg-brand-green-light text-brand-green-pressed',
+  none: 'bg-brand-neutral-30 text-brand-neutral-70',
 }
 
 const RankBadge = ({ tone, label }: { tone: RankTone; label: string }) => {
@@ -79,7 +79,7 @@ export const KBORankBottomSheet = ({
       <BottomSheetModal.Root
         open={shouldRenderContent}
         onOpenChange={onOpenChange}
-        contentClassName="max-h-[80vh] gap-6 light:bg-brand-neutral-white px-4 pt-4 pb-10"
+        contentClassName="max-h-[90vh] gap-6 light:bg-brand-neutral-white px-4 pt-4 pb-10"
       >
         <div className="flex flex-col w-full min-h-0 overflow-hidden">
           <div className="flex justify-center shrink-0">

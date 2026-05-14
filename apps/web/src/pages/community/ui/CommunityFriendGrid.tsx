@@ -4,7 +4,6 @@ import {
   NoEmotionCharacter,
 } from '@ballog/asset/icons'
 
-import { useFlow } from '@/app/routes/stackflow'
 import { cn } from '@/shared/lib/classnames'
 
 export interface CommunityFriendCardData {
@@ -55,16 +54,12 @@ const CommunityFriendCard = ({
   emotion,
   tone,
 }: CommunityFriendCardData) => {
-  const { push } = useFlow()
   const style = EMOTION_STYLES[tone]
 
   return (
-    <button
-      type="button"
+    <div
+      aria-disabled="true"
       className="flex flex-col items-center gap-1 px-2 py-4 h-44 rounded-large bg-usage-background-subtle light:bg-usage-background-default"
-      onClick={() => {
-        push('FriendDetail', {}, { animate: true })
-      }}
     >
       <div
         className={cn(
@@ -88,7 +83,7 @@ const CommunityFriendCard = ({
       <p className="w-full text-center truncate body-sm-medium text-usage-text-default light:text-brand-neutral-60">
         {nickname}
       </p>
-    </button>
+    </div>
   )
 }
 
