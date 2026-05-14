@@ -36,7 +36,7 @@ export const CalendarWeekButton = ({
         className={cn(
           'mt-1 body-md-bold',
           isActive
-            ? 'text-brand-primary-default'
+            ? 'text-brand-primary-default underline underline-offset-4 decoration-2 decoration-brand-primary-default'
             : clickable
               ? 'text-usage-text-default'
               : 'text-brand-neutral-70',
