@@ -1,4 +1,4 @@
-import { addDays, startOfWeek } from 'date-fns'
+import { addDays } from 'date-fns'
 import { format } from 'date-fns-tz'
 
 import type { MatchDateMap } from '@/entities/match/model/match.type'
@@ -14,8 +14,7 @@ interface CalendarWeekContentProps {
 }
 
 function getWeekDates(date: Date): Date[] {
-  const start = startOfWeek(date, { weekStartsOn: 0 })
-  return Array.from({ length: 7 }, (_, i) => addDays(start, i))
+  return Array.from({ length: 7 }, (_, i) => addDays(date, i - 3))
 }
 
 export const CalendarWeekContent = ({

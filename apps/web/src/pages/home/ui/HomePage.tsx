@@ -41,8 +41,10 @@ const HomeContent = () => {
   }
 
   return (
-    <div>
-      <CalendarHeader allMatches={allMatches} />
+    <div className="min-h-screen bg-[#EEEEEE]">
+      <div className="bg-white">
+        <CalendarHeader allMatches={allMatches} />
+      </div>
       {isLoading ? (
         <MatchLoadingSection />
       ) : isEmpty ? (
