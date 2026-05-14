@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Stack } from '@/app/routes/stackflow'
+import { Stack, actions } from '@/app/routes/stackflow'
 import '@stackflow/plugin-basic-ui/index.css'
 import { Toaster } from '@/shared/ui/common/Sonner'
 import { OverlayProvider } from '@/shared/hooks/useOverlay'
@@ -21,6 +21,19 @@ export const ThemeInitializer = () => {
 const AppInner = () => {
   useUpdatePolicy()
   useMswNotice()
+
+  useEffect(() => {
+    try {
+      if (
+        !localStorage.getItem('onBoarding') &&
+        location.pathname === '/'
+      ) {
+        actions.replace('OnBoarding', {}, { animate: false })
+      }
+    } catch {
+      // localStorage 접근 불가 시 무시
+    }
+  }, [])
 
   return (
     <>
