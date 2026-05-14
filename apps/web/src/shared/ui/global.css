@@ -277,6 +277,7 @@ html[data-theme-transition] {
   --color-brand-green-pressed: #3f8f46;
   --color-brand-green-disabled: #a4d4aa;
   --color-brand-green-subtle: #e8f6e9;
+  --color-brand-green-light: #cef7d1;
 
   --color-brand-secondary-default: var(--color-brand-secondary-default);
   --color-brand-secondary-hover: var(--color-brand-secondary-hover);
